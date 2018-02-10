@@ -1,0 +1,30 @@
+{{template "header" .Header}}
+        <!--主要内容-->
+        <div style="height:20px;"></div>
+        <div class="promotion_d">
+			<style>
+				#direction ul.mtab-menual {
+				    border-bottom: 3px solid #ADADAD;  /*线条颜色*/
+				}
+				#direction #PT-switcher-wrap {
+				    width: 940px;                 /*线条宽度*/
+				}
+				#direction ul.mtab-menual li {
+				    background-color: #222222;     /*未选中颜色*/
+				}
+				#direction ul.mtab-menual li.mtab {
+				    background-color: #ADADAD;     /*选中颜色*/
+				}
+				#MemberExclusive_area{
+				     width: {{.YhWidth}}px;                  /*宽度*/
+				}
+			</style>
+			{{template "youhui" .}}
+        </div>
+    </div>
+</div>
+<style>
+.cp_content .news .new02 {    width: 875px;}
+.slots_banner{background: url({{.Header.CdnUrl}}/theme1/public/images/new/promotions_banner.jpg) no-repeat top center !important;}
+</style>
+{{template "footer" .Footer}}

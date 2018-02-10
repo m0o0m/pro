@@ -1,0 +1,77 @@
+{{define "live"}}
+<script type="text/javascript">
+    var live3 = "<link rel=\"stylesheet\" href=\"" + cdnUrl + "/shared/video/css/live3/pklive.css\" />" +
+            "<script type=\"text/javascript\" src=\"" + cdnUrl + "/shared/video/js/live3/jquery.easing.1.3.js\"><\/script>" +
+            "<script type=\"text/javascript\" src=\"" + cdnUrl + "/shared/video/js/live3/jquery.zalki_hover_img.min-0.2.js\"><\/script>";
+    document.writeln(live3);
+
+    $(window).load(function () {
+        $('.main_box').ZalkiHoverImg();
+
+        $('.tit-animate').animate({
+            bottom: '200px'
+        }, 1000);
+        $('.main_box').mouseenter(function () {
+            $(this).find('.tit-animate').animate({
+                bottom: '-200px'
+            }, 500)
+        });
+        $('.main_box').mouseleave(function () {
+            $(this).find('.tit-animate').animate({
+                bottom: '200px'
+            }, 500)
+        });
+    });
+</script>
+<div id="container" class="live-bg live-shadow casino-liveImgs">
+{{$num := .LiveLen}}
+{{range $k,$v := .LiveOrder}}
+    <div class="{{if eq $num 1}}live-one mar-bot  {{else if eq $num 2 4}}live-two live-left mar-bot {{else}} live-three live-thl live-mar{{end}}">
+        <div class="main_box user_style6" data-hipop="text_content">
+            <script type="text/javascript">
+                document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live3/{{$v.VType}}-img.jpg\" title alt=\"Img preview\" class=\"{{if eq $num 2}}live-two-img{{else if eq $num 1}}live-one-img{{else}}live-three-img{{end}}\">");
+            </script>
+            <p class="tit-animate textTitle-box margin-left">{{$v.ProductName}}厅</p>
+            <p class="textTitle">
+                <span class="dis-block">{{$v.VType}}</span>
+                <span class="dis-block">视讯厅</span>
+            </p>
+            <p class="textBox">
+            {{if eq $v.VType "dg"}}
+                <a href="https://f.dg99.info/home/rule/cn/index.html" target="_blank"
+                   class="live-rule live-shadow">游戏规则</a>
+            {{else}}
+                <a href="javascript:;" onclick="opengeme('','rule','')" class="live-rule live-shadow">游戏规则</a>
+            {{end}}
+            {{if 0}}
+            <a href="javascript:;" class="live-game live-shadow"  style="background-color:#3B3C3F;">视讯维护中
+            </a>
+            {{else}}
+                <a href="javascript:;" onclick="javascript:zhuModal.login();" class="live-game live-shadow pk-login-before">进入游戏</a>
+                <a href="javascript:;" onclick="opengeme('','video','{{$v.VType}}')" class="live-game live-shadow pk-login-after" style="display: none;">进入游戏</a>
+            {{end}}
+            </p>
+        </div>
+    </div>
+{{end}}
+{{if (gt $num 6) and (ne $num 9) and (ne $num 12)}}
+    <div class="live-three live-thl live-mar">
+        <div class="main_box user_style6">
+            <script type="text/javascript">
+                document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live3/3-wait.jpg\" class=\"live-three-img\">");
+            </script>
+        </div>
+    </div>
+{{end}}
+{{if eq $num 5 7 10}}
+    <div class="live-three live-thl live-mar">
+        <div class="main_box user_style6">
+            <script type="text/javascript">
+                document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live3/3-wait.jpg\" class=\"live-three-img\">");
+            </script>
+        </div>
+    </div>
+{{end}}
+    <div class="clear"></div>
+</div>
+{{end}}

@@ -1,0 +1,62 @@
+<?php
+
+use \Workerman\Worker;
+use \Workerman\Lib\Timer;
+use Applications\Tools\Lib\Common;
+use \helper\RedisConPool as Redis;
+use Applications\Tools\Lib\Games;
+use \helper\Encrypt;
+use helper\TcpConPoll;
+
+require_once __DIR__ . '/../../Workerman/Autoloader.php';
+
+$worker = new Worker("tcp://0.0.0.0:6666");
+
+$worker->name = 'test';
+
+$worker->count = 1;
+
+$worker->onWorkerStart = function($worker) {
+
+    //tcp钱包测试
+    $str = Encrypt::GetBalance('aaa_jiutong2', "CNY");
+    
+    //$strr = Encrypt::Transfer("2017092006228763~201709200622879","aaa_jiutong2","CNY",-20,"重庆时时彩");
+    //$st = Encrypt::checkTransfer('1');
+
+    $socket = TcpConPoll::getInstace();
+
+
+    var_dump($socket::send($str));
+
+
+
+
+
+    /*
+      $games = new Games();
+      //$games->login();
+      $data = $games->spider();
+      $data = json_decode($data, true)['data'];
+      if (!empty($data)) {
+      //回传 删key
+      $keys = [];
+      foreach ($data as $k => $v) {
+      $keys[] = $v['Score'];
+      }
+
+      if (!empty($keys)) {
+      $keys_str = implode('|', $keys);
+      $res = $games->delkeys($keys_str);
+      print_r($res);
+      }
+      } */
+};
+
+$worker->onMessage = function($connection, $header) {
+    
+};
+
+if (!defined('GLOBAL_START')) {
+    Worker::runAll();
+}

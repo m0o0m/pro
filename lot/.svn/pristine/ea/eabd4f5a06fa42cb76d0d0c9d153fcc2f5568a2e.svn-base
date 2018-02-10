@@ -1,0 +1,60 @@
+package function
+
+import (
+	"github.com/go-xorm/xorm"
+	"global"
+	"models/schema"
+	"models/input"
+	"github.com/golyu/sql-build"
+)
+
+type UserCashRecord struct {
+}
+
+//添加现金记录
+func (m *UserCashRecord) InsertRecord(reqData *input.Translation, curTime, todayTime int64,Ordernum string, user *schema.User, sessArgs ...*xorm.Session) (int64, error) {
+	var sess *xorm.Session
+	switch len(sessArgs) {
+	case 1:
+		sess = sessArgs[0]
+	case 0:
+		sess = global.NewManagementSession()
+	default:
+		panic("sessArgs 传递参数不正确")
+	}
+	cashRecordSchema := new(schema.UserCashRecord)
+	cashRecordSchema.Uid = user.Uid
+	cashRecordSchema.LineId = user.LineId
+	cashRecordSchema.AgentId = user.AgentId
+	cashRecordSchema.CashType = reqData.CType
+	cashRecordSchema.CashNum = reqData.Money
+	cashRecordSchema.CashBalance = user.Money
+	cashRecordSchema.Ptype = user.Ptype
+	cashRecordSchema.Uname = user.Uname
+	cashRecordSchema.Addtime = curTime
+	cashRecordSchema.Addday = todayTime
+	cashRecordSchema.Dids = Ordernum
+	cashRecordSchema.FcType = " "
+	cashRecordSchema.Periods = 1
+	switch reqData.CType {
+	case 1:
+		cashRecordSchema.CashDoType = 4
+		cashRecordSchema.Remark = "API转入"
+	case 2:
+		cashRecordSchema.CashDoType = 5
+		cashRecordSchema.Remark = "API转出"
+	default:
+		panic("c_type not in (1,2)")
+	}
+	sql, err := sqlBuild.Insert(cashRecordSchema.TableName()).
+		Value(cashRecordSchema).
+		String()
+	if err != nil {
+		return 0, err
+	}
+	result, err := sess.Exec(sql)
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}

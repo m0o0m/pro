@@ -1,0 +1,259 @@
+{{define "sport"}}
+<script type="text/javascript">
+    document.writeln('<link rel=\"stylesheet\" href=\"' + cdnUrl + '/shared/sport/css/sport.css\">');
+</script>
+
+
+{{if eq .SportLen 2}}
+<div class="sport_bj">
+    <div class="sport_box">
+        <div class="contentSport1 sport hg">
+            <div class="center">
+                <div class="game-box sport ">
+                    <ul class="game-list ma_top2">
+                        <li data-game="hg" class="active ma_le_145" onclick="opengeme('-','video','pk_sp');"
+                            href="javascript:void(0);">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3"></div>
+
+                        </li>
+                    {{if eq 1 (index .SportsOrder "bbin")}}
+                        <li data-game="bb2" class="ma_bo_4 pk-login-before" onclick="javascript:zhuModal.login();">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3">
+                        </li>
+                        <li data-game="bb2" class="ma_bo_4 pk-login-after" onclick="opengeme('','video','bbin_sp')" style="display: none;">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3">
+                        </li>
+                    {{end}}
+                    {{if eq 1 (index .SportsOrder "im")}}
+                        <li data-game="im" class="ma_bo_4" onclick="opengeme('','video','im_sp');"
+                            href="javacript:void(0);">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3">
+                        </li>
+                    {{end}}
+                    {{if eq 1 (index .SportsOrder "sb")}}
+                        <li data-game="sb" class="ma_bo_4" onclick="opengeme('','video','sb_sp');"
+                            href="javacript:void(0);">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3">
+                        </li>
+                    {{end}}
+                    </ul>
+                    <div class="info2 po_1e_2">
+                        <span class="img_bj8"></span>
+                        <span class="img_bj9"></span>
+                        <div class="active">
+                            皇冠体育是全亚洲最受欢迎的足球投注平台之一。每周为玩家精选全球3000场热门赛事，涵盖欧洲五大联赛，荷甲，葡超，土超，巴甲，阿甲，以及日本A联赛等赛事。玩法众多，投注简单，深受广大球迷朋友热爱......
+                        </div>
+                    {{if eq (1 index .SportsOrder "bbin")}}
+                        <div>BBIN（台湾宝盈集团）体育是亚洲最知名的体育平台之一，拥有丰富完整的竞彩体系，为广大玩家提供英超，德甲，西甲，意甲，法甲等世界各大主流联赛，深受广大玩家喜爱......</div>
+                    {{end}}
+                    {{if eq (1 index .SportsOrder "im")}}
+                        <div>InplayMatrix是运动博彩行业体育博彩平台的领先厂商和专业提供商。我们的技术和数据驱动解决方案普遍适用于满足每个市场需求。InplayMatrix
+                            Sportsbook平台使体育博彩运营商有效; 效率和盈利能力，帮助您为体育博彩界提供更好的娱乐和游戏体验。
+                        </div>
+                    {{end}}
+                    {{if eq 1 (index .SportsOrder "sb")}}
+                        <div>沙巴体育是全亚洲最受欢迎的足球平台之一，数据丰富，玩法多样，提供英超，德甲，西甲，意甲，法甲欧洲五大联赛，以及南美洲，亚洲各级联赛的竞猜，深受广大玩家喜欢.....</div>
+                    {{end}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    +function (fn) {
+        fn(window.jQuery, window, document)
+    }(function ($, w, d) {
+        $(function () {
+            $('.game-list li[data-game]').mouseenter(function () {
+                var $self = $(this);
+                var ind = $self.index();
+                var game = $self.data('game');
+                if ($self.hasClass('active')) {
+                    return false;
+                } else {
+                    $self.parents('.contentSport1').removeClass('hg bb2 im sb').addClass(game);
+                    $self.addClass('active').siblings('.active').removeClass('active');
+                    $self.parent().siblings('.info2').find('>div').eq(ind).addClass('active').siblings('.active').removeClass('active');
+                }
+            })
+        })
+    });
+</script>
+{{end}}
+{{if eq .SportLen 3}}
+<div class="sport_bj">
+    <div class="sport_box">
+        <div class="contentSport1 sport hg">
+            <div class="center">
+                <div class="game-box sport ">
+                    <ul class="game-list ma_top3">
+                        <li data-game="hg" class="active ma_le_145" onclick="opengeme('','video','pk_sp');"
+                            href="javascript:void(0);">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3"></div>
+                        </li>
+                    {{if ne 1 (index .SportsOrder "im")}}
+                        <li data-game="bb" class="ma_bo_4 pk_login_before" onclick="javascript:zhuModal.login();">
+                            <div class="img_bj5"></div>
+                            <div class="img_bj6">
+                        </li>
+                        <li data-game="bb" class="ma_bo_4 pk-login-after" onclick="opengeme('','video','bbin_sp')" style="display: none;">
+                            <div class="img_bj5"></div>
+                            <div class="img_bj6">
+                        </li>
+                        <li data-game="saba3" class="ma_le_145" onclick="opengeme('','video','sb_sp');"
+                            href="javacript:void(0);">
+                            <div class="img_bj2"></div>
+                            <div class="img_bj4">
+                        </li>
+                    {{end}}
+                    {{if ne 1 (index .SportsOrder "bbin")}}
+                        <li data-game="im" class="ma_bo_4" onclick="opengeme('','video','im_sp');"
+                            href="javacript:void(0);">
+                            <div class="img_bj5"></div>
+                            <div class="img_bj6">
+                        </li>
+                        <li data-game="saba3" class="ma_le_145" onclick="opengeme('','video','bbin_sp');"
+                            href="javacript:void(0);">
+                            <div class="img_bj2"></div>
+                            <div class="img_bj4">
+                        </li>
+                    {{end}}
+                    {{if ne 1 (index .SportsOrder "sb")}}
+                        <li data-game="im" class="ma_bo_4" onclick="opengeme('','video','im_sp');"
+                            href="javacript:void(0);">
+                            <div class="img_bj5"></div>
+                            <div class="img_bj6">
+                        </li>
+                        <li data-game="bb" class="ma_le_145 pk_login_before" onclick="javascript:zhuModal.login();">
+                        <li data-game="bb" class="ma_le_145 pk-login-after" onclick="opengeme('','video','bbin_sp')" style="display: none;">
+                            <div class="img_bj2"></div>
+                            <div class="img_bj4">
+                        </li>
+                    {{end}}
+                    </ul>
+                    <div class="info3 po_1e_3">
+                        <span class="img_bj7"></span>
+                        <div class="active">
+                            皇冠体育是全亚洲最受欢迎的足球投注平台之一。每周为玩家精选全球3000场热门赛事，涵盖欧洲五大联赛，荷甲，葡超，土超，巴甲，阿甲，以及日本A联赛等赛事。玩法众多，投注简单，深受广大球迷朋友热爱......
+                        </div>
+                    {{if ne 1 (index .SportsOrder "im")}}
+                        <div>BBIN（台湾宝盈集团）体育是亚洲最知名的体育平台之一，拥有丰富完整的竞彩体系，为广大玩家提供英超，德甲，西甲，意甲，法甲等世界各大主流联赛，深受广大玩家喜爱......</div>
+                        <div>沙巴体育是全亚洲最受欢迎的足球平台之一，数据丰富，玩法多样，提供英超，德甲，西甲，意甲，法甲欧洲五大联赛，以及南美洲，亚洲各级联赛的竞猜，深受广大玩家喜欢.....</div>
+                    {{end}}
+                    {{if ne 1 (index .SportsOrder "bbin")}}
+                        <div>InplayMatrix是运动博彩行业体育博彩平台的领先厂商和专业提供商。我们的技术和数据驱动解决方案普遍适用于满足每个市场需求。InplayMatrix
+                            Sportsbook平台使体育博彩运营商有效; 效率和盈利能力，帮助您为体育博彩界提供更好的娱乐和游戏体验。
+                        </div>
+                        <div>沙巴体育是全亚洲最受欢迎的足球平台之一，数据丰富，玩法多样，提供英超，德甲，西甲，意甲，法甲欧洲五大联赛，以及南美洲，亚洲各级联赛的竞猜，深受广大玩家喜欢.....</div>
+                    {{end}}
+                    {{if ne 1 (index .SportsOrder "sb")}}
+                        <div>InplayMatrix是运动博彩行业体育博彩平台的领先厂商和专业提供商。我们的技术和数据驱动解决方案普遍适用于满足每个市场需求。InplayMatrix
+                            Sportsbook平台使体育博彩运营商有效; 效率和盈利能力，帮助您为体育博彩界提供更好的娱乐和游戏体验。
+                        </div>
+                        <div>BBIN（台湾宝盈集团）体育是亚洲最知名的体育平台之一，拥有丰富完整的竞彩体系，为广大玩家提供英超，德甲，西甲，意甲，法甲等世界各大主流联赛，深受广大玩家喜爱......</div>
+                    {{end}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    +function (fn) {
+        fn(window.jQuery, window, document)
+    }(function ($, w, d) {
+        $(function () {
+            $('.game-list li[data-game]').mouseenter(function () {
+                var $self = $(this);
+                var ind = $self.index();
+                var game = $self.data('game');
+                if ($self.hasClass('active')) {
+                    return false;
+                } else {
+                    $self.parents('.contentSport1').removeClass('hg bb im saba3').addClass(game);
+                    $self.addClass('active').siblings('.active').removeClass('active');
+                    $self.parent().siblings('.info3').find('>div').eq(ind).addClass('active').siblings('.active').removeClass('active');
+                }
+            })
+        })
+    });
+</script>
+{{end}}
+{{if eq .SportLen 4}}
+<div class="sport_bj">
+    <div class="sport_box">
+        <div class="contentSport1 sport hg">
+            <div class="center">
+                <div class="game-box sport ">
+                    <ul class="game-list ma_top4">
+                        <li data-game="hg" class="active ma_le_200" onclick="opengeme('','video','pk_sp');"
+                            href="javascript:void(0);">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3"></div>
+                        </li>
+
+                        <li data-game="bb" class="ma_le_120 pk_login_before" onclick="javascript:zhuModal.login();">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3"></div>
+                        </li>
+                        <li data-game="bb" class="ma_le_120 pk-login-after" onclick="opengeme('','video','bbin_sp')" style="display: none;">
+                            <div class="img_bj1"></div>
+                            <div class="img_bj3">
+                        </li>
+                        <li data-game="saba" class="ma_le_120" onclick="opengeme('','video','sb_sp');"
+                            href="javacript:void(0);">
+                            <div class="img_bj2"></div>
+                            <div class="img_bj4">
+                        </li>
+                        <li data-game="im" class="ma_le_200" onclick="opengeme('','video','im_sp');"
+                            href="javacript:void(0);">
+                            <div class="img_bj2"></div>
+                            <div class="img_bj4">
+                        </li>
+
+                    </ul>
+                    <div class="info po_1e">
+                        <div class="active">
+                            皇冠体育是全亚洲最受欢迎的足球投注平台之一。每周为玩家精选全球3000场热门赛事，涵盖欧洲五大联赛，荷甲，葡超，土超，巴甲，阿甲，以及日本A联赛等赛事。玩法众多，投注简单，深受广大球迷朋友热爱......
+                        </div>
+                        <div>BBIN（台湾宝盈集团）体育是亚洲最知名的体育平台之一，拥有丰富完整的竞彩体系，为广大玩家提供英超，德甲，西甲，意甲，法甲等世界各大主流联赛，深受广大玩家喜爱......</div>
+                        <div>沙巴体育是全亚洲最受欢迎的足球平台之一，数据丰富，玩法多样，提供英超，德甲，西甲，意甲，法甲欧洲五大联赛，以及南美洲，亚洲各级联赛的竞猜，深受广大玩家喜欢.....</div>
+                        <div>InplayMatrix是运动博彩行业体育博彩平台的领先厂商和专业提供商。我们的技术和数据驱动解决方案普遍适用于满足每个市场需求。InplayMatrix
+                            Sportsbook平台使体育博彩运营商有效; 效率和盈利能力，帮助您为体育博彩界提供更好的娱乐和游戏体验。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    +function (fn) {
+        fn(window.jQuery, window, document)
+    }(function ($, w, d, i) {
+        $(function () {
+            $('.game-list li[data-game]').mouseenter(function () {
+                var $self = $(this);
+                var ind = $self.index();
+                var game = $self.data('game');
+                if ($self.hasClass('active')) {
+                    return false;
+                } else {
+                    $self.parents('.contentSport1').removeClass('hg bb saba im saba1').addClass(game);
+                    $self.addClass('active').siblings('.active').removeClass('active');
+                    $self.parent().siblings('.info').find('>div').eq(ind).addClass('active').siblings('.active').removeClass('active');
+                }
+            })
+        })
+    });
+
+</script>
+{{end}}
+{{end}}

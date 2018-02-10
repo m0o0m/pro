@@ -1,0 +1,198 @@
+<div id="content">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>ip白名单</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 control-label">站点</label>
+                                        <div class="col-md-2">
+                                            <div class="form-group" ng-init="site_index_id==''" >
+                                                <select data-smart-select2 class="selectWidth" ng-model="site_index_id" ng-change="sitId(site_index_id)" id="site_index_id">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.id}}" ng-repeat="item in option_ip">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-md-offset-0 col-xs-4 col-xs-offset-0 text-center">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">搜索
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 col-md-offset-0 col-xs-4 col-xs-offset-8 text-center">
+                                            <div class="form-group">
+                                                <!--<button type="submit" data-smart-jqui-dialog-launcher="#dialog_simple"  class="btn btn-primary">-->
+                                                <button type="submit" data-toggle="modal" data-target="#myModal1"
+                                                        class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i> {{lang['AddMore']}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">站点</th>
+                                            <th class="text-center">ip</th>
+                                            <th class="text-center">ip状态</th>
+                                            <th class="text-center">备注</th>
+                                            <th class="text-center">{{lang['function']}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item1 in list1">
+                                            <td>{{item1.site}}</td>
+                                            <td>{{item1.ip}}</td>
+                                            <td>{{item1.ip_status}}</td>
+                                            <td>{{item1.remack}}</td>
+                                            <td>
+                                                <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="getID(item1)">编辑</button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">添加IP白名单</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <label class="col-md-3 control-label ng-binding">IP:</label>
+                            <div class="col-md-6">
+                                <div class="form-group" ng-init="ip_id==''" >
+                                    <div class="form-group">
+                                        <select data-smart-select2 class="selectWidth" ng-model="ip_id">
+                                            <option value="">全部</option>
+                                            <option value="{{item.value}}" ng-repeat="item in option_ip">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <label class="col-md-3 control-label ng-binding">内容</label>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea style="width: 100%;" rows="5" ng-model="content"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label ng-binding">是否启用</label>
+                                <div class="col-md-6">
+                                    <label class="radio radio-inline">
+                                        <input type="radio" name="radioBtn" ng-model="status" value="1"> 启用
+                                    </label>
+                                    <label class="radio radio-inline">
+                                        <input type="radio" name="radioBtn"  ng-model="status" value="2"> 禁用
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="">修改ip白名单</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <label class="col-md-3 control-label ng-binding">IP:</label>
+                            <div class="col-md-6">
+                                <div class="form-group"  >
+                                    <div class="form-group">
+                                        <select  class="form-control" ng-model="data.id">
+                                            <option value="{{item.value}}" ng-repeat="item in option_ip">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <label class="col-md-3 control-label ng-binding">内容</label>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea style="width: 100%;" rows="5" ng-model="data.remack"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label ng-binding">是否启用</label>
+                                <div class="col-md-6">
+                                    <label class="radio radio-inline">
+                                        <input type="radio" name="radioBtn" ng-model="data.status"> 启用
+                                    </label>
+                                    <label class="radio radio-inline">
+                                        <input type="radio" name="radioBtn" ng-model="data.status"> 禁用
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modify()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

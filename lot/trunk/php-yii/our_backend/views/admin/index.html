@@ -1,0 +1,221 @@
+<style>
+    #admin-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="admin-form" method='get' action='/admin/index'>
+            <label for="login_user">账号:
+                <input type="text" name="login_user" id='login_user' value="<{if isset($smarty.get.login_user)}><{$smarty.get.login_user}><{/if}>">
+            </label>
+            <!-- <label for="login_name">昵称:
+                <input type="text" name='login_name'  id="login_name" value="<{if isset($smarty.get.login_name)}><{$smarty.get.login_name}><{/if}>">
+            </label> -->
+
+            <label for="line_reload"> 所属角色:</label>
+            <select type="select" name="role"  id="role" style="width:120px;">
+                <option value="" selected>全部</option>
+                <{foreach from=$roles item=v key=k}>
+                <option value="<{if isset($v['id'])}><{$v['id']}><{/if}>"  <{if isset($smarty.get.role) && $v['id'] eq $smarty.get.role}>selected<{/if}> ><{if isset($v['role_name'])}><{$v['role_name']}><{/if}></option>
+                <{/foreach}>
+            </select>
+            <label for="online"> 在线状态:
+                <select type="select" name="online"  id="online">
+                    <option value="" >全部</option>
+                    <option value="1" <{if isset($smarty.get.online) && $smarty.get.online eq 1 }>selected<{/if}>>在线</option>
+                    <option value="2" <{if isset($smarty.get.online) && $smarty.get.online eq 2 }>selected<{/if}>>离线</option>
+                </select>
+            </label>
+
+            <label > 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum" >
+                    <option value="100"  <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 100}>selected<{/if}>>100</option>
+                    <option value="500" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 500}>selected<{/if}>>500</option>
+                    <option value="1000" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 1000}>selected<{/if}>>1000</option>
+                </select>
+            </label>
+            <label > 页码:
+                <select type="select" name="page"  id="page">
+                    <{section name=loop loop=$pagecount}>
+                    <option value="<{$smarty.section.loop.index+1}>"
+                            <{if isset($smarty.get.page) && $smarty.get.page eq $smarty.section.loop.index+1}>selected<{/if}>>
+                            <{$smarty.section.loop.index+1}>
+                </option>
+                <{/section}>
+            </select>
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">账号</th>
+                        <th class="center">昵称</th>
+                        <th class="center">角色</th>
+                        <th class="center">是否在线</th>
+                        <th class="center">IP</th>
+                        <th class="center">状态</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <{foreach from=$data item=v key=k}>
+                    <tr>
+                        <td class="center">
+                            <a ><{if isset($v['id'])}><{$v['id']}><{/if}></a>
+                        </td>
+                        <td class="center">
+                            <a ><{if isset($v['login_user'])}><{$v['login_user']}><{/if}></a>
+                        </td>
+                        <td class="center"><{if isset($v['login_name'])}><{$v['login_name']}><{/if}></td>
+                        <td class="center">
+                            <a ><{if isset($v['role_name'])}><{$v['role_name']}><{/if}></a>
+                        </td>
+                        <td class="center"> <{if $v['is_withdrawals']}>在线<{else}><font color="#999">离线</font><{/if}></td>
+                        <td class="center"><{if isset($v['login_ip'])}><{$v['login_ip']}><{/if}></td>
+                        <td class="center"><{if isset($v['deleteTxt'])}><{$v['deleteTxt']}><{/if}></td>
+                        <td class="center"><{if isset($v['addDate'])}><{$v['addDate']}><{/if}></td>
+                        <td class="center handle">
+                           <a  class="btn btn-xs btn-success detail" data_a = "<{$v['id']}>" data_b="detail" href='javascript:;'>详情</a>
+                            <a  class="btn btn-xs btn-success update" data_a = "<{$v['id']}>" data_b="update" href='javascript:;'>角色</a>
+                            <{if $v['is_withdrawals']}>
+                            <a  class="btn btn-xs btn-success withdrawals" onclick="javascript:withdrawals(<{$v['id']}>);" >踢线</a>
+                            <{/if}>
+                        </td>
+                    </tr>
+                    <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<script>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var login_user = $.trim($('#login_user').val());
+        var login_name = $.trim($('#login_name').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+        var role = $.trim($('#role').val());
+        var online = $.trim($('#online').val());
+
+        var params = {
+            login_user: login_user,
+            login_name: login_name,
+            role: role,
+            online: online,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/admin/index',
+            container: '#container'
+        });
+    }
+    //祥情
+    $('.detail').click(function(){
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/admin/edit?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+
+     //踢线
+    function withdrawals(uid){
+        var url = 'withdrawals';
+        var data = 'uid=' + uid + '&type=ourbackend_UserOnline';
+        var callback = function(res){
+            if (res.ErrorCode == 2) {
+                layer.alert(res.ErrorMsg, {icon: 2});
+                layer.close(index);
+            } else if (res.ErrorCode == 1) {
+                layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.reload();});
+            }
+        }
+
+        doajax(url,data,callback);
+    }
+
+    //添加
+    $('#create').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/admin/edit/?type=create',
+            container: '#container'
+        });
+    })
+    //修改
+    $('.update').click(function(){
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/admin/edit?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+    //角色
+    $('#role').change(function () {
+        renderTableByPjax();
+    })
+    $('#online').change(function () {
+        renderTableByPjax();
+    })
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+    $('#page').change(function () {
+        renderTableByPjax();
+    })
+
+     function doajax(url,data,callback){
+         $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+               callback(res);
+            }
+        });
+    }
+
+</script>

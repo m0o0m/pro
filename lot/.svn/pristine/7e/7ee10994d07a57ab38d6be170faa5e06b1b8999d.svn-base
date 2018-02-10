@@ -1,0 +1,208 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-20 15:02:49
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/log/history.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a62e9994766e1_58072386',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '3eb09684c75bdf32a02d3ea0e6427a65322fd126' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/log/history.html',
+      1 => 1516430789,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a62e9994766e1_58072386 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    #admin-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+    #sample-table-1 .center{vertical-align:middle}
+    #requestLog-form #ptype{width:100px}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="requestLog-form" method='get' action='/log/history'>
+            <label for="ptype"> 平台:
+                <select type="select" name="ptype" id="ptype">
+                    <option value="">全部</option>
+                    <option value="1" <?php if (isset($_GET['ptype']) && $_GET['ptype'] == 1) {?>selected<?php }?>>总后台</option>
+                    <option value="2" <?php if (isset($_GET['ptype']) && $_GET['ptype'] == 2) {?>selected<?php }?>>业主后台</option>
+                    <option value="3" <?php if (isset($_GET['ptype']) && $_GET['ptype'] == 3) {?>selected<?php }?>>前台</option>
+                </select>
+            </label>
+            <label for="route">账号:
+                <input type="text" name="uname" id='uname' value="<?php if (isset($_GET['uname'])) {
+echo $_GET['uname'];
+}?>">
+            </label>
+            <label for="date"> 日期:
+                <input class="laydate-icon" placeholder="请输入日期" type="text" id="starttime" name="starttime" field="search" value="<?php if (isset($_GET['starttime'])) {
+echo $_GET['starttime'];
+}?>">
+                ~
+                <input class="laydate-icon" placeholder="请输入日期" type="text" id="endtime" name="endtime" field="search" value="<?php if (isset($_GET['endtime'])) {
+echo $_GET['endtime'];
+}?>">
+            </label>
+            <label > 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum" onchange="submit()">
+                    <option value="100"  <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 100) {?>selected<?php }?>>100</option>
+                    <option value="500" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 500) {?>selected<?php }?>>500</option>
+                    <option value="1000" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 1000) {?>selected<?php }?>>1000</option>
+                </select>
+            </label>
+            <label > 页码:
+                <select type="select" name="page"  id="page">
+                    <?php
+$__section_loop_0_saved = isset($_smarty_tpl->tpl_vars['__smarty_section_loop']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop'] : false;
+$__section_loop_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['pagecount']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_loop_0_total = $__section_loop_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = new Smarty_Variable(array());
+if ($__section_loop_0_total != 0) {
+for ($__section_loop_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] = 0; $__section_loop_0_iteration <= $__section_loop_0_total; $__section_loop_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']++){
+?>
+                    <option value="<?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+"
+                            <?php if (isset($_GET['page']) && $_GET['page'] == (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1) {?>selected<?php }?>>
+                            <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+
+                </option>
+                <?php
+}
+}
+if ($__section_loop_0_saved) {
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = $__section_loop_0_saved;
+}
+?>
+            </select>
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+    </form>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">会员编号</th>
+                        <th class="center">会员账号</th>
+                        <th class="center">平 台</th>
+                        <th class="center ">线路ID</th>
+                        <th class="center">I P</th>
+                        <th class="center">状 态</th>
+                        <th class="center">登录时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <?php if (isset($_smarty_tpl->tpl_vars['data']->value)) {?>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center handle" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['uid'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
+ <?php }?> </td>
+                        <td class="center handle" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['uname'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['uname'];?>
+ <?php }?> </td>
+                        <td class="center" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['ptypeTxt'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['ptypeTxt'];?>
+ <?php }?> </td>
+                        <td class="center" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+ <?php }?> </td>
+                        <td class="center" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['ip'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['ip'];?>
+ <?php }?> </td>
+                        <td class="center" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['newState'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['newState'];?>
+ <?php }?> </td>
+                        <td class="center handle" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['adddate'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['adddate'];?>
+ <?php }?> </td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                  <?php }?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<?php echo '<script'; ?>
+>
+           //pjax局部加载列表
+    function renderTableByPjax() {
+       
+        var ptype = $.trim($('#ptype').val());
+        var starttime = $.trim($('#starttime').val());
+        var endtime = $.trim($('#endtime').val());
+        var uname = $.trim($('#uname').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+        var params = {
+            ptype: ptype,
+            starttime: starttime,
+            endtime: endtime,
+            uname: uname,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/log/history',
+            container: '#container'
+        });
+    }
+    //搜索菜单
+    $('#search').click(function(){
+        renderTableByPjax();
+    })
+    //页码
+    $('#page').change(function(){
+       renderTableByPjax();
+    })
+
+      //时间控件
+    var start = {
+        elem: '#starttime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas;
+        }
+    };
+    laydate(start);
+    $('#starttime').val(laydate.now(0, 'YYYY-MM-DD'));
+    var end = {
+        elem: '#endtime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true,
+    };
+    laydate(end);
+    $('#endtime').val(laydate.now(0, 'YYYY-MM-DD'));
+<?php echo '</script'; ?>
+>
+<?php }
+}

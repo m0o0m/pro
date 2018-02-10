@@ -1,0 +1,309 @@
+@charset "UTF-8";
+#page-body {
+  /*跳转过程*/
+  /**/
+  /*.center-4 ul li{*/
+  /*width: 12.5%;*/
+  /*height: 50px;*/
+  /*line-height: 50px;*/
+  /*text-align: center;*/
+  /*}*/ }
+  #page-body .myd-red {
+    color: #fe4641 !important; }
+  #page-body .myd-green {
+    color: green !important; }
+  #page-body .mycenter {
+    border: 1px solid #DDD;
+    height: 664px;
+    margin-top: 8px;
+    background-color: #fff;
+    margin-bottom: 50px; }
+  #page-body .center-t {
+    height: 48px;
+    margin: 0 28px 0 28px;
+    border-bottom: 1px solid #DDD; }
+  #page-body .center-t span {
+    line-height: 48px; }
+  #page-body .center-t span i {
+    /*padding-left: 10px;*/
+    margin-left: 10px;
+    color: #3091FD; }
+  #page-body .center-2 {
+    padding-left: 78px;
+    /* height: 143px; */ }
+  #page-body .center-2 li {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    margin-right: 40px; }
+  #page-body .center-2 li:nth-child(3) select {
+    width: 150px; }
+  #page-body .center-2 .span1 {
+    color: #505050; }
+  #page-body .center-2 select {
+    width: 258px;
+    height: 34px;
+    border: 1px solid #DDD;
+    outline: none; }
+  #page-body .center-2 i {
+    padding-right: 5px; }
+  #page-body .center-2 .myd-red {
+    padding-left: 35px;
+    /* overflow: hidden; */
+    position: relative; }
+  #page-body .center-2 .myd-red i {
+    /* line-height: 40px; */
+    font-size: 30px;
+    /* padding-left: 200px */
+    position: absolute;
+    top: -18px;
+    left: 0; }
+  #page-body .center-2-3 {
+    margin: 30px 0; }
+  #page-body .center-3 {
+    border-top: 2px solid #FFC933;
+    margin: 0 28px 0 28px;
+    height: 178px;
+    background-color: #FFFFEE;
+    padding-left: 50px; }
+  #page-body .center-3 h3 {
+    padding-top: 15px;
+    padding-bottom: 8px; }
+  #page-body .center-3 .fl-1 li {
+    margin-bottom: 5px; }
+  #page-body .center-3 .fl-2 {
+    padding-left: 20px; }
+  #page-body .center-3 .fl-2 li {
+    margin-bottom: 8px; }
+  #page-body .center-4 {
+    padding-left: 50px; }
+  #page-body .center-4 input[type="text"] {
+    width: 260px;
+    height: 34px;
+    border: 1px solid #DDD;
+    outline: none;
+    padding-left: 10px; }
+  #page-body .center-4 input[type="password"] {
+    width: 260px;
+    height: 34px;
+    border: 1px solid #DDD;
+    outline: none;
+    padding-left: 10px; }
+  #page-body .input-div {
+    padding-top: 13px;
+    padding-bottom: 13px; }
+  #page-body .center-4 .myd-red {
+    height: 26px;
+    line-height: 26px; }
+  #page-body .center-4 ul li {
+    margin-bottom: 5px; }
+  #page-body .center-4 > div a {
+    width: 90px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #FF4341;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 600px; }
+  #page-body .myd-red {
+    color: red !important; }
+  #page-body .myd-green {
+    color: green !important; }
+  #page-body .audit {
+    /* border: 1px solid #DDD; */
+    height: 120px;
+    /* margin-top: 8px; */
+    /* background-color: #fff; */
+    margin-bottom: 50px;
+    display: none; }
+  #page-body .audit .deposit-schedule {
+    margin-top: 8px;
+    border: 1px solid #DDD;
+    height: 120px;
+    background-color: #fff;
+    position: relative; }
+  #page-body .audit .deposit-schedule .round {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    /* border-radius: 50%;
+    background-color: #E8E8E8; */
+    position: absolute;
+    top: 18px;
+    z-index: 10; }
+  #page-body .audit .deposit-schedule .line {
+    position: absolute;
+    top: 50px;
+    width: 288px; }
+  #page-body .audit .round .round-2 .myicon {
+    font-size: 30px;
+    color: #fff; }
+  #page-body .FEF7F9 {
+    color: #FEF7F9 !important; }
+  #page-body .myd-red {
+    color: red !important; }
+  #page-body .round .myd-t-gou {
+    color: #29BA1A; }
+  #page-body .myiocn-gou {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #0BBE43;
+    opacity: 0; }
+  #page-body .deposit-schedule .round:nth-child(3) {
+    left: 20%; }
+  #page-body .deposit-schedule .round:nth-child(4) {
+    left: 47.5%; }
+  #page-body .deposit-schedule .round:nth-child(5) {
+    left: 75%; }
+  #page-body .opacity {
+    opacity: 1 !important; }
+  #page-body .deposit-schedule .round:nth-child(3) .round-2 {
+    background-image: url("../image/background-red.png");
+    background-position: 80px -28px; }
+  #page-body .deposit-schedule .round:nth-child(4) .round-2 {
+    background-image: url("../image/background-red.png");
+    background-position: 80px -28px; }
+  #page-body .audit.deposit-schedule .line:nth-child(1) {
+    left: 246px;
+    border-top: 2px solid red; }
+  #page-body .audit.deposit-schedule .line:nth-child(2) {
+    left: 519px;
+    border-top: 2px solid #E8E8E8; }
+  #page-body .smallamount {
+    /* border: 1px solid #DDD; */
+    height: 664px;
+    /* margin-top: 8px; */
+    /* background-color: #fff; */
+    margin-bottom: 50px;
+    display: none; }
+  #page-body .smallamount .deposit-schedule {
+    margin-top: 8px;
+    border: 1px solid #DDD;
+    height: 120px;
+    background-color: #fff;
+    position: relative; }
+  #page-body .smallamount .deposit-schedule .round {
+    display: inline-block;
+    width: 85px;
+    height: 80px;
+    /* border-radius: 50%;
+    background-color: #E8E8E8; */
+    position: absolute;
+    top: 18px;
+    z-index: 10; }
+  #page-body .smallamount .deposit-schedule .line {
+    position: absolute;
+    top: 50px;
+    width: 288px; }
+  #page-body .round .round-2 {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #FF9910;
+    line-height: 60px;
+    text-align: center; }
+  #page-body .round .round-2 .myicon {
+    font-size: 30px;
+    color: #666; }
+  #page-body .center-4-1 ul:nth-child(1) {
+    color: #FEFEFE; }
+  #page-body .center-4-1 ul:nth-child(2) {
+    background-color: #F5F5F5;
+    color: #4F4F4F; }
+  #page-body .center-4-1 ul:nth-child(2) li:nth-child(1), #page-body .center-4-1 li:nth-child(2), #page-body .center-4 ul:nth-child(2) li:nth-child(2) {
+    line-height: 25px; }
+  #page-body .center-4-1 ul li {
+    width: 12.5%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center; }
+  #page-body .caveat {
+    opacity: 0;
+    font-size: 12px;
+    padding-left: 20px; }
+  #page-body .deposit-schedule .line:nth-child(1) {
+    left: 250px;
+    border-top: 2px solid #FE3A37; }
+  #page-body .deposit-schedule .line:nth-child(2) {
+    left: 530px;
+    border-top: 2px solid #FF9910; }
+  #page-body .deposit-schedule-c {
+    margin-top: 8px;
+    padding: 19px 29px 0 29px;
+    border: 1px solid #DDD;
+    background-color: #FFF; }
+  #page-body .deposit-schedule-c .center-3 {
+    border-top: 2px solid #FFC933;
+    /* margin: 0 28px 0 28px; */
+    height: 228px;
+    background-color: #FFFFEE;
+    padding-left: 30px; }
+  #page-body .deposit-schedule-c .center-3 h3 {
+    padding-top: 15px;
+    padding-bottom: 8px; }
+  #page-body .deposit-schedule-c .center-3 .fl-1 li {
+    margin-bottom: 5px; }
+  #page-body .deposit-schedule-c .center-3 .fl-2 {
+    padding-left: 140px; }
+  #page-body .deposit-schedule-c .center-3 .fl-2 li {
+    margin-bottom: 8px; }
+  #page-body .smallamount .deposit-schedule-c .center-3 .fl-2 {
+    padding-left: 55px; }
+  #page-body .f1-font {
+    font-size: 15px; }
+  #page-body .center-3-t {
+    margin-top: 10px;
+    width: 190px;
+    height: 44px;
+    background-color: #E85036;
+    color: #fff;
+    line-height: 44px;
+    text-align: center;
+    font-size: 18px; }
+  #page-body .deposit-schedule-c .center-4 {
+    padding-top: 8px; }
+  #page-body .deposit-schedule-c .center-4 ul:nth-child(1) {
+    background-color: #4D4F56;
+    color: #FEFEFE; }
+  #page-body .deposit-schedule-c .center-4 ul:nth-child(2) {
+    background-color: #F5F5F5;
+    color: #4F4F4F; }
+  #page-body .deposit-schedule-c .center-4 ul:nth-child(2) li:nth-child(1), #page-body .center-4 ul:nth-child(2) li:nth-child(2) {
+    line-height: 25px; }
+  #page-body .center-5 {
+    margin-top: 8px;
+    padding-left: 30px;
+    height: 130px;
+    background-color: #EFFFE1;
+    border-top: 2px solid #6EC51A; }
+  #page-body .center-5 .center-5-t {
+    height: 48px;
+    line-height: 48px;
+    font-weight: 700; }
+  #page-body .center-5-c > span, #page-body .center-5-b > span {
+    margin-right: 34px; }
+  #page-body .center-5-c span {
+    display: inline-block;
+    height: 36px; }
+  #page-body .center-5 .center-5-c .span_h {
+    font-size: 20px;
+    /* color: #fba56d; */ }
+  #page-body .center-6 {
+    height: 46px;
+    text-align: center;
+    padding-top: 12px; }
+  #page-body .center-6 a {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+    width: 90px;
+    background-color: #FE423E;
+    border-radius: 3px;
+    color: #fff; }
+
+/*# sourceMappingURL=withdrawalIndex.css.map */

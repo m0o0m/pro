@@ -1,0 +1,25 @@
+package schema
+
+//用户表
+type User struct {
+	Uid        int64   `insert:"uid;auto;mycat:next value for MYCATSEQ_USER" xorm:"'uid' PK autoincr"`
+	LineId     string  `insert:"line_id" xorm:"'line_id' notnull"`                        //线路id
+	Uname      string  `insert:"uname" xorm:"'uname' notnull"`                            //用户名
+	Pword      string  `insert:"pword" xorm:"'pword' notnull"`                            //用户密码
+	Money      float64 `insert:"money" xorm:"'money' notnull default(0.00)"`              //用户金额
+	Status     int64   `insert:"status" xorm:"'status' notnull default(1)"`               //1为正常
+	Addtime    int64   `insert:"addtime" xorm:"'addtime' notnull created"`                //注册时间
+	CreateIp   string  `insert:"create_ip" xorm:"'create_ip' notnull default('0.0.0.0')"` //注册ip
+	AgentId    int64   `insert:"agent_id" xorm:"'agent_id' notnull"`                      //代理id
+	UaId       int64   `insert:"ua_id" xorm:"'ua_id' notnull"`                            //总代id
+	ShId       int64   `insert:"sh_id" xorm:"'sh_id' notnull"`                            //股东id
+	Currency   string  `insert:"currency" xorm:"'currency' notnull default('cny')"`       //货币种类：人民币cny，越南盾vnd，美元usd，泰国铢thb，新加坡元sgd，菲律宾比索php，马来西亚吉特myr，新台币twd
+	Ptype      int64   `insert:"ptype" xorm:"'ptype' notnull default(1)"`                 //1为pc端
+	Updatetime int64   `insert:"updatetime" xorm:"'updatetime' updated"`                  //修改时间
+	Remark     string  `insert:"remark" xorm:"remark"`                                    //备注
+	IsShiWan   int     `insert:"is_shiwan" xorm:"is_shiwan"`                              //试玩,1非试玩用户 2试玩用户
+}
+
+func (*User) TableName() string {
+	return "my_user"
+}

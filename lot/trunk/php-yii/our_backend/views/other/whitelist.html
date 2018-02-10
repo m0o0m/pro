@@ -1,0 +1,332 @@
+<style>
+    #agent-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+    .width100{width:100px}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="agent-form" method='get' action='/agent/index'>
+            <label for="menuLevel"> 线路ID
+                <select type="select" name="line"  id="line">
+                    <option value="" >全部</option>
+                    <{foreach from=$lines item=v key=k}>
+                    <option value="<{$lines[$k]['line_id']}>" <{if isset($smarty.get.line_id) && $smarty.get.line_id eq <{$lines[$k]['line_id']}> }>selected<{/if}>><{$v['line_id']}></option>
+                    <{/foreach}>
+                </select>
+            </label>
+            
+
+             <label for="menuLevel"> 类型:
+                <select type="select" name="showtype"  id="showtype" style="width:160px;">
+                    <option value="" >全部</option>
+                    <option value="1" <{if isset($smarty.get.type) && $smarty.get.type eq 1 }>selected<{/if}>>前台api</option>
+                    <option value="2" <{if isset($smarty.get.type) && $smarty.get.type eq 2 }>selected<{/if}>>golang接入api</option>
+                    <option value="3" <{if isset($smarty.get.type) && $smarty.get.type eq 3 }>selected<{/if}>>golang采集api</option>
+                    <option value="4" <{if isset($smarty.get.type) && $smarty.get.type eq 4 }>selected<{/if}>>golang钱包模式</option>
+                </select>
+
+            </label>
+
+             <label for="menuLevel"> 状态:
+                <select type="select" name="state"  id="state" style="width:90px;">
+                    <option value="" >全部</option>
+                    <option value="1" <{if isset($smarty.get.state) && $smarty.get.state eq 1 }>selected<{/if}>>启用</option>
+                    <option value="2" <{if isset($smarty.get.state) && $smarty.get.state eq 2 }>selected<{/if}>>停用</option>
+                </select>
+            </label>
+
+    
+        <label>
+            <input type="button" id='search' class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+<div class="row" >
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">线路ID</th>
+                        <th class="center">I P</th>
+                        <th class="center">类型</th>
+                        <th class="center">状态</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">修改时间</th>
+                        <th class="center">备注</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <{foreach from=$data item=v key=k}>
+                    <tr>
+                        <td class="center">
+                            <a ><{if isset($v['id'])}><{$v['id']}><{/if}></a>
+                        </td>
+                        <td class="center">
+                            <a ><{if isset($v['line_id'])}><{$v['line_id']}><{/if}></a>
+                        </td>
+                        <td class="center">
+                            <a><{if isset($v['ipTxt'])}><{$v['ipTxt']}><{/if}></a>
+                        </td>
+                        <td class="center"><{if isset($v['typeTxt'])}><{$v['typeTxt']}><{/if}></td>
+                        <td class="center green"><{if isset($v['stateTxt'])}><{$v['stateTxt']}><{/if}></td>
+                        <td class="center"><{if isset($v['addtime'])}><{$v['addtime']}><{/if}></td>
+                        <td class="center"><{if isset($v['updatetime'])}><{$v['addtime']}><{/if}></td>
+                        <td class="center" style="max-width:150px;"><{if isset($v['remark'])}><{$v['remark']}><{/if}></td>
+
+                        <td class="center handle">
+                            <span  class="btn btn-xs btn-success update" lid='<{$v["id"]}>' lstate='<{$v["state"]}>' lip='<{$v["ip"]}>' lremark='<{$v["remark"]}>'  lline='<{$v["line_id"]}>'  ltype='<{$v["type"]}>'>修改</span>
+                        </td>
+                    </tr>
+                    <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<div class="isHide layui-layer-wrap" id="get_div" style="display: none;">
+    <div class="modal-body">
+        <form  class="form-horizontal" id="fom" >
+           <table id="change_money" class="table table-striped table-bordered table-hover">
+                <tr>
+                    <td>线路:</td>
+                    <td>
+                        <select type="select" name="line_id"  id="line_id" style="width:120px;margin-left:34px;">
+                            <{foreach from=$lines item=v key=k}>
+                            <option value="<{$lines[$k]['line_id']}>"><{$v['line_id']}></option>
+                            <{/foreach}>
+                            <option value="wallet">钱包模式</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>类型</td>
+                    <td>
+                        <select type="select" name="type"  id="type" style="width:120px;margin-left:35px;">
+                             <option value="1" >前台api</option>
+                             <option value="2" >golang接入api</option>
+                             <option value="3" >golang采集api</option>
+                             <option value="4" >golang钱包模式</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>I P</td>
+                    <td>
+                        <textarea cols="30" rows="5" id="ip" name="ip" placeholder="多个IP请用半角逗号隔开" ></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>状态</td>
+                    <td>
+                    <input type="radio" name="status"  checked="checked" value="1" style="margin-left:20px;"/> 启用
+                    <input type="radio" name="status"  style="margin-left:20px;" value="2" /> 停用
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>备注</td>
+                    <td>
+                        <textarea cols="30" rows="4" id="remark" name="remark" placeholder="" ></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='2'>
+                    <center><input type="button" class="btn btn-info" value = "保存"  onclick="javascript:save();"  style="margin-left:20px;" /></center>
+                    </td>
+                </tr>
+                 <input type="hidden" name="s_id" id="s_id" value="" />
+      
+            </table>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+
+
+   
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var line_id = $.trim($('#line').val());
+        var type = $.trim($('#showtype').val());
+        var state = $.trim($('#state').val());
+
+        var params = {
+            line_id: line_id,
+            type: type,
+            state: state
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/other/whitelist',
+            container: '#container'
+        });
+    }
+
+    //pjax局部加载表单
+    function renderFormByPjax(url) {
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    }
+
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+
+  
+    //线路
+     $('#line').change(function () {
+        renderTableByPjax();
+     })
+    //类型
+     $('#showtype').change(function () {
+        renderTableByPjax();
+     })
+    //状态
+     $('#state').change(function () {
+        renderTableByPjax();
+     })
+   
+    //清除弹框内容
+    function clearData(){
+        $('#line_id').attr('disabled', false);
+        $('#type').attr('disabled', false);
+        $('#line_id').children().prop('selected',false);
+        $('#type').children().prop('selected',false);
+        $('input[name="status"][value=1]').prop('checked',true);
+        $('#s_id').val(''); 
+        $('#ip').val('');
+        $('#remark').val('');
+    }
+    //新增
+    $('#create').click(function () {
+        clearData();
+        openLayer('添加IP白名单','500px');
+    })
+
+    //修改
+    $('.update').click(function(){
+        clearData();
+        var id = $(this).attr('lid');
+        var line_id = $(this).attr('lline');
+        var state = $(this).attr('lstate');
+        var type = $(this).attr('ltype');
+        var ip = $(this).attr('lip');
+        var remark = $(this).attr('lremark');
+        if(line_id == '钱包') line_id = 'wallet';
+        $('#s_id').val(id);
+        $('#ip').val(ip);
+        $('#remark').val(remark);
+        $('input[name="status"][value='+ state +']').prop('checked',true);
+        $('#line_id option[value='+ line_id +']').prop('selected',true);
+        $('#type option[value='+ type +']').prop('selected',true);
+        $('#line_id').attr('disabled', true);
+        $('#type').attr('disabled', true);
+        openLayer('修改IP白名单','500px');
+
+    })
+
+    function save(){
+        var line_id = $('#line_id').val();
+        var ip = $('#ip').val();
+        var id = $('#s_id').val();
+        var type = $('#type').val();
+        var remark = $('#remark').val();
+        var status = $('input[name="status"]:radio:checked').val();
+        var url = 'savewhite';
+        if(line_id == ''){
+            layer.alert('请选择线路',{icon:2});
+            return false;
+        }
+        if(ip == ''){
+            layer.alert('请输入ip',{icon:2});
+            $('#ip').focus();
+            return false;
+        }
+
+        login_ip_arr = ip.split(',');
+        patterns = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}$/;
+        for(x in login_ip_arr){
+            if(!patterns.test(login_ip_arr[x])){
+                // login_ip_arr[x].
+                layer.alert('IP格式不正确', {icon: 2})
+                return false;
+            }
+        }
+
+        var data = {line_id:line_id,ip:ip,id:id,type:type,status:status,remark:remark};
+        var callback = function (result) {
+            layer.close(index);
+            if(result.ErrorCode == 1){
+                layer.alert(result.ErrorMsg,{icon:1},function(){window.location.reload();});
+            }else if(result.ErrorCode == 2){
+                layer.alert(result.ErrorMsg,{icon:2});
+                return false;
+            }else{
+                layer.alert('出错啦',{icon:0});
+                return false;
+            }
+            return false;
+        }
+
+        doajax(url,data,callback);
+    }
+
+    // 弹框
+    function openLayer(title, height) {
+        open = layer.open({
+            type: 1, //Page层类型
+            area: ['400px', height],
+            title: title,
+            shade: 0.5, //遮罩透明度
+            maxmin: true, //允许全屏最小化
+            anim: 1, //0-6的动画形式，-1不开启
+            content: $('#get_div')
+        });
+    }
+
+    function doajax(url,data,callback){
+         $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+               callback(res);
+            }
+        });
+    }
+
+
+</script>

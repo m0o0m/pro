@@ -1,0 +1,147 @@
+<div id="content">
+    <div class="row">
+        <section widget-grid id="widget-grid">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>历史记录</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar" ng-show="newTodo">
+                                        <div class="row form-horizontal ">
+                                            <label class="col-md-1  col-xs-4 input-label">站点</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                        <select data-smart-select2 class="selectWidth" ng-model="site_index_id" ng-change="search()">
+                                                            <option value="">全部</option>
+                                                            <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 input-label col-xs-4">类型</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                        <select data-smart-select2 class="selectWidth">
+                                                            <option value="">全部</option>
+                                                            <option value="{{item.value}}" ng-repeat="item in information">{{item.name}}</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">查询时间</label>
+                                            <div class="col-sm-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="开始时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="start_time">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-0 col-xs-8 col-xs-offset-4">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{getWord('End time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="end_time">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline">
+                                        <div class="table-scroll">
+                                            <table  class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>编号</th>
+                                                    <th>站点ID</th>
+                                                    <th>文案标题</th>
+                                                    <th>添加日期</th>
+                                                    <th>文案类别</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list">
+                                                    <td>{{item.code}}</td>
+                                                    <td>{{item.site_id}}</td>
+                                                    <td>{{item.title}}</td>
+                                                    <td>{{item.create_time|fiterTime}}</td>
+                                                    <td>{{item.type}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+        <div class="modal fade" id="dialog_model" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="addAccount">站点口令设置</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">SITE_ID</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="editForm.site_id">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">密钥</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="editForm.key">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">是否开启</label>
+                                    <div class="col-md-7">
+                                        <select name="" id="" class="form-control">
+                                            <option class="form-control" value="1">否</option>
+                                            <option class="form-control" value="2">是</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

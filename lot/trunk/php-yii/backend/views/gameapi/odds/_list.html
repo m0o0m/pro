@@ -1,0 +1,53 @@
+
+<!-- 列表 -->
+<{if isset($result.data)}>
+    <tbody>
+        <{foreach from=$result.data item=v key=k}>
+            <{foreach from=$v item=v2 key=k2}>
+                <tr><th colspan="20"><{if !($k2 eq 'str' && key_exists('num', $v))}><{$k}><{/if}></th></tr>
+                <tr>
+                    <{assign var=vlen value=count($v2)}>
+                    <{if $vlen gt 5}>
+                        <{assign var=widlen value=5}>
+                    <{else}>
+                        <{assign var=widlen value=$vlen}>
+                    <{/if}>
+                    <{for $i=1 to $widlen}>
+                        <td class="center" style="width:66px;background-color:white;font-weight:bold;">号码</td>
+                        <td class="center" style="width:66px;background-color:white;">赔率</td>
+                    <{/for}>
+                </tr>
+                <tr>
+                    <{assign var=i value=1}>
+                    <{foreach from=$v2 item=v3}>
+                        <{if isset($v3.agent_type) && isset($v3.agent_id)}>
+                            <{assign var=itemid value=$v3.play_id}>
+                            <{assign var=iscustom value=1}>
+                        <{elseif isset($v3.line_id)}>
+                            <{assign var=itemid value=$v3.play_id}>
+                            <{assign var=iscustom value=-1}>
+                        <{else}>
+                            <{assign var=itemid value=$v3.id}>
+                            <{assign var=iscustom value=0}>
+                        <{/if}>
+                        <td class="center" style="background-color:white;font-weight:bold;"><{$v3.input_nameTxt}></td>
+                        <td class="center" style="background-color:white;<{if $iscustom eq 1}>color:red;<{elseif $iscustom eq -1}>color:blue;<{/if}>"
+                            onclick="actionEdit(<{$itemid}>);"
+                            id="item<{$itemid}>"
+                            iscustom="<{$iscustom}>"
+                        <{foreach from=$v3 item=_v key=_k}>
+                            data-<{$_k}>="<{$_v}>"
+                        <{/foreach}>
+                            info='<{$v3|json_encode}>'
+                        ><{$v3.odd}></td>
+
+                        <{if $i%5 eq 0}></tr><tr><{/if}>
+                        <{assign var=i value=$i+1}>
+                    <{/foreach}>
+                    </tr><tr>
+                </tr>
+                </tbody><tbody>
+            <{/foreach}>
+        <{/foreach}>
+    </tbody>
+<{/if}>

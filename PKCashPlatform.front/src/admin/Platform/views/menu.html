@@ -1,0 +1,678 @@
+<!-- 菜单账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div id="tabs" data-smart-jqui-tabs>
+            <ul>
+                <li>
+                    <a href="#tabs-a">平台菜单管理</a>
+                </li>
+                <li>
+                    <a href="#tabs-b">代理菜单管理</a>
+                </li>
+            </ul>
+            <div id="tabs-a">
+                <div class="row">
+                    <article class="col-sm-12">
+                        <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>平台菜单管理</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body tab-content">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+                                            <div class="col-sm-offset-11">
+                                                <div class="input-group">
+                                                    <button type="submit" class="btn btn-primary" data-toggle="modal" ng-click="add()" data-target="#myModal1">
+                                                        <i class="fa fa-plus"></i> 新增菜单
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">排序</th>
+                                                        <th class="text-center">菜单名称</th>
+                                                        <th class="text-center">前端路由</th>
+                                                        <th class="text-center">icon</th>
+                                                        <th class="text-center">状态</th>
+                                                        <th class="text-center">功能</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody  ng-repeat="item in list">
+                                                    <tr class="text-center">
+                                                        <td><i class="fa fa-lg fa-plus-circle" ng-click="showFace($index,$event)"></i>{{item.sort}}</td>
+                                                        <td>{{item.menu_name}}</td>
+                                                        <td>{{item.route}}</td>
+                                                        <td>{{item.icon}}</td>
+                                                        <td class="text-red" ng-bind="item.status==1?'启用':'禁用'"></td>
+                                                        <td class="hidden m1_id">{{item.id}}</td>
+                                                        <td>
+                                                            <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="addm1($index)">添加下级</button>
+                                                            <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal4" ng-click="modify_1($index)">修改</button>
+                                                            <button class="btn btn-default btn-xs" ng-click="paySetting(item)" ng-bind="item.status==1?'禁用':'启用'"></button>
+                                                            <button class="btn btn-default btn-xs" ng-click="delete(item.id,item.status)" >删除</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="secondul">
+                                                        <td colspan="6">
+                                                            <table class="table table-bordered table-hover">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="text-center">排序</th>
+                                                                    <th class="text-center">菜单名称</th>
+                                                                    <th class="text-center">前端路由</th>
+                                                                    <th class="text-center">icon</th>
+                                                                    <th class="text-center">状态</th>
+                                                                    <th class="text-center">功能</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody  ng-repeat="list1 in item.Children" >
+                                                                    <tr  class="text-center"style="background-color: #f7f7f7;">
+                                                                        <td> <i ng-show="list1.Children.length!==0" class="fa fa-lg fa-plus-circle" ng-click="showFace($index,$event)"></i>{{list1.sort}}</td>
+                                                                        <td> {{list1.menu_name}}</td>
+                                                                        <td>{{list1.route}}</td>
+                                                                        <td>{{list1.icon}}</td>
+                                                                        <td class="text-red"  ng-bind="list1.status==1?'启用':'禁用'"></td>
+                                                                        <td class="hidden m2_id">{{list1.id}}</td>
+                                                                        <td>
+                                                                            <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="addm2($event)">添加下级</button>
+                                                                            <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal4" ng-click="modify_2($event)">修改</button>
+                                                                            <button class="btn btn-default btn-xs" ng-click="paySetting(list1.id,list1.status)"  ng-bind="list1.status==1?'禁用':'启用'"></button>
+                                                                            <button class="btn btn-default btn-xs" ng-click="delete(list1.id)" >删除</button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="thirdul">
+                                                                        <td colspan="6">
+                                                                            <table class="table table-bordered table-hover">
+                                                                                <thead>
+                                                                                <tr>
+                                                                                    <th class="text-center">排序</th>
+                                                                                    <th class="text-center">菜单名称</th>
+                                                                                    <th class="text-center">前端路由</th>
+                                                                                    <th class="text-center">icon</th>
+                                                                                    <th class="text-center">状态</th>
+                                                                                    <th class="text-center">功能</th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody ng-repeat="data in list1.Children">
+                                                                                <tr class="text-center">
+                                                                                    <td>{{data.sort}}</td>
+                                                                                    <td>{{data.menu_name}}</td>
+                                                                                    <td>{{data.route}}</td>
+                                                                                    <td>{{data.icon}}</td>
+                                                                                    <td class="text-red"  ng-bind="data.status==1?'启用':'禁用'"></td>
+                                                                                    <td class="hidden m3_id">{{data.id}}</td>
+                                                                                    <td>
+                                                                                        <!--<button class="btn btn-default" data-toggle="modal" data-target="#myModal2" >添加下级</button>-->
+                                                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal4" ng-click="modify_3($index,$event)">修改</button>
+                                                                                        <button class="btn btn-default btn-xs" ng-click="paySetting(data.id,data.status)"  ng-bind="data.status==1?'禁用':'启用'"></button>
+                                                                                        <button class="btn btn-default btn-xs" ng-click="delete(data.id)" >删除</button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div id="tabs-b">
+                <div class="row">
+                    <article class="col-sm-12">
+                        <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>代理菜单管理</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body tab-content">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+
+                                            <div class="col-sm-offset-11">
+                                                <div class="input-group">
+                                                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal1Dl" ng-click="add()">
+                                                        <i class="fa fa-plus"></i> 新增菜单
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">排序</th>
+                                                <th class="text-center">菜单名称</th>
+                                                <th class="text-center">前端路由</th>
+                                                <th class="text-center">icon</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">功能</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody  ng-repeat="item in listdl">
+                                                <tr class="text-center">
+                                                    <td><i class="fa fa-lg fa-plus-circle" ng-click="showFace($index,$event)"></i>{{item.sort}}</td>
+                                                    <td>{{item.menu_name}}</td>
+                                                    <td>{{item.route}}</td>
+                                                    <td>{{item.icon}}</td>
+                                                    <td class="text-red" ng-bind="item.status==1?'启用':'禁用'"></td>
+                                                    <td class="hidden m1_idd" ng-model="item.id">{{item.id}}</td>
+                                                    <td>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="addmd1($index)">添加下级</button>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="modify_d1($index)">修改</button>
+                                                        <button class="btn btn-default btn-xs" ng-click="paySetting(item.id,item.status)" ng-bind="item.status==1?'禁用':'启用'"></button>
+                                                        <button class="btn btn-default btn-xs" ng-click="delete(item.id)" >删除</button>
+                                                    </td>
+                                                </tr>
+                                                <tr class="secondul">
+                                                    <td colspan="6">
+                                                        <table class="table table-bordered table-hover">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="text-center">排序</th>
+                                                                <th class="text-center">菜单名称</th>
+                                                                <th class="text-center">前端路由</th>
+                                                                <th class="text-center">icon</th>
+                                                                <th class="text-center">状态</th>
+                                                                <th class="text-center">功能</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody ng-repeat="list1 in item.Children">
+                                                                <tr  class="text-center"  style="background-color: #f7f7f7;">
+                                                                <td> <i ng-show="list1.Children.length!==0" class="fa fa-lg fa-plus-circle" ng-click="showFace($index,$event)"></i>{{list1.sort}}</td>
+                                                                <td> {{list1.menu_name}}</td>
+                                                                <td>{{list1.route}}</td>
+                                                                <td>{{list1.icon}}</td>
+                                                                <td class="text-red"  ng-bind="list1.status==1?'启用':'禁用'"></td>
+                                                                <td  class="hidden m1_iddff">{{list1.id}}</td>
+                                                                <td>
+                                                                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="addmd2($index,$event)">添加下级</button>
+                                                                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="modify_d2($index,$event)">修改</button>
+                                                                    <button class="btn btn-default btn-xs" ng-click="paySetting(list1.id,item.status)" ng-bind="list1.status==1?'禁用':'启用'"></button>
+                                                                    <button class="btn btn-default btn-xs" ng-click="delete(list1.id)" >删除</button>
+                                                                </td>
+                                                            </tr>
+                                                                <tr class="thirdul">
+                                                                    <td colspan="6">
+                                                                        <table class="table table-bordered table-hover">
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th class="text-center">排序</th>
+                                                                                <th class="text-center">菜单名称</th>
+                                                                                <th class="text-center">前端路由</th>
+                                                                                <th class="text-center">icon</th>
+                                                                                <th class="text-center">状态</th>
+                                                                                <th class="text-center">功能</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody ng-repeat="data in list1.Children">
+                                                                                <tr class="text-center">
+                                                                                    <td>{{data.sort}}</td>
+                                                                                    <td>{{data.menu_name}}</td>
+                                                                                    <td>{{data.route}}</td>
+                                                                                    <td>{{data.icon}}</td>
+                                                                                    <td class="text-red">{{data.status|fiterStatused}}</td>
+                                                                                    <td class="hidden m3_idd">{{data.id}}</td>
+                                                                                    <td>
+                                                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="modify_d3($event)">修改</button>
+                                                                                        <button class="btn btn-default btn-xs" ng-click="paySetting(data.id,data.status)"  ng-bind="data.status==1?'禁用':'启用'"></button>
+                                                                                        <button class="btn btn-default btn-xs" ng-click="delete(data.id)" >删除</button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <span style="display: none" class="zz">{{lang['accounts']}}</span>
+    <!--<input type="text" value="{{lang['accounts']}}" class="zz">-->
+
+    <!--新增平台菜单-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">新增平台菜单</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">菜单名称</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="menu_name">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">前端路由</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="route">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">国际化</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="add_language_key">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">排序</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="sort">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">上传icon</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="icon">
+                                    <b class="tooltip tooltip-top-right">
+                                    账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addMenu()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--新增代理菜单-->
+    <div class="modal fade" id="myModal1Dl" tabindex="-1" role="dialog" aria-labelledby="addAccounts" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccounts">新增代理菜单</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">菜单名称</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="menu_name">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">前端路由</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="route">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">国际化</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="add_language_key">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">排序</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="sort">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">上传icon</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="icon">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addMenuDl()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加下级-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">添加下级</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">菜单名称</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="addname">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">前端路由</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="addroute">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">所属层级</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="add_name" value="add_id" readonly="readonly">
+
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">国际化</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="addF_language_key">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item hidden">
+                                <label class="col-md-3 col-xs-4 input-label">平台/代理</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <div class="form-group">
+                                        <input type="text" ng-model="addF_type">
+                                    </div>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">排序</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="addsort">
+                                    <b class="tooltip tooltip-top-right">
+                                    账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">icon</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="addicon">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add_M()">
+                            {{lang['Confirm']}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--平台修改-->
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">平台菜单修改</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">菜单名称{{test}}</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="menuItem.menu_name">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">前端路由</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="menuItem.route">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">国际化</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="first_data.language_key">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">平台/代理</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <div class="form-group">
+                                        <input type="text" ng-model="first_data.type" disabled="disabled">
+                                    </div>
+                                </label>
+                            </section>
+                            <section class="input-item" ng-show="mod_show>=2">
+                                <label class="col-md-3 col-xs-4 input-label">上级菜单</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <div class="form-group searchselect">
+                                        <select class="form-control" ng-model="menu_select_2" ng-change="selectM()">
+                                            <option value="">请选择</option>
+                                            <option ng-value="select.id" ng-repeat="select in select_1">{{select.menu_name}}</option>
+                                        </select>
+                                    </div>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">排序</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="first_data.sort">
+                                    <b class="tooltip tooltip-top-right">
+                                       排序从1开始，最小为1</b>
+                                </label>
+                            </section>
+                            <section class="input-item" ng-show="mod_show!==3">
+                                <label class="col-md-3 col-xs-4 input-label">icon</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="first_data.icon">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submitpt()">
+                            {{lang['Confirm']}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--代理修改-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">代理菜单修改</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">菜单名称</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="first_data.menu_name">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">前端路由</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="first_data.route">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">国际化</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" ng-model="first_data.LanguageKey">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">平台/代理</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <div class="form-group">
+                                        <input type="text" ng-model="first_data.Type">
+                                    </div>
+                                </label>
+                            </section>
+                            <section class="input-item" ng-show="mod_show>=2">
+                                <label class="col-md-3 col-xs-4 input-label">上级菜单</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <div class="form-group">
+                                        <select class="form-control" ng-model="menu_select_1" ng-change="selectM()">
+                                            <option value="">请选择</option>
+                                            <option ng-value="select.id" ng-repeat="select in select_1">{{select.menu_name}}</option>
+                                        </select>
+                                    </div>
+                                </label>
+                            </section>
+                            <!--<section class="input-item" ng-show="mod_show==3">-->
+                            <!--<label class="col-md-3 input-label">下级菜单</label>-->
+                            <!--<label class="col-md-7 input">-->
+                            <!--<div class="form-group searchselect">-->
+                            <!--<select class="form-control" ng-model="menu_select_2">-->
+                            <!--<option value="">请选择</option>-->
+                            <!--<option ng-value="select2.id" ng-repeat="select2 in select_2">{{select2.menu_name}}</option>-->
+                            <!--</select>-->
+                            <!--</div>-->
+                            <!--</label>-->
+                            <!--</section>-->
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">排序</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="first_data.sort">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item" ng-show="mod_show!==3">
+                                <label class="col-md-3 col-xs-4 input-label">icon</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text" name="account" ng-model="first_data.icon">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">
+                            {{lang['Confirm']}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

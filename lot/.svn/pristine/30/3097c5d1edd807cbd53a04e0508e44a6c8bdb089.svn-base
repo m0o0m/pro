@@ -1,0 +1,55 @@
+package function
+
+import (
+	"models/schema"
+	"models/input"
+	"github.com/go-xorm/xorm"
+	"global"
+	"github.com/golyu/sql-build"
+	"fmt"
+)
+
+type AgentCashRecordBean struct {
+}
+
+//添加现金记录
+func (m *AgentCashRecordBean) InsertRecord(reqData *input.Translation, curTime, todayTime int64, agent *schema.UserAgent, sessArgs ...*xorm.Session) (int64, error) {
+	var sess *xorm.Session
+	switch len(sessArgs) {
+	case 1:
+		sess = sessArgs[0]
+	case 0:
+		sess = global.NewManagementSession()
+	default:
+		panic("sessArgs 传递参数不正确")
+	}
+	cashRecordSchema := new(schema.AgentCashRecord)
+	cashRecordSchema.AgentId = agent.Id
+	cashRecordSchema.AgentUser = agent.LoginUser
+	cashRecordSchema.LineId = agent.LineId
+	cashRecordSchema.CashNum = reqData.Money
+	cashRecordSchema.CashBalance = agent.Money
+	cashRecordSchema.Addtime = curTime
+	cashRecordSchema.Addday = todayTime
+	switch reqData.CType {
+	case 1:
+		cashRecordSchema.Remark = "API转入，会员账号:"+reqData.Uname+"，转入金额:"+fmt.Sprintf("%.2f",reqData.Money)
+		cashRecordSchema.CashType = 2
+	case 2:
+		cashRecordSchema.Remark = "API转出，会员账号:"+reqData.Uname+"，转出金额:"+fmt.Sprintf("%.2f",reqData.Money)
+		cashRecordSchema.CashType = 1
+	default:
+		panic("c_type not in (1,2)")
+	}
+	sql, err := sqlBuild.Insert(cashRecordSchema.TableName()).
+		Value(cashRecordSchema).
+		String()
+	if err != nil {
+		return 0, err
+	}
+	result, err := sess.Exec(sql)
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}

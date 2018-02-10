@@ -1,0 +1,220 @@
+{{define "memberdrawwrite"}}
+{{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/deposit.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/Audit.css" type="text/css">
+
+<style>
+    .center-4-1 ul {
+        float: left;
+        width: 100%;
+    }
+
+    .center-4-1 ul:nth-child(1) {
+        color: #FEFEFE;
+    }
+
+    .center-4-1 ul:nth-child(2) {
+        background-color: #F5F5F5;
+        color: #4F4F4F;
+    }
+
+    .center-4-1 ul:nth-child(2) li:nth-child(1), .center-4-1 li:nth-child(2), .center-4 ul:nth-child(2) li:nth-child(2) {
+        line-height: 25px;
+    }
+
+    .center-4-1 ul li {
+        width: 12.5%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .center-3 {
+        border-top: 2px solid #FFC933;
+        margin: 0 28px 0 28px;
+        height: 178px;
+        background-color: #FFFFEE;
+        padding-left: 50px;
+    }
+
+    .center-3 h3 {
+        padding-top: 15px;
+        padding-bottom: 8px;
+    }
+
+    .center-3 .fl-1 li {
+        margin-bottom: 5px;
+    }
+
+    .center-3 .fl-2 {
+        padding-left: 20px;
+    }
+
+    .center-3 .fl-2 li {
+        margin-bottom: 8px;
+    }
+
+    .center-3-t {
+        margin-top: 10px;
+        width: 190px;
+        height: 44px;
+        background-color: #E85036;
+        color: #fff;
+        line-height: 44px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .center-5 {
+        margin-top: 8px;
+        padding-left: 30px;
+        min-height: 130px;
+        background-color: #EFFFE1;
+        border-top: 2px solid #6EC51A;
+    }
+
+    .center-5 .center-5-t {
+        height: 48px;
+        line-height: 48px;
+        font-weight: 700;
+    }
+
+    .center-5-c > span, #page-body .center-5-b > span {
+        margin-right: 34px;
+    }
+
+    .center-5-c span {
+        display: inline-block;
+        height: 36px;
+    }
+
+    .center-5 .center-5-c .span_h {
+        font-size: 20px;
+        /* color: #fba56d; */
+    }
+
+    .center-4-1 {
+        width: 100%;
+        min-height: 100px;
+    }
+
+</style>
+<div class=" mycenter">
+    <div class="deposit-schedule">
+        <div class="line"></div>
+        <div class="line"></div>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-gou1 myicon FEF7F9"></i>
+              </span>
+              <p class="myd-red">转账银行
+                <i class="icon iconfont icon-gou myd-t-gou"></i>
+              </p>
+            </span>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-surelist myicon"></i>
+              </span>
+              <p class="myd-red">正在稽核</p>
+            </span>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-qiandai1 myicon"></i>
+              </span>
+              <p>完成取款</p>
+            </span>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</body>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/jquery-2.1.4.js"></script>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/ws.js"></script>
+<script>
+    $(".d-3-span2 ul").on('click', 'li', function () {
+        $(this).addClass('d-3-span2-click').siblings().removeClass('d-3-span2-click');
+    });
+    $(".center-t i").click(function () {
+        location.replace(location.href);
+    });
+    $(function () {
+        var logindata = loginId();
+        if (logindata) {
+            $.ajax({
+                url: '/ajax/draw/write',
+                type: 'get',
+                data: {},
+                headers: {
+                    'Authorization': 'bearer ' + getCookie('loginBack'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': "pc"
+                },
+                success: function (data, info, xhr) {
+                    console.log(data);
+                    if (data) {
+                        // console.log(data.data.orderNumber);
+                        withdrawWsService.Subscribe(data.data.orderNumber);
+                        if (data.code) {
+                            // alert(data.msg)
+
+                            $.Pro(data.msg, {
+                                Time: 2, StartOn: function () {
+                                    $("html").click(function () {
+                                        $(".showAlert_Pro").hide()
+                                    })
+                                }
+                            })
+
+                            My_pc_Modal({
+                                text: data.msg,
+                            })
+                        }
+                    }
+                    // console.log(xhr);
+                    if (xhr.status == 200) {
+
+                        $.Pro("出款申请提交成功，系统正在为您处理！", {
+                            Time: 2, StartOn: function () {
+                                $("html").click(function () {
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }
+                        })
+
+
+                        My_pc_Modal({
+                            text: "出款申请提交成功，系统正在为您处理！",
+                        })
+
+                        location.herf = '/member/account';
+                    }
+                }
+            })
+        }
+    })
+
+    function My_pc_Modal(obj) {
+        var tet = obj.text;
+        var time = obj.time || 2000;
+        var otime = time - 500;
+
+        var otime = (time - 500) <= 600 ? time : (time - 500);
+
+        $(".my_pc_Modal").text(tet).show().css("opacity", '1');
+
+        setTimeout(function () {
+            $(".my_pc_Modal").animate({
+                "opacity": "0"
+            })
+        }, otime)
+
+        setTimeout(function () {
+            $(".my_pc_Modal").text('').hide();
+        }, time)
+    }
+</script>
+</html>
+{{end}}

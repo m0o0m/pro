@@ -1,0 +1,426 @@
+<style>
+    #menu-form label {
+        margin-right: 10px
+    }
+
+    .handle span {
+        cursor: pointer
+    }
+
+    #twoLevel {
+        display: none
+    }
+    ,minicolors-panel{position: relative;}
+</style>
+<script src="<{Yii::getAlias('@js')}>/jquery.minicolors.js"></script>
+<link rel="stylesheet" href="<{Yii::getAlias('@css')}>/jquery.minicolors.css">
+<script>
+        // 色板：[]
+  //     defaults: {
+  //   animationSpeed: 50, // 动画速度：50，
+  //   animationEasing: 'swing', // 动画Easing：'swing'，
+  //   change: null,// 更改：null，
+  //   changeDelay: 0, // changeDelay：0，
+  //   control: 'hue',  // 控制：“色调”，
+  //   defaultValue: '', // 默认值： ''，
+  //   format: 'hex',  // 格式：“十六进制”，
+  //   hide: null,// hide：null，
+  //   hideSpeed: 100, // hideSpeed：100，
+  //   inline: false,// 内联：false，
+  //   keywords: '', // 关键字：''，
+  //   letterCase: 'lowercase',// letterCase：'小写'，
+  //   opacity: false,// 不透明度：错误，
+  //   position: 'bottom left', // 位置：“左下角”，
+  //   show: null,// 显示：null，
+  //   showSpeed: 100,// showSpeed：100，
+  //   theme: 'default',// 主题：“默认”，
+  //   swatches: []
+  // }
+        function topbarbgcolor_config(topbarbgcolor){
+            $("#color").val(topbarbgcolor);
+            $("#color").minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                defaultValue: $(this).attr('data-defaultValue') || topbarbgcolor,
+                inline:true,
+                letterCase: $(this).attr('data-letterCase') || 'lowercase',
+                opacity: $(this).attr('data-opacity'),
+                position: $(this).attr('data-position') || 'bottom left',
+                change: function(hex, opacity) {
+                    if( !hex ) return;
+                    if( opacity ) hex += ', ' + opacity;
+                    try {
+                        console.log(hex);
+                    } catch(e) {}
+                },
+                theme: 'bootstrap'
+            });
+        }
+        function topbarbgcolor_config1(topbarbgcolor){
+            $("#color1").val(topbarbgcolor);
+            $("#color1").minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                defaultValue: $(this).attr('data-defaultValue') || topbarbgcolor,
+                inline: true,
+                letterCase: $(this).attr('data-letterCase') || 'lowercase',
+                opacity: $(this).attr('data-opacity'),
+                position: $(this).attr('data-position') || 'bottom left',
+                change: function(hex, opacity) {
+                    if( !hex ) return;
+                    if( opacity ) hex += ', ' + opacity;
+                    try {
+//                        console.log(hex);
+                    } catch(e) {}
+                },
+                theme: 'bootstrap'
+            });
+        }
+
+</script>
+<div class="page-header col-xs-12">
+
+    <label for="t_name">账号:
+        <input type="text" name="t_name" id='t_name' value="<{if isset($smarty.get.t_name)}><{$smarty.get.t_name}><{/if}>">
+    </label>
+
+    <label for="t_money">套餐比例:
+        <input type="text" name='t_money'  id="t_money" value="<{if isset($smarty.get.t_money)}><{$smarty.get.t_money}><{/if}>">
+    </label>
+
+    <label>
+        <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+    </label>
+
+    <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+
+</div>
+
+<div class="row">
+    <div class="page-header col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="center">ID</th>
+                    <th class="center">套餐名称</th>
+                    <th class="center">PK彩票</th>
+                    <th class="center">站点数</th>
+                    <th class="center">添加时间</th>
+                    <th class="center">修改时间</th>
+                    <th class="center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <{foreach from=$tlist item=val key=key}>
+                <tr>
+                    <td class="center">
+                        <a><{$val['id']}> </a>
+                    </td>
+                    <td class="center">
+                        <a id="name_<{$val['id']}>"><{$val['tname']}></a>
+                    </td>
+                    <td class="center">
+                        <a><{$val['pktc']}></a>
+                    </td>
+                    <td class="center">
+                        <{$val['num']}>
+                    </td>
+                    <td class="center">
+                        <a><{$val['add_time']}></a>
+                    </td>
+                    <td class="center">
+                       <a> <{$val['update_time']}> </a>
+                    </td>
+
+                    <td class="center handle" style="width:220px;">
+                        <span class="btn btn-xs btn-success detail editstatus"
+                              onclick="getInfo(<{$val['id']}>);">编辑</span>
+                        <span class="btn btn-xs btn-success detail update" onclick="getline(<{$val['id']}>)">站点</span>
+                    </td>
+                </tr>
+                <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<div class="isHide layui-layer-wrap" id="add_tc" style="display: none;">
+    <div class="modal-body">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+
+            <form class="form-horizontal" id="layForm">
+                <tr>
+                    <td>套餐名字：</td>
+                    <td><input type="text" id="tname" name="tname" placeholder="套餐名字"/></td>
+                </tr>
+
+                <tr>
+                    <td>PK彩票</td>
+                    <td><input type="text" id="pktc" name="pktc" value="0"/></td>
+                </tr>                   
+                
+                <tr>
+                    <td>套餐背景：</td>
+                    <td><input type="text" id="color" name="color" value=""/></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <center>
+                        <input id='addTaocan' type="button" class="btn btn-info" value="保存" > 
+                        </center>
+                    </td>
+                <tr>
+
+            </form>
+
+        </table>
+    </div>
+
+</div>
+<div class="isHide layui-layer-wrap" id="add_tc_ed" style="display: none;">
+    <div class="modal-body">
+        <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+
+         <form class="form-horizontal" id="layForm">
+                <tr>
+                    <td>套餐名字：</td>
+                    <td><input type="text" id="tname1" name="tname" value="" placeholder="套餐名字"/></td>
+                </tr>
+
+                <tr>
+                    <td>PK彩票</td>
+                    <td> <input type="text" id="pktc1" name="pktc" value=""/></td>
+                </tr>                   
+                
+                <tr>
+                    <td>套餐背景：</td>
+                    <td> <input type="text" id="color1" name="color" value=""/></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <center>
+                         <input id='editTaocan' type="button" class="btn btn-info" value="保存" style="margin-left:20px;">
+                        </center>
+                    </td>
+                <tr>
+                       <input type="hidden" id="id" value=""/>
+
+            </form>
+        </table>
+       
+    </div>
+</div>
+<style>
+    .p_data_site {
+        float: left;
+        width: 15%;
+        text-align: center;
+    }
+
+    .m_tab {
+        width: 100%;
+    }
+
+    .p_data_s {
+    }
+</style>
+<div class="isHide layui-layer-wrap" id="linelist" style="display: none;">
+    <form  method="post" id="add_form" >
+                <table  id="p_data_all" class="table table-striped table-bordered table-hover">
+                    <tr><td>
+                    <span id="de_title"
+                          style="margin-left: 15px;letter-spacing: 2px;font-weight: bold"></span>
+                    <span style="float:right; margin-right: 20px;"></span>
+                    </td></tr>
+                    
+                   <{foreach from=$list item=v key=k}>
+                       <tr><td style="background-color: <{if isset($v.color)}><{$v.color}><{else}>green<{/if}>;color:#fff;"> <input type="checkbox" name="site[]" id="p_data_<{$v.id}>" class="site-name p_dataone" value="<{$v.id}>" tvalue="<{$v.tid}>">
+                        <label for="p_data_<{$v.id}>"><{if isset($v.line_id)}><{$v.line_id}><{/if}></label>
+                        <label style="margin-left:35px;"><{if isset($v.name)}>当前所属套餐：<{$v.name}><{/if}></label>
+                        </td></tr>
+                    <{/foreach}>
+                
+                    <tr><td>
+                            <input type="checkbox" name="" id="p_dataall" value="0">
+                            <label for="p_dataall">全选</label>
+                    </td></tr>
+                    <tr><td>
+                    <input type="hidden" value="" name="tid"/>
+                    <center><input type="button" value="提交" id="site_sub" class="btn btn-info  botton_a"></center>
+                    </td></tr>
+                </table>
+     
+    </form>
+</div>
+<script>
+    function renderFormByPjax(url) {
+        var t_name = $.trim($('#t_name').val());
+        var t_money = $.trim($('#t_money').val());
+        var params = {
+            t_name: t_name,
+            t_money: t_money
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/taocan/index',
+            container: '#container'
+        });
+    }
+
+   $('#search').click(function () {
+        renderFormByPjax();
+   })
+
+    $('#addTaocan').click(function () {
+        var tname=$('#tname').val();
+        var pktc=$('#pktc').val();
+        var color=$('#color').val();
+        $.ajax({
+                method: 'post',
+                url: 'insert',
+                dataType: 'json',
+                data:{tname:tname,pktc:pktc,color:color},
+                success: function (res) {
+                    if(res.ErrorCode == 1){
+                         layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.reload();});
+                    }else{
+                        layer.alert(res.ErrorMsg, {icon:2});
+                    }
+            }
+        })
+    });
+
+    $("#create").click(function () {
+        topbarbgcolor_config('');
+        openLayer('添加套餐', '400px', '500px', 'add_tc');
+    });
+
+    function openLayer(title, width, height, div) {
+        layer.open({
+            type: 1 //Page层类型
+            // , area: [width, height]
+            , title: title
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: $("#" + div)
+        });
+    }
+
+//    function doSubmit() {
+//        var pktc = $.trim($('#pktc').val());
+//        var tname = $.trim($('#tname').val());
+//        var params = {
+//            pktc: pktc,
+//            tname: tname
+//        };
+//        $.pjax({
+//            data: params,
+//            method: 'get',
+//            url: '/taocan/insert',
+//            container: '#container'
+//        });
+//    }
+
+    function getInfo(id) {
+        topbarbgcolor_config1('')
+        var url = '/taocan/getone';
+        ;
+        $.ajax({
+            method: 'post',
+            data: {id:id},
+            url: url,
+            success: function (data) {
+                data = JSON.parse(data);
+                $('#tname1').val(data.tname);
+                $('#pktc1').val(data.pktc);
+                $('#color1').val(data.color);
+                $('#id').val(data.id);
+                $('.minicolors-swatch-color').css('background',data.color);
+                openLayer('编辑套餐', '400px', '500px', 'add_tc_ed');
+            }
+        });
+    }
+
+    $('#editTaocan').click(function () {
+        var tname = $('#tname1').val();
+        var pktc = $('#pktc1').val();
+        var color = $('#color1').val();
+        var id = $('#id').val();
+        var url = '/taocan/edit';
+        $.ajax({
+            method: 'post',
+            url: url,
+            data: {tname: tname, pktc: pktc, id: id,color:color},
+            dataType: 'json',
+            success: function (res) {
+                if(res.ErrorCode == 1){
+                     layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.reload();});
+                }else{
+                    layer.alert(res.ErrorMsg, {icon:2});
+                }
+            }
+        });
+    })
+
+    function getline(id) {
+        var len=$('#p_data_all').find('input[type=checkbox]');
+        $('input[name=tid]').val(id);
+        var va=$('#name_'+id).text();
+        $('#de_title').html('请选择要使用<font color="red">' + va +'</font>的站点');
+        for(var i=0;i<len.length;i++){
+//            console.log(len.eq(i).attr('tvalue'));
+//            console.log(id);
+            if(id==len.eq(i).attr('tvalue')){
+                len.eq(i).prop('checked','checked');
+//                console.log(len.eq(i).attr('tvalue'));
+            }else{
+                len.eq(i).removeAttr('checked');
+            }
+        }
+        openLayer('编辑套餐', '400px', '400px', 'linelist');
+    }
+    $('#p_dataall').change(function () {
+       var va=$('#p_data_all').val();
+        if(va==0){
+            $('#p_data_all').find('input[type=checkbox]').prop('checked','checked');
+            $('#p_data_all').val(1);
+        }else{
+            $('#p_data_all').find('input[type=checkbox]').removeAttr('checked');
+            $('#p_data_all').val(0);
+        }
+    })
+ 
+    $('#site_sub').click(function () {
+        var tid=$('#add_form').find('input[name=tid]').val();
+        var site = $('#add_form').find('input.site-name:checked');
+        var site1=[];
+        $.each(site, function (index,data) {
+            site1[index]=data.value;
+        });
+        layerload();
+        $.ajax({
+            method:'post',
+            url:'/taocan/change',
+            data:{tid:tid,site:site1},
+            success:function (data) {
+                layer.closeAll('loading');
+//                console.log(data);
+                if(data>0){
+                    layer.alert('修改成功', {icon: 1},function(){window.location.reload();});
+                }else{
+                    layer.alert('修改失败');
+                }
+
+            }
+        })
+    })
+    function layerload() {
+        layer.closeAll();
+        layer.load(0,{shade: [0.5, '#393D49']});
+    }
+</script>

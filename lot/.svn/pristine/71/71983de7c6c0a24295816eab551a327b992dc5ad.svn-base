@@ -1,0 +1,39 @@
+<template>
+  <div class="selectone_five">
+    <div class="s_f_box">
+      <ul v-for="item in one">
+        <li class="thend">{{item.name}}</li>
+        <li v-for="(key,index) in item.object" :class="[key.flag?'styleclect':'']">
+          <span @click="numClick(key,index)" class="one">{{key.num}}</span>
+          <span @click="numClick(key,index)" class="tow">{{key.odd}}</span>
+          <span v-if="key.num" class="three" @click.self="numClick(key,index)">
+            <I-Input @on-keydown="tab_now(key)" @on-change="onchange(key)" :maxlength="9" ref="myfocus" v-model="key.money" @on-focus="onfocus(key)" @on-keyup="gogo(key)" @on-afterpaste="gogo(key)" size="small" style="width: 60px;"></I-Input>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="footer1" style="margin-bottom: 20px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength="9" style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+  </div>
+</template>
+
+<script>
+import happy from './happy';
+export default{
+  ...happy
+}
+</script>
+<style lang="scss" src="../../../assets/css/happy_one.scss" scoped></style>

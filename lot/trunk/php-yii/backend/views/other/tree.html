@@ -1,0 +1,120 @@
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="widget-box widget-color-blue2">
+                    <div class="widget-header">
+                        <h4 class="widget-title lighter smaller">Choose Categories</h4>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-8">
+                            <ul id="tree1"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="widget-box widget-color-green2">
+                    <div class="widget-header">
+                        <h4 class="widget-title lighter smaller">
+                            Browse Files
+                            <span class="smaller-80">(with selectable folders)</span>
+                        </h4>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-8">
+                            <ul id="tree2"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="<{Yii::getAlias('@js')}>/pack/ace-elements.min.js"></script>
+<script src="<{Yii::getAlias('@js')}>/pack/tree.min.js"></script>
+<script type="text/javascript">
+        var sampleData = initiateDemoData();//see below
+        $('#tree1').ace_tree({
+            dataSource: sampleData['data'],
+            multiSelect: true,
+            cacheItems: true,
+            'open-icon': 'ace-icon tree-minus',
+            'close-icon': 'ace-icon tree-plus',
+            'itemSelect': true,
+            'folderSelect': false,
+            'selected-icon': 'ace-icon fa fa-check',
+            'unselected-icon': 'ace-icon fa fa-times',
+            loadingHTML: '<div class="tree-loading"><i class="ace-icon fa fa-refresh fa-spin blue"></i></div>'
+        });
+
+        
+        function initiateDemoData() {
+            var tree_data = {
+                'for-sale': {text: '菜单管理', type: 'folder'},
+                'vehicles': {text: '用户管理', type: 'folder'},
+                'rentals': {text: '线路管理', type: 'folder'},
+                'real-estate': {text: '其它页面', type: 'folder'},
+                'pets': {text: '更多页面', type: 'folder'},
+            };
+            tree_data['for-sale']['additionalParameters'] = {
+                'children': {
+                    'appliances': {text: '菜单列表', type: 'item'}
+                }
+            };
+            tree_data['vehicles']['additionalParameters'] = {
+                'children': {
+                    'cars': {text: '管理员列表', type: 'folder'},
+                    'motorcycles': {text: '角色列表', type: 'item'}
+                }
+            };
+            tree_data['vehicles']['additionalParameters']['children']['cars']['additionalParameters'] = {
+                'children': {
+                    'classics': {text: '管理员新增', type: 'item'},
+                }
+            };
+            
+            var data = function (options, callback) {
+                var $data = null
+                if (!("text" in options) && !("type" in options)) {
+                    $data = tree_data;
+                    callback({data: $data});
+                    return;
+                } else if ("type" in options && options.type == "folder") {
+                    if ("additionalParameters" in options && "children" in options.additionalParameters){
+                        $data = options.additionalParameters.children || {};
+                    }
+                    else{
+                        $data = {}
+                    }
+                }
+                if ($data != null){
+                    setTimeout(function () {
+                        callback({data: $data});
+                    }, parseInt(Math.random() * 500) + 200);
+                }
+            };
+
+            return {'data': data}
+        }
+  
+    
+    $('#tree1').tree('discloseVisible');
+    
+        setTimeout(function () {
+            $('#tree1').tree('discloseVisible');
+       }, 1000);
+        
+        $('li.tree-item').addClass('tree-selected');
+        $('li.tree-item').find('i').addClass('fa-check');
+        $('li.tree-item').find('i').removeClass('fa-times');
+
+
+
+</script>

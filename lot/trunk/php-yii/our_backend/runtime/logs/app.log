@@ -1,0 +1,2011 @@
+2018-02-10 10:56:52 [127.0.0.1][-][8e0t4r4e49q6dhja7eqq2d3o24][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: The directory is not writable by the Web process: /Users/frank/www/newproject/trunk/php-yii/our_backend/web/assets in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/AssetManager.php:213
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/di/Container.php(373): ReflectionClass->newInstanceArgs(Array)
+#3 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/di/Container.php(154): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/di/ServiceLocator.php(133): yii\BaseYii::createObject(Array)
+#6 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(600): yii\di\ServiceLocator->get('assetManager')
+#7 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/View.php(223): yii\base\Application->getAssetManager()
+#8 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/View.php(283): yii\web\View->getAssetManager()
+#9 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/AssetBundle.php(123): yii\web\View->registerAssetBundle('yii\\captcha\\Cap...')
+#10 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/captcha/Captcha.php(134): yii\web\AssetBundle::register(Object(yii\web\View))
+#11 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/captcha/Captcha.php(106): yii\captcha\Captcha->registerClientScript()
+#12 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Widget.php(102): yii\captcha\Captcha->run()
+#13 /Users/frank/www/newproject/trunk/php-yii/our_backend/runtime/Smarty/compile/151ebcd233dd7660387db188b48dfba49dc2a75c_0.file.login.html.php(59): yii\base\Widget::widget(Array)
+#14 /Users/frank/www/newproject/trunk/php-yii/vendor/smarty/smarty/libs/sysplugins/smarty_template_resource_base.php(128): content_5a7ecff4df5a00_10897261(Object(Smarty_Internal_Template))
+#15 /Users/frank/www/newproject/trunk/php-yii/vendor/smarty/smarty/libs/sysplugins/smarty_template_compiled.php(172): Smarty_Template_Resource_Base->getRenderedTemplateCode(Object(Smarty_Internal_Template))
+#16 /Users/frank/www/newproject/trunk/php-yii/vendor/smarty/smarty/libs/sysplugins/smarty_internal_template.php(206): Smarty_Template_Compiled->render(Object(Smarty_Internal_Template))
+#17 /Users/frank/www/newproject/trunk/php-yii/vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatebase.php(216): Smarty_Internal_Template->render(false, 0)
+#18 /Users/frank/www/newproject/trunk/php-yii/vendor/smarty/smarty/libs/sysplugins/smarty_internal_templatebase.php(107): Smarty_Internal_TemplateBase->_execute(Object(Smarty_Internal_Template), NULL, NULL, NULL, 0)
+#19 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2-smarty/ViewRenderer.php(255): Smarty_Internal_TemplateBase->fetch()
+#20 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/View.php(245): yii\smarty\ViewRenderer->render(Object(yii\web\View), '/Users/frank/ww...', Array)
+#21 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/View.php(149): yii\base\View->renderFile('/Users/frank/ww...', Array, Object(our_backend\controllers\LoginController))
+#22 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Controller.php(378): yii\base\View->render('login.html', Array, Object(our_backend\controllers\LoginController))
+#23 /Users/frank/www/newproject/trunk/php-yii/our_backend/controllers/LoginController.php(32): yii\base\Controller->render('login.html', Array)
+#24 [internal function]: our_backend\controllers\LoginController->actionLogin()
+#25 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#26 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#27 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('login', Array)
+#28 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('', Array)
+#29 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#30 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#31 {main}
+2018-02-10 10:56:52 [127.0.0.1][-][8e0t4r4e49q6dhja7eqq2d3o24][info][application] $_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60537'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260212.8315
+    'REQUEST_TIME' => 1518260212
+]
+2018-02-10 10:56:52 [127.0.0.1][-][8e0t4r4e49q6dhja7eqq2d3o24][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory is not writable by the Web process: /Users/frank/www/newproject/trunk/php-yii/our_backend/web/assets' 
+
+in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/di/Container.php(373): ReflectionClass->newInstanceArgs(Array)
+#3 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/di/Container.php(154): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/di/ServiceLocator.php(133): yii\BaseYii::createObject(Array)
+#6 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(600): yii\di\ServiceLocator->get('assetManager')
+#7 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/View.php(223): yii\base\Application->getAssetManager()
+#8 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Component.php(130): yii\web\View->getAssetManager()
+#9 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/log/Logger.php(173): yii\log\Dispatcher->dispatch(Array, true)
+#14 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-02-10 10:56:52 [127.0.0.1][-][8e0t4r4e49q6dhja7eqq2d3o24][info][application] $_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60537'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260212.8315
+    'REQUEST_TIME' => 1518260212
+]
+2018-02-10 10:57:06 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "public/js/push.js". in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php:460
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('public/js/push....', Array)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php:99
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+2018-02-10 10:57:06 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/admin/center'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60549'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/public/js/push.js'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260226.6687
+    'REQUEST_TIME' => 1518260226
+]
+2018-02-10 10:57:08 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "public/js/push.js". in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php:460
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('public/js/push....', Array)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php:99
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+2018-02-10 10:57:08 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/admin/center'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60549'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/public/js/push.js'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260228.8196
+    'REQUEST_TIME' => 1518260228
+]
+2018-02-10 10:57:08 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "public/js/push.js". in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php:460
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('public/js/push....', Array)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php:99
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+2018-02-10 10:57:08 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/admin/center'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60549'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/public/js/push.js'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260228.8658
+    'REQUEST_TIME' => 1518260228
+]
+2018-02-10 10:59:05 [127.0.0.1][-][8e0t4r4e49q6dhja7eqq2d3o24][error][yii\db\Exception] PDOException: PDO::__construct(): MySQL server has gone away in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php:603
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(603): PDO->__construct('mysql:host=127....', 'root', '123456', NULL)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(545): yii\db\Connection->createPdoInstance()
+#2 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(864): yii\db\Connection->open()
+#3 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(851): yii\db\Connection->getMasterPdo()
+#4 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#5 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(894): yii\db\Command->prepare(true)
+#6 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(388): yii\db\Command->queryInternal('fetchColumn', 0)
+#7 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(393): yii\db\Command->queryScalar()
+#8 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(300): yii\db\Query->queryScalar('COUNT(id)', Object(yii\db\Connection))
+#9 /Users/frank/www/newproject/trunk/php-yii/common/models/AgentModel.php(15): yii\db\Query->count('id', Object(yii\db\Connection))
+#10 /Users/frank/www/newproject/trunk/php-yii/our_backend/controllers/AgentController.php(186): common\models\AgentModel::getAgentCount(Object(yii\db\Connection), 'my_user_ua', Array)
+#11 [internal function]: our_backend\controllers\AgentController->actionUaindex()
+#12 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#13 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#14 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('uaindex', Array)
+#15 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('agent/uaindex', Array)
+#16 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#18 {main}
+
+Next PDOException: SQLSTATE[HY000] [2006] MySQL server has gone away in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php:603
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(603): PDO->__construct('mysql:host=127....', 'root', '123456', NULL)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(545): yii\db\Connection->createPdoInstance()
+#2 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(864): yii\db\Connection->open()
+#3 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(851): yii\db\Connection->getMasterPdo()
+#4 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#5 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(894): yii\db\Command->prepare(true)
+#6 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(388): yii\db\Command->queryInternal('fetchColumn', 0)
+#7 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(393): yii\db\Command->queryScalar()
+#8 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(300): yii\db\Query->queryScalar('COUNT(id)', Object(yii\db\Connection))
+#9 /Users/frank/www/newproject/trunk/php-yii/common/models/AgentModel.php(15): yii\db\Query->count('id', Object(yii\db\Connection))
+#10 /Users/frank/www/newproject/trunk/php-yii/our_backend/controllers/AgentController.php(186): common\models\AgentModel::getAgentCount(Object(yii\db\Connection), 'my_user_ua', Array)
+#11 [internal function]: our_backend\controllers\AgentController->actionUaindex()
+#12 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#13 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#14 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('uaindex', Array)
+#15 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('agent/uaindex', Array)
+#16 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#18 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2006] MySQL server has gone away in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php:550
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(864): yii\db\Connection->open()
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(851): yii\db\Connection->getMasterPdo()
+#2 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#3 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(894): yii\db\Command->prepare(true)
+#4 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(388): yii\db\Command->queryInternal('fetchColumn', 0)
+#5 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(393): yii\db\Command->queryScalar()
+#6 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(300): yii\db\Query->queryScalar('COUNT(id)', Object(yii\db\Connection))
+#7 /Users/frank/www/newproject/trunk/php-yii/common/models/AgentModel.php(15): yii\db\Query->count('id', Object(yii\db\Connection))
+#8 /Users/frank/www/newproject/trunk/php-yii/our_backend/controllers/AgentController.php(186): common\models\AgentModel::getAgentCount(Object(yii\db\Connection), 'my_user_ua', Array)
+#9 [internal function]: our_backend\controllers\AgentController->actionUaindex()
+#10 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#11 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#12 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('uaindex', Array)
+#13 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('agent/uaindex', Array)
+#14 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#16 {main}
+Additional Information:
+
+2018-02-10 10:59:04 [127.0.0.1][-][8e0t4r4e49q6dhja7eqq2d3o24][info][application] $_GET = [
+    '_pjax' => '#container'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/login/captcha' => 'uiwu'
+    '__captcha/login/captchacount' => 1
+    'uid' => '1'
+    'uname' => 'frank'
+    'login_user' => 'frank'
+    'login_name' => '春华'
+    'role' => 'super'
+    'role_id' => '1'
+    'role_name' => '超级管理员'
+    'role_access' => '34,36,97,128,130,37,46,129,35,32,33,67,69,70,98,89,99,81,100,101,102,73,75,103,85,104,39,105,106,107,108,109,110,111,71,40,112,113,66,114,115,116,62,63,65,64,86,87,51,60,117,61,80,49,50,53,56,55,38,90,43,91,118,54,119,84,83,47,120,48,121,122,45,41,57,123,124,72,125,88,94,126,42,93,127,77,92'
+    'menu' => [
+        0 => [
+            'menuName' => '权限管理'
+            'menuUrl' => '#'
+            'id' => '34'
+            'icon_class' => 'fa-lock'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '管理员列表'
+                    'menuUrl' => 'admin/index'
+                    'id' => '36'
+                    'pid' => '34'
+                    'threeLevel' => [
+                        0 => 'adminback/save'
+                        1 => 'admin/edit'
+                        2 => 'admin/save'
+                        3 => 'admin/withdrawals'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '角色列表'
+                    'menuUrl' => 'role/index'
+                    'id' => '37'
+                    'pid' => '34'
+                    'threeLevel' => [
+                        0 => 'role/edit'
+                        1 => 'role/save'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '菜单列表(总后台)'
+                    'menuUrl' => 'menu/index'
+                    'id' => '35'
+                    'pid' => '34'
+                    'threeLevel' => [
+                        0 => 'menu/submenu'
+                        1 => 'menu/savemenu'
+                        2 => 'menu/onedata'
+                    ]
+                ]
+            ]
+        ]
+        1 => [
+            'menuName' => '线路管理'
+            'menuUrl' => '#'
+            'id' => '32'
+            'icon_class' => 'fa-barcode'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '线路列表'
+                    'menuUrl' => 'line/index'
+                    'id' => '33'
+                    'pid' => '32'
+                    'threeLevel' => [
+                        0 => 'line/baseupdate'
+                        1 => 'line/insert'
+                        2 => 'line/lineform'
+                        3 => 'line/updatemoney'
+                        4 => 'line/insert'
+                        5 => 'line/add'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '线路提成'
+                    'menuUrl' => 'stat/commission'
+                    'id' => '89'
+                    'pid' => '32'
+                    'threeLevel' => [
+                        0 => 'stat/export'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '套餐管理'
+                    'menuUrl' => 'taocan/index'
+                    'id' => '81'
+                    'pid' => '32'
+                    'threeLevel' => [
+                        0 => 'taocan/insert'
+                        1 => 'taocan/getone'
+                        2 => 'taocan/change'
+                        3 => 'taocan/edit'
+                    ]
+                ]
+            ]
+        ]
+        2 => [
+            'menuName' => '彩票管理'
+            'menuUrl' => '#'
+            'id' => '73'
+            'icon_class' => ''
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '彩种列表'
+                    'menuUrl' => 'games/index'
+                    'id' => '75'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'games/editgame'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '彩票分类'
+                    'menuUrl' => 'games/caigame'
+                    'id' => '85'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'games/addgame'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '注单列表'
+                    'menuUrl' => 'gameapi/bet/index'
+                    'id' => '39'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'gameapi/bet/total'
+                        1 => 'gameapi/bet/detail'
+                        2 => 'gameapi/bet/secondblance'
+                        3 => 'gameapi/auto/getauto'
+                        4 => 'gameapi/bet/by_periods'
+                        5 => 'gameapi/bet/batch_rollback'
+                        6 => 'gameapi/bet/invalid'
+                    ]
+                ]
+                3 => [
+                    'menuName' => '未结算注单列表'
+                    'menuUrl' => 'gameapi/bet/nobalance'
+                    'id' => '71'
+                    'pid' => '73'
+                ]
+                4 => [
+                    'menuName' => '开奖结果列表'
+                    'menuUrl' => 'gameapi/auto/index'
+                    'id' => '40'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'gameapi/auto/checkbet'
+                        1 => 'gameapi/auto/insert'
+                        2 => 'gameapi/auto/update'
+                    ]
+                ]
+                5 => [
+                    'menuName' => '开封盘时间列表'
+                    'menuUrl' => 'gameapi/opentime/index'
+                    'id' => '66'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'gameapi/opentime/open_add'
+                        1 => 'gameapi/opentime/open_edit_info'
+                        2 => 'gameapi/opentime/open_update'
+                    ]
+                ]
+            ]
+        ]
+        3 => [
+            'menuName' => '现金系统'
+            'menuUrl' => '#'
+            'id' => '62'
+            'icon_class' => 'fa-credit-card'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '会员现金记录'
+                    'menuUrl' => 'cash/userrecord'
+                    'id' => '63'
+                    'pid' => '62'
+                ]
+                1 => [
+                    'menuName' => '线路现金记录'
+                    'menuUrl' => 'cash/linerecord'
+                    'id' => '65'
+                    'pid' => '62'
+                ]
+                2 => [
+                    'menuName' => '代理现金记录'
+                    'menuUrl' => 'cash/agentrecord'
+                    'id' => '64'
+                    'pid' => '62'
+                ]
+                3 => [
+                    'menuName' => '总代现金记录'
+                    'menuUrl' => 'cash/uarecord'
+                    'id' => '86'
+                    'pid' => '62'
+                ]
+                4 => [
+                    'menuName' => '股东现金记录'
+                    'menuUrl' => 'cash/shrecord'
+                    'id' => '87'
+                    'pid' => '62'
+                ]
+                5 => [
+                    'menuName' => '钱包异常纪录'
+                    'menuUrl' => 'cash/walletrecord'
+                    'id' => '153'
+                    'pid' => '62'
+                ]
+            ]
+        ]
+        4 => [
+            'menuName' => '数据中心'
+            'menuUrl' => '#'
+            'id' => '51'
+            'icon_class' => 'fa-tachometer'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '会员注单统计'
+                    'menuUrl' => 'stat/index'
+                    'id' => '60'
+                    'pid' => '51'
+                    'threeLevel' => [
+                        0 => 'stat/task'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '线路注单统计'
+                    'menuUrl' => 'stat/line'
+                    'id' => '61'
+                    'pid' => '51'
+                ]
+                2 => [
+                    'menuName' => '统计图表'
+                    'menuUrl' => 'stat/chart'
+                    'id' => '80'
+                    'pid' => '51'
+                ]
+                3 => [
+                    'menuName' => '注单补采'
+                    'menuUrl' => 'spiderbet/index'
+                    'id' => '143'
+                    'pid' => '51'
+                    'threeLevel' => [
+                        0 => 'spiderbet/index'
+                        1 => 'spiderbet/getdata'
+                    ]
+                ]
+                4 => [
+                    'menuName' => '数据预警'
+                    'menuUrl' => 'log/mongocount'
+                    'id' => '151'
+                    'pid' => '51'
+                ]
+            ]
+        ]
+        5 => [
+            'menuName' => '日志管理'
+            'menuUrl' => '#'
+            'id' => '49'
+            'icon_class' => 'fa-briefcase'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '请求日志'
+                    'menuUrl' => 'log/request'
+                    'id' => '50'
+                    'pid' => '49'
+                ]
+                1 => [
+                    'menuName' => '登陆日志'
+                    'menuUrl' => 'log/history'
+                    'id' => '53'
+                    'pid' => '49'
+                ]
+                2 => [
+                    'menuName' => '操作日志'
+                    'menuUrl' => 'log/operate'
+                    'id' => '56'
+                    'pid' => '49'
+                ]
+                3 => [
+                    'menuName' => '日志文件'
+                    'menuUrl' => 'log/logfile'
+                    'id' => '55'
+                    'pid' => '49'
+                ]
+            ]
+        ]
+        6 => [
+            'menuName' => '客户后台管理'
+            'menuUrl' => '#'
+            'id' => '38'
+            'icon_class' => 'fa-exchange'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '超管列表'
+                    'menuUrl' => 'adminback/index'
+                    'id' => '90'
+                    'pid' => '38'
+                ]
+                1 => [
+                    'menuName' => '会员列表'
+                    'menuUrl' => 'user/index'
+                    'id' => '43'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'user/userdetail'
+                        1 => 'user/updatestatus'
+                        2 => 'user/withdrawals'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '代理列表'
+                    'menuUrl' => 'agent/index'
+                    'id' => '54'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'agent/detail'
+                    ]
+                ]
+                3 => [
+                    'menuName' => '总代列表'
+                    'menuUrl' => 'agent/uaindex'
+                    'id' => '84'
+                    'pid' => '38'
+                ]
+                4 => [
+                    'menuName' => '股东列表'
+                    'menuUrl' => 'agent/shindex'
+                    'id' => '83'
+                    'pid' => '38'
+                ]
+                5 => [
+                    'menuName' => '赔率数据'
+                    'menuUrl' => 'gameapi/odds/index'
+                    'id' => '47'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'gameapi/odds/update'
+                    ]
+                ]
+                6 => [
+                    'menuName' => '限额设置'
+                    'menuUrl' => 'gameapi/setlimit/index'
+                    'id' => '48'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'gameapi/setlimit/add'
+                        1 => 'gameapi/setlimit/submit'
+                    ]
+                ]
+                7 => [
+                    'menuName' => '菜单列表(客户后台)'
+                    'menuUrl' => 'agentmenu/index'
+                    'id' => '45'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'agentmenu/onedata'
+                    ]
+                ]
+            ]
+        ]
+        7 => [
+            'menuName' => '其它页面'
+            'menuUrl' => '#'
+            'id' => '41'
+            'icon_class' => 'fa-file-o'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '维护管理'
+                    'menuUrl' => 'maintain/index'
+                    'id' => '57'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'maintain/create'
+                        1 => 'maintain/close'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '缓存管理'
+                    'menuUrl' => 'redis/index'
+                    'id' => '72'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'redis/todo'
+                        1 => 'other/online'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '前台公告列表'
+                    'menuUrl' => 'noticefront/index'
+                    'id' => '88'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'noticefront/add'
+                        1 => 'noticefront/enable'
+                    ]
+                ]
+                3 => [
+                    'menuName' => '后台公告列表'
+                    'menuUrl' => 'noticeback/index'
+                    'id' => '42'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'noticeback/add'
+                        1 => 'noticeback/enable'
+                    ]
+                ]
+                4 => [
+                    'menuName' => 'IP白名单'
+                    'menuUrl' => 'other/whitelist'
+                    'id' => '149'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'other/savewhite'
+                    ]
+                ]
+            ]
+        ]
+    ]
+    'allRoutes' => [
+        0 => 'adminback/index'
+        1 => 'user/index'
+        2 => 'agent/index'
+        3 => 'maintain/index'
+        4 => 'games/index'
+        5 => 'cash/userrecord'
+        6 => 'redis/index'
+        7 => 'agent/uaindex'
+        8 => 'games/caigame'
+        9 => 'gameapi/bet/index'
+        10 => 'log/request'
+        11 => 'cash/linerecord'
+        12 => 'agent/shindex'
+        13 => 'line/index'
+        14 => 'admin/index'
+        15 => 'gameapi/odds/index'
+        16 => 'log/history'
+        17 => 'stat/index'
+        18 => 'cash/agentrecord'
+        19 => 'gameapi/bet/nobalance'
+        20 => 'noticefront/index'
+        21 => 'role/index'
+        22 => 'gameapi/auto/index'
+        23 => 'noticeback/index'
+        24 => 'gameapi/setlimit/index'
+        25 => 'log/operate'
+        26 => 'stat/line'
+        27 => 'cash/uarecord'
+        28 => 'stat/commission'
+        29 => 'menu/index'
+        30 => 'agentmenu/index'
+        31 => 'log/logfile'
+        32 => 'gameapi/opentime/index'
+        33 => 'stat/chart'
+        34 => 'taocan/index'
+        35 => 'cash/shrecord'
+        36 => 'spiderbet/index'
+        37 => 'other/whitelist'
+        38 => 'log/mongocount'
+        39 => 'cash/walletrecord'
+        40 => 'adminback/save'
+        41 => 'role/edit'
+        42 => 'line/baseupdate'
+        43 => 'line/insert'
+        44 => 'line/lineform'
+        45 => 'user/userdetail'
+        46 => 'noticeback/add'
+        47 => 'noticefront/add'
+        48 => 'line/updatemoney'
+        49 => 'stat/export'
+        50 => 'taocan/insert'
+        51 => 'taocan/getone'
+        52 => 'taocan/change'
+        53 => 'games/editgame'
+        54 => 'games/addgame'
+        55 => 'gameapi/bet/total'
+        56 => 'gameapi/bet/detail'
+        57 => 'gameapi/bet/secondblance'
+        58 => 'gameapi/auto/getauto'
+        59 => 'gameapi/bet/by_periods'
+        60 => 'gameapi/bet/batch_rollback'
+        61 => 'gameapi/bet/invalid'
+        62 => 'gameapi/auto/checkbet'
+        63 => 'gameapi/auto/insert'
+        64 => 'gameapi/opentime/open_add'
+        65 => 'gameapi/opentime/open_edit_info'
+        66 => 'gameapi/opentime/open_update'
+        67 => 'stat/task'
+        68 => 'user/updatestatus'
+        69 => 'agent/detail'
+        70 => 'gameapi/odds/update'
+        71 => 'gameapi/setlimit/add'
+        72 => 'gameapi/setlimit/submit'
+        73 => 'maintain/create'
+        74 => 'maintain/close'
+        75 => 'redis/todo'
+        76 => 'noticefront/enable'
+        77 => 'noticeback/enable'
+        78 => 'admin/edit'
+        79 => 'role/save'
+        80 => 'admin/save'
+        81 => 'line/insert'
+        82 => 'line/add'
+        83 => 'taocan/edit'
+        84 => 'menu/submenu'
+        85 => 'gameapi/auto/update'
+        86 => 'agentmenu/onedata'
+        87 => 'menu/savemenu'
+        88 => 'menu/onedata'
+        89 => 'spiderbet/index'
+        90 => 'spiderbet/getdata'
+        91 => 'user/withdrawals'
+        92 => 'other/online'
+        93 => 'other/savewhite'
+        94 => 'admin/withdrawals'
+    ]
+    'CN_name' => [
+        'line/index' => '线路列表'
+        'menu/index' => '菜单列表(总后台)'
+        'admin/index' => '管理员列表'
+        'role/index' => '角色列表'
+        'gameapi/bet/index' => '注单列表'
+        'gameapi/auto/index' => '开奖结果列表'
+        'noticeback/index' => '后台公告列表'
+        'user/index' => '会员列表'
+        'agentmenu/index' => '菜单列表(客户后台)'
+        'role/edit' => '角色(新增,修改,详情)'
+        'gameapi/odds/index' => '赔率数据'
+        'gameapi/setlimit/index' => '限额设置'
+        'log/request' => '请求日志'
+        'log/history' => '登陆日志'
+        'agent/index' => '代理列表'
+        'log/logfile' => '日志文件'
+        'log/operate' => '操作日志'
+        'maintain/index' => '维护管理'
+        'stat/index' => '会员注单统计'
+        'stat/line' => '线路注单统计'
+        'cash/userrecord' => '会员现金记录'
+        'cash/agentrecord' => '代理现金记录'
+        'cash/linerecord' => '线路现金记录'
+        'gameapi/opentime/index' => '开封盘时间列表'
+        'line/baseupdate' => '更改状态'
+        'line/insert' => '线路添加'
+        'line/lineform' => '线路修改(表单)'
+        'gameapi/bet/nobalance' => '未结算注单列表'
+        'redis/index' => '缓存管理'
+        'games/index' => '彩种列表'
+        'stat/chart' => '统计图表'
+        'taocan/index' => '套餐管理'
+        'agent/shindex' => '股东列表'
+        'agent/uaindex' => '总代列表'
+        'games/caigame' => '彩票分类'
+        'cash/uarecord' => '总代现金记录'
+        'cash/shrecord' => '股东现金记录'
+        'noticefront/index' => '前台公告列表'
+        'stat/commission' => '线路提成'
+        'adminback/index' => '超管列表'
+        'user/userdetail' => '会员祥情'
+        'noticeback/add' => '添加后台公告'
+        'noticefront/add' => '添加前台公告'
+        'adminback/save' => '增加修改管理员(入库)'
+        'line/updatemoney' => '额度分配'
+        'stat/export' => '导出表格'
+        'taocan/insert' => '添加套餐'
+        'taocan/getone' => '套餐编辑'
+        'taocan/change' => '编辑站点、套餐'
+        'games/editgame' => '编辑彩种'
+        'games/addgame' => '添加彩票分类'
+        'gameapi/bet/total' => '注单统计'
+        'gameapi/bet/detail' => '注单详情'
+        'gameapi/bet/secondblance' => '手动结算'
+        'gameapi/auto/getauto' => '手动开奖结果补采'
+        'gameapi/bet/by_periods' => '注单回滚'
+        'gameapi/bet/batch_rollback' => '批量回滚'
+        'gameapi/bet/invalid' => '批量设置/恢复状态'
+        'gameapi/auto/checkbet' => '修改开奖结果'
+        'gameapi/auto/insert' => '添加开奖结果'
+        'gameapi/opentime/open_add' => '添加开封盘时间'
+        'gameapi/opentime/open_edit_info' => '修改开封盘时间'
+        'gameapi/opentime/open_update' => '修改开封盘时间（入库）'
+        'stat/task' => '重新统计'
+        'user/updatestatus' => '更改会员状态'
+        'agent/detail' => '查看代理详情'
+        'gameapi/odds/update' => '修改赔率'
+        'gameapi/setlimit/add' => '修改限额'
+        'gameapi/setlimit/submit' => '修改限额(入库）'
+        'maintain/create' => '编辑维护内容'
+        'maintain/close' => '清除维护'
+        'redis/todo' => '操作redis'
+        'noticefront/enable' => '修改公告状态'
+        'noticeback/enable' => '修改公告状态'
+        'admin/edit' => '增加修改管理员'
+        'role/save' => '修改角色信息（入库）'
+        'admin/save' => '添加管理员（入库）'
+        'line/add' => '线路添加（表单）'
+        'taocan/edit' => '添加套餐'
+        'menu/submenu' => '添加菜单（添加、保存）'
+        'gameapi/auto/update' => '修改开奖结果（入库）'
+        'agentmenu/onedata' => '修改菜单'
+        'menu/savemenu' => '编辑菜单（入库）'
+        'menu/onedata' => '查看菜单祥情'
+        'spiderbet/index' => '注单补采纪录列表'
+        'spiderbet/getdata' => '补采注单'
+        'user/withdrawals' => '会员强制下线'
+        'other/online' => '顶部在线人数展示'
+        'other/whitelist' => 'IP白名单'
+        'other/savewhite' => '增加 修改 IP白名单'
+        'log/mongocount' => '数据预警'
+        'admin/withdrawals' => '管理员踢线'
+        'cash/walletrecord' => '钱包异常纪录'
+    ]
+    'unikey' => '17beec1e2e257a60738e3c51b21af557'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/agent/shindex'
+    'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded; charset=UTF-8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_X_PJAX_CONTAINER' => '#container'
+    'HTTP_X_PJAX' => 'true'
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_ACCEPT' => 'text/html, */*; q=0.01'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60593'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/agent/uaindex?_pjax=%23container'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => '_pjax=%23container'
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260344.969
+    'REQUEST_TIME' => 1518260344
+]
+2018-02-10 10:59:05 [127.0.0.1][-][8e0t4r4e49q6dhja7eqq2d3o24][error][yii\db\Exception] PDOException: PDO::__construct(): MySQL server has gone away in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php:603
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(603): PDO->__construct('mysql:host=127....', 'root', '123456', NULL)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(545): yii\db\Connection->createPdoInstance()
+#2 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(864): yii\db\Connection->open()
+#3 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(851): yii\db\Connection->getMasterPdo()
+#4 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#5 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(894): yii\db\Command->prepare(true)
+#6 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(388): yii\db\Command->queryInternal('fetchColumn', 0)
+#7 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(393): yii\db\Command->queryScalar()
+#8 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(300): yii\db\Query->queryScalar('COUNT(id)', Object(yii\db\Connection))
+#9 /Users/frank/www/newproject/trunk/php-yii/common/models/AgentModel.php(15): yii\db\Query->count('id', Object(yii\db\Connection))
+#10 /Users/frank/www/newproject/trunk/php-yii/our_backend/controllers/AgentController.php(186): common\models\AgentModel::getAgentCount(Object(yii\db\Connection), 'my_user_ua', Array)
+#11 [internal function]: our_backend\controllers\AgentController->actionUaindex()
+#12 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#13 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#14 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('uaindex', Array)
+#15 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('agent/uaindex', Array)
+#16 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#18 {main}
+
+Next PDOException: SQLSTATE[HY000] [2006] MySQL server has gone away in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php:603
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(603): PDO->__construct('mysql:host=127....', 'root', '123456', NULL)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(545): yii\db\Connection->createPdoInstance()
+#2 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(864): yii\db\Connection->open()
+#3 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(851): yii\db\Connection->getMasterPdo()
+#4 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#5 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(894): yii\db\Command->prepare(true)
+#6 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(388): yii\db\Command->queryInternal('fetchColumn', 0)
+#7 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(393): yii\db\Command->queryScalar()
+#8 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(300): yii\db\Query->queryScalar('COUNT(id)', Object(yii\db\Connection))
+#9 /Users/frank/www/newproject/trunk/php-yii/common/models/AgentModel.php(15): yii\db\Query->count('id', Object(yii\db\Connection))
+#10 /Users/frank/www/newproject/trunk/php-yii/our_backend/controllers/AgentController.php(186): common\models\AgentModel::getAgentCount(Object(yii\db\Connection), 'my_user_ua', Array)
+#11 [internal function]: our_backend\controllers\AgentController->actionUaindex()
+#12 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#13 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#14 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('uaindex', Array)
+#15 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('agent/uaindex', Array)
+#16 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#18 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2006] MySQL server has gone away in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php:550
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(864): yii\db\Connection->open()
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Connection.php(851): yii\db\Connection->getMasterPdo()
+#2 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(219): yii\db\Connection->getSlavePdo()
+#3 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(894): yii\db\Command->prepare(true)
+#4 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Command.php(388): yii\db\Command->queryInternal('fetchColumn', 0)
+#5 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(393): yii\db\Command->queryScalar()
+#6 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/db/Query.php(300): yii\db\Query->queryScalar('COUNT(id)', Object(yii\db\Connection))
+#7 /Users/frank/www/newproject/trunk/php-yii/common/models/AgentModel.php(15): yii\db\Query->count('id', Object(yii\db\Connection))
+#8 /Users/frank/www/newproject/trunk/php-yii/our_backend/controllers/AgentController.php(186): common\models\AgentModel::getAgentCount(Object(yii\db\Connection), 'my_user_ua', Array)
+#9 [internal function]: our_backend\controllers\AgentController->actionUaindex()
+#10 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/InlineAction.php(55): call_user_func_array(Array, Array)
+#11 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Controller.php(154): yii\base\InlineAction->runWithParams(Array)
+#12 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('uaindex', Array)
+#13 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('agent/uaindex', Array)
+#14 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#16 {main}
+Additional Information:
+
+2018-02-10 10:59:05 [127.0.0.1][-][8e0t4r4e49q6dhja7eqq2d3o24][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/login/captcha' => 'uiwu'
+    '__captcha/login/captchacount' => 1
+    'uid' => '1'
+    'uname' => 'frank'
+    'login_user' => 'frank'
+    'login_name' => '春华'
+    'role' => 'super'
+    'role_id' => '1'
+    'role_name' => '超级管理员'
+    'role_access' => '34,36,97,128,130,37,46,129,35,32,33,67,69,70,98,89,99,81,100,101,102,73,75,103,85,104,39,105,106,107,108,109,110,111,71,40,112,113,66,114,115,116,62,63,65,64,86,87,51,60,117,61,80,49,50,53,56,55,38,90,43,91,118,54,119,84,83,47,120,48,121,122,45,41,57,123,124,72,125,88,94,126,42,93,127,77,92'
+    'menu' => [
+        0 => [
+            'menuName' => '权限管理'
+            'menuUrl' => '#'
+            'id' => '34'
+            'icon_class' => 'fa-lock'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '管理员列表'
+                    'menuUrl' => 'admin/index'
+                    'id' => '36'
+                    'pid' => '34'
+                    'threeLevel' => [
+                        0 => 'adminback/save'
+                        1 => 'admin/edit'
+                        2 => 'admin/save'
+                        3 => 'admin/withdrawals'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '角色列表'
+                    'menuUrl' => 'role/index'
+                    'id' => '37'
+                    'pid' => '34'
+                    'threeLevel' => [
+                        0 => 'role/edit'
+                        1 => 'role/save'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '菜单列表(总后台)'
+                    'menuUrl' => 'menu/index'
+                    'id' => '35'
+                    'pid' => '34'
+                    'threeLevel' => [
+                        0 => 'menu/submenu'
+                        1 => 'menu/savemenu'
+                        2 => 'menu/onedata'
+                    ]
+                ]
+            ]
+        ]
+        1 => [
+            'menuName' => '线路管理'
+            'menuUrl' => '#'
+            'id' => '32'
+            'icon_class' => 'fa-barcode'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '线路列表'
+                    'menuUrl' => 'line/index'
+                    'id' => '33'
+                    'pid' => '32'
+                    'threeLevel' => [
+                        0 => 'line/baseupdate'
+                        1 => 'line/insert'
+                        2 => 'line/lineform'
+                        3 => 'line/updatemoney'
+                        4 => 'line/insert'
+                        5 => 'line/add'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '线路提成'
+                    'menuUrl' => 'stat/commission'
+                    'id' => '89'
+                    'pid' => '32'
+                    'threeLevel' => [
+                        0 => 'stat/export'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '套餐管理'
+                    'menuUrl' => 'taocan/index'
+                    'id' => '81'
+                    'pid' => '32'
+                    'threeLevel' => [
+                        0 => 'taocan/insert'
+                        1 => 'taocan/getone'
+                        2 => 'taocan/change'
+                        3 => 'taocan/edit'
+                    ]
+                ]
+            ]
+        ]
+        2 => [
+            'menuName' => '彩票管理'
+            'menuUrl' => '#'
+            'id' => '73'
+            'icon_class' => ''
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '彩种列表'
+                    'menuUrl' => 'games/index'
+                    'id' => '75'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'games/editgame'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '彩票分类'
+                    'menuUrl' => 'games/caigame'
+                    'id' => '85'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'games/addgame'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '注单列表'
+                    'menuUrl' => 'gameapi/bet/index'
+                    'id' => '39'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'gameapi/bet/total'
+                        1 => 'gameapi/bet/detail'
+                        2 => 'gameapi/bet/secondblance'
+                        3 => 'gameapi/auto/getauto'
+                        4 => 'gameapi/bet/by_periods'
+                        5 => 'gameapi/bet/batch_rollback'
+                        6 => 'gameapi/bet/invalid'
+                    ]
+                ]
+                3 => [
+                    'menuName' => '未结算注单列表'
+                    'menuUrl' => 'gameapi/bet/nobalance'
+                    'id' => '71'
+                    'pid' => '73'
+                ]
+                4 => [
+                    'menuName' => '开奖结果列表'
+                    'menuUrl' => 'gameapi/auto/index'
+                    'id' => '40'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'gameapi/auto/checkbet'
+                        1 => 'gameapi/auto/insert'
+                        2 => 'gameapi/auto/update'
+                    ]
+                ]
+                5 => [
+                    'menuName' => '开封盘时间列表'
+                    'menuUrl' => 'gameapi/opentime/index'
+                    'id' => '66'
+                    'pid' => '73'
+                    'threeLevel' => [
+                        0 => 'gameapi/opentime/open_add'
+                        1 => 'gameapi/opentime/open_edit_info'
+                        2 => 'gameapi/opentime/open_update'
+                    ]
+                ]
+            ]
+        ]
+        3 => [
+            'menuName' => '现金系统'
+            'menuUrl' => '#'
+            'id' => '62'
+            'icon_class' => 'fa-credit-card'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '会员现金记录'
+                    'menuUrl' => 'cash/userrecord'
+                    'id' => '63'
+                    'pid' => '62'
+                ]
+                1 => [
+                    'menuName' => '线路现金记录'
+                    'menuUrl' => 'cash/linerecord'
+                    'id' => '65'
+                    'pid' => '62'
+                ]
+                2 => [
+                    'menuName' => '代理现金记录'
+                    'menuUrl' => 'cash/agentrecord'
+                    'id' => '64'
+                    'pid' => '62'
+                ]
+                3 => [
+                    'menuName' => '总代现金记录'
+                    'menuUrl' => 'cash/uarecord'
+                    'id' => '86'
+                    'pid' => '62'
+                ]
+                4 => [
+                    'menuName' => '股东现金记录'
+                    'menuUrl' => 'cash/shrecord'
+                    'id' => '87'
+                    'pid' => '62'
+                ]
+                5 => [
+                    'menuName' => '钱包异常纪录'
+                    'menuUrl' => 'cash/walletrecord'
+                    'id' => '153'
+                    'pid' => '62'
+                ]
+            ]
+        ]
+        4 => [
+            'menuName' => '数据中心'
+            'menuUrl' => '#'
+            'id' => '51'
+            'icon_class' => 'fa-tachometer'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '会员注单统计'
+                    'menuUrl' => 'stat/index'
+                    'id' => '60'
+                    'pid' => '51'
+                    'threeLevel' => [
+                        0 => 'stat/task'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '线路注单统计'
+                    'menuUrl' => 'stat/line'
+                    'id' => '61'
+                    'pid' => '51'
+                ]
+                2 => [
+                    'menuName' => '统计图表'
+                    'menuUrl' => 'stat/chart'
+                    'id' => '80'
+                    'pid' => '51'
+                ]
+                3 => [
+                    'menuName' => '注单补采'
+                    'menuUrl' => 'spiderbet/index'
+                    'id' => '143'
+                    'pid' => '51'
+                    'threeLevel' => [
+                        0 => 'spiderbet/index'
+                        1 => 'spiderbet/getdata'
+                    ]
+                ]
+                4 => [
+                    'menuName' => '数据预警'
+                    'menuUrl' => 'log/mongocount'
+                    'id' => '151'
+                    'pid' => '51'
+                ]
+            ]
+        ]
+        5 => [
+            'menuName' => '日志管理'
+            'menuUrl' => '#'
+            'id' => '49'
+            'icon_class' => 'fa-briefcase'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '请求日志'
+                    'menuUrl' => 'log/request'
+                    'id' => '50'
+                    'pid' => '49'
+                ]
+                1 => [
+                    'menuName' => '登陆日志'
+                    'menuUrl' => 'log/history'
+                    'id' => '53'
+                    'pid' => '49'
+                ]
+                2 => [
+                    'menuName' => '操作日志'
+                    'menuUrl' => 'log/operate'
+                    'id' => '56'
+                    'pid' => '49'
+                ]
+                3 => [
+                    'menuName' => '日志文件'
+                    'menuUrl' => 'log/logfile'
+                    'id' => '55'
+                    'pid' => '49'
+                ]
+            ]
+        ]
+        6 => [
+            'menuName' => '客户后台管理'
+            'menuUrl' => '#'
+            'id' => '38'
+            'icon_class' => 'fa-exchange'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '超管列表'
+                    'menuUrl' => 'adminback/index'
+                    'id' => '90'
+                    'pid' => '38'
+                ]
+                1 => [
+                    'menuName' => '会员列表'
+                    'menuUrl' => 'user/index'
+                    'id' => '43'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'user/userdetail'
+                        1 => 'user/updatestatus'
+                        2 => 'user/withdrawals'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '代理列表'
+                    'menuUrl' => 'agent/index'
+                    'id' => '54'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'agent/detail'
+                    ]
+                ]
+                3 => [
+                    'menuName' => '总代列表'
+                    'menuUrl' => 'agent/uaindex'
+                    'id' => '84'
+                    'pid' => '38'
+                ]
+                4 => [
+                    'menuName' => '股东列表'
+                    'menuUrl' => 'agent/shindex'
+                    'id' => '83'
+                    'pid' => '38'
+                ]
+                5 => [
+                    'menuName' => '赔率数据'
+                    'menuUrl' => 'gameapi/odds/index'
+                    'id' => '47'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'gameapi/odds/update'
+                    ]
+                ]
+                6 => [
+                    'menuName' => '限额设置'
+                    'menuUrl' => 'gameapi/setlimit/index'
+                    'id' => '48'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'gameapi/setlimit/add'
+                        1 => 'gameapi/setlimit/submit'
+                    ]
+                ]
+                7 => [
+                    'menuName' => '菜单列表(客户后台)'
+                    'menuUrl' => 'agentmenu/index'
+                    'id' => '45'
+                    'pid' => '38'
+                    'threeLevel' => [
+                        0 => 'agentmenu/onedata'
+                    ]
+                ]
+            ]
+        ]
+        7 => [
+            'menuName' => '其它页面'
+            'menuUrl' => '#'
+            'id' => '41'
+            'icon_class' => 'fa-file-o'
+            'twoLevelMenu' => [
+                0 => [
+                    'menuName' => '维护管理'
+                    'menuUrl' => 'maintain/index'
+                    'id' => '57'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'maintain/create'
+                        1 => 'maintain/close'
+                    ]
+                ]
+                1 => [
+                    'menuName' => '缓存管理'
+                    'menuUrl' => 'redis/index'
+                    'id' => '72'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'redis/todo'
+                        1 => 'other/online'
+                    ]
+                ]
+                2 => [
+                    'menuName' => '前台公告列表'
+                    'menuUrl' => 'noticefront/index'
+                    'id' => '88'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'noticefront/add'
+                        1 => 'noticefront/enable'
+                    ]
+                ]
+                3 => [
+                    'menuName' => '后台公告列表'
+                    'menuUrl' => 'noticeback/index'
+                    'id' => '42'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'noticeback/add'
+                        1 => 'noticeback/enable'
+                    ]
+                ]
+                4 => [
+                    'menuName' => 'IP白名单'
+                    'menuUrl' => 'other/whitelist'
+                    'id' => '149'
+                    'pid' => '41'
+                    'threeLevel' => [
+                        0 => 'other/savewhite'
+                    ]
+                ]
+            ]
+        ]
+    ]
+    'allRoutes' => [
+        0 => 'adminback/index'
+        1 => 'user/index'
+        2 => 'agent/index'
+        3 => 'maintain/index'
+        4 => 'games/index'
+        5 => 'cash/userrecord'
+        6 => 'redis/index'
+        7 => 'agent/uaindex'
+        8 => 'games/caigame'
+        9 => 'gameapi/bet/index'
+        10 => 'log/request'
+        11 => 'cash/linerecord'
+        12 => 'agent/shindex'
+        13 => 'line/index'
+        14 => 'admin/index'
+        15 => 'gameapi/odds/index'
+        16 => 'log/history'
+        17 => 'stat/index'
+        18 => 'cash/agentrecord'
+        19 => 'gameapi/bet/nobalance'
+        20 => 'noticefront/index'
+        21 => 'role/index'
+        22 => 'gameapi/auto/index'
+        23 => 'noticeback/index'
+        24 => 'gameapi/setlimit/index'
+        25 => 'log/operate'
+        26 => 'stat/line'
+        27 => 'cash/uarecord'
+        28 => 'stat/commission'
+        29 => 'menu/index'
+        30 => 'agentmenu/index'
+        31 => 'log/logfile'
+        32 => 'gameapi/opentime/index'
+        33 => 'stat/chart'
+        34 => 'taocan/index'
+        35 => 'cash/shrecord'
+        36 => 'spiderbet/index'
+        37 => 'other/whitelist'
+        38 => 'log/mongocount'
+        39 => 'cash/walletrecord'
+        40 => 'adminback/save'
+        41 => 'role/edit'
+        42 => 'line/baseupdate'
+        43 => 'line/insert'
+        44 => 'line/lineform'
+        45 => 'user/userdetail'
+        46 => 'noticeback/add'
+        47 => 'noticefront/add'
+        48 => 'line/updatemoney'
+        49 => 'stat/export'
+        50 => 'taocan/insert'
+        51 => 'taocan/getone'
+        52 => 'taocan/change'
+        53 => 'games/editgame'
+        54 => 'games/addgame'
+        55 => 'gameapi/bet/total'
+        56 => 'gameapi/bet/detail'
+        57 => 'gameapi/bet/secondblance'
+        58 => 'gameapi/auto/getauto'
+        59 => 'gameapi/bet/by_periods'
+        60 => 'gameapi/bet/batch_rollback'
+        61 => 'gameapi/bet/invalid'
+        62 => 'gameapi/auto/checkbet'
+        63 => 'gameapi/auto/insert'
+        64 => 'gameapi/opentime/open_add'
+        65 => 'gameapi/opentime/open_edit_info'
+        66 => 'gameapi/opentime/open_update'
+        67 => 'stat/task'
+        68 => 'user/updatestatus'
+        69 => 'agent/detail'
+        70 => 'gameapi/odds/update'
+        71 => 'gameapi/setlimit/add'
+        72 => 'gameapi/setlimit/submit'
+        73 => 'maintain/create'
+        74 => 'maintain/close'
+        75 => 'redis/todo'
+        76 => 'noticefront/enable'
+        77 => 'noticeback/enable'
+        78 => 'admin/edit'
+        79 => 'role/save'
+        80 => 'admin/save'
+        81 => 'line/insert'
+        82 => 'line/add'
+        83 => 'taocan/edit'
+        84 => 'menu/submenu'
+        85 => 'gameapi/auto/update'
+        86 => 'agentmenu/onedata'
+        87 => 'menu/savemenu'
+        88 => 'menu/onedata'
+        89 => 'spiderbet/index'
+        90 => 'spiderbet/getdata'
+        91 => 'user/withdrawals'
+        92 => 'other/online'
+        93 => 'other/savewhite'
+        94 => 'admin/withdrawals'
+    ]
+    'CN_name' => [
+        'line/index' => '线路列表'
+        'menu/index' => '菜单列表(总后台)'
+        'admin/index' => '管理员列表'
+        'role/index' => '角色列表'
+        'gameapi/bet/index' => '注单列表'
+        'gameapi/auto/index' => '开奖结果列表'
+        'noticeback/index' => '后台公告列表'
+        'user/index' => '会员列表'
+        'agentmenu/index' => '菜单列表(客户后台)'
+        'role/edit' => '角色(新增,修改,详情)'
+        'gameapi/odds/index' => '赔率数据'
+        'gameapi/setlimit/index' => '限额设置'
+        'log/request' => '请求日志'
+        'log/history' => '登陆日志'
+        'agent/index' => '代理列表'
+        'log/logfile' => '日志文件'
+        'log/operate' => '操作日志'
+        'maintain/index' => '维护管理'
+        'stat/index' => '会员注单统计'
+        'stat/line' => '线路注单统计'
+        'cash/userrecord' => '会员现金记录'
+        'cash/agentrecord' => '代理现金记录'
+        'cash/linerecord' => '线路现金记录'
+        'gameapi/opentime/index' => '开封盘时间列表'
+        'line/baseupdate' => '更改状态'
+        'line/insert' => '线路添加'
+        'line/lineform' => '线路修改(表单)'
+        'gameapi/bet/nobalance' => '未结算注单列表'
+        'redis/index' => '缓存管理'
+        'games/index' => '彩种列表'
+        'stat/chart' => '统计图表'
+        'taocan/index' => '套餐管理'
+        'agent/shindex' => '股东列表'
+        'agent/uaindex' => '总代列表'
+        'games/caigame' => '彩票分类'
+        'cash/uarecord' => '总代现金记录'
+        'cash/shrecord' => '股东现金记录'
+        'noticefront/index' => '前台公告列表'
+        'stat/commission' => '线路提成'
+        'adminback/index' => '超管列表'
+        'user/userdetail' => '会员祥情'
+        'noticeback/add' => '添加后台公告'
+        'noticefront/add' => '添加前台公告'
+        'adminback/save' => '增加修改管理员(入库)'
+        'line/updatemoney' => '额度分配'
+        'stat/export' => '导出表格'
+        'taocan/insert' => '添加套餐'
+        'taocan/getone' => '套餐编辑'
+        'taocan/change' => '编辑站点、套餐'
+        'games/editgame' => '编辑彩种'
+        'games/addgame' => '添加彩票分类'
+        'gameapi/bet/total' => '注单统计'
+        'gameapi/bet/detail' => '注单详情'
+        'gameapi/bet/secondblance' => '手动结算'
+        'gameapi/auto/getauto' => '手动开奖结果补采'
+        'gameapi/bet/by_periods' => '注单回滚'
+        'gameapi/bet/batch_rollback' => '批量回滚'
+        'gameapi/bet/invalid' => '批量设置/恢复状态'
+        'gameapi/auto/checkbet' => '修改开奖结果'
+        'gameapi/auto/insert' => '添加开奖结果'
+        'gameapi/opentime/open_add' => '添加开封盘时间'
+        'gameapi/opentime/open_edit_info' => '修改开封盘时间'
+        'gameapi/opentime/open_update' => '修改开封盘时间（入库）'
+        'stat/task' => '重新统计'
+        'user/updatestatus' => '更改会员状态'
+        'agent/detail' => '查看代理详情'
+        'gameapi/odds/update' => '修改赔率'
+        'gameapi/setlimit/add' => '修改限额'
+        'gameapi/setlimit/submit' => '修改限额(入库）'
+        'maintain/create' => '编辑维护内容'
+        'maintain/close' => '清除维护'
+        'redis/todo' => '操作redis'
+        'noticefront/enable' => '修改公告状态'
+        'noticeback/enable' => '修改公告状态'
+        'admin/edit' => '增加修改管理员'
+        'role/save' => '修改角色信息（入库）'
+        'admin/save' => '添加管理员（入库）'
+        'line/add' => '线路添加（表单）'
+        'taocan/edit' => '添加套餐'
+        'menu/submenu' => '添加菜单（添加、保存）'
+        'gameapi/auto/update' => '修改开奖结果（入库）'
+        'agentmenu/onedata' => '修改菜单'
+        'menu/savemenu' => '编辑菜单（入库）'
+        'menu/onedata' => '查看菜单祥情'
+        'spiderbet/index' => '注单补采纪录列表'
+        'spiderbet/getdata' => '补采注单'
+        'user/withdrawals' => '会员强制下线'
+        'other/online' => '顶部在线人数展示'
+        'other/whitelist' => 'IP白名单'
+        'other/savewhite' => '增加 修改 IP白名单'
+        'log/mongocount' => '数据预警'
+        'admin/withdrawals' => '管理员踢线'
+        'cash/walletrecord' => '钱包异常纪录'
+    ]
+    'unikey' => '17beec1e2e257a60738e3c51b21af557'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/agent/shindex'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60593'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/agent/uaindex'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260345.0542
+    'REQUEST_TIME' => 1518260345
+]
+2018-02-10 10:59:10 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "public/js/push.js". in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php:460
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('public/js/push....', Array)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php:99
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+2018-02-10 10:59:10 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/agent/uaindex'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60593'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/public/js/push.js'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260350.2692
+    'REQUEST_TIME' => 1518260350
+]
+2018-02-10 10:59:10 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "public/js/push.js". in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php:460
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('public/js/push....', Array)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php:99
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+2018-02-10 10:59:10 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/agent/uaindex'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '60593'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/public/js/push.js'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518260350.328
+    'REQUEST_TIME' => 1518260350
+]
+2018-02-10 11:23:07 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "public/js/push.js". in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php:460
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('public/js/push....', Array)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php:99
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+2018-02-10 11:23:07 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/admin/center'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '61198'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/public/js/push.js'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518261787.8044
+    'REQUEST_TIME' => 1518261787
+]
+2018-02-10 11:23:07 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "public/js/push.js". in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php:460
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('public/js/push....', Array)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php:99
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+2018-02-10 11:23:07 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/admin/center'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '61198'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/public/js/push.js'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518261787.8595
+    'REQUEST_TIME' => 1518261787
+]
+2018-02-10 11:23:08 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "public/js/push.js". in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Module.php:460
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php(87): yii\base\Module->runAction('public/js/push....', Array)
+#1 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/web/Application.php:99
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-yii/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+2018-02-10 11:23:08 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '8e0t4r4e49q6dhja7eqq2d3o24'
+]
+
+$_SERVER = [
+    'USER' => '_www'
+    'HOME' => '/Library/WebServer'
+    'HTTP_COOKIE' => 'PHPSESSID=8e0t4r4e49q6dhja7eqq2d3o24'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9,en;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://admin.pk.com/admin/center'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_HOST' => 'admin.pk.com'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'admin.pk.com'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '61212'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'SERVER_SOFTWARE' => 'nginx/1.12.1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'REQUEST_SCHEME' => 'http'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/public/js/push.js'
+    'SCRIPT_NAME' => '/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => ''
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'PATH_TRANSLATED' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web'
+    'PATH_INFO' => ''
+    'SCRIPT_FILENAME' => '/Users/frank/www/newproject/trunk/php-yii/our_backend/web/index.php'
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1518261788.9117
+    'REQUEST_TIME' => 1518261788
+]

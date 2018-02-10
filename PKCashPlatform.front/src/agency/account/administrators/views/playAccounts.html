@@ -1,0 +1,303 @@
+<!-- 管理员账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+                <div class="row">
+                    <article class="col-sm-12">
+                        <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>{{getWord('A_1_2')}}</h2>
+                                <div class="widget-toolbar">
+                                    <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                                </div>
+                            </header>
+                            <div>
+                                <div class="widget-body tab-content">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar" ng-show="newTodo">
+                                        <div class="row form-horizontal">
+                                            <label class="col-md-1 control-label">{{getWord('Proxy account')}}:</label>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <select class="form-control" name="status">
+                                                        <option value="-1">全部</option>
+                                                        <option value="1">一级代理</option>
+                                                        <option value="0">二级代理</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label">{{getWord('Status')}}：</label>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="-1">全部</option>
+                                                        <option value="1">启用</option>
+                                                        <option value="0">禁用</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label">{{getWord('On-line')}}:</label>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="-1">全部</option>
+                                                        <option value="1">在线</option>
+                                                        <option value="0">下线</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label">{{getWord('Hidden')}}：</label>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="-1">全部</option>
+                                                        <option value="1">显示</option>
+                                                        <option value="0">隐藏</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label">{{getWord('source')}}：</label>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="-1">全部</option>
+                                                        <option value="1">来源一</option>
+                                                        <option value="0">来源二</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <label class="col-md-1 control-label">{{getWord('Registration date')}}：</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{getWord('Creation Time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label">——————</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{getWord('End time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="{{getWord('Administrator account search')}}" ng-model="accounts.account">
+                                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-horizontal">
+                                            <label class="col-md-1 control-label">{{getWord('sort')}}：</label>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="-1">注册日期</option>
+                                                        <option value="1">账号等级</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label"></label>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="-1">由大到小</option>
+                                                        <option value="1">由小到大</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" name="items" ></th>
+                                                    <th>{{getWord('Status')}}</th>
+                                                    <th>{{getWord('Name')}}</th>
+                                                    <th>{{getWord('Accounts')}}</th>
+                                                    <th>{{getWord('System quota')}}</th>
+                                                    <th>{{getWord('New date')}}</th>
+                                                    <th>{{getWord('status')}}</th>
+                                                    <th>{{getWord('function')}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list">
+                                                    <td>
+                                                        <input type="checkbox" name="items">
+                                                    </td>
+                                                    <td>{{item.value1}}</td>
+                                                    <td>{{item.value2}}</td>
+                                                    <td>{{item.value3}}</td>
+                                                    <td>{{item.value4}}</td>
+                                                    <td>{{item.value5}}</td>
+                                                    <td>{{item.value5}}</td>
+                                                    <td>
+                                                        <button class="btn btn-default" ng-click="disable()">{{getWord('Disable')}}</button>
+                                                        <button class="btn btn-default" ng-click="kick()">{{getWord('Kick line')}}</button>
+                                                        <button data-toggle="modal" data-target="#myModal2" class="btn btn-default">{{getWord('Modify')}}</button>
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+    </section>
+    <span style="display: none" class="zz">{{getWord('accounts')}}</span>
+    <!--<input type="text" value="{{getWord('accounts')}}" class="zz">-->
+    <!--添加-->
+    <div class="modal fade" id="dialog_simplexj" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">{{getWord('Add Account')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('accounts')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('accounts')}}" type="text" ng-model="accounts.accounts">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('Password')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('Password')}}" type="text" ng-model="accounts.passwords">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('Permission grouping')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('Select group name')}}" type="text"  list="list2" ng-model="accounts.groupIds">
+                                    <datalist id="list2">
+                                        <option ng-repeat="list1 in accounts.select">{{list1.group_name}}</option>
+                                    </datalist>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('Remarks')}}</label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" rows="5" ng-model="accounts.remarks"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('Status')}}</label>
+                                <div class="col-md-10 inline-group">
+                                    <label class="radio col col-md-4 ">
+                                        <input type="radio" name="radio-inline1" class="checkP" value="1" checked="checked" style="margin-top: 1px">
+                                        {{getWord('Enables')}}</label>
+                                    <label class="radio col col-md-4">
+                                        <input type="radio" class="checkP" name="radio-inline1" value="0" style="margin-top: 1px">
+                                        <i></i>{{getWord('Disable')}}</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">{{getWord('Modify member account')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('accounts')}}</label>
+                                <div class="col-md-6">
+                                    <label class="control-label">a123</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Member name')}}</label>
+                                <div class="col-md-6">
+                                    <label class="control-label">a123</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Password')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('Password')}}" type="text" ng-model="accounts.password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Confirm password')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('Password')}}" type="text" ng-model="accounts.password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Can I change the password')}}</label>
+                                <div class="col-md-6">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="0" name="isModify">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="isModify">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

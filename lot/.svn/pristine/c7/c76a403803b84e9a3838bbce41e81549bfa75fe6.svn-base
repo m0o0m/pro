@@ -1,0 +1,15 @@
+/* eslint-disable */
+window.urlConfig = {
+  basePath: 'http://pkapi.pk1358.com/',
+};
+
+window.socketConfig = {
+  host: '113.10.246.106',
+  // host: '192.168.100.103',
+  port: '9527'
+};
+
+window.chatboxConfig = {
+  host: '113.10.246.104',
+  port: '3527'
+}

@@ -1,0 +1,88 @@
+angular.module('app.copyEditor').controller('RegistCopyCtrl',  function($scope,APP_CONFIG,$LocalStorage,CopyEditorService,popupSvc,$rootScope,$state){
+    $scope.sitId = function (site_index_id) {
+        CopyEditorService.getSiteSelect(site_index_id).then(function (response) {
+            $scope.sharedJson = response.data.data;
+        });
+    };
+    var user = JSON.parse($LocalStorage.getItem("user"));
+    $scope.isSuperAdmin = user.site_index_id === '';
+    if ($scope.isSuperAdmin === false) {
+        //获取全部站点
+        $scope.sitId();
+    } else {
+        $scope.sitId(user.site_index_id);
+    }
+
+    var GetAllEmployee = function () {
+        var postData = {
+            site_index_id: $scope.site_index_id
+        }
+        CopyEditorService.getRegisterCopy(postData).then(function (response) {
+            $scope.list = response.data.list;
+        })
+    }
+    GetAllEmployee();
+    $scope.search = function () {
+        GetAllEmployee();
+    }
+    $scope.modify = function (id,title,code,status,color) {
+        $scope.ids = id;
+        $scope.tit = title;
+        $scope.code = code;
+        $scope.color = color;
+        $scope.status = status;
+        $scope.code = code;
+        var status_1 = document.getElementsByName('status');
+        for(var i = 0;i < 2;i++) {
+            if (status_1[i].value == status) {
+                status_1[i].checked = 'checked';
+            }
+        }
+    }
+    $scope.sub = function () {
+        $scope.status_1 = $("input[name='status']:checked").val();
+        var postData = {
+            id: $scope.ids,
+            title: $scope.tit,
+            code: $scope.code,
+            status: $scope.status_1,
+            color: $scope.color
+        }
+        CopyEditorService.getDiscountSub(postData).then(function (response) {
+            console.log(response);
+            if(response.data.data==null){
+                popupSvc.smallBox("success", $rootScope.getWord("success"));
+                GetAllEmployee();
+            } else {
+                popupSvc.smallBox("fail", response.data.msg);
+            }
+        })
+    }
+    $scope.mContent = function (id) {
+        $state.go('app.CopyEditor.RegisterEditor',{
+            id:id
+        })
+    }
+    $scope.module = function (id) {
+        $state.go('app.CopyEditor.RegisterMould',{
+            id:id
+        })
+    }
+
+    $scope.keep = function (id) {
+        var del = function () {
+            var postData = {
+                id: id
+            };
+            CopyEditorService.getRegisterCopyKeep(postData).then(function (response) {
+                if (response.data.data===null){
+                    GetAllEmployee();
+                    popupSvc.smallBox("success", $rootScope.getWord("success"));
+                } else {
+                    popupSvc.smallBox("fail", response.data.msg);
+                }
+            })
+        };
+        popupSvc.smartMessageBox($rootScope.getWord("confirmationOperation"),del);
+    }
+});

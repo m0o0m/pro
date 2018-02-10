@@ -1,0 +1,187 @@
+@import "./function.scss";
+
+.eleven_too {
+  margin-top: 20px;
+  .box {
+    width: 912px;
+    // padding-top: 7px;
+    padding-left: 20px;
+    padding-right: 12px;
+    overflow: hidden;
+    .uls {
+      .thend {
+        border-top: 1px solid $border_color;
+        border-bottom: 1px solid $border_color;
+        height: 40px;
+        line-height: 40px;
+        background-color: #eee;
+      }
+    }
+    li {
+      .one, .tow {
+        float: left;
+        width: 56px;
+        height: 40px;
+        line-height: 40px;
+        color: #000;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .tow {
+        color: rgb(64, 64, 64);
+        border-right: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+      }
+      .three {
+        height: 40px;
+        width: 56px;
+        line-height: 40px;
+        display: inline-block;
+        input {
+          width: 42px;
+          height: 16px;
+          color: #000;
+          border: 1px solid #b1b1b1;
+        }
+      }
+    }
+    .uls:nth-child(1) {
+      .thend {
+        border-right: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+      }
+      .dadul {
+        border-right: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+      }
+      .sonli {
+        float: left;
+        width: 25%;
+        border-right: 1px solid $border_color;
+        .sonul {
+          li {
+            float: left;
+          }
+          .one, .tow {
+            width: 60px;
+          }
+          .three {
+            width: 98px;
+          }
+        }
+      }
+      .sonli:nth-child(4), .sonli:last-child {
+        border-right: none;
+      }
+      .sonli:nth-child(1), .sonli:nth-child(2), .sonli:nth-child(4), .sonli:nth-child(3) {
+        border-bottom: 1px solid $border_color;
+      }
+    }
+    .uls:nth-child(2), .uls:nth-child(3), .uls:nth-child(4), .uls:nth-child(5), .uls:nth-child(6) {
+      float: left;
+      width: 20%;
+      border-right: 1px solid $border_color;
+      border-bottom: 1px solid $border_color;
+      .sonli {
+        border-bottom: 1px solid $border_color;
+      }
+      .sonli:last-child {
+        border-bottom: none;
+      }
+    }
+    .uls:nth-child(2) {
+      border-left: 1px solid $border_color;
+    }
+  }
+  .footer1 {
+    width: 920px;
+    float: left;
+    margin-top: 10px;
+    padding-right: 20px;
+    // padding-bottom: 45px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .img {
+      margin-left: 136px;
+      float: left;
+      span {
+        //margin-left: 30px;
+        //height: 60px;
+        float: left;
+        display: block;
+        cursor: pointer;
+      }
+      .s1 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat 0 0px;
+        background-size: 368px;
+      }
+      .s2 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -64px 0px;
+        background-size: 368px;
+      }
+      .s3 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -128px 0px;
+        background-size: 368px;
+      }
+      .s4 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -192px 0px;
+        background-size: 368px;
+      }
+      .s5 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -256px 0px;
+        background-size: 368px;
+      }
+      .s6 {
+        height: 60px;
+        width: 73px;
+        background: url("../../assets/img/Chips.png") no-repeat -320px 0px;
+        background-size: 368px;
+      }
+    }
+    .one {
+      width: 160px;
+      float: left;
+      background-color: #eee;
+      span {
+        color: $bg_color;
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      float: right;
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+}
+
+.styleclect {
+  background-color: $bg_select;
+}

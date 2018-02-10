@@ -1,0 +1,7 @@
+package back
+
+
+type DelResult struct {
+	SuccessNum int64
+	FailureNum int64
+}

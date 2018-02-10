@@ -1,0 +1,12 @@
+package global
+
+import "sync"
+
+var M sync.Map
+
+type SiteConfig struct {
+	Md5Key string
+	DesKey string
+}
+
+//定时将程序中的密钥更新到程序中

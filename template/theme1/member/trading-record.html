@@ -1,0 +1,150 @@
+{{define "memberrecord"}}
+{{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/vip.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/deposit.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/record.css" type="text/css">
+<div class="">
+    <div class="vip-bar-1">
+        <div class="vip-bar-item show">
+            <div class="record">
+                <ul class="r_name clearfix">
+                {{if eq .IsOther 1}}
+                    <li class="txt_l ">投注记录</li>
+                    <li class="txt_r txt_active" id="cash-data-list">现金流水</li>
+                {{else}}
+                    <li class="txt_l txt_active">投注记录</li>
+                    <li class="txt_r" id="cash-data-list">现金流水</li>
+                {{end}}
+
+                </ul>
+                <div class="r_center clearfix">
+                    <div class="show record_item clearfix">
+                        <ul class="navs clearfix" stat="4">
+                            <li stat="4" class="navs_active">彩票</li>
+                            <li stat="5">体育</li>
+                            <li stat="1">视讯</li>
+                            <li stat="2">电子</li>
+                            <li stat="3">捕鱼</li>
+                        </ul>
+                        <div class="tabs_center clearfix">
+                            <div class="show tabs_item clearfix">
+                                <div class="choose clearfix">
+                                    <div class="notenum fl">
+                                        <span>注单号：</span>
+                                        <input type="text" name="orderNum">
+                                    </div>
+                                    <div class="bettime fl">
+                                        <span>开始时间：</span>
+                                        <input class="inp" type="text">
+                                        <div id='schedule-box' class="boxshaw timebox"></div>
+                                    </div>
+                                    <div class="bettime fl">
+                                        <span>结束时间：</span>
+                                        <input class="inp2" type="text">
+                                        <div id='schedule-box2' class="boxshaw timebox"></div>
+                                    </div>
+                                    <div class="s_type fl">
+                                        <span>体育种类：</span>
+                                    </div>
+                                    <div class="select fl">
+                                        <select name="source_type" id="source_type">
+                                        </select>
+                                    </div>
+                                    <div class="select1 fl" style="margin-left: 10px">
+                                        <select name="source_type_one" id="source_type_one">
+                                        </select>
+                                    </div>
+                                    <div class="btn_search fl" id="btn_search">搜索</div>
+                                </div>
+                                <div class="date_nav clearfix" style="width: 100%;height: 100%;">
+                                    <ul class="ul1 clearfix my-theme">
+                                        <li>投注日期</li>
+                                        <li>注单号</li>
+                                        <li>种类</li>
+                                        <li>盈利</li>
+                                        <li>投注金额</li>
+                                        <li>有效投注</li>
+                                    </ul>
+                                    <div id="show-record-list">
+                                    {{/*注单记录展示*/}}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="record_item">
+                        <div class="tabs_center clearfix">
+                            <div class="show tabs_item clearfix">
+                                <div class="choose clearfix">
+                                    <div class="notenum fl">
+                                        <span>交易单号：</span>
+                                        <input type="text" name="cash-order-num">
+                                    </div>
+                                    <div class="bettime fl">
+                                        <span>开始时间：</span>
+                                        <input class="inp3" type="text">
+                                        <div id='schedule-box3' class="boxshaw timebox"></div>
+                                    </div>
+                                    <div class="bettime fl">
+                                        <span>结束时间：</span>
+                                        <input class="inp4" type="text">
+                                        <div id='schedule-box4' class="boxshaw timebox"></div>
+                                    </div>
+                                    <div class="bettime fl">
+                                        <span>交易选项:</span>
+                                        <select class="select-group" id="cash_source_type">
+                                            <option value="99">全部</option>
+                                            <option value="0">人工存入</option>
+                                            <option value="1">会员返佣</option>
+                                            <option value="2">线上入款</option>
+                                            <option value="3">人工取出</option>
+                                            <option value="4">线上取款</option>
+                                            <option value="5">线上出款</option>
+                                            <option value="6">注册优惠</option>
+                                            <option value="7">下单</option>
+                                            <option value="8">额度转换</option>
+                                            <option value="9">优惠返水</option>
+                                            <option value="10">自助返水</option>
+                                            <option value="11">会员返佣</option>
+                                            <option value="12">红包</option>
+                                            <option value="13">入款监控</option>
+                                        </select>
+                                    </div>
+                                    <div class="btn_search fl" id="btn_search_cash">搜索</div>
+                                </div>
+
+                                <div class="video_nav clearfix">
+                                    <ul class="ul2 clearfix my-theme">
+                                        <li>操作日期</li>
+                                        <li>操作单号</li>
+                                        <li>种类</li>
+                                        <li>类型</li>
+                                        <li>操作金额</li>
+                                        <li>操作后金额</li>
+                                        <li>状态</li>
+                                    </ul>
+                                    <div id="show-cash-list" class="show-cash-list"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</body>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/schedule.js"></script>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/recording.js"></script>
+
+<script>
+    var isOther={{.IsOther}}
+</script>
+
+
+</html>
+{{end}}

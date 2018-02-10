@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>PK</title>
+<link rel="stylesheet" href="../../../style/css/weui.min.css">
+<link rel="stylesheet" href="../../../style/css/jquery-weui.min.css">
+<link rel="stylesheet" href="../../../style/css/reset.css">
+<link rel="stylesheet" href="../../../style/css/admin.css">
+<link rel="stylesheet" href="../../../style/fonts/iconfont.css">
+
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+	<!-- <dl class="h-head">
+    	<dt><a class="iconfont">&#xe605;</a></dt>
+        <h2>活动中心</h2>
+        <dd><a class="iconfont">&#xe608;</a></dd>
+    </dl> -->
+    <ul class="h-head">
+            <li>
+                    <a>
+                            <i class="iconfont wap-fanhui"></i>
+                        </a>
+            </li>
+            <li>
+                <h2>活动中心</h2>
+            </li>
+            <li>
+                <a href="/m/index">首页</a>
+            </li>
+        </ul>
+    <nav class="h-infornav">
+        <li class="curr"><a>游戏公告</a></li>
+        <li><a>个人中心</a></li>
+    </nav>
+    <nav class="h-recora">
+    	<li class="curr"><a>存款</a></li>
+        <li><a>存款</a></li>
+        <li><a>存款</a></li>
+        <li><a>存款</a></li>
+        <li><a>存款</a></li>
+    </nav>
+</header>
+<div id="wrapper">
+<div id="scroller">
+<!--iscroll 滑动 开始-->
+
+<section class="m-recora">
+	<div class="o1">
+        <dl>
+            <h1 class="head"><i class="iconfont" style="color:#ff831f">&#xe61a;</i><a>线上存款</a><p>+1234元</p><span class="iconfont">&#xe60c;</span></h1>
+            <ul>
+            	<li>
+                	<p class="time"><i>▍</i><span>2017-17-17</span></p>
+                    <h2 class="six"><i>线上存款</i><span>存款：11111元</span></h2>
+                     <dt class="deposit"><p>存款：<i>10元</i></p><p>存款：<i>10元</i></p></dt>
+                    <p class="remark">备注：备注备注备注备注备注</p>
+                </li>
+            </ul>
+        </dl>
+        </div>
+    <div class="o2 hide">
+    	
+    </div>
+</section>
+
+
+          
+
+
+
+<!--iscroll 滑动 结束-->
+</div>
+</div>
+</body>
+<script src="../../../style/js/jquery-2.1.4.js"></script>
+<script src="../../../style/js/jquery-weui.min.js"></script>
+<script src="../../../style/js/iscroll.js"></script>
+<script src="../../../style/js/admin.js"></script> 
+<script>
+$(document).ready(function(e) {
+ 	$('.m-recora dl .head').click(function(){
+		$(this).siblings('ul').slideToggle()	
+		$(this).toggleClass('curr')
+	});
+	/*$('.h-infornav li').click(function(){
+		var index=$(this).index();
+		$(this).addClass('curr').siblings().removeClass('curr');	
+		$('.m-infornav').find('div').eq(index).slideDown().siblings().slideUp();
+	}) */
+});
+</script>
+</html>

@@ -1,0 +1,74 @@
+package lottery
+
+import (
+	"controllers"
+	"github.com/labstack/echo"
+	"global"
+	"models/input"
+)
+
+type ShiwanController struct {
+	controllers.BaseController
+}
+
+//注册账号
+func (*ShiwanController) RegAccount(ctx echo.Context) error {
+	reqDataShiwan := new(input.ShiwanRegUser)
+	code := global.ValidRequest(reqDataShiwan, ctx)
+	if code != 0 {
+		return ctx.JSON(200, global.ReplyError(code, ctx))
+	}
+	var retryNum = 3
+	reqData := &input.RegUser{
+		SiteId:    "zzz",
+		Pwd:       "123456",
+		AgentName: "shiwan_dl",
+		IsShiwan:  2,
+		CreateIp:  reqDataShiwan.CreateIp,
+		Money:     2000,
+	}
+REG:
+	for {
+		reqData.Uname = global.GetRandomString(12);
+		//会员是否存在
+		exist, _, err := userBean.IsExist(reqData.SiteId, reqData.Uname)
+		if err != nil {
+			global.GlobalLogger.Error("error:%s", err.Error())
+			return ctx.JSON(500, global.ReplyError(60000, ctx))
+		}
+		if !exist {
+			break
+		}
+	}
+	// TODO 查询代理
+	agent, err := agentBean.GetAgentByAccount("zzz", "shiwan_dl")
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 查询总代
+	ua, err := uaBean.GetUaById("zzz", agent.Pid)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 注册
+	reqData.Currency = "CNY"
+	_, err = userBean.Reg(reqData, agent, ua)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		if retryNum > 0 {
+			retryNum--
+			goto REG
+		}
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 查询游戏链接
+	url, err := lineBean.GetUrl(reqData.SiteId)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+
+	return ctx.JSON(global.ReplyItem(200, url))
+}

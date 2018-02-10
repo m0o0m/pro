@@ -1,0 +1,398 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#NationDay{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 1000px;
+    height: 700px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 15001;
+
+
+}
+
+
+#content_bg_NationDay{
+
+    width:100%;
+    height: 1000px;
+    position: absolute;
+    opacity: 0.7;
+    background-color: black;
+    background-size:100%;
+    z-index: 15000;
+    top:0px;
+    left:0px;
+}
+
+#content_close_NationDay{
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    z-index:15002;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    top: 10px;
+    left: 10px;
+    color:black;
+    background-color: white;
+    border:1px solid white;
+    border-radius:50% ;
+}
+
+#NationDay .NationDay_content{
+    margin: 0 auto;
+    width: 1000px;
+    height: 700px;
+}
+
+
+
+
+.section_top_dice img{
+    position: absolute;
+    top: 65px;
+    width: 40px;
+    display: inline-block;
+
+}
+
+
+
+.section_top_dice img:first-child{
+    right:220px;
+
+    -webkit-animation:RightToLeft 6s  linear;
+
+    animation:RightToLeft 6s  linear;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+
+
+.section_top_dice img:nth-child(2){
+    left:220px;
+
+    -webkit-animation:LeftToRight 6s 300ms linear;
+
+    animation:LeftToRight 6s 300ms linear;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+
+.section_top_dice img:nth-child(3){
+    right:220px;
+    -webkit-animation:RightToMiddle  2s 500ms  linear;
+    animation:RightToMiddle  2s 500ms  linear;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+.section_top_dice img:nth-child(4){
+    left:220px;
+    -webkit-animation:LeftToRight  6s 600ms  linear;
+    animation:LeftToRight  6s 600ms  linear;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+.section_top_dice img:nth-child(5){
+    right:220px;
+    -webkit-animation:RightToLeft  6s 800ms  linear;
+    animation:RightToLeft  6s 800ms  linear;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+
+@-webkit-keyframes RightToMiddle {
+    0%{
+        right:220px;
+        opacity: 1;
+
+    }
+
+    65%{
+        right:470px;
+        top: 65px;
+        opacity: 1;
+    }
+
+    85%{
+        right:470px;
+        top: 80px;
+        opacity: 0;
+    }
+
+
+    100%{
+        right:470px;
+        top: 18%;
+        opacity: 0;
+    }
+
+
+}
+
+@keyframes RightToMiddle {
+    0%{
+        right:220px;
+        opacity: 1;
+
+    }
+
+    65%{
+        right:470px;
+        top: 65px;
+        opacity: 1;
+    }
+
+    85%{
+        right:470px;
+        top: 80px;
+        opacity: 0;
+    }
+
+
+    100%{
+        right:470px;
+        top: 18%;
+        opacity: 0;
+    }
+
+
+}
+
+
+@-webkit-keyframes RightToLeft {
+    0%{
+        right:220px;
+
+    }
+
+    50%{
+        right:730px;
+    }
+
+    100%{
+        right:220px
+    }
+
+}
+
+
+@keyframes RightToLeft {
+    0%{
+        right:220px;
+
+    }
+
+    50%{
+        right:730px;
+    }
+
+    100%{
+        right:220px
+    }
+
+}
+
+
+@-webkit-keyframes LeftToRight {
+    0%{
+        left:220px;
+
+    }
+
+    50%{
+        left:730px;
+    }
+
+    100%{
+        left:220px
+    }
+
+}
+
+
+@keyframes LeftToRight {
+    0%{
+        left:220px;
+
+    }
+
+    50%{
+        left:730px;
+    }
+
+    100%{
+        left:220px
+    }
+
+}
+
+
+
+
+/*画面中部*/
+#NationDay .section_middle{
+    /*background-color: grey;*/
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+    top: 50px;
+}
+
+#Nation_canvas{
+    margin: 0 auto;
+    display: block;
+}
+
+
+
+
+/*画面底部*/
+
+#NationDay .section_bottom{
+    position: absolute;
+    padding-left: 3%;
+    left: 11%;
+    bottom: -10%;
+    width: 80%;
+    height: 200px;
+
+}
+
+.section_bottom ul{
+    list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+
+}
+
+.section_bottom ul li{
+    display: inline-block;
+    width: 100px;
+    position: relative;
+    bottom: -130px;
+    -webkit-animation:BottomToTop 1s ease-in-out ;
+    animation:BottomToTop 1s ease-in-out ;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+
+.section_bottom ul li:nth-child(1){
+
+
+}
+
+.section_bottom ul li:nth-child(2){
+
+    -webkit-animation-delay: 1s;
+
+    animation-delay: 1s;
+}
+
+.section_bottom ul li:nth-child(3){
+
+    -webkit-animation-delay: 2s;
+
+    animation-delay: 2s;
+}
+
+.section_bottom ul li:nth-child(4){
+
+    -webkit-animation-delay: 3s;
+
+    animation-delay: 3s;
+}
+
+.section_bottom ul li:nth-child(5){
+    -webkit-animation-delay: 4s;
+    animation-delay: 4s;
+
+}
+
+
+
+.section_bottom ul li img{
+    width: 60px;
+
+}
+
+
+.section_bottom ul li img:first-child{
+    position: relative;
+    top: 21px;
+    z-index: 10;
+
+
+}
+
+.section_bottom ul li img:last-child{
+    position: relative;
+    z-index: 1;
+    height:50%;
+
+}
+
+.section_bottom ul li:nth-child(3) img{
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.section_bottom ul li:nth-child(3) img:first-child{
+    position: relative;
+    top: 5px;
+    z-index: 10;
+
+
+}
+
+
+.section_bottom ul li:nth-child(3) img:last-child{
+    position: relative;
+    z-index: 1;
+}
+
+
+@-webkit-keyframes BottomToTop {
+    0%{
+        bottom: -130px;
+    }
+
+    100%{
+        bottom:0;
+
+    }
+
+}
+
+
+@keyframes BottomToTop {
+    0%{
+        bottom: -130px;
+    }
+
+    100%{
+        bottom:0;
+
+    }
+
+}

@@ -1,0 +1,285 @@
+package lottery
+
+import (
+	"github.com/labstack/echo"
+	"controllers"
+	"models/input"
+	"global"
+	"encoding/json"
+	"framework/uuid"
+	"fmt"
+	"models/back"
+	"github.com/zengnotes/utility"
+	"time"
+)
+
+type AccountController struct {
+	controllers.BaseController
+}
+
+//注册账号
+func (*AccountController) RegAccount(ctx echo.Context) error {
+	reqData := new(input.RegUser)
+	code := global.ValidRequest(reqData, ctx)
+	if code != 0 {
+		return ctx.JSON(200, global.ReplyError(code, ctx))
+	}
+	// TODO 会员是否存在
+	exist, _, err := userBean.IsExist(reqData.SiteId, reqData.Uname)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if exist {
+		return ctx.JSON(200, global.ReplyError(10011, ctx))
+	}
+	// TODO 查询代理
+	agent, err := agentBean.GetAgentByAccount(reqData.SiteId, reqData.AgentName)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 查询总代
+	ua, err := uaBean.GetUaById(reqData.SiteId, agent.Pid)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 注册
+	//reqData.CreateIp = ctx.RealIP()
+	reqData.Currency = "CNY"
+	reqData.IsShiwan = 1
+	user, err := userBean.Reg(reqData, agent, ua)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 获取游戏链接
+	url, err := lineBean.GetUrl(reqData.SiteId)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 生成token并存入
+	data := new(global.UserRedisToken)
+	data.Line_id = user.LineId
+	data.Uid = user.Uid
+	data.Uname = user.Uname
+	data.Agent_name = reqData.AgentName
+	data.Agent_id = user.AgentId
+	data.Ua_id = user.UaId
+	data.Sh_id = user.ShId
+	data.Is_shiwan = user.IsShiWan
+	data.Ip = reqData.CreateIp
+	token := global.Md5(uuid.NewV4().String())
+	err = memberRedisSet(token, data)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	return ctx.JSON(global.ReplyItem(200, url + "?token=" + token))
+}
+
+//登陆 获取游戏链接
+func (*AccountController) Login(ctx echo.Context) error {
+	reqData := new(input.AttemptLogin)
+	code := global.ValidRequest(reqData, ctx)
+	if code != 0 {
+		return ctx.JSON(200, global.ReplyError(code, ctx))
+	}
+	// TODO 登陆验证
+	//reqData.Pwd = global.Md5(global.Md5(reqData.Pwd)) md5后的密码
+	isLogin, user, err := userBean.Login(reqData.SiteId, reqData.Uname, reqData.Pwd)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if !isLogin {
+		return ctx.JSON(200, global.ReplyError(10005, ctx))
+	}
+	// TODO 获取游戏链接
+	url, err := lineBean.GetUrl(reqData.SiteId)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 生成token并存入
+	data := new(global.UserRedisToken)
+	data.Line_id = user.LineId
+	data.Uid = user.Uid
+	data.Uname = user.Uname
+	data.Agent_name = reqData.AgentName
+	data.Agent_id = user.AgentId
+	data.Ua_id = user.UaId
+	data.Sh_id = user.ShId
+	data.Is_shiwan = user.IsShiWan
+	data.Ip = reqData.CreateIp
+	token := global.Md5(uuid.NewV4().String())
+	err = memberRedisSet(token, data)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if len(reqData.GameId) != 0{
+		return ctx.JSON(global.ReplyItem(200, url + "?token=" + token+"&fc_type="+reqData.GameId))
+	}else{
+		return ctx.JSON(global.ReplyItem(200, url + "?token=" + token))
+	}
+}
+
+//余额获取
+func (*AccountController) GetBalance(ctx echo.Context) error {
+	reqData := new(input.ReqBalance)
+	code := global.ValidRequest(reqData, ctx)
+	if code != 0 {
+		return ctx.JSON(200, global.ReplyError(code, ctx))
+	}
+	// TODO 登陆验证
+	isLogin, _, err := userBean.Login(reqData.SiteId, reqData.Uname, reqData.Pwd)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if !isLogin {
+		return ctx.JSON(200, global.ReplyError(10005, ctx))
+	}
+	// TODO 获取余额
+	money, err := userBean.GetBalance(reqData.SiteId, reqData.Uname ,reqData.Pwd)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	return ctx.JSON(global.ReplyItem(200, money))
+}
+
+//修改密码
+func (*AccountController) UpdatePassword(ctx echo.Context) error {
+	reqData := new(input.UpdatePwd)
+	code := global.ValidRequest(reqData, ctx)
+	if code != 0 {
+		return ctx.JSON(200, global.ReplyError(code, ctx))
+	}
+	//reqData.OldPwd = global.Md5(global.Md5(reqData.OldPwd))
+	//reqData.Pwd = global.Md5(global.Md5(reqData.Pwd))
+	num, err := userBean.UpdatePwd(reqData.SiteId, reqData.Uname, reqData.Pwd, reqData.NewPwd)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if num == 0 {
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	return ctx.JSON(global.ReplyItem(200, nil))
+}
+
+//额度转换
+func (*AccountController) TransferCredit(ctx echo.Context) error {
+	reqData := new(input.Translation)
+	code := global.ValidRequest(reqData, ctx)
+	if code != 0 {
+		return ctx.JSON(200, global.ReplyError(code, ctx))
+	}
+
+	// TODO 开启事物
+	sess := global.NewManagementSession()
+	err := sess.Begin()
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	defer sess.Close()
+	// TODO 会员是否存在
+	exist, user, err := userBean.IsExist(reqData.SiteId, reqData.Uname)
+	if err != nil {
+		sess.Rollback()
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if !exist {
+		sess.Rollback()
+		return ctx.JSON(200, global.ReplyError(10009, ctx))
+	}
+	// TODO 查询代理信息
+	agent, err := agentBean.GetAgentById(reqData.SiteId, user.AgentId)
+	if err != nil {
+		sess.Rollback()
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	curTime := global.GetCurrentTime()
+	todayTime := global.GetTodayStart()
+	user.Updatetime = curTime
+	// TODO 会员余额更改(update)
+	num, err := userBean.UpdateMoney(user, reqData.Money, reqData.CType,reqData.Pwd, sess)
+	if err != nil {
+		sess.Rollback()
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if num == 0 {
+		sess.Rollback()
+		return ctx.JSON(500, global.ReplyError(10020, ctx))
+	}
+	agent.Updatetime = curTime
+	// TODO 代理余额修改
+	num, err = agentBean.UpdateMoney(agent, reqData.Money, reqData.CType, sess)
+	if err != nil {
+		sess.Rollback()
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(10019, ctx))
+	}
+	if num == 0 {
+		sess.Rollback()
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	data := new(back.Balance)
+	data.Money = user.Money
+	data.Ordernum = utility.Md5(fmt.Sprintf("%s-%d",user.Uname,time.Now().UnixNano()))
+	// TODO 添加会员现金记录
+	num, err = userCashRecordBean.InsertRecord(reqData, curTime, todayTime ,data.Ordernum, user, sess)
+	if err != nil {
+		sess.Rollback()
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if num == 0 {
+		sess.Rollback()
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	// TODO 添加代理现金记录
+	num, err = agentCashRecordBean.InsertRecord(reqData, curTime, todayTime, agent, sess)
+	if err != nil {
+		sess.Rollback()
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	if num == 0 {
+		sess.Rollback()
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	err = sess.Commit()
+	if err != nil {
+		sess.Rollback()
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	return ctx.JSON(global.ReplyItem(200, data))
+}
+
+//redis 存储
+// deprecated
+func memberRedisSet(token string, userRedisToken *global.UserRedisToken) (err error) {
+	b, err := json.Marshal(userRedisToken)
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return err
+	}
+	global.GlobalLogger.Info("过期时间:%s", global.RedisExpTime)
+	global.GlobalLogger.Info("存入token值：%s", userRedisToken)
+	//存储新token
+	err = global.RedisClient.Set(token, string(b), global.RedisExpTime).Err()
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+	}
+	return err
+}

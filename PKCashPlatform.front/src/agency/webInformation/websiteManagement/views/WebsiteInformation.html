@@ -1,0 +1,293 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <form class="form-horizontal ng-pristine ng-valid ">
+                <article class="col-md-6 col-xs-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('WebsiteInformation')}}-PC</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div role="content">
+                                    <div class="widget-body">
+                                        <div class="row">
+                                            <div class="col-md-12 smart-form">
+                                                <fieldset>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">会员中心颜色：</label>
+                                                        <div class="col-md-6">
+                                                            <select data-smart-select2 style="width:100%" class="select2" ng-model="information.member_color">
+                                                                <option value="">请选择</option>
+                                                                <option value={{item.id}} ng-repeat="item in colorDrop">{{item.color}}</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    </section>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">全屏动画：</label>
+                                                        <div class="col-md-9">
+                                                            <div class="col-md-12 martop">
+                                                                <div class="inline-group">
+                                                                    <label class="radio padd-top">
+                                                                        <input type="radio" name="radio-inline" value="1" ng-model="information.screen_animation_id" ng-checked="information.screen_animation_id===1">
+                                                                        <i></i>开启</label>
+                                                                    <label class="radio padd-top">
+                                                                        <input type="radio" name="radio-inline" value="2" ng-model="information.screen_animation_id" ng-checked="information.screen_animation_id===2">
+                                                                        <i></i>关闭</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+
+                                                    <section>
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">网站名称：</label>
+                                                            <div class="col-md-6">
+                                                                <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                    <input type="text" placeholder="网站1" ng-model="information.web_name">
+                                                                    <b class="tooltip tooltip-top-right">
+                                                                        <i class="fa fa-warning txt-color-teal lable-color"></i>*必填</b>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </section>
+
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">keywords：</label>
+                                                        <div class="col-md-6">
+                                                            <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                <input type="text" placeholder="keywords" ng-model="information.keywords">
+                                                                <b class="tooltip tooltip-top-right">
+                                                                    <i class="fa fa-warning txt-color-teal lable-color"></i>*站点关键词</b>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">description：</label>
+                                                        <div class="col-md-6">
+                                                            <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                <input type="text" placeholder="description" ng-model="information.description">
+                                                                <b class="tooltip tooltip-top-right">
+                                                                    <i class="fa fa-warning txt-color-teal lable-color"></i>*站点说明</b>
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">版权信息：</label>
+                                                        <div class="col-md-6">
+                                                            <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                <input type="text" placeholder="版权信息" ng-model="information.copyright">
+                                                                <b class="tooltip tooltip-top-right">
+                                                                    <i class="fa fa-warning txt-color-teal lable-color"></i>*必填</b>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">客服QQ：</label>
+                                                        <div class="col-md-6">
+                                                            <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                <input type="text" placeholder="客服QQ" ng-model="information.qq">
+                                                                <b class="tooltip tooltip-top-right">
+                                                                    <i class="fa fa-warning txt-color-teal lable-color"></i>*多个QQ中间用","隔开</b>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Email：</label>
+                                                        <div class="col-md-6">
+                                                            <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                <input type="text" placeholder="Email" ng-model="information.email" >
+                                                                <b class="tooltip tooltip-top-right">
+                                                                    <i class="fa fa-warning txt-color-teal lable-color"></i>*多个邮箱中间用","隔开</b>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">客服热线：</label>
+                                                        <div class="col-md-6">
+                                                            <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                <input type="text" placeholder="客服热线" ng-model="information.phone">
+                                                                <b class="tooltip tooltip-top-right">
+                                                                    <i class="fa fa-warning txt-color-teal lable-color"></i>*多个电话中间用","隔开</b>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                    <section>
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">易记域名：</label>
+                                                            <div class="col-md-6">
+                                                                <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                    <input type="text" placeholder="易记域名" ng-model="information.domain">
+                                                                    <b class="tooltip tooltip-top-right">
+                                                                        <i class="fa fa-warning txt-color-teal lable-color"></i>*请填写域名</b>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section>
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">在线客服：</label>
+                                                            <div class="col-md-6">
+                                                                <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                    <input type="text" placeholder="在线客服" ng-model="information.onlineService">
+                                                                    <b class="tooltip tooltip-top-right">
+                                                                        <i class="fa fa-warning txt-color-teal lable-color"></i>*请填写客服电话</b>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="col-md-6 col-xs-12">
+                    <div jarvis-widget id="standard-datatable-widgets" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('WebsiteInformation')}}-WAP</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div role="content">
+                                    <div class="widget-body">
+                                        <div class="row">
+                                            <div class="col-md-12 smart-form">
+                                                <fieldset>
+                                                    <section>
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">wap顶部颜色：</label>
+                                                            <div class="col-md-6">
+                                                                <label class="input">
+                                                                    <input class="form-control" data-smart-colorpicker type="text"  ng-model="information.top_color">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section>
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">APP下载链接：</label>
+                                                            <div class="col-md-6">
+                                                                <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                    <input type="text" placeholder="APP下载链接"  ng-model="information.appLink">
+                                                                    <b class="tooltip tooltip-top-right">
+                                                                        <i class="fa fa-warning txt-color-teal lable-color"></i>*必填</b>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section>
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">wap快捷支付：</label>
+                                                            <div class="col-md-9">
+                                                                <div class="col-md-12 martop">
+                                                                    <div class="inline-group">
+                                                                        <label class="radio padd-top">
+                                                                            <input type="radio" name="radio-inlines" value="1"  ng-model="information.quickpayment" ng-checked="information.quickpayment===1">
+                                                                            <i></i>开启</label>
+                                                                        <label class="radio padd-top">
+                                                                            <input type="radio" name="radio-inlines" value="2"  ng-model="information.quickpayment" ng-checked="information.quickpayment===2">
+                                                                            <i></i>关闭</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section>
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">wap域名：</label>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label">
+                                                                    <a ng-href="{{information.wap_domain}}" target="_blank" class=" lable-color">{{information.wap_domain}}</a>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section>
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">wap底部文案：</label>
+                                                            <div class="col-md-6">
+                                                                <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                    <input type="text" placeholder="wap底部文案" ng-model="information.copyname">
+                                                                    <b class="tooltip tooltip-top-right">
+                                                                        <i class="fa fa-warning txt-color-teal lable-color"></i>*请填写wap底部文案</b>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">wap底部按钮名称：</label>
+                                                        <div class="col-md-6">
+                                                            <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                <input type="text" placeholder="wap底部按钮名称"  ng-model="information.button_name">
+                                                                <b class="tooltip tooltip-top-right">
+                                                                    <i class="fa fa-warning txt-color-teal lable-color"></i>*为空默认不显示</b>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                    <section>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">wap底部按钮链接：</label>
+                                                        <div class="col-md-6">
+                                                            <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                                                <input type="text" placeholder="wap底部按钮链接"  ng-model="information.bottom_link">
+                                                                <b class="tooltip tooltip-top-right">
+                                                                    <i class="fa fa-warning txt-color-teal lable-color"></i>*必须包含http://或https://</b>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </section>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <footer>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 text-align-center btn-bgcolor-fff">
+                            <button type="submit" class="btn btn-primary" ng-click="modify()">
+                                确定提交
+                            </button>
+                        </div>
+                    </div>
+                </footer>
+            </form>
+        </div>
+    </section>
+
+</div>
+

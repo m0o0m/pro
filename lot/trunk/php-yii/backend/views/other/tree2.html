@@ -1,0 +1,218 @@
+<style>
+
+    #accessTree .ace-icon {
+        color: #F9E8CE;
+        width: 13px;
+        height: 13px;
+        line-height: 13px;
+        font-size: 11px;
+        text-align: center;
+        border-radius: 3px;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        background-color: #FAFAFA;
+        border: 1px solid #CCC;
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    }
+
+    #accessTree .fa-check{
+        background-color: #F9A021;
+        border-color: #F9A021;
+        color: #FFF;
+    }
+
+</style>
+<!--<div class="col-sm-6">
+    <div class="widget-box widget-color-blue2">
+        <div class="widget-header">
+            <h4 class="widget-title lighter smaller">Choose Categories</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main padding-8">
+                <ul id='accessTree'  class="tree tree-unselectable" >
+                    <li class="tree-branch tree-open" >	
+                        <div class="tree-branch-header">	
+                            <span class="tree-branch-name ">	
+                                <i class="ace-icon icon-item fa-times"></i>
+                                <span class="tree-label">菜单管理</span>	
+                            </span>			
+                        </div>		
+                        <ul class="tree-branch-children" >
+                            <li class="tree-item " role="treeitem">
+                                <span class="tree-item-name">		
+                                    <i class="icon-item ace-icon fa-check"></i>
+                                    <span class="tree-label">菜单列表</span>
+                                </span>			
+                            </li>
+                            <li class="tree-item " role="treeitem">
+                                <span class="tree-item-name">		
+                                    <i class="icon-item ace-icon "></i>
+                                    <span class="tree-label">菜单新增</span>
+                                </span>			
+                            </li>
+                        </ul>	
+                    </li>
+                    <li class="tree-branch tree-open" >
+                        <div class="tree-branch-header">
+                            <span class="tree-branch-name">	
+                                <i class="icon-item ace-icon "></i>	
+                                <span class="tree-label">用户管理</span>		
+                            </span>			
+                        </div>			
+                        <ul class="tree-branch-children" >
+                            <li class="tree-branch tree-open" >
+                                <div class="tree-branch-header">	
+                                    <span class="tree-branch-name">	
+                                        <i class="icon-item ace-icon "></i>	
+                                        <span class="tree-label">管理员列表</span>	
+                                    </span>				
+                                </div>			
+                                <ul class="tree-branch-children" >
+                                    <li class="tree-item " >
+                                        <span class="tree-item-name">		
+                                            <i class="icon-item ace-icon fa-check"></i>	
+                                            <span class="tree-label">管理员新增</span>	
+                                        </span>			
+                                    </li>
+                                </ul>	
+                            </li>
+                            <li class="tree-item " >
+                                <span class="tree-item-name">		
+                                    <i class="icon-item ace-icon fa fa-check"></i>
+                                    <span class="tree-label">角色列表</span>
+                                </span>			
+                            </li>
+                        </ul>	
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="col-sm-6">
+    <div class="widget-box widget-color-blue2">
+        <div class="widget-header">
+            <h4 class="widget-title lighter smaller">Choose Categories</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main padding-8">
+                <ul id='accessTree'  class="tree tree-unselectable" >
+                    <{foreach from=$oneLevel item=v key=k}>
+                    <li class="tree-branch tree-open oneLi" >
+                        <div class="tree-branch-header">
+                            <span class="tree-branch-name oneLevel" key='<{$v["id"]}>'>	
+                                <i class="icon-item ace-icon fa-times"></i>	
+                                <span class="tree-label"><{$v['menu_name']}>(<{$v['menu']}>)</span>		
+                            </span>			
+                        </div>			
+                        <ul class="tree-branch-children" >
+                            <{foreach from=$twoLevel item=tv key=tk}>
+                            <{if $tv['pid'] eq $v['id']}>
+                            <li class="tree-branch tree-open twoLi" >
+                                <div class="tree-branch-header">	
+                                    <span class="tree-branch-name twoLevel" key='<{$tv["id"]}>'>	
+                                        <i class="icon-item ace-icon fa-times"></i>	
+                                        <span class="tree-label"><{$tv['menu_name']}>(<{$tv['menu']}>)</span>	
+                                    </span>				
+                                </div>			
+                                <ul class="tree-branch-children" >
+                                    <{foreach from=$threeLevel item=thv key=thk}>
+                                    <{if $thv['pid'] eq $tv['id']}>
+                                    <li class="tree-item threeLi" >
+                                        <span class="tree-item-name threeLevel" key='<{$tv["id"]}>'>		
+                                            <i class="icon-item ace-icon fa-times"></i>	
+                                            <span class="tree-label"><{$thv['menu_name']}>(<{$thv['menu']}>)</span>	
+                                        </span>			
+                                    </li>
+                                    <{/if}>
+                                    <{/foreach}>
+                                </ul>	
+                            </li>
+                            <{/if}>
+                            <{/foreach}>
+                        </ul>	
+                    </li>
+                    <{/foreach}>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //一级菜单点击事件
+    $('span.oneLevel').click(function () {
+        var obj = $(this).find('.icon-item');
+        var theLi = $(this).parents('li.oneLi');
+        if (obj.hasClass('fa-times')) {
+            obj.removeClass('fa-times');
+            obj.addClass('fa-check');
+            checkTwo(theLi);
+            checkThree(theLi);
+        } else {
+            obj.removeClass('fa-check');
+            obj.addClass('fa-times');
+            cancelTwo(theLi);
+            cancelThree(theLi);
+        }
+    });
+    //二级菜单点击事件
+    $('span.twoLevel').click(function () {
+        var obj = $(this).find('.icon-item');
+        var theLi = $(this).parents('li.twoLi');
+        if (obj.hasClass('fa-times')) {
+            obj.removeClass('fa-times');
+            obj.addClass('fa-check');
+            checkThree(theLi);
+        } else {
+            obj.removeClass('fa-check');
+            obj.addClass('fa-times');
+            cancelThree(theLi);
+        }
+    });
+
+    //三级菜单点击事件
+    $('span.threeLevel').click(function () {
+        var obj = $(this).find('.icon-item');
+        //var theLi = $(this).parents('li.threeLi');
+        if (obj.hasClass('fa-times')) {
+            obj.removeClass('fa-times');
+            obj.addClass('fa-check');
+        } else {
+            obj.removeClass('fa-check');
+            obj.addClass('fa-times');
+        }
+    });
+
+
+
+    //所有二级选中
+    function　checkTwo(obj) {
+        obj.find('.twoLi').find('.icon-item').removeClass('fa-times');
+        obj.find('.twoLi').find('.icon-item').addClass('fa-check');
+    }
+
+    //所有二级取消
+    function cancelTwo(obj) {
+        obj.find('.twoLi').find('.icon-item').removeClass('fa-check');
+        obj.find('.twoLi').find('.icon-item').addClass('fa-times');
+    }
+
+    //所有三级选中
+    function　checkThree(obj) {
+        obj.find('.threeLi').find('.icon-item').removeClass('fa-times');
+        obj.find('.threeLi').find('.icon-item').addClass('fa-check');
+    }
+
+    //所有三级取消
+    function cancelThree(obj) {
+        obj.find('.threeLi').find('.icon-item').removeClass('fa-check');
+        obj.find('.threeLi').find('.icon-item').addClass('fa-times');
+    }
+
+
+
+</script>

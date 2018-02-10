@@ -1,0 +1,431 @@
+{{define "memberquota"}}
+{{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/quota-conversion.css" type="text/css">
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/public.js"></script>
+<style scoped type="text/css">
+    .dialog-money dd {
+        padding: 5%
+    }
+
+    .dailog-money-amount li {
+        display: inline-block;
+        padding: 5px 10px;
+        width: 9%;
+        background-color: #f1f1f1;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    /* .flyback {
+        width: 58px;
+        height: 24px;
+        text-align: center;
+        line-height: 24px;
+        color: #fff;
+        float: right;
+        display: inline-block;
+        border-radius: 5px;
+        background-color: #f03737;
+        padding: 0 20px;
+        cursor: pointer;
+    } */
+    #dialog-money sdev a {
+        cursor: pointer;
+    }
+</style>
+<div class="quota-conversion ">
+    <div class="money-self clearfix">
+        <span class="fl realname"><i>姓名：</i></span>
+        <span class="fl account"><i>账号：</i></span>
+    </div>
+    <div class="money-video clearfix">
+        <span class="fl">账户余额：￥<i class="text-red account_balance"></i></span>
+        <span class="fl">视讯总余额：￥<i class="text-red game_balance"></i></span>
+        <button class="flyback" onclick="flyback()">一键回归</button>
+        <button class="refresh" onclick="GetInfo()">刷新</button>
+    </div>
+    <ul id="lottery-c" class="lottery-c clearfix">
+    {{/*<li class="fl">*/}}
+            {{/*<span>EG彩票：￥500.00</span>*/}}
+            {{/*<span class="money-convert-c money-into">转入</span>*/}}
+            {{/*<span class="money-convert-c money-out">转出</span>*/}}
+            {{/*<i class="iconfont icon-f14"></i>*/}}
+        {{/*</li>*/}}
+    </ul>
+    <div class="clearfix transfer-accounts-notice">
+        <p class="fl text-red">*户内转账说明：</p>
+        <div class="fl">
+            <p>1.户内最低转账金额为10元，最高转账金额不限</p>
+            <p>2.户内转账不收任何手续费</p>
+            <p>3.如果有任何疑问请咨询24小时<a href="javascript:OnlineService('{{.Header.UrlLink}}');" href="#">在线客服</a></p>
+            <p class="text-red p-font-size">*提示：系统额度可以下注EG电子，皇冠体育，彩票游戏，真人娱乐须转额度</p>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<div class="money-transfor-dialog" id="money-transfor-dialog">
+    <div class="dialog-money" id="dialog-money">
+        <p class="dialog-money-h"><span>转入</span></p>
+        <div class="money-into-c">
+            <ul class="clearfix">
+                <li class="fl">用户余额</li>
+                <li class="fl text-red">转出</li>
+                <li class="fl">账户余额</li>
+            </ul>
+            <div class="transform-money-amount">
+                <span>转入金额：</span>
+                <input type="text" id="convertMoney" placeholder="100" onkeyup="value=this.value.replace(/\D+/g,'')">
+                <span>￥</span>
+            </div>
+            <div class="dailog-money-amount">
+                <li><a onclick="setMoney(1)">1</a></li>
+                <li><a onclick="setMoney(10)">10</a></li>
+                <li><a onclick="setMoney(50)">50</a></li>
+                <li><a onclick="setMoney(100)">100</a></li>
+                <li><a onclick="setMoney(1000)">1000</a></li>
+                <li><a onclick="setMoney(0)">全部</a></li>
+            </div>
+            <div class="dialog-submit">
+                <a>提交</a>
+            </div>
+        </div>
+        <span class="iconfont icon-iconfontroundclosefill"></span>
+    </div>
+</div>
+</div>
+</body>
+<script>
+    $('.money-into').on('click', function () {
+        $('.money-transfor-dialog').show();
+    });
+    var currData;
+    var tag = false;
+
+    //刷新界面
+    function GetInfo() {
+        if (getCookie('loginBack')) {
+            var loginBack = getCookie('loginBack');
+            $.ajax({
+                type: "get",
+                url: "/balance",
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': loginBack.type
+                },
+                data: {},
+                dataType: 'json',
+                beforeSend: function () {
+                    $(this).attr({disabled: "disabled"});
+                    Loading();
+                },
+                complete: function () {
+                    $(this).removeAttr("disabled");
+                    LoadingClose();
+                },
+                success: function (data) {
+                    if (data.code) {
+                        console.log("发生错误:" + data);
+                        $.toast(data.msg, 'text');
+                    } else {
+                        console.log(data);
+                        currData = data.data;
+                        refresh()
+                    }
+                }
+            });
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            window.location.href = "/m/login"
+        }
+    }
+
+    $(window).load(function (e) { //获取会员信息
+        GetInfo()
+    });
+
+    //一键回归
+    function flyback() {
+        if (tag) {
+            return
+        }
+        tag = true;
+        if (getCookie('loginBack')) {
+            var loginBack = getCookie('loginBack');
+            $.ajax({
+                type: "post",
+                url: "/flyback",
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': loginBack.type
+                },
+                data: {},
+                dataType: 'json',
+                beforeSend: function () {
+                    $(this).attr({disabled: "disabled"});
+                    Loading();
+                },
+                complete: function () {
+                    $(this).removeAttr("disabled");
+                    LoadingClose();
+                },
+                success: function (data) {
+                    if (data.code) {
+                        console.log("发生错误:" + data);
+                        $.toast(data.msg, 'text');
+                    } else {
+                        console.log(data);
+                        currData = data.data;
+                        var successNum = currData['success_num'];
+                        var failure_num = currData['failure_num'];
+                        // alert("成功:" + Number(successNum) + "   失败:" + Number(failure_num));
+
+                        $.Pro("成功:" + Number(successNum) + "   失败:" + Number(failure_num), {
+                            Time: 2, StartOn: function () {
+                                $("html").click(function () {
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }
+                        })
+
+                        refresh()
+                    }
+                }
+            });
+        } else {
+            // $.toast("用户登录信息已失效， 请重新登录！", 'text');
+
+            $.Pro("用户登录信息已失效， 请重新登录！", {
+                Time: 2, StartOn: function () {
+                    $("html").click(function () {
+                        $(".showAlert_Pro").hide()
+                    })
+                }
+            })
+            window.location.href = "/m/login"
+        }
+        tag = false;
+    }
+
+    //type-1方式转入,2转出
+    function setMoney(money) {
+        if (money == 0) {
+            money = $("#maxMoney").text();
+        }
+        $("#convertMoney").val(money);
+    }
+
+    function ok() {
+        var platformId;
+        var platform;
+        var tType;
+        var money;
+        platformId = $("#platformId").text();
+        platform = $("#platform").text();
+        tType = $("#type").text();
+        money = $("#convertMoney").val();
+        if (money < 10) {
+            $.Pro("金额不能小于10", {
+                Time: 2, StartOn: function () {
+                    $("html").click(function () {
+                        $(".showAlert_Pro").hide()
+                    })
+                }
+            });
+            return
+        }
+
+        if (getCookie('loginBack')) {
+            $.ajax({
+                type: "post",
+                url: "/balance/conversions",
+                data: JSON.stringify({
+                    "platformId": Number(platformId),
+                    "platform": String(platform),
+                    "money": Number(money),
+                    "tType": String(tType),
+                    "media": "pc",
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                beforeSend: function () {
+                    $(this).attr({disabled: "disabled"});
+                    Loading();
+                },
+                success: function (data) {
+                    if (data && data.code) {
+                        console.log("发生错误:" + data);
+                        // alert(data.msg);
+                        $.Pro(data.msg, {
+                            Time: 2, StartOn: function () {
+                                $("html").click(function () {
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }
+                        })
+                    } else {
+                        currData = data.data;
+                        refresh();
+                        $('.money-transfor-dialog').hide();
+                    }
+                },
+                complete: function () {
+                    $(this).removeAttr("disabled");
+                    LoadingClose();
+                }
+            });
+        } else {
+            // alert("用户登录信息已失效， 请重新登录！");
+            $.Pro("用户登录信息已失效， 请重新登录！", {
+                Time: 2, StartOn: function () {
+                    $("html").click(function () {
+                        $(".showAlert_Pro").hide()
+                    })
+                }
+            })
+            window.location.href = "/m/login"
+        }
+    }
+
+    function refresh() {
+        console.log("页面数据", currData);
+        if (currData['realname'] === '') {
+            $("span.realname").text("");
+        } else {
+            $("span.realname").text(currData['realname']);
+        }
+        $("span.account").text(currData['account']);
+        $("i.account_balance").text(currData['accountBalance']);
+        $("i.game_balance").text(currData['gameBalance']);
+        var str = "";
+        $.each(currData['productClassifyBalance'], function (key, val) {
+            var inBtnId = "in" + val.platform + "-" + key;
+            var outBtnId = "out" + val.platform + "-" + key;
+            str += "<li class=\"fl\">";
+            str += "<span>" + val.platform.toUpperCase() + " 平台:</span>";
+            str += "<span>￥" + val.balance + "</span>";
+            str += "<p id =\"" + inBtnId + "\" class=\"money-convert-c money-into\">转入</p>";
+            str += "<p id =\"" + outBtnId + "\" class=\"money-convert-c money-out\">转出</p>";
+            str += "</li>";
+        });
+        $("#lottery-c").html(str);
+        $("#lottery-c li").on("click", "p", function () {
+            var index = $(this).attr("id").substring($(this).attr("id").indexOf("-") + 1);
+            var platform = currData['productClassifyBalance'][index].platform.toUpperCase();
+            var platformId = currData['productClassifyBalance'][index].platform_id;
+            var balance = currData['productClassifyBalance'][index].balance;
+            var popStr = "";
+
+            if (Number($(this).attr("id").indexOf("in")) == 0) {
+                //转入
+                popStr += "<p class=\"dialog-money-h\"><span>转入</span></p>";
+                popStr += "<div class=\"money-into-c\">";
+                popStr += "<ul class=\"clearfix\">";
+                popStr += "<li class=\"fl\">账户余额</li>";
+                popStr += "<li class=\"fl text-red\">>———————></li>";
+                popStr += "<li class=\"fl\">" + platform + "</li>";
+                popStr += "<label id=\"type\" style=\"display: none\">in</label>";
+                popStr += "<label id=\"maxMoney\" style=\"display: none\">" + currData['accountBalance'] + "</label>";
+
+            } else {
+                //转出
+                popStr += "<p class=\"dialog-money-h\"><span>转出</span></p>";
+                popStr += "<div class=\"money-into-c\">";
+                popStr += "<ul class=\"clearfix\">";
+                popStr += "<li class=\"fl\">" + platform + "</li>";
+                popStr += "<li class=\"fl text-red\"><———————<</li>";
+                popStr += "<li class=\"fl\">账户余额</li>";
+                popStr += "<label id=\"type\" style=\"display: none\">out</label>";
+                popStr += "<label id=\"maxMoney\" style=\"display: none\">" + balance + "</label>";
+            }
+            popStr += "<label id=\"platformId\" style=\"display: none\">" + platformId + "</label>";
+            popStr += "<label id=\"platform\" style=\"display: none\">" + platform + "</label>";
+            popStr += "</ul>";
+            popStr += "<div class=\"transform-money-amount\">";
+            popStr += "<span>金额：</span>";
+            popStr += "<input type=\"text\" id=\"convertMoney\" placeholder=\"100\" onkeyup=\"value=this.value.replace(/\\D+/g,'')\">";
+            popStr += "<span>￥</span>";
+            popStr += "</div>";
+            popStr += "<ul class=\"dailog-money-amount clearfix\">";
+            popStr += "<li onclick=\"setMoney(10)\">10</li>";
+            popStr += "<li onclick=\"setMoney(20)\">20</li>";
+            popStr += "<li onclick=\"setMoney(50)\">50</li>";
+            popStr += "<li onclick=\"setMoney(100)\">100</li>";
+            popStr += "<li onclick=\"setMoney(1000)\">1000</li>";
+            popStr += "<li onclick=\"setMoney(0)\">全部</li>";
+            popStr += "</ul>";
+            popStr += "<div class=\"dialog-submit\">";
+            popStr += "<a onclick=\"ok()\" style='cursor: pointer'>提交</a>";
+            popStr += "</div>";
+            popStr += "</div>";
+            popStr += "<span class=\"iconfont icon-iconfontroundclosefill\"></span>";
+            $("#dialog-money").html(popStr);
+
+            $('.money-transfor-dialog .icon-iconfontroundclosefill').on('click', function () {
+                $('.money-transfor-dialog').hide();
+            });
+            $('.money-transfor-dialog').fadeToggle();
+            $('.pop').fadeToggle();
+
+        });
+    }
+
+    function cancel() {
+        $('.big-shade-all').fadeToggle();
+        $('.pop').fadeToggle();
+    }
+
+    $(".money-video").on("mousedown", "button", function (e) {
+        if ((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)) {
+            $(this).addClass("buttonshadowR")
+        }
+    })
+    $(".money-video").on("mouseup", "button", function (e) {
+        $(this).removeClass("buttonshadowR")
+    })
+
+    $("#lottery-c").on("mousedown", ".money-into", function (e) {
+        if ((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)) {
+            $(this).addClass("buttonshadowY")
+        }
+    })
+
+    $("#lottery-c").on("mouseup", ".money-into", function (e) {
+        $(this).removeClass("buttonshadowY")
+    })
+
+    $("#lottery-c").on("mousedown", ".money-out", function (e) {
+        if ((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)) {
+            $(this).addClass("buttonshadowB")
+        }
+    })
+
+    $("#lottery-c").on("mouseup", ".money-out", function (e) {
+        $(this).removeClass("buttonshadowB")
+    })
+
+    $('#dialog-money').on("mousedown", ".dailog-money-amount li", function (e) {
+        if ((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)) {
+            $(this).addClass("buttonshadowGray")
+        }
+    })
+    $('#dialog-money').on("mouseup", ".dailog-money-amount li", function (e) {
+        $(this).removeClass("buttonshadowGray")
+    })
+
+    $('#dialog-money').on("mousedown", ".dialog-submit", function (e) {
+        if ((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)) {
+            $(this).addClass("buttonshadowR")
+        }
+    })
+    $('#dialog-money').on("mouseup", ".dialog-submit", function (e) {
+        $(this).removeClass("buttonshadowR")
+    })
+
+</script>
+</html>
+{{end}}

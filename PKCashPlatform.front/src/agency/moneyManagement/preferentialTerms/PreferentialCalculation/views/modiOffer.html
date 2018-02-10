@@ -1,0 +1,117 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('SetPreferential')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="form-group">
+                                                                <!--<div class="form-group">-->
+                                                                <select data-smart-select2  ng-model="data.site_index_id" class="selectWidth">
+                                                                    <option value="">请选择</option>
+                                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                                </select>
+                                                                <!--</div>-->
+                                                            </div>
+                                                        </div>
+                                                        <lable class="col-md-4 col-md-offset-0 col-xs-12  input-label" style="color: red">【如不开启层级返点优惠分区，选择默认选择】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-1 col-xs-4 input-label">层级选择:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="form-group">
+                                                                <select data-smart-select2  ng-model="data.level_id" class="selectWidth">
+                                                                    <option value="">请选择</option>
+                                                                    <option value="{{item.level_id}}" ng-repeat="item in drp">{{item.level_id}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-1 col-xs-4 input-label">总消费</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="form-group">
+                                                                <input class="form-control " type="text" ng-model="data.valid_money">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-1 col-xs-4 input-label">优惠上限</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="form-group">
+                                                                <input class="form-control " type="text" ng-model="data.discount_up">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div>
+                                                        <label class="col-md-1 col-xs-4 input-label">商品</label>
+                                                        <div class="widget-body no-padding form-group col-md-6  inline-group">
+                                                            <div class="panel-group smart-accordion-default" id="accordion-2" style="margin-left: 10px; margin-top: 10px;">
+                                                                <div class="panel panel-default">
+                                                            <div class="panel-heading ">
+                                                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-1" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i>点击展开</a></h4>
+                                                            </div>
+                                                            <div id="collapseTwo-1" class="panel-collapse collapse ">
+                                                                <div class="panel-body inline-group col-md-12">
+                                                                    <div class="col-md-4 control-label col-xs-6 pull-left" ng-repeat="item in commodity" >
+                                                                        <div class="form-group input-group" style="margin-left: 8px;">
+                                                                            <input type="checkbox"  class="test"  name="test" ng-click="ckecked($event)" value={{item.id}} ng-checked="isSelected(item.id)">
+                                                                            <span style="margin-left: 5px"  >{{item.platform}}</span>
+                                                                            <div class="inputsese pull-right">
+                                                                                <input type="text" style="width: 65px; height: 19px"   class="inputse" value="{{item.proportion}}">
+                                                                                <span style="margin-left: 8px;">%</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6 text-align-center">
+                                                        <button class="btn btn-primary"  type="submit" ng-click="edit()">
+                                                            {{lang['Confirm submission']}}
+                                                        </button>
+
+                                                        <button class="btn btn-primary"  type="submit" onclick="window.history.back();" >
+                                                            返回
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

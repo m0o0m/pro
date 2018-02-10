@@ -1,0 +1,104 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken"
+                     data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>报表统计</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead style="text-align: center">
+                                            <tr>
+                                                <th class="text-align-center"></th>
+                                                <th class="text-align-center"></th>
+                                                <th class="text-align-center">站点</th>
+                                                <th class="text-align-center" ng-repeat="item in data.project track by $index">{{item}}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody ng-repeat="item in data.list" class="text-align-center">
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="bb">
+                                                    </td>
+                                                    <td ng-click="open($event)">&gt;</td>
+                                                    <td>{{item.site}}</td>
+                                                    <td ng-repeat="item1 in item.value track by $index">{{item1}}</td>
+                                                </tr>
+                                                <tr class="tr-excel">
+                                                    <td colspan="{{data.project.length+3}}">
+                                                        <table class="table table-bordered" style="display: none;">
+                                                            <thead>
+                                                                <tr class="text-align-center">
+                                                                    <td style="vertical-align:middle;" rowspan="2">网站</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">項目</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">金額</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">上月负数	</td>
+                                                                    <td style="vertical-align:middle;" rowspan="1">條件</td>
+                                                                    <td style="vertical-align:middle;" rowspan="1">负数额度</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">應收</td>
+                                                                    <td style="vertical-align:middle;" rowspan="1">应加应扣</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">备注</td>
+                                                                </tr>
+                                                                <tr class="text-align-center">
+                                                                    <td rowspan="1">比例</td>
+                                                                    <td rowspan="1">本月应加</td>
+                                                                    <td rowspan="1">视讯额度</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="item2 in item.excel.list">
+                                                                    <td style="vertical-align:middle;text-align: center" rowspan="{{item.excel.list.length}}" ng-if="$index==0">{{item.excel.packageName}}</td>
+                                                                    <td>{{item2.projectName}}</td>
+                                                                    <td>{{item2.amount}}</td>
+                                                                    <td>{{item2.lastMonth}}</td>
+                                                                    <td>{{item2.condition}}</td>
+                                                                    <td>{{item2.negativeAmount}}</td>
+                                                                    <td>{{item2.receivable}}</td>
+                                                                    <td>{{item2.video}}</td>
+                                                                    <td>{{item2.remark}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="9" style="background: yellow">
+                                                                        <p>注：1.客户接到财务对账单，三天内如有数据疑问请联系财务专员，财务专员SKYPE:pk.finance</p>
+                                                                        <p>    2.如无疑问，汇款前请找财务专员索取最新汇款账号，感谢您们的支持，PK娱乐平台团队致敬！</p>
+                                                                        <p>    3.汇款账号发出后，半小时内没汇好款，要汇款之前请再联系我们确认汇款账号，以免有变动。</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody class="text-align-center">
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="bb">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-xs btn-default" >导出</button>
+                                                    </td>
+                                                    <td>总计({{data.list.length}})</td>
+                                                    <td ng-repeat="item in data.total track by $index">{{item}}</td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+

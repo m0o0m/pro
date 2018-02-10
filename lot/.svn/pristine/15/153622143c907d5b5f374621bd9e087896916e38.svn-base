@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1">
+        <meta name=screen-orientation content=portrait>
+        <meta name=x5-orientation content=portrait>
+        <meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+        <title>PK彩票</title>
+        <script type=text/javascript src=./config.js></script>
+        <link href=http://pkcdn.pk1358.com/pc/resource/css/app.css rel=stylesheet>
+    </head>
+    <style>
+        #loading_js {
+            width: 100%;
+            height: 100%;
+            display: block;
+            top: 0;
+            left: 0;
+            position: fixed;
+            opacity: 0.7;
+            z-index: 1000;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .loading-image {
+            position: absolute;
+            width: 100px;
+            top: 20%;
+            left: 47%;
+            height: 100px;
+            z-index: 999
+        }
+    </style>
+
+    <body>
+        <div id=loading_js><img class=loading-image src=http://pkcdn.pk1358.com/pc/static/loading.gif alt=Loading...></div>
+        <div id=app></div>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/manifest.8becb.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/vendor.e4989.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/app.e8f8a.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/0.0437d.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/1.89718.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/2.48bd7.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/3.dfbce.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/4.c9b72.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/5.9954b.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/6.25f7c.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/7.d4136.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/8.63cea.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/9.c5cc8.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/10.cd7a9.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/11.99844.js></script>
+        <script type=text/javascript src=http://pkcdn.pk1358.com/pc/resource/js/12.b50b8.js></script>
+    </body>
+
+</html>

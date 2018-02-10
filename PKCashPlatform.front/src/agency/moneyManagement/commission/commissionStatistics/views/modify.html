@@ -1,0 +1,114 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('RebateSetting')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">自身盈利金额:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" list="SiteChoice" ng-model="commission.value1">
+                                                        </div>
+                                                        <lable class=" col-md-1 control-label">以上</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">有效会员:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" list="SiteChoice" ng-model="commission.value2">
+                                                        </div>
+                                                        <lable class=" col-md-1 control-label">以上</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">体育退佣比例:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" list="SiteChoice" ng-model="commission.value3">
+                                                        </div>
+                                                        <lable class=" col-md-1 control-label">%</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">彩票退佣比例:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" list="SiteChoice" ng-model="commission.value4">
+                                                        </div>
+                                                        <lable class=" col-md-1 control-label">%</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">视讯退佣比例:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" list="SiteChoice" ng-model="commission.value5">
+                                                        </div>
+                                                        <lable class=" col-md-1 control-label">%</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">EG彩票退佣比例:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" list="SiteChoice" ng-model="commission.value6">
+                                                        </div>
+                                                        <lable class=" col-md-1 control-label">%</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">体育退水比例:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" list="SiteChoice" ng-model="commission.value7">
+                                                        </div>
+                                                        <lable class=" col-md-1 control-label">%</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">彩票退水比例:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" list="SiteChoice" ng-model="commission.value8">
+                                                        </div>
+                                                        <lable class=" col-md-1 control-label">%</lable>
+                                                    </div>
+                                                </fieldset>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 text-align-center">
+                                                        <button class="btn btn-primary"  type="submit">
+                                                            {{getWord('Confirm submission')}}
+                                                        </button>
+
+                                                        <button class="btn btn-primary"  type="submit" onclick="window.history.back();" >
+                                                            {{getWord('Return')}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+package input
+
+type DataList struct {
+	SiteId string `json:"site_id" valid:"Required;MinSize(3);MaxSize(4);ErrorCode(20001)"`
+}
+
+type DellData struct {
+	SiteId string `json:"site_id" valid:"Required;MinSize(3);MaxSize(4);ErrorCode(20001)"`
+	Keys   string `json:"keys"`
+}

@@ -1,0 +1,33 @@
+package function
+
+import (
+	"models/schema"
+	"global"
+	"errors"
+	"github.com/golyu/sql-build"
+)
+
+type UaBean struct {
+}
+
+//根据总代id查询总代信息
+func (m *UaBean) GetUaById(siteId string, uaId int64) (ua *schema.MyUserUa, err error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	ua = new(schema.MyUserUa)
+	sql, err := sqlBuild.Select(ua.TableName()).
+		Where_(siteId, "line_id").
+		Where_(uaId, "id").
+		String()
+	if err != nil {
+		return
+	}
+	b, err := sess.SQL(sql).Get(ua)
+	if err != nil {
+		return
+	}
+	if !b {
+		err = errors.New("Get 0 row")
+	}
+	return
+}

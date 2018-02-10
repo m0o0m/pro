@@ -1,0 +1,214 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.position_quata {
+  z-index: 9999;
+  position: fixed;
+  right: -125px;
+  bottom: 10px;
+  width: 210px;
+  transition-duration: 0.5s;
+}
+
+.input-container > .radio-tile.s-label {
+  height: 30px;
+  width: 50px;
+}
+
+.position_quata:hover {
+  right: 0;
+  transition-duration: 0.5s;
+}
+
+.flipquota {
+  margin: 0px;
+  text-align: center;
+  height: 65px;
+}
+
+.panel {
+  margin: 0px;
+  background: #fff;
+  border: solid 1px #c3c3c3;
+  height: auto;
+  display: none;
+  border-radius: 6px;
+}
+
+.radiobox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio-tile-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+.radio-tile-group .input-container {
+  position: relative;
+  margin: 0.3rem;
+}
+.radio-tile-group .input-container .radio-button {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+.radio-tile-group .input-container .radio-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #555555;
+  border-radius: 5px;
+  /*padding: 1rem;*/
+  transition: transform 300ms ease;
+}
+.radio-tile-group .input-container .radio-tile-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #555555;
+}
+.radio-tile-group .input-container .radio-button:checked + .radio-tile {
+  background-color: #555555;
+  border: 2px solid #555555;
+  color: white;
+  transform: scale(1.1, 1.1);
+}
+.radio-tile-group .input-container .radio-button:checked + .radio-tile .radio-tile-label {
+  color: white;
+  background-color: #555555;
+}
+
+.inputbox {
+  margin: 10px;
+}
+.inputbox p {
+  color: #555555;
+  font-size: 12px;
+  font-weight: 300;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.input-number {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  height: 45px;
+  width: 100%;
+}
+
+.confirm-btn {
+  display: block;
+  float: right;
+}
+
+.input-number input {
+  border: none;
+  display: inline-block;
+  height: 100%;
+  padding: 0 10px;
+  outline: none;
+  position: relative;
+  width: calc(100% - 40px);
+}
+
+.input-number-increment,
+.input-number-decrement {
+  background-color: white;
+  border: 0;
+  border-left: 1px solid #e6ebee;
+  cursor: pointer;
+  display: block;
+  outline: none;
+  position: absolute;
+  width: 28px;
+  height: 26px;
+  text-align: center;
+  right: 0;
+}
+
+#quata_close{
+  display: none;
+  width:30px;
+  height:30px;
+}
+
+.input-number-increment:hover:before {
+  border-bottom-color: #0073ba;
+}
+
+.input-number-decrement:hover:before {
+  border-top-color: #0073ba;
+}
+
+.input-number-increment {
+  border-bottom: 1px solid #e6ebee;
+  top: 0;
+}
+
+.input-number-decrement {
+  bottom: 0;
+}
+
+.input-number-increment:before,
+.input-number-decrement:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+.input-number-increment:before {
+  border-bottom: 5px solid #555555;
+}
+
+.input-number-decrement:before {
+  border-top: 5px solid #555555;
+}
+
+.button_quota {
+  -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  display: block;
+  margin: 10px auto;
+  max-width: 180px;
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+a.button_quota {
+  color: rgba(85, 85, 85, 0.9);
+  box-shadow: rgba(85, 85, 85, 0.7) 0 0px 0px 2px inset;
+}
+
+a.button_quota:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: rgba(85, 85, 85, 1) 0 0px 0px 40px inset;
+}
+a.button_quota:active {
+  color: rgba(255, 255, 255, .5);
+}

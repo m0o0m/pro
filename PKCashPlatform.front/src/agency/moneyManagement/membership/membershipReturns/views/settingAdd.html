@@ -1,0 +1,82 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('RebateSetting')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <div class="row">
+                                        <label class="col-md-1 control-label col-xs-4 reltop">站点</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select data-smart-select2  class="selectWidth" ng-model="site_index_id">
+                                                    <option value="">请选择</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in names">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 control-label col-xs-4">最低有效购买</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input class="form-control" type="text" ng-model="buy">
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 control-label col-xs-4 reltop">优惠上限</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input class="form-control" type="text" ng-model="sale">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-scroll">
+                                <div class="panel-group smart-accordion-default" id="accordion">
+                                    <div class="panel panel-default" ng-repeat="item in list" >
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title" ng-click="comm(item.id)"><a data-toggle="collapse" data-parent="#accordion" ng-href="{{'#'+item.id}}" class="collapsed"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i> {{item.Title}} </a></h4>
+                                        </div>
+                                        <div id="{{item.id}}" class="panel-collapse collapse ">
+                                            <div class="panel-body">
+                                                <div class="table-scroll"><div class="row">
+                                                    <div class="col-md-2 col-xs-6 control-labelpull-left" ng-repeat="items in item.Children" >
+                                                        <div class="input-group smart-form" style="margin-bottom:15px" >
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="checkbox" class="test" ng-checked="items.is_product===1" name="test" ng-click="ckecked($event)" value={{items.id}}>
+                                                                <i></i>{{items.product_name}}
+                                                            </label>
+                                                            <div class="inputsese pull-right">
+                                                                <label class="input">
+                                                                    <i class="icon-append">%</i>
+                                                                    <input type="text" value={{items.proportion}} class="inputse">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="smart-form ">
+                                    <footer>
+                                        <button type="submit" class="btn btn-primary" ng-click="sub()">{{getWord('Confirm')}}</button>
+                                        <button type="button" class="btn btn-default" onclick="history.go(-1);">{{getWord('Return')}}</button>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

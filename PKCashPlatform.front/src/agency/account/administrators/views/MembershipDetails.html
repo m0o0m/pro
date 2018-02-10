@@ -1,0 +1,144 @@
+<!-- 管理员账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('Membership details')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 control-label">{{getWord('Accounts')}}</label>
+
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control inp_2" ng-model="account">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <div class="input-group">
+                                            <a class="btn btn-default search" ng-click="search()" href-void>{{getWord('Search')}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1 col-sm-offset-7">
+                                        <div class="input-group">
+                                            <a class="btn btn-default search" onclick="history.go(-1)" href-void>{{getWord('Return')}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>会员账号</th>
+                                            <th>手机号/邮箱/QQ</th>
+                                            <th>锁定</th>
+                                            <th>层级</th>
+                                            <th>加入时间</th>
+                                            <th>最后登录/IP</th>
+                                            <th>登陆次数</th>
+                                            <th>存款次数</th>
+                                            <th>存款总额</th>
+                                            <th>最大存款</th>
+                                            <th>提款次数</th>
+                                            <th>提款总额</th>
+                                            <th>最大提款</th>
+                                            <th>盈利</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+
+                                            <td>{{item.realname}}</td>
+                                            <td>{{item.account}}</td>
+                                            <td>{{item.mobile}}/{{item.email}}/{{item.qq}}</td>
+                                            <td>
+                                                <input type="checkbox" ng-checked="item.is_locked_level==1" ng-click="lock($event,item.id)"/>
+                                                <span style="color: green">锁定</span>
+                                            </td>
+                                            <td class="text-red" data-toggle="modal" data-target="#myModal2" ng-click="modifyHierarchy(item.level_id)">{{item.level_id}}</td>
+                                            <td>{{item.create_time|fiterTime}}</td>
+                                            <td>{{item.last_login_time|fiterTime}}<span class="text-red"> / </span>{{item.last_login_ip}}</td>
+                                            <td>{{item.login_count}}</td>
+                                            <td>{{item.deposit_num}}</td>
+                                            <td>{{item.deposit_count}}</td>
+                                            <td>{{item.deposit_max}}</td>
+                                            <td>{{item.draw_num}}</td>
+                                            <td>{{item.draw_count}}</td>
+                                            <td>{{item.draw_max}}</td>
+                                            <td>{{item.spread_money}}</td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <span style="display: none" class="zz">{{getWord('accounts')}}</span>
+    <!--分层-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">{{getWord('Member hierarchy')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid" id="aa">
+                        <div class="table-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>选择分层</th>
+                                    <th>名称</th>
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr ng-repeat="item in hierarchylist" ng-if="item.level_id!==Id">
+                                    <td><input type="radio" name="hierarch" ng-value="item.level_id" /></td>
+                                    <td>{{item.level_id}}</td>
+                                    <td>{{item.description}}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="modifyHierarchySubmit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>

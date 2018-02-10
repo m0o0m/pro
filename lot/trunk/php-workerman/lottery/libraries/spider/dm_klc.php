@@ -1,0 +1,93 @@
+<?php
+
+namespace libraries\spider;
+
+use \helper\Curl;
+use \config\curl_config;
+use \helper\SpiderCommon as common;
+
+class Dm_klc {
+
+    static $qishu = "";
+    static $wait = [];
+    static $type = 'tidligere-danske28-resultater/';
+
+    // static $url = "http://www.danishlotto.com/get_lotto.php";
+    // static $continue_url = "http://www.danishlotto.com/tidligere-danske28-resultater/";
+
+    public static function getData() {
+        $continue_url = str_replace('[dlotto]', curl_config::$dlotto, curl_config::$dlotto_url);
+        $continue_url = str_replace('[dlotto_type]', static::$type, $continue_url);
+
+        $str = '';
+        $data = array();
+        $str = Curl::run($continue_url, 'get');
+        //如果采集不到数据
+        if (empty($str)) {
+            // echo 'Can not collection the url:' . $continue_url . PHP_EOL;
+            return array();
+        }
+        //获取内部inner_tbody
+        $inner_preg = '/<tbody id="list">(.*?)<\/tbody>/is';
+        preg_match_all($inner_preg, $str, $body_arr);
+        if(!isset($body_arr[1][0])) return array();
+        $inner_tbody = $body_arr[1][0];
+        //获取所有的tr
+        $tr_preg = '/<tr>(.*?)<\/tr>/is';
+        preg_match_all($tr_preg, $inner_tbody, $all_tr);
+        $all_tr = $all_tr[1];
+        //获取所有td
+        $td_preg = '/<td>(.*?)<\/td>/is';
+        $all_td = array();
+        foreach ($all_tr as $key => $val) {
+            preg_match_all($td_preg, $val, $all_td[$key]);
+            $all_td[$key] = $all_td[$key][1];
+        }
+        if (empty($all_td))
+            return array();
+        // var_dump($all_td);
+        //取出球的值
+        $ball_preg = '/<span class="c-dk-ball2">(.*?)<\/span>/is';
+        //时间
+        $time_preg = '/\d{2}\/(\d{2}||\d{1})\/\d{4} \d{2}:\d{2}:\d{2}/is';
+
+        foreach ($all_td as $key => $val) {
+            $ball = array();
+            $data[$key]['expect'] = intval($val[0]);
+            preg_match_all($ball_preg, $val[1], $ball);
+
+            $ball_str = null;
+            foreach ($ball[1] as $v) {
+                $ball_str .= $v . ',';
+            }
+            $data[$key]['opencode'] = trim($ball_str, ',');
+            preg_match_all($time_preg, $val[2], $time);
+            $data[$key]['opentime'] = $time[0][0];
+            $data[$key]['opentimestamp'] = strtotime($time[0][0]);
+        }
+
+        $last_expect_key = array_keys($data, max($data));
+        $last_expect_key = $last_expect_key[0];
+        $last_expect = $data[$last_expect_key];
+        $data = array();
+        $check_arr = array(
+            'type' => 'dm_klc',
+            'expect' => $last_expect['expect'], //期数
+            'maxexpect' => 3885120, //期数最大值
+            'minexpect' => 1780000, //期数最小值
+            'ball' => $last_expect['opencode'], //开奖结果 逗号拼接
+            'maxball' => 80, //单球最大值
+            'minball' => 1, //单球最小值
+            'ballcount' => 20    //球的个数
+        );
+        $res = common::checkSpider($check_arr);
+        if(!$res) return array();
+        $data[0] = $last_expect;
+        return $data;
+    }
+
+    public static function getContinueData($time) {
+        self::getData();
+    }
+
+}

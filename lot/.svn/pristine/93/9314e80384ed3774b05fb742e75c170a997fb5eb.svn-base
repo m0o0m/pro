@@ -1,0 +1,202 @@
+<?php
+
+ini_set("memory_limit", "-1");
+
+use \Workerman\Worker;
+use \Workerman\Connection\AsyncTcpConnection;
+use \helper\MysqlPdo as pdo;
+use \helper\RedisConPool;
+use \helper\Common_helper;
+use \helper\Curl;
+
+require_once __DIR__ . '/../../Workerman/Autoloader.php';
+
+Worker::$stdoutFile = __DIR__ . '/../../logs/worker.log';
+
+$worker = new Worker('http://0.0.0.0:10002');
+$worker->name = 'betApi';
+
+$worker->onWorkerStart = function($worker) {
+    // echo 'common start now' . PHP_EOL;
+};
+
+$worker->onMessage = function($connection, $data) {
+    $post = $data['post'];
+    //此模块主要应用于单条数据结算
+    $id = isset($post['id']) ? $post['id'] : null;
+    $periods = isset($post['periods']) ? $post['periods'] : null; //期数
+    $fc_type = isset($post['fc_type']) ? $post['fc_type'] : null; //彩种
+
+    $class = '\libraries\balance\\' . ucfirst($fc_type) . 'Balance';
+    $lottery = pdo::instance('lottery');
+    $table = Common_helper::GetBetTableNameByType($fc_type); //获取注单表名
+    $auto_table = Common_helper::GetAutoTableNameByType($fc_type); //获取开奖结果表名
+
+
+    if ($post['todo'] == 'balance') {
+        $time = $class::getTimeByQishu($periods); //获取当前期数的开盘时间
+        if (is_array($id) && is_numeric($periods) && $fc_type) {
+            //处理id数组 至 字符串
+            $id_str = '';
+            foreach ($id as $v) {
+                if (is_numeric($v)) {
+                    $id_str .= $v . ',';
+                } else {
+                    
+                }
+            }
+            $id = rtrim($id_str, ',');
+            $sql = "select * from $table where addtime>='$time' and id in($id) and js=1 and status=1 and periods='$periods' order by addtime asc";
+            $bet_info = $lottery->query($sql);
+            if (!$bet_info) {
+                $result['ErrorMsg'] = '并非有效的未结算注单,可能原因(投注时间不对等非法注单)';
+                $result['ErrorCode'] = 2;
+                $connection->send(json_encode($result));
+                return false;
+            }
+            $class::$bets[$periods] = $bet_info;
+            $class::$run[$periods] = 1;
+            $res = Common_helper::BalanceByType($fc_type, $periods, $id); //根据type和期数 进入结算
+            if ($res) {
+                if ($res['ErrorCode'] == 1 || $res['ErrorCode'] == 2) {
+                    $connection->send(json_encode($res));
+                    return true;
+                } else {
+                    $result['ErrorMsg'] = '结算进程：结算失败';
+                    $result['ErrorCode'] = 2;
+                    $connection->send(json_encode($result));
+                    return false;
+                }
+            } else {
+                $result['ErrorMsg'] = '结算进程：结算失败';
+                $result['ErrorCode'] = 2;
+                $connection->send(json_encode($result));
+                return false;
+            }
+        } else {
+            $result['ErrorMsg'] = '单条结算数据不合法';
+            $result['ErrorCode'] = 2;
+            $connection->send(json_encode($result));
+            return false;
+        }
+    }
+
+
+    //注单回滚
+    if ($post['todo'] == 'rollback') {
+        if (is_array($id) && is_numeric($periods) && $fc_type) {
+            //处理id数组 至 字符串
+            $id_count = count($id);
+            $id_str = '';
+            foreach ($id as $v) {
+                if (is_numeric($v)) {
+                    $id_str .= $v . ',';
+                } else {
+                    // echo 'Can not Know id: ' . $v;
+                }
+            }
+            $id = rtrim($id_str, ',');
+            $res = Common_helper::rollback($fc_type, $periods, $id); //单条回滚
+            if ($res['ErrorCode'] == 1 || $res['ErrorCode'] == 2) {
+                $connection->send(json_encode($res));
+                return;
+            } else {
+                $result['ErrorMsg'] = '注单回滚失败';
+                $result['ErrorCode'] = 2;
+                $connection->send(json_encode($result));
+                return;
+            }
+        } elseif (is_numeric($periods) && $fc_type) {//批量回滚
+            $res = Common_helper::rollback($fc_type, $periods);
+            if ($res['ErrorCode'] == 1 || $res['ErrorCode'] == 2) {
+                $connection->send(json_encode($res));
+                return;
+            } else {
+                $result['ErrorMsg'] = $periods . '注单整期回滚失败';
+                $result['ErrorCode'] = 2;
+                $connection->send(json_encode($result));
+                return;
+            }
+        } else {
+            $result['ErrorMsg'] = '回滚数据不合法';
+            $result['ErrorCode'] = 2;
+            $connection->send(json_encode($result));
+            return;
+        }
+    }
+
+
+    //手工输入期数后批量结算 主要用于结算回滚注单及结算失败的注单
+    if ($post['todo'] == 'allbalance') {
+        if (is_numeric($periods) && $fc_type) {
+            $periods = strval($periods);
+            //尝试从内存中读取数据
+            $class::$run[$periods] = 1;
+            $port = Common_helper::getPort($fc_type);
+            $port = $port[1];
+            $data = Curl::run('http://127.0.0.1:' . $port, 'post', array(
+                        'todo' => 'get',
+                        'type' => $fc_type,
+                        'qishu' => $periods
+            ));
+            if ($data) {
+                $data = json_decode($data, true);
+                $bets = isset($data['bets']) ? $data['bets'] : array();
+                if ($bets) {
+                    $res = Common_helper::BalanceByType($fc_type, $periods, '', $bets);
+                } else {
+                    $res = Common_helper::BalanceByType($fc_type, $periods);
+                }
+            } else {
+                $res = Common_helper::BalanceByType($fc_type, $periods);
+            }
+
+
+            if ($res['ErrorCode'] == 1 || $res['ErrorCode'] == 2) {
+                $connection->send(json_encode($res));
+                return true;
+            } else if ($res == true) {
+                $result['ErrorMsg'] = '结算进程：结算成功';
+                $result['ErrorCode'] = 1;
+                $connection->send(json_encode($result));
+                return;
+            } else {
+                $result['ErrorMsg'] = '结算进程：结算失败';
+                $result['ErrorCode'] = 2;
+                $connection->send(json_encode($result));
+                return false;
+            }
+        } else {
+            $result['ErrorMsg'] = '整期数据不合法';
+            $result['ErrorCode'] = 2;
+            $connection->send(json_encode($result));
+            return false;
+        }
+    }
+
+    //获取结算类内存中的数据条数
+    if ($post['todo'] == 'getMemoryCount') {
+        $port = Common_helper::getPort($fc_type);
+        $port = $port[1];
+        $data = Curl::run('http://127.0.0.1:' . $port, 'post', array(
+                    'todo' => 'count',
+                    'type' => $fc_type
+        ));
+       
+        $connection->send($data);
+        return true;
+    }
+
+    $result['ErrorMsg'] = '非法指令，无法处理';
+    $result['ErrorCode'] = 2;
+    $connection->send(json_encode($result));
+    return false;
+};
+
+
+
+// 运行worker
+if(!defined('GLOBAL_START')) {
+    Worker::runAll();
+}
+?>

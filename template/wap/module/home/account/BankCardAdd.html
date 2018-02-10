@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>PK</title>
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+<style>
+
+    #mescroll{
+        bottom: 0;
+    }
+</style>
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+	<!-- <dl class="h-head">
+    	<dt><a class="iconfont">&#xe605;</a></dt>
+        <h2>添加银行卡</h2>
+        <dd><a href="/m">首页</a></dd>
+    </dl> -->
+    <ul class="h-head">
+            <li>
+                <a>
+                    <i class="iconfont wap-fanhui"></i>
+                </a>
+            </li>
+            <li>
+                <h2>添加银行卡</h2>
+            </li>
+            <li>
+                <a href="/m">首页</a>
+            </li>
+        </ul>
+</header>
+
+<div id="mescroll" class="mescroll">
+
+    <dl class="m-myaccount">
+        <dt>
+            <li>
+                <span>选择银行</span>
+                <select name="bank">
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                </select>
+            </li>
+        </dt>
+    </dl>
+    <dl class="m-myaccount">
+        <dt>
+            <li><span>银行卡号：</span><input type="text" name='card' maxlength="19" placeholder="银行卡号" onkeyup="value=this.value.replace(/\D+/g,'')"></li>
+            <li><span>开户人：</span><input type="text" name='cardName' placeholder=""></li>
+            <li><span>开户支行：</span><input type="text" name='cardAddress' placeholder="开户支行"></li>
+            <li style="display:none"><span>取款密码：</span><input type="password" name='password' placeholder="取款密码" maxlength="4" onkeyup="value=value.replace(/[^\d]/g,'')"></li>
+            <li style="display:none"><span>确认密码：</span><input type="password" name='comPassword' placeholder="确认密码" maxlength="4" onkeyup="value=value.replace(/[^\d]/g,'')"></li>
+        </dt>
+        <button class="save">添加银行卡</button>
+    </dl>
+
+</div>
+
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script> 
+</html>
+<script>
+    $(window).load(function(e){
+        loginId();
+        if(!getCookie('loginBack')){ //没有登陆信息的时候返回登陆页面
+            $.toast("用户登录信息已过期， 请重新登录！", 'text');
+            setTimeout("window.location.href = '/m/login'; ",1000);//延迟2秒执行
+        }
+        bankList();
+    })
+    $("dl.m-myaccount button.save").click(function(){
+        var $bankId = Number($("select[name='bank']").val());
+        var $card = $("input[name='card']").val();
+        var $cardName = $("input[name='cardName']").val();
+        var $cardAddress = $("input[name='cardAddress']").val();
+        if($bankId == NaN){
+            $.toast("请选择出款银行类型", 'text');
+            return false;
+        }
+        if($card == ''){
+            $.toast("出款银行卡号不能为空", 'text');
+            return false;
+        }else if ( !(/^\d{16,19}$/).test($card) ) {
+            $.toast("银行卡号格式不正确， 应该由16-19位的数字组成", 'text');
+            return false;
+        }
+        if($cardName == ''){
+            $.toast("开户人不能为空", 'text');
+            return false;
+        }
+        if($cardAddress == ''){
+            $.toast("开户地址不能为空", 'text');
+            return false;
+        }
+
+        if ($("input[type='password']").is('hidden')) {
+            var $password = $("input[name='password']").val();
+            var $comPassword = $("input[name='comPassword']").val();
+            if($password.length == 0){
+                alert("取款密码不能为空！");
+                return false;
+            }else{
+                if ( !(/^\d{4}$/).test($password) ) {
+                    alert("取款密码为4位数的数字");
+                    return false;
+                }
+            }
+
+            if($comPassword != $password){
+                alert("两次输入的密码不一致");
+                return false;
+            }
+            var data = JSON.stringify({
+                'bank_id' : Number($bankId),
+                'card' : $card,
+                'card_name' : $cardName,
+                'card_address' : $cardAddress,
+                'password' : $password
+            });
+        }else{
+            var data = JSON.stringify({
+                'bank_id' : Number($bankId),
+                'card' : $card,
+                'card_name' : $cardName,
+                'card_address' : $cardAddress
+            }); 
+        }
+
+        $('.m-login .o1 dd button').attr("disabled", true); //按钮失效
+        bankAdd();
+    });
+
+    $(document).ready(function(e) {
+        var pass = getQueryString('pass');
+        if (pass == 1) {
+            $("input[type='password']").parent('li').show();
+        }else{
+            $("input[name='cardName']").attr({"disabled":'disabled'}).val(loginData.realname);
+        }
+
+        // 输入框验证
+       var $card = $("input[name='card']").val();
+        var $cardName = $("input[name='cardName']").val();
+        var $cardAddress = $("input[name='cardAddress']").val();
+
+        $("input[name='card']").focus(function () {
+            if ($(this).val() == $card) {
+                $(this).val('');
+            }
+        }).blur(function () {
+            if ($(this).val() == '') {
+                $(this).val($card);
+            }
+        });
+
+        $("input[name='cardName']").focus(function () {
+            if ($(this).val() == $cardName) {
+                $(this).val('');
+            }
+        }).blur(function () {
+            if ($(this).val() == '') {
+                $(this).val($cardName);
+            }
+        });
+        $("input[name='cardAddress']").focus(function () {
+            if ($(this).val() == $cardAddress) {
+                $(this).val('');
+            }
+        }).blur(function () {
+            if ($(this).val() == '') {
+                $(this).val($cardAddress);
+            }
+        });
+
+        var mescroll = new MeScroll("mescroll", {
+                //下拉刷新的所有配置项
+                down:{
+                    use: false, //是否初始化下拉刷新; 默认true
+                    auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                    hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                    isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+                }
+			});
+    });
+</script>

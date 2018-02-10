@@ -1,0 +1,550 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-19 18:00:42
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/line/index.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a61c1caa2d3f9_24851602',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '2d0e98cd2040bc7a7c75b4224d0070f37f7f0b52' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/line/index.html',
+      1 => 1514538858,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a61c1caa2d3f9_24851602 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    #menu-form label{margin-right:10px}
+    .handle span{cursor: pointer}
+    #twoLevel{display: none}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="menu-form" method='get' action='/line/index'>
+                <label for="line_reload"> 选择线路:</label>
+                <select type="select" name="line_id"  id="line_id" style="width:120px;">
+                    <option value="" selected>全部</option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['line']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <option value="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+}?>"  <?php if (isset($_GET['line_id']) && isset($_smarty_tpl->tpl_vars['v']->value['line_id']) && $_smarty_tpl->tpl_vars['v']->value['line_id'] == $_GET['line_id']) {?>selected<?php }?> ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+}?></option>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </select>
+            <label for="line_name">线路名称:
+                <input type="text" name="line_name" id='line_name' value="<?php if (isset($_GET['line_name'])) {
+echo $_GET['line_name'];
+}?>">
+            </label>
+            <!-- <label for="url">域名:
+                <input type="text" name="url" id='url' value="<?php if (isset($_GET['url'])) {
+echo $_GET['url'];
+}?>">
+            </label>
+            <label for="s_money">起始额度:
+                <input type="text" name="s_money" id='s_money' value="<?php if (isset($_GET['s_money'])) {
+echo $_GET['s_money'];
+}?>" style="width:50px;" />
+            </label>
+            <label for="e_money">截止额度:
+                <input type="text" name="e_money" id='e_money' value="<?php if (isset($_GET['e_money'])) {
+echo $_GET['e_money'];
+}?>" style="width:50px;" /> -->
+            </label>
+            <label for="status"> 状态:
+                <select type="select" name="status"  id="status">
+                    <option value="" >全部</option>
+                    <option value="1" <?php if (isset($_GET['status']) && $_GET['status'] == 1) {?>selected<?php }?>>启用</option>
+                    <option value="2" <?php if (isset($_GET['status']) && $_GET['status'] == 2) {?>selected<?php }?>>停用</option>
+                    <option value="3" <?php if (isset($_GET['status']) && $_GET['status'] == 3) {?>selected<?php }?>>维护</option>
+                </select>
+            </label>
+            <label for="type"> 交易模式:
+                <select type="select" name="type"  id="type" style="width:100px;">
+                    <option value="" >全部</option>
+                    <option value="1" <?php if (isset($_GET['type']) && $_GET['type'] == 1) {?>selected<?php }?>>钱包模式</option>
+                    <option value="2" <?php if (isset($_GET['type']) && $_GET['type'] == 2) {?>selected<?php }?>>额度转换</option>
+                </select>
+            </label>
+        
+            <label for="page"> 每页显示条数:
+                <select type="select" name="pagenum"  id="pagenum">
+                    <option value="100"  <?php if (isset($_GET['pagenum']) && $_GET['pagenum'] == 100) {?>selected<?php }?>>100</option>
+                    <option value="500" <?php if (isset($_GET['pagenum']) && $_GET['pagenum'] == 500) {?>selected<?php }?>>500</option>
+                    <option value="1000" <?php if (isset($_GET['pagenum']) && $_GET['pagenum'] == 1000) {?>selected<?php }?>>1000</option>
+                </select>
+            </label>
+            <label for="page"> 页码:
+                <select type="select" name="page"  id="page">
+                    <?php
+$__section_loop_0_saved = isset($_smarty_tpl->tpl_vars['__smarty_section_loop']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop'] : false;
+$__section_loop_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['pagecount']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_loop_0_total = $__section_loop_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = new Smarty_Variable(array());
+if ($__section_loop_0_total != 0) {
+for ($__section_loop_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] = 0; $__section_loop_0_iteration <= $__section_loop_0_total; $__section_loop_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']++){
+?>
+                    <option value="<?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+"
+                            <?php if (isset($_GET['page']) && $_GET['page'] == (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1) {?>selected<?php }?>
+                            >
+                            <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+ 
+                </option>
+                <?php
+}
+}
+if ($__section_loop_0_saved) {
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = $__section_loop_0_saved;
+}
+?>
+            </select>
+        </label>
+      <!--  <label for="date"> 日期：
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='s_addtime' value="<?php if (isset($_GET['s_addtime'])) {
+echo $_GET['s_addtime'];
+}?>" id="startTime" style="width:180px;">
+                ~
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='e_addtime' value="<?php if (isset($_GET['e_addtime'])) {
+echo $_GET['e_addtime'];
+}?>" id="endTime" style="width:180px;">
+
+            </label> -->
+<!-- <?php echo '<script'; ?>
+>
+//时间控件
+    var start = {
+        elem: '#startTime',
+        format: 'YYYY/MM/DD hh:mm:ss',
+        //min: laydate.now(), //设定最小日期为当前日期
+        max: '2099-06-16 23:59:59', //最大日期
+        istime: true,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    var end = {
+        elem: '#endTime',
+        format: 'YYYY/MM/DD hh:mm:ss',
+        //min: laydate.now(), //设定最小日期为当前日期
+        max: '2099-06-16 23:59:59', //最大日期
+        istime: true,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    laydate(start);
+    laydate(end);
+<?php echo '</script'; ?>
+> -->
+         <label>
+            <input type="button" id='search' class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">线路名称</th>
+                        <th class="center">额度</th>
+                        <th class="center">线路状态</th>
+                        <th class="center">交易模式</th>
+                        <th class="center">试玩模式</th>
+                        <th class="center">域名</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">修改时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center">
+                            <a > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_name'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['line_name'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['money'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['money'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['status'])) {?> <?php echo $_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->tpl_vars['v']->value['status']];
+}?></a>
+                        </td>
+                         <td class="center">
+                            <a > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['type'])) {?> <?php echo $_smarty_tpl->tpl_vars['type']->value[$_smarty_tpl->tpl_vars['v']->value['type']];
+}?></a>
+                        </td>
+                         <td class="center">
+                            <a > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['is_shiwan'])) {?> <?php echo $_smarty_tpl->tpl_vars['experience']->value[$_smarty_tpl->tpl_vars['v']->value['is_shiwan']];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['url'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['url'];
+}?></a>
+                        </td>                    
+                        <td class="center">
+                             <?php if (isset($_smarty_tpl->tpl_vars['v']->value['addtime'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['addtime'];
+}?>
+                        </td>
+                        <td class="center">
+                             <?php if (isset($_smarty_tpl->tpl_vars['v']->value['updatetime'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['updatetime'];
+}?>
+                        </td>
+                        <td class="center handle" style="width:220px;">
+                            
+                        <span  class="btn btn-xs btn-success detail editstatus" lid='<?php echo $_smarty_tpl->tpl_vars['v']->value["id"];?>
+' status='<?php echo $_smarty_tpl->tpl_vars['v']->value["status"];?>
+'>更改状态</span>
+                        <span  class="btn btn-xs btn-success detail update" data_a="<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+"  data_b = "<?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+">信息修改</span>
+                        <span  class="btn btn-xs btn-success detail editmoney" data='<?php echo $_smarty_tpl->tpl_vars['v']->value["id"];?>
+' lineI = '<?php echo $_smarty_tpl->tpl_vars['v']->value["line_id"];?>
+' lineN = '<?php echo $_smarty_tpl->tpl_vars['v']->value["line_name"];?>
+' nowMoney='<?php echo $_smarty_tpl->tpl_vars['v']->value["money"];?>
+' >额度分配</span>
+                        </td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+
+<div class="isHide layui-layer-wrap"id="status_form" style="display: none;">
+    <div class="modal-body">
+        <center>
+        <br/>
+        <form  class="form-horizontal" id="layForm"  >
+            <label for="status">
+                线路状态：<select name="status" id="editstate">
+                    <option id="s_1" value="1" selected="">启用</option>
+                    <option id="s_2" value="2" selected="">停用</option>
+                    <option id="s_3" value="3" selected="">维护</option>
+                </select>
+                <input type="hidden" name="id" value="" id="e_id" />
+            </label>
+            <input id='saveStatus' type="submit" class="btn btn-info" value = "保存" style="margin-left:20px;">
+        </form>
+        </center>
+    </div>
+  
+</div>
+
+<div class="isHide layui-layer-wrap" id="money_form" style="display: none;">
+    <div class="modal-body">
+        <center>
+        <form  class="form-horizontal" id="layForm"  >
+            <table id="change_money" class="table table-striped table-bordered table-hover">
+                <tr>
+                    <td>线路名称：</td><td id="lineN" style="margin-left:60px;" ></td>
+                </tr>
+                <tr>
+                    <td>线路I D：</td><td id="lineI" style="margin-left:60px;" ></td>
+                </tr>
+                <tr>
+                    <td>当前金额：</td><td id="nowMoney" style="margin-left:60px;" ></td>
+                </tr>
+                    <td>交易金额：</td>
+               
+                    <td><input type="text" name="moneyN" id="moneyN" value="" style="width:100px;" /> </td>
+                <tr>
+                    <td>交易模式：</td>
+                    <td>
+                    <input type="radio" name="pattern" id="pattern" checked="checked" value="1" />存入
+                    <input type="radio" name="pattern" id="pattern" style="margin-left:20px;" value="2" />取出
+                    </td>
+                <tr>
+                    <td colspan='2'>
+                    <center><input id='saveMoney' type="submit" class="btn btn-info" value = "保存" style="margin-left:20px;" /></center>
+                    </td>
+                </tr>
+            <input type="hidden" name="m_id" id="m_id" value="" />
+            <input type="hidden" name="l_id" id="l_id" value="" />
+            </table>
+        </form>
+        </center>
+    </div>
+  
+</div>
+<?php echo '<script'; ?>
+>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var line_id = $.trim($('#line_id').val());
+        var line_name = $.trim($('#line_name').val());
+        var url = $.trim($('#url').val());
+        var s_money = $.trim($('#s_money').val());
+        var e_money = $.trim($('#e_money').val());
+        var e_addtime = $.trim($('#e_addtime').val());
+        var s_addtime = $.trim($('#s_addtime').val());
+        var status = $.trim($('#status').val());
+        var type = $.trim($('#type').val());
+        var pagenum = $.trim($('#pagenum').val());
+        var page = $.trim($('#page').val());
+        var params = {
+            line_id: line_id,
+            line_name: line_name,
+            url: url,
+            s_money: s_money,
+            e_money: e_money,
+            s_addtime: s_addtime,
+            e_addtime: e_addtime,
+            status: status,
+            type: type,
+            pagenum: pagenum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/line/index',
+            container: '#container'
+        });
+    }
+    //pjax局部加载表单
+    function renderFormByPjax(url) {
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    }
+      //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+    //线路
+    $('#line_id').change(function () {
+        renderTableByPjax();
+    })
+    //每页显示条数切换
+    $('#pagenum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+     $('#page').change(function () {
+        renderTableByPjax();
+    })
+    //状态
+     $('#type').change(function () {
+        renderTableByPjax();
+    })
+    //交易模式
+     $('#status').change(function () {
+        renderTableByPjax();
+    })
+    //修改
+    $('.update').click(function () {
+        var id = $(this).attr('data_a');
+        var line_id = $(this).attr('data_b');
+        var url = '/line/lineform?id=' + id + '&line_id='+line_id;
+        renderFormByPjax(url);
+    })
+
+    //增加
+    $("#create").click(function () {
+       var url = '/line/insert';
+        renderFormByPjax(url);
+    })
+
+
+    function getData(type, data) {
+        var id, url, title, height, load;
+        if (type == 'editstatus') {
+            title = '线路状态更改';
+            height = '200px';
+            id = data['lid'];
+            var status = data['status'];
+            $('#editstate').children().prop('selected',false);
+             $('#editstate option[value='+ status +']').prop('selected',true);
+            $('#e_id').val(id);
+            openLayer(title,'500px',height,'status_form');
+        }else if(type == 'editmoney'){
+            title = '额度分配';
+            height = '400px';
+            id = data['id'];
+            $('#lineI').html(data['lineI']);
+            $('#lineN').html(data['lineN']);
+            $('#nowMoney').html(data['nowMoney']);
+            $('#m_id').val(id);
+            $('#l_id').val(data['lineI']);
+            openLayer(title,'400px',height,'money_form');
+        }
+       
+    }
+
+    function openLayer(title,width, height,div) {
+        layer.open({
+            type: 1 //Page层类型
+            , area: [width, height]
+            , title: title
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: $("#"+div)
+        });
+    }
+
+    //提交表单
+    function submit() {
+        $('#menu-form').submit();
+    }
+
+    //线路状态更改
+    $(".handle .editstatus").click(function () {
+        var data = new Array();
+        data['lid'] = $(this).attr('lid');
+        data['status'] = $(this).attr('status');
+        getData('editstatus', data);
+    })
+
+    //额度分配
+     $(".handle .editmoney").click(function () {
+        var data = new Array();
+        data['id'] = $(this).attr('data');
+        data['lineI'] = $(this).attr('lineI');
+        data['lineN'] = $(this).attr('lineN');
+        data['nowMoney'] = $(this).attr('nowMoney');
+        getData('editmoney',data);
+    })    
+
+   
+   
+    //线路状态更改提交
+    $('#saveStatus').click(function () {
+       var id = $('#e_id').val();
+       var status = $('#editstate').val();
+        if (id == '') {
+            layer.alert('ID不能为空！', {icon: 2});
+            return false;
+        } 
+        var url = 'updatestatus';
+        var data = "id="+id + "&status="+status;
+        var callback = function(res){
+            if (res.ErrorCode == 2) {
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                    layer.close(index);
+                } else if (res.ErrorCode == 1) {
+                    layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.reload();});
+                }
+        }
+
+        doajax(url,data,callback);
+        return false;
+    });
+
+        //额度交易更改提交
+    $('#saveMoney').click(function () {
+       var id = $('#m_id').val();
+       var money = $('#moneyN').val();
+       var status = $('#editstate').val();
+       var line_id = $('#l_id').val();
+       var pattern = $('input[name="pattern"]:radio:checked').val();
+       var str=/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+
+        if (id == '' || line_id == '') {
+            layer.alert('参数出错啦！', {icon: 2});
+            return false;
+        }
+        if( money == ''){
+            layer.alert('交易金额不能小于零！', {icon: 2});
+            $('#moneyN').focus();
+            return false;
+        } 
+        if(!str.test(money)){
+            layer.alert('请输入合法的金额', {icon: 2});
+            $('#moneyN').focus();
+            return false;
+        }
+        var url = 'updatemoney';
+        var data = "id="+id + "&money="+money + "&pattern="+pattern + "&line_id="+line_id;
+        var callback = function(res){
+            if (res.ErrorCode == 2) {
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                    layer.close(index);
+                } else if (res.ErrorCode == 1) {
+                    layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.reload();});
+                }
+        }
+
+        doajax(url,data,callback);
+        return false;
+    });
+
+    function doajax(url,data,callback){
+         $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+               callback(res);
+            }
+        });
+    }
+
+<?php echo '</script'; ?>
+><?php }
+}

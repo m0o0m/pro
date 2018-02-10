@@ -1,0 +1,358 @@
+
+<!-- 维护面板 -->
+<table id="view-container" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <!-- <th class="center">维护类型</th> -->
+          <{foreach from=$ptypes key=ptype item=ptypeTxt}>
+            <th class="center"><{$ptypeTxt}></th>
+          <{/foreach}>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <!-- <td class="center">全网维护</td> -->
+          <{foreach from=$ptypes key=ptype item=ptypeTxt}>
+            <td class="center"
+             data-mtype="1"
+             data-ptype="<{$ptype}>"
+             data-starttime="<{if isset($list['1'][$ptype].startdate)}><{$list['1'][$ptype].startdate}><{/if}>"
+             data-endtime="<{if isset($list['1'][$ptype].enddate)}><{$list['1'][$ptype].enddate}><{/if}>"
+             data-line_id='<{if isset($list["1"][$ptype].line_id)}><{$list["1"][$ptype].line_id|json_encode}><{/if}>'
+             data-remark='<{if isset($list["1"][$ptype].remark)}><{$list["1"][$ptype].remark}><{/if}>'
+             style="position:relative;">
+                <span name="view-btn" class="btn btn-xs btn-<{if isset($list['1'][$ptype])}>danger<{else}>success<{/if}>">+全网维护+</span>
+                <span name="view-close" style="display:<{if isset($list['1'][$ptype])}>block<{else}>none<{/if}>;cursor:pointer;position:absolute;top:0px;right:6%;font-size:28px;">×</span>
+            </td>
+          <{/foreach}>
+        </tr>
+        <tr>
+            <!-- <td class="center">一般维护</td> -->
+          <{foreach from=$ptypes key=ptype item=ptypeTxt}>
+            <td class="center"
+             data-mtype="2"
+             data-ptype="<{$ptype}>"
+             data-starttime="<{if isset($list['2'][$ptype].startdate)}><{$list['2'][$ptype].startdate}><{/if}>"
+             data-endtime="<{if isset($list['2'][$ptype].enddate)}><{$list['2'][$ptype].enddate}><{/if}>"
+             data-line_id='<{if isset($list["2"][$ptype].line_id)}><{$list["2"][$ptype].line_id|json_encode}><{/if}>'
+             data-fc_type='<{if isset($list["2"][$ptype].fc_type)}><{$list["2"][$ptype].fc_type|json_encode}><{/if}>'
+             data-remark='<{if isset($list["2"][$ptype].remark)}><{$list["2"][$ptype].remark}><{/if}>'
+             style="position:relative;">
+            <{if in_array($ptype, ['pc','wap'])}>
+                <span name="view-btn" class="btn btn-xs btn-<{if isset($list['2'][$ptype])}>danger<{else}>success<{/if}>">+一般维护+</span>
+                <span name="view-close" style="display:<{if isset($list['2'][$ptype])}>block<{else}>none<{/if}>;cursor:pointer;position:absolute;top:0px;right:6%;font-size:28px;">×</span>
+            <{else}>
+             ——
+            <{/if}>
+            </td>
+          <{/foreach}>
+        </tr>
+    </tbody>
+</table>
+
+<!-- 编辑表单 -->
+<div id="view-box" style="display:none;">
+    <form id="view-form">
+        <input type="hidden" name="mtype">
+        <input type="hidden" name="ptype">
+        <input type="hidden" id="line_id">
+        <input type="hidden" id="fc_type">
+        <input type="hidden" id="remark">
+        <table style="width:90%;margin:20px auto 36px;" class="table table-striped table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th class="center" rowspan="2" style="line-height:75px;"><span style="color:red;">*</span>日期:</th>
+
+                    <td>
+                        <input style="width:180px;" class="laydate-icon" type="text" placeholder="请输入日期" name="starttime" id="starttime">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input style="width:180px;" class="laydate-icon" type="text" placeholder="请输入日期" name="endtime" id="endtime">
+                    </td>
+                </tr>
+                <tr id="lines">
+                    <th class="center" style="line-height:70px;"><span style="color:red;">*</span>线路:</th>
+                    <td name="line_container"></td>
+                </tr>
+                <tr>
+                    <th class="center">备注:</th>
+                    <td><textarea name="remark" style="width:100%;min-height:66px;"></textarea></td>
+                </tr>
+                <tr style="height:20px;"></tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="提交" class="btn btn-info">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<div id="npcwap" style="display:none;">
+    <table>
+        <tr>
+            <td class="center" colspan="10">
+                <label><input onclick="selectAllForm($('#lines'), '[name^=line_id]')" name="selectAll" type="checkbox">&nbsp;全选&nbsp;</label>
+                <label><input onclick="resetForm($('#lines'), '[name^=line_id]', $('#view-form').find('[id=line_id]').val())" name="reset" type="button" value="恢复"></label>
+            </td>
+        </tr>
+        <tr>
+          <{foreach from=$lines key=k item=line name=foo}>
+            <td>
+                <label><input onclick="selectOneForm($('#lines'), '[name^=line_id]')" name="line_id[]" value="<{$line['line_id']}>" type="checkbox">&nbsp;<{$line['line_id']}>&nbsp;&nbsp;&nbsp;</label>
+            </td>
+            <{if $smarty.foreach.foo.iteration%5 eq 0}></tr><tr><{/if}>
+          <{/foreach}>
+        </tr>
+    </table>
+</div>
+<div id="pcwap" style="display:none;">
+    <table style="width:100%;" class="table table-striped table-bordered table-hover" >
+      <{foreach from=$lines key=k item=line}>
+        <tr id="<{$line['line_id']}>">
+            <td>
+                <label style="width:100%;background:#f4f4f4;"><input onclick="selectLine($(this))" name="line_id[]" value="<{$line['line_id']}>" type="checkbox">&nbsp;<span style="color:blue;"><{$line['line_id']}></span>&nbsp;</label>
+                <table name="children" style="display:none;margin:0px auto 20px;" class="table table-striped table-bordered table-hover" >
+                    <tr>
+                        <td class="center" colspan="10">
+                            <label><input onclick="selectAllForm($('#<{$line['line_id']}>'), '[name^=fc_type]')" name="selectAll" type="checkbox">&nbsp;全选&nbsp;</label>
+                            <label><input onclick="resetBefore($('#<{$line['line_id']}>'), '[name^=fc_type]', $('#view-form').find('[id=fc_type]').val(), '<{$line['line_id']}>')" name="reset" type="button" value="恢复"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                      <{foreach from=$games key=k item=game name=foo}>
+                        <td>
+                            <label><input onclick="selectOneForm($('#<{$line['line_id']}>'), '[name^=fc_type]')" name="fc_type[<{$line['line_id']}>][]" value="<{$game['type']}>" type="checkbox">&nbsp;<{$game['name']}>&nbsp;</label>
+                        </td>
+                        <{if $smarty.foreach.foo.iteration%5 eq 0}></tr><tr><{/if}>
+                      <{/foreach}>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+      <{/foreach}>
+    </table>
+</div>
+
+<script type="text/javascript">
+    // 编辑
+    $('#view-container [name=view-btn]').click(function(){
+        var mtype = $(this).closest('td').data('mtype');
+        var ptype = $(this).closest('td').data('ptype');
+        var starttime = $(this).closest('td').data('starttime');
+        var endtime = $(this).closest('td').data('endtime');
+        var line_id = $(this).closest('td').data('line_id');
+        var fc_type = $(this).closest('td').data('fc_type');
+        var remark = $(this).closest('td').data('remark');
+
+        if (mtype == 2 && (ptype == 'pc' || ptype == 'wap')) {
+            $('#view-form').find('[name=line_container]').html($('#pcwap').html());
+        } else {
+            $('#view-form').find('[name=line_container]').html($('#npcwap').html());
+        }
+
+        // 回显
+        $('#view-form').find('[name=mtype]').val(mtype);
+        $('#view-form').find('[name=ptype]').val(ptype);
+        if (mtype == 2 && (ptype == 'pc' || ptype == 'wap')) { // 一般维护类型的 PC、WAP
+            var fc_type = $(this).closest('td').data('fc_type');
+            for (line_id in fc_type) {
+                if(fc_type[line_id]){
+                    var obj = $('#' + line_id).find('[value='+line_id+']');
+                    obj.attr('checked', true);
+                    selectLine(obj);
+                    resetForm($('#' + line_id), '[name^=fc_type]', fc_type[line_id]);
+                }
+            }
+        } else {
+            resetForm($('#lines'), '[name^=line_id]', line_id);
+        }
+        $('#view-form').find('[name=starttime]').val(starttime);
+        $('#view-form').find('[name=endtime]').val(endtime);
+        $('#view-form').find('[name=remark]').val(remark);
+
+        // 用于 重置/提交前对比
+        if (mtype == 2 && (ptype == 'pc' || ptype == 'wap')) { // 一般维护类型的 PC、WAP
+            line_id = JSON.stringify(line_id);
+            fc_type = JSON.stringify(fc_type);
+        }
+        $('#view-form').find('[id=line_id]').val(line_id);
+        $('#view-form').find('[id=fc_type]').val(fc_type);
+        $('#view-form').find('[id=remark]').val(remark);
+
+        var mtypes = {"1":'全网维护', "2":'一般维护'};
+        var ptypes = JSON.parse('<{$ptypes|json_encode}>');
+        var title = ' <span style="color:blue;">' + ptypes[ptype] + '</span> ' + mtypes[mtype] + ' 详情';
+        if (mtype == 2 && (ptype == 'pc' || ptype == 'wap')) { // 一般维护类型的 PC、WAP
+            openLayer(title, '#view-box');
+        }else{
+            openLayer2(title, '#view-box');
+        }
+    });
+    // 提交
+    $('#view-form').submit(function () {
+        var type = 'POST';
+        var url = 'create';
+        var data = $(this).serialize();
+        request(url,type,data);
+        return false;
+    });
+    // 关闭
+    $('#view-container [name=view-close]').click(function () {
+        $('#view-container [name=view-close]').removeAttr('submit');
+        $(this).attr('submit', true);
+        $(this).closest('td').data('act', 'close');
+        layer.confirm('确定删除吗？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            var type = 'POST';
+            var url = 'close';
+            var data = $('#view-container [name=view-close][submit]').closest('td').data();
+            request(url,type,data);
+        }, function(){
+            layer.msg('操作已取消');
+            return;
+        });
+    });
+
+    // 选择/取消 线路
+    function selectLine(obj){
+        var mtype = $('#view-form').find('[name=mtype]').val();
+        var ptype = $('#view-form').find('[name=ptype]').val();
+        if (mtype == 2 && (ptype == 'pc' || ptype == 'wap')) // 一般维护类型的 PC、WAP 才展开彩种选项，全网的都不展开
+            if(obj.is(':checked'))
+                obj.closest('td').find('[name=children]').show();
+            else
+                obj.closest('td').find('[name=children]').hide();
+    }
+
+    // 选择全部
+    function selectAllForm(obj, target){
+        if(typeof obj != 'object') var obj = $(obj);
+        if(obj.find('[name=selectAll]').is(':checked')){
+            obj.find(target + 'input[type=checkbox]').prop('checked',true);
+        }else{
+            obj.find(target + 'input[type=checkbox]').attr('checked',false);
+        }
+    }
+    // 选择一条
+    function selectOneForm(obj, target){
+        if(typeof obj != 'object') var obj = $(obj);
+        var flag = false;
+        obj.find(target + 'input[type=checkbox]').each(function(index,obj){
+            if(!$(this).is(':checked')){
+                flag = true;
+            }
+        });
+        if(flag){
+            obj.find('input[name=selectAll]').prop('checked',false);
+        }else{
+            obj.find('input[name=selectAll]').prop('checked',true);
+        }
+    }
+    // 恢复选项
+    function resetForm(obj, target, val){
+        if(typeof obj != 'object') var obj = $(obj);
+        if(typeof val != 'object') var val = val.split(',');
+        obj.find(target + '[type=checkbox]').attr('checked',false);
+        for(x in val){
+            obj.find(target + '[value="'+val[x]+'"]').prop('checked',true);
+        }
+        selectOneForm(obj, target);
+    };
+    function resetBefore(obj, target, val, child){
+        if(child){
+            var val = JSON.parse(val);
+            tmp = '';
+            for(x in val){
+                if (child == x) tmp = val[child];
+            }
+            val = tmp;
+        }
+        resetForm(obj, target, val);
+    };
+
+    // 弹框(一般维护)
+    function openLayer(title,obj) {
+        if(typeof obj != 'object') var obj = $(obj);
+        open = layer.open({
+            type: 1 //Page层类型
+            , area: ['800px', '530px']
+            , title: title
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: obj
+        });
+    }
+
+    // 弹框(全网维护)
+    function openLayer2(title,obj) {
+        if(typeof obj != 'object') var obj = $(obj);
+        open = layer.open({
+            type: 1 //Page层类型
+            , area: ['500px', 'auto']
+            , title: title
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: obj
+        });
+    }
+    //时间控件
+    
+    var starttime = {
+        elem: '#starttime',
+        format: 'YYYY-MM-DD hh:mm:ss',
+        // min: laydate.now(),
+        istime: true,
+        istoday: true,
+        choose: function (datas) {
+            endtime.min = datas;
+        }
+    };
+    laydate(starttime);
+    
+    var endtime = {
+        elem: '#endtime',
+        format: 'YYYY-MM-DD hh:mm:ss',
+        // min: laydate.now(),
+        istime: true,
+        istoday: true
+    };
+    laydate(endtime);
+
+    // ajax提交
+    function request(url,type,data,dataType,callback) {
+        if (!dataType) dataType = 'json';
+        $.ajax({
+            type: type,
+            url: url,
+            data: data,
+            dataType: dataType,
+            success: function (result) {
+                if (callback) {callback(result);return}
+                switch(result.ErrorCode){
+                    case 1:// success
+                        layer.alert(result.ErrorMsg, {icon:1}, function(){
+                            location = window.location;
+                        });
+                        break;
+                    case 2:// fail
+                        layer.alert(result.ErrorMsg, {icon:2});
+                        break;
+                    default:
+                        layer.alert(result.ErrorMsg);
+                        break;
+                }
+            },
+            error: function (XMLHttpRequest,textStatus,errorThrown) {
+                console.log(XMLHttpRequest);
+                layer.msg(textStatus+' : '+errorThrown);
+            }
+        });
+    };
+</script>

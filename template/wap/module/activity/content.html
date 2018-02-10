@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>PK</title>
+    <link rel="stylesheet" href="../../style/css/weui.min.css">
+    <link rel="stylesheet" href="../../style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../../style/css/reset.css">
+    <link rel="stylesheet" href="../../style/css/admin.css">
+    <link rel="stylesheet" href="../../style/fonts/iconfont.css">
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+    <!-- <dl class="h-head">
+        <dt><a class="iconfont">&#xe605;</a></dt>
+        <h2>活动中心内页</h2>
+        <dd><a href="../../index.html">首页</a></dd>
+    </dl> -->
+    <ul class="h-head">
+            <li>
+                    <a>
+                            <i class="iconfont wap-fanhui"></i>
+                        </a>
+            </li>
+            <li>
+                <h2>活动中心内页</h2>
+            </li>
+            <li>
+                <a href="/m">首页</a>
+            </li>
+        </ul>
+</header>
+<div id="wrapper">
+    <div id="scroller">
+        <!--iscroll 滑动 开始-->
+
+        <main class="main m-activits bgfff">
+            <dl class="attend">
+                <img src="../../style/images/1.jpg">
+                <article>
+                    <p>
+                        说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活说明活动说明活</p>
+                    <i>活动时间：2017-12-12 12:12:12～2017-12-12 12:12:12</i>
+                </article>
+                <a class="go">我要参加</a>
+            </dl>
+        </main>
+
+
+        <!--iscroll 滑动 结束-->
+    </div>
+</div>
+{{template "mem_footer" .}}
+<section class="big-shade"></section>
+<section class="p-semicircle hide">
+    <ul>
+        <li><a href="../home/deposit/bank.html"><img src="../../style/images/icon/nav_09.png">
+            <p>存款</p></a></li>
+        <li><a href="../home/convert/index.html"><img src="../../style/images/icon/nav_03.png">
+            <p>额度转行</p></a></li>
+        <li><a href="../home/withdrawal/index.html"><img src="../../style/images/icon/nav_06.png">
+            <p>存款</p></a></li>
+    </ul>
+</section>
+</body>
+<script src="../../style/js/jquery-2.1.4.js"></script>
+<script src="../../style/js/jquery-weui.min.js"></script>
+<script src="../../style/js/iscroll.js"></script>
+<script src="../../style/js/admin.js"></script>
+<script src="../../style/js/marquee.js"></script>
+<script src="../../style/js/swiper.min.js"></script>
+</html>
+<script>
+    // $('.h-head .iconfont').click(function () {
+    //     window.history.go(-1);
+    // })
+    $(document).ready(function (e) {
+        $('.f-hmoe .cent span').click(function () {
+            $('.p-semicircle').slideToggle(500)
+            $('.big-shade').fadeToggle(300)
+        })
+        $('.h-head dd a').click(function () {
+            $('.h-pop').slideToggle()
+        })
+        $('.h-pop').click(function () {
+            $('.h-pop').slideToggle()
+        })
+        createMarquee({});
+    });
+</script>

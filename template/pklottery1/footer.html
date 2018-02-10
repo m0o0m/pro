@@ -1,0 +1,51 @@
+{{define "footer"}}
+<div class="xl-lottery-footer">
+    <div class="xl-center">
+        <div class="footer-top">
+            <a href="javascript:;" class="text-c">
+                <span class="fl">N</span>
+                <div class="fl">
+                    <p>新手上路</p>
+                    <p>ovice path</p>
+                </div>
+            </a>
+            <a href="javascript:;" class="text-c">
+                <span class="fl">C</span>
+                <div class="fl">
+                    <p>联系我们</p>
+                    <p>ontact us</p>
+                </div>
+            </a>
+            <a href="javascript:;" class="text-c">
+                <span class="fl">D</span>
+                <div class="fl">
+                    <p>手机下载</p>
+                    <p>ownload</p>
+                </div>
+            </a>
+        </div>
+        <ul class="clearfix introduce">
+        {{range $k,$v:=.Content}}
+            <li class="fl"><a href="javascript:void(0);" onclick="getPager('-','iword','{{$v.Id}}');" target="mem_index">{{$v.Title}}</a></li>
+        {{end}}
+        </ul>
+
+        <ul class="footer-ul-img clearfix">
+            <li class="fl"><a href="javascript:;"><img src="{{.CdnUrl}}/pklottery1/public/images/new/newPkLogo.png" alt=""></a></li>
+            <li class="fl"><a href="javascript:;"><img src="{{.CdnUrl}}/pklottery1/public/images/new/BBIN.png" alt=""></a></li>
+            <li class="fl" class="fl"><a href="javascript:;"><img src="{{.CdnUrl}}/pklottery1/public/images/new/OG_big1.png" alt=""></a></li>
+            <li class="fl"><a href="javascript:;"><img src="{{.CdnUrl}}/pklottery1/public/images/new/LEBO.png"></a></li>
+            <li class="fl"><a href="javascript:;"><img src="{{.CdnUrl}}/pklottery1/public/images/new/MG.png" alt=""></a></li>
+            <li class="fl"><a href="javascript:;"><img src="{{.CdnUrl}}/pklottery1/public/images/new/AB.png" alt=""></a></li>
+            <li class="fl"><a href="javascript:;"><img src="{{.CdnUrl}}/pklottery1/public/images/new/shape731.png" alt=""></a></li>
+        </ul>
+        <p class="footer-text">Copyright @ {{.SiteName}} Reserved</p>
+    </div>
+</div>
+
+</div>
+</div>
+{{template "footer_" .}}
+</body>
+</html>
+{{end}}

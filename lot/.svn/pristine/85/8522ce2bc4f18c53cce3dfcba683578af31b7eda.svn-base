@@ -1,0 +1,168 @@
+
+<div class="page-header col-xs-12">
+      <label for="menuLevel"> 查看结算进程内存数据条数:
+          <select type="select" name="fc_type"  id="fc_type" style="width:120px;">
+              <option value="">请选择彩种</option>
+              <{foreach from=$games item=v key=k}>
+              <option value="<{$v['type']}>" <{if isset($smarty.get.fc_type) && $smarty.get.fc_type eq <{$v['type']}>}>selected<{/if}>><{$v['name']}></option>
+              <{/foreach}>
+          </select>
+      </label>
+    <input type="button" class="btn btn-sm btn-success" id="showCount" value="点击查看"/>
+    <input type="button" style="margin-left:30px;" class="btn btn-sm btn-success" id="search" value="刷新页面"/>
+</div>
+
+<!-- 列表 -->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <{if isset($wait)}><!-- 判断是否刷新过于频繁 -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr><th>温馨提示:您的手速过快，注意身体哦</th></tr>
+                </thead>
+                <tr style="height:200px;">
+                  <td>
+                      刷新太过频繁，请歇息5秒
+                  </td>
+              </tr>
+            </table>
+            <{else}>
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr><th class="center" colspan="4">Mongo数据库</th></tr>
+                    <tr>
+                        <th class="center">表类型</th>
+                        <th class="center">表名</th>
+                        <th class="center">用途</th>
+                        <th class="center">总条数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <{if isset($data)}>
+                    <{foreach from=$data item=v key=k}>
+                    <tr>
+                         <td class="center" >  <{if isset($v['type'])}> <{$v['type']}> <{/if}></td>
+                         <td class="center" >  <{if isset($v['table'])}> <{$v['table']}> <{/if}></td>
+                         <td class="center" >  <{if isset($v['name'])}> <{$v['name']}> <{/if}></td>
+                        <td class="center handle" >  <{if isset($v['count'])}><{if $v['count'] > 5000000}> <font color="red"><{/if}><{$v['count']}> <{/if}></td>
+                       
+                    </tr>
+                    <{/foreach}>
+                  <{/if}>
+                </tbody>
+            </table>
+
+            <!-- 统计队列 -->
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr><th class="center" colspan="4">统计队列(键名:AccountFromRedis)现有数据：<{if isset($arr['totalbet'])}> <{if $arr['totalbet'] > 10000}> <font color="red"> <{/if}> <{$arr['totalbet']}><{/if}> 条</th></tr>
+                </thead>
+            </table>
+            <!-- 采集缓存 -->
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr><th class="center" colspan="4">外部API采集缓存</th></tr>
+                    <tr>
+                        <th class="center">redis键名</th>
+                        <th class="center">线路ID</th>
+                        <th class="center">数量</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <{if isset($arr['spider'])}>
+                    <{foreach from=$arr['spider'] item=v key=k}>
+                    <tr>
+                         <td class="center" >  <{if isset($v['key'])}> <{$v['key']}> <{/if}></td>
+                         <td class="center" >  <{if isset($v['line_id'])}> <{$v['line_id']}> <{/if}></td>
+                         <td class="center" >  <{if isset($v['count'])}><{if $v['count'] > 100000}> <font color="red"><{/if}><{$v['count']}> <{/if}> </td>
+                    </tr>
+                    <{/foreach}>
+                  <{/if}>
+                </tbody>
+            </table>
+            <!-- 结算缓存 -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr><th class="center" colspan="4">待结算注单缓存</th></tr>
+                    <tr>
+                        <th class="center">redis键名</th>
+                        <th class="center">彩种</th>
+                        <th class="center">期数</th>
+                        <th class="center">数量</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <{if isset($arr['balance']) && !empty($arr['balance'])}>
+                    <{foreach from=$arr['balance'] item=v key=k}>
+                    <tr>
+                         <td class="center" >  <{if isset($v['key'])}> <{$v['key']}> <{/if}></td>
+                         <td class="center" >  <{if isset($v['fc_type'])}> <{$v['fc_type']}> <{/if}></td>
+                         <td class="center" >  <{if isset($v['qishu'])}> <{$v['qishu']}> <{/if}></td>
+                         <td class="center" >   <{if isset($v['count'])}><{if $v['count'] > 1000000}> <font color="red"><{/if}><{$v['count']}> <{/if}></td>
+                    </tr>
+                    <{/foreach}>
+                  <{else}>
+                    <tr><td colspan="4" style="text-align:center;">暂无缓存数据</td></tr>
+                  <{/if}>
+                </tbody>
+            </table>
+            <{/if}><!-- 判断是否刷新过于频繁 -->
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<script>
+  $('#search').click(function(){
+        $.pjax({
+            data:'',
+            method: 'get',
+            url: '/log/mongocount',
+            container: '#container'
+        });
+  })
+  
+  $('#showCount').click(function(){
+       var type = $('#fc_type').val();
+       if(type == ''){
+          layer.alert('请选择彩种', {icon:2});
+          return;
+       }
+       var url = '/log/memorycount';
+       var data = 'type=' + type;
+       var callback = function(res){
+            layer.close(index);
+            if(res.ErrorCode == 1){
+                layer.alert(res.ErrorMsg,{icon:1});
+            }
+            if(res.ErrorCode == 2){
+                layer.alert(res.ErrorMsg,{icon:0});
+                return false;
+            }
+       }
+       request(url,'post',data,callback);
+  })
+
+    // ajax 提交
+function request(url,type,data,callback) {
+     $.ajax({
+        type: type,
+        url: url,
+        data: data,
+        beforeSend: function () {
+            index = layer.load(1, {
+                shade: [0.5, '#000000'] //0.1透明度的白色背景
+            });
+        },
+        error: function () {
+            layer.alert('出错啦！', {icon: 2});
+            layer.close(index);
+            return false;
+        },
+        dataType: 'json',
+        success: function (res) {
+           callback(res);
+        }
+    });
+}
+</script>

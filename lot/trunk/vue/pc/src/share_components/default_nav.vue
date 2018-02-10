@@ -1,0 +1,160 @@
+<template>
+  <div :class="['default_nav',isActive?'margin':'']">
+    <div class="d_nav">
+      <ul class="clearfix" v-if="page!='liuhecai'">
+        <li v-for="(item, i) in lists" :key="i" @click="router_go(item,i)" class="fl" :class="{'click':selectItem==i}">{{item.name}}</li>
+      </ul>
+      <ul class="clearfix" v-if="page=='liuhecai' && flag">
+        <li v-if="i<13" v-for="(item, i) in lists" :key="i" @click="router_go(item,i)" class="fl" :class="{'click':selectItem==i}">{{item.name}}</li>
+      </ul>
+      <ul class="clearfix" v-else-if="page=='liuhecai' && !flag">
+        <li v-if="i>12" v-for="(item, i) in lists" :key="i" @click="router_go(item,i)" class="fl" :class="{'click':selectItem==i}">{{item.name}}</li>
+      </ul>
+      <i class="iconfont nav-l" @click="myclick" v-if="page=='liuhecai' && !flag" :class="[flag?'pk-jiantou-copy-copy':'pk-jiantou1']"></i>
+      <i class="iconfont nav-r" @click="myclick" v-if="page=='liuhecai' && flag" :class="[flag?'pk-jiantou-copy-copy':'pk-jiantou1']"></i>
+    </div>
+  </div>
+</template>
+
+<script>
+import com_cookie from '../assets/js/com_cookie'
+export default {
+  data() {
+    return {
+      selectItem: 0,
+      page: null,
+      flag: true,
+      list_arry:[
+        {one:0,}
+      ]
+    };
+  },
+  created() {
+    this.$root.$on("change_item", e => {
+      this.selectItem = e;
+    });
+      var str = this.$route.path;
+      str = str.slice(str.lastIndexOf("/") + 1);
+      this.page = this.$route.query.page;
+      if(this.$route.query.page == 'jsliuhecai'){
+        this.page = 'liuhecai'
+      }
+      for (var index = 0; index < this.lists.length; index++) {
+        if (this.lists[index].item == str) {
+          this.selectItem = index;
+          if (index > 12) {
+            this.flag = !this.flag;
+          }
+          break;
+        }
+      }
+    console.log(this.selectItem)
+  },
+  watch:{
+    '$route':function(to,from){
+      console.log(this.$route.path.split('_')[this.$route.path.split('_').length-1]);
+      this.selectItem = Number(this.$route.path.split('_')[this.$route.path.split('_').length-1])-1;
+      com_cookie.setCookie("top_nav", this.selectItem);
+    }
+  },
+  mounted(){
+    if(document.cookie.indexOf("top_nav=") != -1){
+      if(com_cookie.getCookie("top_nav")){
+        this.selectItem = com_cookie.getCookie("top_nav");
+      }
+    }else{
+      this.selectItem = 0;
+    }
+  },
+  props: {
+    lists: {
+      type: Array
+    },
+    isActive: {
+      default: true,
+      type: Boolean
+    }
+  },
+  destroyed(){
+    com_cookie.delCookie("top_nav")
+  },
+  methods: {
+    router_go: function(child, i) {
+      this.selectItem = i;
+      com_cookie.setCookie("top_nav",i);
+      this.$emit("menu", child.item);
+    },
+    myclick() {
+      this.flag = !this.flag;
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "../assets/css/function.scss";
+.margin {
+  // margin-bottom: 16px;
+}
+.default_nav {
+  // float: left;
+  width: 920px;
+  background-color: #fff;
+  // padding-left: 20px;
+  // position: fixed;
+  padding-top: 10px;
+  // top: 195px;
+  // z-index: 777;
+  .d_nav {
+    // float: left;
+    // border-radius: 5px;
+    // width: 920px;
+    // overflow: hidden;
+    padding-left: 20px;
+    background: $bg_color5;
+    position: relative;
+    color: #fff;
+    ul {
+      height: 36px;
+      line-height: 36px;
+      li {
+        display: block;
+        font-size: 13px;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 0 15px;
+        display: block;
+        cursor: pointer;
+        // border-radius: 5px;
+        border-top: 1px solid transparent;
+      }
+      li:hover {
+        background-color: #fff;
+        // border-radius: 5px;
+        color: #000;
+        border-top: 1px solid $bg_color;
+      }
+      .click {
+        background-color: #fff;
+        // border-radius: 5px;
+        color: #000;
+        border-top: 1px solid $bg_color;
+      }
+    }
+    .nav-r {
+      position: absolute;
+      right: 2px;
+      top: 6px;
+      cursor: pointer;
+      // color: #fff;
+    }
+    .nav-l {
+      position: absolute;
+      left: 2px;
+      top: 6px;
+      cursor: pointer;
+      // color: #fff;
+    }
+  }
+}
+</style>

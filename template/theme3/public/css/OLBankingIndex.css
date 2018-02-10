@@ -1,0 +1,374 @@
+.deposit-div2-item-cen{
+    width: 3864px;
+}
+
+.deposit-div2-item{
+    width: 966px;
+    overflow: hidden;
+}
+.deposit-div2 .d-div1{
+    padding-bottom: 18px;
+}
+.deposit-div2 .d-span1{
+    display: inline-block;
+    text-align: right;
+    width: 115px;
+}
+
+
+.d-div2 input{
+    text-align: right;
+    height: 38px;
+    width: 280px;
+    border: 1px solid #DDD;
+    outline: none;
+    padding-right: 10px;
+}
+
+.d-div2 p{
+    font-size: 12px;
+    padding-left: 160px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.d-div3{
+    padding-top: 25px;
+    border: 2px solid #6EC51A;
+    margin-right: 30px;
+    padding: 23px 10px 0px 10px;
+    border-bottom: none;
+}
+
+.d-div3 .d-3-span2{
+    /* margin-left: 5px; */
+    display: inline-block;
+    width: 796px;
+}
+.d-div3 .d-3-span2 li{
+    border: 1px solid #DDD;
+    width: 170px;
+    height: 50px;
+    margin-right: 23px;
+    margin-bottom: 23px;
+    position: relative;
+}
+
+.d-3-span2-click{
+    border:1px solid #E93030 !important;
+    box-shadow: 0px 3px 3px #FFF3F2;
+}
+
+.d-3-span2-click .myiocn-gou{
+    opacity: 1;
+}
+
+/* .d-div4{
+    padding-left: 120px;
+    font-size: 14px;
+    color: #505050;
+    padding-bottom: 30px;
+} */
+
+.deposit-bottom{
+    margin-top: 5px;
+    margin-right: 30px;
+    border: 2px solid #6EC51A;
+    padding-top: 23px;
+}
+
+.deposit-bottom >div{
+    padding-top: 25px;
+    /* margin-right: 30px; */
+    padding: 0px 10px 0px 10px;
+}
+.deposit-bottom >div:nth-child(1) li{
+    border: 1px solid #DDD;
+    width: 170px;
+    height: 50px;
+    margin-right: 23px;
+    margin-bottom: 23px;
+    position: relative;
+}
+.deposit-bottom >div:nth-child(1) li img{
+    width: 100%;
+}
+
+
+.deposit-bottom >div ul{
+    display: inline-block;
+    width: 796px;
+}
+
+.deposit-bottom .deposittwo-ul2 li{
+    height: 80px;
+    width: 38%;
+    margin-bottom: 4px;
+    border: 1px solid #DDD;
+}
+.deposit-bottom .deposittwo-ul2 li:nth-child(2){
+    width: 20%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.deposittwo-ul2 div{
+    height: 50%;
+    line-height: 40px;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.deposittwo-ul2 .deposittwo-ul2-div1{
+    font-weight: 700;
+    background-color: #F5F5F5;
+}
+.deposittwo-ul2 .deposittwo-ul2-div2{
+    background-color: #fff;
+    color: #686868;
+}
+.deposittwo-ul-click{
+    border:1px solid #E93030 !important;
+    box-shadow: 0px 3px 3px #FFF3F2;
+}
+
+.deposittwo-ul-click .myiocn-gou{
+    opacity: 1;
+}
+.deposit-for{
+    border: 2px solid #6EC51A;
+    padding:0px 0 0 20px;
+    margin-right: 30px;
+    border-top: none;
+}
+.deposit-for-left li{
+    margin-bottom: 16px;
+}
+.deposit-for-left li >span{
+    display: inline-block;
+    width: 96px;
+    text-align: right;
+}
+.deposit-for-left li input[type='text']{
+    width: 195px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 5px;
+    margin-left: 5px;
+    color: #999;
+}
+.deposit-for-left li select{
+    color: #686868;
+    width: 202px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 5px;
+    margin-left: 5px;
+}
+
+
+
+.deposit-for-right{
+    width: 570px;
+    padding-left: 20px;
+}
+
+.deposit-for-right-top ,.li_time{
+    height: 38px;
+}
+.li_time{
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.deposit-for-right-top input[type='text'],.li_time input[type='text']{
+    width: 195px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 5px;
+    margin-left: 5px;
+    color: #999;
+}
+
+.vip-section{
+    padding-bottom: 20px;
+}
+
+.deposit-for-right-bot{
+    padding-top: 10px;
+    font-size: 14px;
+    padding-left: 10px;
+}
+.deposit-for-right-bot >div{
+    padding-bottom: 10px;
+}
+
+.deposit-for-right-button{
+    text-align: right;
+    padding-top: 20px;
+}
+.deposit-for-right-button a{
+    display: inline-block;
+    line-height: 34px;
+    text-align: center;
+    width: 80px;
+    height: 34px;
+    border-radius: 3px;
+    /* outline: none; */
+    background-color: #FF4341;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.deposit-div2-item-but{
+    padding:0px 50px 23px 0;
+    text-align: right;
+}
+.deposit-div2-item-but button,.deposit-div2-item-but a{
+    display: inline-block;
+    line-height: 34px;
+    text-align: center;
+    height: 34px;
+    width: 80px;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #FF4341;
+    outline: none;
+}
+
+.deposit-div2-item-but .my-upper{
+    background-color: #EEEEEE;
+    color: #C0C0C0;
+}
+
+
+
+.item2 .deposit-div2-item-but{
+    padding-top: 23px;
+}
+
+.item3 .deposit-b-t{
+    text-align: center;
+    width: 936px;
+}
+.item3 .deposit-b-t ul:nth-child(1){
+    /* background-color: #4D4F56; */
+    color: #F5F5F5;
+}
+.item3 .deposit-b-t ul:nth-child(2){
+    background-color:#F5F5F5;
+    color: #4D4F56;
+}
+
+.item3 .deposit-b-t li{
+    height: 50px;
+    line-height: 50px;
+    width: 20%;
+}
+.item3 .deposit-b-c{
+    margin-top: 10px;
+    border: 2px solid #FEC370;
+    width: 933px;
+}
+.item3 .deposit-b-c .deposit-b-c-1{
+    padding: 16px 0 16px 16px;
+    /* font-weight: 700; */
+    font-size: 18px;
+}
+.item3 .deposit-b-c .deposit-b-c-1 span:nth-child(2){
+    color: red;
+}
+.item3 .deposit-b-c-2{
+    height: 216px;
+}
+
+.item3 .deposit-b-c-2 >div:nth-child(1){
+    width: 30%;
+}
+.item3 .deposit-b-c-2 >div:nth-child(2){
+    width: 70%;
+}
+
+.item3 .deposit-b-c-2 .div-1 div{
+    padding-left: 16px;
+}
+.item3 .deposit-b-c-2 .div-1 div p{
+    border-left: 2px solid red;
+    padding-left: 10px;
+    font-size: 20px;
+}
+.item3 .deposit-b-c-2 .div-1 .div-img{
+    width: 202px;
+    height: 60px;
+    border: 1px solid #DDD;
+    margin-top: 20px;
+    margin-left: 16px;
+}
+
+.item3 .deposit-b-c-2 .div-2 .li1{
+    margin-bottom: 22px;
+    vertical-align: middle;
+}
+
+.item3 .deposit-b-c-2 .div-2 span{
+    display: inline-block;
+}
+.item3 .deposit-b-c-2 .div-2 .div-2-span1{
+    width: 80px;
+    text-align: right;
+}
+.item3 .deposit-b-c-2 .div-2 .div-2-span2{
+    width: 265px;
+}
+
+.item3 .deposit-b-c-2 .div-2 .div-2-span3{
+    width: 76px;
+}
+.item3 .deposit-b-c-2 .div-2 .div-2-span3 button{
+    width: 100%;
+    height: 24px;
+    background-color: #E85036;
+    color: #fff;
+    border-radius:2px;
+    outline: none;
+}
+.item3 .deposit-b-c-3{
+    text-align: center;
+    color: #FB6965;
+    padding-bottom: 10px;
+}
+
+.item3 .deposit-b-b{
+    margin-top: 32px;
+    text-align: right;
+}
+.item3 .deposit-b-b a{
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 2px;
+}
+.item3 .deposit-b-b .but1{
+    margin-right: 5px;
+    background-color: #EEEEEE;
+    color: #C0C0C0;
+}
+.item3 .deposit-b-b .but2{
+    background-color: #F84C2F;
+    color: #fff;
+}
+
+.item3 .deposit-div2-item-but{
+    padding-top: 23px;
+}
+
+
+.item4{
+    background-color: red;
+}

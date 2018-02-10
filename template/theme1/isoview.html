@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端​​APP信任授权教程</title>
+
+    <link rel="stylesheet" type="text/css" href="{{.CdnUrl}}/theme1/public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{.CdnUrl}}/theme1/public/css/style1.css">
+    <script type="text/javascript" src="{{.CdnUrl}}/theme1/public/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".proc-title").click(function () {
+                if ($(this).siblings('.con-proc').is(":hidden")) {
+                    $(this).parent().siblings('li').children('.con-proc').hide();
+                    $(this).siblings('.con-proc').show();
+                    $('html,body').animate({scrollTop: $(this).offset().top}, 'slow');
+                    $(this).addClass("proc-title-hover");
+                } else {
+                    $(this).siblings('.con-proc').slideUp();
+                    $(this).removeClass("proc-title-hover")
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="shell">
+        <div class="header">移动端APP信任授权教程</div>
+        <div class="proc">
+            <div class="proc-title proc-title-hover">
+                <h2>第一步：</h2>
+                <p>设置 ＞ 通用</p></div>
+            <div class="con-proc myblock">
+                <p><img class="step-img" src="{{.CdnUrl}}/theme1/public/images/ios/IMG_00531.png"><img class="step-img"
+                                                                                            src="{{.CdnUrl}}/theme1/public/images/ios/IMG_00541.png">
+                </p></div>
+        </div>
+        <div class="proc">
+            <div class="proc-title proc-title-hover">
+                <h2>第二步：</h2>
+                <p>设备管理 ＞ 授权确认</p></div>
+            <div class="con-proc" style="display: block;">
+                <p><img class="step-img" src="{{.CdnUrl}}/theme1/public/images/ios/IMG_00551.png"><img class="step-img"
+                                                                                            src="{{.CdnUrl}}/theme1/public/images/ios/IMG_00571.png">
+                </p></div>
+        </div>
+        <div class="proc">
+            <div class="proc-title proc-title-hover">
+                <h2>第三步：</h2>
+                <p>完成！授权完毕</p></div>
+            <div class="con-proc" style="display: block;">
+                <p></p>
+                <center><img class="step-img" src="{{.CdnUrl}}/theme1/public/images/ios/IMG_00581.png"></center>
+                <p></p></div>
+        </div>
+
+        <!---​​- footer ---->
+        <div class="footer">
+            <p class="copyright">Copyright © PK版权所有 All Rights Reserved.</p></div>
+    </div>
+</div>
+
+</body>
+</html>

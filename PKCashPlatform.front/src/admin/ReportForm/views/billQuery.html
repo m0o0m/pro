@@ -1,0 +1,138 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken"
+                     data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>报表统计</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body-toolbar">
+                            <div class="row form-horizontal">
+                                <div class="row">
+                                    <label class="col-md-1 col-xs-4 input-label allsite">{{lang['Site']}}</label>
+                                    <div class="col-md-2 col-xs-8 col-xs-12 allsite">
+                                        <div class="form-group">
+
+                                            <select data-smart-select2 class="selectWidth"  ng-model="site">
+                                                <option value="">全部</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">日期区间</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm" ng-model="date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">账单状态</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <select class="form-control" ng-model="status" ng-init="status='1'" >
+                                                <option class="form-control" value="1">未下发</option>
+                                                <option class="form-control" value="2">已下发</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-3 input-label allsite">
+                                        <a href-void="" class="btn btn-primary" href="#" ng-click="search()">搜索</a>
+                                    </label>
+                                    <label class="col-md-1 col-xs-3 input-label allsite">
+                                        <a class="btn btn-primary" data-ui-sref="app.ReportForm.reportQuery">添加</a>
+                                    </label>
+                                    <label class="col-md-1 col-xs-3 input-label allsite">
+                                        <a href-void="" class="btn btn-primary" href="#" ng-click="delBill()">删除</a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-body no-padding">
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead style="text-align: center">
+                                            <tr>
+                                                <th class="text-align-center"></th>
+                                                <th class="text-align-center"></th>
+                                                <th class="text-align-center">站点</th>
+                                                <th class="text-align-center">期数</th>
+                                                <th class="text-align-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody ng-repeat="item in data.list" class="text-align-center">
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="bb">
+                                                    </td>
+                                                    <td ng-click="open($event)">&gt;</td>
+                                                    <td>{{item.site}}</td>
+                                                    <td>{{item.periods}}</td>
+                                                    <td>
+                                                        <button class="btn btn-xs btn-default" ng-click="modifyBill()">修改</button>
+                                                        <button class="btn btn-xs btn-default" ng-click="issuedBill()">下发账单</button>
+                                                    </td>
+                                                </tr>
+                                                <tr class="tr-excel">
+                                                    <td colspan="5">
+                                                        <table class="table table-bordered" style="display: none;">
+                                                            <thead>
+                                                                <tr class="text-align-center">
+                                                                    <td style="vertical-align:middle;" rowspan="2">网站</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">項目</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">金額</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">上月负数	</td>
+                                                                    <td style="vertical-align:middle;" rowspan="1">條件</td>
+                                                                    <td style="vertical-align:middle;" rowspan="1">负数额度</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">應收</td>
+                                                                    <td style="vertical-align:middle;" rowspan="1">应加应扣</td>
+                                                                    <td style="vertical-align:middle;" rowspan="2">备注</td>
+                                                                </tr>
+                                                                <tr class="text-align-center">
+                                                                    <td rowspan="1">比例</td>
+                                                                    <td rowspan="1">本月应加</td>
+                                                                    <td rowspan="1">视讯额度</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="item2 in item.excel.list">
+                                                                    <td style="vertical-align:middle;text-align: center" rowspan="{{item.excel.list.length}}" ng-if="$index==0">{{item.excel.packageName}}</td>
+                                                                    <td>{{item2.projectName}}</td>
+                                                                    <td>{{item2.amount}}</td>
+                                                                    <td>{{item2.lastMonth}}</td>
+                                                                    <td>{{item2.condition}}</td>
+                                                                    <td>{{item2.negativeAmount}}</td>
+                                                                    <td>{{item2.receivable}}</td>
+                                                                    <td>{{item2.video}}</td>
+                                                                    <td>{{item2.remark}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="9" style="background: yellow">
+                                                                        <p>注：1.客户接到财务对账单，三天内如有数据疑问请联系财务专员，财务专员SKYPE:pk.finance</p>
+                                                                        <p>    2.如无疑问，汇款前请找财务专员索取最新汇款账号，感谢您们的支持，PK娱乐平台团队致敬！</p>
+                                                                        <p>    3.汇款账号发出后，半小时内没汇好款，要汇款之前请再联系我们确认汇款账号，以免有变动。</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+

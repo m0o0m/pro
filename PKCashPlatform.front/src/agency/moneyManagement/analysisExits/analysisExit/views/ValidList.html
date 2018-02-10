@@ -1,0 +1,101 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('ValidMembershipList')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+
+                                        <label class="col-md-1 control-label allsite col-xs-4 reltop">站点</label>
+                                        <div class="col-md-2 col-xs-8 allsite">
+                                            <div class="form-group">
+                                                <select data-smart-select2  class="selectWidth" ng-model="site_index_id">
+                                                    <option value="">请选择</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in names">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 control-label reltop col-xs-4">查询时间</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="开始时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="start_time">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 control-label text-align-center reltop col-xs-4">————</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="结束时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="end_time">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 control-label reltop col-xs-4">代理商账号</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" class="form-control inp_2" placeholder="请输入代理商账号" ng-model="agency">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-horizontal">
+                                        <div class="col-md-1 col-xs-offset-8 col-md-offset-11">
+                                            <a href-void="" class="btn btn-primary" href="#" ng-click="search()">查询</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">排序</th>
+                                                <th class="text-center">账号</th>
+                                                <th class="text-center">登入账号</th>
+                                                <th class="text-center">有效人数</th>
+                                                <th class="text-center">新增人数</th>
+                                                <th class="text-center">入工入款</th>
+                                                <th class="text-center">公司/线上入款</th>
+                                                <th class="text-center">入工取款</th>
+                                                <th class="text-center">线上取款</th>
+                                                <th class="text-center">结果</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list" class="text-center">
+                                                <td>{{item.sort}}</td>
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.login_account}}</td>
+                                                <td>{{item.effective_number}}</td>
+                                                <td>{{item.new_arrivals}}</td>
+                                                <td>{{item.artificial_income}}</td>
+                                                <td>{{item.company_online}}</td>
+                                                <td>{{item.artificial_draw}}</td>
+                                                <td>{{item.online_draw}}</td>
+                                                <td>{{item.result}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

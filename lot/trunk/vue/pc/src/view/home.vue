@@ -1,0 +1,378 @@
+<template lang="html">
+  <div class="home">
+    <div class='html_rig'>
+      <div class="default_left">
+        <div class='logo' @click='returnIndex'>
+          <h1>PK娱乐城</h1>
+        </div>
+        <div class='def-l-t' @click='returnIndex'>
+          <h2>彩票大厅</h2>
+        </div>
+        <ul class='nuv'>
+          <li v-for="(item,index) in lists" @click='listClick(item,index)'>
+            <div class='img-font' :class='[item.flag?"img-font-click":""]'>
+              <img v-if="index>1" :src='item.lsrc' class='lotteryIcon'></img>
+              {{item.lname}}
+              <i :class="[item.flag?'pk-arrowDown':'pk-jiantou']" class='iconfont nuv-icon-dow'></i>
+            </div>
+            <ul class='nuv-ul-s' ref="ulst">
+              <li v-for="(v,i) in item.types" style="position: relative;">
+                <p v-if="v.is_wh == 1" class='nuv-ul-s-list' @click.stop='sonlistClick(i,item,v)'
+                   :class="{'nuv-ul-s-list-click':v.flag}">
+                  <i v-if="v.is_hot==2" class='icon-new'></i><span ref="weihu">{{v.name}}</span>
+                  <i class='icon-heart' :class="[v.is_like==2?'xin1':'xin']" @click.stop="get_love(v)"></i>
+                </p>
+
+                <p v-else-if="v.is_wh == 2" class='nuv-ul-s-list' @click.stop="nothing()" @mouseover="on_mouseover(v)"
+                   @mouseout="on_mouseout(v)" :class="{'nuv-ul-s-list-click':v.flag}">
+                  <i class='icon-weihu'></i>
+                  <i v-if="v.is_hot==2" class='icon-new'></i><span v-show="v.weihu_status">维护中</span><span
+                  v-show="!v.weihu_status">{{v.name}}</span>
+                  <i class='icon-heart' :class="[v.is_like==2?'xin1':'xin']" @click.stop="get_love(v)"></i>
+                </p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="rigth_content">
+        <Right></Right>
+        <router-view :rightList="rightList" :loading_modal="loading_modal"></router-view>
+      </div>
+      <!--<Chat-room></Chat-room>-->
+      <Ket-board v-show="this.$route.query.page"></Ket-board>
+    </div>
+    <!--<BackTop></BackTop>-->
+    <Rule></Rule>
+  </div>
+</template>
+
+<script>
+  import Rule from "../share_components/game_rule";
+  import Right from "../share_components/default_right";
+  import animate from "../assets/js/animate";
+  import mymousewheel from "../assets/js/mousewheel";
+  import httpApi from "../api/config";
+  import {Modal} from 'iview';
+//  import ChatRoom from '../share_components/chat_room'
+  import share_time from '../share_components/share'
+  import KetBoard from '../share_components/keyboard_view'
+  export default {
+    components: {
+      Right,
+      Modal,
+//      BackTop,
+      Rule,
+      KetBoard,
+//      ChatRoom
+    },
+    data() {
+      return {
+        loading_modal:false,
+        lists: [],
+        ulst: null,
+        index: null,
+        love_flag: true,
+        rightList: [],
+      };
+    },
+    watch: {
+      $route: "sethome"
+    },
+    created() {
+      this.$root.$on("menu_love", e => {
+        this.get_love(e);
+      });
+      this.all_type();
+    },
+
+    mounted() {
+      var h = window.screen.height;
+      var nuv = document.querySelector(".nuv");
+      nuv.style.height = h - 250 + "px";
+      mymousewheel(nuv);
+      document.getElementById('loading_js').style.display = 'none';
+    },
+    methods: {
+      nothing(){
+        console.log(111)
+      },
+      on_mouseout(v) {
+//        console.log(v);
+        v.weihu_status = false;
+      },
+      on_mouseover(v){
+//        console.log(v);
+        v.weihu_status = true;
+      },
+      myAccordion(ul, item, i, lists) {
+        for (let index = 0; index < lists.length; index++) {
+          if (index == i) {
+            if (lists[index].flag) {
+              ul[index].style.display = "block";
+              animate(ul[index], {
+                height: 40 * ul[index].children.length,
+                opacity: 1
+              });
+            } else {
+              animate(
+                ul[index],
+                {
+                  height: 0,
+                  opacity: 0
+                },
+                () => {
+                  ul[index].style.display = "none";
+                }
+              );
+            }
+          } else {
+            lists[index].flag = false;
+            animate(
+              ul[index],
+              {
+                height: 0,
+                opacity: 0
+              },
+              () => {
+                ul[index].style.display = "none";
+              }
+            );
+          }
+        }
+      },
+      returnIndex() {
+        if (this.ulst == null) {
+          this.ulst = this.$refs.ulst;
+        }
+        var flag = true;
+        this.$router.push({
+          name: "home"
+        });
+        for (let k = 0; k < this.lists.length; k++) {
+          if (this.ulst[k].clientHeight > 0) {
+            flag = false;
+            animate(
+              this.ulst[k],
+              {
+                height: 0,
+                opacity: 0
+              },
+              () => {
+                this.ulst[k].style.display = "none";
+              }
+            );
+          }
+          for (let i = 0; i < this.lists[k].types.length; i++) {
+            this.lists[k].types[i].flag = false;
+          }
+          this.lists[k].flag = false;
+        }
+        //再次请求接口
+        this.all_type();
+      },
+      listClick(item, index) {
+        //判断ulst是否已经有数据，没有数据就把所有子ul放进
+        if (this.ulst == null) {
+          this.ulst = this.$refs.ulst;
+        }
+        item.flag = !item.flag;
+        this.myAccordion(this.ulst, item, index, this.lists);
+      },
+      sonlistClick(i, item, v) {
+        if (v.is_wh == 2) {
+//        v.name = '维护中'
+        } else {
+          // 子li的点击事件
+          for (var index = 0; index < this.lists.length; index++) {
+            for (var k = 0; k < this.lists[index].types.length; k++) {
+              if (this.lists[index].types[k].name == v.name) {
+                this.lists[index].types[k].flag = true;
+              } else {
+                this.lists[index].types[k].flag = false;
+              }
+            }
+          }
+          this.$root.$emit("change_item", 0);
+          this.$root.$emit("child_change", 0);
+          let index_page = '';
+//      if(v.type == 'liuhecai' || v.type == 'bj_28' || v.type == 'pc_28' || v.type == 'ffc_o'){
+//        index_page = v.type
+//      }else{
+//        index_page = v.ltype
+//      }
+          index_page = v.template;
+//          console.log(v);
+          this.$router.push({
+//            name: v.type,
+            name: index_page,
+            params: {
+              id: v.type
+            },
+            query: {
+              page: v.type
+            }
+          });
+        }
+      },
+      all_type() {
+        this.rightList = [];//清空右侧的数据
+        var like = null;
+        var hot = null;
+        var all_type = null;
+        var lists = [];
+//        this.$root.$emit('loading_home',true);
+        this.loading_modal = true;
+         document.documentElement.scrollTop = 0;
+         document.body.scrollTop = 0;
+        httpApi.alltype(this, {}, res => {
+          if (res.data.ErrorCode == 1) {
+//            this.$root.$emit('loading_home',false);
+            this.loading_modal = false;
+            like = res.data.Data.like;
+            hot = res.data.Data.hot;
+            all_type = res.data.Data.all_type;
+            for (var i = 0; i < like.length; i++) {
+              like[i].flag = false;
+              for (var k = 0; k < like[i].length; k++) {
+                like[i].types[k].flag = false;
+              }
+            }
+            lists.push({
+              lname: "我的收藏",
+              flag: false,
+              SelectItem: null,
+              types: like
+            });
+            for (var i = 0; i < hot.length; i++) {
+              hot[i].flag = false;
+              for (var k = 0; k < hot[i].length; k++) {
+                hot[i].types[k].flag = false;
+              }
+            }
+            lists.push({
+              lname: "热门彩票",
+              flag: false,
+              SelectItem: null,
+              types: hot
+            });
+            for (var i = 0; i < all_type.length; i++) {
+              all_type[i].flag = false;
+              all_type[i].SelectItem = null;
+              for (var k = 0; k < all_type[i].types.length; k++) {
+                all_type[i].types[k].flag = false;
+              }
+              lists.push(all_type[i]);
+            }
+//            console.log(lists);
+            for (let i = 0; i < lists.length; i++) {
+              for (let j = 0; j < lists[i].types.length; j++) {
+                Object.assign(lists[i].types[j], {weihu_status: false})
+              }
+            }
+            this.lists = lists;
+            for (let i = 2; i < this.lists.length; i++) {
+              for (let k = 0; k < this.lists[i].types.length; k++) {
+                this.rightList.push(this.lists[i].types[k]);
+              }
+            }
+            let last_number = 0;
+            let index = 0;
+            for (let i = 0; i < this.rightList.length; i++) {
+              for (let j = 0; j < this.rightList[i].auto.length; j++) {
+                if (this.rightList[i].ltype == 'xy') {
+                  index += 1;
+                  last_number += Number(this.rightList[i].auto[j]);
+                  if (index == 3) {
+                    this.rightList[i].auto.push(last_number);
+                    index = 0;
+                    last_number = 0;
+                    break
+                  }
+                }
+              }
+            }
+//            console.log(this.rightList)
+          }
+        });
+      },
+      get_love(item) {
+        if (this.love_flag) {
+          this.love_flag = false;
+          var is_like = item.is_like;
+          this.$set(this.lists, this.lists);
+          if (this.ulst == null) {
+            this.ulst = this.$refs.ulst;
+          }
+          const body = {
+            fc_type: item.type
+          };
+          httpApi.updateloves(this, body, res => {
+            if (res.statusText == "OK") {
+              if (is_like == 2) {
+                this.$Modal.success({
+                  content: "取消成功"
+                });
+                window.setTimeout(() => {
+                  this.$Modal.remove();
+                }, share_time.Prompt);
+              } else {
+                this.$Modal.success({
+                  content: "收藏成功"
+                });
+                window.setTimeout(() => {
+                  this.$Modal.remove();
+                }, share_time.Prompt);
+              }
+              var flag = true;
+              for (var i = 0; i < this.lists.length; i++) {
+                for (var l = 0; l < this.lists[i].types.length; l++) {
+                  if (this.lists[i].types[l].type == item.type) {
+                    if (is_like == 2) {
+                      this.lists[i].types[l].is_like = 1;
+                      flag = false;
+                    } else {
+                      this.lists[i].types[l].is_like = 2;
+                    }
+                  }
+                }
+              }
+              if (flag) {
+                this.lists[0].types.push(item);
+                if (this.lists[0].flag) {
+                  var height = this.ulst[0].clientHeight;
+                  this.ulst[0].style.height = height + 40 + "px";
+                }
+              } else {
+                for (var i = 0; i < this.lists[0].types.length; i++) {
+                  if (this.lists[0].types[i].name == item.name) {
+                    this.lists[0].types.splice(i, 1);
+                    break;
+                  }
+                }
+                if (this.lists[0].flag) {
+                  var height = this.ulst[0].clientHeight;
+                  this.ulst[0].style.height = height - 40 + "px";
+                }
+              }
+              this.love_flag = true;
+            } else {
+              this.love_flag = true;
+            }
+          });
+        }
+      },
+      sethome() {
+        if (!this.$route.query.page) {
+          if (window.is_wh) {
+            if (window.is_wh == 2) {
+              this.$router.go(0);
+            }
+          }
+          window.is_wh = 1;
+        }
+      }
+    }
+  };
+</script>
+<style lang="scss" src="../assets/css/home.scss" scoped></style>

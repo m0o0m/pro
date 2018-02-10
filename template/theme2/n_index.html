@@ -1,0 +1,1604 @@
+<html class="first zh-cn "><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>PK  a站</title>
+<meta http-equiv="Cache-Control" content="max-age=864000">
+<meta name="keywords" content="100211">
+<meta name="description" content="123566">
+<link href="/public/css/font-awesome1.css" rel="stylesheet">  
+<script type="text/javascript">
+    var $title = document.title;
+    parent.document.title = $title;
+    var CssType = "1";
+    var cdnUrl = 'https://pcc.pkcdns2.com/9'; //js中調用cdn域名，將域名賦值給js全局變量
+    /*if (window.parent.cdnUrl){//cdn域名一律使用https
+        cdnUrl = window.parent.cdnUrl;
+    }*/
+    var jsVersion = '';
+    if (window.parent.jsVersion){//js版本号
+        jsVersion = window.parent.jsVersion;
+    }
+    var scriptHtml = "<script src=\""+cdnUrl+"/shared/sitepublic/js/jquery-1.7.2.min.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/jquery-ui-1.8.21.custom.min.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/md5.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/top.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/common_member.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/common_forpage.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/common_helper.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/common_forgames.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/common_static.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/float.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/jquery.cookie.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/easydialog.min.js\"><\/script>"+
+        "<link href=\""+cdnUrl+"/shared/sitepublic/css/jquery-ui-1.9.2.custom.css\" type=\"text/css\" rel=\"stylesheet\">"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/unslider.min.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/sitepublic/js/tab.js\"><\/script>";
+    if(CssType == "2"){
+        //推送
+        scriptHtml += "<script src=\""+cdnUrl+"/shared/push/swfobject.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/push/web_socket.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/push/config.js\"><\/script>"+
+        "<script src=\""+cdnUrl+"/shared/push/push.js\"><\/script>";
+    }
+    scriptHtml += "<link href=\""+cdnUrl+"/shared/simplelogin/css/modalCss.css\" rel=\"stylesheet\">"+
+        "<script src=\""+cdnUrl+"/shared/simplelogin/js/modalJs.js\"><\/script>";
+    document.writeln(scriptHtml);
+</script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/jquery-1.7.2.min.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/jquery-ui-1.8.21.custom.min.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/md5.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/top.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/common_member.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/common_forpage.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/common_helper.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/common_forgames.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/common_static.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/float.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/jquery.cookie.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/easydialog.min.js"></script><link href="https://pcc.pkcdns2.com/9/shared/sitepublic/css/jquery-ui-1.9.2.custom.css" type="text/css" rel="stylesheet"><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/unslider.min.js"></script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/tab.js"></script><link href="https://pcc.pkcdns2.com/9/shared/simplelogin/css/modalCss.css" rel="stylesheet"><script src="https://pcc.pkcdns2.com/9/shared/simplelogin/js/modalJs.js"></script>
+
+
+<script type="text/javascript">
+    var lotterys = '<link rel="stylesheet" href="' + cdnUrl + '/shared/lottlys/css/css/bootstrap.min.css" />'
+//    lotterys+='<link rel="stylesheet" href="' + cdnUrl + '/shared/lottlys/css/css/lotteryhall.css" />'
+    document.writeln(lotterys)
+</script><link rel="stylesheet" href="https://pcc.pkcdns2.com/9/shared/lottlys/css/css/bootstrap.min.css">
+
+
+<script type="text/javascript">
+    $(function(){
+        var imgdom = $("<img src='"+cdnUrl+"/shared/simplelogin/images/no.png'/>");
+        var io = false;
+        var config = {
+            codesImg : imgdom,
+            registHref : 'getPager("-","zhuce");',
+            passwordID : 'passwordID',
+            userNameID : 'userNameID',
+            codeID     : 'codeID',
+            codesClick : function(){
+                            imgdom.attr("src", "/yzm.php?type="+Math.random()+(new Date).getTime());
+                        },
+            enterBtnClick : function(){
+                var un  =   $("#userNameID").val();
+                if(un == "" || un == "帐户"){
+                    $("#userNameID").focus();
+                    return false;
+                }
+                var pw  =   $("#passwordID").val();
+                if(pw == "" || pw == "******"){
+                    $("#passwordID").focus();
+                    return false;
+                }
+                var rmNum   =   $("#codeID").val();
+                if(rmNum == "" || rmNum == '验证码'){
+                    $("#codeID").focus();
+                    return false;
+                }
+                if(!io){
+                    io = true;
+                    $.post("/index.php/webcenter/Login/login_do",{r:Math.random(),action:"login",username:un,password:pw,vlcodes:rmNum},function(data){
+                        if(data == 5){
+                            zhuModal.show('验证码错误，请重新输入');
+                            $("#codeID").val('');
+                            $("#codeID").select();
+                            io = false;
+                            imgdom.attr("src", "/yzm.php?type="+Math.random()+(new Date).getTime());
+                        }else if(data == 4){
+                            zhuModal.show('账号密码不匹配,请重新输入!');
+                            $("#codeID").val('');
+                            $("#passwordID").val('');
+                            $("#username").select();
+                            io = false;
+                        }else if(data == 3){
+                            zhuModal.show('账号不存在!');
+                            $("#codeID").val('');
+                            $("#passwordID").val('');
+                            $("#username").select();
+                            io = false;
+                        }else if(data == 2){
+                            zhuModal.show('对不起，账户已暂停使用,请联系在线客服！');
+                            io = false;
+                        }else if(data == 1){
+                            window.location.href= '/login/info';
+                            return;
+                        }   
+                    });
+                }
+            }
+
+        };
+        zhuModal.init({loginConfig:config});
+    })
+</script>
+<style>
+    /*按钮弹出框*/
+
+    .eg_modal{
+        display: none;
+        width: 100%;
+        height: 100%;
+        position:fixed;
+        left: 0;
+        top: 0;
+        z-index: 10001;
+        background-color: rgba(0,0,0,0.5);
+
+    }
+    .eg_money_popup{
+        color:#000;
+        width: 500px;
+        height: 208px;
+        background-color: rgb(248,248,248);
+        padding: 5px;
+        font-size:1.1em;
+        border-radius: 5px;
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        -o-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%); 
+         z-index: 10000;
+        display: none;
+    }
+
+
+    .eg_money_popup a{
+        text-decoration: none;
+        cursor: pointer;
+        text-align: center;
+    }
+    .eg_money_popup a:hover{
+        text-decoration: none;
+
+    }
+
+    .eg_money_popup>form>div{
+        overflow: hidden;
+        height: 30px;
+        line-height: 30px;
+    }
+    .eg_money_popup>form div:nth-child(n+3){
+        margin-top: 10px;
+    }
+
+    .eg_money_popup>form div:nth-child(2){
+        margin-top:5px;
+    }
+    .eg_money_popup>form>div:not(.form-submit-list) {
+        font-weight: bold;
+        font-size: 1.4em;
+    }
+
+
+
+    .eg_money_popup>form>div:nth-child(1)>a{
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        float: right;
+        background: url("https://pcc.pkcdns2.com/9/shared/lottlys/images/images/popup/cross_normal.png") no-repeat;
+    }
+
+    .eg_money_popup>form>div:nth-child(1)>a:hover{
+        background-image:url("https://pcc.pkcdns2.com/9/shared/lottlys/images/images/popup/cross_change.png") ;
+    }
+
+    .eg_money_popup>form>div:nth-child(2) strong{
+        text-decoration: underline;
+        color:red;
+    }
+
+    .eg_money_popup>form>div:nth-child(3)>a{
+        position: absolute;
+        right: 13%;
+        width: 92px;
+        height: 30px;
+        line-height: 30px;
+        color:blue;
+        background: url("https://pcc.pkcdns2.com/9/shared/lottlys/images/images/popup/gray_dialog.png") no-repeat 12px 0px;
+
+    }
+
+    .eg_money_popup>form>div:nth-child(3)>a:hover{
+        color:red;
+    }
+
+    .eg_money_popup>form>div:nth-child(3){
+        position: relative;
+    }
+
+    .eg_money_popup>form>div:nth-child(3) p{
+        color:red;
+        position: relative;
+        left: -13%;
+    }
+
+    .eg_money_popup>form>div:nth-child(4) input{
+        position: relative;
+        left: -10%;
+        height: 30px;
+        outline: none;
+    }
+
+    .eg_money_popup>form>div:nth-child(5) a{
+        width: 152px;
+        height: 30px;
+        display: inline-block;
+        line-height: 30px;
+        color:white;
+    }
+
+    .eg_money_popup>form>div:nth-child(5) a:first-child{
+
+        background: url("https://pcc.pkcdns2.com/9/shared/lottlys/images/images/popup/purple_button.png") no-repeat 13px 0px;
+    }
+    .eg_money_popup>form>div:nth-child(5) a:last-child{
+
+        background: url("https://pcc.pkcdns2.com/9/shared/lottlys/images/images/popup/purple_button.png") no-repeat 13px 0px;
+    }
+
+    .eg_money_popup>form>div:nth-child(5)>a:hover{
+        background-image:url("https://pcc.pkcdns2.com/9/shared/lottlys/images/images/popup/orange_button.png") ;
+    }
+
+    .eg_money_popup>form>.form-submit-transfer{
+        display: none;
+    }
+</style>
+<!--弹出框-->
+    </head><body marginwidth="0" marginheight="0"><div class="eg_modal">
+        <div class="eg_money_popup">
+            <form>
+                <div class="form-group">
+                    <a href="#"></a>
+                </div>
+                <div class="form-group">
+                    <div id="egtcGameMoney" class="col-sm-offset-2 col-sm-9" style="display:none">EG游戏账户余额（当前：
+                        <strong>¥0.00</strong>
+                        ）</div>
+                    <div id="csGameMoney" class="col-sm-offset-2 col-sm-9" style="display:none">官方彩票账户余额（当前：
+                        <strong>¥0.00</strong>
+                        ）</div>
+                </div>
+                <div class="form-group">
+
+                    <label for="system_money" class="col-sm-3 col-sm-offset-2">系统余额：</label>
+                    <p class="col-sm-3" id="system_money">18.00</p>
+                    <a href="javascript:openmember('1');" class="col-sm-2">去存款</a>
+                </div>
+                <div class="form-group">
+                    <label for="rollin_money" class="col-sm-3 col-sm-offset-2">转入金额：</label>
+                    <input type="text" class="col-sm-5 form-control" id="rollin_money" onkeyup="quataclearNoNum(this);">
+                </div>
+                <div class="form-group form-submit-list">
+                    <a href="#" id="hl" class="col-sm-2 col-sm-offset-2">忽略提醒进入游戏</a>
+                    <a href="#" class="col-md-2" id="button_quota">确认转账</a>
+                </div>
+                <div class="from-group form-submit-transfer">
+                    <p class="col-sm-10 col-sm-offset-4">转账中,请稍等....</p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <input type="hidden" id="egtc_quatatoken" value="">
+    <input type="hidden" id="cs_quatatoken" value="">
+    <input id="lotteryTypeName" name="lottery_type_name" type="hidden" value="">
+<script>
+    var min_money = Number("1");
+//    弹框
+    $('#button_quota').click(function () {
+        var rollin_money = $('#rollin_money').val();
+        lotteryTypeName=$("#lotteryTypeName").val();
+        var edtype_num='';
+        if(lotteryTypeName=='egtc'){
+            edtype_num='2';
+        }
+        if(lotteryTypeName=='cs'){
+            edtype_num='3';
+        }
+        var token = $('#'+lotteryTypeName+'_quatatoken').val();
+
+        if ( rollin_money < min_money ) {
+            alert("转换金额不得小于"+min_money+"，或者输入金额不能为空！");
+            return false;
+        }
+        $('.form-submit-list').css('display','none');
+        $('.form-submit-transfer').css('display','block');
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "/index.php/member/new/bank/bank_transf_index_do",
+            data: "trtype1="+'sport'+"&trtype2="+lotteryTypeName+"&p3_Amt="+rollin_money+'&'+lotteryTypeName+'_quatatoken='+token+'&edtype='+edtype_num,
+            dataType: 'json',
+            error: function(){
+                alert('异常错误，请联系客服');
+                hid(lotteryTypeName);
+            },
+            success: function(msg){
+                if(msg.status==18){
+                    alert("额度转换成功");
+                    hid(lotteryTypeName);
+                    opengeme('/video/login?g_type='+lotteryTypeName+'&sw=0&gameid=');
+                }else{
+                    alert(msg.info);
+                    hid(lotteryTypeName);
+                }
+            },
+        });
+
+    })
+
+    function hid(lotteryTypeName) {
+        ajax_tokn(lotteryTypeName);
+        $('.eg_modal').css('display','none');
+        $('.form-submit-list').css('display','block');
+        $('.form-submit-transfer').css('display','none');
+        history.go(0);
+    }
+
+    function ajax_tokn(lotteryTypeName) {
+        $.ajax({
+            type: "POST",
+            url: "/index.php/index/auata_token",
+            data: "type="+lotteryTypeName,
+            dataType: 'json',
+            success: function(msg){
+             $('#'+lotteryTypeName+'_quatatoken').val(msg.token);
+            },
+        });
+    }
+    
+    var gameHref = {
+        href: '',
+        opengame3: function (href) {
+            if(href.indexOf('egtc') >= 0){
+                $("#lotteryTypeName").val('egtc');
+                $('#egtcGameMoney').show();
+            }else{
+                $('#egtcGameMoney').hide();
+            }
+            if(href.indexOf('cs') >= 0){
+                $("#lotteryTypeName").val('cs');
+                $('#csGameMoney').show();
+            }else{
+                $('#csGameMoney').hide();
+            }
+            var _this = this;
+            _this.href = href;
+            _this.modal_game();
+        },
+        modal_game: function () {
+//        模态框显示
+            $('.eg_modal').show();
+            $('.eg_money_popup').show();
+            $('.eg_money_popup>form>div:first-child a').click(function () {
+                $('.eg_money_popup').hide();
+                $('.eg_modal').hide();
+            })
+        },
+        hl: function () {
+            var _this = this;
+            opengeme(_this.href);
+            $('.eg_modal').css('display','none');
+            $('.eg_money_popup').hide();
+        }
+    };
+
+    //判断是直接进入还是带入额度
+    function opengeme2 (href) {
+        gameHref.opengame3(href);
+    }
+    
+    // 给忽略绑定事件，目的为了跳转正确的彩票
+    $('#hl').click(function () {
+        gameHref.hl();
+    })
+    
+    function quataclearNoNum(obj) {
+        obj.value=obj.value.replace(/[^\d+]/g,'');
+    }
+
+
+
+</script>
+
+<link href="https://private1.pkcdns4.com/t_a/public/css/new/standard.css" rel="stylesheet">
+<link href="https://private1.pkcdns4.com/t_a/public/css/new/saipan.css" rel="stylesheet">
+<link href="https://private1.pkcdns4.com/t_a/public/css/new/font-awesome.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://private1.pkcdns4.com/t_a/public/css/new/style.css" type="text/css">
+<script type="text/javascript" src="https://private1.pkcdns4.com/t_a/public/js/new/jquery.nivo.slider.pack.js"></script>
+<style>/* header */ 
+    .header { background: url(https://private1.pkcdns4.com/t_a/public/images/new/head_Ad.png) 353px 16px no-repeat; } 
+    .news-wrap { background: url(https://private1.pkcdns4.com/t_a/public/images/new/news_bg.jpg) 5px 4px no-repeat #FFF; } 
+    .first-download { background: url(https://private1.pkcdns4.com/t_a/public/images/new/btn_download.png) 0 0 no-repeat; } /*banner-wrap*/ 
+    .banner-wrap{ background:url('https://private1.pkcdns4.com/t_a/public/images/new/title_welcome.jpg') no-repeat left top;} 
+    .live .banner-wrap, .livetop .banner-wrap { background:url('https://private1.pkcdns4.com/t_a/public/images/new/title_live.jpg') no-repeat left top;}
+    .memberexclusiveii .banner-wrap { background:url('https://private1.pkcdns4.com/t_a/public/images/new/title_memberexclusiveii.jpg') no-repeat left top;} /* login */ 
+    .login-wrap { background: url(https://private1.pkcdns4.com/t_a/public/images/new/login02_bg.png) 8px 0 no-repeat #CDDDF1; } 
+    .first-login-wrap, .first-login-data { background: url(https://private1.pkcdns4.com/t_a/public/images/new/login_bg.png) 0 0 no-repeat; } 
+    .first-login-wrap .login-submit { background: url(https://private1.pkcdns4.com/t_a/public/images/new/btn_login.png) 0 0 no-repeat; } 
+    .first-login-wrap .login-joinmember { background: url(https://private1.pkcdns4.com/t_a/public/images/new/btn_join.png) 0 0 no-repeat; } 
+    .first-login-data .su-logout { background: url(https://private1.pkcdns4.com/t_a/public/images/new/btn_logout.png) 0 0 no-repeat; } /* 其它 */ 
+    .advertise-title { background: url(https://private1.pkcdns4.com/t_a/public/images/new/about_ad.jpg) 0 0 no-repeat; } /* ** 各站 遊戲彩金 Game Jackpot */ 
+    .ele-gamejp-wrap { background: url('https://private1.pkcdns4.com/t_a/public/images/new/gamejp_bg.png') 0 0 no-repeat; }</style>
+<link href="https://private1.pkcdns4.com/t_a/public/css/new/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+
+
+<div id="mainBody">
+    <div id="page-header">
+        <div class="header clearfix">
+            <!-- LOGO -->
+            <div class="header-logo">
+                <div id="ele-logo-wrap">
+                    <a id="ele-logo-img"></a>
+                </div>
+                <style>
+                    #ele-logo-wrap,#ele-logo-img {width: 297px;height: 79px;background: url('https://private1.pkcdns4.com/t_a/public/images/new/logo.png') no-repeat;}
+                    #ele-logo-wrap{ background-position: 100% 100%;}
+                    #ele-logo-img { background-position: 0 0; }
+                </style>
+                <script>var ms = 600;
+                    $('#ele-logo-wrap > a').hover(function() {
+                        $(this).stop().animate({
+                            'opacity': 0
+                        },
+                        ms);
+                    },
+                    function() {
+                        $(this).stop().animate({
+                            'opacity': 1
+                        },
+                        ms);
+                    });</script>
+            </div>
+            <div class="header-top clearfix">
+                <!-- 自訂連結 -->
+                <div class="top-link-wrap">
+                    <a onclick="getPager('-','shiwan_reg');" href="javascript:void(0);" data-color="#fcfbfc|#F203FE" class="js-article-color top-custom-link" style="color: rgb(242, 3, 254);">免费试玩</a>&nbsp;|&nbsp;
+                    <a href="javascript:void(0);" onclick="getPager('-','detect');" data-color="#FBFCFB|#21FD22" class="js-article-color top-custom-link" style="color: rgb(33, 253, 34);">線路檢測</a>&nbsp;|&nbsp;
+                    <a href="/index.php/index/qucik_pay" target="_brank" data-color="#FBFCFB|#FDFD21" class="js-article-color top-custom-link" style="color: rgb(253, 253, 33);">快速充值中心</a>&nbsp;|&nbsp;
+                    <a href="/index.php/index/applypro" target="_brank" data-color="#FBFCFB|#FDFD21" class="js-article-color top-custom-link" style="color: rgb(253, 253, 33);">优惠活动大厅</a></div>
+                <!-- lang -->
+                <span class="lang-wrap">
+                    <style>.ele-lang-wrap { height: 20px; vertical-align: middle; display: inline-block; *display: inline; *zoom: 1; } 
+                    .ele-lang-option{ width: 22px; height: 16px; vertical-align: top; *margin-left: 4px; background: url('https://private1.pkcdns4.com/t_a/public/images/new/lang_rect.png') no-repeat; display: inline-block; *display: inline; *zoom: 1; } 
+                    .ele-lang-zh-cn { background-position: 0 -40px; } 
+                    .ele-lang-en { background-position: 0 -80px; } 
+                    .ele-lang-ja { background-position: 0 -120px; } 
+                    .ele-lang-ko { background-position: 0 -160px; } 
+                    .ele-lang-vi { background-position: 0 -200px; } 
+                    .ele-lang-th { background-position: 0 -240px; }</style>
+                    <span class="ele-lang-wrap">
+                        <a href="javascript:void(0);" class="ele-lang-option ele-lang-zh-tw" title="繁體中文"></a>
+                        <a href="javascript:void(0);" class="ele-lang-option ele-lang-zh-cn" title="简体中文"></a>
+                        <a href="javascript:void(0);" class="ele-lang-option ele-lang-en" title="English"></a>
+                    </span>
+                </span>
+                <br>
+                <!-- est -->
+                <div class="est-wrap"></div>
+            </div>
+            <!-- 主選單 -->
+            <div id="navfixed" class="mainnav-placeholder">
+                <div class="mainnav-wrap clear">
+                    <div class="mainnav">
+                        <ul class="clearfix">
+                            <li>
+                                <div class="nav-line"></div>
+                            </li>
+                            <li id="LS-first" class="LS-first">
+                                <a href="/" target="_top" class="current" title="首页">首页</a>
+                                <!-- 子選單 --></li>
+                            <li>
+                                <div class="nav-line"></div>
+                            </li>
+                            <li id="LS-ball" class="LS-ball">
+                                <a href="javascript:void(0);" onclick="getPager('-','sports','m');" class="">体育赛事</a>
+                                <!-- 子選單 --></li>
+                            <li>
+                                <div class="nav-line"></div>
+                            </li>
+                            <li id="LS-live" class="LS-live">
+                                <a href="javascript:void(0);" onclick="getPager('-','livetop','m');" class="">视讯直播</a>
+                                <!-- 子選單 --></li>
+                            <li>
+                                <div class="nav-line"></div>
+                            </li>
+                            <li id="LS-game" class="LS-game">
+                                <a href="javascript:void(0);" onclick="getPager('-','egame','m');" class="">电子游艺</a>
+                                <!-- 子選單 --></li>
+                            <li>
+                                <div class="nav-line"></div>
+                            </li>
+                            <li id="LS-ltlottery" class="LS-ltlottery">
+                                <a href="javascript:void(0);" onclick="getPager('-','lottery');" class="">彩票游戏</a>
+                                <!-- 子選單 --></li>
+                            <li>
+                                <div class="nav-line"></div>
+                            </li>
+                            <li id="LS-memberexclusiveii" class="LS-memberexclusiveii">
+                                <a href="javascript:void(0);" onclick="getPager('-','youhui');" class=" js-article-color " data-color="#4967A7|#FF0000" title="优惠活动" style="color: rgb(255, 0, 0);">优惠活动
+                                    <div class="event-new"></div></a>
+                                <!-- 子選單 --></li>
+                            <li>
+                                <div class="nav-line"></div>
+                            </li>
+                            <li id="LS-joinmember" class="LS-joinmember">
+                                <a onclick="getPager('-','zhuce');" href="javascript:void(0);" class="nav-join " title="会员注册">会员注册</a>
+                                <!-- 子選單 --></li>
+                            <li>
+                                <div class="nav-line"></div>
+                            </li>
+                            <li id="LS-mobile" class="LS-mobile">
+                                <a href="/index.php/index/wapview" target="_blank" title="手机下注">手机下注</a>
+                                <!-- 子選單 --></li>
+                        </ul>
+                        <div class="nav-line"></div>
+                        <a href="javascript:OnlineService('????520??1314??????');" class="nav-servic">在线客服</a>
+                        <div class="nav-line"></div>
+                        <div id="L-Sub">
+                            <div class="LS-ball" style="left: 51px; display: none;"> 
+                                <span class="subbg-left"></span> 
+                                <a onclick="getPager('-','sports','m');" href="javascript:void(0);">皇冠体育</a>
+                                                                <a href="javascript:;" onclick="opengeme('/video/games/login.php?g_type=bbin')">BB体育</a>
+                                                                                                <a href="javascript:;" onclick="getPager('-','im_sports','m');">IM体育</a>
+                                                                                                    <a href="javascript:;" onclick="getPager('-','sb_sports','m');">SB体育</a>
+                                                                <span class="subbg-right"></span>
+                            </div>
+                            <div class="LS-live" style="left: 0px; display: none;"> 
+                                <span class="subbg-left"></span>
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=ag')">AG视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=bbin')">BBIN视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=mg')">MG视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=lebo')">LEBO视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=og')">OG视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=dg')">DG视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=ab')">AB视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=lmg')">LMG视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=gd')">GD视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=gpi')">GPI视讯</a> 
+                                                                        <a href="javascript:;" onclick="opengeme('/video/games/login?g_type=sa')">SA视讯</a> 
+                                     
+                                <span class="subbg-right"></span>
+                            </div>
+                            <div class="LS-game" style="left: 128px; display: none;">
+                                <span class="subbg-left"></span> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','AG');">AG电子</a> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','BBIN');">BBIN电子</a> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','EG');">EG电子</a> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','MG');">MG电子</a> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','PT');">PT电子</a> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','GG');">GG电子</a> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','HB');">HB电子</a> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','GD');">GD电子</a> 
+                                                                        <a href="javascript:;" onclick="getPager('-','egame','GPI');">GPI电子</a> 
+                                                                    <span class="subbg-right"></span>
+                            </div>
+                                                            <div class="LS-ltlottery" style="left: 390px; display: none;">
+                                    <span class="subbg-left"></span> 
+                                    <a href="javascript:;" onclick="getPager('-', 'pk_lottery', 'm');" class="">PK彩票</a> 
+                                                                        <a href="javascript:void(0);" onclick="opengeme2('/video/login?g_type=egtc&amp;sw=0')">EG彩票</a>
+                                                                                                            <a href="javascript:void(0);" onclick="opengeme2('/video/login?g_type=cs&amp;sw=0')">官方彩票</a>
+                                                                        <span class="subbg-right"></span>
+                                </div>
+                                                    </div>
+                        <style>
+                        #L-Sub{position: relative;z-index: 9999; clear: both;}
+                        #L-Sub div {background: #238be3;display:none;position: absolute;height: 32px;line-height: 32px;padding: 0 8px; z-index:100;box-shadow: 0px 0px 5px 3px #666;}
+                        #L-Sub div a { float: left;display: block;padding: 0 4px;color:#FFFFE4; text-decoration: none;font-size: 12px;line-height: 30px;height: 30px;width: auto;}
+                        #L-Sub div a:hover {color:#F2E1B0;}
+                        #L-Sub span {display: block;float: left; width: 7px;height: 32px;}
+                        </style>                       
+                        <script language="javascript">
+                        $(document).ready(function() {
+                            $("li.LS-ball, li.LS-live, li.LS-game,li.LS-ltlottery").subTabs();
+                        });
+                        </script>
+                    </div>
+                </div>
+            </div>
+                    <script language="javascript">
+$(document).ready(function() {
+    document.onkeydown = function (event){ 
+　　if (event.keyCode==13) //回车键的键值为13 
+　　　　$("#submit").click();
+　　};
+});
+</script>
+        <div class="ad-flash">
+            <style>
+                .ele-slideshow-wrap{ width: 998px; position: relative; margin : 0 auto; } 
+                .ele-slideshow-scroll{ width: 998px; height: 409px; overflow: hidden; position: relative; z-index: 1; margin: 0 auto; } 
+                .ele-slideshow-wrap ul{ position: absolute; left: 0; top: 0; width:998px; height: 409px; } 
+                .ele-slideshow-wrap li{ position: absolute; left: 0; top: 0; width: 998px; height: 409px; opacity: 0; filter: alpha(opacity=0); } 
+                .ele-slideshow-wrap li a{ display: block; width: 998px; height: 409px; } 
+                .ele-slideshow-wrap li a img{ image-rendering: optimizeQuality; } 
+                .ele-slideshow-control-wrap{ position: absolute; z-index: 3; bottom: 0; padding: 5px; } 
+                .ele-slideshow-nav{ display: inline-block; vertical-align: middle; } 
+                .ele-slideshow-nav a{ width: 16px; height: 16px; background-color: #8296B1; display: inline-block; text-align: center; color: #FFF; line-height: 16px; margin: 0 2px; text-decoration: none; position: relative; } 
+                .ele-slideshow-nav a.active, .ele-slideshow-nav a:hover{ background-color: #74B0CE; color: #FFF; } 
+                .ele-slideshow-clip{ background-repeat: no-repeat; }
+            </style>
+            <div id="js-ele-slideshow1" class="ele-slideshow-wrap" onselectstart="return false;">
+                <div class="js-ele-slideshow-scroll ele-slideshow-scroll">
+                    <script type="text/javascript">
+$(document).ready(function(){
+
+$('#slider').nivoSlider({
+    effect:'random',
+    slices:15,
+    animSpeed:500,
+    pauseTime:3000,
+    directionNav:true,
+    controlNav:true,
+    keyboardNav:true
+});
+
+}); 
+</script>
+
+<div class="theme-default">
+
+<div id="slider" class="nivoSlider" style="position: relative; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474184.png&quot;) no-repeat;">
+            <a href="" class="nivo-imageLink" style="display: none;"><img src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png" width="100%" height="409" style="display: none;"></a>
+            <a href="" class="nivo-imageLink" style="display: none;"><img src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474196.jpg" width="100%" height="409" style="display: none;"></a>
+            <a href="" class="nivo-imageLink" style="display: none;"><img src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474179.jpg" width="100%" height="409" style="display: none;"></a>
+            <a href="" class="nivo-imageLink" style="display: block;"><img src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474184.png" width="100%" height="409" style="display: none;"></a>
+                  
+<div class="nivo-caption" style="opacity: 0; display: block;"><p></p></div><div class="nivo-directionNav" style="display: none;"><a class="nivo-prevNav">Prev</a><a class="nivo-nextNav">Next</a></div><div class="nivo-controlNav"><a class="nivo-control active" rel="0">1</a><a class="nivo-control" rel="1">2</a><a class="nivo-control" rel="2">3</a><a class="nivo-control" rel="3">4</a></div><div class="nivo-box" style="opacity: 0.0614266; left: 0px; top: 0px; width: 7.67832px; height: 6.26551px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) 0px 0px no-repeat; overflow: hidden;"></div><div class="nivo-box" style="opacity: 0; left: 125px; top: 0px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -125px 0px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 250px; top: 0px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -250px 0px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 375px; top: 0px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -375px 0px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 500px; top: 0px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -500px 0px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 625px; top: 0px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -625px 0px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 750px; top: 0px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -750px 0px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 875px; top: 0px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -875px 0px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 0px; top: 102px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) 0px -102px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 125px; top: 102px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -125px -102px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 250px; top: 102px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -250px -102px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 375px; top: 102px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -375px -102px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 500px; top: 102px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -500px -102px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 625px; top: 102px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -625px -102px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 750px; top: 102px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -750px -102px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 875px; top: 102px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -875px -102px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 0px; top: 204px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) 0px -204px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 125px; top: 204px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -125px -204px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 250px; top: 204px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -250px -204px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 375px; top: 204px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -375px -204px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 500px; top: 204px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -500px -204px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 625px; top: 204px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -625px -204px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 750px; top: 204px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -750px -204px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 875px; top: 204px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -875px -204px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 0px; top: 306px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) 0px -306px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 125px; top: 306px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -125px -306px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 250px; top: 306px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -250px -306px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 375px; top: 306px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -375px -306px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 500px; top: 306px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -500px -306px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 625px; top: 306px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -625px -306px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 750px; top: 306px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -750px -306px no-repeat;"></div><div class="nivo-box" style="opacity: 0; left: 875px; top: 306px; width: 0px; height: 0px; background: url(&quot;https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1503474201.png&quot;) -875px -306px no-repeat;"></div></div> 
+</div>
+                </div>
+            </div>
+        </div>
+        <!-- 最新消息 -->
+        <div class="news-wrap clearfix">
+            <div class="news-item ele-msg-cp">
+                <div class="ele-news-txt" style="display: inline-block; height: 44px; overflow: hidden; word-break: break-all; word-wrap: break-word; width: 874px;">
+                    <marquee scrollamount="3" scrolldelay="150" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="cursor: pointer;"><span id="bulletinMsg" data="left" onclick="notice_data();">圣诞节快到了，祝各位佳友圣诞节快乐！！多多盈利！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></marquee>
+                </div>
+            </div>
+        </div>
+        <!-- 登入 -->
+                <div class="first-login-data">
+            <div class="mem-info">
+                <style>.ele-accinfo{ display: block; padding-right: 5px; padding-bottom: 4px; } .ele-accinfo .fa{ padding: 0 2px; font-size: 14px; } .ele-first-balance{ display: inline-block; } .ele-acc-unit { display: inline-block; } .ele-obalance-wrap{ position: relative; display: inline-block; } .ele-other-balance{ cursor: pointer; }</style>
+                <div class="ele-accinfo ele-acc-name">
+                    <span>帐号：</span>
+                    <strong>qwertq</strong></div>
+                <div class="ele-acc-unit">
+                    <div id="_bbsportBalance" class="ele-accinfo ele-first-balance">
+                        <span>系统余额：</span>
+                        <strong>18.00</strong></div>
+                    <div class="ele-obalance-wrap js_ele_obalance_wrap">
+                        <div class="ele-accinfo ele-other-balance">
+                            <i class="fa fa-plus-square" style="line-height: 10px;"></i>
+                        </div>
+                        <div class="js_ele_obalance_item_wrap" style="margin-right: -130px;
+                        margin-top: -10px;">
+                        <div class="ele-obalance-item">
+                          <div class="ele-obalance"><span>系统余额：</span><strong>18.00</strong></div>
+                                                    <div class="ele-obalance"><span>CS余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>IM余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>EGTC余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>AG余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>BBIN余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>MG余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>LEBO余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>OG余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>DG余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>AB余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>PT余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>GG余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>HB余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>SB余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>LMG余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>GD余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>GPI余额：</span><strong>0.00</strong></div>
+                                                    <div class="ele-obalance"><span>SA余额：</span><strong>0.00</strong></div>
+                                                  </div>
+                        <div class="ele-balance-tool clearfix">
+                           <a href="javascript:openmember('3');">额度转换</a>
+                        </div>
+                        <link rel="stylesheet" href="/public/css/font-awesome1.css">
+                        <style>
+
+                            /*clear float*/
+                            .clearfix:before, .clearfix:after { content:""; display:table;}
+                            .clearfix:after { clear:both;}
+                            .clearfix { *zoom:1;}
+                            .js_ele_obalance_item_wrap{
+                                display:none;
+                                position: absolute;
+                                opacity: 1;
+                                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                                width: 270px;
+                                -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+                                -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+                                box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+                                border-radius: 2px;
+                                color: #000;
+                                font-size: 12px;
+                                background: #FFF56B;
+                                cursor: default;
+                                z-index: 9999;
+                                right: 0;
+                                text-align: left;
+                            }
+                            .js_ele_obalance_wrap{position:relative}
+                            .js_ele_obalance_wrap .ele-obalance{
+                                    line-height: 22px;
+                                    color:#000;
+                            }
+                            .js_ele_obalance_wrap .ele-obalance strong{
+                                    color:#000;
+                            }
+                            .ele-obalance-item{
+                                padding: 16px;
+                            }
+                            .ele-obalance-item strong{
+                                font-weight: normal;
+                            }
+                            .ele-obalance{
+                                padding-bottom: 2px;
+                                color: #444;
+                            }
+                            /* 額度轉換 */
+                            .ele-balance-tool{
+                                padding: 4px;
+                                background: #F4F4F4;
+                            }
+                            .ele-balance-tool a{
+                                float: right;
+                                padding: 4px 8px;
+                                color: #FFF;
+                                background: #555;
+                                -o-transition: background-color .20s linear;
+                                -webkit-transition: background-color .20s linear;
+                                -moz-transition: background-color .20s linear;
+                                transition:  background-color .20s linear;
+                                border-radius: 2px;
+                                text-decoration: none;
+                            }
+                            .ele-balance-tool a:hover{
+                                background: #000;
+                            }
+                            .js_ele_obalance_wrap:hover .js_ele_obalance_item_wrap{
+                            display:block;
+                        }
+                        </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- sub -->
+            <div class="SU-Menual clearfix">
+                <ul class="login-Menual">
+                    <li>
+                        <a id="su-macenter" href="javascript:openmember('4');" title="会员中心">会员中心</a></li>
+                    <li>
+                        <a id="su-deposite" href="javascript:openmember('1');" title="线上存款">线上存款</a></li>
+                    <li>
+                        <a id="su-withdraw" href="javascript:openmember('2');" title="线上取款">线上取款</a></li>
+                    <li>
+                        <a id="su-switch" href="javascript:openmember('3');" title="额度转换">额度转换</a></li>
+                    <li>
+                        <a id="su-msg" href="javascript:openmember('8');" title="未读讯息">未读讯息</a>(
+                        <span id="MsgNotReadCount">1</span>)</li></ul>
+                <a href="javascript:void(0)" onclick="javascript:window.location.href='/index.php/webcenter/login/login_out'" class="su-logout"></a>
+            </div>
+        </div>
+                <a href="javascript:void(0);" onclick="window.open('https://pcc.pkcdns2.com/9/shared/download/download.html','','width=1040,height=706,fullscreen=1,scrollbars=0,location=no');" class="first-download"></a>
+    </div>
+</div>
+<div id="page-container">
+    <div id="page-body">
+        <div class="first-game-wrap">
+            <style>
+                .ele-firstgame { position: relative; } 
+                .ele-firstgame-1 { width: 243px; height: 188px; float:left; _display:inline; position: relative; overflow: hidden; background: url(https://private1.pkcdns4.com/t_a/public/images/new/143158777147.jpg) -243px bottom no-repeat; } 
+                .ele-firstgame-1 span { width: 243px; height: 188px; background: url(https://private1.pkcdns4.com/t_a/public/images/new/143158776878.jpg) left top no-repeat; position: absolute; top: 0; left: 0; cursor:pointer; } 
+                .ele-firstgame-2 { width: 243px; height: 188px; float:left; _display:inline; position: relative; overflow: hidden; background: url(https://private1.pkcdns4.com/t_a/public/images/new/143156800458.jpg) -243px bottom no-repeat; } 
+                .ele-firstgame-2 span { width: 243px; height: 188px; background: url(https://private1.pkcdns4.com/t_a/public/images/new/143156800261.jpg) left top no-repeat; position: absolute; top: 0; left: 0; cursor:pointer; } 
+                .ele-firstgame-3 { width: 243px; height: 188px; float:left; _display:inline; position: relative; overflow: hidden; background: url(https://private1.pkcdns4.com/t_a/public/images/new/143156804438.jpg) -243px bottom no-repeat; } 
+                .ele-firstgame-3 span { width: 243px; height: 188px; background: url(https://private1.pkcdns4.com/t_a/public/images/new/143156804234.jpg) left top no-repeat; position: absolute; top: 0; left: 0; cursor:pointer; } 
+                .ele-firstgame-4 { width: 243px; height: 188px; float:left; _display:inline; position: relative; overflow: hidden; background: url(https://private1.pkcdns4.com/t_a/public/images/new/143156808138.jpg) -243px bottom no-repeat; } 
+                .ele-firstgame-4 span { width: 243px; height: 188px; background: url(https://private1.pkcdns4.com/t_a/public/images/new/143156807935.jpg) left top no-repeat; position: absolute; top: 0; left: 0; cursor:pointer; }
+            </style>
+            <div class="ele-firstgame-wrap" onselectstart="return false">
+                <div class="clearfix ele-firstgame" id="js-firstgame-slider">
+                    <a href="javascript:void(0);" onclick="getPager('-','sports','m');" class="ele-firstgame-1 js-ele-firstgame-fade" style="background-position-x: -243px;">
+                        <span style="background-position-x: 0px;"></span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="getPager('-','livetop','m');" class="ele-firstgame-2 js-ele-firstgame-fade" style="background-position-x: -243px;">
+                        <span style="background-position-x: 0px;"></span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="getPager('-','egame','m');" class="ele-firstgame-3 js-ele-firstgame-fade" style="background-position-x: -243px;">
+                        <span style="background-position-x: 0px;"></span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="getPager('-','lottery');" class="ele-firstgame-4 js-ele-firstgame-fade" style="background-position-x: -243px;">
+                        <span style="background-position-x: 0px;"></span>
+                    </a>
+                </div>
+            </div>
+            <script>
+                $('.js-ele-firstgame-fade > span').hover(function() {
+                    $(this).css("background-position-x", "-243px").parent().css("background-position-x", "0");
+                },
+                function() {
+                    $(this).css("background-position-x", "0").parent().css("background-position-x", "-243px");
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--快捷额度转换-->
+<script type="text/javascript">
+    var quata = "<link rel=\"stylesheet\" href=\""+cdnUrl+"/shared/quotazh/css/quota.css\" />"+
+        "<script type=\"text/javascript\" src=\""+cdnUrl+"/shared/quotazh/js/quota.js\"><\/script>";
+    document.writeln(quata);
+</script><link rel="stylesheet" href="https://pcc.pkcdns2.com/9/shared/quotazh/css/quota.css"><script type="text/javascript" src="https://pcc.pkcdns2.com/9/shared/quotazh/js/quota.js"></script>
+
+
+<div class="position_quata">
+    <script type="text/javascript">
+        document.writeln("<img  id ='quata_close' src=\""+cdnUrl+"/shared/quotazh/images/close-btn.png\">");
+    </script><img id="quata_close" src="https://pcc.pkcdns2.com/9/shared/quotazh/images/close-btn.png">
+
+        <div class="panel">
+        <div class="radiobox">
+            <div class="radio-tile-group">
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="CS">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/CS-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">CS</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="IM">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/IM-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">IM</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="EGTC">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/EGTC-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">EGTC</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="AG">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/AG-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">AG</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="BBIN">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/BBIN-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">BBIN</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="MG">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/MG-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">MG</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="LEBO">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/LEBO-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">LEBO</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="OG">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/OG-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">OG</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="DG">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/DG-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">DG</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="AB">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/AB-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">AB</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="PT">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/PT-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">PT</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="GG">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/GG-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">GG</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="HB">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/HB-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">HB</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="SB">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/SB-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">SB</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="LMG">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/LMG-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">LMG</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="GD">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/GD-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">GD</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="GPI">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/GPI-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">GPI</label>
+                    </div>
+                </div>
+                                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id="SA">
+                    <div class="radio-tile s-label">
+                        <!--<div class="icon">-->
+                            <!--<script type="text/javascript">-->
+                                <!--document.writeln("<img id=0 src=\""+cdnUrl+"/shared/quotazh/images/game-icon/SA-black.png\">");-->
+                            <!--</script>-->
+                        <!--</div>-->
+                        <label class="radio-tile-label">SA</label>
+                    </div>
+                </div>
+                                <input type="hidden" id="vdtype" value="">
+                <input type="hidden" id="quatatoken" value="c8029cacfb8a6119c2219c46d6480735">
+                <div class="inputbox">
+                    <p style="color: red;">余额:<span id="ssmoney">18.00</span></p>
+                    <p>* 请输入您要转换的额度</p>
+
+                    <div class="input-number" min="1">
+                        <input type="text" id="quata_money" onkeyup="quataclearNoNum(this);" placeholder="转换金额不能小于1元">
+                    </div>
+                    <p style="height: 20px;width: 100px;margin: 0 auto;">
+                        <label><input style="-webkit-appearance:radio;" name="Fruit" type="radio" value="1">转入 </label>
+                        <label><input style="-webkit-appearance:radio;" name="Fruit" type="radio" value="2">转出 </label>
+                    </p>
+                    <a href="#" class="button_quota">确认转换</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        <p class="flipquota" style="background: url(&quot;https://pcc.pkcdns2.com/9/shared/quotazh/images/blue.png&quot;) no-repeat;"></p>
+</div>
+<script>
+
+    window.onload = function(){
+        var min_money = Number("1");
+        $("input[name='radio']").bind("click",function(){
+            $('#vdtype').val($(this).attr('id'));
+        });
+        $('.button_quota').click(function(){
+
+            var fruit = $("input[name='Fruit']:checked").val();
+            var p3_Amt = Number($('#quata_money').val());
+            var token = $('#quatatoken').val();
+
+            if( fruit == 1 ){
+                var trtype1 = 'sport';
+                var trtype2 = $('#vdtype').val().toLowerCase();
+            }else if( fruit == 2 ){
+                var trtype1 = $('#vdtype').val().toLowerCase();
+                var trtype2 = 'sport';
+            }else{
+                alert('请选择转换状态');
+                return false;
+            }
+
+            if( trtype2 == '' ){
+                alert("请选择您要转换的视讯类型");
+                return false;
+            }
+            if ( p3_Amt - parseInt(p3_Amt) !== 0 ){
+                alert("转换金额不得为非整数！");
+                return false;
+            }
+            if ( p3_Amt < min_money ) {
+                alert("转换金额不得小于"+min_money+"，或者输入金额不能为空！");
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/index.php/member/new/bank/bank_transf_index_do",
+                data: "trtype1="+trtype1+"&trtype2="+trtype2+"&p3_Amt="+p3_Amt+'&quatatoken='+token+'&edtype='+'1',
+                dataType: 'json',
+                success: function(msg){
+                    if(msg.status==18){
+                        alert("额度转换成功");
+                        ajax_again();
+                    }else{
+                        alert(msg.info);
+                        ajax_again();
+                    }
+                },
+            });
+        })
+
+        $('#quata_close').click(function(){
+            $(".position_quata").css("display","none");
+        })
+
+        $('.position_quata').mouseover(function(){
+            $("#quata_close").css("display","block");
+        })
+
+        $('.position_quata').mouseleave(function(){
+            $("#quata_close").css("display","none");
+        })
+
+        $(".position_quata").mouseleave(function(){
+            $(".panel").css("display","none");
+        });
+
+        function ajax_again(){
+            $.ajax({
+                type: "POST",
+                url: "/index.php/index/auata_token",
+                dataType: 'json',
+                success: function(msg){
+                    $('#quatatoken').val(msg.token);
+                },
+            })
+        }
+    }
+
+
+    function quataclearNoNum(obj) {
+        obj.value=obj.value.replace(/[^\d+]/g,'');
+    }
+
+    $(".flipquota").css("background","url("+cdnUrl+"/shared/quotazh/images/blue.png) no-repeat");
+</script>
+
+
+
+
+
+<div id="page-footer">
+    <div class="footer clearfix">
+        <div class="article-menu">
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','3');" target="mem_index" data-color="" class="js-article-color">关于我们&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','8');" target="mem_index" data-color="" class="js-article-color">常见问题&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','6');" target="mem_index" data-color="" class="js-article-color">存款帮助&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','4');" target="mem_index" data-color="" class="js-article-color">联系我们&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','7');" target="mem_index" data-color="" class="js-article-color">取款帮助&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','4');" target="mem_index" data-color="" class="js-article-color">联系我们&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','5');" target="mem_index" data-color="" class="js-article-color">代理联盟&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','5');" target="mem_index" data-color="" class="js-article-color">代理联盟&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','5');" target="mem_index" data-color="" class="js-article-color">代理联盟&nbsp;|&nbsp;</a>
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','19');" target="mem_index" data-color="" class="js-article-color">牌照展示&nbsp;&nbsp;</a>
+                </div>
+        <div class="footer-pics clearfix">
+            <a target="_brank" href="http://pkbet.cc" id="bblogo"></a>
+            <a id="browser-logo">
+                <img src="https://private1.pkcdns4.com/t_a/public/images/new/ublogo.png" border="0" width="146"></a>
+            <div class="footer-bank"></div>
+        </div>
+        <div class="copyright">Copyright © 欢迎来到PK家族 Reserved&nbsp;&nbsp;</div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    if (parent.cyjiframe == true){
+        var links = document.getElementsByTagName('link');
+        for (var i = 0; i < links.length; i++) {
+            var link = links[i];
+            if (link.href.indexOf('.ico') > 0) {
+                var head = parent.window.document.head;
+                linkTag = parent.window.document.createElement('link');
+                linkTag.href = link.href;
+                linkTag.setAttribute('rel','shortcut icon');
+                linkTag.setAttribute('type','image/vnd.microsoft.icon');
+                head.appendChild(linkTag);
+            }
+        }
+    }
+
+</script>
+
+<ul picfloat="right" style="position: absolute; cursor: pointer; z-index: 1000; right: 5px; width: 240px; top: 261.95px;" class="TplFloatSet" id="TplFloatPic_1">
+        <li>
+        <a onclick="" href="###" target="_blank" style="width: 240px; height: 44px;">
+        <img align="middle" class="png_fix" alt="" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147153.png" style="display: inline;" width="240" height="44">
+        <img align="middle" class="png_fix" alt="" style="display: none;" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147153.png" width="240" height="44">
+        </a>
+    </li>
+        <li>
+        <a onclick="" href="http://wpa.qq.com/msgrd?V=3&amp;uin=492889999&amp;Site=QQ客服&amp;Menu=yes" target="_blank" style="width: 240px; height: 44px;">
+        <img align="middle" class="png_fix" alt="" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147160.png" style="display: inline;" width="240" height="44">
+        <img align="middle" class="png_fix" alt="" style="display: none;" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147160.png" width="240" height="44">
+        </a>
+    </li>
+        <li>
+        <a onclick="" href="http://wpa.qq.com/msgrd?V=3&amp;uin=973556666&amp;Site=QQ客服&amp;Menu=yes" target="_blank" style="width: 240px; height: 44px;">
+        <img align="middle" class="png_fix" alt="" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147168.png" style="display: inline;" width="240" height="44">
+        <img align="middle" class="png_fix" alt="" style="display: none;" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147168.png" width="240" height="44">
+        </a>
+    </li>
+        <li>
+        <a onclick="" href="skype:pkbetcc?chat" target="_blank" style="width: 240px; height: 44px;">
+        <img align="middle" class="png_fix" alt="" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147174.png" style="display: inline;" width="240" height="44">
+        <img align="middle" class="png_fix" alt="" style="display: none;" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147174.png" width="240" height="44">
+        </a>
+    </li>
+        <li>
+        <a onclick="FloatClose(this);" href="javascript:;" style="width: 240px; height: 23px;">
+        <img align="middle" class="png_fix" alt="" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147182.png" style="display: inline;" width="240" height="23">
+        <img align="middle" class="png_fix" alt="" style="display: none;" src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1504147182.png" width="240" height="23">
+        </a>
+    </li>
+    </ul>
+<style>
+    .TplFloatSet a{display:block;margin:0 auto;text-align:center;}
+    .TplFloatSet img{vertical-align:bottom;}
+    .TplFloatSet li{list-style: none;font-size:0px;}
+</style>
+
+<script>
+//關閉效果
+function FloatClose(t){ $(t).parents('.TplFloatSet').hide(); }
+var float_list = [], float_side = 5;
+if (typeof(FloatL_Top) == 'undefined' || FloatL_Top == '' || FloatL_Top == 0) {
+    var left_top = 180;
+}else{
+    var left_top = FloatL_Top;
+}
+if (typeof(FloatR_Top) == 'undefined' || FloatR_Top == '' || FloatR_Top == 0) {
+    var right_top = 180;
+}else{
+    var right_top = FloatR_Top;
+}
+$(window).load(function() {
+// s廳主自改 - 浮動圖V2 -2013.7.19
+            float_list['1'] = $('#TplFloatPic_1');
+        for (var i in float_list) {
+       var self = float_list[i],
+       picfloat = (self.attr('picfloat') == 'right') ? 1 : 0;self.show().Float({'floatRight' : picfloat, 'topSide' : ((picfloat == 1) ? right_top : left_top), side: float_side});
+       var w = 0;
+     $.each(self.find('img'), function(){
+            var width = $(this).width();
+            w = (width > w) ? width : w;//取圖片最大寬度
+            $(this).attr({
+                'width' : width,
+                'height': $(this).height()
+            });
+        });
+        self.css('width', w);
+        if (picfloat) {
+            right_top = right_top + 10 + (self.height() || 250);
+        } else {
+            left_top = left_top + 10 + (self.height() || 250);
+        }
+
+        $('a', self).each(function(){
+            $(this).css({'width' : $(this).find('img:first').width(),'height' : $(this).find('img:first').height()});
+            $(this).hover(function() {
+                $(this).find('img:first').hide();
+                $(this).find('img:last').show();
+            }, function() {
+                $(this).find('img:last').hide();
+                $(this).find('img:first').show();
+            });
+        });
+    }
+});
+document.writeln('<script src=\"'+cdnUrl+'/shared/sitepublic/js/jquery.easing.1.3.min.js\"><\/script>');
+</script><script src="https://pcc.pkcdns2.com/9/shared/sitepublic/js/jquery.easing.1.3.min.js"></script>
+
+   <style>
+    #Lsj-fkinglayer {
+        display: none;
+        position: fixed;
+        z-index: 9998;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+</style>
+<style>
+    .Lsj-Modal {
+        display: none;
+        z-index: 9999;
+        position: absolute; 
+        top: 50px; 
+        left: 0; 
+        right: 0;  
+    }
+    
+    .Lsj_modal-content {
+        position: relative;
+        z-index:9999;
+        background-color: transparent;
+        margin: auto;
+        padding: 0;
+        min-width: 250px;
+        max-width: 1000px;
+        overflow:hidden;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s;
+    }
+
+    @-webkit-keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    .Lsj-close {
+        color: #fff;
+        float: right;
+        padding: 5px 0px;
+        font-size: 20px;
+        font-weight: bold;
+        overflow:hidden;
+    }
+
+    .Lsj-close:hover,
+    .Lsj-close:focus {
+        color: #555;
+        text-decoration: none;
+        cursor: pointer;
+        overflow:hidden;
+    }
+
+    .Lsj_modal-header {
+        height: 40px;
+        padding: 0 10px;
+        background-color: transparent;
+        color: #fff;
+        overflow:hidden;
+    }
+
+    .Lsjmodal-body_contents {
+        display:block;
+        clear:both;
+        width:100%;
+        min-height: 40px;
+        max-height: 550px;
+        overflow:hidden;
+    }
+    .Lsjmodal-body_contents p{
+        display:block;
+        clear:both;
+        width:100%;
+        overflow:hidden;
+        height:auto;
+        font-size:12px;
+    }
+    .Lsjmodal-body_contents p img {
+        padding: 0;
+        margin: 0;
+        width:100%;
+        min-height: 40px;
+        max-height: 550px;
+        overflow: hidden;
+    }
+
+    .Lsj_modal-footer {
+        padding: 2px 10px;
+        color: #555555;
+    }
+
+    .Lsjbtn-bottom-two-right {
+        text-align: center;
+    }
+
+    .Lsjbtn-bottom-two-right a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .Lsj_okBtn {
+        display: inline-block;
+        margin: 10px;
+        padding: 15px 5px;
+        border: none;
+        outline: none;
+        background-color: #3276b1;
+        color: #fff;
+        font-size: 16px;
+        line-height: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 150ms ease-out;
+        width: 180px;
+        letter-spacing: 4px;
+        border-radius: 2px;
+    }
+
+    .Lsj_okBtn.Lsj_filled:focus, 
+    .Lsj_okBtn.Lsj_filled:hover {
+        background-color: #3276b1;
+        box-shadow: 0 0 0 0.1875rem white, 
+            0 0 0 0.375rem #3276b1;
+    }
+    .Lsj_okBtn.Lsj_filled:active {
+        background-color: #285e8e;
+        box-shadow: 0 0 0 0.1875rem #285e8e, 
+            0 0 0 0.375rem #285e8e;
+        transition-duration: 75ms;
+    }
+
+    .Lsj_modal-content .Lsj_modal-header h3{
+        text-align: center;
+        line-height:40px;
+        font-weight: 600;
+        margin: 0;
+        font-size:16px;
+    }
+</style>
+<style>
+    .Lsj_modal-footer{
+        background-color: transparent;
+    }
+    
+    /* Outline Button */
+    .Lsj_okBtn.Lsj_outline {
+        border: 2px solid #fff;
+        background-color: transparent;
+        color: #fff;
+    }
+    .Lsj_okBtn.Lsj_outline:focus, 
+    .Lsj_okBtn.Lsj_outline:hover {
+        border-color: #555;
+        box-shadow: 0 0 0 0.1875rem white, 
+            0 0 0 0.375rem #555;
+        color: #fff;
+    }
+    .Lsj_okBtn.Lsj_outline:active {
+        border-color: #fff;
+        color: #fff;
+        box-shadow: 0 0 0 0.1875rem #fff, 
+            0 0 0 0.375rem #fff;
+        transition-duration: 75ms;
+    }
+</style>
+<div id="LsjmyModal" class="Lsj-Modal" style="display: none;">
+    <div class="Lsj_modal-content Pop_bor_2">
+        <div class="Lsjmodal-body_contents">
+            <p><img src="https://1.pkcdns4.com/uploadimg/1/t/a/t_a_1510714902.png"></p>
+        </div>
+        <div class="Lsj_modal-footer">
+            <div class="Lsjbtn-bottom-two-right">
+                <button class="Lsj_okBtn Lsj_outline" onclick="removers(1);">下次不再显示</button>
+                <button class="Lsj_okBtn Lsj_filled" onclick="removers();">确定</button>
+            </div>
+        </div>
+    </div>
+    <div id="Lsj-fkinglayer" style="display: none;"></div>
+</div>
+<script>
+    $(document).ready(function(){ 
+        $("#LsjmyModal").hide();
+        $('#Lsj-fkinglayer').hide();
+    });
+</script>
+<script>
+    function removers(i) {
+        if (i == 1) {
+            $.cookie('PKBET_ORG', 'Y', {path: '/', expires: ''});
+        }
+        $('#LsjmyModal').remove();
+    }
+    $(window).load(function(){
+        if ($.cookie('PKBET_ORG')){
+            $("#LsjmyModal").hide();
+            $('#Lsj-fkinglayer').hide();
+            return;
+        }else{
+            var count_slide=[{"id":"2876","site_id":"t","index_Id":"a","title":"1","img":null,"content":"<p><img src=\"https:\/\/1.pkcdns4.com\/uploadimg\/1\/t\/a\/t_a_1510714902.png\"\/><\/p>","is_delete":"1","add_date":"2017-12-05 17:44:07","creator":null,"type":null,"ad_type":"1","picwidth":null,"picheight":null,"Ad_url":"","textbgc":"","ad_way":"2","pop_config":{"id":"15","site_id":"t","index_id":"a","title_bcolor":"#889df2","pop_bcolor":"#d47373","title_color":"#0f0c03","ad_way":"2"},"pop_state":1}];
+                count_slide=count_slide.length;
+            if(count_slide==1){
+                var label_empty=$(".Lsjmodal-body_contents").find("img").length;
+                if(label_empty){
+                    var img_obj = new Image();
+                    img_obj.src=$(".Lsjmodal-body_contents img").attr('src');
+                    var img_width=img_obj.width;
+                    var img_height=img_obj.height;
+                    $(".Lsj_modal-content").css('width',img_width);
+                    $(".Lsjmodal-body_contents").css('height',img_height);
+                    $(".Lsjmodal-body_contents p img").css('height',img_height);
+                }else{
+                    $(".Lsj_modal-content").css('width',720);
+                }
+            }
+            $('#Lsj-fkinglayer').show();
+            $("#LsjmyModal").show();    
+        }
+    });
+</script>
+
+
+
+
+<!-- 回到顶部按钮-开始 -->
+<style type="text/css">
+    #ele-float-top-wrap {
+    position: fixed;
+    right: 5px;
+    bottom: 90px;
+    min-width: 40px;
+    z-index: 20;
+}
+#ele-float-top{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 40px;
+    display: none;
+}
+.ele-float-top-btn {
+    margin-top: 2px;
+    display: block;
+    position: relative;
+    height: 40px;
+    border-radius: 3px;
+    transition: opacity 0.6s ease;
+    background-color: white;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+    }
+#ele-float-top-up {
+    display: none;
+    cursor: pointer;
+    margin-top: -40px;
+}
+.ele-float-top-btn:hover {
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+    filter: alpha(opacity=100);
+    opacity: 1;
+    background-position: 50% 100%;
+}
+</style>
+<div id="ele-float-top-wrap" style="height: 0px;">
+    <div id="ele-float-top" style="display: block;">
+        <div id="ele-float-top-up" class="ele-float-top-btn" style="background-image: url(&quot;https://pcc.pkcdns2.com/9/shared/sitepublic/images/float_top_up.png&quot;);"></div>
+    </div>
+</div>
+<!-- 回到顶部按钮-结束 -->
+
+<!-- 红包活动-->
+<script type="text/javascript">
+    $("#ele-float-top-up").css("background-image","url('"+cdnUrl+"/shared/sitepublic/images/float_top_up.png')");
+    document.writeln('<script src=\"'+cdnUrl+'/shared/red/js/redbag.js\"><\/script>');
+</script><script src="https://pcc.pkcdns2.com/9/shared/red/js/redbag.js"></script><div id="hdddddddddd"></div>
+
+<!-- 红包活动-->
+
+</body></html>

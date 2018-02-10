@@ -1,0 +1,61 @@
+package function
+
+import (
+	"global"
+	"models/schema"
+	"models/back"
+	"github.com/golyu/sql-build"
+	"errors"
+)
+
+type LineBean struct {
+}
+
+//得到游戏链接
+func (m *LineBean) GetUrl(siteId string) (url string, err error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	lineSchema := new(schema.SysLineList)
+	//sess.Where("status = ?", 1)
+	//sess.Where("line_id = ?", siteId)
+	//sess.Select("url")
+	//b, err := sess.Table(lineSchema.TableName()).Get(&url)
+	//if err != nil {
+	//	return
+	//}
+	//if !(b) {
+	//	err = errors.New("get 0 row")
+	//}
+	sql, err := sqlBuild.Select(lineSchema.TableName()).
+		Where(1, "status").
+		Where(siteId, "line_id").
+		Column("url").
+		String()
+	if err != nil {
+		return
+	}
+	b, err := sess.SQL(sql).Get(&url)
+	if err != nil {
+		return
+	}
+	if !(b) {
+		err = errors.New("get 0 row")
+	}
+	return
+}
+
+//查询数据库中的key
+func (m *LineBean) GetAll() (keys []*back.Key, err error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	lineSchema := new(schema.SysLineList)
+	sql, err := sqlBuild.Select(lineSchema.TableName()).
+		Where(1, "status").
+		Limit(1000).
+		String()
+	if err != nil {
+		return
+	}
+	err = sess.SQL(sql).Find(&keys)
+	return
+}

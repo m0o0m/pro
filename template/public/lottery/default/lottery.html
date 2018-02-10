@@ -1,0 +1,436 @@
+{{define "lottery"}}
+<style>
+
+
+    /*PK,EG选项卡样式*/
+    .lotteryboard_content {
+        /*min-height: 1380px;*/
+        height: auto;
+        overflow: hidden;
+        /*position: relative;*/
+    }
+
+    .select_form_content_lotteryboard img {
+        padding-top: 10%;
+        width: 80px;
+        height: 80px;
+    }
+
+    .lotteryboard_forms_lottery {
+        height: 150px;
+        margin: 4px 10px 10px 10px;
+        font-size: 15px;
+    }
+
+    .lotteryboard_pk_imgs, .lotteryboard_eg_imgs, .lotteryboard_cs_imgs {
+        background-color: rgb(255, 255, 255);
+        margin-top: 1%;
+
+    }
+
+    .lotteryboard_pk_forms, .lotteryboard_eg_forms, .lotteryboard_ks_forms {
+        display: none;
+        max-width: 990px;
+        padding: 0 0 0 1%;
+        margin: 0 auto;
+        background: url("{{.Header.CdnUrl}}/theme3/public/shared/lottlys/images/images/lotteryhall/insideBG.png") no-repeat;
+
+    }
+
+    .lotteryboard_pk_forms div[class='col-md-10'], .lotteryboard_eg_forms div[class='col-md-10'], .lotteryboard_ks_forms div[class='col-md-10'] {
+        margin-top: 6px;
+
+    }
+
+    .lotteryboard_eg_forms {
+        display: none;
+    }
+
+    .lotteryboard_eg_forms > div[class='lotteryboard_row'] > div:last-child {
+        border-right: none
+    }
+
+    .lotteryboard_pk_forms > .lotteryboard_forms_unit > div:first-child, .lotteryboard_eg_forms > .lotteryboard_forms_unit > div:first-child, .lotteryboard_ks_forms > .lotteryboard_forms_unit > div:first-child, {
+
+        text-align: center;
+        line-height: 40px;
+        margin-right: 10px;
+        padding-left: 7px;
+
+    }
+
+    .lotteryboard_forms_unit > div:first-child > p {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: white;
+    }
+
+    .lotteryboard_forms_unit > div:first-child img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 5px;
+    }
+
+    .lotteryboard_forms_unit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url('{{.Header.CdnUrl}}/theme3/public/shared/lottlys/images/images/lotteryhall/leftLine.png') no-repeat 12px 10px;
+        box-shadow: 0px 22px 5px -16px #060606;
+    }
+
+    .lotteryboard_select_form_top .lotteryhall_select {
+
+        background-color: #3e0f28;
+        margin: auto 0;
+        overflow: hidden;
+        border-bottom: 1px solid white;
+        font-size: 1.2rem;
+        margin-left: 6px;
+        display: flex;
+        /*justify-content: space-between;*/
+    }
+
+    .lotteryboard_select_form_top .lotteryhall_select > div {
+        float: left;
+    }
+
+    .lotteryboard_select_form_top .lotteryhall_select > div:hover {
+        cursor: pointer;
+    }
+
+    .lotteryboard_forms_lottery {
+        background: url("{{.Header.CdnUrl}}/theme3/public/shared/lottlys/images/images/lotteryhall/rightItem.png") no-repeat;
+    }
+
+    .lotteryboard_content a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+    }
+
+    .lotteryboard_content a:hover {
+        text-decoration: none;
+    }
+
+    .lotteryboard_row .col-md-2 {
+
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /*选项按钮*/
+    .lotteryboard_select_form_top .lotteryhall_select > div {
+        line-height: 40px;
+        text-align: center;
+        width: 235px;
+        height: 83px;
+    }
+
+    .lotteryboard_select_form_top .lotteryhall_select img {
+        width: 48px;
+        height: 48px;
+    }
+
+    /*.lotteryboard_select_form_top .lotteryhall_select > div:first-child {*/
+    /*!*width: 50%;*!*/
+    /*height: 55px;*/
+    /*line-height: 55px;*/
+    /*text-align: center;*/
+    /*display: inline-block;*/
+    /*color: white;*/
+    /*right: 0px;*/
+    /*}*/
+
+    /*.lotteryboard_select_form_top .lotteryhall_select > div:last-child {*/
+    /*!*width: 50%;*!*/
+    /*height: 55px;*/
+    /*line-height: 55px;*/
+    /*text-align: center;*/
+    /*!*background-color: #8d030a;*!*/
+    /*display: inline-block;*/
+    /*color: white;*/
+    /*left: 0px;*/
+    /*}*/
+
+    .lotteryboard_select_form_top .lotteryhall_select > div {
+        height: 55px;
+        line-height: 55px;
+        text-align: center;
+        /*background-color: #8d030a;*/
+        display: inline-block;
+        color: white;
+        left: 0px;
+        flex-grow: 1;
+    }
+
+    .lotteryboard_select_form_top .lotteryhall_select > div + div {
+        border-left: 1px solid black;;
+    }
+
+    .select_form_content_lotteryboard {
+        margin: 0 auto;
+    }
+
+    .select_form_content_lotteryboard div {
+        text-align: center;
+    }
+
+    .toggle {
+        background: url("{{.Header.CdnUrl}}/theme3/public/shared/lottlys/images/images/lotteryhall/buttonACT.png") no-repeat;
+    }
+
+    /*卡司彩票*/
+
+    #pkLottery {
+        display: block;
+    }
+
+</style>
+<div class="lotteryboard_content">
+    <div class="container">
+        <div class="lotteryboard_row lotteryboard_select_form_top" style="width:990px;margin: 0 auto;">
+            <div id="lotteryhallSelect" class="lotteryhall_select">
+                {{$url := .Header.CdnUrl}}
+            {{range $k,$v := .LotteryOrder}}
+                <div class="lotteryboard_{{$v}}_select_tab {{if eq $k 0}}toggle{{end}}">
+                    <img src="{{$url}}/theme3/public/shared/lottlys/images/{{$v}}/{{$v}}_logo.png">
+                    <span class="bg_col">{{if eq $v "egtc"}}
+                        EG{{else if eq $v "pk"}}PK{{else if eq $v "cs"}}官方{{end}}彩票</span>
+                </div>
+            {{end}}
+            </div>
+        </div>
+        <div class="container select_form_content_lotteryboard">
+
+            <div id="pkLottery" class="lotteryboard_pk_imgs lotteryboard_pk_forms">
+            {{range $k,$v := .PkData}}
+                <div class="lotteryboard_row lotteryboard_forms_unit">
+                    <div class="col-md-2">
+                        <img src='{{$url}}/theme3/public{{index $v "img"}}'>
+                        <p>{{index $v "name"}}</p>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="lotteryboard_row">
+                        {{range $key,$val := index $v "type"}}
+                            <div class="col-md-2 lotteryboard_forms_lottery">
+                                <a class="game_99" href="javascript:void(0);"
+                                   onclick="opengeme('{{$val.Type}}','video','pk_fc')">
+                                    <img src="{{$url}}/theme3/public/shared/lottlys/images/pk/{{$val.Type}}.png">
+                                    <p style="color:white;margin-top: 10px;">{{$val.Name}}</p>
+                                </a>
+                            </div>
+                        {{end}}
+                        </div>
+                    </div>
+                </div>
+            {{end}}
+            </div>
+
+
+        {{if .EgData}}
+            <div id="egtcLottery" class="lotteryboard_eg_imgs lotteryboard_eg_forms">
+            {{range $k,$v := .EgData}}
+                <div class="lotteryboard_row lotteryboard_forms_unit">
+                    <div class="col-md-2">
+                        <img src="{{$url}}/theme3/public{{index $v "img"}}">
+                        <p>{{index $v "name"}}</p>
+
+                    </div>
+                    <div class="col-md-10">
+                        <div class="lotteryboard_row">
+                        {{range $key,$val := index $v "type"}}
+                            <div class="col-md-2 lotteryboard_forms_lottery">
+                                <a class="game_99" href="javascript:void(0);" onclick="opengeme('{{$val.EgHref}}','video','eg_fc')">
+                                    <img src="{{$url}}/theme3/public/shared/lottlys/images/egtc/{{$val.EgType}}.png">
+                                    <p style="color:white;margin-top: 10px;">{{$val.EgName}}</p>
+                                </a>
+                            </div>
+                        {{end}}
+                        </div>
+                    </div>
+                </div>
+            {{end}}
+            </div>
+        {{end}}
+            <!--卡司.秀彩票-->
+        {{if .CsData}}
+            <div id="csLottery" class="lotteryboard_ks_imgs lotteryboard_ks_forms">
+            {{range $k,$v := .CsData}}
+                <div class="lotteryboard_row lotteryboard_forms_unit">
+                    <div class="col-md-2">
+                        <img src="{{$url}}/theme3/public{{index $v "img"}}">
+                        <p>{{index $v "name"}}</p>
+
+                    </div>
+                    <div class="col-md-10">
+                        <div class="lotteryboard_row">
+                        {{range $key,$val := index $v "type"}}
+                            <div class="col-md-2 lotteryboard_forms_lottery">
+                                <a class="game_99" href="javascript:void(0);" onclick="opengeme('{{$val.CsHref}}','video','cs_fc')">
+                                    <img src="{{$url}}/theme3/public/shared/lottlys/images/cs/{{$val.CsType}}.png">
+                                    <p style="color:white;margin-top: 10px;">{{$val.CsName}}</p>
+                                </a>
+                            </div>
+                        {{end}}
+                        </div>
+                    </div>
+                </div>
+            {{end}}
+            </div>
+        {{end}}
+
+        </div>
+    </div>
+    <style>
+        .games_bg_shiwan {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.9;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 99;
+        }
+
+        .games_bg_shiwan a {
+            width: 60px;
+            height: 20px;
+            background-color: #f3f601;
+            color: #000;
+            line-height: 20px;
+            padding: 5px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            position: absolute;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .games_mfsw_a_bt {
+            top: 45px;
+        }
+
+        .games_ksyx_a_bt {
+            top: 80px;
+        }
+
+        .col-md-2:hover .games_bg_shiwan {
+            display: block;
+        }
+    </style>
+
+    <!--<button id="bbtn">点击弹出</button>-->
+</div>
+
+<script>
+    //lotteryboard大厅pk,eg选项卡js
+
+    // $('.lotteryboard_pk_select_tab').click(function (e) {
+    //     $(this).addClass('toggle').siblings().removeClass('toggle');
+    //     $('.lotteryboard_pk_forms').siblings().fadeOut(500, function () {
+    //         $('.lotteryboard_pk_forms').fadeIn(500)
+    //     })
+
+    // })
+
+    // $('.lotteryboard_egtc_select_tab').click(function (e) {
+    //     $(this).addClass('toggle').siblings().removeClass('toggle');
+    //     $('.lotteryboard_eg_forms').siblings().fadeOut(500, function () {
+    //         $('.lotteryboard_eg_forms').fadeIn(500)
+    //     })
+    // })
+
+    // $('.lotteryboard_cs_select_tab').click(function (e) {
+    //     $(this).addClass('toggle').siblings().removeClass('toggle');
+    //     $('.lotteryboard_ks_forms').siblings().fadeOut(500, function () {
+    //         $('.lotteryboard_ks_forms').fadeIn(500)
+    //     })
+    // })
+    //lotteryboard大厅pk,eg选项卡js
+    $("#lotteryhallSelect").on('click','div', function(){
+        var $calssName = $(this)[0].className;
+        if ($calssName.indexOf('lotteryboard_pk_select_tab') >= 0) {
+            var lotteryFormObj = $('.lotteryboard_pk_forms');
+        }
+        if ($calssName.indexOf('lotteryboard_egtc_select_tab') >= 0) {
+            var lotteryFormObj = $('.lotteryboard_eg_forms');
+        }
+        if ($calssName.indexOf('lotteryboard_cs_select_tab') >= 0) {
+            var lotteryFormObj = $('.lotteryboard_ks_forms');
+        }
+        $(this).addClass('toggle').siblings().removeClass('toggle');
+        lotteryFormObj.siblings().fadeOut(500, function () {
+            lotteryFormObj.fadeIn(500);
+        })
+    })
+
+    $('.lotteryboard_forms_lottery').on('mouseover mouseout', function(){
+        if (event.type == "mouseover") {
+            $(this).css({
+                'box-shadow': '5px 5px 5px black',
+                'transform': 'scale(1.1)',
+                'transition': 'all 500ms ease 0s',
+                '-webkit-transform': 'scale(1.1)',
+                '-webkit-transform': 'all 1s ease 0s'
+
+            })
+        }
+        if (event.type == "mouseout") {
+            $(this).css({
+                'box-shadow': 'none',
+                'transform': 'scale(1)',
+                'transition': 'all 500ms ease 0s',
+                '-webkit-transform': 'scale(1)',
+                '-webkit-transform': 'all 1s ease 0s'
+
+            })
+        }
+    })
+
+
+    // $('.lotteryboard_forms_lottery').on('mouseover', function (e) {
+    //     $(this).css({
+    //         'box-shadow': '5px 5px 5px black',
+    //         'transform': 'scale(1.1)',
+    //         'transition': 'all 500ms ease 0s',
+    //         '-webkit-transform': 'scale(1.1)',
+    //         '-webkit-transform': 'all 1s ease 0s'
+
+    //     })
+    // })
+
+    // $('.lotteryboard_forms_lottery').on('mouseout', function (e) {
+    //     $(this).css({
+    //         'box-shadow': 'none',
+    //         'transform': 'scale(1)',
+    //         'transition': 'all 500ms ease 0s',
+    //         '-webkit-transform': 'scale(1)',
+    //         '-webkit-transform': 'all 1s ease 0s'
+
+    //     })
+
+    // })
+
+    //    卡司彩票效果
+    //    var showTitle = $('.show-title');
+    //    showTitle.mouseenter(function () {
+    //
+    //      $(this).addClass('show-bg1')
+    //      var p = $(this).parent().offset();
+    //      console.log(p);
+    //      var Pos=new Object();
+    //      Pos.left=p.left+22;
+    //      Pos.top=p.top+22;
+    //      $('.iconrun').offset(Pos);
+    //      $('.iconrun').show();
+    //
+    //    });
+    //    showTitle.mouseleave(function () {
+    //      $(this).removeClass('show-bg1')
+    //    });
+</script>
+{{end}}

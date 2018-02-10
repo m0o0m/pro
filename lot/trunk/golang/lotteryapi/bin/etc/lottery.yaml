@@ -1,0 +1,36 @@
+app_name : lottery
+addr : :8084
+language : zh
+
+version :
+    test : 170926.01
+    product : v1
+
+##日志 "FNST", "FINE", "DEBG", "TRAC", "INFO", "WARN", "EROR", "CRIT"
+log :
+    level : EROR
+    type : file
+    path : log
+
+##读取维护／登陆token写入等
+redis :
+    name : 0
+    host : 113.10.246.114:6379
+    password : 4bIwSQZAc8Rp
+    expirtime : 0.5   #登陆toen 存储时间 以分钟为单位
+    goroutimenum : 5  #可以开的协程数量
+
+##存放采集数据的redis
+dataRedis :
+    name : 0
+    host : 113.10.246.114:6380
+    password : 4bIwSQZAc8Rp
+
+
+mysql :
+    name : jiqun1
+    host : 113.10.246.111:3306
+    username : lottery
+    password : tjVBd&RfWX0Y
+    dbname : lottery
+    showsql : false

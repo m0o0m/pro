@@ -1,0 +1,7 @@
+package back
+
+type Key struct {
+	LineId string `xorm:"line_id" `                //站点id
+	Md5key string `xorm:"'md5key' notnull"`        //线路接口
+	Deskey string `xorm:"'deskey' default('ull')"` //线路接口
+}

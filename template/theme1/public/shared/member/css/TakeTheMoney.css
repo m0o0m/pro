@@ -1,0 +1,177 @@
+#page-body .myd-red {
+  color: red !important; }
+#page-body .myd-green {
+  color: green !important; }
+#page-body .mycenter {
+  border: 1px solid #DDD;
+  min-height: 664px;
+  margin-top: 8px;
+  background-color: #fff;
+  margin-bottom: 50px; }
+#page-body .center-t {
+  height: 48px;
+  margin: 0 28px 0 28px;
+  /* border-bottom: 1px solid #DDD; */ }
+#page-body .center-t span {
+  line-height: 48px; }
+#page-body .center-t span i {
+  padding-left: 10px;
+  color: #3091FD; }
+#page-body .center-2 {
+  margin: 0 28px 0 28px;
+  padding-left: 58px;
+  height: 190px;
+  border-bottom: 1px solid #DDD;
+  border-top: 1px solid #DDD; }
+#page-body .center-2 li {
+  display: inline-block;
+  height: 60px;
+  line-height: 60px; }
+#page-body .center-2 li:nth-child(1) {
+  width: 350px; }
+#page-body .center-2 li:nth-child(2) {
+  margin-left: 58px; }
+#page-body .center-2 .span1 {
+  color: #505050; }
+#page-body .center-2 select {
+  width: 258px;
+  height: 34px;
+  border: 1px solid #DDD;
+  outline: none;
+  font-size: 14px; }
+#page-body .center-2 i {
+  padding-right: 5px; }
+#page-body .center-2 .myd-red {
+  height: 60px;
+  font-size: 14px;
+  line-height: 60px;
+  /*padding-left: 35px;*/
+  /* overflow: hidden; */
+  /*position: relative;*/ }
+#page-body .center-2 .myd-red i {
+  /* line-height: 40px; */
+  font-size: 30px;
+  /* padding-left: 200px */
+  position: absolute;
+  top: -18px;
+  left: 0; }
+#page-body .center-2-3 {
+  padding-top: 16px; }
+#page-body .center-2-3 li span {
+  color: #505050; }
+#page-body .center-2-3 li input {
+  width: 258px;
+  height: 34px;
+  border: 1px solid #DDD;
+  outline: none;
+  font-size: 14px; }
+#page-body .center-3 {
+  border-top: 2px solid #FFC933;
+  margin: 0 28px 0 28px;
+  height: 178px;
+  background-color: #FFFFEE;
+  padding-left: 50px; }
+#page-body .center-3 h3 {
+  padding-top: 15px;
+  padding-bottom: 8px; }
+#page-body .center-3 .fl-1 li {
+  margin-bottom: 5px; }
+#page-body .center-3 .fl-2 {
+  padding-left: 140px; }
+#page-body .center-3 .fl-2 li {
+  margin-bottom: 8px; }
+#page-body .center-4 {
+  padding-top: 16px;
+  margin: 0 28px 0 28px; }
+#page-body .center-4 ul:nth-child(1) {
+  color: #FEFEFE; }
+#page-body .center-4 ul:nth-child(2) {
+  background-color: #F5F5F5;
+  color: #4F4F4F; }
+#page-body .center-4 ul:nth-child(2) li:nth-child(1), #page-body .center-4 ul:nth-child(2) li:nth-child(2) {
+  line-height: 50px; }
+#page-body .center-4 ul li {
+  width: 19.5%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center; }
+#page-body .center-4 .del span {
+  background-color: #f13735;
+  display: inline-block;
+  color: #fff;
+  width: 50px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  border-radius: 8px; }
+#page-body .center-6 {
+  height: 46px;
+  text-align: center;
+  padding-top: 12px; }
+#page-body .center-6 a {
+  display: inline-block;
+  height: 34px;
+  line-height: 34px;
+  width: 90px;
+  background-color: #ff4341;
+  border-radius: 3px;
+  color: #fff; }
+#page-body .center-2-f {
+  position: relative; }
+#page-body .center-2-f button {
+  display: inline-block;
+  width: 90px;
+  height: 34px;
+  background-color: #ff4341;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 5px;
+  outline: none; }
+#page-body .myd-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  line-height: 100%;
+  display: none; }
+#page-body .myd-modal .myd-modal-c {
+  width: 300px;
+  height: 175px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 200px;
+  overflow: hidden;
+  padding-top: 25px;
+  text-align: center; }
+#page-body .myd-modal-c .myd-modal-1 {
+  height: 55px;
+  line-height: 55px; }
+#page-body .myd-modal-c .myd-modal-1 i {
+  font-size: 40px;
+  color: #4CBE26; }
+#page-body .myd-modal-c .myd-modal-2 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 50px;
+  /* line-height: 55px; */ }
+#page-body .myd-modal-c .myd-modal-2 p {
+  line-height: 25px;
+  font-size: 18px; }
+#page-body .myd-modal-c .myd-modal-3 button {
+  background-color: #FE2624;
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+  margin-top: 15px;
+  outline: none; }
+
+/*# sourceMappingURL=TakeTheMoney.css.map */

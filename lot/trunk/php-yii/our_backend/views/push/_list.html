@@ -1,0 +1,112 @@
+
+    <thead>
+        <tr>
+            <th class="center">ID</th>
+            <th class="center">终端</th>
+            <th class="center">线路</th>
+            <th class="center">彩种</th>
+            <th class="center">群组</th>
+            <th class="center">用户</th>
+            <th class="center">标题</th>
+            <th class="center">内容</th>
+            <th class="center">发送时间</th>
+            <th class="center">添加时间</th>
+            <th class="center">状态</th>
+            <th class="center">启用</th>
+            <th class="center">备注</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+<{if isset($result.data)}>
+    <tbody>
+    <{if count($result['data']) == 0}>
+        <tr><td class="center" colspan="20">无记录</td></tr>
+    <{else}>
+      <{foreach from=$result.data item=v key=k}>
+        <tr id="item<{$v.id}>"
+          <{foreach from=$v item=vv key=kk}>
+            data-<{$kk}>='<{$vv}>'
+          <{/foreach}>
+            info='<{$v|@json_encode}>'
+        >
+            <td class="center"><{$v.id}></td>
+          <{if isset($v.client_limit) && $v.client_limit eq 1}>
+            <td class="center" data-title="终端" data-content="<{$v.clients}>" onclick="showContent($(this));">
+                <span style="display:inline-block;width:66px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                <{$v.clients}>
+                </span>
+            </td>
+            <{else}>
+            <td class="center">不限</td>
+          <{/if}>
+          <{if isset($v.line_limit) && $v.line_limit eq 1}>
+            <td class="center" data-title="线路" data-content="<{$v.lines}>" onclick="showContent($(this));">
+                <span style="display:inline-block;width:66px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                <{$v.lines}>
+                </span>
+            </td>
+            <{else}>
+            <td class="center">不限</td>
+          <{/if}>
+          <{if isset($v.game_limit) && $v.game_limit eq 1}>
+            <td class="center" data-title="彩种" data-content="<{$v.games}>" onclick="showContent($(this));">
+                <span style="display:inline-block;width:66px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                <{$v.games}>
+                </span>
+            </td>
+            <{else}>
+            <td class="center">不限</td>
+          <{/if}>
+          <{if isset($v.group_limit) && $v.group_limit eq 1}>
+            <td class="center" data-title="群组" data-content="<{$v.groups}>" onclick="showContent($(this));">
+                <span style="display:inline-block;width:66px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                <{$v.groups}>
+                </span>
+            </td>
+            <{else}>
+            <td class="center">不限</td>
+          <{/if}>
+          <{if isset($v.user_limit) && $v.user_limit eq 1}>
+            <td class="center" data-title="用户" data-content="<{$v.users}>" onclick="showContent($(this));">
+                <span style="display:inline-block;width:66px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                <{$v.users}>
+                </span>
+            </td>
+            <{else}>
+            <td class="center">不限</td>
+          <{/if}>
+            <td class="center title" data-detail="<{$v.title}>"><{$v.title}></td>
+            <td class="center content" data-detail="<{$v.content}>" style="max-width:200px;">
+                <div style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><{$v.content}></div>
+            </td>
+            <td class="center"><{$v.senddate}></td>
+            <td class="center"><{$v.adddate}></td>
+            <td class="center"><{$v.statusTxt}></td>
+            <td class="center" name="enable">
+                <a <{if $v.status neq 0}> style="cursor:no-drop;"<{else}> onclick="actionEnable(<{$v.id}>, <{$v.enable}>)"<{/if}> class="btn btn-xs btn-<{if $v['enable'] eq '1'}>primary<{else}>default<{/if}> enable">
+                    <{$v.enableTxt}>
+                </a>
+            </td>
+            <td class="center"><{$v.remark}></td>
+            <td class="center">
+              <{if $v.status eq 0}>
+                <a onclick="actionEdit(<{$v.id}>)" class="btn btn-xs btn-success update">修改</a>
+                <!-- <a onclick="actionPush(<{$v.id}>)" class="btn btn-xs btn-warning push"<{if $v.enable neq 1}> style="display:none;"<{/if}>>推送</a> -->
+              <{/if}>
+            </td>
+        </tr>
+      <{/foreach}>
+    <{/if}>
+    </tbody>
+<{/if}>
+
+<script>
+    $('td.title, td.content').click(function(){
+        var title = $('td.title').data('detail');
+        var content = $('td.content').data('detail');
+        layer.alert(content,{'title':title});
+    });
+    function showContent(obj){
+        layer.alert(obj.data('content'),{'title':obj.data('title')});
+    }
+</script>

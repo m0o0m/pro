@@ -1,0 +1,130 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-02-01 19:46:34
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/gameapi/odds/_list.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a72fe1a43fa64_31829059',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '4d0bebf00df52978df3335802cfc5f242f239fa8' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/gameapi/odds/_list.html',
+      1 => 1515729171,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a72fe1a43fa64_31829059 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+<!-- 列表 -->
+<?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'])) {?>
+    <tbody>
+        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value['data'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+        <tr><th colspan="20"><?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+</th></tr>
+        <tr>
+            <?php $_smarty_tpl->_assignInScope('vlen', count($_smarty_tpl->tpl_vars['v']->value));
+?>
+            <?php if ($_smarty_tpl->tpl_vars['vlen']->value > 5) {?>
+                <?php $_smarty_tpl->_assignInScope('widlen', 5);
+?>
+            <?php } else { ?>
+                <?php $_smarty_tpl->_assignInScope('widlen', $_smarty_tpl->tpl_vars['vlen']->value);
+?>
+            <?php }?>
+            <?php
+$_smarty_tpl->tpl_vars['i'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? $_smarty_tpl->tpl_vars['widlen']->value+1 - (1) : 1-($_smarty_tpl->tpl_vars['widlen']->value)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 1, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration == $_smarty_tpl->tpl_vars['i']->total;?>
+                <td class="center" style="width:66px;background-color:white;font-weight:bold;">号码</td>
+                <td class="center" style="width:66px;background-color:white;">赔率</td>
+            <?php }
+}
+?>
+
+        </tr>
+        <tr>
+            <?php $_smarty_tpl->_assignInScope('i', 1);
+?>
+            <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v']->value, 'vv', false, 'kk');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['kk']->value => $_smarty_tpl->tpl_vars['vv']->value) {
+?>
+                <?php if (isset($_smarty_tpl->tpl_vars['vv']->value['agent_type']) && isset($_smarty_tpl->tpl_vars['vv']->value['agent_id'])) {?>
+                    <?php $_smarty_tpl->_assignInScope('itemid', $_smarty_tpl->tpl_vars['vv']->value['play_id']);
+?>
+                    <?php $_smarty_tpl->_assignInScope('iscustom', 1);
+?>
+                <?php } elseif (isset($_smarty_tpl->tpl_vars['vv']->value['line_id'])) {?>
+                    <?php $_smarty_tpl->_assignInScope('itemid', $_smarty_tpl->tpl_vars['vv']->value['play_id']);
+?>
+                    <?php $_smarty_tpl->_assignInScope('iscustom', -1);
+?>
+                <?php } else { ?>
+                    <?php $_smarty_tpl->_assignInScope('itemid', $_smarty_tpl->tpl_vars['vv']->value['id']);
+?>
+                    <?php $_smarty_tpl->_assignInScope('iscustom', 0);
+?>
+                <?php }?>
+                <td class="center" style="background-color:white;font-weight:bold;"><?php echo $_smarty_tpl->tpl_vars['vv']->value['input_nameTxt'];?>
+</td>
+                <td class="center" style="background-color:white;<?php if ($_smarty_tpl->tpl_vars['iscustom']->value == 1) {?>color:red;<?php } elseif ($_smarty_tpl->tpl_vars['iscustom']->value == -1) {?>color:blue;<?php }?>"
+                    onclick="actionEdit(<?php echo $_smarty_tpl->tpl_vars['itemid']->value;?>
+);"
+                    id="item<?php echo $_smarty_tpl->tpl_vars['itemid']->value;?>
+"
+                    iscustom="<?php echo $_smarty_tpl->tpl_vars['iscustom']->value;?>
+"
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['vv']->value, 'v3', false, 'k3');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars['v3']->value) {
+?>
+                    data-<?php echo $_smarty_tpl->tpl_vars['k3']->value;?>
+="<?php echo $_smarty_tpl->tpl_vars['v3']->value;?>
+"
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                    info='<?php echo json_encode($_smarty_tpl->tpl_vars['vv']->value);?>
+'
+                ><?php echo $_smarty_tpl->tpl_vars['vv']->value['odd'];?>
+</td>
+
+                <?php if ($_smarty_tpl->tpl_vars['i']->value%5 == 0) {?></tr><tr><?php }?>
+                <?php $_smarty_tpl->_assignInScope('i', $_smarty_tpl->tpl_vars['i']->value+1);
+?>
+            <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+        </tr>
+        </tbody><tbody>
+        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+    </tbody>
+<?php }
+}
+}

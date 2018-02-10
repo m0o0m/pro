@@ -1,0 +1,44 @@
+package router
+
+import (
+	"global"
+	"encoding/json"
+)
+
+var (
+	n            []string
+	WhiteListKey = ""
+)
+
+//type AutoWhiteList []string
+
+func CheckWhiteList(siteid, gtype string, ip string) (isExist int) {
+	global.RedisClient.Ping()
+	if gtype == "lottery" {
+		WhiteListKey = "whitelist_" + siteid + "_join"
+	} else {
+		WhiteListKey = "whitelist_" + siteid + "_spider"
+	}
+	datas, err := global.RedisClient.Get(WhiteListKey).Result()
+	if err != nil {
+		global.GlobalLogger.Debug("GetWhiteList error: %v", err.Error())
+		return 1
+	}
+	//["11.11.111.111","127.0.0.1"]
+	if len(datas) > 0 {
+		err := json.Unmarshal([]byte(datas), &n)
+		if err != nil {
+			global.GlobalLogger.Error("json Unmarshal error: %s", datas)
+			return 0
+		}
+		for _, v := range n {
+			if v == ip {
+				isExist = 1
+				return
+			}
+		}
+		return isExist
+
+	}
+	return 1
+}

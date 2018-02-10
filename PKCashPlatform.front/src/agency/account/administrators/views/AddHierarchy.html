@@ -1,0 +1,127 @@
+<div id="content">
+    <div class="row">
+        <section widget-grid id="widget-grid">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('Add Heriy')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid" ng-model="formData">
+                                                <fieldset ng-if="isSuperAdmin">
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">{{getWord('Site')}}</label>
+                                                        <div class="col-md-3" ng-init="site_index_id=''">
+                                                            <select class="form-control" id="site_index_id" ng-model="site_index_id" ng-change="siteId()" >
+                                                                <option value="">请选择</option>
+                                                                <option ng-value="item.site_index_id" ng-repeat="item in siteJson" >{{item.site_name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">{{getWord('Payment settings')}}</label>
+                                                        <div class="col-md-3">
+                                                                <select class="form-control" id="pay_set">
+                                                                    <option value="1">RMB</option>
+                                                                    <option value="10">美金</option>
+                                                                    <option value="100">欧元</option>
+                                                                </select>
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">{{getWord('rmdRequired')}}</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">{{getWord('hierarchyName')}}</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" ng-model="formData.level_id">
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">{{getWord('fixedNumber')}}</lable>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">{{getWord('describe')}}</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text"  ng-model="formData.description">
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">{{getWord('requiredSpecialCharacters')}}</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">{{getWord('Membership time')}}</label>
+                                                        <div class="col-md-3">
+                                                            <div class="input-group ">
+                                                                 <input type="text" name="mydate" placeholder="{{getWord('Creation Time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="formData.start_time">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="input-group ">
+                                                                <input type="text" name="mydate" placeholder="{{getWord('End time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="formData.end_time">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">{{getWord('Deposit times')}}</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="number" min="0" ng-model="formData.deposit_num">
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">{{getWord('default0,isUnrestricted')}}</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">{{getWord('Total deposits')}}</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control" type="number" min="0"  ng-model="formData.deposit_count">
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">{{getWord('default0,isUnrestricted')}}</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">{{getWord('Remark')}}</label>
+                                                        <div class="col-md-3">
+                                                            <textarea row="4" ng-model="formData.remark"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 text-align-center">
+                                                        <button class="btn btn-primary"  type="submit" ng-click="sumbit()">
+                                                            {{getWord('Confirm submission')}}
+                                                        </button>
+
+                                                        <button class="btn btn-primary"  type="submit" onclick="window.history.back();" >
+                                                            {{getWord('Return')}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

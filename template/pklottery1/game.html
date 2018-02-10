@@ -1,0 +1,10 @@
+{{template "header" .Header}}
+<div id="page-container" style="background: #110F39;">
+    <div id="page-body">
+    	{{template "game" .}}
+    </div>
+</div>
+<style type="text/css">
+	.banner-wrap{background: url({{.Header.CdnUrl}}/theme3/public/images/new/dza.jpg) no-repeat left top !important;}
+</style>
+{{template "footer" .Footer}}

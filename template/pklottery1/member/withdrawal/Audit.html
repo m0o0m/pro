@@ -1,0 +1,361 @@
+{{define "memberdrawwrite"}}
+{{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/deposit.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/Audit.css" type="text/css">
+
+<style>
+    .center-4-1 ul {
+        float: left;
+        width: 100%;
+    }
+
+    .center-4-1 ul:nth-child(1) {
+        color: #FEFEFE;
+    }
+
+    .center-4-1 ul:nth-child(2) {
+        background-color: #F5F5F5;
+        color: #4F4F4F;
+    }
+
+    .center-4-1 ul:nth-child(2) li:nth-child(1), .center-4-1 li:nth-child(2), .center-4 ul:nth-child(2) li:nth-child(2) {
+        line-height: 25px;
+    }
+
+    .center-4-1 ul li {
+        width: 12.5%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .center-3 {
+        border-top: 2px solid #FFC933;
+        margin: 0 28px 0 28px;
+        height: 178px;
+        background-color: #FFFFEE;
+        padding-left: 50px;
+    }
+
+    .center-3 h3 {
+        padding-top: 15px;
+        padding-bottom: 8px;
+    }
+
+    .center-3 .fl-1 li {
+        margin-bottom: 5px;
+    }
+
+    .center-3 .fl-2 {
+        padding-left: 20px;
+    }
+
+    .center-3 .fl-2 li {
+        margin-bottom: 8px;
+    }
+
+    .center-3-t {
+        margin-top: 10px;
+        width: 190px;
+        height: 44px;
+        background-color: #E85036;
+        color: #fff;
+        line-height: 44px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .center-5 {
+        margin-top: 8px;
+        padding-left: 30px;
+        min-height: 130px;
+        background-color: #EFFFE1;
+        border-top: 2px solid #6EC51A;
+    }
+
+    .center-5 .center-5-t {
+        height: 48px;
+        line-height: 48px;
+        font-weight: 700;
+    }
+
+    .center-5-c > span, #page-body .center-5-b > span {
+        margin-right: 34px;
+    }
+
+    .center-5-c span {
+        display: inline-block;
+        height: 36px;
+    }
+
+    .center-5 .center-5-c .span_h {
+        font-size: 20px;
+        /* color: #fba56d; */
+    }
+
+    .center-4-1 {
+        width: 100%;
+        min-height: 100px;
+    }
+
+</style>
+<div class=" mycenter">
+    <div class="deposit-schedule">
+        <div class="line"></div>
+        <div class="line"></div>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-gou1 myicon FEF7F9"></i>
+              </span>
+              <p class="myd-red">转账银行
+                <i class="icon iconfont icon-gou myd-t-gou"></i>
+              </p>
+            </span>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-surelist myicon"></i>
+              </span>
+              <p class="myd-red">正在稽核</p>
+            </span>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-qiandai1 myicon"></i>
+              </span>
+              <p>完成取款</p>
+            </span>
+    </div>
+</div>
+<div class=" smallamount">
+    <div class="deposit-schedule">
+        <div class="line"></div>
+        <div class="line"></div>
+        <span class="round">
+                            <span class="round-2">
+                                <i class="icon iconfont icon-gou1 myicon FEF7F9"></i>
+                            </span>
+                            <p class="myd-red">选择出款银行</p>
+                        </span>
+        <span class="round">
+                            <span class="round-2">
+                                <i class="icon iconfont icon-surelist myicon FEF7F9"></i>
+                            </span>
+                            <p class="myd-red">稽核完成<i class="icon iconfont icon-gou myd-t-gou"></i></p>
+                        </span>
+        <span class="round">
+                            <span class="round-2">
+                                <i class="icon iconfont icon-qiandai1 myicon FEF7F9"></i>
+                            </span>
+                            <p>完成取款 <i class="icon iconfont icon-gantanhao myd-red"></i></p>
+                        </span>
+    </div>
+    <div class="deposit-schedule-c">
+        <div class="center-3 clearfix">
+            <div class="center-3-t">出款常见问题
+                <i class="icon iconfont icon-wenhao"></i>
+            </div>
+            <h3>尊敬的会员，您好！出款时若出现以下情况将会扣除一定的费用</h3>
+            <ul class="fl fl-1 f1-font">
+                <li>1. 未满足常态稽核将扣除入款金额50%行政费用与优惠</li>
+                <li>2. 未满足综合稽核将会扣除优惠金额</li>
+                <li>3. 提交订单后注意查看稽核状态，请注意是否需要扣除费用</li>
+                <li>4. 有出款订单未处理时无法提交第二笔订单</li>
+            </ul>
+            <ul class="fl fl-2 f1-font" style="padding-left: 20px;">
+                <li class="myd-red">常态稽核=会员入款金额 * 常态稽核倍数</li>
+                <li class="myd-red">综合（优惠）稽核=（会员入款金额 + 优惠） * 综合稽核倍数</li>
+                <li class="myd-red">优惠即存款优惠，人工优惠等等</li>
+            </ul>
+        </div>
+        <div class="center-4-1">
+            <ul class="clearfix my-theme">
+                <li class="fl">开始时间</li>
+                <li class="fl" style="line-height: 50px;">结束时间</li>
+                <li class="fl">存款金额</li>
+                <li class="fl">优惠稽核</li>
+                <li class="fl">综合稽核</li>
+                <li class="fl">手续费</li>
+                <li class="fl">常态稽核</li>
+                <li class="fl">综合稽核</li>
+            </ul>
+            <ul class="clearfix" id="show-charge-data">
+                <li class="fl">2017-11-22 12:00:00</li>
+                <li class="fl">2017-11-22 12:00:00</li>
+                <li class="fl">10000.00</li>
+                <li class="fl">1000.00</li>
+                <li class="fl">10000.00</li>
+                <li class="fl">10000.00</li>
+                <li class="fl myd-red">满足</li>
+                <li class="fl myd-red">满足</li>
+            </ul>
+        </div>
+    </div>
+    <div class="center-5">
+        <div class="center-5-t">稽核详情</div>
+        <div class="center-5-c">
+            <span class="span-1"><span><i class='myd-red'>*</i>订单号：</span><span class="myd-red" id="order-num">2017777777777777</span></span><br>
+            <span class="span-1"><span><i class='myd-red'>*</i>取款金额:</span><span
+                    class="myd-red" id="draw-money">20.00</span>元</span></span><br>
+            <span class="span-1"><span><i class='myd-red'>*</i>扣除手续费：</span><span
+                    class="myd-red" id="deduction-money">0</span>元</span></span><br>
+            <span class="span-1"><span><i class='myd-red'>*</i>最终取款金额：</span><span
+                    class="myd-red" id="draw-out-money">20.00</span>元</span></span><br>
+        </div>
+        <div class="center-5-b" id="show-result">
+            <span class="span-1"><i class='myd-red'>*</i>满足综合稽核，无需扣除优惠金额</span><br>
+            <span class="span-1"><i class='myd-red'>*</i>满足常态稽核，无需扣除50%行政优惠</span><br>
+            <span class="span-1"><i class='myd-red'>*</i>综合稽核+常态稽核+手续费，共需扣除：<span
+                    class='myd-red'>0</span>元</span><br>
+        </div>
+    </div>
+    <div class="center-6" id="result-url">
+    </div>
+</div>
+</div>
+</section>
+</div>
+</body>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/jquery-2.1.4.js"></script>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/ws.js"></script>
+<script>
+    $(".d-3-span2 ul").on('click', 'li', function () {
+        $(this).addClass('d-3-span2-click').siblings().removeClass('d-3-span2-click');
+    });
+    $(".center-t i").click(function () {
+        location.replace(location.href);
+    });
+    $(function () {
+        var logindata = loginId();
+        if (logindata) {
+            $.ajax({
+                url: '/ajax/draw/write',
+                type: 'get',
+                data: {},
+                headers: {
+                    'Authorization': 'bearer ' + getCookie('loginBack'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': "pc"
+                },
+                success: function (data, info, xhr) {
+                    console.log(data);
+                    if (data) {
+                        // console.log(data.data.orderNumber);
+                        withdrawWsService.Subscribe(data.data.orderNumber);
+                        if (data.code) {
+                            // alert(data.msg)
+
+                            $.Pro(data.msg, {
+                                Time: 2, StartOn: function () {
+                                    $("html").click(function () {
+                                        $(".showAlert_Pro").hide()
+                                    })
+                                }
+                            })
+
+                            My_pc_Modal({
+                                text: data.msg,
+                            })
+                        }
+                        if (data.data) {
+                            $('.mycenter').hide();
+                            $('.smallamount').show();
+                            var showTime = strToDate(showdata.CreateTime);
+                            var outTime;
+                            if (showdata.OutTime != 0) {
+                                outTime = strToDate(showdata.OutTime);
+                            } else {
+                                outTime = '';
+                            }
+
+                            var showmoney = Math.floor((showdata.FavourableMoney + showdata.ExpeneseMoney + showdata.Charge) * 100) / 100;
+                            var htmldata, normal, mui;
+                            var htmldata1 = '';
+                            var showresult = '';
+                            if (showdata.FavourableMoney == 0) {
+                                mui = '满足';
+                                showresult += '<span class="span-1"><i class="myd-red">*</i>满足综合稽核，无需扣除优惠金额</span><br>';
+                            } else {
+                                mui = '不满足';
+                                showresult += '<span class="span-1"><i class="myd-red">*</i>不满足综合稽核，扣除优惠金</span><br>';
+                            }
+                            if (showdata.ExpeneseMoney == 0) {
+                                normal = '满足';
+                                showresult += '<span class="span-1"><i class="myd-red">*</i>满足常态稽核，无需扣除50%行政优惠</span><br>';
+                            } else {
+                                normal = '不满足';
+                                showresult += '<span class="span-1"><i class="myd-red">*</i>不满足常态稽核，需扣除50%行政优惠</span><br>';
+                            }
+                            showresult += '<span class="span-1"><i class="myd-red">*</i>综合稽核+常态稽核+手续费，共需扣除：<span class="myd-red">' + showmoney + '</span>元</span><br>';
+                            htmldata = '<li class="fl">' + showTime[0] + showTime[1] + '</li>';
+                            if (outTime != '') {
+                                htmldata += '<li class="fl">' + outTime[0] + outTime[1] + '</li>';
+                            } else {
+                                htmldata += '<li class="fl">' + outTime + '</li>';
+                            }
+                            htmldata += '<li class="fl">' + showdata.OutwardNum + '</li>' +
+                                    '<li class="fl">' + showdata.FavourableMoney + '</li>' +
+                                    '<li class="fl">' + showdata.ExpeneseMoney + '</li>' +
+                                    '<li class="fl">' + showdata.Charge + '</li>' +
+                                    '<li class="fl">' + normal + '</li>' +
+                                    '<li class="fl">' + mui + '</li>';
+                            $('#show-charge-data').html(htmldata);
+                            var drawmoney = Math.floor(showdata.OutwardNum * 100) / 100;
+                            var outmoney = Math.floor(showdata.OutwardMoney * 100) / 100;
+                            $('#order-num').html(showdata.OrderNum);
+                            $('#draw-money').html(drawmoney);
+                            $('#deduction-money').html(showdata.Charge);
+                            $('#draw-out-money').html(outmoney);
+                            $('#show-result').html(showresult);
+                            $('#result-url').html(htmldata1)
+
+                        }
+                    }
+                    // console.log(xhr);
+                    if (xhr.status == 200) {
+
+                        $.Pro("出款申请提交成功，系统正在为您处理！", {
+                            Time: 2, StartOn: function () {
+                                $("html").click(function () {
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }
+                        })
+
+
+                        My_pc_Modal({
+                            text: "出款申请提交成功，系统正在为您处理！",
+                        })
+
+                        location.herf = '/member/account';
+                    }
+                }
+            })
+        }
+    })
+
+
+    function My_pc_Modal(obj) {
+        var tet = obj.text;
+        var time = obj.time || 2000;
+        var otime = time - 500;
+
+        var otime = (time - 500) <= 600 ? time : (time - 500);
+
+        $(".my_pc_Modal").text(tet).show().css("opacity", '1');
+
+        setTimeout(function () {
+            $(".my_pc_Modal").animate({
+                "opacity": "0"
+            })
+        }, otime)
+
+        setTimeout(function () {
+            $(".my_pc_Modal").text('').hide();
+        }, time)
+    }
+
+
+</script>
+
+</html>
+{{end}}

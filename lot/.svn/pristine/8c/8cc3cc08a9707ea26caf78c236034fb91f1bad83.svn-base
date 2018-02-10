@@ -1,0 +1,22 @@
+package global
+
+import (
+	"time"
+	"strconv"
+)
+
+//得到今天0时0分0秒和23时59分59秒  最终效果如20170102
+func GetTodayStart() (int64) {
+	local, _ := time.LoadLocation("Local")
+	tmStr := time.Now().
+		In(local).
+		Format("20060102")
+	timeNumber, _ := strconv.ParseInt(tmStr, 10, 64)
+	return timeNumber
+}
+
+//得到当前时间
+func GetCurrentTime() int64 {
+	local, _ := time.LoadLocation("Local")
+	return time.Now().In(local).Unix()
+}

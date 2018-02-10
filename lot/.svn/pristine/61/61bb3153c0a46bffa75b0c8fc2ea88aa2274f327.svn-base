@@ -1,0 +1,19 @@
+package schema
+
+//股东现金流水表
+type ShCashRecord struct {
+	Id       int64   `xorm:"'id' PK autoincr" json:"id"`                      //主键id
+	ShId     int64   `xorm:"'sh_id' notnull" json:"sh_id"`                    //股东id
+	ShUser   string  `xorm:"'sh_user' notnull" json:"sh_user"`                //股东账号
+	LineId   string  `xorm:"'line_id' notnull" json:"line_id"`                //站点id
+	SourceId int64   `xorm:"source_id" json:"source_id"`                      //关联id号
+	CashNum  float64 `xorm:"cash_num" json:"cash_num"`                        //交易金额
+	Remark   string  `xorm:"remark" json:"remark"`                            //备注
+	Addtime  int64   `xorm:"'addtime' notnull" json:"addtime"`                //插入时间
+	Addday   int64   `xorm:"'addday' notnull" json:"addday"`                  //下注的日期
+	CashType int64   `xorm:"'cash_type' notnull default(1)" json:"cash_type"` //1-存入,2-取出
+}
+
+func (*ShCashRecord) TableName() string {
+	return "my_sh_cash_record"
+}

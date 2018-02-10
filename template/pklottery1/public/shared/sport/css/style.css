@@ -1,0 +1,53 @@
+body{text-align:center;font-family:"Microsoft YaHei",Verdana,Geneva,sans-serif;}
+.w1000{width:1024px;margin-left:auto;margin-right:auto; overflow: hidden;}
+a img{border:0}
+a.forget { font-size: 14px; line-height:30px;  float: left; margin-top: 10px;}
+.fl_left{float:left;}
+.fl_right{float:right;}
+.ma_bootm{margin-bottom: 30px;}
+.ma_fr{ margin-right: 17px }
+/*体育赛事*/
+
+.view-live {width: 330px;height:368px;overflow: hidden;position: relative;text-align: center;cursor: default;background-color: rgba(0, 0, 0, 0.6);}
+.view-live .mask-live,.view-live .content {width: 330px;height:368px;position: absolute;overflow: hidden;top: 0;left: 0;padding-top:30px;}
+.view-live img{display: block;position: relative;width: 100%; height: 100%;}
+.view-live h2 {text-transform: uppercase;color: #fff;text-align: center;position: relative;font-size: 20px;padding: 10px;background: rgba(0, 0, 0, 0.8);margin: 20px 0 0 0;}
+.view-live p {line-height: 24px;font-family: Georgia, serif;font-size: 14px;position: relative;color: #fff;padding: 10px 20px;text-align: center;min-height: 120px; display: block;}
+.buttom_box{width: 220px; margin:0 auto;overflow:hidden;}
+.Sports_button{ display: block;border:none;width: 100px; height: 40px;line-height: 38px;font-size: 16px; font-family:"Microsoft YaHei",Verdana,Geneva,sans-serif;text-align: center; background: #b80700;color: #fff; cursor: pointer;text-transform: uppercase;-webkit-box-shadow: 0 0 5px #000;-moz-box-shadow: 0 0 5px #000;box-shadow: 0 0 5px #000;text-decoration: none; margin: 0 auto;}
+.Sports_button_fr{ display:block;border:none;width:100px; height: 40px;line-height:38px;font-size: 16px; font-family:"Microsoft YaHei",Verdana,Geneva,sans-serif;text-align: center; background: #eea905;color: #fff; cursor: pointer;text-transform: uppercase;-webkit-box-shadow: 0 0 5px #241a01;-moz-box-shadow: 0 0 5px #241a01;box-shadow: 0 0 5px #241a01;text-decoration: none; float: right;}
+.Sports_button_fl{ display: block;border:none;width: 100px; height: 40px;line-height: 38px;font-size: 16px; font-family:"Microsoft YaHei",Verdana,Geneva,sans-serif;text-align: center; background: #b80700;color: #fff; cursor: pointer;text-transform: uppercase;-webkit-box-shadow: 0 0 5px #000;-moz-box-shadow: 0 0 5px #000;box-shadow: 0 0 5px #000;text-decoration: none; float: left;}
+.Sports_events a{ display: block; }
+.Sports_events a img{-moz-transform: scaleY(1);-o-transform: scaleY(1);-ms-transform: scaleY(1);-webkit-transform:scale(1,1); transform:scale(1,1);
+	transform:rotate(0deg);-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-o-transform:rotate(0deg);-ms-transform:rotate(0deg); -webkit-transition: all 1s ease-in-out;-moz-transition: all 1s ease-in-out;-o-transition: all 1s ease-in-out;-ms-transition: all 1s ease-in-out;transition: all 0.7s ease-in-out;}
+.Sports_events a .mask-live {background-color: rgba(0, 0, 0, 0.4);-webkit-transition: all 0.5s linear;-moz-transition: all 0.5s linear;-o-transition: all 0.5s linear;-ms-transition: all 0.5s linear;transition: all 0.5s linear;-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);opacity: 0;}
+.view-tenth h2 {border-bottom: 1px solid rgba(255, 255, 255, 0.5);background: transparent;margin: 20px 40px 0px 40px;color: #fff;-webkit-transform: scale(0);-moz-transform: scale(0);-o-transform: scale(0);-ms-transform: scale(0);transform: scale(0);-webkit-transition: all 0.5s linear;-moz-transition: all 0.5s linear;-o-transition: all 0.5s linear;-ms-transition: all 0.5s linear;transition: all 0.5s linear;-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);opacity: 0;}
+.view-tenth p{color: #fff;-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);opacity: 0;-webkit-transform: scale(0);-moz-transform: scale(0);-o-transform: scale(0);-ms-transform: scale(0);transform: scale(0);-webkit-transition: all 0.5s linear;-moz-transition: all 0.5s linear;-o-transition: all 0.5s linear;-ms-transition: all 0.5s linear;transition: all 0.5s linear;}
+.view-tenth input{-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);opacity: 0;-webkit-transform: scale(0);-moz-transform: scale(0);-o-transform: scale(0);-ms-transform: scale(0);transform: scale(0);-webkit-transition: all 0.5s linear;-moz-transition: all 0.5s linear;-o-transition: all 0.5s linear;-ms-transition: all 0.5s linear;transition: all 0.5s linear;}
+.Sports_events a:hover img,.Sports_events a:active img {/*-webkit-transform: scale(10);*/-moz-transform: scale(10);-o-transform: scale(10);-ms-transform: scale(10);-webkit-transform: scale(10,10);transform: scale(10,10);
+transform:rotate(360deg);-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);-ms-transform:rotate(360deg);
+	 -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);opacity: 0.5; cursor: pointer;}
+.Sports_events a:hover .mask-live,.Sports_events a:active .mask-live {-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";filter: alpha(opacity=100);opacity: 1;cursor: pointer; z-index: 1000;}
+
+.Sports_events a:hover input,.Sports_events a:active input {/*-webkit-transform: scale(10);*/-moz-transform: scale(10);-o-transform: scale(10);-ms-transform: scale(10);-webkit-transform: scale(10,10);transform: scale(10,10);
+transform:rotate(360deg);-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);-ms-transform:rotate(360deg);
+	 -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);opacity: 0.9; cursor: pointer;}
+
+.Penalty_three{background-color: rgba(0, 0, 0, 0.6);width: 100%;height: 100%; margin-top: -25px; padding-top:140px; }
+.Penalty_one{background-color: rgba(0, 0, 0, 0.6);width: 100%;height: 100%; margin-top: -25px; padding-top:50px; }
+.view-tenth .physical_education_hg{ width: 100%;height: 100%; position: absolute;top:0;background:url(../images/Newsports_hgbj.png)no-repeat center 0 #004499;z-index: 5; background-size: contain;}
+.view-tenth .physical_education_bb{ width: 100%;height: 100%; position: absolute;top:0;background:url(../images/Newsports_bbbj.png)no-repeat center 0 #004499;z-index: 5; background-size: contain;}
+.view-tenth .physical_education_im{ width: 100%;height: 100%; position: absolute;top:0;background:url(../images/Newsports_imbj.png)no-repeat center 0 #004499;z-index: 5; background-size: contain;}
+.view-tenth .physical_education_sb{ width: 100%;height: 100%; position: absolute;top:0;background:url(../images/Newsports_sbbj.png)no-repeat center 0 #004499;z-index: 5; background-size: contain;}
+.view-tenth:hover h2,.view-tenth:hover p,.view-tenth:hover a.info {-webkit-transform: scale(1);-moz-transform: scale(1);-o-transform: scale(1);-ms-transform: scale(1);transform: scale(1);-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";filter: alpha(opacity=100);opacity: 1;}
+/*二*/
+.view1{width:370px;height: 412px; margin-bottom:46px; overflow: hidden;position: relative;text-align: center;cursor: default;background-color: rgba(0, 0, 0, 0.6);position:absolute;top:0px; left:327px;z-index: 10;}
+.view1 .mask-live{width:370px;height:412px;position: absolute;overflow: hidden;top: 0;left: 0; padding-top:60px;}
+.view2 {width: 440px;height: 490px; margin-bottom:46px; overflow: hidden;position: relative;text-align: center;cursor: default;background-color: rgba(0, 0, 0, 0.6);}
+.view2 .mask-live{width: 440px;height:490px;position: absolute;overflow: hidden;top: 0;left: 0; padding-top:100px;}
+.view2 img,.view1 img{display: block;position: relative; width: 100%; height: 100%;}
+.view2 h2,.view1 h2 {text-transform: uppercase;text-align: center;position: relative;font-size: 20px;padding: 10px;margin: 20px 40px 0px 40px; line-height: 30px;}
+.view2 p,.view1 p {font-family: Georgia, serif;font-size: 14px;position: relative;padding: 10px 20px;text-align: center;min-height: 140px; display: block;}
+.two{padding:47px 47px 1px 47px;overflow: hidden;}
+.three{padding:22px 20px;overflow: hidden;}
+.Sports_events{position: relative; overflow: hidden; margin-bottom:40px; margin-top: 30px;}

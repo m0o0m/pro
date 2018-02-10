@@ -1,0 +1,69 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('RebateSetting')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 control-label col-xs-4 reltop">站点</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select data-smart-select2  class="selectWidth" ng-model="site_index_id">
+                                                    <option value="">请选择</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in names">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-8">
+                                            <button class="btn btn-default" ng-click="search()">搜索</button>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-4">
+                                            <a href-void="" class="btn btn-primary" href="#" ng-click="add()">新增设定</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">有效投注</th>
+                                                <th ng-repeat="type in name" class="text-center">{{type}}</th>
+                                                <th class="text-center">上限</th>
+                                                <th class="text-center">功能</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list" class="text-center">
+                                                <td>{{item.all_bet}}</td>
+                                                <td ng-repeat="typeItem in item.rate">{{typeItem}}</td>
+                                                <td>{{item.upper_limit}}</td>
+                                                <td>
+                                                    <button class="btn btn-default" ng-click="modify(item.id)">{{getWord('Modify')}}</button>
+                                                    <button class="btn btn-default" ng-click="delete(item.id)">{{getWord('Delete')}}</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+</div>

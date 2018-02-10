@@ -1,0 +1,351 @@
+
+<style>#search-form label{margin-right:10px}</style>
+<div class="page-header col-xs-12">
+    <form id="search-form">
+        <label> 线路:
+            <select type="select" name="line_id" id="line_id">
+                <option value="">全部</option>
+                <{foreach from=$data.show.lines item=v key=k}>
+                <option value="<{$v['line_id']}>"<{if isset($smarty.get.line_id) && $smarty.get.line_id eq <{$v['line_id']}>}>selected<{/if}>><{$v['line_id']}></option>
+                <{/foreach}>
+            </select>
+        </label>
+        <!-- <label> 代理帐号:
+            <input type="text" placeholder="请输入代理账号" name="agentname" id="agentname" value="<{if isset($smarty.get.agentname)}><{$smarty.get.agentname}><{/if}>">
+        </label> -->
+        <!-- <label> 会员帐号:
+            <input type="text" placeholder="请输入会员账号" name="username" id="username" value="<{if isset($smarty.get.username)}><{$smarty.get.username}><{/if}>">
+        </label> -->
+        <label> 彩票种类:
+            <select type="select" name="fc_type" id="fc_type">
+                <option value="">全部</option>
+                <{foreach from=$data.show.games item=v key=k}>
+                <option value="<{$v['type']}>"<{if isset($smarty.get.fc_type) && $smarty.get.fc_type eq <{$v['type']}>}>selected<{/if}>><{$v['name']}></option>
+                <{/foreach}>
+            </select>
+        </label>
+        <!-- <br> -->
+        <label for=""> 日期:
+            <input class="laydate-icon" type="text" placeholder="请输入日期" name="starttime" id="starttime" value="<{if isset($smarty.get.starttime) }><{$smarty.get.starttime}><{/if}>">
+            ~
+            <input class="laydate-icon" type="text" placeholder="请输入日期" name="endtime" id="endtime" value="<{if isset($smarty.get.endtime) }><{$smarty.get.endtime}><{/if}>">
+        </label>
+        <label> 显示类型:
+            <select type="select" name="display" id="display">
+                <option value="1"<{if isset($smarty.get.display) && $smarty.get.display eq '1'}>selected<{/if}>>线路</option>
+                <option value="2"<{if isset($smarty.get.display) && $smarty.get.display eq '2'}>selected<{/if}>>彩种</option>
+                <!-- <option value="3"<{if isset($smarty.get.display) && $smarty.get.display eq '3'}>selected<{/if}>>代理</option> -->
+                <!-- <option value="4"<{if isset($smarty.get.display) && $smarty.get.display eq '4'}>selected<{/if}>>会员</option> -->
+            </select>
+        </label>
+        <label> 图表类型:
+            <select type="select" name="chart_type" id="chart_type">
+                <option value="column"<{if isset($smarty.get.chart_type) && $smarty.get.chart_type eq 'column'}>selected<{/if}>>柱状图</option>
+                <{if isset($smarty.get.chart_type) && $smarty.get.chart_type eq 'bar'}><option value="bar"<{if isset($smarty.get.chart_type) && $smarty.get.chart_type eq 'bar'}>selected<{/if}>>柱状图-纵向</option><{/if}>
+                <option value="pie"<{if isset($smarty.get.chart_type) && $smarty.get.chart_type eq 'pie'}>selected<{/if}>>饼状图</option>
+            </select>
+        </label>
+        <label>
+            <input type="button" class="btn btn-sm btn-success" id="search" value="搜索"/>
+        </label>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+
+                <script src="<{Yii::getAlias('@js')}>/pack/hcharts/highcharts.js"></script>
+                <!-- https://img.hcharts.cn/highcharts/modules/exporting.js -->
+                <!-- https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js -->
+                <!-- <script src="<{Yii::getAlias('@js')}>/pack/hcharts/exporting.js"></script> --><!-- 打印图表 -->
+                <!-- <script src="<{Yii::getAlias('@js')}>/pack/hcharts/highcharts-zh_CN.js"></script> -->
+                <{if empty($chart)}>
+                    <center><div style="margin-top:20px;font-size:30px;">抱歉,暂无数据</div></center>
+                <{else}>
+                <style>
+                    #chart{
+                        overflow-x:scroll;
+                    }
+                    #chart_container{
+                        min-width:100%;
+                        min-height:500px;
+                        <{if isset($chart.width)}>width:<{$chart.width}>px;<{/if}>
+                        <{if isset($chart.height)}>height:<{$chart.height}>px;<{/if}>
+                    }
+                    [id^=chart_pie_container]{
+                        float:left;
+                        width:50%;
+                        margin-bottom:60px;
+                    }
+                </style>
+                <div id="chart"><div id="chart_container"></div></div>
+                <div id="chart_pie_container1"></div>
+                <div id="chart_pie_container2"></div>
+                <div id="chart_pie_container3"></div>
+                <div id="chart_pie_container4"></div>
+                <div id="chart_pie_container5"></div>
+                <div id="chart_pie_container6"></div>
+                <!-- <div id="chart_pie_container"></div> -->
+                <script>
+                    _hcharts('#chart_container');
+                    pie_hcharts('#chart_pie_container');
+                    function _hcharts(id) {
+                        $(id).highcharts({
+                            chart: {
+                                type: '<{if isset($smarty.get.chart_type)}><{$smarty.get.chart_type}><{/if}>'
+                            },
+                            title: {
+                                text: '<{if isset($chart.title)}><{$chart.title}><{/if}>'
+                            },
+                            subtitle: {
+                                text: '<{if isset($chart.subtitle)}><{$chart.subtitle}><{/if}>'
+                            },
+                            xAxis: {
+                                categories: [// 横坐标 根据什么分类
+                                    <{if isset($chart.xaxis_categories)}>
+                                        <{foreach from=$chart.xaxis_categories key=k item=v name=foo}>
+                                            '<{$v}>'
+                                        <{if $smarty.foreach.foo.iteration < count($chart.xaxis_categories)}>,<{/if}>
+                                        <{/foreach}>
+                                    <{/if}>],
+                                title: {
+                                    text: null
+                                }
+                            },
+                            yAxis: [{// 纵坐标栏目单位
+                                title:{
+                                    text:'金额(元)',
+                                    align: 'high',
+                                    rotation: 0
+                                },
+                                opposite:false
+                            },{
+                                title:{
+                                    text:'笔数',
+                                    align: 'high',
+                                    rotation: 0
+                                },
+                                opposite:true
+                            }],
+                            tooltip: {// 提示/单位
+                                headerFormat: '<p style="font-size:16px;font-weight:bold;">{point.key}</p><table>',
+                                // pointFormat: 
+                                //     '<tr>' +
+                                //         '<td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                //         '<td style="padding:0"><b>{point.y:.2f} <{if isset($chart.tooltip_valuesuffix)}><{$chart.tooltip_valuesuffix}><{/if}></b></td>' +
+                                //     '</tr>',
+                                footerFormat: '</table>',
+                                shared: true,
+                                useHTML: true
+                            },
+                            plotOptions: {
+                                <{if isset($chart.series_type)}><{$chart.series_type}><{/if}>: {
+                                    dataLabels: {
+                                        enabled: true,
+                                        allowOverlap: true,
+                                      <{if isset($chart.series.bet.data) && count($chart.series.bet.data) > 3}>
+                                        <{if isset($smarty.get.chart_type) && $smarty.get.chart_type neq 'bar'}>
+                                            rotation: 270 // 横坐标分类小于三种才显示纵坐标数值
+                                        <{/if}>
+                                      <{/if}>
+                                    }
+                                }
+                            },
+                            legend: {// 统计栏目位置
+                                align: 'center',
+                                verticalAlign: 'bottom',
+                                x: 0,
+                                y: 0,
+                                // floating: true,
+                                borderWidth: 0
+                            },
+                            credits: {// 官网链接
+                                enabled: false
+                            },
+                            series: [
+                            <{if isset($chart.series)}>
+                                <{foreach from=$chart.series key=k item=v name=foo}>{
+                                    type: '<{if isset($chart.series_type)}><{$chart.series_type}><{/if}>',
+                                    name: '<{$v.name}>',
+                                    data: [
+                                    <{foreach from=$v.data key=k2 item=v2 name=foo2}>
+                                        ['<{$k2}>',<{$v2}>]
+                                        <{if $smarty.foreach.foo2.iteration < count($v.data)}>,<{/if}>
+                                    <{/foreach}>
+                                    ],
+                                    yAxis: <{$smarty.foreach.foo.index%2}>,
+                                    <{if $smarty.foreach.foo.index%2 eq 0}>
+                                    tooltip: {
+                                        valuePrefix: '￥',
+                                        valueSuffix: ' <{if isset($chart.tooltip_valuesuffix)}><{$chart.tooltip_valuesuffix}><{/if}>'
+                                    }
+                                    <{else}>
+                                    tooltip: {
+                                        valueSuffix: ' <{if isset($chart.tooltip_valuesuffix2)}><{$chart.tooltip_valuesuffix2}><{/if}>'
+                                    }
+                                    <{/if}>
+                                }<{if $smarty.foreach.foo.iteration < count($chart.series)}>,<{/if}>
+                                <{/foreach}>
+                            <{/if}>]
+                        });
+                    };
+                    function pie_hcharts(id) {
+                        <{if isset($chart.series)}>
+                            <{foreach from=$chart.series key=k item=v name=foo}>
+                        $(id + <{$smarty.foreach.foo.iteration}>).highcharts({
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false
+                            },
+                            title: {
+                                text: '<{$v.name}> 占比图'
+                            },
+                            subtitle: {
+                                text: '<{if isset($chart.subtitle)}><{$chart.subtitle}><{/if}>'
+                            },
+                            tooltip: {
+                                headerFormat: '{series.name}<br>',
+                                pointFormat: '{point.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.y} ({point.percentage:.1f}%)',
+                                        style: {
+                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                        }
+                                    }
+                                }
+                            },
+                            credits: {// 官网链接
+                                enabled: false
+                            },
+                            series: [{
+                                type: 'pie',
+                                name: '<{$v.name}>',
+                                data: [
+                                <{foreach from=$v.data key=k2 item=v2 name=foo2}>
+                                    ['<{$k2}>',<{$v2}>]
+                                    <{if $smarty.foreach.foo2.iteration < count($v.data)}>,<{/if}>
+                                <{/foreach}>
+                                ],
+                                yAxis: <{$smarty.foreach.foo.index%2}>,
+                                <{if $smarty.foreach.foo.index%2 eq 0}>
+                                tooltip: {
+                                    valueSuffix: ' <{if isset($chart.tooltip_valuesuffix)}><{$chart.tooltip_valuesuffix}><{/if}>'
+                                }
+                                <{else}>
+                                tooltip: {
+                                    valueSuffix: ' <{if isset($chart.tooltip_valuesuffix2)}><{$chart.tooltip_valuesuffix2}><{/if}>'
+                                }
+                                <{/if}>
+                            }]
+                        });
+                            <{/foreach}>
+                        <{/if}>
+                    };
+                </script>
+                <{/if}>
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<script>
+    // pjax局部加载列表
+    function search() {
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: '?',
+            container: '#container'
+        });
+    }
+    // 搜索
+    $('#search').click(function () {
+        search();
+    });
+    // 切换
+    $('#display,#line_id,#fc_type').change(function () {
+        search();
+    });
+    // 柱状图 饼状图 切换 不刷新
+    change_chart('<{if isset($smarty.get.chart_type)}><{$smarty.get.chart_type}><{/if}>');
+    $('#chart_type').change(function () {
+        change_chart($(this).val(), 1);
+    });
+    function change_chart(val, replace) {
+        var title = '';
+        var url = url_arg_replace('chart_type', val, location.href);
+        var state = {
+            title: title,
+            url: url,
+            container: '#container'
+        };
+        if (replace) history.pushState(state,title,url);
+        switch(val){
+            case 'column':
+            case 'bar':
+                $('[id^=chart_pie_container]').hide();
+                $('#chart_container').show();
+                break;
+            case 'pie':
+                $('[id^=chart_pie_container]').show();
+                $('#chart_container').hide();
+                break;
+        }
+    };
+    // 替换URL参数
+    function url_arg_replace(arg,replace,url){
+        var pattern=arg+'=([^&]*)';
+        var replaceText=arg+'='+replace;
+        if(url.match(pattern)){
+            var tmp='/('+ arg+'=)([^&]*)/gi';
+            tmp=url.replace(eval(tmp),replaceText);
+            return tmp;
+        }else{
+            if(url.match('[\?]')){
+                return url+'&'+replaceText;
+            }else{
+                return url+'?'+replaceText;
+            }
+        }
+        return url+'\n'+arg+'\n'+replace;
+    }
+
+    //时间控件
+    var starttime = {
+        elem: '#starttime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            endtime.min = datas;
+        }
+    };
+    laydate(starttime);
+    var endtime = {
+        elem: '#endtime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true
+    };
+    laydate(endtime);
+
+    <{if !isset($smarty.get.starttime)}>
+        $('#starttime').val(laydate.now(0, 'YYYY-MM-DD'));
+    <{/if}>
+    <{if !isset($smarty.get.endtime)}>
+        $('#endtime').val(laydate.now(0, 'YYYY-MM-DD'));
+    <{/if}>
+</script>

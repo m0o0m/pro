@@ -1,0 +1,26 @@
+html {
+  /*height: 100%;*/
+  overflow-y: scroll;
+}
+
+:root {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/*:root body {*/
+  /*position: absolute;*/
+/*}*/
+
+body {
+  min-height: 100%;
+  width: 100vw;
+  /*overflow: hidden;*/
+  /*add*/
+  overflow: auto;
+  height: 100%;
+}
+
+.demo-spin-icon-load {
+  animation: ani-demo-spin 1s linear infinite;
+}

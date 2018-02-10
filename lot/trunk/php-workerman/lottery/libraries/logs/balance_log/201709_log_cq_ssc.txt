@@ -1,0 +1,36 @@
+2017-09-08 11:18:54
+cq_ssc select 20170908032 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170908032' and js = 1 and addtime >= '1504840200'
+2017-09-12 13:59:52
+cq_ssc select 20170912048 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912048' and js = 1 and addtime >= '1505195400'
+2017-09-12 14:28:46
+cq_ssc select 20170912051 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912051' and js = 1 and addtime >= '1505197200'
+2017-09-12 14:38:40
+cq_ssc select 20170912052 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912052' and js = 1 and addtime >= '1505197800'
+2017-09-12 14:48:40
+cq_ssc select 20170912053 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912053' and js = 1 and addtime >= '1505198400'
+2017-09-12 14:58:41
+cq_ssc select 20170912054 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912054' and js = 1 and addtime >= '1505199000'
+2017-09-12 15:08:50
+cq_ssc select 20170912055 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912055' and js = 1 and addtime >= '1505199600'
+2017-09-12 15:18:51
+cq_ssc select 20170912056 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912056' and js = 1 and addtime >= '1505200200'
+2017-09-12 15:28:40
+cq_ssc select 20170912057 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912057' and js = 1 and addtime >= '1505200800'
+2017-09-12 15:38:40
+cq_ssc select 20170912058 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912058' and js = 1 and addtime >= '1505201400'
+2017-09-12 15:48:40
+cq_ssc select 20170912059 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912059' and js = 1 and addtime >= '1505202000'
+2017-09-12 15:58:37
+cq_ssc select 20170912060 count error
+SELECT count(id) as count FROM my_bet_cq_ssc where periods='20170912060' and js = 1 and addtime >= '1505202600'

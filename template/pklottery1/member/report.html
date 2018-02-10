@@ -1,0 +1,219 @@
+{{define "memberreport"}}
+{{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/report.css" type="text/css">
+<style>
+
+#page-body .txt_l{
+    border-right: none;
+}
+</style>
+<div class="">
+    <div class="vip-bar-1">
+        <div class="vip-bar-item show">
+            <div class="report">
+                <ul class="r_name clearfix">
+                    <li class="txt_l txt_active">本周</li>
+                    <li class="txt_r">上周</li>
+                </ul>
+                <div class="r_center clearfix">
+                    <div class="show record_item clearfix">
+                        <div class="tabs_center clearfix">
+                            <div class="show tabs_item">
+                                <div class="date_nav clearfix" id="report_data">
+                                    <ul class="ul1 clearfix my-theme">
+                                        <li>项目</li>
+                                        <li>注单笔数</li>
+                                        <li>下注金额</li>
+                                        <li>有效下注金额</li>
+                                        <li>游戏类型</li>
+                                        <li>盈利总额</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="record_item">
+                        <div class="tabs_center clearfix">
+                            <div class="show tabs_item">
+                                <div class="date_nav clearfix" id="report_data2">
+                                    <ul class="ul1 clearfix my-theme">
+                                        <li>项目</li>
+                                        <li>注单笔数</li>
+                                        <li>下注金额</li>
+                                        <li>有效下注金额</li>
+                                        <li>游戏类型</li>
+                                        <li>盈利总额</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</body>
+
+<script>
+    $(window).load(function(e){
+        getThisWeekReport();
+        getLastWeekReport();
+    });
+    //查询这周报表
+    function getThisWeekReport() {
+            $.ajax({
+                type: "get",
+                url: "/member/reportthis",
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code) {
+                        $.toast(data.msg, 'text');
+                    } else {
+                        var report = data.data;
+                        var str = "";
+                        var totalnum = 0;
+                        var totalbetall = 0;
+                        var totalbetvalid = 0;
+                        var totalwin = 0;
+                        $.each(report,function(key,value) {
+                            str += "<ul class='ul1f clearfix'>";
+                            str += "<li>"+value.dayTime+"</li>";
+                            str += "<li>"+value.num+"</li>";
+                            str += "<li>"+value.betAll+"</li>";
+                            str += "<li>"+value.betValid+"</li>";
+                            str += "<li>-</li>";
+                            str += "<li>"+value.win+"</li>";
+                            str += "</ul><div class='weeks-content'>";
+                            totalnum += value.num;
+                            totalbetall += value.betAll;
+                            totalbetvalid += value.betValid;
+                            totalwin += value.win;
+                            var reportlist = value.Data;
+                            if (reportlist != null){
+                                $.each(reportlist,function(k,val) {
+                                    str += "<ul><li>"+val.dayTime+"</li>";
+                                    str += "<li>"+val.num+"</li>";
+                                    str += "<li>"+val.betAll+"</li>";
+                                    str += "<li>"+val.betValid+"</li>";
+                                    str += "<li>"+val.vType+"</li>";
+                                    str += "<li>"+val.win+"</li></ul>";
+                                });
+                            }
+                            str += "</div>";
+                        });
+                        str += "<ul class=\"sum1 clearfix\"><li>总计</li><li>"+totalnum+"</li><li>"+totalbetall+"</li><li>"+totalbetvalid+"</li><li>-</li><li>"+totalwin+"</li></ul>";
+                        $("#report_data").append(str);
+                    }
+                },
+                error:function(){
+                    // alert("登录后才能进去此页面！");
+                    $.Pro("登录后才能进去此页面！",{Time:2,StartOn:function(){
+                        $("html").click(function(){
+                            $(".showAlert_Pro").hide()
+                        })
+                    }})  
+                    window.location.href = "/index";
+                }
+            });
+    }
+
+
+    //查询上周报表
+    function getLastWeekReport() {
+            $.ajax({
+                type: "get",
+                url: "/member/reportlast",
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code) {
+                        $.toast(data.msg, 'text');
+                    } else {
+                        var report = data.data;
+                        var str = "";
+                        var totalnum = 0;
+                        var totalbetall = 0;
+                        var totalbetvalid = 0;
+                        var totalwin = 0;
+                        $.each(report,function(key,value) {
+                            str += "<ul class='ul1f clearfix'>";
+                            str += "<li>"+value.dayTime+"</li>";
+                            str += "<li>"+value.num+"</li>";
+                            str += "<li>"+value.betAll+"</li>";
+                            str += "<li>"+value.betValid+"</li>";
+                            str += "<li>-</li>";
+                            str += "<li>"+value.win+"</li>";
+                            str += "</ul><div class='weeks-content'>";
+                            totalnum += value.num;
+                            totalbetall += value.betAll;
+                            totalbetvalid += value.betValid;
+                            totalwin += value.win;
+                            var reportlist = value.Data;
+                            if (reportlist != null){
+                                $.each(reportlist,function(k,val) {
+                                    str += "<ul><li>"+val.dayTime+"</li>";
+                                    str += "<li>"+val.num+"</li>";
+                                    str += "<li>"+val.betAll+"</li>";
+                                    str += "<li>"+val.betValid+"</li>";
+                                    str += "<li>"+val.vType+"</li>";
+                                    str += "<li>"+val.win+"</li></ul>";
+                                });
+                            }
+                            str += "</div>";
+                        });
+                        str += "<ul class=\"sum1 clearfix\"><li>总计</li><li>"+totalnum+"</li><li>"+totalbetall+"</li><li>"+totalbetvalid+"</li><li>-</li><li>"+totalwin+"</li></ul>";
+                        $("#report_data2").append(str);
+
+                        $('.date_nav .ul1f').each(function () {
+                            var this_div = $(".date_nav div");
+                            var pk_title = $(".date_nav .ul1f").index(this);
+                            $(this).click(
+                                    function () {
+                                        this_div.eq(pk_title).slideToggle();
+                                    },
+                                    function () {
+                                        this_div.eq(pk_title).slideToggle();
+                                    }
+                            );
+                        });
+                    }
+                },
+                error:function(){
+                    // alert("用户登录信息已失效， 请重新登录！");
+                    $.Pro("用户登录信息已失效， 请重新登录！",{Time:2,StartOn:function(){
+                        $("html").click(function(){
+                            $(".showAlert_Pro").hide()
+                        })
+                    }})  
+                    
+                    window.location.href = "/index";
+                }
+            });
+    }
+
+
+    $('.vip-tab-1').on('click', 'li', function () {
+        var index = $(this).index();
+        $(this).addClass('tab-1-active').siblings().removeClass('tab-1-active');
+        $('.vip-bar-1 .vip-bar-item').eq(index).show().siblings().hide();
+    });
+
+    $('.r_name').on('click', 'li', function () {
+        var index = $(this).index();
+        console.log(index);
+        $(this).addClass('txt_active').siblings().removeClass('txt_active');
+        $('.r_center .record_item').eq(index).show().siblings().hide();
+    });
+
+
+</script>
+
+</html>
+{{end}}

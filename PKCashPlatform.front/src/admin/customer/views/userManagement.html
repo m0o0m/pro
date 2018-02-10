@@ -1,0 +1,246 @@
+<!-- 用户管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>用户管理</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+
+                                <div class="widget-body-toolbar">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select data-smart-select2 class="selectWidth" ng-model="site">
+                                                        <option value="">请选择</option>
+                                                        <option value="{{item.site_index_id}}" ng-repeat="item in sharedJson">{{item.site_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">多站点</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" ng-model="moreSite">
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">账号查询</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" ng-model="account">
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">登录IP</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" ng-model="loginIp">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-1 col-xs-4 input-label">多站点</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-change="search()" ng-model="type">
+                                                        <option  value="">全部</option>
+                                                        <option ng-value="item.value" ng-repeat="item in statusJson">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">注册日期</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{getWord('Creation Time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label text-align-center">————</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{getWord('End time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">账号类型</label>
+                                            <div class="col-md-1 col-xs-8">
+                                                <div class="form-group">
+                                                    <select class="form-control ng-pristine ng-valid ng-touched" ng-model="account_type"  ng-options="item.value as item.name for item in accountTYpeJson"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-8 col-md-offset-0 col-xs-offset-4">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-change="search()" ng-model="equipment" ng-init="equipment='1'" >
+                                                        <option class="form-control" value="1">设备</option>
+                                                        <option ng-vaule="item.value" ng-repeat="item in equipmentJson">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1 col-xs-6 col-md-offset-0 col-xs-offset-10">
+                                                <a href-void="" class="btn btn-primary" href="#" ng-click="search()">搜索</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                            <tr >
+                                                <th class="text-align-center">站点</th>
+                                                <th class="text-align-center">设备</th>
+                                                <th class="text-align-center">真实姓名</th>
+                                                <th class="text-align-center">会员账号</th>
+                                                <th class="text-align-center">登录IP</th>
+                                                <th class="text-align-center">系统额度</th>
+                                                <th class="text-align-center">视讯额度</th>
+                                                <th class="text-align-center">盘口</th>
+                                                <th class="text-align-center">新增日期</th>
+                                                <th class="text-align-center">状况</th>
+                                                <th class="text-align-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-align-center" ng-repeat="item in list">
+                                                <td>{{item.site}}</td>
+                                                <td>{{item.equipment}}</td>
+                                                <td>{{item.realname}}</td>
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.login_ip}}</td>
+                                                <td>{{item.system_quota}}</td>
+                                                <td>{{item.video_limit}}</td>
+                                                <td>{{item.handicap}}</td>
+                                                <td>{{item.create_time | fiterTime}}</td>
+                                                <td>{{item.status | fiterStatused}}</td>
+                                                <td>
+                                                    <button class="btn btn-default btn-xs" ng-click="disable(item)" ng-show="item.status==1">{{getWord('Disable')}}</button>
+                                                    <button class="btn btn-default btn-xs" ng-click="disable(item)" ng-show="item.status==2">{{getWord('Enables')}}</button>
+                                                    <button class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModal2" ng-click="Info(item.id)">{{lang['data']}}</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">查看会员资料</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'get' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">账号</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled"  type="text"  ng-model="account_name" placeholder="请输入账号">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">真实姓名</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="请输入真实姓名" type="text" ng-model="username">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">出生日期</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="请输入真实姓名" type="text" ng-model="userdata">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">国家</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="国家" type="text" ng-model="country">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">取款银行</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="取款银行" type="text" ng-model="bank">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">银行账号</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="银行账号" type="text" ng-model="bank_account">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">地址</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="地址" type="text" ng-model="address">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">取款密码</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="取款密码" type="text" ng-model="password">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">备注</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="备注" type="text" ng-model="remarks">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">注册IP</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="注册IP" type="text" ng-model="registered_ip">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">注册时间</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="注册时间" type="text" ng-model="registered_time">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">最后登录时间</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="最后登录时间" type="text" ng-model="last_time">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">最后登录IP</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" disabled="disabled" placeholder="最后登录IP" type="text" ng-model="last_ip">
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

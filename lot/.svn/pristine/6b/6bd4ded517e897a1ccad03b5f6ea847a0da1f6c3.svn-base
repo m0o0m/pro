@@ -1,0 +1,18 @@
+package schema
+
+//线路现金流水表
+type LineCashRecord struct {
+	Id          int64   `xorm:"'id' PK autoincr"`               //主键id
+	LineId      string  `xorm:"'line_id' notnull"`              //站点id
+	HanderId    int64   `xorm:"hander_id"`                      //操作者id
+	CashNum     float64 `xorm:"cash_num"`                       //交易金额
+	CashBalance float64 `xorm:"'cash_balance' notnull"`         //现有资金
+	Remark      string  `xorm:"remark"`                         //备注
+	Addtime     int64   `xorm:"'addtime' notnull"`              //插入时间
+	Addday      int64   `xorm:"'addday' notnull"`               //下注的日期
+	CashType    int64   `xorm:"'cash_type' notnull default(1)"` //1-存入,2-取出
+}
+
+func (*LineCashRecord) TableName() string {
+	return "my_line_cash_record"
+}

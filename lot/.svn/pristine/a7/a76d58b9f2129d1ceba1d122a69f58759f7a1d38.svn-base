@@ -1,0 +1,1321 @@
+<template lang="html">
+  <div class="happy_three" style="overflow: hidden;">
+    <!-- <div class="" @click="fetchData()">
+      请求接口
+    </div> -->
+    <div class="pk_time">
+      <div class="time_left">
+        <div class="left_logo">
+          <img :src="c_data.img_path" alt="">
+        </div>
+        <div class="left_text">
+          <p>{{c_data.fc_name}}</p>
+          <p><span>第</span> {{c_data.qishu}} <span>期</span></p>
+        </div>
+      </div>
+      <div class="time_center">
+        <p class="center_top">投注剩余时间</p>
+        <div class="center_bottom">
+          <div class="fl time_content" v-if="h < 10 && h >= 0">0{{h}}</div>
+          <div class="fl time_content" v-else-if="h < 0">--</div>
+          <div class="fl time_content" v-else>{{h}}</div>
+          <div class="fl fs">时</div>
+          <div class="fl time_content" v-if="m < 10 && m >= 0">0{{m}}</div>
+          <div class="fl time_content" v-else-if="m < 0">--</div>
+          <div class="fl time_content" v-else>{{m}}</div>
+          <div class="fl fs">分</div>
+          <div class="fl time_content" v-if="s < 10 && s >= 0">0{{s}}</div>
+          <div class="fl time_content" v-else-if="s < 0">--</div>
+          <div class="fl time_content" v-else>{{s}}</div>
+          <div class="fl fs">秒</div>
+        </div>
+      </div>
+      <div class="time_bottom">
+        <div class="bottom_left"><span>第</span> {{auto.qishu}} <span>期开奖</span></div>
+        <div class='bottom_center'>
+          <div class="bottom_content_k3">
+            <div class="content_list" v-for="item in auto.ball">
+              <p :class="['img'+item,'box_k3']"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_bottom">
+        <p @click="history()">历史结果</p>
+        <p @click="open_way">开奖走势</p>
+        <p @click="show_rule()">玩法规则</p>
+      </div>
+    </div>
+    <Nav-top :isActive='false' :lists="menus" @menu="go_child"></Nav-top>
+    <!-- <integrate></integrate> -->
+    <router-view :top_lists="top_lists" :center_lists="center_lists" :bottom_lists="bottom_lists"></router-view>
+  </div>
+</template>
+
+<script>
+function top(){
+  return [
+    {
+      name: '和值',
+      object: [{
+          id: 0,
+          num: 3,
+          number: '165.000',
+          money: '',
+          index: 0,
+          flag: false,
+        },
+        {
+          id: 1,
+          num: 7,
+          number: '10.000',
+          money: '',
+          index: 1,
+          flag: false,
+        },
+        {
+          id: 2,
+          num: 11,
+          number: '5.600',
+          money: '',
+          index: 2,
+          flag: false,
+        },
+        {
+          id: 3,
+          num: 15,
+          number: '15.000',
+          money: '',
+          index: 3,
+          flag: false,
+        },
+        {
+          id: 4,
+          num: '大',
+          number: '1.970',
+          money: '',
+          index: 4,
+          flag: false,
+        },
+      ]
+    },
+    {
+      name: '和值',
+      object: [{
+          id: 5,
+          num: 4,
+          number: '48.000',
+          money: '',
+          index: 5,
+          flag: false,
+        },
+        {
+          id: 6,
+          num: 8,
+          number: '7.200',
+          money: '',
+          index: 6,
+          flag: false,
+        },
+        {
+          id: 7,
+          num: 12,
+          number: '6.050',
+          money: '',
+          index: 7,
+          flag: false,
+        },
+        {
+          id: 8,
+          num: 16,
+          number: '25.000',
+          money: '',
+          index: 8,
+          flag: false,
+        },
+        {
+          id: 9,
+          num: '小',
+          number: '1.970',
+          money: '',
+          index: 9,
+          flag: false,
+        },
+      ]
+    },
+    {
+      name: '和值',
+      object: [{
+          id: 10,
+          num: 5,
+          number: '25.000',
+          money: '',
+          index: 10,
+          flag: false,
+        },
+        {
+          id: 11,
+          num: 9,
+          number: '6.050',
+          money: '',
+          index: 11,
+          flag: false,
+        },
+        {
+          id: 12,
+          num: 13,
+          number: '7.200',
+          money: '',
+          index: 12,
+          flag: false,
+        },
+        {
+          id: 13,
+          num: 17,
+          number: '48.000',
+          money: '',
+          index: 13,
+          flag: false,
+        },
+        {
+          id: 14,
+          num: '单',
+          number: '1.970',
+          money: '',
+          index: 14,
+          flag: false,
+        },
+      ]
+    },
+    {
+      name: '和值',
+      object: [{
+          id: 15,
+          num: 6,
+          number: '15.000',
+          money: '',
+          index: 15,
+          flag: false,
+        },
+        {
+          id: 16,
+          num: 10,
+          number: '5.600',
+          money: '',
+          index: 16,
+          flag: false,
+        },
+        {
+          id: 17,
+          num: 14,
+          number: '10.000',
+          money: '',
+          index: 17,
+          flag: false,
+        },
+        {
+          id: 18,
+          num: 18,
+          number: '165.000',
+          money: '',
+          index: 18,
+          flag: false,
+        },
+        {
+          id: 19,
+          num: '双',
+          number: '1.970',
+          money: '',
+          index: 19,
+          flag: false,
+        },
+      ]
+    },
+  ]
+};
+function center(){
+  return [
+      {
+      name: '两连',
+      object: [{
+          id: 0,
+          num: '1,2',
+          number: '4.800',
+          money: '',
+          index: 0,
+          flag: false,
+        },
+        {
+          id: 1,
+          num: '1,6',
+          number: '4.800',
+          money: '',
+          index: 1,
+          flag: false,
+        },
+        {
+          id: 2,
+          num: '2,6',
+          number: '4.800',
+          money: '',
+          index: 2,
+          flag: false,
+        },
+        {
+          id: 3,
+          num: '4,5',
+          number: '4.800',
+          money: '',
+          index: 3,
+          flag: false,
+        },
+      ]
+    },
+    {
+      name: '两连',
+      object: [{
+          id: 4,
+          num: '1,3',
+          number: '4.800',
+          money: '',
+          index: 4,
+          flag: false,
+        },
+        {
+          id: 5,
+          num: '2,3',
+          number: '4.800',
+          money: '',
+          index: 5,
+          flag: false,
+        },
+        {
+          id: 6,
+          num: '3,4',
+          number: '4.800',
+          money: '',
+          index: 6,
+          flag: false,
+        },
+        {
+          id: 7,
+          num: '4,6',
+          number: '4.800',
+          money: '',
+          index: 7,
+          flag: false,
+        },
+      ]
+    },
+    {
+      name: '两连',
+      object: [{
+          id: 8,
+          num: '1,4',
+          number: '4.800',
+          money: '',
+          index: 8,
+          flag: false,
+        },
+        {
+          id: 9,
+          num: '2,4',
+          number: '4.800',
+          money: '',
+          index: 9,
+          flag: false,
+        },
+        {
+          id: 10,
+          num: '3,5',
+          number: '4.800',
+          money: '',
+          index: 10,
+          flag: false,
+        },
+        {
+          id: 11,
+          num: '5,6',
+          number: '4.800',
+          money: '',
+          index: 11,
+          flag: false,
+        },
+      ]
+    },
+    {
+      name: '两连',
+      object: [{
+          id: 12,
+          num: '1,5',
+          number: '4.800',
+          money: '',
+          index: 12,
+          flag: false,
+        },
+        {
+          id: 13,
+          num: '2,5',
+          number: '4.800',
+          money: '',
+          index: 13,
+          flag: false,
+        },
+        {
+          id: 14,
+          num: '3,6',
+          number: '4.800',
+          money: '',
+          index: 14,
+          flag: false,
+        },
+        {
+          id: '',
+          num: '',
+          number: '',
+          money: '',
+          index: '',
+          flag: '',
+        },
+      ]
+    },
+  ]
+};
+function bottom(){
+  return[{
+      name: '独胆',
+      object: [{
+          id: 0,
+          num: '1',
+          number: '2.050',
+          money: '',
+          index: 0,
+          flag: false,
+        },
+        {
+          id: 1,
+          num: '2',
+          number: '2.050',
+          money: '',
+          index: 1,
+          flag: false,
+        },
+        {
+          id: 2,
+          num: '3',
+          number: '2.050',
+          money: '',
+          index: 2,
+          flag: false,
+        },
+        {
+          id: 3,
+          num: '4',
+          number: '2.050',
+          money: '',
+          index: 3,
+          flag: false,
+        },
+        {
+          id: 4,
+          num: '5',
+          number: '2.050',
+          money: '',
+          index: 4,
+          flag: false,
+        },
+        {
+          id: 5,
+          num: '6',
+          number: '2.050',
+          money: '',
+          index: 5,
+          flag: false,
+        },
+      ]
+    },
+    {
+      name: '豹子',
+      object: [{
+          id: 6,
+          num: '1,1,1',
+          number: '165.000',
+          money: '',
+          index: 6,
+          flag: false,
+        },
+        {
+          id: 7,
+          num: '2,2,2',
+          number: '165.000',
+          money: '',
+          index: 7,
+          flag: false,
+        },
+        {
+          id: 8,
+          num: '3,3,3',
+          number: '165.000',
+          money: '',
+          index: 8,
+          flag: false,
+        },
+        {
+          id: 9,
+          num: '4,4,4',
+          number: '165.000',
+          money: '',
+          index: 9,
+          flag: false,
+        },
+        {
+          id: 10,
+          num: '5,5,5',
+          number: '165.000',
+          money: '',
+          index: 10,
+          flag: false,
+        },
+        {
+          id: 11,
+          num: '6,6,6',
+          number: '165.000',
+          money: '',
+          index: 11,
+          flag: false,
+        },
+        {
+          id: 12,
+          num: '任意的豹子',
+          number: '27.500',
+          money: '',
+          index: 12,
+          flag: false,
+        },
+      ]
+    },
+    {
+      name: '对子',
+      object: [{
+          id: 13,
+          num: '1,1',
+          number: '9.800',
+          money: '',
+          index: 13,
+          flag: false,
+        },
+        {
+          id: 14,
+          num: '2,2',
+          number: '9.800',
+          money: '',
+          index: 14,
+          flag: false,
+        },
+        {
+          id: 15,
+          num: '3,3',
+          number: '9.800',
+          money: '',
+          index: 15,
+          flag: false,
+        },
+        {
+          id: 16,
+          num: '4,4',
+          number: '9.800',
+          money: '',
+          index: 16,
+          flag: false,
+        },
+        {
+          id: 17,
+          num: '5,5',
+          number: '9.800',
+          money: '',
+          index: 17,
+          flag: false,
+        },
+        {
+          id: 18,
+          num: '6,6',
+          number: '9.800',
+          money: '',
+          index: 18,
+          flag: false,
+        },
+      ]
+    },
+  ]
+};
+import api from '../../../api/config'
+import iTime from "../../../share_components/pk_time"
+import NavTop from '../../../share_components/default_nav'
+import ws from '../../../assets/js/socket'
+export default {
+  components:{
+    NavTop,
+    iTime
+  },
+  data(){
+    return{
+      timer: null,
+      // endTime: '2018/1/11 10:00:00',
+      h: 0,
+      m: 0,
+      s: 0,
+      c_data:{
+        fc_name:'',
+        img_path:'',
+        qishu:''
+      },
+      auto:{
+        qishu:null,
+        datetime:'',
+        ball:[]
+      },
+      closetime:{
+        fengpan:'',
+        kaijiang:'',
+        kaipan:'',
+        now_time:''
+      },
+      menus: [{
+        name:'整合',item:'k3'
+      }],
+      top_lists: [{
+          name: '和值',
+          object: [{
+              id: 0,
+              num: 3,
+              number: '165.000',
+              money: '',
+              index: 0,
+              flag: false,
+            },
+            {
+              id: 1,
+              num: 7,
+              number: '10.000',
+              money: '',
+              index: 1,
+              flag: false,
+            },
+            {
+              id: 2,
+              num: 11,
+              number: '5.600',
+              money: '',
+              index: 2,
+              flag: false,
+            },
+            {
+              id: 3,
+              num: 15,
+              number: '15.000',
+              money: '',
+              index: 3,
+              flag: false,
+            },
+            {
+              id: 4,
+              num: '大',
+              number: '1.970',
+              money: '',
+              index: 4,
+              flag: false,
+            },
+          ]
+        },
+        {
+          name: '和值',
+          object: [{
+              id: 5,
+              num: 4,
+              number: '48.000',
+              money: '',
+              index: 5,
+              flag: false,
+            },
+            {
+              id: 6,
+              num: 8,
+              number: '7.200',
+              money: '',
+              index: 6,
+              flag: false,
+            },
+            {
+              id: 7,
+              num: 12,
+              number: '6.050',
+              money: '',
+              index: 7,
+              flag: false,
+            },
+            {
+              id: 8,
+              num: 16,
+              number: '25.000',
+              money: '',
+              index: 8,
+              flag: false,
+            },
+            {
+              id: 9,
+              num: '小',
+              number: '1.970',
+              money: '',
+              index: 9,
+              flag: false,
+            },
+          ]
+        },
+        {
+          name: '和值',
+          object: [{
+              id: 10,
+              num: 5,
+              number: '25.000',
+              money: '',
+              index: 10,
+              flag: false,
+            },
+            {
+              id: 11,
+              num: 9,
+              number: '6.050',
+              money: '',
+              index: 11,
+              flag: false,
+            },
+            {
+              id: 12,
+              num: 13,
+              number: '7.200',
+              money: '',
+              index: 12,
+              flag: false,
+            },
+            {
+              id: 13,
+              num: 17,
+              number: '48.000',
+              money: '',
+              index: 13,
+              flag: false,
+            },
+            {
+              id: 14,
+              num: '单',
+              number: '1.970',
+              money: '',
+              index: 14,
+              flag: false,
+            },
+          ]
+        },
+        {
+          name: '和值',
+          object: [{
+              id: 15,
+              num: 6,
+              number: '15.000',
+              money: '',
+              index: 15,
+              flag: false,
+            },
+            {
+              id: 16,
+              num: 10,
+              number: '5.600',
+              money: '',
+              index: 16,
+              flag: false,
+            },
+            {
+              id: 17,
+              num: 14,
+              number: '10.000',
+              money: '',
+              index: 17,
+              flag: false,
+            },
+            {
+              id: 18,
+              num: 18,
+              number: '165.000',
+              money: '',
+              index: 18,
+              flag: false,
+            },
+            {
+              id: 19,
+              num: '双',
+              number: '1.970',
+              money: '',
+              index: 19,
+              flag: false,
+            },
+          ]
+        },
+      ],
+      center_lists: [{
+          name: '两连',
+          object: [{
+              id: 0,
+              num: '1,2',
+              number: '4.800',
+              money: '',
+              index: 0,
+              flag: false,
+            },
+            {
+              id: 1,
+              num: '1,6',
+              number: '4.800',
+              money: '',
+              index: 1,
+              flag: false,
+            },
+            {
+              id: 2,
+              num: '2,6',
+              number: '4.800',
+              money: '',
+              index: 2,
+              flag: false,
+            },
+            {
+              id: 3,
+              num: '4,5',
+              number: '4.800',
+              money: '',
+              index: 3,
+              flag: false,
+            },
+          ]
+        },
+        {
+          name: '两连',
+          object: [{
+              id: 4,
+              num: '1,3',
+              number: '4.800',
+              money: '',
+              index: 4,
+              flag: false,
+            },
+            {
+              id: 5,
+              num: '2,3',
+              number: '4.800',
+              money: '',
+              index: 5,
+              flag: false,
+            },
+            {
+              id: 6,
+              num: '3,4',
+              number: '4.800',
+              money: '',
+              index: 6,
+              flag: false,
+            },
+            {
+              id: 7,
+              num: '4,6',
+              number: '4.800',
+              money: '',
+              index: 7,
+              flag: false,
+            },
+          ]
+        },
+        {
+          name: '两连',
+          object: [{
+              id: 8,
+              num: '1,4',
+              number: '4.800',
+              money: '',
+              index: 8,
+              flag: false,
+            },
+            {
+              id: 9,
+              num: '2,4',
+              number: '4.800',
+              money: '',
+              index: 9,
+              flag: false,
+            },
+            {
+              id: 10,
+              num: '3,5',
+              number: '4.800',
+              money: '',
+              index: 10,
+              flag: false,
+            },
+            {
+              id: 11,
+              num: '5,6',
+              number: '4.800',
+              money: '',
+              index: 11,
+              flag: false,
+            },
+          ]
+        },
+        {
+          name: '两连',
+          object: [{
+              id: 12,
+              num: '1,5',
+              number: '4.800',
+              money: '',
+              index: 12,
+              flag: false,
+            },
+            {
+              id: 13,
+              num: '2,5',
+              number: '4.800',
+              money: '',
+              index: 13,
+              flag: false,
+            },
+            {
+              id: 14,
+              num: '3,6',
+              number: '4.800',
+              money: '',
+              index: 14,
+              flag: false,
+            },
+            {
+              id: '',
+              num: '',
+              number: '',
+              money: '',
+              index: '',
+              flag: '',
+            },
+          ]
+        },
+      ],
+      bottom_lists: [{
+          name: '独胆',
+          object: [{
+              id: 0,
+              num: '1',
+              number: '2.050',
+              money: '',
+              index: 0,
+              flag: false,
+            },
+            {
+              id: 1,
+              num: '2',
+              number: '2.050',
+              money: '',
+              index: 1,
+              flag: false,
+            },
+            {
+              id: 2,
+              num: '3',
+              number: '2.050',
+              money: '',
+              index: 2,
+              flag: false,
+            },
+            {
+              id: 3,
+              num: '4',
+              number: '2.050',
+              money: '',
+              index: 3,
+              flag: false,
+            },
+            {
+              id: 4,
+              num: '5',
+              number: '2.050',
+              money: '',
+              index: 4,
+              flag: false,
+            },
+            {
+              id: 5,
+              num: '6',
+              number: '2.050',
+              money: '',
+              index: 5,
+              flag: false,
+            },
+          ]
+        },
+        {
+          name: '豹子',
+          object: [{
+              id: 6,
+              num: '1,1,1',
+              number: '165.000',
+              money: '',
+              index: 6,
+              flag: false,
+            },
+            {
+              id: 7,
+              num: '2,2,2',
+              number: '165.000',
+              money: '',
+              index: 7,
+              flag: false,
+            },
+            {
+              id: 8,
+              num: '3,3,3',
+              number: '165.000',
+              money: '',
+              index: 8,
+              flag: false,
+            },
+            {
+              id: 9,
+              num: '4,4,4',
+              number: '165.000',
+              money: '',
+              index: 9,
+              flag: false,
+            },
+            {
+              id: 10,
+              num: '5,5,5',
+              number: '165.000',
+              money: '',
+              index: 10,
+              flag: false,
+            },
+            {
+              id: 11,
+              num: '6,6,6',
+              number: '165.000',
+              money: '',
+              index: 11,
+              flag: false,
+            },
+            {
+              id: 12,
+              num: '任意的豹子',
+              number: '27.500',
+              money: '',
+              index: 12,
+              flag: false,
+            },
+          ]
+        },
+        {
+          name: '对子',
+          object: [{
+              id: 13,
+              num: '1,1',
+              number: '9.800',
+              money: '',
+              index: 13,
+              flag: false,
+            },
+            {
+              id: 14,
+              num: '2,2',
+              number: '9.800',
+              money: '',
+              index: 14,
+              flag: false,
+            },
+            {
+              id: 15,
+              num: '3,3',
+              number: '9.800',
+              money: '',
+              index: 15,
+              flag: false,
+            },
+            {
+              id: 16,
+              num: '4,4',
+              number: '9.800',
+              money: '',
+              index: 16,
+              flag: false,
+            },
+            {
+              id: 17,
+              num: '5,5',
+              number: '9.800',
+              money: '',
+              index: 17,
+              flag: false,
+            },
+            {
+              id: 18,
+              num: '6,6',
+              number: '9.800',
+              money: '',
+              index: 18,
+              flag: false,
+            },
+          ]
+        },
+      ]
+    }
+  },
+  created(){
+    this.fetchData();
+  },
+  mounted(){
+    this.socket_change(this.$route.query.page);
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route.query.page':function(to,from) {
+      this.$root.$off(from);
+      this.$root.$off(from+'lefttime');
+      this.socket_change(to);
+      this.fetchData();
+    }
+  },
+  destroyed(){
+    console.log('清除定时器：'+this.timer);
+    window.clearInterval(this.timer);
+    if(!this.isIE9){
+      ws.close_ws(false);
+    }
+    this.$root.$off(this.$route.query.page);
+    this.$root.$off(this.$route.query.page+'lefttime')
+  },
+  methods:{
+    socket_change: function(to){
+      if(!this.isIE9){
+        let self = this;
+        ws.createWebSocket(to,self,true);
+        this.$root.$on(to,(e)=>{
+          this.auto = e;
+      });
+        this.$root.$on(to+'lefttime',(e)=>{
+          this.c_data.qishu = e.qishu;
+          this.closetime.fengpan = e.close_time;
+          this.closetime.now_time = e.now_time;
+          let t1 = e.close_time - e.now_time;
+          if(t1 == 0){
+            this.fetchData(2)
+          }
+        })
+      }
+    },
+    open_way: function (){
+      let page = 'trend_chart/chart-lotteryId='+this.$route.query.page+'.html'+'?tab=1';
+      window.open(page)
+    },
+    history: function () {
+      let page = 'trend_chart/chart-lotteryId='+this.$route.query.page+'.html'+'?tab=3';
+      window.open(page)
+    },
+    //aaaaa
+    show_rule: function(){
+      this.$root.$emit('rule_show',true);
+      this.$root.$emit('now_page',this.$route.query.page)
+    },
+    run_time: function() {
+      this.timer = window.setInterval(this.getRTime, 1000);
+      console.log('定时器id（run-time）：'+this.timer);
+    },
+    getRTime: function() {
+      // var EndTime= new Date(); //截止时间
+      // var NowTime = new Date();//现在的时间
+      console.log('封盘时间：'+this.closetime.fengpan);
+      console.log('当前时间：'+this.closetime.now_time);
+      this.closetime.now_time += 1;
+      var t1 = this.closetime.fengpan * 1000 - this.closetime.now_time * 1000;
+      // var d=Math.floor(t/1000/60/60/24);
+      this.h = Math.floor(t1 / 1000 / 60 / 60 % 24);
+      this.m = Math.floor(t1 / 1000 / 60 % 60);
+      this.s = Math.floor(t1 / 1000 % 60);
+      // console.log('开奖时间：'+'时：'+h+'；分：'+m+'；秒：'+s);
+      console.log('封盘时间：' + '时：' + this.h + '；分：' + this.m + '；秒：' + this.s);
+      console.log('定时器id(time_out)：'+this.timer);
+      if (this.h == 0 && this.m == 0 && this.s == 0) {
+        this.fetchData(2);
+        this.$root.$emit("success", true);
+      }else if(this.h < 0 && this.m < 0 && this.s < 0){
+        window.clearInterval(this.timer);
+        this.h = -1;
+        this.m = -1;
+        this.s = -1;
+      }
+    },
+    init: function() {
+      console.log('定时器id(init)：'+this.timer);
+      this.run_time()
+    },
+    //aaaaaa
+    go: function(){
+      this.$router.go(0)
+    },
+    sortNumber: function(a,b){
+      return a.sort - b.sort
+    },
+    fetchData: function(type){
+      this.reset();
+      // type==2?this.$root.$emit('loading',true,true):this.$root.$emit('loading',true);
+      if(type == 2){
+        window.clearInterval(this.timer);
+        this.$root.$emit('loading',true,true)
+      }else{
+        this.$root.$emit('loading',true);
+        window.clearInterval(this.timer);
+      }
+      let body = {
+        'fc_type': this.$route.query.page
+      };
+      api.getgameindex(this, body, (res) => {
+        // console.log('errorCode:' + res.data.ErrorCode);
+        if (res.data.ErrorCode == 1) {
+          this.$root.$emit('loading',false);
+          if(res.data.is_wh == 2){
+            this.$root.$emit('wh_modal',true)
+          }else if(res.data.is_wh == 1){
+            this.$root.$emit('wh_modal',false)
+          }
+          this.$root.$emit('c_data',res.data.Data.c_data);
+          this.auto = res.data.Data.auto;
+          this.closetime = res.data.Data.closetime;
+          this.c_data = res.data.Data.c_data;
+          var data = res.data.Data.odds;
+          data.sort(this.sortNumber);
+          // console.log(data);
+          this.computed(data);
+          this.computed_or(data);
+          this.computed_oo(data);
+          this.init();
+        }
+      })
+    },
+    computed: function(data) {
+        this.$set(this.top_lists, this.top_lists);
+        this.top_lists = top();
+        for(let j = 0;j<this.top_lists[0].object.length;j++){
+          if(j == 4){
+            break;
+          }else{
+            Object.assign(this.top_lists[0].object[j], data[j]);
+            Object.assign(this.top_lists[0].object[4],data[16])
+          }
+        };
+        for(let j = 0,i = 4;j<this.top_lists[1].object.length,i<9;i++,j++){
+          if(j == 4){
+            break;
+          }else{
+            Object.assign(this.top_lists[1].object[j], data[i]);
+            Object.assign(this.top_lists[1].object[4],data[17])
+          }
+        };
+        for(let j = 0,i = 8;j<this.top_lists[2].object.length,i<13;i++,j++){
+          if(j == 4){
+            break;
+          }else{
+            Object.assign(this.top_lists[2].object[j], data[i]);
+            Object.assign(this.top_lists[2].object[4],data[18])
+          }
+        };
+        for(let j = 0,i = 12;j<this.top_lists[3].object.length,i<17;i++,j++){
+          if(j == 4){
+            break;
+          }else{
+            Object.assign(this.top_lists[3].object[j], data[i]);
+            Object.assign(this.top_lists[3].object[4],data[19])
+          }
+        };
+      // console.log(this.top_lists);
+    },
+    computed_or: function(data){
+      this.$set(this.center_lists, this.center_lists);
+      this.center_lists = center();
+      //两连
+      for(let i = 0,j=39;i<this.center_lists[0].object.length,j<43;i++,j++){
+        Object.assign(this.center_lists[0].object[i],data[j])
+      };
+      for(let i = 0,j=43;i<this.center_lists[1].object.length,j<47;i++,j++){
+        Object.assign(this.center_lists[1].object[i],data[j])
+      };
+      for(let i = 0,j=47;i<this.center_lists[2].object.length,j<51;i++,j++){
+        Object.assign(this.center_lists[2].object[i],data[j])
+      };
+      for(let i = 0,j=51;i<this.center_lists[3].object.length,j<55;i++,j++){
+        Object.assign(this.center_lists[3].object[i],data[j])
+      };
+    },
+    computed_oo: function(data){
+      this.$set(this.bottom_lists, this.bottom_lists);
+      this.bottom_lists = bottom();
+      //dudan
+      for(let i = 0,j=20;i<this.bottom_lists[0].object.length,j<26;i++,j++){
+        Object.assign(this.bottom_lists[0].object[i],data[j])
+      };
+      for(let i = 0,j=26;i<this.bottom_lists[1].object.length,j<33;i++,j++){
+        Object.assign(this.bottom_lists[1].object[i],data[j]);
+        let name = data[j].remark.slice(
+          data[j].remark.search("#") + 1,
+          data[j].remark.length
+        );
+        console.log(name)
+        this.bottom_lists[1].object[i].num = name;
+      };
+      for(let i = 0,j=33;i<this.bottom_lists[2].object.length,j<39;i++,j++){
+        Object.assign(this.bottom_lists[2].object[i],data[j])
+      };
+    },
+    reset: function() {
+      for (let i = 0; i < this.top_lists.length; i++) {
+        for (let j = 0; j < this.top_lists[i].object.length; j++) {
+          this.top_lists[i].object[j].money = '';
+          this.top_lists[i].object[j].flag = '';
+          this.money_disabled = false;
+          this.disabled = false;
+          this.money = '';
+          this.$root.$emit('reset', '')
+        }
+      };
+      for (let i = 0; i < this.center_lists.length; i++) {
+        for (let j = 0; j < this.center_lists[i].object.length; j++) {
+          this.center_lists[i].object[j].money = '';
+          this.center_lists[i].object[j].flag = '';
+          this.money_disabled = false;
+          this.disabled = false;
+          this.money = '';
+          this.$root.$emit('reset', '')
+        }
+      };
+      for (let i = 0; i < this.bottom_lists.length; i++) {
+        for (let j = 0; j < this.bottom_lists[i].object.length; j++) {
+          this.bottom_lists[i].object[j].money = '';
+          this.bottom_lists[i].object[j].flag = '';
+          this.money_disabled = false;
+          this.disabled = false;
+          this.money = '';
+          this.$root.$emit('reset', '')
+        }
+      };
+    },
+    go_child: function(child){
+      // console.log(child);
+      this.$router.push({
+        name:child,
+        query: {page: this.$route.query.page}
+      });
+    }
+  }
+}
+</script>

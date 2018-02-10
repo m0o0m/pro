@@ -1,0 +1,327 @@
+/*reset start*/
+html {
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -o-text-size-adjust: none;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+  padding: 0;
+  margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset, img {
+  border: 0;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+  font-weight: normal;
+  font-style: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+caption, th {
+  text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+
+q:before, q:after {
+  content: "";
+}
+
+abbr, acronym {
+  border: 0;
+}
+
+input, textarea, select, button {
+  font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Microsoft YaHei","Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-backface-visibility: hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+textarea:active, a:active, select:active, option:active, input:active, textarea:focus, a:focus, select:focus, option:focus, input:focus {
+  outline: 0;
+}
+/*reset end*/
+body {
+  width: 100%;
+  font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Microsoft YaHei","Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: url('../images/bj.jpg') repeat scroll 0 0;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix:after {
+  content: ".";
+  height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+  font-size: 0;
+}
+
+.g-f-left {
+  float: left;
+}
+
+.g-f-right {
+  float: right;
+}
+
+.js-ds-none {
+  display: none;
+}
+.header {
+  width: 1000px;
+  height: 120px;
+  /* background: url('../images/topbg.png') no-repeat 50% 0; */
+  margin: 0px auto;
+  position: relative;
+}
+.header .logo {
+  height: 124px;
+  float: left;
+}
+.header .online-service {
+  width: 260px;
+  float: right;
+}
+.content {
+  position: relative;
+  width: 960px;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin: 0px auto;
+  padding: 20px 20px 10px;
+}
+.content a.service {
+  position: absolute;
+  display: block;
+  width: 180px;
+  height: 35px;
+  z-index: 100;
+  top: -70px;
+  right: 10px;
+  text-indent: -9999px;
+}
+.content h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  line-height: 38px;
+}
+.content p {
+  font-size: 14px;
+  line-height: 30px;
+}
+.content-table {
+  width: 100%;
+  margin: 20px auto;
+  font-size: 14px;
+  color: #333333;
+  border-width: 1px;
+  border-color: #666666;
+  border-collapse: collapse;
+}
+.content-table td {
+  font-size: 14px;
+  border: 1px solid #ccc;
+  padding: 10px 2px;
+  color: #000;
+}
+.content-table td.title {
+  width: 15%;
+  background-color: #f6f6f6;
+}
+.content-table td.inputtd {
+  width: 70%;
+}
+.table-input {
+  width: 96%;
+  padding: 5px 10px;
+  line-height: 30px;
+  height:30px;
+  font-size: 14px;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+
+input[type=radio] {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.00rem;
+  height: 1.25rem;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 0;
+  outline: 0 !important;
+  line-height: 0.625rem;
+  color: #d8d8d8;
+  margin: 0.716667rem 0.416667rem 0.625rem;
+}
+input[type=radio]:after {
+  content: "";
+  display:block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 0.625rem;
+  font-size: 1.0rem;
+  color: #fff;
+  border: 3px solid #ddd;
+  background-color: #fff;
+  box-sizing:border-box;
+}
+input[type=radio]:checked:after {
+  content: "L";
+  transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);
+  -webkit-transform:matrix(-0.766044,-0.642788,-0.642788,0.766044,0,0);
+  border-color: #d88a03;
+  background-color: #d88a03;
+}
+
+.form-btn a {
+  display: block;
+  width: 220px;
+  height: 50px;
+  background-color:#453c3c;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 50px;
+  color: #ffffff;
+  font-size: 24px;
+  margin: 10px auto;
+}
+.tips {
+  font-size: 12px;
+  text-align: center;
+  padding: 10px 0px;
+}
+.copyright {
+  padding: 20px 0px 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+}
+
+
+.content .item {
+    float: left;
+    width: 475px;
+    background: #aaa;
+    margin: 0 0 15px 0px;
+}
+.content .item .hd {
+    background: #fff;
+    padding-bottom: 8px;
+    height: 35px;
+}
+.content .item .hd h2 {
+    display: block;
+    float: left;
+    background: url(../images/tle.png);
+    height: 35px;
+    width: 180px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 35px;
+    text-indent: 15px;
+}
+.content .item .hd .txt {
+    color: #856033;
+    font-size: 12px;
+    float: right;
+    line-height: 35px;
+    padding: 0 10px;
+}
+a {
+    color: #2f2f2f;
+    text-decoration: none;
+}
+a {
+    background-color: transparent;
+}
+.content .item .bd {
+    background: #ebebea;
+    padding: 6px;
+    height: 50px;
+}
+.content .item .btn {
+    -moz-box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    border: solid 2px #d2c5b5;
+    color: #28272a;
+    width: 140px;
+    height: 37px;
+    line-height: 37px;
+    float: left;
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    background: #fff;
+    margin: 5px 4px;
+    position: relative;
+}
+.content .item .btn img {
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    margin-right: 4px;
+}
+.header .topbar {
+    line-height: 31px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 14px;
+    color: #ccc;
+}
+.header .topbar a{
+    color: #ccc;
+}
+.header .topbar a:hover{
+    color: #f7d373;
+}
+ul {list-style:none;}
+ul li {float:left;width:187px; height:50px; overflow:hidden; }
+
+.bankon {vertical-align:middle;}

@@ -1,0 +1,16 @@
+{{define "mem_footer"}}
+<footer class="foot-h">
+    <nav class="f-hmoe f-turnea">
+        <ul>
+            <a href="/m/bank" class="{{if eq .PageType 1}}curr{{end}}"><i class="iconfont wap-icon-yucunkuan"></i>
+                <p>存款</p></a>
+            <a href="/m/withdraw" class="{{if eq .PageType 2}}curr{{end}}"><i class="iconfont wap-woyaoqukuan"></i>
+                <p>取款</p></a>
+            <a href="/m/convert" class="{{if eq .PageType 3}}curr{{end}}"><i class="iconfont wap-eduzhuanhuan"></i>
+                <p>额度转换</p></a>
+            <a href="javascript:OnlineService('{{.UrlLink}}');" class="{{if eq .PageType 4}}curr{{end}}"><i class="iconfont wap-kefu-"></i>
+                <p>客服</p></a>
+        </ul>
+    </nav>
+</footer>
+{{end}}

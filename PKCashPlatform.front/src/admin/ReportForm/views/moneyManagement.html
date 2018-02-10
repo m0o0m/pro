@@ -1,0 +1,512 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div id="tab" data-smart-jqui-tabs>
+
+            <ul>
+                <li>
+                    <a href="#tab-a1">第三方管理</a>
+                </li>
+                <li>
+                    <a href="#tab-b1">银行卡管理</a>
+                </li>
+            </ul>
+            <div class="row" id="tab-a1">
+                <article class="col-sm-12">
+                    <div jarvis-widget data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>第三方管理</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}"
+                                        ng-click="toggleAdd()"><i
+                                        ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i>
+                                    {{lang['screening']}}
+                                </button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div ng-show="newTodo">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+                                            <label class="col-md-1 col-xs-4 input-label">状态</label>
+                                            <div class="col-md-2 col-xs-4 allsite">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="status">
+                                                        <option value="">请选择</option>
+                                                        <option value="1">启用</option>
+                                                        <option value="2">禁用</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1 col-xs-4">
+                                                <a class="btn btn-primary" data-toggle="modal"
+                                                   data-target="#myModal1">添加</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered">
+                                                <thead style="text-align: center">
+                                                <tr>
+                                                    <th class="text-align-center">编号</th>
+                                                    <th class="text-align-center">第三方名字</th>
+                                                    <th class="text-align-center">支付类型</th>
+                                                    <th class="text-align-center">密钥</th>
+                                                    <th class="text-align-center">支付账号</th>
+                                                    <th class="text-align-center">支付域名</th>
+                                                    <th class="text-align-center">国付宝账号</th>
+                                                    <th class="text-align-center">宝付终端号</th>
+                                                    <th class="text-align-center">所在层级</th>
+                                                    <th class="text-align-center">状态</th>
+                                                    <th class="text-align-center">操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="text-align-center">
+                                                <tr ng-repeat="item in list1">
+                                                    <td>{{item.number}}</td>
+                                                    <td>{{item.thirdName}}</td>
+                                                    <td>{{item.paymentType}}</td>
+                                                    <td>{{item.secretKey}}</td>
+                                                    <td>{{item.paymentAccount}}</td>
+                                                    <td>{{item.paymentDomain}}</td>
+                                                    <td>{{item.guofubao}}</td>
+                                                    <td>{{item.baofu}}</td>
+                                                    <td>{{item.hierarchy}}</td>
+                                                    <td>{{item.status|fiterStatused}}</td>
+                                                    <td><button data-toggle="modal" data-target="#myModal3" class="btn btn-default btn-xs" ng-click="modifyThird(item)">{{lang['Modify']}}</button></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf1"></tm-pagination>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="row" id="tab-b1">
+                <article class="col-sm-12">
+                    <div jarvis-widget data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>银行卡管理</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}"
+                                        ng-click="toggleAdd()"><i
+                                        ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i>
+                                    {{lang['screening']}}
+                                </button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div ng-show="newTodo">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+                                            <div class="col-sm-1 col-xs-12">
+                                                <a class="btn btn-primary" data-toggle="modal"
+                                                   data-target="#myModal2" ng-click="add2()">添加</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered">
+                                                <thead style="text-align: center">
+                                                <tr>
+                                                    <th class="text-align-center">编号</th>
+                                                    <th class="text-align-center">银行卡名字</th>
+                                                    <th class="text-align-center">银行卡账号</th>
+                                                    <th class="text-align-center">收款人</th>
+                                                    <th class="text-align-center">开户行地址</th>
+                                                    <th class="text-align-center">所属层级</th>
+                                                    <th class="text-align-center">状态</th>
+                                                    <th class="text-align-center">操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="text-align-center">
+                                                <tr ng-repeat="item in list2">
+                                                    <td>{{item.number}}</td>
+                                                    <td>{{item.bankName}}</td>
+                                                    <td>{{item.bankAccount}}</td>
+                                                    <td>{{item.payee}}</td>
+                                                    <td>{{item.bankAddress}}</td>
+                                                    <td>{{item.hierarchy}}</td>
+                                                    <td>{{item.status|fiterStatused}}</td>
+                                                    <td><button data-toggle="modal" data-target="#myModal4" class="btn btn-default btn-xs" ng-click="modifyBank(item)">{{lang['Modify']}}</button></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf2"></tm-pagination>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="seeAccount">第三方信息</h4>
+                </div>
+                <div class="modal-body table-scroll" style="height: 400px;">
+                    <form class="smart-form form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">第三方名字：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData1.thirdName">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">第三方类型：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData1.paymentType">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">支付账号：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData1.paymentAccount">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">密钥：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData1.secretKey">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">支付域名：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData1.paymentDomain">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">国付宝账号：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData1.guofubao">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">宝付终端号：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData1.baofu">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">层级选择：</label>
+                                <label class="col-md-7 col-xs-6">
+                                    <select data-smart-select2  class="selectWidth" ng-model="formData1.hierarchy">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.id}}" ng-repeat="item in hierarchyList">{{item.name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">状态：</label>
+                                <label class="col-md-7 col-xs-6">
+                                    <input type="radio" name="status" value="1" ng-model="formData1.status">启用
+                                    <input type="radio" name="status" value="2" ng-model="formData1.status">禁用
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addThird()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">银行卡信息</h4>
+                </div>
+                <div class="modal-body table-scroll" style="height: 400px;">
+                    <form class="smart-form form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">银行卡名字：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData2.bankName">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">银行卡账号：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData2.bankAccount">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">开户行：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData2.bankAddress">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">收款人：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="formData2.payee">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">层级选择：</label>
+                                <label class="col-md-7 col-xs-6">
+                                    <select data-smart-select2  class="selectWidth" ng-model="formData2.hierarchy">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.id}}" ng-repeat="item in hierarchyList">{{item.name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">状态：</label>
+                                <label class="col-md-7 col-xs-6">
+                                    <input type="radio" name="status" value="1" ng-model="formData2.status">启用
+                                    <input type="radio" name="status" value="2" ng-model="formData2.status">禁用
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addBank()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">第三方信息--编辑</h4>
+                </div>
+                <div class="modal-body table-scroll" style="height: 400px;">
+                    <form class="smart-form form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">第三方名字：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData1.thirdName">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">第三方类型：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData1.paymentType">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">支付账号：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData1.paymentAccount">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">密钥：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData1.secretKey">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">支付域名：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData1.paymentDomain">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">国付宝账号：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData1.guofubao">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">宝付终端号：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData1.baofu">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">层级选择：</label>
+                                <label class="col-md-7 col-xs-6">
+                                    <select data-smart-select2  class="selectWidth" ng-model="modifyData1.hierarchy">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.id}}" ng-repeat="item in hierarchyList">{{item.name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">状态：</label>
+                                <label class="col-md-7 col-xs-6">
+                                    <input type="radio" name="status" value="1" ng-select="modifyData1.status===1" ng-model="modifyData1.status">启用
+                                    <input type="radio" name="status" value="2" ng-select="modifyData1.status===2" ng-model="modifyData1.status">禁用
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifyThirdSubmit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">银行卡信息--编辑</h4>
+                </div>
+                <div class="modal-body table-scroll" style="height: 400px;">
+                    <form class="smart-form form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">银行卡名字：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData2.bankName">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">银行卡账号：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData2.bankAccount">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">开户行：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData2.bankAddress">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">收款人：</label>
+                                <label class="col-md-7 col-xs-6 input">
+                                    <input type="text" ng-model="modifyData2.payee">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">层级选择：</label>
+                                <label class="col-md-7 col-xs-6">
+                                    <select data-smart-select2  class="selectWidth" ng-model="modifyData2.hierarchy">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.id}}" ng-repeat="item in hierarchyList">{{item.name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-6 input-label">状态：</label>
+                                <label class="col-md-7 col-xs-6">
+                                    <input type="radio" name="status" value="1" ng-select="modifyData2.status===1" ng-model="modifyData2.status">启用
+                                    <input type="radio" name="status" value="2" ng-select="modifyData2.status===2" ng-model="modifyData2.status">禁用
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifyBankSubmit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,481 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>多站点</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar" ng-show="newTodo">
+                                        <div class="row form-horizontal ">
+
+                                            <div class="col-md-1 col-xs-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search"  data-toggle="modal" data-target="#myModal2">添加站点</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline">
+                                        <div class="table-scroll">
+                                            <table  class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>SITEID</th>
+                                                    <th>INDEX_ID</th>
+                                                    <th>域名</th>
+                                                    <th>时间</th>
+                                                    <th>模块管理</th>
+                                                    <th>状态</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list">
+                                                    <td>{{item.SITEID}}</td>
+                                                    <td>{{item.INDEX_ID}}</td>
+                                                    <td>{{item.domain}}</td>
+                                                    <td>{{item.time}}</td>
+                                                    <td><button class="btn btn-default btn-xs" data-ui-sref="app.site.videoModule({id:item.site_id})">模块管理</button></td>
+                                                    <td>{{item.status|currentstate}}</td>
+                                                    <td>
+                                                        <button class="btn btn-default btn-xs" data-ui-sref="app.site.reception({id:item.site_id})">前台</button>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="getGaent(item)">添加代理</button>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal5" ng-click="oneTouch(item)">一键生成三级代理</button>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal4" ng-click="detail(item)">编辑</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+    </div>
+</div>
+<!--编辑-->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">修改站点</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">站点名称</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="detail.site_name"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">SITEID</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="detail.SITEID"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">INDEX_ID</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="detail.INDEX_ID"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">主域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="detail.domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">代理后台域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="detail.agent_domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">后台域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="detail.Backstage"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">WAP域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="detail.wap_domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">域名总数</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="detail.domainCount" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label ng-binding">是否下载app</label>
+                            <div class="col-md-6">
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn" ng-model="detail.status" value="1"> 是
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"  ng-model="detail.status" value="2">否
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="mod()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加站点-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">添加站点</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">站点名称</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="site_name"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">SITEID</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="SITEID"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">INDEX_ID</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="INDEX_ID"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">主域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">代理后台域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="agent_domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">后台域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="Backstage"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">WAP域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="wap_domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">域名总数</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="domainCount" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label ng-binding">是否下载app</label>
+                            <div class="col-md-6">
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn" ng-model="status" value="1"> 是
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"  ng-model="status" value="2">否
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加代理-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">添加代理</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">名称</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="item.INDEX_ID" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">前台id</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="item.SITEID" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">账号</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="item.account" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">所属类别</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="Category">
+                                    <option value="">股东名</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">类型</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="typeId">
+                                    <option value="">正式</option>
+                                    <option value="">测试</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">备注</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="remark" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAgent()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--一键生成三级代理-->
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">一键生成三级代理</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">siteid</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control">{{resd.SITEID}}</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">indexid</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control">{{resd.INDEX_ID}}</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认股东名称</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="default_name" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认股东账号</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="resd.Module" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认股东备注</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="default_remark" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认总代名称</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="default_totalgeneration" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认总代账号</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="default_totalgeneration_account" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认总代备注</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="default_totalgeneration_remark" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认代理名称</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="default_agent_name" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认代理账号</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="default_agent_account" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">默认代理备注</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="default_agent_remark" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="level()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

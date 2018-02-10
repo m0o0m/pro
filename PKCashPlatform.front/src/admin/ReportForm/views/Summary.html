@@ -1,0 +1,141 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>出入款项目汇总</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <div class="row">
+                                        <label class="col-md-1 col-xs-4 input-label allsite">{{lang['Site']}}</label>
+                                        <div class="col-md-2 col-xs-8 col-xs-12 allsite">
+                                            <div class="form-group">
+
+                                                <select data-smart-select2 class="selectWidth"  ng-model="site">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label allsite">日期区间</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group" ng-init="statusd=''">
+                                                <select class="form-control" ng-model="section" ng-init="section='1'">
+                                                    <option value="1">美东</option>
+                                                    <option value="2">北京</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label text-align-right">日期查询</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label ">————</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-1 col-xs-3 input-label allsite">
+                                                <a href-void="" class="btn btn-primary" href="#" ng-click="search()">今日</a>
+                                            </label>
+                                            <label class="col-md-1 col-xs-3 input-label allsite">
+                                                <a href-void="" class="btn btn-primary" href="#" ng-click="search()">昨日</a>
+                                            </label>
+                                            <label class="col-md-1 col-xs-3 input-label allsite">
+                                                <a href-void="" class="btn btn-primary" href="#" ng-click="search()">本周</a>
+                                            </label>
+                                            <label class="col-md-1 col-xs-3 input-label allsite">
+                                                <a href-void="" class="btn btn-primary" href="#" ng-click="search()">查询</a>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr class="text-align-center">
+                                                <th colspan="4" class="text-align-center">收入</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="text-align-center">
+                                            <tr>
+                                                <td class="text-align-center">公司入款</td>
+                                                <td class="text-align-center">线上支付</td>
+                                                <td class="text-align-center">人工存入</td>
+                                                <td class="text-align-center">会员出款被扣金额</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{income.companyIncome.money}}({{income.companyIncome.num}}笔)({{income.companyIncome.people}}人)</td>
+                                                <td>{{income.lineIncome.money}}({{income.lineIncome.num}}笔)({{income.lineIncome.people}}人)</td>
+                                                <td>{{income.artificialIncome.money}}({{income.artificialIncome.num}}笔)({{income.artificialIncome.people}}人)</td>
+                                                <td>{{income.detainedIncome.money}}({{income.detainedIncome.num}}笔)({{income.detainedIncome.people}}人)</td>
+                                            </tr>
+                                            <tr class="text-align-center">
+                                                <td colspan="4" class="text-align-center">收入总计:<span style="color: red">{{income.total}}</span></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr class="text-align-center">
+                                                <th colspan="4" class="text-align-center">支出</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="text-align-center">
+                                            <tr>
+                                                <td>会员出款</td>
+                                                <td>给予优惠</td>
+                                                <td>人工提出</td>
+                                                <td>给予返水</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{expenditure.companyIncome.money}}({{expenditure.companyIncome.num}}笔)({{expenditure.companyIncome.people}}人)</td>
+                                                <td>{{expenditure.lineIncome.money}}({{expenditure.lineIncome.num}}笔)({{expenditure.lineIncome.people}}人)</td>
+                                                <td>{{expenditure.artificialIncome.money}}({{expenditure.artificialIncome.num}}笔)({{expenditure.artificialIncome.people}}人)</td>
+                                                <td>{{expenditure.detainedIncome.money}}({{expenditure.detainedIncome.num}}笔)({{expenditure.detainedIncome.people}}人)</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-align-center">收入总计:<span style="color: red">{{expenditure.total}}</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-align-center"><span style="color: red">实际盈亏：{{actual}}</span></td>
+                                                <td colspan="2" class="text-align-center"><span style="color: red">账目总计：{{total}}</span></td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </section>
+
+</div>
+

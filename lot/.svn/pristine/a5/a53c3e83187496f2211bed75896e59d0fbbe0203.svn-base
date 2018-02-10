@@ -1,0 +1,119 @@
+
+<!-- 添加/修改 表单 -->
+<style>[disabled]{cursor:no-drop;}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;}input[type="number"]{-moz-appearance:textfield;}</style>
+<div class="isHide layui-layer-wrap">
+    <div class="modal-body">
+        <form id="add-form" class="form-horizontal" >
+            <input type="hidden" name="id" value="<{if isset($item) && $item.id}><{$item.id}><{/if}>">
+            <input type="hidden" name="iscustom" value="<{if isset($smarty.get.iscustom)}><{$smarty.get.iscustom}><{/if}>">
+            <input type="hidden" name="line_id" value="<{if isset($smarty.get.line_id)}><{$smarty.get.line_id}><{/if}>">
+            <input type="hidden" name="agent_type" value="<{if isset($smarty.get.agent_type)}><{$smarty.get.agent_type}><{/if}>">
+            <input type="hidden" name="agent_id" value="<{if isset($smarty.get.agent_id)}><{$smarty.get.agent_id}><{/if}>">
+            <input type="hidden" name="fc_type" value="<{if isset($item) && $item.fc_type}><{$item.fc_type}><{/if}>">
+            <input type="hidden" name="fc_name" value="<{if isset($item) && $item.fc_name}><{$item.fc_name}><{/if}>">
+            <input type="hidden" name="gameplay" value="<{if isset($item) && $item.gameplay}><{$item.gameplay}><{/if}>">
+            <input type="hidden" name="name" value="<{if isset($item) && $item.name}><{$item.name}><{/if}>">
+            <input type="hidden" name="sort" value="<{if isset($item) && $item.sort}><{$item.sort}><{/if}>">
+            <input type="hidden" name="info" value='<{if isset($item)}><{$item|json_encode}><{/if}>'>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">  </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="line_id" disabled>
+                            <option value="">请选择</option>
+                          <{foreach from=$data.show.lines item=val key=key}>
+                            <option value="<{$val['line_id']}>" <{if isset($smarty.get.line_id) && $smarty.get.line_id == $val.line_id}>selected<{/if}> ><{$val['line_id']}></option>
+                          <{/foreach}>
+                        </select>
+                        <label>
+                            <select type="select" name="agent_type" disabled>
+                                <option value="">请选择</option>
+                                <option value="sh" <{if isset($smarty.get.agent_type) && $smarty.get.agent_type eq 'sh'}> selected<{/if}> >股东</option>
+                                <option value="ua" <{if isset($smarty.get.agent_type) && $smarty.get.agent_type eq 'ua'}> selected<{/if}> >总代</option>
+                                <option value="at" <{if isset($smarty.get.agent_type) && $smarty.get.agent_type eq 'at'}> selected<{/if}> >代理</option>
+                            </select>
+                        </label>
+                        <label>
+                            <select type="select" name="agent_id" disabled>
+                                <option value="">请选择</option>
+                              <{foreach from=$data.agents item=val key=key}>
+                                <option value="<{$val['id']}>" <{if isset($smarty.get.agent_id) && $smarty.get.agent_id == $val.id}>selected<{/if}> ><{$val['login_name']}></option>
+                              <{/foreach}>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 彩票名称: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="fc_type" disabled>
+                            <option value="">请选择</option>
+                          <{foreach from=$data.show.games item=val key=key}>
+                            <option value="<{$val.type}>" <{if isset($item) && $item.fc_type && $item.fc_type == $val.type}>selected<{/if}> ><{$val['name']}></option>
+                          <{/foreach}>
+                        </select>
+                        <label class="children">
+                            <select type="select" name="gameplay" disabled>
+                                <option value="">请选择</option>
+                              <{foreach from=$data.gameplays item=val key=key}>
+                                <option value="<{$val.gameplay}>" <{if isset($item) && $item.gameplay && $item.gameplay == $val.gameplay}>selected<{/if}> ><{$val['name']}></option>
+                              <{/foreach}>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 最小限额: </label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="number" oninput="if(value.length>4){value=value.slice(0,4);}" name="limit_min" value="<{if isset($item) && $item.limit_min}><{$item.limit_min}><{/if}>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 单场最大限额: </label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="number" oninput="if(value.length>7){value=value.slice(0,7);}" name="single_field_max" value="<{if isset($item) && $item.single_field_max}><{$item.single_field_max}><{/if}>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 单笔最大限额: </label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="number" oninput="if(value.length>6){value=value.slice(0,6);}" name="single_note_max" value="<{if isset($item) && $item.single_note_max}><{$item.single_note_max}><{/if}>">
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <label>
+            <input id="add-form-btn" type="submit" class="btn btn-info" value = "提交">
+        </label>
+    </div>
+</div>
+
+<script>
+// ------------------ 增/改 ------------------------------------
+    $('#add-form-btn').click(function(){
+        $.ajax({
+            type: 'post',
+            url: 'add',
+            data: $('#add-form').serialize(),
+            dataType:'json',
+            success: function(data,textStatus){
+                var result = data;
+                if(result.ErrorCode > 0){
+                    layer.alert(result.ErrorMsg, {icon: 0});
+                    return;
+                }
+                if(result.ErrorMsg){
+                    layer.alert(result.ErrorMsg, {icon: 1}, function(){
+                        var params = '';
+                        <{foreach from=$smarty.get item=val key=key}>
+                            params += '&<{$key}>=<{$val}>';
+                        <{/foreach}>
+                        location = 'index?' + params;
+                    });
+                }
+            }
+        });
+    });
+</script>

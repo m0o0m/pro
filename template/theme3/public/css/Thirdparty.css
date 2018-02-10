@@ -1,0 +1,345 @@
+.deposit-div2-item-cen{
+    width: 1932px;
+}
+.deposit-div2-item{
+    width: 966px;
+}
+
+.item2{
+    width: 936px;
+}
+
+.deposit-for{
+    margin-top: 8px;
+    height: 468px;
+    border: 2px solid #FFC832;
+    padding-top: 28px;
+    padding-left: 100px;
+    background-color: #FFFFEE;
+}
+.deposit-for-1{
+    display: inline-block;
+    width: 300px;
+}
+.deposit-for-1 img{
+    border: 1px solid #DDD;
+    height: 100%;
+    vertical-align: middle;
+}
+.deposit-for-1 .text{
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+}
+.deposit-for-1 .deposit-for-img{
+    position: relative;
+    overflow: hidden;
+    width: 174px;
+}
+.deposit-for-1 .deposit-for-mod{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 170px;
+    height: 170px;
+    line-height: 170px;
+    background-color: rgba(0, 0, 0, 00.5);
+    color: #fff;
+    text-align: center;
+    display: none;
+}
+
+
+
+.deposit-for-1 .text span{
+    display: inline-block;
+    overflow: hidden;
+}
+
+.deposit-for-1 .text span:nth-child(2){
+    width: 100px;
+}
+.deposit-for-1 .text button{
+    background-color: #ec1515;
+    width: 62px;
+    height: 24px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.deposit-for-2{
+    width: 585px;
+}
+
+.deposit-for-left li{
+    margin-bottom: 16px;
+}
+.deposit-for-left li >span{
+    display: inline-block;
+    width: 136px;
+    text-align: right;
+}
+.deposit-for-left li input[type='text']{
+    width: 260px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 10px;
+    margin-left: 5px;
+    color: #999;
+}
+.deposit-for-left li select{
+    color: #686868;
+    width: 272px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 5px;
+    margin-left: 5px;
+}
+
+.deposit-for-left li:last-child{
+    position: relative;
+}
+.deposit-for-right-bot{
+    font-size: 14px;
+}
+.deposit-for-right-bot li{
+    margin-bottom: 3px;
+}
+
+.deposit-for-right-bot .myd-red{
+    height: 30px;
+}
+
+
+.deposit-for-right-button a,.deposit-for-right-button button{
+    display: inline-block;
+    line-height: 34px;
+    text-align: center;
+    width: 80px;
+    height: 34px;
+    border-radius: 3px;
+    /* outline: none; */
+    background-color: #FF4341;
+    color: #fff;
+    cursor: pointer;
+}
+
+.deposit-bottom{
+    margin-top: 8px;
+    border: 1px solid #DDD;
+    height: 566px;
+    background-color: #fff;
+    padding: 16px 99px 0 99px;
+}
+.deposit-b-t{
+    text-align: center;
+}
+.deposit-b-t ul:nth-child(1){
+    color: #fff;
+}
+.deposit-b-t ul:nth-child(2){
+    background-color:#F5F5F5;
+    color: #4D4F56;
+}
+
+.deposit-b-t li{
+    height: 50px;
+    line-height: 50px;
+    width: 20%;
+}
+.deposit-b-c{
+    margin-top: 10px;
+    border: 2px solid #FEC370;
+    /* height: 340px; */
+}
+.deposit-b-c .deposit-b-c-1{
+    padding: 16px 0 16px 16px;
+    /* font-weight: 700; */
+    font-size: 18px;
+}
+.deposit-b-c .deposit-b-c-1 span:nth-child(2){
+    color: red;
+}
+.deposit-b-c-2{
+    height: 150px;
+}
+
+.deposit-b-c-2 >div:nth-child(1){
+    width: 30%;
+}
+.deposit-b-c-2 >div:nth-child(2){
+    width: 70%;
+}
+
+.deposit-b-c-2 .div-1 div{
+    padding-left: 16px;
+}
+.deposit-b-c-2 .div-1 div p{
+    border-left: 2px solid red;
+    padding-left: 10px;
+    font-size: 20px;
+}
+.deposit-b-c-2 .div-1 .div-img{
+    width: 202px;
+    height: 60px;
+    border: 1px solid #DDD;
+    margin-top: 20px;
+    margin-left: 16px;
+}
+
+.deposit-b-c-2 .div-2 .li1{
+    margin-bottom: 22px;
+    vertical-align: middle;
+}
+
+.deposit-b-c-2 .div-2 span{
+    display: inline-block;
+}
+.deposit-b-c-2 .div-2 .div-2-span1{
+    width: 105px;
+    text-align: right;
+}
+.deposit-b-c-2 .div-2 .div-2-span2{
+    width: 265px;
+}
+.vo{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+
+.deposit-b-c-2 .div-2 .div-2-span3{
+    width: 76px;
+}
+.deposit-b-c-2 .div-2 .div-2-span3 button{
+    width: 100%;
+    height: 24px;
+    background-color: #ec1515;
+    color: #fff;
+    border-radius:2px;
+    outline: none;
+}
+.deposit-b-c-3{
+    padding-top: 15px;
+    padding-bottom: 25px;
+    text-align: center;
+    color: #ff5d5d;
+}
+
+.deposit-for-right-button a{
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 2px;
+}
+.deposit-for-right-button .but1{
+    margin-right: 5px;
+    background-color: #EEEEEE;
+    color: #C0C0C0;
+}
+.deposit-for-right-button .but2{
+    background-color: #ff4341;
+    color: #fff;
+}
+
+.deposit-for-right-button{
+    text-align: right;
+    /* padding-top: 10px; */
+    padding-bottom: 20px;
+    margin-top: 32px;
+}
+.item-but2{
+    margin-top: 42px;
+}
+
+
+
+
+
+/* 这是日期插件的css */
+#schedule-box{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 145px;
+    width: 300px;
+    margin: 0 auto;
+    font-size: 13px;
+    background-color: #fff;
+}
+
+.schedule-hd{
+    padding: 10px 15px;
+}
+.schedule-hd >span{
+    display: inline-block;
+}
+.schedule-hd >span:nth-child(2){
+    width: 170px;
+}
+.schedule-hd >span:nth-child(1){
+    width: 50px;
+}
+.schedule-hd >span:nth-child(3){
+    text-align: right;
+    width: 50px;
+}
+
+.today{
+    flex: 1;
+    text-align: center;
+}
+.ul-box{
+    overflow: hidden;
+    padding: 5px 0 5px 0px;
+}
+.ul-box > li{
+    float: left;
+    width: 14.28%;
+    text-align: center;
+    /* padding: 5px 0; */
+    margin-bottom: 0;
+}
+.other-month{
+    color: #999;
+}
+.current-month{
+    color: #333333;
+}
+.today-style{
+    border-radius: 50%;
+    background: #58d321;
+}
+.arrow{
+    cursor: pointer;
+}
+.dayStyle{
+    display: inline-block;
+    width: 35px !important;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center !important;
+    line-height: 35px;
+    cursor: pointer;
+}
+.current-month > .dayStyle:hover{
+    background: #00BDFF;
+    color: #ffffff;
+}
+.today-flag{
+    background: #00C2B1;
+    color: #fff;
+}
+.boxshaw{
+    box-shadow: 2px 2px 15px 2px #e3e3e3;
+}
+.selected-style {
+    background: #00BDFF;
+    color: #ffffff;
+}

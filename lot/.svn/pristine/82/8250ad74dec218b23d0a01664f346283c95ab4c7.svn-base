@@ -1,0 +1,213 @@
+<style>
+    .detailDiv{display:none}
+</style>
+<div class="page-header">
+    <p id="me-table-buttons">
+        <h1>
+           <a href="javascript:;" id="admin_index">管理员列表</a>
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                <{if isset($type) && $type eq 'detail'}>查看详情<{/if}>
+                <{if isset($type) && $type eq 'update'}>所属角色<{/if}>
+                <{if isset($type) && $type eq 'create'}>添加管理员<{/if}>
+            </small>
+        </h1>
+            
+    </p>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form id="w0" >
+            <div class="col-xs-12 col-sm-3">
+                <div class="col-xs-12 col-sm-12 widget-container-col  ui-sortable">
+                    <div class="widget-box  ui-sortable-handle">
+                        <div class="widget-header">
+                            <h5 class="widget-title">基本信息</h5>
+                            <input type="hidden" name="adminId" id='adminId' value="<{if !empty($id)}><{$id}><{/if}>">
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="form-group ">
+                                    <label class="control-label" for="login_user">账号</label>
+                                    <input type="text" id="login_user" class="form-control" name="role" value="<{if isset($data['login_user'])}><{$data['login_user']}><{/if}>" >
+                                    <div class="help-block"></div>
+                                </div>
+                                <div class="form-group  ">
+                                    <label class="control-label" for="login_name">昵称</label>
+                                    <input type="text" id="login_name" class="form-control" name="login_name" value="<{if isset($data['login_name'])}><{$data['login_name']}><{/if}>" >
+                                    <div class="help-block"></div>
+                                </div>
+                                <div class="form-group  ">
+                                    <label class="control-label" for="login_ip">IP</label>
+                                    <textarea class="form-control" id="login_ip" name="login_ip" ><{if isset($data['login_ip'])}><{$data['login_ip']}><{/if}></textarea>
+                                    <div class="help-block"></div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label" >状态</label>
+                                    <select type="select" name="status" id="status" class="form-control">
+                                        <option value="1" <{if isset($data['is_delete']) && $data['is_delete'] eq 1}>selected<{/if}>>有效</option>
+                                        <option value="2" <{if isset($data['is_delete']) && $data['is_delete'] eq 2}>selected<{/if}>>无效</option>
+                                    </select>
+                                    <div class="help-block"></div>
+                                </div>
+                                <div class="detailDiv">
+                                    <div class="form-group  ">
+                                        <label class="control-label" for="roleName">添加时间</label>
+                                        <input type="text" id="addTime" class="form-control" name="addTime" value="<{if isset($data['addTimeTxt'])}><{$data['addTimeTxt']}><{/if}>" >
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group  ">
+                                        <label class="control-label" for="roleName">修改时间</label>
+                                        <input type="text" id="updateTime" class="form-control" name="updateTime" value="<{if isset($data['updateTimeTxt'])}><{$data['updateTimeTxt']}><{/if}>" >
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+                                <button type="button" id='save' class="btn btn-primary">更新</button>              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-9 widget-container-col  ui-sortable">
+                <div class="widget-box ui-sortable-handle">
+                    <div class="widget-header">
+                        <h5 class="widget-title">角色</h5>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="checkbox col-sm-10" style="padding:5px;">
+                                        <label>
+                                            <span class="lbl">请选择一个角色</span>
+                                        </label>
+                                    </div>
+                                    <{foreach from=$roles item=v key=k}>
+                                    <div class="checkbox col-sm-4" style="padding:5px;">
+                                        <label>
+                                            <input class="ace ace-checkbox-2 childChecked" 
+                                                   type="checkbox" 
+                                                   name="roleId" 
+                                                   value="<{$v['id']}>"
+                                                   <{if isset($data['role_id']) && $data['role_id'] eq $v['id'] }>checked<{/if}>
+                                                   >
+                                            <span class="lbl"> <{$v['role']}>(<{$v['role_name']}>)</span>
+                                        </label>
+                                    </div>
+                                    <{/foreach}>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>                    
+    </div>
+</div>
+<script>
+    $('#admin_index').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/admin/index',
+            container: '#container'
+        });
+    })
+
+    var type = "<{$smarty.get.type}>";
+    if (type == 'detail') {
+        $('#save').hide();
+        var adminForm = $('#w0');
+        adminForm.find('input').attr('disabled', true);
+        adminForm.find('select').attr('disabled', true);
+        adminForm.find('textarea').attr('disabled', true);
+    }
+    //更新
+    $("#save").click(function () {
+        var load;
+        var id = $.trim($('#adminId').val());
+        var login_user = $.trim($('#login_user').val());
+        var login_name = $.trim($('#login_name').val());
+        var login_ip = $.trim($('#login_ip').val());
+        var status = $.trim($('#status').val());
+        var roleId = $('.childChecked:checked').val();
+        var reg = /^[A-Za-z0-9_]*$/g;
+    
+        if (login_user == '') {
+            layer.alert('账号不能为空！', {icon: 2});
+            return false;
+        }else if(login_user.length < 4 || login_user.length >20){
+             layer.alert('账号长度为4-20位！', {icon: 2});
+            return false;
+        }else if (!reg.test(login_user)) {
+            layer.alert('账号只能为数字字母下划线！', {icon: 2});
+            return false;
+        } else if (login_name == '') {
+            layer.alert('昵称不能为空！', {icon: 2});
+            return false;
+        } else if ($('.childChecked:checked').length < 1) {
+            layer.alert('请选择一个角色！', {icon: 2});
+            return false;
+        }
+
+        if (login_ip != '') {
+            login_ip_arr = login_ip.split("\n");
+            patterns = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}$/;
+            for(x in login_ip_arr){
+                if(!patterns.test(login_ip_arr[x])){
+                    layer.alert('IP格式不正确', {icon: 0})
+                    return false;
+                }
+            }
+        }
+
+        var data = {
+            id: id,
+            login_user: login_user,
+            login_name: login_name,
+            login_ip: login_ip,
+            status: status,
+            roleId: roleId
+        };
+        $.ajax({
+            type: "post",
+            url: '/admin/save',
+            data: data,
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2})
+                layer.close(load);
+            },
+            dataType: 'json',
+            success: function (res) {
+                layer.alert(res.msg, {icon: 2});
+                if (res.code == 400) {
+                    layer.close(load);
+                } else if(res.ErrorCode == 2){
+                    layer.close(load);
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                } else if (res.code == 200) {
+                    layer.close(load);
+                    layer.alert('更新成功！',{icon:1},function(){
+                        window.location.href = '/admin/index';
+                    })
+                }
+            }
+        });
+    })
+
+    //单选
+    $('.childChecked').click(function () {
+        if ($(this).prop('checked')) {
+            $(this).parents('.checkbox').siblings('.checkbox').find('.childChecked').prop('checked', false);
+        }
+    })
+
+
+
+
+
+</script>

@@ -1,0 +1,164 @@
+@import "./function.scss";
+
+.report {
+  .r_box {
+    margin: 12px 0 0 10px;
+    .thend {
+      overflow: hidden;
+      width: 900px;
+      h2 {
+        font-size: 18px;
+        font-weight: bold;
+        float: left;
+      }
+    }
+    .week {
+      float: left;
+      ul {
+        overflow: hidden;
+        height: 84px;
+        margin-top: 10px;
+        width: 900px;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        li {
+          margin-top: 32px;
+          float: left;
+          font-size: 16px;
+          font-weight: bold;
+          height: 50px;
+          line-height: 50px;
+          width: 120px;
+          cursor: pointer;
+        }
+        li:last-child {
+          background-color: $Button_color;
+          border-radius: 10px 10px 0 0px;
+          color: #fff;
+        }
+      }
+    }
+    .table {
+      width: 900px;
+      .thend {
+        // float: left;
+        // margin-top: 20px;
+        width: 900px;
+        line-height: 50px;
+        height: 50px;
+        background-color: $Button_color;
+        li {
+          font-size: 14px;
+          color: #fff;
+          width: 149px;
+          float: left;
+        }
+      }
+      .from {
+        //.rightbtn {
+        //  position: relative;
+        //  i{
+        //    position: absolute;
+        //    right: 20px;
+        //    top: 18px;
+        //  }
+        //}
+        .li1, .li2 {
+          // overflow: hidden;
+          //overflow: hidden;
+          width: 900px;
+          border-left: 1px solid $border_color;
+          border-right: 1px solid $border_color;
+          border-bottom: 1px solid $border_color;
+          .ul1 {
+            //border-top: 1px solid $border_color;
+            li {
+              display: block;
+              float: left;
+              width: 149px;
+              height: 60px;
+              line-height: 60px;
+              // overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+          .ul1 {
+            // overflow: hidden;
+          }
+          .ul2 {
+            cursor: pointer;
+            // overflow: hidden;
+            //border-bottom: 1px solid $border_color;
+            height: 60px;
+            li {
+              display: block;
+              float: left;
+              width: 149px;
+              // height: 60px;
+              line-height: 60px;
+              height: 60px;
+              // overflow: hidden;
+              // text-overflow: ellipsis;
+              // white-space: nowrap;
+            }
+          }
+          .ul2:last-child {
+            border-bottom: none;
+          }
+          .ul2:hover {
+            background-color: $bg_select;
+
+          }
+        }
+        .li1:hover {
+          background-color: $bg_select;
+        }
+        .li1 {
+          cursor: pointer;
+        }
+        .li2 {
+          display: none;
+          // height: 60px;
+        }
+      }
+      .ul3 {
+        border-bottom: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+        height: 60px;
+        li {
+          display: block;
+          float: left;
+          width: 149px;
+          // height: 60px;
+          line-height: 60px;
+          height: 60px;
+          // overflow: hidden;
+          // text-overflow: ellipsis;
+          // white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+//点击切换
+.stylebg {
+  background-color: $bg_color;
+  border-radius: 10px 10px 0 0px;
+  color: #fff;
+}
+
+.ulfor {
+  li {
+    height: 60px;
+    line-height: 60px;
+    color: red;
+    border: 1px solid #eee;
+  }
+}
+
+.red {
+  color: red;
+}

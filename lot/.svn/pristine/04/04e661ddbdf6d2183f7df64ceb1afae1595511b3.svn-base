@@ -1,0 +1,17 @@
+package router
+
+import (
+	"github.com/labstack/echo"
+	"controllers/spider"
+	"controllers/lottery"
+)
+
+func SpiderRouter(c *echo.Echo) {
+	e := c.Group("", CheckSite, CheckMainTainSpider,CheckWhiteListSpider)
+	delCtrl := new(controllers.DelController)
+	otherCtrl := new(lottery.OtherController)
+	e.GET("/getList", delCtrl.GetList)
+	e.GET("/delList", delCtrl.DelList)
+	c.GET("/refresh/key", otherCtrl.Refresh) //刷新缓存的key
+
+}

@@ -1,0 +1,79 @@
+{{define "live"}}
+<script type="text/javascript">
+    document.writeln("<link rel=\"stylesheet\" href=\"" + cdnUrl + "/shared/video/css/live4/csino-style.css\" />");
+</script>
+<div class="casino-live">
+
+    <div class="casino-bgDiv"></div>
+    <div class="casino-nav">
+        <ul>
+        {{range $k,$v := .LiveOrder}}
+        {{if 0}}   {{/*判断是否维护*/}}
+            <li><a href="javascript:;" onclick="alert('{{$v.VType}}视讯维护中！');" class="casino-hover"
+                   style="color:#3B3C3F;">{{$v.VType}}</a></li>
+        {{else}}
+            <li><a href="javascript:;" class="casino-hover" casino="casino-{{$v.VType}}">{{$v.VType}}</a></li>
+        {{end}}
+        {{end}}
+        </ul>
+    </div>
+
+    <div class="casino-mm">
+    {{range $k,$v := .LiveOrder}}
+        <script type="text/javascript">
+            document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live4/casinomm-{{$v.VType}}.png\" class=\"casino-{{$v.VType}}-mm\"{{if eq $k 0}}style=\"display:block;\"{{else}}style=\"display:none;\"{{end}}/>");
+        </script>
+    {{end}}
+    </div>
+    <div id="casino-tit-img" class=""></div>
+
+    <div class="casino-chongzhi">
+        <a href="javascript:;" onclick="javascript:zhuModal.login();" class="pk-login-before"></a>
+        <a href="/member/bank" id="egame_go" class="pk-login-after"
+           style="display: none;"></a>
+    </div>
+    <div class="casino-guize">
+        <a href="javascript:;" onclick="opengeme('','rule','')"></a>
+    </div>
+    <div class="casino-kaishiyx">
+    {{range $k,$v := .LiveOrder}}
+        {{/*<a href="javascript:;" onclick="javascript:zhuModal.login();" class="casino-{{$v.VType}}-ss pk-login-before"></a>*/}}
+        <a href="javascript:;" onclick="opengeme('','video','{{$v.VType}}')"
+           class="casino-{{$v.VType}}-ss"></a>
+    {{end}}
+    </div>
+    <div class="casino-eduzh">
+        <a href="javascript:;" onclick="javascript:zhuModal.login();" class="pk-login-before"
+           style="display: none;"></a>
+        <a href="javascript:openmember('3');" class="pk-login-after" style="display: none;"></a>
+    </div>
+
+    <div class="casino-tableDiv">
+        <script type="text/javascript">
+            document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live4/table.png\" usemap=\"#Map\" class=\"region_button\">");
+        </script>
+    </div>
+</div>
+
+<script>
+    $viType = $('.casino-nav>ul>li').eq(0).find('a').attr('casino');
+    $('.casino-nav>ul>li').eq(0).siblings().find('a').removeClass('casino-hover');
+    $('.casino-kaishiyx').find('a.' + $viType + '-ss').show();
+    $('.casino-kaishiyx>a.' + $viType + '-ss').siblings('a').hide();
+    $('#casino-tit-img').addClass($viType + '-tit');
+    $(".casino-nav ul li a").hover(function () {
+        $casino = $(this).attr('casino');
+        $(this).addClass('casino-hover');
+        $(this).parent().siblings().find('a').removeClass('casino-hover');
+        $(this).parents('.casino-nav').siblings('.casino-mm').find('.' + $casino + '-mm').show();
+        $(this).parents('.casino-nav').siblings('.casino-mm').find('.' + $casino + '-mm').siblings().hide();
+
+        $(this).parents('.casino-nav').siblings('.casino-kaishiyx').find('.' + $casino + '-ss').show();
+        $(this).parents('.casino-nav').siblings('.casino-kaishiyx').find('.' + $casino + '-ss').siblings().hide();
+
+        $titImg = $(this).parents('.casino-nav').siblings('#casino-tit-img').attr('class');
+        $(this).parents('.casino-nav').siblings('#casino-tit-img').removeClass($titImg);
+        $(this).parents('.casino-nav').siblings('#casino-tit-img').addClass($casino + '-tit');
+    });
+</script>
+{{end}}

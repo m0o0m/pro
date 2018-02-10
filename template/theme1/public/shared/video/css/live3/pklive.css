@@ -1,0 +1,54 @@
+/*------------公用样式---------------*/
+.casino-liveImgs.live-bg{ width: 1000px; margin:0 auto; min-height: 400px;}
+.casino-liveImgs .live-shadow{
+-o-box-shadow:0 0 5px rgba(252, 252, 252, 0.5);
+-moz-box-shadow: 0 0 5px rgba(252, 252, 252, 0.5);/* Firefox */
+-webkit-box-shadow: 0 0 5px rgba(252, 252, 252, 0.5);/* Safari and Chrome */
+box-shadow: 0 0 5px rgba(252, 252, 252, 0.5);
+filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=4);}
+.casino-liveImgs .live-fla{float: left;}
+.casino-liveImgs .textBox .live-rule, .textBox .live-game{background-color: #C52323; width: 120px; height: 40px; display: block; font-size: 16px; line-height: 40px; border-radius: 10px; color: #FFFFFF; text-align: center; float: left;}
+.casino-liveImgs .textTitle-box{position: absolute; z-index: 999;bottom: 0px; width: 100%; height: 60px; background-color:rgba(19, 19, 18, 0.61);font-size: 35px;line-height: 60px; text-align: center; color: #F5F5F5; }
+.casino-liveImgs .dis-block{ display: block;}
+.casino-liveImgs .user_style6 .textBox a:hover{ background-color: #EA773C;}
+
+/*------------一张图---------------*/
+.casino-liveImgs .live-one{width: 900px; height: 400px; margin: auto;}
+.casino-liveImgs .live-one .textBox .live-rule{float: left;  margin-left: 20%;}
+.casino-liveImgs .live-one .textBox .live-game{float: right; margin-right: 20%;}
+.casino-liveImgs .live-one .user_style6 .textTitle{border-radius:90px;margin-top:50px;margin-left: 280px;height: auto;width: 300px;text-align: center; font-size: 50px;}
+.casino-liveImgs .live-one .margin-left{margin-bottom: -200px;}
+
+/*------------为两张图---------------*/
+.casino-liveImgs .live-two{width: 450px; height: 400px; overflow: hidden;}
+.casino-liveImgs .live-left{float: left; margin-left: 34px;}
+.casino-liveImgs .live-two .user_style6 .textTitle {border-radius: 90px; 
+margin-top: 50px;margin-left: 80px;height: auto; width: 300px;text-align: center;  font-size: 50px;}
+.casino-liveImgs .live-two-img{position: relative; left: -215px;}
+.casino-liveImgs .live-two .textBox .live-rule{margin-left: 30px;}
+.casino-liveImgs .live-two .textBox .live-game{margin-left: 130px;}
+.mar-bot{margin-bottom: 34px;}
+.casino-liveImgs .live-two .margin-left{margin-bottom: -200px; width: 450PX;}
+
+/*------------三张图以上---------------*/
+.casino-liveImgs .live-three{width: 300px; height: 400px; overflow: hidden;}
+.casino-liveImgs .live-thl{float: left;}
+.casino-liveImgs .live-three-img{position: relative; left: -290px;}
+.casino-liveImgs .live-three .user_style6 .textTitle {margin-top: 50px;margin-left: 0px;height: 90px;width:300px;text-align: center;  font-size: 50px;}
+.casino-liveImgs .live-mar{margin-left: 25px; margin-bottom: 25px;}
+.casino-liveImgs .live-three .textBox .live-rule{margin-left: 5px;}
+.casino-liveImgs .live-three .textBox .live-game{margin-left: 30px;}
+.casino-liveImgs .live-three .margin-left{margin-bottom: -200px; width: 300px;  }
+
+/*------------hover样式---------------*/
+.casino-liveImgs .main_box {position: relative;overflow: hidden;margin: auto;}
+.casino-liveImgs .main_box > img {display: block;z-index: 10;}
+.casino-liveImgs .overlayText {position: absolute;overflow: hidden;display: none;z-index: 20;margin: 0;background: #000;color: #fff;}
+.casino-liveImgs .overlayRubTop {position: absolute;overflow: hidden;z-index: 20;margin: 0;border: 0 none;background: #000;}
+.casino-liveImgs .overlayRubBottom {position: absolute;overflow: hidden;z-index: 20;margin: 0;border: 0 none;background: #000;}
+.casino-liveImgs .textBox {position: absolute;float: left;z-index: 30;margin: 0;padding: 0;}
+.casino-liveImgs .textTitle {position: absolute;float: left;z-index: 30;margin: 0;margin-left: 10px;padding: 5px;font-weight: bold;}
+.casino-liveImgs .user_style6 .textTitle {color: #fff;font-size: 26px;}
+.casino-liveImgs .user_style6 .textBox {margin-bottom: 30px;}
+.casino-liveImgs a:hover { color: #D40000; text-decoration: none}
+.casino-liveImgs .live-clear{height:0; overflow:hidden; clear:both}

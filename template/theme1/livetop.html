@@ -1,0 +1,12 @@
+{{template "header" .Header}}
+        <!--主要内容-->
+        <div class="live_content">
+			{{template "live" .}}
+        </div>
+    </div>
+</div>
+<style>
+.cp_content .news .new02 {    width: 875px;}
+.slots_banner{background: url({{.Header.CdnUrl}}/theme1/public/images/new/live_banner.jpg) no-repeat top center !important;}
+</style>
+{{template "footer" .Footer}}

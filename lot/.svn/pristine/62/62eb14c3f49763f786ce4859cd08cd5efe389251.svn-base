@@ -1,0 +1,110 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-19 18:34:34
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/upload/_list.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a61c9baecd3a8_46868773',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '8a3b30feb87391c424932f0fdbafbf141b8a9a64' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/upload/_list.html',
+      1 => 1514276738,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a61c9baecd3a8_46868773 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+    <thead>
+        <tr>
+            <th class="center">ID</th>
+            <th class="center">线路</th>
+            <th class="center">代理</th>
+            <th class="center">文件名</th>
+            <th class="center">预览</th>
+            <th class="center">路径</th>
+            <th class="center">源文件名</th>
+            <th class="center">排序</th>
+            <th class="center">启用</th>
+            <th class="center">添加时间</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+<?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'])) {?>
+    <tbody>
+    <?php if (count($_smarty_tpl->tpl_vars['result']->value['data']) == 0) {?>
+        <tr><td class="center" colspan="20">无记录</td></tr>
+    <?php } else { ?>
+      <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value['data'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+        <tr id="item<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+"
+          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v']->value, 'vv', false, 'kk');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['kk']->value => $_smarty_tpl->tpl_vars['vv']->value) {
+?>
+            data-<?php echo $_smarty_tpl->tpl_vars['kk']->value;?>
+="<?php echo $_smarty_tpl->tpl_vars['vv']->value;?>
+"
+          <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+            data-info="<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+"
+        >
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['agentTxt'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['filename'];?>
+</td>
+            <td class="center"><img style="max-width:66px;max-height:66px;" onclick="actionView(<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+);" src="<?php echo $_smarty_tpl->tpl_vars['v']->value['showpath'];?>
+"/></td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['filepath'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['original_filename'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['sort'];?>
+</td>
+            <td class="center" name="enable"><a onclick="actionEnable(<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['v']->value['enable'];?>
+)" class="btn btn-xs btn-<?php if ($_smarty_tpl->tpl_vars['v']->value['enable'] == '1') {?>primary<?php } else { ?>default<?php }?> enable"><?php echo $_smarty_tpl->tpl_vars['v']->value['enableTxt'];?>
+</a></td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['adddate'];?>
+</td>
+            <td class="center">
+                <a onclick="actionView(<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+)" class="btn btn-xs btn-success view">查看</a>
+                <!-- <a onclick="actionEdit(<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+)" class="btn btn-xs btn-success update">修改</a> -->
+            </td>
+        </tr>
+      <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+    <?php }?>
+    </tbody>
+<?php }
+}
+}

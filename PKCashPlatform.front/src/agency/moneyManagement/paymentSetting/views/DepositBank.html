@@ -1,0 +1,144 @@
+<div id="content">
+    <div class="row">
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('DepositBankSet')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar">
+                                <div ng-show="newTodo">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group" >
+                                            <select data-smart-select2 class="selectWidth" ng-model="site"  >
+                                                <option value="">请选择</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">{{getWord('Status')}}</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group" ng-init="status=''">
+                                            <select class="form-control" ng-model="status">
+                                                <option value="">请选择</option>
+                                                <option ng-value="item.value" ng-repeat="item in option_status">{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4  input-label">银行名称</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control inp_2" placeholder="" ng-model="bank_name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1 col-xs-6">
+                                        <div class="input-group pull-right">
+                                            <button type="submit" data-toggle="modal" data-target="#dialog_simple_divided"  class="btn btn-primary" ng-click="search()">
+                                                查询
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1  col-xs-6">
+                                        <div class="input-group pull-right">
+                                            <button type="submit"  ng-click="modi()"  class="btn btn-primary">
+                                                新增
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>银行类型</th>
+                                            <th>开户行</th>
+                                            <th>账号</th>
+                                            <th>收款人</th>
+                                            <th>停用金额</th>
+                                            <th>适用层级</th>
+                                            <th>状态</th>
+                                            <th>备注</th>
+                                            <th style="text-align: center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.bank_id}}</td>
+                                            <td>{{item.open_bank}}</td>
+                                            <td>{{item.account}}</td>
+                                            <td>{{item.payee}}</td>
+                                            <td>{{item.discontinued}}</td>
+                                            <td> <a ng-click="level(item.id,item.site_index_id)" data-toggle="modal" data-target="#myModal1">{{item.level_num}}</a></td>
+                                            <td>{{item.status|fiterStatused}}</td>
+                                            <td>{{item.remake}}</td>
+                                            <td style="text-align: center">
+                                                <button  class="ids btn btn-default btn-xs" ng-click="" data-ui-sref="app.PaymentSetting.Modify({Id:item.id})">{{getWord('Modify')}}</button>
+                                                <button  class="ids btn  btn-default btn-xs"  ng-click="" data-ui-sref="app.PaymentSetting.DepositRecord({Id:item.id})">{{getWord('depositRecord')}}</button>
+                                                <button class="ids btn btn-default btn-xs" ng-click="disables(item.status,item.id,item)" ng-show="item.status==2">{{getWord('Disable')}}</button>
+                                                <button class="ids btn btn-default btn-xs" ng-click="disables(item.status,item.id,item)" ng-show="item.status==1">{{getWord('Enables')}}</button>
+                                                <button  class="ids btn btn-default btn-xs" ng-click="del(item.id)">{{getWord('Delete')}}</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccounts">{{getWord('layeredDetails')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <div class="table-scroll">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>分层id</td>
+                                    <td>分层名称</td>
+                                </tr>
+                                <tr ng-repeat="item1 in list1">
+                                    <td>{{item1.level_id}}</td>
+                                    <td>{{item1.description}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adds()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

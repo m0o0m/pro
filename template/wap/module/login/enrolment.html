@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>PK</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+
+</head>
+<style>
+    body {
+        background-color: #fff;
+    }
+
+
+    .p-tratio {
+        /* min-height: 500px !important; */
+        height: 400px !important;
+        /* overflow: scroll; */
+        width: 300px !important;
+        padding-bottom: 10px;
+    }
+    .p-tratio .btn{
+        width: 100%;
+        text-align: center;
+    }
+    .p-tratio button{
+        width: 100px;
+        height: 30px;
+        background: linear-gradient(to right, #ff223c, #ff6b2a)
+    }
+
+    .p-tratio .h2 {
+        height: 35px;
+        line-height: 35px;
+        background: linear-gradient(to right, #ff223c, #ff6b2a);
+        text-align: center;
+        color: #fff;
+    }
+
+    .p-tratio p {
+        padding: 1% 1% 1% 4%;
+    }
+    .p-tratio .mescroll{
+        position: static;
+        height: 90% !important;
+        /* padding-bottom: 10px; */
+    }
+</style>
+
+<body ontouchstart>
+    <header class="head-h">
+        <ul class="h-head">
+            <li>
+                <a href="/m/index">首页</a>
+            </li>
+            <li>
+                <h2>注册</h2>
+            </li>
+            <li>
+                <a href="/m/login">登录</a>
+            </li>
+        </ul>
+    </header>
+    <!-- <div id="wrapper">
+        <div id="scroller">
+            iscroll 滑动 开始
+        <main class="m-login bgfff">
+            <dl class="o2">
+                <dt>
+                    <ul>
+                        <li><i class="iconfont wap-wode"></i><input type="text" name="register-name" id="register-name"
+                                                                    placeholder="请输入用户名" minlength="4" maxlength="11" onkeyup="value=value.replace(/[\W]/g,'')" />
+                        </li>
+                        <p>账号只能为4-11位数字和字母组合</p>
+                    </ul>
+                    <ul>
+                        <li><i class="iconfont wap-mima"></i><input type="password" name="register-password"
+                                                                    id="register-password" onkeyup="password(this.id)"
+                                                                    placeholder="请输入密码" maxlength="11" minlength="6" />
+                        </li>
+                        <p></p>
+                    </ul>
+                    <ol class="strong">
+                        <li class="pass-str1"></li>
+                    </ol>
+                    <ul>
+                        <li><i class="iconfont wap-querenmima"></i>
+                            <input type="password" name="password1" id="register-password1" placeholder="确认密码"  maxlength="11" minlength="6"/>
+                        </li>
+                        <p></p>
+                    </ul>
+                    <div id="is_need">
+                    </div>
+                    <ol class="consent">
+                        <li>
+                            <label>
+                                <input type="checkbox" name="agree" value="1" checked="checked">
+                                <i>本人同意</i>
+                            </label>
+                            <a>《开户协议》</a>
+                        </li>
+                    </ol>
+                </dt>
+                <dd>
+                    <button type="button" id="regSub">注册</button>
+                </dd>
+            </dl>
+        </main>
+        iscroll 滑动 结束
+    </div> -->
+    <div id="mescroll" class="mescroll m-login">
+    <dl class="o2">
+        <dt>
+            <ul>
+                <li><i class="iconfont wap-wode"></i><input type="text" name="register-name" id="register-name"
+                                                            placeholder="请输入用户名" minlength="4" maxlength="11" onkeyup="value=value.replace(/[\W]/g,'')" />
+                </li>
+                <p>账号只能为4-11位数字和字母组合</p>
+            </ul>
+            <ul>
+                <li><i class="iconfont wap-mima"></i><input type="password" name="register-password"
+                                                            id="register-password" onkeyup="password(this.id)"
+                                                            placeholder="请输入密码" maxlength="11" minlength="6" />
+                </li>
+                <p></p>
+            </ul>
+            <ol class="strong">
+                <li class="pass-str1"></li>
+            </ol>
+            <ul>
+                <li><i class="iconfont wap-querenmima"></i>
+                    <input type="password" name="password1" id="register-password1" placeholder="确认密码"  maxlength="11" minlength="6"/>
+                </li>
+                <p></p>
+            </ul>
+            <div id="is_need">
+            </div>
+            <ol class="consent">
+                <li>
+                    <label>
+                        <input type="checkbox" name="agree" value="1" checked="checked">
+                        <i>本人同意</i>
+                    </label>
+                    <a>《开户协议》</a>
+                </li>
+            </ol>
+        </dt>
+        <dd>
+            <button type="button" id="regSub">注册</button>
+        </dd>
+    </dl>
+</div>
+    <section class="big-shade">
+        <section class="pop p-tratio">
+            <h2 class="h2">注册协议</h2>
+            <div class="big-shade-cen mescroll" id="protocol">
+                <p>
+                    册注协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议</p>
+                <p>
+                    册注协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议</p>
+                <p>
+                    册注协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议</p>
+                <p>
+                    册注协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议</p>
+                <p>
+                    册注协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议</p>
+                <p>
+                    册注协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议</p>
+                <p>
+                    册注协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议</p>
+                <p>
+                    册注协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议注册协议</p>
+            </div>
+            <div class="btn">
+                <button>确定</button>
+            </div>
+        </section>
+    </section>
+    </div>
+</body>
+<script>
+    var cdnUrl = "{{.CdnUrl}}";
+</script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/mem_reg_ajax.js"></script>
+
+
+</html>

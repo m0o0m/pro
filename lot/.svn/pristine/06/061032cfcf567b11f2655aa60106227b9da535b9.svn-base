@@ -1,0 +1,159 @@
+
+<!-- 搜索栏 -->
+<style>select{width:auto !important;}#search-form label{margin-right:10px}</style>
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="search-form" action="" method="">
+            <{if Yii::$app->session->get('user_type') eq 1}>
+            <input type="hidden" id="line_id" name="line_id" value="<{php}>echo Yii::$app->session->get('line_id');<{/php}>" />
+            <label for="">代理类型:
+                <select type="select" name="agent_type" id="agent_type">
+                    <option value="">初始数据</option>
+                    <option value="sh" <{if isset($smarty.get.agent_type) && $smarty.get.agent_type eq 'sh'}> selected<{/if}> >股东</option>
+                    <option value="ua" <{if isset($smarty.get.agent_type) && $smarty.get.agent_type eq 'ua'}> selected<{/if}> >总代</option>
+                    <option value="at" <{if isset($smarty.get.agent_type) && $smarty.get.agent_type eq 'at'}> selected<{/if}> >代理</option>
+                </select>
+                <span class="children" <{if !isset($smarty.get.agent_type) || ( isset($smarty.get.agent_type) && $smarty.get.agent_type eq '' )}> style="display:none;"<{/if}>>
+                    代理商:
+                    <select type="select" name="agent_id" id="agent_id">
+                        <option value="">请选择</option>
+                      <{foreach from=$data.agents item=val key=key}>
+                        <option value="<{$val.id}>" <{if isset($smarty.get.agent_id) && $smarty.get.agent_id eq $val.id}> selected<{/if}> ><{$val.login_name}></option>
+                      <{/foreach}>
+                    </select>
+                </span>
+            </label>
+            <{else}>
+            <input type="hidden" id="agent_type" name="agent_type" value="at" />
+            <input type="hidden" id="agent_id" name="agent_id" value="<{Yii::$app->session->get('uid')}>" />
+            <{/if}>
+            <label for="">彩票种类:
+                <select type="select" name="fc_type">
+                    <option value="">请选择</option>
+                  <{foreach from=$data.show.games item=val key=key}>
+                    <option value="<{$val.type}>" <{if !isset($smarty.get.fc_type) && $val.type == 'cq_ssc'}> selected<{/if}> <{if isset($smarty.get.fc_type) && $smarty.get.fc_type eq $val.type}> selected<{/if}>><{$val.name}></option>
+                  <{/foreach}>
+                </select>
+            </label>
+            <label>
+                <input type="button" id="search" class="btn btn-sm btn-success" value="搜索" />
+            </label>
+        </form>
+    </div>
+</div>
+
+<!-- 列表 -->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <{include file="_list.html"}>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<script>
+// $(document).ready(function(){
+// ------------------ -- ------------------------------------
+    $("#search-form select").each(function(){
+        $(this).data("lastIndex",$(this).find(':selected').index()).change(function(){
+            var lastIndex = $(this).data('lastIndex');
+            var curIndex = $(this).find(':selected').index();
+            if(lastIndex != curIndex){
+                $(this).css({'color':'red'});
+            }else{
+                $(this).css({'color':''});
+            }
+        });
+    });
+
+    $('#agent_type').change(function(){
+        var obj = $(this);
+        var agent_type = obj.val();
+        var child = $('#' + obj.attr('id') + ' ~ .children');
+        if(!agent_type){
+            child.hide();
+            return;
+        }
+        child.show();
+        $.ajax({
+            type: 'post',
+            url: 'agent',
+            data: 'agent_type=' + agent_type,
+            dataType:'json',
+            success: function(data,textStatus){
+                var html = '代理商:';
+                html += '<select type="select" name="agent_id" id="agent_id">';
+                html += '   <option value="">请选择</option>';
+                for(x in data){
+                    html += '<option value="'+data[x].id+'">'+data[x].login_name+'</option>';
+                }
+                html += '</select>';
+
+                child.html(html);
+            }
+        });
+    });
+
+// ------------------ 操作 ------------------------------------
+    function search() {
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: '?',
+            container: '#container'
+        });
+        return false;
+    }
+    function jump(url) {
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    }
+    // 提交查询
+     $('#search-form').submit(function () {
+        var agent_type = $('#agent_type').val();
+        var agent_id = $('#agent_id').val();
+        if(agent_type){
+            if(!agent_id){
+                layer.msg('请选择代理商');
+                return false;
+            }
+        }
+        search();
+    });
+    // 搜索
+     $('#search').click(function () {
+        search();
+    });
+    // 每页显示条数切换
+    $('#pagenum').change(function () {
+        search();
+    });
+    // 页码切换
+    $('#page').change(function () {
+        search();
+    });
+    // 添加
+    $('#add').click(function(){
+        jump('add');
+    });
+    // 修改
+    function actionEdit(id,iscustom) {
+        var agent_id = '<{if isset($smarty.get.agent_id)}><{$smarty.get.agent_id}><{/if}>';// var agent_id = $('#agent_id').val();
+        if(!agent_id){
+	        var line_id = $('#line_id').val();
+	        if(!line_id){
+	            layer.msg('如需修改，请选择代理商');
+	            return;
+	        }
+        }
+        jump('add?id='+id+'&iscustom='+iscustom);
+    }
+// });
+</script>

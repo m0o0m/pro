@@ -1,0 +1,132 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>站点统计数据</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select data-smart-select2  class="selectWidth" ng-model="site">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label">模式</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select class="form-control" ng-model="timeZone" ng-init="timeZone='1'">
+                                                    <option value="1">非转时区模式</option>
+                                                    <option value="2">转时区模式</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label">类型</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select class="form-control" ng-model="type">
+                                                    <option value="">请选择</option>
+                                                    <option value="{{item.id}}" ng-repeat="item in typeOption">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 col-xs-4 input-label">日期</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label">————</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-6 col-md-offset-1">
+                                            <a href-void="" class="btn btn-default" href="#" ng-click="search()">查询</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead style="text-align: center">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>站点</th>
+                                                <th>总笔数</th>
+                                                <th>赢笔数</th>
+                                                <th>总投注</th>
+                                                <th>有效投注</th>
+                                                <th>派彩</th>
+                                                <th>JACK</th>
+                                                <th>DAY_TYPE</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.site}}</td>
+                                                <td>{{item.allNum}}</td>
+                                                <td>{{item.winNum}}</td>
+                                                <td>{{item.allBet}}</td>
+                                                <td>{{item.effectiveBet}}</td>
+                                                <td>{{item.payout}}</td>
+                                                <td>{{item.jack}}</td>
+                                                <td>{{item.dayType}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">小计：</td>
+                                                <td>{{subtotal.allNum}}</td>
+                                                <td>{{subtotal.winNum}}</td>
+                                                <td>{{subtotal.allBet}}</td>
+                                                <td>{{subtotal.effectiveBet}}</td>
+                                                <td>{{subtotal.payout}}</td>
+                                                <td>{{subtotal.jack}}</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">总计：</td>
+                                                <td>{{total.allNum}}</td>
+                                                <td>{{total.winNum}}</td>
+                                                <td>{{total.allBet}}</td>
+                                                <td>{{total.effectiveBet}}</td>
+                                                <td>{{total.payout}}</td>
+                                                <td>{{total.jack}}</td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </section>
+
+</div>
+

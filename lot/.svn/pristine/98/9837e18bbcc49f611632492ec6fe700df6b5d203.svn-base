@@ -1,0 +1,73 @@
+{
+  "_args": [
+    [
+      "vue-loading-template@0.1.7",
+      "/Users/huygo/work_space/pk-pc3.0/pk-pc"
+    ]
+  ],
+  "_development": true,
+  "_from": "vue-loading-template@0.1.7",
+  "_id": "vue-loading-template@0.1.7",
+  "_inBundle": false,
+  "_integrity": "sha1-Mqubtnx4ufROSVonFyVfwDKuaJ8=",
+  "_location": "/vue-loading-template",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "vue-loading-template@0.1.7",
+    "name": "vue-loading-template",
+    "escapedName": "vue-loading-template",
+    "rawSpec": "0.1.7",
+    "saveSpec": null,
+    "fetchSpec": "0.1.7"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vue-loading-template/-/vue-loading-template-0.1.7.tgz",
+  "_spec": "0.1.7",
+  "_where": "/Users/huygo/work_space/pk-pc3.0/pk-pc",
+  "author": {
+    "name": "jkchao",
+    "email": "jkchaom@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/jkchao/vue-loading/issues"
+  },
+  "dependencies": {
+    "vue": "^2.2.1"
+  },
+  "description": "vue-loading",
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-latest": "^6.0.0",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "file-loader": "^0.9.0",
+    "raw-loader": "^0.5.1",
+    "vue-loader": "^11.1.4",
+    "vue-template-compiler": "^2.2.1",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0"
+  },
+  "homepage": "https://github.com/jkchao/vue-loading#readme",
+  "keywords": [
+    "vue",
+    "loading",
+    "template"
+  ],
+  "license": "ISC",
+  "main": "dist/vue-loading.min.js",
+  "name": "vue-loading-template",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkchao/vue-loading.git"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot"
+  },
+  "version": "0.1.7"
+}

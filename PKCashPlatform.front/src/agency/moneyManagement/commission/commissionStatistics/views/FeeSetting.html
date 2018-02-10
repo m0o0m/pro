@@ -1,0 +1,75 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('FeeSetting')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar">
+                                <div class="row">
+                                    <label class="col-md-1 input-label col-xs-4">站点</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <select data-smart-select2 style="width: 80%;" ng-model="site_index_id">
+                                                <option value="">全部</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div  class="col-md-1 col-md-offset-0 col-xs-12 pull-right">
+                                        <div class="input-group">
+                                            <button type="submit" class="btn btn-primary" ng-click="search()">
+                                                {{lang['Search']}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    入款手续费
+                                                </th>
+                                                <th>入款手续费上限</th>
+                                                <th>出款手续费</th>
+                                                <th>出款手续费上限</th>
+                                                <th>开启交收模式</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.income_poundage_ratio}}</td>
+                                                <td>{{item.income_poundage_up}}</td>
+                                                <td>{{item.out_poundage_ratio}}</td>
+                                                <td>{{item.out_poundage_up}}</td>
+                                                <td>{{item.is_delivery_model==1?"开启":"关闭"}}</td>
+                                                <td>
+                                                    <button data-ui-sref="app.CommissionStatistics.ModificationFee({id:item.id})" class="btn btn-warning btn-xs">修改</button>
+                                                    <button class="btn btn-danger btn-xs" ng-click="del(item.id)">删除</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </section>
+
+</div>

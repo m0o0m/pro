@@ -1,0 +1,19 @@
+package schema
+
+//总代现金流水表;
+type UaCashRecord struct {
+	Id       int64   `xorm:"'id' PK autoincr notnull"`       //主键id
+	UaId     int64   `xorm:"'ua_id' notnull"`                //总代id
+	UaUser   string  `xorm:"'ua_user' notnull"`              //总代账号
+	LineId   string  `xorm:"'line_id' notnull"`              //站点id
+	HanderId int64   `xorm:"'hander_id' default(ull)"`       //操作者id
+	CashNum  float64 `xorm:"'cash_num' default(ull)"`        //交易金额
+	Remark   string  `xorm:"'remark' default('ull')"`        //备注
+	Addtime  int64   `xorm:"'addtime' notnull"`              //插入时间
+	Addday   int64   `xorm:"'addday' notnull"`               //下注的日期
+	CashType int64   `xorm:"'cash_type' notnull default(1)"` //1-存入,2-取出
+}
+
+func (*UaCashRecord) TableName() string {
+	return "my_ua_cash_record"
+}

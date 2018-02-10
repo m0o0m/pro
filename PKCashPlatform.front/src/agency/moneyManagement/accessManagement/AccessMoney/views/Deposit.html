@@ -1,0 +1,314 @@
+
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('bulkDeposit')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="widget-body-toolbar">
+                                <div id="tabs" data-smart-jqui-tabs>
+                                    <ul>
+                                        <li>
+                                            <a href="#tabs-a">账号</a>
+                                        </li>
+                                        <li>
+                                            <a href="#tabs-b">层级</a>
+                                        </li>
+                                    </ul>
+                                    <div id="tabs-a">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" method="post">
+                                                <div>
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>批量方式</td>
+                                                            <td colspan="3">账号</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>账号</td>
+                                                            <td colspan="3">
+                                                                <div class="row form-horizontal">
+                                                                <label class="col-md-1 control-label">会员账号:</label>
+                                                                <div  class="col-sm-2 col-xs-12">
+                                                                    <div class="input-group form-group">
+                                                                        <input type="text" class="form-control inp_2" placeholder="{{getWord('Please enter')}}{{getWord('Member account')}}" ng-model="key">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <div class="input-group">
+                                                                        <a class="btn btn-primary search" data-toggle="modal" data-target="#myModal1" ng-click="search()">{{getWord('Search')}}</a>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="input-group form-group">
+                                                                    <textarea name="" id="account" cols="50"
+                                                                              rows="5"></textarea>
+                                                                </div>
+                                                                  
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>存款金额</td>
+                                                            <td colspan="3">
+                                                                <input class="input-group" type="text" ng-model="deposit_amount">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>存款优惠</td>
+                                                            <td colspan="3">
+                                                                <label class="radio">
+                                                                    <input type="checkbox" name="c" id="checkbox1" ng-bind="checkbox1" >
+                                                                    存入,优惠金额：
+                                                                    <input type="text" ng-model="deposit_preference">
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>汇款优惠</td>
+                                                            <td colspan="3">
+                                                                <label class="radio">
+                                                                    <input type="checkbox" name="h" id="checkbox2" ng-bind="checkbox2" >
+                                                                    存入,优惠金额：
+                                                                    <input type="text" ng-model="remittance_discount">
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>综合打码稽核</td>
+                                                            <td colspan="3">
+                                                                <label class="radio">
+                                                                    <input type="checkbox" name="z" id="checkbox3" ng-bind="checkbox3" >
+                                                                    稽核,打码量：&nbsp;&nbsp;&nbsp;
+                                                                    <input type="text" ng-model="audit">
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>常态性稽核</td>
+                                                            <td colspan="3">
+                                                                <label class="radio">
+                                                                    <input type="checkbox" name="z" id="checkbox4" ng-bind="checkbox4" >
+                                                                    稽核
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>存款项目</td>
+                                                            <td colspan="3">
+                                                                <div class="form-group col-md-3">
+                                                                    <select data-smart-select2 style="width: 100%;" ng-model="deposit_type" ng-init="deposit_type=''">
+                                                                        <option value="">请选择</option>
+                                                                        <option ng-value="deposit.id" ng-repeat="deposit in option_deposit">{{deposit.name}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>是否退佣</td>
+                                                            <td colspan="3">
+                                                                <label class="radio col col-md-4  ng-binding">
+                                                                    <input type="radio" name="radio-inline1" value="1" ng-model="is_write_rebate">
+                                                                    写入
+                                                                </label>
+                                                                <label class="radio col col-md-4 ng-binding">
+                                                                    <input type="radio" name="radio-inline1" value="0" ng-model="is_write_rebate">
+                                                                    取消
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>备注</td>
+                                                            <td colspan="3">
+                                                                <textarea rows="3" cols="50" ng-model="remark"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td colspan="3">
+                                                                <div class="text-align-center">
+                                                                    <button type="button" class="btn btn-primary" ng-click="commit()">确定</button>
+                                                                    <button type="button" class="btn btn-default" ng-click="reset()">重置</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div id="tabs-b">
+                                        <div class="table-responsive">
+                                            <form class="form-inline" method="post">
+                                                <div>
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>批量方式</td>
+                                                            <td colspan="3">层级</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>层级</td>
+                                                            <td colspan="3">
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="level_id" ng-model="level_id"  >
+                                                                        <option value="">请选择层级</option>
+                                                                        <option ng-value="level.level_id" ng-repeat="level in levelList">{{level.level_id}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>存款金额</td>
+                                                            <td colspan="3">
+                                                                <input class="input-group" type="text" ng-model="deposit_amount1">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>存款优惠</td>
+                                                            <td colspan="3">
+                                                                <label class="radio">
+                                                                    <input type="checkbox" name="c" id="checkbox5" ng-bind="checkbox5" >
+                                                                    存入,优惠金额：
+                                                                    <input type="text" ng-model="deposit_preference1">
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>汇款优惠</td>
+                                                            <td colspan="3">
+                                                                <label class="radio">
+                                                                    <input type="checkbox" name="h" id="checkbox6" ng-bind="checkbox6" >
+                                                                    存入,优惠金额：
+                                                                    <input type="text" ng-model="remittance_discount1">
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>综合打码稽核</td>
+                                                            <td colspan="3">
+                                                                <label class="radio">
+                                                                    <input type="checkbox" name="z" id="checkbox7" ng-bind="checkbox7" >
+                                                                    稽核,打码量：&nbsp;&nbsp;&nbsp;
+                                                                    <input type="text" ng-model="audit1">
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>常态性稽核</td>
+                                                            <td colspan="3">
+                                                                <label class="radio">
+                                                                    <input type="checkbox" name="z" id="checkbox8" ng-bind="checkbox8" >
+                                                                    稽核
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>存款项目</td>
+                                                            <td colspan="3">
+                                                                <div class="form-group col-md-3">
+                                                                    <select data-smart-select2 style="width: 100%;" ng-model="deposit_type1" ng-init="deposit_type1=''">
+                                                                        <option value="">请选择</option>
+                                                                        <option ng-value="deposit.id" ng-repeat="deposit in option_deposit">{{deposit.name}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>是否退佣</td>
+                                                            <td colspan="3">
+                                                                <label class="radio col col-md-4  ng-binding">
+                                                                    <input type="radio" name="radio-inline1" value="1" ng-model="is_write_rebate1">
+                                                                    写入
+                                                                </label>
+                                                                <label class="radio col col-md-4 ng-binding">
+                                                                    <input type="radio" name="radio-inline1" value="0" ng-model="is_write_rebate1">
+                                                                    取消
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>备注</td>
+                                                            <td colspan="3">
+                                                                <textarea rows="3" cols="50" ng-model="remark1"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td colspan="3">
+                                                                <div class="text-align-center">
+                                                                    <button type="button" class="btn btn-primary" ng-click="commit1()">确定</button>
+                                                                    <button type="button" class="btn btn-default" ng-click="reset()">重置</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+
+
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="addAccount">{{getWord('User information')}}</h4>
+            </div>
+            <div class="modal-body">
+                <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                    <fieldset>
+                        <section class="input-item">
+                            <label class="col-md-3">账号：</label>
+                            <label class="col-md-7">{{data.account}}</label>
+                        </section>
+                        <section class="input-item">
+                            <label class="col-md-3">余额：</label>
+                            <label class="col-md-7">{{data.balance}}</label>
+                        </section>
+                        <section class="input-item">
+                            <label class="col-md-3">真实姓名：</label>
+                            <label class="col-md-7">{{data.realname}}</label>
+                        </section>
+
+
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{getWord('Cancel')}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAcount()">
+                    {{getWord('Confirm')}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

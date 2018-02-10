@@ -1,0 +1,157 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-02-01 19:46:19
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/noticefront/_list.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a72fe0b4c76d0_77287429',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '5fc5b88702493cc03c6dcc647f861e1a257e851d' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/noticefront/_list.html',
+      1 => 1515671487,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a72fe0b4c76d0_77287429 (Smarty_Internal_Template $_smarty_tpl) {
+if (!is_callable('smarty_modifier_truncate')) require_once '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/vendor/smarty/smarty/libs/plugins/modifier.truncate.php';
+?>
+
+<!-- 列表 -->
+    <thead>
+        <tr>
+            <th class="center"></th>
+            <th class="center">类型</th>
+            <!-- <th class="center">站点 ID</th> -->
+           <!--  <th class="center">代理类型</th>
+            <th class="center">代理帐号</th> -->
+            <th class="center">标题</th>
+            <th class="center">内容</th>
+            <th class="center">状态</th>
+            <th class="center">备注</th>
+            <th class="center">添加时间</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+<?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'])) {?>
+    <tbody>
+    <?php if (count($_smarty_tpl->tpl_vars['result']->value['data']) == 0) {?>
+        <tr><th class="center" colspan="20">无记录</th></tr>
+    <?php } else { ?>
+      <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value['data'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+        <tr id="item<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+">
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['typeTxt'];?>
+</td>
+            <!-- <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+</td> -->
+            <!-- <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['agent_type'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['agentTxt'];?>
+</td> -->
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['title'];?>
+</td>
+            <td class="center c_detail" rel="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['content'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['content'];
+}?>">  <?php if (isset($_smarty_tpl->tpl_vars['v']->value['content'])) {?> <?php echo smarty_modifier_truncate($_smarty_tpl->tpl_vars['v']->value['content'],20);?>
+ <?php if (strlen($_smarty_tpl->tpl_vars['v']->value['content']) > 40) {?><p style="font-size:3px;color:green;">点击查看完整内容</p><?php }
+}?></td>
+            <td class="center" name="enable">
+                 <?php if (isset($_smarty_tpl->tpl_vars['v']->value['agent_type']) && $_smarty_tpl->tpl_vars['v']->value['agent_type'] == 1 && isset($_smarty_tpl->tpl_vars['user_type']->value) && $_smarty_tpl->tpl_vars['user_type']->value == 1) {?>
+                <a onclick="actionEnable(<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+, <?php echo $_smarty_tpl->tpl_vars['v']->value['status'];?>
+)" class="btn btn-xs btn-<?php if ($_smarty_tpl->tpl_vars['v']->value['status'] == '1') {?>primary<?php } else { ?>default<?php }?> enable"><?php echo $_smarty_tpl->tpl_vars['v']->value['statusTxt'];?>
+</a>
+                <?php } else { ?>
+                    <?php echo $_smarty_tpl->tpl_vars['v']->value['statusTxt'];?>
+
+                <?php }?>
+            </td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['remark'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['adddate'];?>
+</td>
+            <td class="center">
+            <?php if (isset($_smarty_tpl->tpl_vars['v']->value['agent_type']) && $_smarty_tpl->tpl_vars['v']->value['agent_type'] == 1 && isset($_smarty_tpl->tpl_vars['user_type']->value) && $_smarty_tpl->tpl_vars['user_type']->value == 1) {?>
+                <a onclick="actionEdit(<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+)" class="btn btn-xs btn-success update">修改</a>
+            <?php } else { ?>
+                无
+            <?php }?>
+            </td>
+        </tr>
+      <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+    <?php }?>
+    </tbody>
+<?php }?>
+
+<?php echo '<script'; ?>
+>
+    // 启用 关闭
+    function actionEnable(id, enable){
+        msg = (enable==1) ? '确定关闭吗？' : '确定开启吗？' ;
+        $('#sample-table-1').data('id',id);
+        $('#sample-table-1').data('enable',enable);
+        layer.confirm(msg, {
+            btn: ['确定','取消']
+        }, function(){
+            layer.closeAll('dialog');
+
+            var id = $('#sample-table-1').data('id');
+            var enable = $('#sample-table-1').data('enable');
+
+            $.ajax({
+                type: 'post',
+                url: 'enable',
+                data: 'id=' + id + '&enable=' + enable,
+                dataType:'json',
+                success: function(data,textStatus){
+                    var result = data;
+                    if(result.ErrorCode > 0){
+                        layer.alert(result.ErrorMsg, {icon: 0});
+                        return;
+                    }
+                    if(result.ErrorMsg){
+                        layer.alert(result.ErrorMsg, {icon: 1}, function(){
+                            if(enable == 1){
+                                $('#item' + id).find('[name=enable]').html('<a onclick="actionEnable('+id+', 2)" class="btn btn-xs btn-default enable">无效</a>');
+                            }else{
+                                $('#item' + id).find('[name=enable]').html('<a onclick="actionEnable('+id+', 1)" class="btn btn-xs btn-primary enable">有效</a>');
+                            }
+                            layer.closeAll('dialog');
+                        });
+                    }
+                }
+            });
+        }, function(){
+            return;
+        });
+    }
+
+	$('.c_detail').click(function(){
+        var rel = $(this).attr('rel');
+        if(rel.length > 20){
+            layer.alert(rel,{'title':'公告祥情'});
+        }
+    })
+<?php echo '</script'; ?>
+><?php }
+}

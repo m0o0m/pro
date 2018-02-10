@@ -1,0 +1,129 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('CommissionInquiry')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar" ng-show="newTodo">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                    <div class="col-md-1 col-xs-8">
+                                        <div class="form-group">
+                                            <select data-smart-select2 style="width: 100%;" ng-model="site_index_id">
+                                                <option value="">全部</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">期数选择:</label>
+                                    <div class="col-md-1 col-xs-8">
+                                        <div class="form-group">
+                                            <select class="form-control" ng-model="period">
+                                                <option value="">全部</option>
+                                                <option value="1">期数1</option>
+                                                <option value="2">期数2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-md-offset-0 col-xs-8 col-xs-offset-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control inp_2" placeholder="请输入代理账号" ng-model="account">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">已获退佣</label>
+                                    <div class="col-md-1 col-xs-8">
+                                        <div class="form-group" >
+                                            <select class="form-control" ng-model="isGet">
+                                                <option value="">全部</option>
+                                                <option value="1">&gt;0</option>
+                                                <option value="2">=0</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">有效会员</label>
+                                    <div class="col-md-1 col-xs-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control inp_2" placeholder=""  ng-model="member_min">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-md-offset-0 col-xs-8 col-xs-offset-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control inp_2" placeholder=""  ng-model="member_max">
+                                        </div>
+                                    </div>
+
+                                    <div  class="col-sm-1  col-xs-6">
+                                        <div class="input-group pull-right">
+                                            <button type="submit"  data-smart-jqui-dialog-launcher=".dialog_simple_z"  class="btn btn-primary" ng-click="search()">
+                                                {{lang['Search']}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th rowspan="2">账号名称</th>
+                                            <th rowspan="2">有效会员（含期前）</th>
+                                            <th rowspan="2">JACK前期/当前</th>
+                                            <th rowspan="2">前期盈利</th>
+                                            <th rowspan="2">当期盈利</th>
+                                            <th colspan="{{arr.length}}" style="text-align: center">退佣比例(%)</th>
+                                            <th rowspan="2">前期有效投注</th>
+                                            <th rowspan="2">当期有效投注</th>
+                                            <th colspan="{{arr.length}}" style="text-align: center">退水比例(%)</th>
+                                            <th rowspan="2">前期费用</th>
+                                            <th rowspan="2">当期费用</th>
+                                            <th rowspan="2">可获退水</th>
+                                            <th rowspan="2">可获退佣</th>
+                                            <th rowspan="2">总可退金额</th>
+                                            <th rowspan="2">备注</th>
+                                        </tr>
+                                        <tr>
+                                            <th ng-repeat="item in arr track by $index">{{item}}</th>
+                                            <th ng-repeat="item in arr track by $index">{{item}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.account}}</td>
+                                            <td>{{item.member}}</td>
+                                            <td>{{item.before_jack}}/{{item.now_jack}}</td>
+                                            <td>{{item.before_earning}}</td>
+                                            <td>{{item.now_earning}}</td>
+                                            <td ng-repeat="tuiyong in item.RebateRatio track by $index">{{tuiyong}}</td>
+                                            <td>{{item.before_betting}}</td>
+                                            <td>{{item.now_betting}}</td>
+                                            <td ng-repeat="tuishui in item.WaterRatio track by $index">{{tuishui}}</td>
+                                            <td>{{item.before_expense}}</td>
+                                            <td>{{item.now_expense}}</td>
+                                            <td>{{item.aval_tuishui}}</td>
+                                            <td>{{item.aval_tuiyong}}</td>
+                                            <td>{{item.total_return}}</td>
+                                            <td>{{item.remark}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+    </section>
+
+</div>
+

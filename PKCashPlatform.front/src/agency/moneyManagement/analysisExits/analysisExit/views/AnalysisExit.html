@@ -1,0 +1,126 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('Analysis')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <div class="widget-body-toolbar">
+                                    <div class="form-horizontal">
+                                        <div class="row ">
+                                            <label class="col-md-1 input-label allsite col-xs-4">站点</label>
+                                            <div class="col-md-2 col-xs-8 allsite">
+                                                <div class="form-group">
+                                                    <select data-smart-select2  class="selectWidth" ng-model="site_index_id">
+                                                        <option value="">请选择</option>
+                                                        <option value="{{itemSite.site_index_id}}" ng-repeat="itemSite in sharedJson">{{itemSite.site_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 input-label col-xs-4">查询时间</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="开始日期" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="start_time">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 input-label text-align-center col-xs-4">————</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="结束日期" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="end_time">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 input-label col-xs-4">排序</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="order_by">
+                                                        <option value="">请选择</option>
+                                                        <option ng-value="itemOrder.value" ng-repeat="itemOrder in json.option_is_order">{{itemOrder.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-1 input-label col-xs-4">类型</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select  class="form-control" ng-model="type">
+                                                        <option value>请选择</option>
+                                                        <option ng-value="itemType.value" ng-repeat="itemType in json.option_income_type">{{itemType.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-xs-8 col-xs-offset-4 col-md-offset-0">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="type_account">
+                                                        <option value="">请选择</option>
+                                                        <option value="{{itemTypeAccount.value}}" ng-repeat="itemTypeAccount in json.option_is_type">{{itemTypeAccount.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" class="form-control inp_2" ng-model="account">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1 col-xs-offset-8 col-md-offset-0">
+                                                <a href-void="" class="btn btn-primary" href="#" ng-click="search()">查询</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr class="text-center">
+                                                <td>会员账号</td>
+                                                <td>代理商</td>
+                                                <td>总金额</td>
+                                                <td>优惠金额</td>
+                                                <td>总笔数</td>
+                                            </tr>
+
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list"  class="text-center">
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.agency}}</td>
+                                                <td>{{item.money}}</td>
+                                                <td>{{item.sale}}</td>
+                                                <td>{{item.number}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="text-align: center; color: red">
+                                                    <p>小计：{{subtotal.subtotal}}笔 入款金额：{{subtotal.income_sum}}元 优惠金额：{{subtotal.discount_sum}}元 入款人数:{{subtotal.income_num}}人</p>
+                                                    <p>总计：{{total.total}}笔 入款金额：{{total.income_sum}}元 优惠金额：{{total.discount_sum}}元 入款人数:{{total.income_num}}人</p>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

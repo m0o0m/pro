@@ -1,0 +1,95 @@
+
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">彩种</th>
+                        <!-- <th class="center">线路ID</th> -->
+                        <{if isset($result.data[0]['at_id'])}><th class="center">代理编号</th><{/if}>
+                        <{if isset($result.data[0]['at_username'])}><th class="center">代理帐号</th><{/if}>
+                        <{if isset($result.data[0]['uid'])}><th class="center">会员编号</th><{/if}>
+                        <{if isset($result.data[0]['uname'])}><th class="center">会员帐号</th><{/if}>
+                        <th class="center">总注单</th>
+                        <th class="center">总笔数</th>
+                        <th class="center">有效注单</th>
+                        <th class="center">有效笔数</th>
+                        <th class="center">赢金额</th>
+                        <th class="center">赢笔数</th>
+                        <th class="center">盈利</th>
+                        <th class="center">注单日期</th>
+                        <th class="center">最近统计时间</th>
+                    </tr>
+                </thead>
+                <{if isset($result['data'])}>
+                <tbody>
+                  <{if count($result['data']) == 0}>
+                    <tr><th class="center" colspan="20">无记录</th></tr>
+                  <{else}>
+                    <{foreach from=$result.data item=v key=k}>
+                    <tr>
+                        <td class="center"><{if isset($v['id'])}><{$v['id']}><{/if}></td>
+                        <td class="center"><{if isset($v['fc_typeTxt'])}><{$v['fc_typeTxt']}><{elseif isset($v['fc_type'])}><{$v['fc_type']}><{/if}></td>
+                        <!-- <td class="center"><{if isset($v['line_id'])}><{$v['line_id']}><{/if}></td> -->
+                        <{if isset($v['at_id'])}><td class="center"><{$v['at_id']}></td><{/if}>
+                        <{if isset($v['at_username'])}><td class="center"><{$v['at_username']}></td><{/if}>
+                        <{if isset($v['uid'])}><td class="center"><{$v['uid']}></td><{/if}>
+                        <{if isset($v['uname'])}><td class="center"><{$v['uname']}></td><{/if}>
+                        <td class="center"><{if isset($v['bet'])}><{$v['bet']}><{/if}></td>
+                        <td class="center"><{if isset($v['bet_count'])}><{$v['bet_count']}><{/if}></td>
+                        <td class="center"><{if isset($v['valid_bet'])}><{$v['valid_bet']}><{/if}></td>
+                        <td class="center"><{if isset($v['valid_bet_count'])}><{$v['valid_bet_count']}><{/if}></td>
+                        <td class="center"><{if isset($v['win'])}><{$v['win']}><{/if}></td>
+                        <td class="center"><{if isset($v['win_count'])}><{$v['win_count']}><{/if}></td>
+                        <td class="center"><{if isset($v['money'])}>
+                        <{if $v['money'] gt 0 }><font color="red"><{else}><font color="green"><{/if}><{$v['money']}></font>
+                        <{/if}></td>
+                        <td class="center"><{if isset($v['addday'])}><{$v['addday']}><{/if}></td>
+                        <td class="center"><{if isset($v['updatedate'])}><{$v['updatedate']}><{/if}></td>
+                    </tr>
+                    <{/foreach}>
+                </tbody>
+
+<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+     <tr>
+        <td colspan="2">本页注单下注金额:</td>
+        <td colspan="4"><{$result['total']['bet']}> 元</td>
+        <td colspan="2">本页注单下注笔数:</td>
+        <td colspan="4"><{$result['total']['bet_count']}> 笔</td>
+    </tr>
+    <tr>
+        <td colspan="2">本页注单有效下注金额:</td>
+        <td colspan="4"><{$result['total']['valid_bet']}> 元</td>
+        <td colspan="2">本页注单有效下注笔数:</td>
+        <td colspan="4"><{$result['total']['valid_bet_count']}> 笔</td>
+    </tr>
+     <tr>
+        <td colspan="2">本页注单贏金额:</td>
+        <td colspan="4"><{$result['total']['win']}> 元</td>
+        <td colspan="2">本页注单赢笔数:</td>
+        <td colspan="4"><{$result['total']['win_count']}> 笔</td>
+    </tr>
+    <tr>
+        <td colspan="2">符合条件注单下注金额:</td>
+        <td colspan="4"><{$result['total']['all_bet']}> 元</td>
+        <td colspan="2">符合条件注单下注笔数:</td>
+        <td colspan="4"><{$result['total']['all_bet_count']}> 笔</td>
+    </tr>
+    <tr>
+        <td colspan="2">符合条件注单有效下注金额:</td>
+        <td colspan="4"><{$result['total']['all_valid']}> 元</td>
+        <td colspan="2">符合条件注单有效下注笔数:</td>
+        <td colspan="4"><{$result['total']['all_valid_count']}> 笔</td>
+    </tr>
+    <tr>
+        <td colspan="2">符合条件注单赢金额:</td>
+        <td colspan="4"><{$result['total']['all_win']}> 元</td>
+        <td colspan="2">符合条件注单赢笔数:</td>
+        <td colspan="4"><{$result['total']['all_win_count']}> 笔</td>
+    </tr>
+    <tr><th colspan="2">统计数据：</th><th colspan="10">
+            本页总盈利： <span style="<{if $result['total']['money'] gt 0 }>color:red;<{else}>color:green;<{/if}>"> <{$result['total']['money']}></span> 元 
+            符合条件注单总盈利：<span style="<{if $result['total']['all_money'] gt 0 }>color:red;<{else}>color:green;<{/if}>"> <{$result['total']['all_money']}></span> 元</th>
+    </tr>
+
+</table>
+                  <{/if}>
+<{/if}>

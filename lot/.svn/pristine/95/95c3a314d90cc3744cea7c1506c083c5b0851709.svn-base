@@ -1,0 +1,60 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-26 18:46:14
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/other/access.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a6b06f6259679_02511934',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '19d5b6d01e5a2766feafecbb48d1879ec4cf9d5c' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/other/access.html',
+      1 => 1500517185,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a6b06f6259679_02511934 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="error-container">
+            <div class="well">
+                <h1 class="grey lighter smaller">
+                    <span class="blue bigger-125">
+                        <i class="ace-icon fa fa-random"></i>
+                        对不起,
+                    </span>
+                    您没有权限访问该页面！
+                </h1>
+                <hr>
+                <h3 class="lighter smaller">
+                    请联系超级管理员
+                    <i class="ace-icon fa fa-wrench icon-animated-wrench bigger-125"></i>
+
+                </h3>
+                <div class="space"></div>
+                <hr>
+                <div class="space"></div>
+                <div class="center">
+                    <a href="javascript:history.go(-1)" class="btn btn-grey">
+                        <i class="ace-icon fa fa-arrow-left"></i>
+                        返回上一页
+                    </a>
+
+                    <a href="/admin/center" class="btn btn-primary">
+                        <i class="ace-icon fa fa-tachometer"></i>
+                        主页
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><?php }
+}

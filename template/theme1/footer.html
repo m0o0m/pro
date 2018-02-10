@@ -1,0 +1,46 @@
+{{define "footer"}}
+<div class="bottom">
+    <div class="bott01">
+        <div class="wrapper">
+            <ul>
+                <li class="li-02">
+                    <img src="{{.CdnUrl}}/theme1/public/images/new/foot_icon01.png">
+                    <a>客服QQ：{{index .QQ 0}}</a>
+                </li>
+                <li class="li-02">
+                    <img src="{{.CdnUrl}}/theme1/public/images/new/foot_icon01.png">
+                    <a>代理QQ：{{if gt (len .QQ) 1}}{{index .QQ 1}}{{else}}{{index .QQ 0}}{{end}}</a>
+                </li>
+                <li class="li-01" style="width: 308px;">
+                    <img src="{{.CdnUrl}}/theme1/public/images/new/foot_icon03.png">
+                    <a>联系邮箱：{{index .Email 0}}</a>
+                </li>
+                <li class="li-01" style="width: 288px;">
+                    <img src="{{.CdnUrl}}/theme1/public/images/new/foot_icon04.png">
+                    <a href="javascript:OnlineService('{{.UrlLink}}');">7X24小时在线客服</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="bott02">
+        <div class="wrapper" style="position: relative;">
+            <div class="img">
+                <img src="{{.CdnUrl}}/theme1/public/images/new/foot_icon05.png">
+            </div>
+            <a href="http://www.pkbet.cc/" target="_blank" style="display:block;width:60px;height: 50px;position: absolute;right:151px;top: 10px;z-index: 99;">
+            </a>
+            <div style="color: #fff;">
+                {{range $k,$v:=.Content}}
+                    <a href="javascript:void(0);" onclick="getPager('-','iword','{{$v.Id}}');" target="mem_index" data-color="" class="js-article-color">
+                        {{if gt $k 0}}&nbsp;&nbsp;|&nbsp;&nbsp;{{end}}{{$v.Title}}
+                    </a>
+                {{end}}
+            </div>
+            <p>Copyright©2006 - 2017 {{.SiteName}}  All Rights Reserved</p>
+        </div>
+    </div>
+</div>
+{{template "footer_" .}}
+</body>
+</html>
+{{end}}

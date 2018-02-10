@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>{{.SiteName}}</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+    <style>
+        .head-h{
+            height: 81px;
+        }
+        #mescroll{
+            top: 81px;
+        }
+    </style>
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+    <ul class="h-head">
+        <li>
+            <a>
+                <i class="iconfont wap-fanhui"></i>
+            </a>
+        </li>
+        <li>
+            <h2>消息中心</h2>
+        </li>
+        <li>
+            <a href="/m/index">首页</a>
+        </li>
+    </ul>
+    <nav class="h-infornav">
+            <li class="curr"><a>游戏公告</a></li>
+            <li id="mesCenter"><a>个人消息</a></li>
+        </nav>
+</header>
+<div id="mescroll" class="mescroll">
+        <section class="m-infornav">
+                <div class="o1">
+                {{range .NoticeTypes}}
+                    <dl>
+                        <dt nottype="{{.NoticeCate}}"><a>{{.NoticeType}}</a><i class="iconfont wap-arrow"></i></dt>
+                        <ul>
+                        {{if .NoticeList}}
+                        {{range .NoticeList}}
+                            <li>
+                                <h1><a>{{.NoticeTitle}}</a><i>{{.NoticeDateStr}}</i></h1>
+                                <p>{{.NoticeContent}}</p>
+                            </li>
+                        {{end}}
+                        {{else}}
+                            <li class="game-show-no-notice">
+    
+                            </li>
+                        {{end}}
+                        </ul>
+                    </dl>
+                {{end}}
+                </div>
+                <div class="o2 hide">
+                    <dl>
+                        <ul>
+                        </ul>
+                    </dl>
+                </div>
+            </section>
+</div>
+</body>
+<script>
+    var cdnUrl = "{{.CdnUrl}}";
+</script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/mesCenter.js"></script>
+</html>

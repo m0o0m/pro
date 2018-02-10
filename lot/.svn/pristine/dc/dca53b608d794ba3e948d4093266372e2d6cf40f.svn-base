@@ -1,0 +1,6 @@
+package back
+
+type Balance struct {
+	Money float64 `json:"money" ` //余额
+	Ordernum string `json:"ordernum" ` //余额
+}

@@ -1,0 +1,258 @@
+<div class="page-header">
+    <p id="me-table-buttons">
+        <button class="btn btn-white btn-primary btn-bold" onclick="javascript:window.location.href = '/gameapi/bet/index'" >
+            <i class="ace-icon fa fa-plus-circle blue"></i>返回列表
+        </button>
+        <button class="btn btn-white btn-success btn-bold" id="show-table-refresh" onclick="javascript:window.location.reload();">
+            <i class="ace-icon fa  fa-refresh"></i>刷新
+        </button>
+
+    </p>
+</div>
+
+<style>
+    #show-table_filter{ margin-left: 20px; }
+    .con_div{ margin-top:10px; }
+    .bt_label{width:110px;}
+    .nr_label input{width:400px;}
+    .nr_label select{width:400px;}
+</style>
+<div class="col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="menu-form" method='post' action='/gameapi/bet/update'>
+            <input type="hidden" name="id" id="id" value="<{$data.id}>">
+            <input type="hidden" name="id" id="fc_type" value="<{$data.fc_type}>">
+            <div class="con_div">
+                <label for="line_id" class="bt_label">线路ID：</label>
+                <label class="nr_label">
+                    <input type="text" name="line_id" id='line_id' value="<{if isset($data['line_id'])}><{$data.line_id}><{/if}>" />
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="uname" class="bt_label">账户：</label>
+                <label class="nr_label">
+                    <input type="text" name="uname" id='uname' value="<{if isset($data['uname'])}><{$data.uname}><{/if}>" />
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="periods" class="bt_label">彩票期数：</label>
+                <label class="nr_label">
+                    <input type="text" name="periods" id='periods' value="<{if isset($data['periods'])}><{$data.periods}><{/if}>" />
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="did" class="bt_label">订单号：</label>
+                <label class="nr_label">
+                    <input type="text" name="did" id='did' value="<{if isset($data['did'])}><{$data.did}><{/if}>">
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="money" class="bt_label">下注金额：</label>
+                <label class="nr_label">
+                    <input type="text" name="money" id='money' value="<{if isset($data['money'])}><{$data.money}><{/if}>">
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="bet_info" class="bt_label">下注内容:</label>
+                <label class="nr_label">
+                    <input type="text" name="bet_info" id='bet_info' value="<{if isset($data['bet_info'])}><{$data.bet_info}><{/if}>" />
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="odds" class="bt_label">赔率:</label>
+                <label class="nr_label">
+                    <input type="text" name="odds" id='odds' value="<{if isset($data['odds'])}><{$data.odds}><{/if}>" />
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="win" class="bt_label">派彩金额:</label>
+                <label class="nr_label">
+                    <input type="text" name="win" id='win' value="<{if isset($data['win'])}><{$data.win}><{/if}>" />
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="ptype" class="bt_label">来源:</label>
+                <label class="nr_label">
+                    <select type="select" name="ptype"  id="ptype">
+                        <option value="1" <{if <{$data.ptype}> eq 1}>selected<{/if}>>PC</option>
+                        <option value="2" <{if <{$data.ptype}> eq 2}>selected<{/if}>>WAP</option>
+                        <option value="3" <{if <{$data.ptype}> eq 3}>selected<{/if}>>APP</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="addtime" class="bt_label">下注时间:</label>
+                <label class="nr_label">
+                    <input class="laydate-icon" type="text" placeholder="请输入日期" name='addtime' value="<{if isset($data['addtime'])}><{$data.addtime}><{/if}>" id="addtime">
+                </label>
+            </div>
+
+            <div class="con_div">
+                <label for="status" class="bt_label">结算状态:</label>
+                <label class="nr_label">
+                    <select type="select" name="status"  id="status">
+                        <option value="1" <{if <{$data.status}> eq 1}>selected<{/if}>>未结算</option>
+                        <option value="2" <{if <{$data.status}> eq 2}>selected<{/if}>>赢</option>
+                        <option value="3" <{if <{$data.status}> eq 3}>selected<{/if}>>输</option>
+                        <option value="4" <{if <{$data.status}> eq 4}>selected<{/if}>>和局</option>
+                        <option value="5" <{if <{$data.status}> eq 5}>selected<{/if}>>无效</option>
+                    </select>
+                </label>
+            </div>
+
+            <label style="margin-left:200px;margin-top:20px;">
+                <input type="submit" class="btn btn-sm btn-success" value="确认修改" onclick="return check();" />
+            </label>
+        </form>
+    </div>
+</div>
+<script>
+
+    //时间控件
+    var addtime = {
+        elem: '#addtime',
+        format: 'YYYY/MM/DD hh:mm:ss',
+        //min: laydate.now(), //设定最小日期为当前日期
+        max: '2099-06-16 23:59:59', //最大日期
+        istime: true,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    laydate(addtime);
+
+    function check() {
+        var id = $('#id').val();
+        var fc_type = $('#fc_type').val();
+        var line_id = $('#line_id').val();
+        var uname = $('#uname').val();
+        var periods = $('#periods').val();
+        var did = $('#did').val();
+        var money = $('#money').val();
+        var bet_info = $('#bet_info').val();
+        var odds = $('#odds').val();
+        var win = $('#win').val();
+        var ptype = $('#ptype').val();
+        var addtime = $('#addtime').val();
+        var status = $('#status').val();
+        if (line_id == '') {
+            layer.alert('线路ID不能为空！', {icon: 2});
+            $('#line_id').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }
+        if (uname == '') {
+            layer.alert('用户账号不能为空！', {icon: 2});
+            $('#uname').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }
+        if (periods == '') {
+            layer.alert('彩票期数不能为空！', {icon: 2});
+            $('#periods').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }
+        if (did == '') {
+            layer.alert('订单号不能为空！', {icon: 2});
+            $('#did').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }
+        if (money == '') {
+            layer.alert('下注金额不能为空！', {icon: 2});
+            $('#money').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }if (bet_info == '') {
+            layer.alert('下注内容不能为空！', {icon: 2});
+            $('#bet_info').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }if (odds == '') {
+            layer.alert('赔率不能为空！', {icon: 2});
+            $('#odds').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }if (win == '') {
+            layer.alert('派彩金额不能为空！', {icon: 2});
+            $('#win').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }if (addtime == '') {
+            layer.alert('下注时间不能为空！', {icon: 2});
+            $('#addtime').focus(function(){
+                $(this).css("background-color","#FFFFCC");
+            });
+            return false;
+        }
+        
+        $.ajax({
+            type: "post",
+            url: '/gameapi/bet/update',
+            data: {
+              "id": id,
+              "fc_type":fc_type,
+              "line_id":line_id,
+              "uname":uname,
+              "periods":periods,
+              "did":did,
+              "money":money,
+              "bet_info":bet_info,
+              "odds":odds,
+              "win":win,
+              "ptype":ptype,
+              "addtime":addtime,
+              "status":status
+            },
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(load);
+                return false;
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.code['ErrorCode'] == 2) {
+                    layer.alert(res.code['ErrorMsg'], {icon: 2});
+                    layer.close(load);
+                } else if (res.code['ErrorCode'] == 1) {
+                    layer.alert(res.code['ErrorMsg'], {icon: 1},function(){window.location.href = '/gameapi/bet/index';});
+                    
+                }
+                return false;
+            },
+            complete: function () {
+                var idx = $('.layui-layer-shade').length - 1;
+                if (idx > 0) {
+                    $('body').find('.layui-layer-shade').eq(idx).remove();
+                }
+            }
+        });
+        
+        return false;
+    }
+</script>

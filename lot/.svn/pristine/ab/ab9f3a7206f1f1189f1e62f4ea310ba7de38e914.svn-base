@@ -1,0 +1,13 @@
+@import "./function.scss";
+
+.pk_content {
+  background-color: #fff;
+  width: 920px;
+  //height: 1100px;
+  border-radius: 5px;
+  padding-bottom: 100px;
+  overflow: hidden;
+  // padding: 10px
+  position: relative;
+  top: 70px;
+}

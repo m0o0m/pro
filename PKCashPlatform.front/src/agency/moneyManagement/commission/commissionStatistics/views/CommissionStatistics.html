@@ -1,0 +1,97 @@
+<div id="content">
+
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('CommissionStatistics')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 input-label col-xs-4">站点</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <select data-smart-select2 class="selectWidth" ng-model="site_index_id">
+                                                                <option value="">请选择</option>
+                                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 input-label col-xs-4">期数选择:</label>
+                                                        <div class="col-md-3 col-xs-8 ">
+                                                            <select data-smart-select2 class="selectWidth" ng-model="lineState">
+                                                                <option value="">请选择</option>
+                                                                <option value="1">期数1</option>
+                                                                <option value="2">期数2</option>
+                                                                <option value="2">期数3</option>
+                                                            </select>
+                                                        </div>
+                                                        <label  class="col-md-3 col-md-offset-0 col-xs-8 col-xs-offset-4 input-label text-red">【一定要按照期数序号来退佣】</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 input-label col-xs-4">账号:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <select data-smart-select2  class="selectWidth" ng-model="lineState">
+                                                                <option value="">请选择</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 input-label col-xs-4">显示条件:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <select data-smart-select2  class="selectWidth" ng-model="lineState">
+                                                                <option value="">全部</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 input-label col-xs-4">累计会员</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <select data-smart-select2 class="selectWidth" ng-model="lineState">
+                                                                <option value="">请选择</option>
+                                                                <option value="1">累计</option>
+                                                                <option value="2">不累计</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="col-md-1 col-md-offset-0 col-xs-8 col-xs-offset-1">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">
+                                                            <button class="btn btn-primary" data-ui-sref="app.CommissionStatistics.list">确定</button>
+                                                        </label>
+                                                    </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

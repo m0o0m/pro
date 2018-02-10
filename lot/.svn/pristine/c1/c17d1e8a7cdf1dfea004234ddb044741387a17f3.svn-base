@@ -1,0 +1,211 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-19 18:34:26
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/noticeback/_form.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a61c9b2e92298_35173681',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '35e894335f30a3a5670242a5b493e6615497ec1b' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/noticeback/_form.html',
+      1 => 1515671487,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a61c9b2e92298_35173681 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+<!-- 添加/修改 表单 -->
+<div class="isHide layui-layer-wrap">
+    <div class="modal-body">
+        <form id="add-form" class="form-horizontal" action="?" method="POST">
+            <input type="hidden" name="id" value='<?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['id']) {
+echo $_smarty_tpl->tpl_vars['item']->value['id'];
+}?>'>
+            <input type="hidden" name="info" value='<?php if (isset($_smarty_tpl->tpl_vars['item']->value)) {
+echo json_encode($_smarty_tpl->tpl_vars['item']->value);
+}?>'>
+            <fieldset>
+                <!-- <div class="form-group">
+                    <label class="col-sm-3 control-label"> 类型: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="type">
+                          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['show']->value['types'], 'val', false, 'key');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+?>
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+" <?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['type'] && $_smarty_tpl->tpl_vars['item']->value['type'] == $_smarty_tpl->tpl_vars['key']->value) {?>selected<?php }?> ><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</option>
+                          <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                        </select>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 线路: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="line_id" id="line_id">
+                            <option value="">请选择</option>
+                          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['show']->value['lines'], 'val', false, 'key');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+?>
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['val']->value['line_id'];?>
+" <?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['line_id'] && $_smarty_tpl->tpl_vars['item']->value['line_id'] == $_smarty_tpl->tpl_vars['val']->value['line_id']) {?>selected<?php }?> ><?php echo $_smarty_tpl->tpl_vars['val']->value['line_id'];?>
+</option>
+                          <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                        </select>
+                    </div>
+                </div>
+<!--                 <div class="form-group">
+                    <label class="col-sm-3 control-label"> 代理类型: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="agent_type" id="agent_type">
+                            <option value="">请选择</option>
+                          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['show']->value['atypes'], 'val', false, 'key');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+?>
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+" <?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['agent_type'] && $_smarty_tpl->tpl_vars['item']->value['agent_type'] == $_smarty_tpl->tpl_vars['key']->value) {?>selected<?php }?> ><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</option>
+                          <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                        </select>
+                        <br>
+                        <span class="children">
+                          <?php if (isset($_smarty_tpl->tpl_vars['item']->value['agents'])) {?>
+                          代理:
+                          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['item']->value['agents'], 'val', false, 'key');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+?>
+                            <label>
+                                <input type="checkbox" name="agent_id[]" value="<?php echo $_smarty_tpl->tpl_vars['val']->value['id'];?>
+" <?php if (isset($_smarty_tpl->tpl_vars['item']->value['aids']) && in_array($_smarty_tpl->tpl_vars['val']->value['id'],$_smarty_tpl->tpl_vars['item']->value['aids'])) {?>checked<?php }?> />
+                                <?php echo $_smarty_tpl->tpl_vars['val']->value['login_name'];?>
+&nbsp;&nbsp;
+                            </label>
+                          <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                          <?php }?>
+                        </span>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 标题: </label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" name="title" value="<?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['title']) {
+echo $_smarty_tpl->tpl_vars['item']->value['title'];
+}?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 内容: </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="content"><?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['content']) {
+echo $_smarty_tpl->tpl_vars['item']->value['content'];
+}?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 备注: </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="remark"><?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['remark']) {
+echo $_smarty_tpl->tpl_vars['item']->value['remark'];
+}?></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <label>
+            <input id="add-form-btn" type="submit" class="btn btn-info" value = "提交">
+        </label>
+    </div>
+</div>
+
+<?php echo '<script'; ?>
+>
+// ------------------ 增/改 ------------------------------------
+    $('#add-form-btn').click(function(){
+        $.ajax({
+            type: 'post',
+            url: 'add',
+            data: $('#add-form').serialize(),
+            dataType:'json',
+            success: function(data,textStatus){
+                var result = data;
+                if(result.ErrorCode > 0){
+                    layer.alert(result.ErrorMsg, {icon: 0});
+                    return;
+                }
+                if(result.ErrorMsg){
+                    layer.alert(result.ErrorMsg, {icon: 1}, function(){
+                        location = 'index?p';
+                    });
+                }
+            }
+        });
+    });
+    // $('#agent_type').change(function(){
+    //     var agent_type = $('#agent_type').val();
+    //     var line_id = $('#line_id').val();
+    //     if(!agent_type){
+    //         $('#agent_type ~ .children').html('');
+    //         return;
+    //     }
+    //     $.ajax({
+    //         type: 'post',
+    //         url: 'agent',
+    //         data: 'line_id=' + line_id + '&agent_type=' + agent_type,
+    //         dataType:'json',
+    //         success: function(data,textStatus){
+    //             var html = '代理:<label>';
+    //             for(x in data){
+    //                 html += '&nbsp;&nbsp;<input type="checkbox" name="agent_id[]" value="'+data[x].id+'" />';
+    //                 html += data[x].login_name;
+    //             }
+    //             if(data.length == 0){
+    //                 html += 'null'
+    //             }
+    //             html += '</label>';
+
+    //             $('#agent_type ~ .children').html(html);
+    //         }
+    //     });
+    // });
+<?php echo '</script'; ?>
+><?php }
+}

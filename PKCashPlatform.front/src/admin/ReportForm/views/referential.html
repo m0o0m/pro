@@ -1,0 +1,201 @@
+
+
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>优惠统计列表</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar" ng-show="newTodo">
+                                        <div class="row form-horizontal">
+                                            <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select data-smart-select2  class="selectWidth" ng-model="appsite">
+                                                        <option value="">请选择</option>
+                                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">会员账号</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" class="form-control inp_2" ng-model="memberAccount">
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">代理账号</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" class="form-control inp_2" ng-model="agentAccount">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-horizontal">
+                                            <label class="col-md-1 col-xs-4 input-label">日期</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 control-label text-align-center">————</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-xs-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>启动定时任务</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-xs-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>重新统计</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <form class="form-inline">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-align-center">ID</th>
+                                                    <th class="text-align-center">站点</th>
+                                                    <th class="text-align-center">代理ID</th>
+                                                    <th class="text-align-center">UID</th>
+                                                    <th class="text-align-center">账号</th>
+                                                    <th class="text-align-center">总笔数</th>
+                                                    <th class="text-align-center">优惠金额</th>
+                                                    <th class="text-align-center">DAY_TYPE</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="text-align-center">
+                                                <tr ng-repeat="item in list">
+                                                    <td>{{item.id}}</td>
+                                                    <td>{{item.site}}</td>
+                                                    <td>{{item.agentId}}</td>
+                                                    <td>{{item.UID}}</td>
+                                                    <td>{{item.account}}</td>
+                                                    <td>{{item.allNum}}</td>
+                                                    <td>{{item.referential}}</td>
+                                                    <td>{{item.dayType}}</td>
+                                                </tr>
+                                                <tr style="text-align: center">
+                                                    <td colspan="5">小计：</td>
+                                                    <td colspan="1">{{subtotal.allNum}}</td>
+                                                    <td colspan="1">{{subtotal.referential}}</td>
+                                                    <td colspan="1"></td>
+                                                </tr>
+                                                <tr style="text-align: center">
+                                                    <td colspan="5">总计：</td>
+                                                    <td colspan="1">{{total.allNum}}</td>
+                                                    <td colspan="1">{{total.referential}}</td>
+                                                    <td colspan="1"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+        <div class="modal fade" id="dialog_homecopy" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="addAccount">是否确定修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">文案代码</label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" ng-model="HomeCopy.code">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">标题</label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" ng-model="HomeCopy.title">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">排序</label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="number" ng-model="HomeCopy.num">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">是否启用</label>
+                                    <div class="col-md-3">
+                                        <input class="form-control" type="text" placeholder="选择是否启用" list="homecopyY2" ng-model="homecopy.YN2">
+                                        <datalist id="homecopyY2">
+                                            <option value="是">是</option>
+                                            <option value="否">否</option>
+                                        </datalist>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,111 @@
+<thead>
+    <tr>
+        <th class="center">
+            <select id="batch" onchange="batch(this.value)">
+                <option value="">批量操作</option>
+                <!-- <option value="balance">批量结算</option> -->
+                <option value="rollback">批量回滚</option>
+                <option value="invalid">批量设置无效</option>
+                <option value="ok">批量恢复有效</option>
+            </select><br>
+            <input name="batchAll" onclick="checkAll()" type="checkbox" />
+            <span class="lbl">全选</span>
+        </th>
+        <th class="center">投注账号</th>
+        <th class="center">彩种</th>
+        <th class="center">代理帐号</th>
+        <th class="center">订单号</th>
+        <th class="center">期 数</th>
+        <th class="center">下注时间</th>
+        <th class="center">投注内容</th>
+        <th class="center">设备来源</th>
+
+        <th class="center">投注金额</th>
+        <th class="center">赔率</th>
+        <th class="center">派彩金额</th>
+        <th class="center">注单状态</th>
+        <th class="center">操作</th>
+    </tr>
+</thead>
+<tbody>
+    <{foreach from=$data item=v key=k}>
+    <tr>
+        <td class="center">
+            <input name="batchId" onclick="checkOne()" value="<{$v['id']}>,<{$v['periods']}>,<{$v['fc_type']}>" type="checkbox" />
+            <{if isset(<{$v["line_id"]}>)}><{$v["line_id"]}><{/if}>
+        </td>
+        <td class="center"><{if isset(<{$v["uname"]}>)}><{$v["uname"]}><{/if}></td>
+         <td class="center"><{if isset(<{$v["type_name"]}>)}><{$v["type_name"]}><{/if}></td>
+         <td class="center"><{if isset(<{$v["at_username"]}>)}><{$v["at_username"]}><{/if}></td>
+        <td class="center" style="max-width:150px;word-break:break-all;"><{if isset(<{$v["order_num"]}>)}><{$v["order_num"]}><{/if}></td>
+        <td class="center"><{if isset(<{$v["periods"]}>)}><{$v["periods"]}><{/if}></td>
+        <td class="center"><{if isset(<{$v["addtime"]}>)}><{$v["addtime"]}><{/if}></td>
+        <td class="center" style="max-width:150px;word-break:break-all;"><{if isset(<{$v["bet_info"]}>)}><{$v["bet_info"]}><{/if}></td>
+        <td class="center"><{if isset(<{$v["ptype"]}>)}><{$v["ptype"]}><{/if}></td>
+        <td class="center"><{if isset(<{$v["bet"]}>)}><{$v["bet"]}><{/if}></td>
+        <td class="center"><{if isset(<{$v["odds"]}>)}><{$v["odds"]}><{/if}></td>
+        <td class="center"><{if isset(<{$v["win"]}>)}><{$v["win"]}><{/if}></td>
+        <td class="center">
+            <{if isset(<{$v["status"]}>)}>
+                <{if $v['oldstatus'] eq 3 }><font color="green"><{/if}>
+                <{if $v['oldstatus'] eq 2 }><font color="red"><{/if}>
+                <{if $v['oldstatus'] eq 4 }><font color="blue"><{/if}>
+                <{$v["status"]}>
+                </font>
+            <{/if}>
+        </td>
+        <td class="center handle">
+            <a  class="btn btn-xs btn-success detail" data_a="<{$v['id']}>" data_b="<{$v['fc_type']}>" href='javascript:void(0);'>详情</a>
+            <!-- <a  class="btn btn-xs btn-success update" href='/gameapi/bet/edit?id=<{$v["id"]}>&fc_type=<{$v["fc_type"]}>'>修改</a> -->
+
+        </td>
+    </tr>
+    <{/foreach}>
+    <{if isset($data) && !empty($data)}>
+    <tr><td colspan="2">本页所有注单</td><td colspan="12"><{$totalbet['str_page_all']}></td></tr>
+    <tr><td colspan="2">本页未结算注单</td><td colspan="12"><{$totalbet['str_page_a']}></td></tr>
+    <tr><td colspan="2">本页已结算注单</td><td colspan="12"><{$totalbet['str_page_b']}></td></tr>
+ 
+    <{/if}>
+</tbody>
+<input type="hidden" id= "tmp_page" value="<{if isset($pagedata['page'])}><{$pagedata['page']}><{else}>1<{/if}>">
+<input type="hidden" id= "tmp_total_page" value="<{if isset($pagedata['totalpage'])}><{$pagedata['totalpage']}><{else}>1<{/if}>">
+<script type="text/javascript">
+     //祥情
+     $('.detail').click(function(){
+        var id = $(this).attr('data_a');;
+        var fc_type = $(this).attr('data_b');
+        var url = '/gameapi/bet/detail?id=' + id + '&fc_type=' + fc_type;
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    })
+
+   //页码
+    $(function(){
+        var page = $('#tmp_page').val();
+        var total_page = $('#tmp_total_page').val();
+        var new_page = 0;
+        if(page == 0) page = 1;
+        if(total_page == 0){
+            new_page = 1;
+        }else if(total_page > 500 ){
+            new_page = 500;
+        }else{
+            new_page = total_page;
+        }
+        var str = '';
+        for(var i = 1; i <= new_page; i++){
+            if(i == page){
+                str += '<option value="'+ i +'" selected >' + i + '</option>';
+            }else{
+                str += '<option value="'+ i +'">' + i + '</option>';
+            }
+        }
+        $('#page').html('');
+        $('#page').html(str);
+        $('#total_page_label').html('').html('共 ' + total_page + ' 页');
+    })
+</script>

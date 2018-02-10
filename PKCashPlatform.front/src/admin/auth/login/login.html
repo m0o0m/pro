@@ -1,0 +1,44 @@
+<div id="login-box">
+<div class="container login-middle">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-xs-12   no-padding">
+            <form  id="formid" enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                <header class="bg-col">
+                    总后台登录
+                </header>
+                <fieldset>
+                    <section>
+                        <label class="input"> <i class="icon-append fa fa-user login-icon"></i>
+                            <input class="login-input" type="text" name="account" placeholder="请输入账号" data-message-required="请输入账号" data-message-email="请输入账号" ng-model="account">
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>
+                                请输入账号</b></label>
+                    </section>
+                    <section>
+                        <label class="input"> <i class="icon-append fa fa-lock login-icon"></i>
+                            <input class="login-input"  type="password" name="password" placeholder="请输入密码"  data-minlength="3" data-maxnlength="20" data-message="请输入密码" ng-model="password">
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>请输入密码</b> </label>
+
+                    </section>
+                    <section ng-show="klyz">
+                        <label class="input"> <i class="icon-append fa fa-key login-icon"></i>
+                            <input class="login-input"  type="text" name="password" placeholder="请输入口令验证"  data-minlength="3" data-maxnlength="20" data-message="请输入口令验证" ng-model="verify_code">
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-key txt-color-teal"></i>请输入口令验证</b> </label>
+
+                    </section>
+                    <section>
+                        <div id="captcha" >
+                            <input type="text" ng-model="code" placeholder="请输入验证码" >
+                            <div class="imgBox"><img ng-click="getCode()"  id="codeImg" style="cursor: pointer" src=""></div>
+                        </div>
+                    </section>
+                </fieldset>
+                <footer>
+                    <button type="submit" ng-click="login()" class="btn btn-primary login-btn">
+                        登录
+                    </button>
+                </footer>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

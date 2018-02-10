@@ -1,0 +1,307 @@
+.xl-center {
+    margin: 0 auto;
+}
+
+.xl-lottery-top {
+    font-size: 12px;
+    padding: 10px 0;
+    background: #f2f2f2;
+}
+
+.xl-lottery-top p a {
+    color: #fe4345;
+}
+
+.xl-lottery-top p a:first-child {
+    margin: 0 20px;
+}
+
+.xl-lottery-top p a:last-child {
+    color: #8c8b8b;
+}
+
+.xl-lottery-top ul li a {
+    color: #000;
+}
+
+.xl-lottery-top ul li:first-child {
+    position: relative;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div {
+    display: none;
+    background-color: #fff;
+    width: 165px;
+    border: 1px solid #ccc;
+    position: absolute;
+    right: 0;
+    top: 15px;
+    z-index: 99;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-code-small li {
+    width: 50%;
+    height: 20px;
+    text-align: center;
+    background-color: #fe4345;
+    border-top: 2px solid #fe4345;
+    color: #fff;
+    cursor: pointer;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-img {
+    display: none;
+    color: #fff;
+    font-weight: 900;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-img p {
+    color: #fe4345;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-img div {
+    text-align: center;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-img div img {
+    display: block;
+    margin: 5px auto;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-div-show {
+    display: block;
+}
+
+.xl-lottery-top ul li:first-child .xl-div-show {
+    display: block;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-code-active {
+    color: #fe4345 !important;
+    background-color: #fff !important;
+}
+
+.xl-lottery-top ul li:first-child .icon-shouji {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.xl-lottery-top ul li:first-child .icon-xiangxia {
+    margin: 0 10px;
+}
+
+.xl-lottery-top ul .top-line {
+    color: #ccc;
+    margin: 0 10px;
+}
+
+.xl-lottery-logo {
+    height: 68px;
+}
+
+.xl-lottery-logo img {
+    margin-top: 6px;
+}
+
+.xl-lottery-logo input {
+    height: 30px;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    padding-left: 10px;
+    color: #999999;
+    margin-top: 18px;
+    outline: none;
+}
+
+.xl-lottery-logo .input-verity {
+    width: 100px;
+}
+
+.xl-lottery-logo span {
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    width: 90px;
+    height: 32px;
+    margin-top: 18px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.xl-lottery-logo .xl-login {
+    background-color: #fe4345;
+}
+
+.xl-lottery-logo .xl-register {
+    background-color: #ec1e22;
+    margin-right: 80px;
+}
+
+.xl-lottery-nav {
+    height: 56px;
+    background: #fe4345;
+}
+
+.xl-lottery-content-top {
+    height: 56px;
+    background-color: #fff;
+}
+
+.xl-lottery-content-top p {
+    width: 240px;
+    text-align: center;
+    background-color: #e3393c;
+    height: 56px;
+    line-height: 56px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.xl-lottery-content-top ul {
+    background-color: #fe4345;
+    height: 56px;
+    padding: 0 61px;
+}
+
+.xl-lottery-content-top ul li {
+    width: 106px;
+    height: 100%;
+}
+
+.xl-lottery-content-top ul li a {
+    color: #fff;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 56px;
+    text-align: center;
+}
+
+.xl-lottery-content-top ul li .active-li {
+    background-color: #fd090c;
+}
+
+.content-top ul.fl {
+    width: 240px;
+}
+
+.content-top ul.fl li {
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+
+.content-top ul.fl li a {
+    color: #666;
+    display: inline-block;
+    text-align: center;
+}
+
+.content-top ul.fl li a span {
+    margin: 0 20px 0 10px;
+    color: #999;
+}
+
+.content-top ul.fl li:last-child {
+    border-bottom: 1px solid #ccc;
+}
+
+.content-top .top-fr {
+    width: 738px;
+    padding-left: 20px;
+}
+
+.content-top .top-fr p:first-child {
+    color: #fe4345;
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+.content-top .top-fr p {
+    line-height: 30px;
+}
+
+.content-top .top-fr ul li {
+    line-height: 30px;
+}
+
+.xl-lottery-footer {
+    background-color: #332c2c;
+    color: #413d3d;
+}
+
+.xl-lottery-footer .footer-top {
+    font-weight: 900;
+}
+
+.xl-lottery-footer .footer-top a {
+    display: inline-block;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.xl-lottery-footer .footer-top a div {
+    font-weight: 900;
+}
+
+.xl-lottery-footer .footer-top a div p:last-child {
+    font-size: 12px;
+    color: #413d3d;
+    text-align: center;
+    line-height: 5px;
+}
+
+.xl-lottery-footer .footer-top a:first-child {
+    margin-right: 495px;
+}
+
+.xl-lottery-footer .footer-top a:nth-child(2) {
+    margin-right: 230px;
+}
+
+.xl-lottery-footer .introduce {
+    font-size: 14px;
+}
+
+.xl-lottery-footer .introduce li {
+    width: 9%;
+    border-right: 1px solid #413d3d;
+}
+
+.xl-lottery-footer .introduce li a {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #413d3d;
+}
+
+.xl-lottery-footer .introduce li:nth-child(8) {
+    border: none;
+}
+
+.xl-lottery-footer .introduce li:last-child {
+    border: none;
+}
+
+.xl-lottery-footer .footer-ul-img {
+    width: 840px;
+    padding: 40px 0;
+    margin: 0 auto;
+}
+
+.xl-lottery-footer .footer-ul-img li {
+    width: 120px;
+    line-height: 40px;
+}
+
+.xl-lottery-footer .footer-ul-img li img {
+    vertical-align: middle;
+}
+
+.xl-lottery-footer .footer-text {
+    font-size: 12px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+/*# sourceMappingURL=color.css.map */

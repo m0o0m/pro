@@ -1,0 +1,201 @@
+<?php
+/* Smarty version 3.1.31, created on 2017-11-28 07:21:18
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/report/getmoney.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a1d0e6eb83a44_90634849',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '39d8a1eb8962ad8234421aa744c8ed6baba87f9f' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/report/getmoney.html',
+      1 => 1511762828,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a1d0e6eb83a44_90634849 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="requestLog-form" method='get' action='/report/linebet'>
+            
+            <label for="date"> 日期：
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='startTime' value="<?php if (isset($_GET['start_time'])) {
+echo $_GET['start_time'];
+}?>" id="startTime" style="width:180px;">
+                ~
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='endTime' value="<?php if (isset($_GET['end_time'])) {
+echo $_GET['end_time'];
+}?>" id="endTime" style="width:180px;">
+
+            </label>
+          
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+    </form>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center ">线 路 I D</th>
+                        <th class="center">盈利</th>
+                        <th class="center">套餐名称</th>
+                        <th class="center">比例</th>
+                        <th class="center">应收金额</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center"><i class="glyphicon glyphicon-plus-sign" id="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+_b" onclick="javascript:showsub('<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+');" ></i> <?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+ </td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_money'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['line_money'];?>
+ <?php }?> </td>
+                        <td class="center" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['tname'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['tname'];?>
+ <?php }?> </td>
+                        <td class="center" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['proportion'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['proportion'];?>
+ <?php }?> </td>
+                        <td class="center" > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_tc_money'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['line_tc_money'];?>
+ <?php }?> </td>
+                    </tr>
+                        <?php if (!empty($_smarty_tpl->tpl_vars['v']->value['agent'])) {?>
+                            <tbody id="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+_sub" style="display:none;">
+                            <tr><td colspan="5" style="border-bottom:1px solid black;"><button class="btn btn-xs btn-success" onclick="excel('<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+')">导出到excel</button></td></tr>
+                            <tr>
+                                <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">代理名称</td>
+                                <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">盈利</td>
+                                <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">套餐名称</td>
+                                <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">比例</td>
+                                <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">应收金额</td>
+                            </tr>
+                            <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v']->value['agent'], 'vv', false, 'kk');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['kk']->value => $_smarty_tpl->tpl_vars['vv']->value) {
+?>
+                            <tr>
+                                <td class="center " style="background:rgb(214,253,208);border:1px solid black;"><?php if (isset($_smarty_tpl->tpl_vars['vv']->value['agent_name'])) {?> <?php echo $_smarty_tpl->tpl_vars['vv']->value['agent_name'];
+}?></td>
+                                <td class="center " style="background:rgb(214,253,208);border:1px solid black;"><?php if (isset($_smarty_tpl->tpl_vars['vv']->value['allmoney'])) {?> <?php echo $_smarty_tpl->tpl_vars['vv']->value['allmoney'];?>
+ <?php }?></td>
+                                <td class="center " style="background:rgb(214,253,208);border:1px solid black;"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['tname'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['tname'];?>
+ <?php }?></td>
+                                <td class="center " style="background:rgb(214,253,208);border:1px solid black;"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['proportion'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['proportion'];?>
+ <?php }?></td>
+                                <td class="center " style="background:rgb(214,253,208);border:1px solid black;"><?php if (isset($_smarty_tpl->tpl_vars['vv']->value['tc_money'])) {?> <?php echo $_smarty_tpl->tpl_vars['vv']->value['tc_money'];?>
+ <?php }?></td>
+                            </tr>
+                            <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                        </tbody>
+                        <?php }?>
+
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+                <?php if (!empty($_smarty_tpl->tpl_vars['data']->value)) {?><tr><td colspan="5">备注：以上数据实际使用时，请先导出报表，重新统计后进行对比</td></tr><?php }?>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php echo '<script'; ?>
+>
+//pjax局部加载列表
+    function renderTableByPjax() {
+        var starttime = $.trim($('#startTime').val());
+        var endtime = $.trim($('#endTime').val());
+
+        var params = {
+            start_time: starttime,
+            end_time: endtime
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/report/getmoney',
+            container: '#container'
+        });
+    }
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+  
+    //时间控件
+ var start_a = {
+        elem: '#startTime',
+        format: 'YYYY/MM/DD',
+        //min: laydate.now(), //设定最小日期为当前日期
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    var end_a = {
+        elem: '#endTime',
+        format: 'YYYY/MM/DD',
+        //min: laydate.now(), //设定最小日期为当前日期
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    laydate(start_a);
+    laydate(end_a);
+
+    function showsub(res){
+          $('#'+res+'_b').toggleClass('glyphicon-plus-sign glyphicon-minus');
+
+          $('#'+res+'_sub').toggle();
+    }
+
+   
+
+    function excel(line_id){
+        window.location.href = 'excel_data?bet_type=money&line_id='+line_id;
+    }
+
+<?php echo '</script'; ?>
+>
+<?php }
+}

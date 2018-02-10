@@ -1,0 +1,267 @@
+<template>
+  <div class="seven">
+    <div class="footer1">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength='9' style="width: 100px" size="small"
+                                                                            v-model="money" @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <div class="bottom_content">
+      <div class="top">
+        <ul>
+          <li class="one">号码</li>
+          <li class="two">赔率</li>
+          <li class="three">金额</li>
+          <li class="four">球号</li>
+          <li class="one">号码</li>
+          <li class="two">赔率</li>
+          <li class="three">金额</li>
+          <li class="four">球号</li>
+        </ul>
+      </div>
+      <div class="table">
+        <div class="bottom" v-for="item in lists">
+          <ul v-for="key in item.object" :class="[key.flag?'styleclect':'']" @click="myclick(key)">
+            <li class="one">{{key.num}}</li>
+            <li class="one">{{key.odd}}</li>
+            <!-- <li :class="[key.number?'three':'border3_none']"><input v-if="key.number" type="text" ref="input_other" v-model="key.item"/></li> -->
+            <li class="two">
+              <I-Input @on-keydown="tab_now(key)" @on-change="onchange(key)" :maxlength='9' ref="myfocus" style="width: 50px" class="mr" size="small"  v-model="key.money" @on-keyup="gogo(key)" @on-afterpaste="gogo(key)"></I-Input>
+            </li>
+            <li class="four">
+              <span v-for="yan in key.box" :style="{background:key.bgc}"> {{yan}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer1" style="margin-bottom: 20px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength='9' style="width: 100px" size="small"
+                                                                            v-model="money" @on-keyup="push_money()"
+                                                                            @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+
+  </div>
+</template>
+
+<script>
+import {Modal,Input} from 'iview'
+import api from '../../../api/config'
+import MeModal from '../../../share_components/bet.vue'
+export default {
+   components:{MeModal,Modal,'I-Input':Input},
+   props:{},
+   data(){
+     return{
+       money: '',
+       modal: false,
+//       disabled: false,
+//       money_disabled: false,
+       lists:[
+         {
+           object:[
+             {num:'红单',index:0,number:'48.8',flag:null,money:'',box:['01','07','13','19','23','27','35','45']},
+             {num:'红大',index:1,number:'48.8',flag:null,money:'',box:['29','30','34','35','40','45','46']},
+             {num:'红合单',index:2,number:'48.8',flag:null,money:'',box:['01','07','23','29','45','12','18','30','34']},
+             {num:'绿单',index:3,number:'48.8',flag:null,money:'',box:['05','11','17','21','27','33','39','43'],bgc:'linear-gradient(#3ec948, #026d09)'},
+             {num:'绿大',index:4,number:'48.8',flag:null,money:'',box:['27','28','32','33','38','39','43','44'],bgc:'linear-gradient(#3ec948, #026d09)'},
+             {num:'绿合单',index:5,number:'48.8',flag:null,money:'',box:['05','16','21','27','32','38','43'],bgc:'linear-gradient(#3ec948, #026d09)'},
+             {num:'蓝单',index:6,number:'48.8',flag:null,money:'',box:['03','09','15','25','31','37','41','47'],bgc:'linear-gradient(#2991d2, #1c6196)'},
+             {num:'蓝大',index:7,number:'48.8',flag:null,money:'',box:['25','26','31','36','37','41','42','47','48'],bgc:'linear-gradient(#2991d2, #1c6196)'},
+             {num:'蓝合单',index:8,number:'48.8',flag:null,money:'',box:['03','09','10','14','25','36','41','47'],bgc:'linear-gradient(#2991d2, #1c6196)'},
+           ]
+         },
+         {
+           object:[
+             {num:'红双',index:9,number:'48.8',flag:null,money:'',box:['02','08','12','18','24','30','34','40','46']},
+             {num:'红小',index:10,number:'48.8',flag:null,money:'',box:['01','02','07','08','12','13','18','19','23','24']},
+             {num:'红合双',index:11,number:'48.8',flag:null,money:'',box:['13','19','35','02','08','24','40','46']},
+             {num:'绿双',index:12,number:'48.8',flag:null,money:'',box:['06','16','22','28','32','38','44'],bgc:'linear-gradient(#3ec948, #026d09)'},
+             {num:'绿小',index:13,number:'48.8',flag:null,money:'',box:['05','06','11','16','17','21','22'],bgc:'linear-gradient(#3ec948, #026d09)'},
+             {num:'绿合双',index:14,number:'48.8',flag:null,money:'',box:['06','11','17','22','28','33','39','44'],bgc:'linear-gradient(#3ec948, #026d09)'},
+             {num:'蓝双',index:15,number:'48.8',flag:null,money:'',box:['04','10','14','20','26','36','42','48'],bgc:'linear-gradient(#2991d2, #1c6196)'},
+             {num:'蓝小',index:16,number:'48.8',flag:null,money:'',box:['03','04','09','10','14','15','20'],bgc:'linear-gradient(#2991d2, #1c6196)'},
+             {num:'蓝合双',index:17,number:'48.8',flag:null,money:'',box:['04','15','20','26','31','37','42','48'],bgc:'linear-gradient(#2991d2, #1c6196)'},
+           ]
+         },
+       ]
+     }
+   },
+   sortNumber: function(a,b){
+     return a.sort - b.sort
+   },
+   created(){
+     this.fetchData();
+     this.$root.$on('success', (e) => {
+       if (e) {
+         this.modal = false;
+         this.reset()
+       }
+     })
+   },
+   watch: {
+     // 如果路由有变化，会再次执行该方法
+     '$route': 'fetchData',   // 只有这个页面初始化之后，这个监听事件才开始生效
+   },
+   mounted(){
+     this.$root.$on('time_out',(e)=>{
+       if(e){
+         this.fetchData()
+       }
+     })
+   },
+   destroyed(){
+     this.$root.$off('time_out')
+   },
+   methods:{
+     sortNumber: function(a,b){
+       return a.sort - b.sort
+     },
+     fetchData: function(){
+       this.$root.$emit('loading',true);
+       console.log('this_page:'+this.$route.query.page);
+       let body = {
+         'fc_type':this.$route.query.page,
+         'gameplay':171
+       };
+       api.getgameindex(this,body,(res)=>{
+         if(res.data.ErrorCode == 1){
+           this.animal_config = res.data.shengxiao;
+           this.$root.$emit('loading',false);
+           this.$root.$emit('c_data',res.data.Data.c_data);
+           let back_data = res.data.Data.odds;
+           back_data.sort(this.sortNumber);
+           console.log(back_data);
+           this.computed(back_data);
+           this.$root.$emit('get_closetime',res.data.Data.closetime);
+         }
+       })
+     },
+     myclick(item) {
+       this.$refs.myfocus[item.index].focus();
+       item.flag = !item.flag;
+       //console.log(item.flag);
+       if (item.flag) {
+         item.money = this.money;
+       } else {
+         item.money = '';
+         this.$refs.myfocus[item.index].blur();
+       }
+     },
+     push_money: function () {
+       this.money = this.money.replace(/\D/g, "");
+       this.computed_money();
+     },
+     change_money: function () { this.computed_money() },
+     //按键tab
+     tab_now: function(key) {
+       if (!key.money) {
+         key.flag = false;
+       } else if (key.money) {
+         key.flag = true;
+       }
+     },
+     //监听input值得变化
+     onchange: function(key) {
+       if (!key.money) {
+         key.flag = false;
+       } else if (key.money) {
+         key.flag = true;
+       }
+     },
+     //每个球对应的输入框
+     gogo: function(key) {
+       key.money = key.money.replace(/\D/g, "");
+     },
+     add_money: function (type) {
+       let money = this.money;
+       this.money = Number(money) + type;
+       this.computed_money();
+     },
+     cancel: function (item) {
+       this.modal = false;
+       document.querySelector('body').style.overflow = 'auto'
+     },
+     reset() {
+       for (let i = 0; i < this.lists.length; i++) {
+         for (let j = 0; j < this.lists[i].object.length; j++) {
+           this.lists[i].object[j].money = "";
+           this.lists[i].object[j].flag = "";
+         }
+       }
+       this.money = "";
+       this.$root.$emit("reset", "");
+     },
+     computed_money: function () {
+       for (let i = 0; i < this.lists.length; i++) {
+         for (let j = 0; j < this.lists[i].object.length; j++) {
+           //添加金额参数入对象
+           if (this.lists[i].object[j].flag) {
+             this.lists[i].object[j].money = this.money
+           } else if (!this.lists[i].object[j].flag) {
+             this.lists[i].object[j].money = ''
+           }
+         }
+       }
+     },
+     go_to() {
+       let a = this.money + 'a';
+       this.money = a.replace(/\D/g, "");
+       var kk = 0;
+       for (let i = 0; i < this.lists.length; i++) {
+         for (let j = 0; j < this.lists[i].object.length; j++) {
+           if (this.lists[i].object[j].money != undefined) {
+             let b = this.lists[i].object[j].money + 'b';
+             this.lists[i].object[j].money = b.replace(/\D/g, "");
+             kk += Number(this.lists[i].object[j].money);
+           }
+         }
+       }
+       console.log('kk:' + kk);
+       if (kk != 0) {
+         this.modal = true;
+         document.querySelector('body').style.overflow = 'hidden';
+         this.$root.$emit('id-selected', this.lists);
+       } else if (kk == 0) {
+         this.$Modal.warning({
+           content: '请先下注'
+         });
+         window.setTimeout(() => {
+           this.$Modal.remove()
+         }, 500)
+       }
+     },
+     computed: function(data){
+       this.$set(this.lists,this.lists);
+       for(let i = 0,k = 0;i < this.lists[0].object.length;i++,k+=2){
+         Object.assign(this.lists[0].object[i],data[k])
+       }
+       for(let i = 0 , k = 1;i < this.lists[1].object.length;i++,k+=2){
+         Object.assign(this.lists[1].object[i],data[k])
+       }
+     },
+   },
+}
+</script>
+<style lang="scss" src="../../../assets/css/six_seven.scss" scoped></style>

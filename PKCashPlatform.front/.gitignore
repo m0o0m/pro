@@ -1,0 +1,15 @@
+*.idea
+*.svn
+.sass-cache/
+node_modules/
+bower_components
+app/coffee/modules/locales/locale*.coffee
+*.swp
+*.swo
+.DS_Store
+.#*
+/tags
+tmp/
+/static
+/agency
+/admin

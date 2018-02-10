@@ -1,0 +1,46 @@
+package global
+
+//数据库初始化
+import (
+	"config"
+	"fmt"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/go-xorm/xorm"
+	"log"
+)
+
+const (
+	Lottery = "lottery"
+)
+
+var (
+	TablePrefix string = "sales_" //数据表前缀
+	Engine      *xorm.Engine
+)
+
+func NewManagementSession() *xorm.Session {
+	return Engine.NewSession()
+}
+
+func InitMysql(configSql config.MysqlConfig) error {
+	var err error
+	host := configSql.Host
+	dbName := configSql.DbName
+	password := configSql.Password
+	username := configSql.Username
+	data := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", username, password, host, dbName)
+	Engine, err = xorm.NewEngine("mysql", data)
+	if err != nil {
+		log.Fatalf("parse config file error:%v\n,%v", data, err)
+		return err
+	}
+	err = Engine.Ping()
+	if err != nil {
+		log.Fatalf("mysql Ping error:%v\n", err)
+		return err
+	}
+	if configSql.ShowSql == true {
+		Engine.ShowSQL(true)
+	}
+	return nil
+}

@@ -1,0 +1,4 @@
+
+Notice: Undefined variable: user_line in /Users/doublejian/www/pklottery/newproject/trunk/other/pklottery/helper/Common_helper.php on line 392
+
+Warning: Invalid argument supplied for foreach() in /Users/doublejian/www/pklottery/newproject/trunk/other/pklottery/helper/Common_helper.php on line 392

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta charset="utf-8"/>
+        <script src="<{Yii::getAlias('@js')}>/jquery.min.js"></script>
+        <script src="<{Yii::getAlias('@js')}>/bootstrap.min.js"></script>
+    </head>
+    <body class="no-skin">
+        <div class="main-container" id="main-container">
+            <!--主要内容信息-->
+            <div class="main-content">
+                <div class="page-content">
+                    <!--主要内容信息-->
+                    <div class="page-content-area">
+                        <div class="page-header">
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <{$content}>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-content">
+                        <span class="bigger-120">
+                            <span class="blue bolder"> Liujinxing </span>
+                            Yii2 Admin 项目 &copy; 2016-2018
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+            </a>
+        </div>
+    </body>
+</html>
+

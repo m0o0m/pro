@@ -1,0 +1,176 @@
+.ele-live-wrap {
+	overflow: hidden;
+	width: 900px;
+	margin: 0 auto;
+	z-index: 10;
+}
+
+.ele-live-align {
+	position: relative;
+	height: 500px;
+	background-image: url("../../images/live2/default-bg.jpg");
+	z-index: 5;
+}
+
+.gallery-picture {
+	position: absolute;
+	bottom: -500px;
+	left: 0px;
+	z-index: -1;
+    transition-duration: 0.4s;
+}
+
+.ele-live-notice {
+	position: absolute;
+	transition-duration: 1.2s;
+	bottom: 0;
+	height: 120px;
+	width: 100%;
+	background-color: rgba(0, 0, 0, .5);
+	color: #fff;
+	text-align: center;
+}
+
+.ele-live-notice h4 {
+	position: absolute;
+	width: 100%;
+	height: 40px;
+	top: 0;
+	font-size: 14px;
+	font-weight: 300;
+	padding-top: 15px;
+}
+
+.cards-box {
+	position: absolute;
+	bottom: 0;
+	height: 120px;
+	width: 100%;
+	z-index: 1;
+}
+
+.cards-box .card {
+	position: absolute;
+	margin-top: 65px;
+	transition-duration: 0.4s;
+	height: 206px;
+	width: 135px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.cards-box .card.ab {
+	background-image: url("../../images/live2/cards/ab1.png");
+	top: 0;
+	left: 0;
+}
+
+.cards-box .card.ag {
+	background-image: url("../../images/live2/cards/ag3.png");
+	top: 0;
+	left: 70px;
+}
+
+.cards-box .card.bbin {
+	background-image: url("../../images/live2/cards/bbin2.png");
+	top: 0;
+	left: 140px;
+}
+
+.cards-box .card.ct {
+	background-image: url("../../images/live2/cards/ct4.png");
+	top: 0;
+	left: 210px;
+}
+
+.cards-box .card.dg {
+	background-image: url("../../images/live2/cards/dg1.png");
+	top: 0;
+	left: 280px;
+}
+
+.cards-box .card.gd {
+	background-image: url("../../images/live2/cards/gd3.png");
+	top: 0;
+	left: 350px;
+}
+
+.cards-box .card.gpi {
+	background-image: url("../../images/live2/cards/gpi2.png");
+	top: 0;
+	left: 420px;
+}
+
+.cards-box .card.lebo {
+	background-image: url("../../images/live2/cards/lebo4.png");
+	top: 0;
+	left: 490px;
+}
+
+.cards-box .card.lmg {
+	background-image: url("../../images/live2/cards/lmg1.png");
+	top: 0;
+	left: 560px;
+}
+
+.cards-box .card.mg {
+	background-image: url("../../images/live2/cards/mg3.png");
+	top: 0;
+	left: 630px;
+}
+
+.cards-box .card.og {
+	background-image: url("../../images/live2/cards/og2.png");
+	top: 0;
+	left: 700px;
+}
+
+.cards-box .card.sa {
+	background-image: url("../../images/live2/cards/sa4.png");
+	top: 0;
+	left: 770px;
+}
+
+.btn-row {
+	position: absolute;
+	width: 30%;
+	height: 60px;
+	left: 96px;
+	bottom: 120px;
+	opacity: 1;
+	text-align: center;
+	animation: btnAI 1s 1;
+	-webkit-animation: btnAI 1s 1;
+}
+@keyframes btnAI {
+	0%   {bottom: -60px; opacity: 0;}
+	100% {bottom: 120px; opacity: 1;}
+}
+@-webkit-keyframes btnAI {
+	0%   {bottom: -60px; opacity: 0;}
+	100% {bottom: 120px; opacity: 1;}
+}
+
+.btn-row a {
+	font-size: 14px;
+	font-weight: 300px;
+	padding: 10px 25px;
+	border: 2px solid #fff;
+	color: #fff;
+}
+
+.btn-row a:first-child {
+	margin-right: 10px;
+}
+
+.btn-row a:last-child {
+	margin-left: 10px;
+}
+
+.btn-row a:hover {
+	background-color: #fff;
+	color: #000;
+	transition-duration: .6s;
+}
+
+

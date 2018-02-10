@@ -1,0 +1,154 @@
+<?php
+/* Smarty version 3.1.31, created on 2017-12-28 09:47:43
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/agent/detail.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a444d3fbdc6b9_94451352',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'b9acdea56e890837a2212ae63809a94a2928122f' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/agent/detail.html',
+      1 => 1510109525,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a444d3fbdc6b9_94451352 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    .select{width:20%;float:left;margin-right:10px}
+    #sh-select{display: none}
+    #money{width:20%}
+</style>
+
+<div class="page-header">
+    <?php if ($_GET['type'] == 'user_sh') {?>
+    <h1>
+         <a href="javascript:jump('shindex');" id="agent_index">股东列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            股东祥情
+        </small>
+    </h1>
+    <?php }?>
+    <?php if ($_GET['type'] == 'user_ua') {?>
+    <h1>
+         <a href="javascript:jump('uaindex');" id="agent_index">总代列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            总代祥情
+        </small>
+    </h1>
+    <?php }?>
+    <?php if ($_GET['type'] == 'user_agent') {?>
+    <h1>
+         <a href="javascript:jump('index');" id="agent_index">代理列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            代理祥情
+        </small>
+    </h1>
+    <?php }?>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" role="form"  id="agent-form">
+             <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">所属线路</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<?php echo $_smarty_tpl->tpl_vars['data']->value["line_id"];?>
+' class="col-sm-5">
+                </div>
+            </div>
+            <?php if (!empty($_smarty_tpl->tpl_vars['data']->value['parent'])) {?>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">所属上级</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='账号:<?php echo $_smarty_tpl->tpl_vars['data']->value["parent"];?>
+  昵称:<?php echo $_smarty_tpl->tpl_vars['data']->value["parent_name"];?>
+' class="col-sm-5">
+                </div>
+            </div>
+            <?php }?>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">代理类型</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<?php echo $_smarty_tpl->tpl_vars['data']->value["agent_type_txt"];?>
+' class="col-sm-5">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">账号</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<?php echo $_smarty_tpl->tpl_vars['data']->value["login_user"];?>
+' class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-2">昵称</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<?php echo $_smarty_tpl->tpl_vars['data']->value["login_name"];?>
+' class="col-xs-10 col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-2">额度</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<?php echo $_smarty_tpl->tpl_vars['data']->value["money"];?>
+'  class="col-xs-10 col-sm-5">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-2">状态</label>
+                <div class="col-sm-9">
+                    <select class="form-control select" id="ua-select">
+                        <option value="1" <?php ob_start();
+echo $_smarty_tpl->tpl_vars['data']->value["is_delete"];
+$_prefixVariable1=ob_get_clean();
+if ($_prefixVariable1 == '1') {?>selected<?php }?>>有效</option>
+                        <option value="2" <?php ob_start();
+echo $_smarty_tpl->tpl_vars['data']->value["is_delete"];
+$_prefixVariable2=ob_get_clean();
+if ($_prefixVariable2 == '2') {?>selected<?php }?>>无效</option>
+                    </select>
+                </div>
+            </div>
+            <div class="space-4"></div>
+        </form>
+        <div class="hr hr-18 dotted hr-double"></div>
+    </div>
+</div>
+<?php echo '<script'; ?>
+>
+    $(function(){
+        $('#agent-form').find('input').attr('disabled',true);
+        $('#agent-form').find('select').attr('disabled',true);
+    })
+    
+    $('#agent_index').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/agent/index',
+            container: '#container'
+        });
+    })
+
+    function jump(url){
+         $.pjax({
+            method: 'get',
+            url: '/agent/' + url,
+            container: '#container'
+        });
+    }
+<?php echo '</script'; ?>
+><?php }
+}

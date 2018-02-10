@@ -1,0 +1,100 @@
+@charset "UTF-8";
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font: inherit; font-size: 100%; vertical-align: baseline; }
+
+html { line-height: 1; }
+ol, ul { list-style: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; vertical-align: middle; }
+q, blockquote { quotes: none; }
+q:before, q:after, blockquote:before, blockquote:after { content: ""; content: none; }
+a img { border: none; }
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary { display: block; }
+html { height: 100%; }
+body { background: #191919; font-family: "Microsoft YaHei" SimSun; font-size: 14px; height: 100%; }
+
+.center { width: 1000px; margin: 0 auto; position: relative; }
+.center:after { display: block; content: ''; clear: both; }
+
+a { text-decoration: none; color: inherit; }
+a:focus { outline: none; }
+a:hover { text-decoration: none; }
+
+.clearfix:after { display: block; content: ''; clear: both; }
+.pull-left{ float: left; }
+.pull-right { float: right; }
+
+
+.header .logo { padding-top: 20px; text-align: center; }
+.header .logo img { max-width: 280px; height: auto; }
+.header .text { padding: 50px 0 0 40px; }
+.header .url { padding-top: 50px; }
+.header .top-nav { position: absolute; top: 15px; right: 0; }
+.header .top-nav li { display: inline-block; float: left; }
+.header .top-nav li.line { margin: 0 8px; color: #989898; font-size: 12px; }
+.header .top-nav li a { color: #989898; font-family: "Microsoft YaHei"; font-size: 12px; }
+.header .top-nav li.select-language{ margin-left: 30px;}
+.header .top-nav li.select-language span { font-size: 0; display: inline-block; width: 20px; height: 14px; margin: 0 2px; float: left; cursor: pointer; background-image: url("../../images/sports/icons_language.png"); background-repeat: no-repeat; }
+.header .top-nav li.select-language span.zh-CN { background-position: 0 0; }
+.header .top-nav li.select-language span.zh-TW { background-position: -30px 0; }
+.header .top-nav li.select-language span.en-US { background-position: -60px 0; }
+
+.nav { height: 86px; background: #121212; border-bottom: 1px solid #303030; position: relative; z-index: 10; }
+.nav .fixed-top { width: 100%; height: 85px; background: #121212; }
+.nav .fixed-top.fixed { border-bottom: 1px solid #303030; position: fixed; top: 0; left: 0; z-index: 1000; }
+.nav li { width: 100px; height: 80px; float: left; position: relative; z-index: 1; }
+.nav li > a { display: inline-block; width: 100%; font-size: 14px; text-align: center; line-height: 150%; color: #fff4f4; font-family: "Microsoft YaHei"; }
+.nav li > a:before { content: ''; display: inline-block; width: 100%; height: 24px; margin-top: 15px; background-position: center top; background-repeat: no-repeat; }
+.nav li.nav-5 a:before,.nav li.nav-6 a:before{ height: 33px; margin-top: 10px;}
+.nav li > a:hover { color: #fda900; }
+.nav li > a:hover:before { background-position: center bottom; }
+.nav li.hot:before { content: ''; display: inline-block; position: absolute; top: 10px; right: 5px; width: 21px; height: 12px; background: url("../../images/sports/hot.gif") no-repeat; }
+.nav li.nav-1 a:before { background-image: url("../../images/sports/nav_icon1.png"); }
+.nav li.nav-2 a:before { background-image: url("../../images/sports/nav_icon2.png"); }
+.nav li.nav-3 a:before { background-image: url("../../images/sports/nav_icon3.png"); }
+.nav li.nav-4 a:before { background-image: url("../../images/sports/nav_icon4.png"); }
+.nav li.nav-5 a:before { background-image: url("../../images/sports/nav_icon5.png"); }
+.nav li.nav-6 a:before { background-image: url("../../images/sports/nav_icon6.png"); }
+.nav li.nav-7 a:before { background-image: url("../../images/sports/nav_icon7.png"); }
+.nav li.nav-8 a:before { background-image: url("../../images/sports/nav_icon8.png"); }
+.nav li.nav-9 a:before { background-image: url("../../images/sports/nav_icon9.png"); }
+.nav li.nav-10 a:before { background-image: url("../../images/sports/nav_icon10.png"); }
+
+.nav li .subnav { min-width: 150px; position: absolute; top: 80px; left: -20px; -moz-transition: all 0.35s ease; -o-transition: all 0.35s ease; -webkit-transition: all 0.35s ease; transition: all 0.35s ease; }
+.nav li .subnav .border { border: 2px solid #e8cc62; border-width: 0px 2px; border-color: #fff71a; position: relative; background: url(../../images/sports/opacity-9.png); }
+.nav li .subnav .border .caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-top: 4px solid\9; border-right: 4px solid transparent; border-left: 4px solid transparent; position: absolute; top: 0px; left: 60px; border-bottom: 10px solid #ffd153; border-width: 0px 10px 0px; -moz-transition: all 0.1s ease; -o-transition: all 0.1s ease; -webkit-transition: all 0.1s ease; transition: all 0.1s ease; }
+.nav li .subnav .border .t { display: none;width: 0;height: 0;-moz-transition: all 0.2s ease; -o-transition: all 0.2s ease; -webkit-transition: all 0.2s ease; transition: all 0.2s ease; }
+.nav li .subnav a { display: block; height: 32px; line-height: 32px; color: #d9c064; font-size: 12px; font-family: "Microsoft YaHei"; text-indent: 0px; text-align: center; height: 0px; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); opacity: 0; overflow: hidden; padding: 0; -moz-transition: all 0.2s ease; -o-transition: all 0.2s ease; -webkit-transition: all 0.2s ease; transition: all 0.2s ease; }
+.nav li .subnav a + a { border-top: 0px solid #393435; }
+.nav li .subnav a.red { color: #ff0101; }
+.nav li .subnav a:hover { background: #333; }
+.nav li:hover { z-index: 2; background: url("../../images/sports/bg_navhover.jpg") no-repeat center top; }
+.nav li:hover .subnav .border { border-color: #e8cc62; border-width: 2px; text-align: center; }
+.nav li:hover .subnav .border .caret { border-width: 0 10px 10px; top: -10px; }
+.nav li:hover .subnav .border .t { display: inline-block;width: auto; height: auto; margin: 5px auto;}
+.nav li:hover .subnav a { height: 32px; filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false); opacity: 1; position: relative; text-align: left; padding-left: 50px;}
+.nav li:hover .subnav a i{ position: absolute; left: 15px; top: 1px;}
+.nav li:hover .subnav a.hot{color: #f00}
+.nav li:hover .subnav a.hot::before{content: '';display: inline-block;position: absolute;top: 10px; right: 10px; height: 12px; width: 21px; background:url(../../images/sports/hot.gif) no-repeat}
+.nav li:hover .subnav a{ border-top: 1px dashed #747a7f; }
+
+.footer .center { height: 100%; background: #0e0e0e url("../../images/sports/footer-logos.jpg") no-repeat center bottom; }
+.footer .center .contact { margin-top: 30px; float: left; }
+.footer .center .contact li { display: block; position: relative; float: left; width: 170px; height: 44px; padding-left: 80px; color: #969696; font-size: 14px; line-height: 140%; background-position: 30px top; background-repeat: no-repeat; -moz-transition: all 0.3s; -o-transition: all 0.3s; -webkit-transition: all 0.3s; transition: all 0.3s; }
+.footer .center .contact li span { display: block; font-size: 16px; color: #fff; }
+.footer .center .contact li.info-tel { background-image: url("../../images/sports/f_contact01.png"); }
+.footer .center .contact li.info-mail { background-image: url("../../images/sports/f_contact02.png"); }
+.footer .center .contact li.info-qq { background-image: url("../../images/sports/f_contact03.png"); }
+.footer .center .contact li.info-chat { background-image: url("../../images/sports/f_contact04.png"); }
+.footer .center .contact li:hover { background-position: 30px bottom; }
+.footer .center .links { position: absolute; left: 0; bottom: 25px; }
+.footer .center .links li { display: inline-block; margin: 0 5px; }
+.footer .center .links li a { font-size: 12px; color: #c1c1c1; }
+.footer .center .links li a:hover { color: #f60; }
+.footer .center p.copyright { position: absolute; right: 0; bottom: 25px; font-size: 12px; color: #c1c1c1; }
+
+/*牌照展示*/
+.licence-pic { width: 420px !important; height: 337px; border: 3px solid #fff; }
+.licence-pic img { max-width: 420px; height: auto; }
+
+/*太阳城宣传片*/
+.vedio-show { width: 750px !important; height: 270px !important; border: 3px solid #fff; }

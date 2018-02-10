@@ -1,0 +1,91 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('MembershipReturns')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body">
+                                <div class="widget-body-toolbar">
+                                <div class="row">
+                                    <div class="form-horizontal ng-pristine ng-valid">
+                                        <label class="col-md-1 control-label text-align-right col-xs-4">时间区间</label>
+                                        <div class="col-md-3 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input class="form-control is_date" value="{{startTime}} ~ {{endTime}}" type="text" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 control-label text-align-right col-xs-4">综合打码量</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input class="form-control " placeholder="倍数" type="text" ng-model="code">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 col-md-2">
+                                            <button class="btn btn-success"  type="submit" ng-click="sub()">
+                                                存入
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-8 col-md-2 reltop">
+                                            <lable class="control-label" style="color: red;">【请勿重复点击】</lable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr class="text-center">
+                                                <td rowspan="2">
+                                                    <input type="checkbox" id="all" name="items" ng-click="doallcheck()">全选
+                                                </td>
+                                                <td rowspan="2">代理商</td>
+                                                <td rowspan="2">会员</td>
+                                                <td rowspan="2">有效总投注</td>
+                                                <td colspan="{{name.length}}">有效投注/返点</td>
+                                                <td rowspan="2">返佣小计</td>
+                                            </tr>
+                                            <tr class="text-center">
+                                                <td rowspan="2" ng-repeat="item in name">{{item}}</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="a in list" class="text-center">
+                                                <td>
+                                                    <input type="checkbox" class="test" value="{{a.id}}">
+                                                </td>
+                                                <td>{{a.agency}}</td>
+                                                <td>{{a.account}}</td>
+                                                <td>{{a.all_bet}}</td>
+                                                <td ng-repeat="b in a.rate">
+                                                    {{b}}
+                                                </td>
+                                                <td>{{a.rebate}}</td>
+                                            </tr>
+                                            <tr class="text-center">
+                                                <td>总计:</td>
+                                                <td colspan="2">总人数：<span>{{total.all_people}}</span>人</td>
+                                                <td>{{total.all_bet}}</td>
+                                                <td ng-repeat="d in total.rate">{{d}}</td>
+                                                <td>{{total.rebate}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

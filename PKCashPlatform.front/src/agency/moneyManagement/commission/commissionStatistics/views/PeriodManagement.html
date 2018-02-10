@@ -1,0 +1,229 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('PeriodManagement')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                                <div class="widget-body-toolbar" ng-show="newTodo">
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select data-smart-select2 class="selectWidth" ng-model="site_index_id" ng-change="search()">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right">
+                                            <div class="row">
+                                                <div class="col-md-12 ">
+                                                    <button class="btn btn-primary ng-binding" type="submit" data-toggle="modal" data-target="#myModal1">
+                                                        <i class="fa fa-save"></i>
+                                                        新增期数
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>期数名称</th>
+                                                <th>起始日期</th>
+                                                <th>结束日期</th>
+                                                <th>当前状态</th>
+                                                <th>功能</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.start_time}}</td>
+                                                <td>{{item.end_time}}</td>
+                                                <td>{{item.status==1?'已退佣':'未退佣'}}</td>
+                                                <td>
+
+                                                    <button ng-if="item.status==1"  ng-click="chongxiao(item.id)" class="btn btn-primary">{{getWord('retreats')}}</button>
+                                                    <button ng-if="item.status==2" data-toggle="modal" data-target="#myModal2" class="btn btn-primary" ng-click="modify(item)">{{getWord('Modify')}}</button>
+                                                    <button ng-if="item.status==2"  ng-click="del(item.id)" class="btn btn-primary">{{getWord('Delete')}}</button>
+                                                </td>
+                                            </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">{{getWord('addPeriods')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">站点</label>
+                                <div class="col-md-5 col-xs-8">
+                                    <select data-smart-select2 class="selectWidth" ng-model="addData.site">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                    </select>
+                                </div>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">期数名称</label>
+                                <label class="col-md-5 input col-xs-8">
+                                    <input type="text" name="account"   ng-model="addData.name">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">当前状态</label>
+                                <label class="col-md-5 input-label text-left col-xs-8">
+                                    <input type="radio" ng-value="1" name="aa" ng-model="addData.status">
+                                    是
+                                    <input type="radio" ng-value="2" name="aa" ng-model="addData.status">
+                                    否
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">起始日期</label>
+                                <div class="col-sm-5 col-xs-8">
+                                    <div class="input-group form-group">
+                                        <input type="text" class="form-control" data-smart-masked-input="9999-99-99" data-mask-placeholder= "-" ng-model="addData.start_time">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">结束日期</label>
+                                <div class="col-sm-5 col-xs-8">
+                                    <div class="input-group form-group">
+                                        <input type="text" class="form-control" data-smart-masked-input="9999-99-99" data-mask-placeholder= "-" ng-model="addData.end_time">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <label class="col-md-3 col-md-offset-0 col-xs-8 col-xs-offset-4 input-label text-align-right text-red">【查询区间限制为两个月】</label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{getWord('Cancel')}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                            {{getWord('Confirm')}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" >{{getWord('modifyPeriods')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">站点</label>
+                                <div class="col-md-5 col-xs-8">
+                                    <select data-smart-select2 class="selectWidth" ng-model="modifyData.site">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                    </select>
+                                </div>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">期数名称</label>
+                                <label class="col-md-5 input col-xs-8">
+                                    <input type="text" name="account"   ng-model="modifyData.name">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">当前状态</label>
+                                <label class="col-md-5 input-label text-left col-xs-8">
+                                    <input type="radio" ng-value="1" ng-checked="modifyData.status===1" name="bb" ng-model="modifyData.status">
+                                    是
+                                    <input type="radio" ng-value="2" ng-checked="modifyData.status===2" name="bb" ng-model="modifyData.status">
+                                    否
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">起始日期</label>
+                                <div class="col-sm-5 col-xs-8">
+                                    <div class="input-group form-group">
+                                        <input type="text" class="form-control" data-smart-masked-input="9999-99-99" data-mask-placeholder= "-" ng-model="modifyData.start_time">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label col-xs-4">结束日期</label>
+                                <div class="col-sm-5 col-xs-8">
+                                    <div class="input-group form-group">
+                                        <input type="text" class="form-control" data-smart-masked-input="9999-99-99" data-mask-placeholder= "-" ng-model="modifyData.end_time">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <label class="col-md-3 col-md-offset-0 col-xs-8 col-xs-offset-4 input-label text-align-right text-red">【查询区间限制为两个月】</label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{getWord('Cancel')}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifysubmit()">
+                            {{getWord('Confirm')}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

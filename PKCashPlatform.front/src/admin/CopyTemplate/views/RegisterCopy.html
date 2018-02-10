@@ -1,0 +1,68 @@
+<!-- 管理员权限分组列表 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>注册模板管理</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body">
+                                <div class="widget-body-toolbar">
+                                    <div class="row">
+                                        <div class="col-sm-1 col-sm-offset-11  col-xs-12">
+                                            <div class="input-group pull-right">
+                                                <button type="submit" class="btn btn-primary" ng-click="add()">
+                                                    <i class="fa fa-plus"></i> 添加模板
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-align-center">序号</th>
+                                            <th class="text-align-center">标题</th>
+                                            <th class="text-align-center">内容</th>
+                                            <th class="text-align-center">类型</th>
+                                            <th class="text-align-center">状态</th>
+                                            <th class="text-align-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-align-center" ng-repeat="item in list">
+                                            <td>{{item.num}}</td>
+                                            <td>{{item.title}}</td>
+                                            <td>{{item.content}}</td>
+                                            <td>{{item.type | registerType}}</td>
+                                            <td>{{item.status | fiterStatused}}</td>
+                                            <td>
+                                                <button ng-show="item.status===1"  ng-click="disable(item)"  class="ids btn  btn-default btn-xs" >
+                                                    禁用
+                                                </button>
+                                                <button ng-show="item.status===2" ng-click="disable(item)"  class="ids btn  btn-default btn-xs">
+                                                    启用
+                                                </button>
+                                                <button class="ids btn  btn-default btn-xs" data-toggle="modal" data-target="#myModal"  ng-click="modify(item.id,$index)">
+                                                    {{lang['Edit']}}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

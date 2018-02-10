@@ -1,0 +1,130 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div jarvis-widget id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-eye"></i> </span>
+                <h2>Default Elements</h2>
+            </header>
+            <!-- widget div-->
+            <div>
+                <!-- widget content -->
+                <div class="widget-body">
+                    <form class="form-horizontal" id="formid" enctype="multipart/form-data">
+                        <fieldset>
+                            <legend>{{lang['Site information']}}</legend>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['Distributor']}}:</label>
+                                <div class="col-md-3">
+                                    <input class="form-control" placeholder="{{lang['Choose dealers']}}" type="text" name="agencyName" list="list" ng-model="modifySite.data.SiteAgency">
+                                    <datalist id="list">
+                                        <option ng-repeat="list in modifySite.dataJson">{{list.SiteAgency}}</option>
+                                    </datalist>
+                                    <p class="note"><strong>{{lang['Tip']}}:</strong>{{lang['Select the dealer or manually enter the dealer name']}}</p>
+                                </div>
+                                <label class="col-md-2 control-label">{{lang['Site name']}}:</label>
+                                <div class="col-md-3">
+                                    <input class="form-control" placeholder="{{lang['Site name']}}" name="siteName" type="text" ng-model="modifySite.data.SiteName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['Site']}}{{lang['Status']}}：</label>
+                                <div class="col-md-3">
+                                    <!--<input class="form-control" placeholder="选择状态" type="text" name="status" list="list1">-->
+                                    <select class="form-control" name="status" id="sel">
+                                        <option value="1">启用</option>
+                                        <option value="0">禁用</option>
+                                    </select>
+                                    <p class="note"><strong>{{lang['Tip']}}:</strong>{{lang['Select site status']}}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['PC domain name']}}:</label>
+                                <div class="col-md-3">
+                                    <input class="form-control" placeholder="{{lang['Please enter the PC domain name']}}" name="siteName" type="text" ng-model="modifySite.data.SiteName">
+                                </div>
+                                <label class="col-md-2 control-label">{{lang['WAP domain name']}}:</label>
+                                <div class="col-md-3">
+                                    <input class="form-control" placeholder="{{lang['Please enter the WAP domain name']}}" name="siteName" type="text" ng-model="modifySite.data.SiteName">
+                                </div>
+                                <div class="form-group"></div>
+                            </div>
+
+                            <!--<div class="form-group">-->
+                               <!---->
+                            <!--</div>-->
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['SSI certificate']}}:</label>
+                                <div class="col-md-3">
+                                    <!--type="file" value="FileUploader"  ng-model = "addacti.mainpicture"-->
+                                    <input type="file" class="btn btn-default" id="exampleInputFile1" value="FileUploader" name="siteLogo" ng-model="modifySite.data.SiteLogo">
+                                </div>
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-3">
+                                    <!--type="file" value="FileUploader"  ng-model = "addacti.mainpicture"-->
+                                    <input type="file" class="btn btn-default" id="exampleInputFile1" value="FileUploader" name="siteLogo" ng-model="modifySite.data.SiteLogo">
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>{{lang['Customer service information']}}</legend>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2">QQ:</label>
+                                <div class="col-md-10">
+                                    <input type="hidden" name="name[]" value="qq">
+                                    <input class="form-control input-sm" placeholder="{{lang['Please enter']}}..." type="text" name="siteInfo[]" ng-model="modifySite.data.SiteServiceInfo.qq">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">{{lang['WeChat']}}:</label>
+                                <div class="col-md-10">
+                                    <input type="hidden" name="name[]" value="wechat">
+                                    <input class="form-control input-sm" placeholder="{{lang['Please enter']}}..." type="text" name="siteInfo[]" ng-model="modifySite.data.SiteServiceInfo.wechat">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">{{lang['Telephone']}}:</label>
+                                <div class="col-md-10">
+                                    <input type="hidden" name="name[]" value="phone">
+                                    <input class="form-control input-sm" placeholder="{{lang['Please enter']}}..." type="text" name="siteInfo[]" ng-model="modifySite.data.SiteServiceInfo.phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">{lang['Email']}}:</label>
+                                <div class="col-md-10">
+                                    <input type="hidden" name="name[]" value="email">
+                                    <input class="form-control input-sm" placeholder="{{lang['Please enter']}}..." type="email" name="siteInfo[]" ng-model="modifySite.data.SiteServiceInfo.email">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-default" type="button">
+                                        {{lang['Cancel']}}
+                                    </button>
+                                    <button class="btn btn-primary" type="submit" value="Submit" ng-click="modifySite.submit()">
+                                        <i class="fa fa-save"></i>
+                                        {{lang['Confirm']}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>
+    </section>
+
+</div>

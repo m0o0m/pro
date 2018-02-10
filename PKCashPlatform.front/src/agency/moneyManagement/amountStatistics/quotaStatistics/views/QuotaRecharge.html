@@ -1,0 +1,130 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('QuotaRecharge')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="widget-body-toolbar">
+                                <div id="tabs" data-smart-jqui-tabs>
+                                    <ul>
+                                        <li>
+                                            <a href="#tabs-a">第三方额度充值</a>
+                                        </li>
+                                        <li>
+                                            <a href="#tabs-b">银行卡额度充值</a>
+                                        </li>
+                                    </ul>
+                                    <div id="tabs-a">
+                                        <form class="form-horizontal">
+                                            <fieldset>
+                                                <legend>充值列表</legend>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">订单号:</label>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" placeholder="" type="text" ng-model="threeOrder">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">充值金额:</label>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" placeholder="" type="text" ng-model="threeMoney">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">支付方式:</label>
+                                                    <div class="col-md-8">
+                                                        <div class="">
+                                                            <select class="form-control" ng-model="threeType">
+                                                                <option value="">请选择</option>
+                                                                <option ng-value="modeItem.value" ng-repeat="modeItem in json.option_income_type" ng-selected="$index==1">{{modeItem.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">支付银行:</label>
+                                                    <div class="col-md-8">
+                                                        <div class="">
+                                                            <select class="form-control" ng-model="threeBank">
+                                                                <option value="">请选择</option>
+                                                                <option ng-value="threeItem.id" ng-repeat="threeItem in three" ng-selected="$index==1">{{threeItem.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <button class="btn btn-primary" type="submit" ng-click="submit()">
+                                                            <i class="fa fa-save"></i>
+                                                            {{getWord('Done')}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div id="tabs-b">
+                                        <form class="form-horizontal">
+                                            <fieldset>
+                                                <legend>充值列表</legend>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">订单号:</label>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" placeholder="" type="text" ng-model="order">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">充值金额:</label>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" placeholder="" type="text" ng-model="money">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">支付账号:</label>
+                                                    <div class="col-md-8">
+                                                        <input class="form-control" placeholder="{{getWord('Order number')}}" type="text" ng-model="account">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">收款银行:</label>
+                                                    <div class="col-md-8">
+                                                        <div class="">
+                                                            <select class="form-control" ng-model="bank">
+                                                                <option value="">请选择</option>
+                                                                <option ng-value="bankItem.id" ng-repeat="bankItem in list" ng-selected="$index==1">{{bankItem.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <button class="btn btn-primary" type="submit" ng-click="bankSubmit()">
+                                                            <i class="fa fa-save"></i>
+                                                            {{getWord('Done')}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

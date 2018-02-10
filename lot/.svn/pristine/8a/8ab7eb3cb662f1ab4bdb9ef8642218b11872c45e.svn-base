@@ -1,0 +1,20 @@
+package router
+
+import (
+	"github.com/labstack/echo"
+	"controllers/lottery"
+)
+
+func Lottery(c *echo.Echo) {
+	e := c.Group("", CheckSite, CheckMainTainLottery,CheckWhiteListLottery) // 获取站点信息
+	accountCtrl := new(lottery.AccountController)
+	//shiwanCtrl := new(lottery.ShiwanController)
+	otherCtrl := new(lottery.OtherController)
+	c.GET("/refresh/key", otherCtrl.Refresh) //刷新缓存的key
+	e.GET("/account/create", accountCtrl.RegAccount) //注册
+	//e.GET("/shiwan/create", shiwanCtrl.RegAccount)   //试玩注册
+	e.GET("/account/login", accountCtrl.Login)       //登陆 获取游戏链接
+	e.GET("/account/balance", accountCtrl.GetBalance)             //获取余额
+	e.GET("/account/transfer_credit", accountCtrl.TransferCredit) //额度转换
+	e.GET("/account/update_pwd", accountCtrl.UpdatePassword)      //修改密码
+}

@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>PK</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+</head>
+<style>
+    body{
+        background-color: #fff;
+    }
+    .o1 dd a{
+        text-decoration: underline;
+        color: royalblue;
+    }
+</style>
+
+<body ontouchstart>
+<header class="head-h">
+    <ul class="h-head">
+            <li>
+                <a href="/m/index">首页</a>
+            </li>
+            <li>
+                <h2>登录</h2>
+            </li>
+            <li>
+                
+            </li>
+        </ul>
+</header>
+
+<div id="mescroll" class="mescroll m-login">
+<!-- <div id="wrapper">
+    <div id="scroller"> -->
+        <!--iscroll 滑动 开始-->
+        <!-- <main class="main m-login"> -->
+            <dl class="o1">
+                <dt>
+                <li class="urog-form-role">
+                    <i class="iconfont wap-wode"></i>
+                    <input type="text" name="account" id="account" placeholder="请输入账号">
+                    <i class="empty-i iconfont wap-guanbi" data-close="account"></i>
+                </li>
+                <li class="urog-form-role">
+                    <i class="iconfont wap-mima"></i>
+                    <input type="password" name="password" id="password" placeholder="请输入密码">
+                    <i class="empty-i2 iconfont wap-guanbi" data-close="password"></i>
+                </li>
+                <li><i class="iconfont wap-yanzhengma"></i><input type="text" name="code" placeholder="请输入验证码"><img id="vImg" src="{{.CdnUrl}}/wap/style/images/no.png" onclick="getYzm();">
+                </li>
+                </dt>
+                <dd>
+                    <button>登录</button>
+                    <p>没有账号？<a href="/m/reg">立即注册</a></p>
+                </dd>
+            </dl>
+        <!-- </main> -->
+
+
+        <!--iscroll 滑动 结束-->
+    <!-- </div>
+</div> -->
+</div>
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script src="{{.CdnUrl}}/theme3/public/shared/sitepublic/js/common_member.js"></script>
+<script>
+    var _Code = '';
+    $(document).ready(function (e) {
+        var ComeUrl=document.referrer;
+        $('.m-login .o1 dd button').click(function () {
+            var $account = $("input[name='account']");
+            var $password = $("input[name='password']");
+            var $code = $("input[name='code']");
+            if ($account.val() == '') {
+                $.toast("用户名不能为空", 'text');
+                return false;
+            }
+            if ($account.val().length >12 ) {
+                $.toast("用户名不能太长>12", 'text');
+                return false;
+            }
+            if ($password.val() == '') {
+                $.toast("密码不能为空", 'text');
+                return false;
+            }
+            if ($password.val().length>12) {
+                $.toast("密码不能太长>12", 'text');
+                return false;
+            }
+            if ($code.val() == '') {
+                $.toast("验证码不能为空", 'text');
+                return false;
+            }
+            $('.m-login .o1 dd button').attr("disabled", true); //按钮失效
+            $.ajax({
+                type: "post",
+                url: "/m/loginDo",
+                headers: {"Code": _Code, 'platform': "wap"},
+                contentType: "application/json",
+                data: JSON.stringify({
+                    account: $account.val(),
+                    password: $password.val(),
+                    code: $code.val()
+                }),
+                dataType: 'json',
+                success: function (data) {
+                    console.log('错误',data);
+                    if (data.code == 20021) {
+                        $.toast(data.msg, 'text');
+                        // $code.select();
+                    } else if (data.code == 20001 || data.code == 30138) {
+                        $.toast(data.msg, 'text');
+                        $account.val('');
+                        $password.val('');
+                        // $account.select();
+                    } else if (data.code == 20002 || data.code == 60000) {
+                        $.toast(data.msg, 'text');
+                    } else if (data.code == undefined||data.code == null){
+                        setCookie("loginBack", data['data'].token);    //将登陆信息写入缓存
+                        window.location.href = ComeUrl;
+                        return;
+                    }else{
+                        $.toast(data.msg, 'text');
+                        $account.val('');
+                        $password.val('');
+                    }
+                    $('.m-login .o1 dd button').attr("disabled", false); //按钮有效
+                    $("input[name='code']").val("") //清空验证码输入框
+                }
+            });
+        })
+        // $('.h-head .iconfont').click(function () {
+        //     window.history.go(-1);
+        // })weui-mask_transparent
+
+        // 输入框验证
+        var $account = $("input[name='account']").val();
+        var $password = $("input[name='password']").val();
+        var $code = $("input[name='code']").val();
+
+        $("input[name='account']").focus(function () {
+            if ($(this).val() == $account) {
+                $(this).val('');
+            }
+        }).blur(function () {
+            if ($(this).val() == '') {
+                $(this).val($account);
+            }
+        });
+
+        $("input[name='password']").focus(function () {
+            if ($(this).val() == $password) {
+                $(this).val('');
+            }
+        }).blur(function () {
+            if ($(this).val() == '') {
+                $(this).val($password);
+            }
+        });
+        // $("input[name='code']").focus(function () {
+        //     if ($(this).val() == $code) {
+        //         $(this).val('');
+        //     }
+        //     getKey('');
+        // })
+        //.blur(function () {
+        //     if ($(this).val() == '') {
+        //         $(this).val($code);
+        //     }
+        // });
+    });
+
+    $(window).load(function (e) {
+        if (getCookie('loginBack')) {
+            window.location.href = '/m/account';
+        }
+    })
+
+    $(function () {
+        $(".empty-i").click(function () {
+            $("input[name='account']").val("").focus();
+        });
+        $(".empty-i2").click(function () {
+            $("input[name='password']").val("").focus();
+        });
+    })
+
+</script>
+</html>

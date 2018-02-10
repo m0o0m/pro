@@ -1,0 +1,305 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>浮动图片管理</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar">
+                                <div class="row">
+                                    <div class="col-sm-1 col-sm-offset-11">
+                                        <div class="input-group pull-right">
+                                            <button type="submit"  data-toggle="modal" data-target="#add"  class="btn btn-primary">
+                                                <i class="fa fa-plus"></i> {{lang['AddMore']}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>是否新开业面</th>
+                                                <th>滑动效果</th>
+                                                <th>浮动图片</th>
+                                                <th>URL地址</th>
+                                                <th>内链地址</th>
+                                                <th>排序</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.isNew |YorN}}</td>
+                                                <td>{{item.status|fiterStatused}}</td>
+                                                <td>
+                                                    鼠标滑出：<span style="background-color: orangered;color: #fff;" data-toggle="modal" data-target="#myModa_floatgo" ng-click="upload(item.id)">[上传]</span>
+                                                    鼠标滑入：<span style="background-color: orangered;color: #fff;" data-toggle="modal" data-target="#myModa_floatgo" ng-click="upload(item.id)">[上传]</span>
+                                                </td>
+                                                <td>{{item.url}}</td>
+                                                <td>{{item.link}}</td>
+                                                <td>{{item.order}}</td>
+                                                <td>
+                                                    <button class="ids btn btn-warning btn-xs" data-toggle="modal" data-target="#dialog_floatgo" style="margin: 5px" ng-click="open(item)">
+                                                        {{lang['Edit']}}
+                                                    </button>
+                                                    <button tyle="margin-right: 5px" class="ids btn btn-danger btn-xs" style="margin: 5px" ng-click="deleteImg(item.id)">
+                                                        {{lang['Delete']}}
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">浮动图片--添加</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset class="floatgolink">
+                            <div class="form-group">
+                                <label class="col-md-4 col-xs-4 control-label">是否为内链</label>
+                                <div class="col-md-6 col-xs-6 floatlink">
+                                    <div class="form-group">
+                                        <select data-smart-select2 class="selectWidth" ng-model="addData.isLink">
+                                            <option value="">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="2">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-4 col-xs-4 control-label">滑动效果</label>
+                                <div class="col-md-6 col-xs-6 floatlink">
+                                    <div class="form-group">
+                                        <select data-smart-select2 class="selectWidth" ng-model="addData.status">
+                                            <option value="">请选择</option>
+                                            <option value="1">滑动</option>
+                                            <option value="2">不滑动</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-4 col-xs-4 control-label">新开效果</label>
+                                <div class="col-md-6 col-xs-6 floatlink">
+                                    <div class="form-group">
+                                        <select data-smart-select2 class="selectWidth" ng-model="addData.isNew">
+                                            <option value="">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="2">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-4 col-xs-4 control-label">排序</label>
+                                <div class="col-md-6 col-xs-6 floatlink">
+                                    <input class="form-control" placeholder="排序" type="number" ng-model="addData.order">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addImg()">
+                        提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="dialog_floatgo" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">浮动图片--编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset class="floatgolink">
+                            <div class="form-group">
+                                <label class="col-md-4 col-xs-4 control-label">是否为内链</label>
+                                <div class="col-md-6 col-xs-6 floatlink">
+                                    <div class="form-group">
+                                        <select data-smart-select2 class="selectWidth" ng-model="formData.isLink">
+                                            <option value="">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="2">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-4 col-xs-4 control-label">滑动效果</label>
+                                <div class="col-md-6 col-xs-6 floatlink">
+                                    <div class="form-group">
+                                        <select data-smart-select2 class="selectWidth" ng-model="formData.status">
+                                            <option value="">请选择</option>
+                                            <option value="1">滑动</option>
+                                            <option value="2">不滑动</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-4 col-xs-4 control-label">新开效果</label>
+                                <div class="col-md-6 col-xs-6 floatlink">
+                                    <div class="form-group">
+                                        <select data-smart-select2 class="selectWidth" ng-model="formData.isNew">
+                                            <option value="">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="2">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-4 col-xs-4 control-label">排序</label>
+                                <div class="col-md-6 col-xs-6 floatlink">
+                                    <input class="form-control" placeholder="排序" type="number" ng-model="formData.order">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifyImg()">
+                        提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModa_floatgo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">附件信息修改</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">地址</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="请输入地址" type="text" ng-model="url">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">链接</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="请输入链接" type="text">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <!--<fieldset>-->
+                            <!--<div class="form-group col-md-2 col-sm-offset-5">-->
+                                <!--<button class="btn btn-primary" data-dismiss="modal"  aria-hidden="true">保存</button>-->
+                            <!--</div>-->
+                        <!--</fieldset>-->
+                        <div class="table-scroll">
+                            <table class="table table-bordered" >
+                                <thead>
+                                <tr>
+                                    <th colspan="4" style="text-align: center">附件管理</th>
+                                </tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>附件标题</th>
+                                    <th>附件地址</th>
+                                    <th>上传时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr ng-repeat="item in enclosure">
+                                    <td class="col col-md-1 col-lg-1 col-xs-1">{{item.id}}</td>
+                                    <td class="col col-md-3 col-lg-3 col-xs-3">
+                                        <div class="row">
+                                            <input type="text" ng-model="item.title">
+                                            <button class="btn btn-xs" ng-click="select(item)">选择</button>
+                                            <button class="btn btn-xs" ng-click="modifyTitle(item)">修改</button>
+                                        </div>
+
+                                    </td>
+                                    <td class="col col-md-6 col-lg-6 col-xs-6">
+                                        <input type="text" placeholder="{{item.url}}" class="addCopy" disabled="disabled">
+                                        <button class="btn btn-xs"><a ng-href="{{item.url}}" target="_blank">查看</a></button>
+                                        <button class="btn btn-xs" ng-click="delete(item)">删除</button>
+                                    </td>
+                                    <td class="col col-md-2 col-lg-2 col-xs-2" style="word-wrap:break-word;">{{item.create_time|fiterTime}}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="submit()">
+                        保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

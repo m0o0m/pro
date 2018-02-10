@@ -1,0 +1,340 @@
+@import "./function.scss";
+
+.bet {
+  //position: relative;
+  .pk_bet {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(55,55,55,.6);
+    height: 100%;
+    z-index: 1000;
+  }
+  .modal {
+    position: fixed;
+    top: 30%;
+    left: 38%;
+    z-index: 1000;
+    width: 450px;
+    margin: 0 auto;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    box-shadow: 0px 0px 2px 2px #ddd;
+    .header {
+      background-color: $bg_color;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      border-radius: 5px 5px 0 0;
+    }
+    .bet_center {
+      width: 420px;
+      // background-color: #eee;
+      border-radius: 5px;
+      height: 180px;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      // overflow: auto;
+      .center_top {
+        background-color: #eee;
+        height: 35px;
+        text-align: center;
+        line-height: 34px;
+        color: black;
+        padding: 0;
+        width: 100%;
+        margin: 0 auto;
+        /* margin: 0; */
+        font-weight: bold;
+        font-size: 16px;
+        border: 1px solid $border_color;
+        // border-top: none;
+        .one {
+          text-align: center;
+          display: inline-block;
+          width: 90px;
+          float: left;
+          border-right: 1px solid $border_color;
+        }
+        .two {
+          display: inline-block;
+          width: 75px;
+          float: left;
+          text-align: center;
+          border-right: 1px solid $border_color;
+        }
+        .three {
+          text-align: center;
+          display: inline-block;
+          width: 100px;
+          float: left;
+          border-right: 1px solid $border_color;
+        }
+        .four {
+          text-align: center;
+          display: inline-block;
+          width: 128px;
+          float: left
+        }
+      }
+      .hp_center_top {
+        background-color: #eee;
+        height: 35px;
+        text-align: center;
+        line-height: 34px;
+        color: black;
+        padding: 0;
+        width: 100%;
+        margin: 0 auto;
+        /* margin: 0; */
+        font-weight: bold;
+        font-size: 16px;
+        border: 1px solid $border_color;
+        // border-top: none;
+        .one {
+          text-align: center;
+          display: inline-block;
+          width: 100px;
+          float: left;
+          border-right: 1px solid $border_color;
+        }
+        .two {
+          display: inline-block;
+          width: 100px;
+          float: left;
+          text-align: center;
+          border-right: 1px solid $border_color;
+          .box{
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            display: inline-block;
+            border-radius: 20px;
+            background: $lg_blue2;
+          }
+        }
+        .three {
+          text-align: center;
+          display: inline-block;
+          width: 200px;
+          float: left;
+          // border-right: 1px solid $border_color;
+        }
+      }
+      .hp_center_content {
+        height: 35px;
+        text-align: center;
+        line-height: 34px;
+        color: black;
+        padding: 0;
+        width: 100%;
+        margin: 0 auto;
+        /* margin: 0; */
+        font-weight: bold;
+        font-size: 16px;
+        border: 1px solid $border_color;
+        border-top: none;
+        //border-right: none;
+        .one {
+          text-align: center;
+          display: inline-block;
+          width: 100px;
+          float: left;
+          border-right: 1px solid $border_color;
+        }
+        .two {
+          display: inline-block;
+          width: 100px;
+          float: left;
+          border-right: 1px solid $border_color;
+        }
+        .three {
+          text-align: center;
+          display: inline-block;
+          width: 200px;
+          float: left;
+          // border-right: 1px solid $border_color;
+        }
+        .box {
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          font-size: 16px;
+          font-weight: bold;
+          color: #fff;
+          display: inline-block;
+          border-radius: 20px;
+          background: $lg_blue2;
+        }
+      }
+      .center_content {
+        height: 35px;
+        text-align: center;
+        line-height: 34px;
+        color: black;
+        padding: 0;
+        width: 100%;
+        margin: 0 auto;
+        /* margin: 0; */
+        font-weight: bold;
+        font-size: 16px;
+        border: 1px solid $border_color;
+        border-top: none;
+        //border-right: none;
+        .one {
+          text-align: center;
+          display: inline-block;
+          width: 90px;
+          float: left;
+          border-right: 1px solid $border_color;
+        }
+        .two {
+          display: inline-block;
+          width: 75px;
+          float: left;
+          border-right: 1px solid $border_color;
+        }
+        .three {
+          text-align: center;
+          display: inline-block;
+          width: 100px;
+          float: left;
+          border-right: 1px solid $border_color;
+        }
+        .four {
+          text-align: center;
+          display: inline-block;
+          width: 128px;
+          float: left
+        }
+        .box {
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          font-size: 16px;
+          font-weight: bold;
+          color: #fff;
+          display: inline-block;
+          border-radius: 20px;
+          background: $lg_blue2;
+        }
+      }
+      .center_six_content {
+        //height: 35px;
+        text-align: center;
+        line-height: 34px;
+        color: black;
+        padding: 0;
+        width: 100%;
+        margin: 0 auto;
+        /* margin: 0; */
+        font-weight: bold;
+        font-size: 16px;
+        //border: 1px solid $border_color;
+        border-top: none;
+        h2 {
+          margin: 20px 0;
+          text-align: center;
+          span {
+            color: #fff;
+            background: $bg_color2;
+            width: 40px;
+            display: inline-block;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+          }
+        }
+        .aa {
+          // padding-left: 35px;
+          background-color: #eeee;
+          border-radius: 10px;
+          padding: 5px 0;
+        }
+        .bb {
+          // padding-left: 35px;
+          background-color: #eeee;
+          border-radius: 10px;
+          padding: 5px 0;
+        }
+        .one_boll {
+          padding-left: 154px;
+        }
+        .two_boll {
+          padding-left: 115px;
+        }
+        .three_boll {
+          padding-left: 76px;
+        }
+        .four_boll {
+          padding-left: 39px
+        }
+        .five_boll {
+          // padding-left: 35px
+        }
+        p {
+          overflow: hidden;
+          .two {
+            display: inline-block;
+            width: 75px;
+            float: left;
+            //border-right: 1px solid $border_color;
+            .box {
+              width: 30px;
+              height: 30px;
+              line-height: 30px;
+              text-align: center;
+              font-size: 16px;
+              font-weight: bold;
+              color: #fff;
+              display: inline-block;
+              border-radius: 20px;
+              background: $lg_blue2;
+            }
+          }
+        }
+      }
+    }
+    p {
+      width: 380px;
+      margin: 0 auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      .money_input {
+        width: 338px;
+        padding: 5px;
+        background-color: #eee;
+        border-radius: 5px
+      }
+    }
+    .bet_bottom {
+      width: 78px;
+      padding: 8px;
+      margin-left: 125px;
+      cursor: pointer;
+      outline: 0;
+      border-radius: 5px;
+    }
+    .color1 {
+      background-color: $bg_color;
+      color: #fff
+    }
+    .color2 {
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+    .font {
+      margin-left: 20px
+    }
+  }
+}

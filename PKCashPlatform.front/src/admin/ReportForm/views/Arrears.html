@@ -1,0 +1,268 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>催款查询</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="form-horizontal row">
+                                        <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select data-smart-select2  class="selectWidth" ng-model="site">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label">{{lang['Status']}}</label>
+                                        <div class="col-md-1 col-xs-8">
+                                            <div class="form-group">
+                                                <select class="form-control" ng-model="status" ng-init="status='0'">
+                                                    <option value="0">全部</option>
+                                                    <option value="1">已支付</option>
+                                                    <option value="2">未支付</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-horizontal row">
+                                        <label class="col-md-1 col-xs-4 input-label">时间</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">————</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1 col-xs-6">
+                                                <div class="input-group">
+                                                    <button class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-6">
+                                                <div class="input-group">
+                                                    <button class="btn btn-primary search" data-toggle="modal" data-target="#myModal1">添加催款</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">编号</th>
+                                            <th class="text-center">站点</th>
+                                            <th class="text-center">开户行</th>
+                                            <th class="text-center">收款人</th>
+                                            <th class="text-center">银行</th>
+                                            <th class="text-center">银行卡号</th>
+                                            <th class="text-center">下发时间</th>
+                                            <th class="text-center">客户支付状态</th>
+                                            <th class="text-center">是否已经交付</th>
+                                            <th class="text-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                            <td>{{item.number}}</td>
+                                            <td>{{item.site}}</td>
+                                            <td>{{item.openBank}}</td>
+                                            <td>{{item.payee}}</td>
+                                            <td>{{item.bank}}</td>
+                                            <td>{{item.bankNum}}</td>
+                                            <td>{{item.issuedTime|fiterTime}}</td>
+                                            <td>{{item.customerStatus}}</td>
+                                            <td>{{item.status}}</td>
+                                            <td>
+                                                <button class="btn btn-xs btn-default" data-toggle="modal" data-target="#myModal2" ng-click="modify(item)">催款</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">收款银行信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">站点：</label>
+                                <label class="col-md-7 control-label" style="margin-top: 6px;">
+                                    <span class="col-md-6" data-site="{{item.site_index_id}}" ng-repeat="item in siteJson"><input name="bb" ng-model="check1" class="check1" type="checkbox" />{{item.site_name}}&nbsp;&nbsp;</span>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label"></label>
+                                <label class="col-md-7 control-label">
+                                    <hr style="margin-top: 10px;">
+                                    <input name="aa" type="radio" ng-click="check1=true" />全选
+                                    <input name="aa" type="radio" ng-click="check1=false" />反选
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">开户行网点：</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="addData.openBank">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">收款人：</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="addData.payee">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">银行：</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="addData.bank">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">银行账号：</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="addData.bankNum">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                        <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">备注：</label>
+                                <label class="col-md-7 input">
+                                    <textarea class="col-md-12" rows="5" ng-model="addData.remark"></textarea>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount2">收款银行信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">站点：</label>
+                                <label class="col-md-7 control-label" style="margin-top: 6px;">
+                                    <span class="col-md-6" data-site="{{item.site_index_id}}" ng-repeat="item in siteJson"><input name="bb" ng-model="check2" class="check2" type="checkbox" />{{item.site_name}}&nbsp;&nbsp;</span>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label"></label>
+                                <label class="col-md-7 control-label">
+                                    <hr style="margin-top: 10px;">
+                                    <input name="aa" type="radio" ng-click="check2=true" />全选
+                                    <input name="aa" type="radio" ng-click="check2=false" />反选
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">开户行网点：</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="modifyData.openBank">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">收款人：</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="modifyData.payee">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">银行：</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="modifyData.bank">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">银行账号：</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="modifyData.bankNum">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--密码长度6-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">备注：</label>
+                                <label class="col-md-7 input">
+                                    <textarea class="col-md-12" rows="5" ng-model="modifyData.remark"></textarea>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifySubmit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

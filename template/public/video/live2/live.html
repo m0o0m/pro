@@ -1,0 +1,55 @@
+{{define "live"}}
+<script type="text/javascript">
+    var live2 = "<link rel=\"stylesheet\" href=\"" + cdnUrl + "/shared/video/css/live2/casino.css\" />" +
+            "<script type=\"text/javascript\" src=\"" + cdnUrl + "/shared/video/js/live2/gaming-box.js\"><\/script>";
+    document.writeln(live2);
+</script>
+<div class="content">
+    <div class="bwrap bg-5c3917">
+        <div class="ele-live-wrap center-block" style="width:900px">
+            <!-- cards wrap frame -->
+            <div class="ele-live-align">
+                <div class="gallery">
+                {{range $k,$v := .LiveOrder}}
+                    <li class="gallery-picture {{$v.VType}}"></li>
+                {{end}}
+                </div>
+
+                <div class="btn-row">
+                    <!-- 游戏规则 -->
+                    <a href="javascript:;" target="_blank" id="egame_rule">游戏规则</a>
+                    <!-- 进入游戏 -->
+                    <a href="javascript:;" onclick="javascript:zhuModal.login();" class="pk-login-before">进入游戏</a>
+                    <a href="javascript:;" id="egame_go" class="pk-login-after" style="display: none;">进入游戏</a>
+                </div>
+
+                <div class="ele-live-notice">
+                    <h4>请滑动鼠标指针选择下方的博彩公司，祝您游戏愉快！</h4>
+                </div>
+
+                <!-- cards -->
+                <div class="cards-box">
+
+                </div><!-- end cards -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+var clients_group = {
+{{$url := .Header.CdnUrl}}
+{{range $k,$v := .LiveOrder}}
+{{if gt $k 0}},{{end}}{{$k}}: ["{{$v.VType}}", '<img src="{{$url}}/theme3/public/shared/video/images/live2/{{$v.VType}}.jpg" alt="{{$v.VType}}">']
+{{end}}
+};
+var num = {{.LiveLen}}-1;
+var px = 765/num;
+var list =
+{{range $k,$v := .LiveOrder}}
+{{if gt $k 0}}+{{end}}"<div class='card {{$v.VType}}' style='left:"+px*{{$k}}+"px'></div> "
+{{end}}
+$('.cards-box').html(list);
+</script>
+
+{{end}}

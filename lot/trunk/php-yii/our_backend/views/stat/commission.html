@@ -1,0 +1,125 @@
+
+<div class="page-header col-xs-12">
+    <form id="search-form">
+        <label for="date"> 日期：
+            <input class="laydate-icon" type="text" placeholder="请输入日期" name="starttime" id="starttime" value="<{if isset($smarty.get.starttime) }><{$smarty.get.starttime}><{/if}>">
+            ~
+            <input class="laydate-icon" type="text" placeholder="请输入日期" name="endtime" id="endtime" value="<{if isset($smarty.get.endtime) }><{$smarty.get.endtime}><{/if}>">
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center" style="width:20%;">线路ID</th>
+                        <th class="center">盈利</th>
+                        <th class="center">套餐名称</th>
+                        <th class="center">比例</th>
+                        <th class="center">应收金额</th>
+                    </tr>
+                </thead>
+                <{if isset($result['data'])}>
+                <tbody>
+                  <{if count($result['data']) == 0}>
+                    <tr><th class="center" colspan="20">无记录</th></tr>
+                  <{else}>
+                  <{foreach from=$result['data'] item=v key=k}>
+                    <tr>
+                        <td class="center"><i class="glyphicon glyphicon-plus-sign" id="<{$k}>_b" onclick="javascript:showsub('<{$k}>');" ></i> <{$k}> </td>
+                        <td class="center"> <{if isset($v['line_money'])}> <{$v['line_money']}> <{/if}> </td>
+                        <td class="center"> <{if isset($v['tname'])}> <{$v['tname']}> <{/if}> </td>
+                        <td class="center"> <{if isset($v['proportion'])}> <{$v['proportion']}> <{/if}> </td>
+                        <td class="center"> <{if isset($v['line_tc_money'])}> <{$v['line_tc_money']}> <{/if}> </td>
+                    </tr>
+                    <{if !empty($v['agent'])}>
+                    <tbody id="<{$k}>_sub" style="display:none;">
+                        <tr><td colspan="5" style="border-bottom:1px solid black;"><button class="btn btn-xs btn-success" onclick="excel('<{$k}>')">导出到excel</button></td></tr>
+                        <tr>
+                            <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">代理名称</td>
+                            <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">盈利</td>
+                            <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">套餐名称</td>
+                            <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">比例</td>
+                            <td class="center sub_th" style="background:rgb(246,205,160);border:1px solid black;">应收金额</td>
+                        </tr>
+                        <{foreach from=$v['agent'] item=vv key=kk}>
+                        <tr>
+                            <td class="center" style="background:rgb(214,253,208);border:1px solid black;"><{if isset($vv['agent_name'])}> <{$vv['agent_name']}><{/if}></td>
+                            <td class="center" style="background:rgb(214,253,208);border:1px solid black;"><{if isset($vv['allmoney'])}> <{$vv['allmoney']}> <{/if}></td>
+                            <td class="center" style="background:rgb(214,253,208);border:1px solid black;"> <{if isset($v['tname'])}> <{$v['tname']}> <{/if}></td>
+                            <td class="center" style="background:rgb(214,253,208);border:1px solid black;"><{if isset($v['proportion'])}> <{$v['proportion']}> <{/if}></td>
+                            <td class="center" style="background:rgb(214,253,208);border:1px solid black;"><{if isset($vv['tc_money'])}> <{$vv['tc_money']}> <{/if}></td>
+                        </tr>
+                        <{/foreach}>
+                    </tbody>
+                    <{/if}>
+                  <{/foreach}>
+                    <tr><td colspan="5">备注：以上数据实际使用时，请先导出报表，重新统计后进行对比</td></tr>
+                  <{/if}>
+                </tbody>
+                <{/if}>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // pjax局部加载列表
+    function search() {
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: '?',
+            container: '#container'
+        });
+    }
+    // 搜索
+    $('#search').click(function () {
+        search();
+    });
+  
+    //时间控件
+    var start = {
+        elem: '#starttime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas;
+        }
+    };
+    laydate(start);
+    var end = {
+        elem: '#endtime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true
+    };
+    laydate(end);
+    <{if !isset($smarty.get.starttime)}>
+        $('#starttime').val(laydate.now(0, 'YYYY-MM-DD'));
+    <{/if}>
+    <{if !isset($smarty.get.endtime)}>
+        $('#endtime').val(laydate.now(0, 'YYYY-MM-DD'));
+    <{/if}>
+
+
+    function showsub(res){
+        $('#'+res+'_b').toggleClass('glyphicon-plus-sign glyphicon-minus');
+        $('#'+res+'_sub').toggle();
+    }
+
+    function excel(line_id){
+        var start = $('#starttime').val();
+        var end = $('#endtime').val();
+        window.location.href = 'export?act=commission&line_id='+line_id + '&starttime=' + start + '&endtime=' + end;
+    }
+</script>

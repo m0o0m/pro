@@ -1,0 +1,17 @@
+{{template "header" .Header}}
+<div id="page-container" style="background: #110F39;">
+    <div id="page-body" style="background: url({{.Header.CdnUrl}}/theme3/public/images/new/gameArea_bg_y.png) 50% 100% repeat-y;">
+        <div style="height:10px;"></div>
+    {{template "lottery" .}}
+    </div>
+</div>
+<style>
+    .first #page-container:before,
+    .game #page-container:before,
+    .first #page-container:after,
+    .game #page-container:after {
+        display:block;
+    }
+    .banner-wrap{background: url({{.Header.CdnUrl}}/theme3/public/images/new/cpa.jpg) no-repeat left top !important;}
+</style>
+{{template "footer" .Footer}}

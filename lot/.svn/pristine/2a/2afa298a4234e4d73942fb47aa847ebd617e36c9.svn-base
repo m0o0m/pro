@@ -1,0 +1,234 @@
+package core
+
+import (
+	"net"
+	"github.com/gansidui/gotcp"
+	"encoding/binary"
+	"io"
+	"errors"
+	"time"
+	"encoding/json"
+	"strings"
+	"global"
+	"models"
+)
+
+var (
+	n            []string
+	WhiteListKey = ""
+)
+
+const (
+	MaxBodyLen = 5 << 10 //5120KB
+)
+
+// Packet
+type Packet struct {
+	pData []byte `json:"-"`
+	Data  string `json:"data"`
+	Key   string `json:"key"`
+}
+
+func (this *Packet) Serialize() []byte {
+	return this.pData
+}
+
+func (this *Packet) GetLength() uint32 {
+	return binary.BigEndian.Uint32(this.pData[0:4])
+}
+
+func (this *Packet) GetBody() []byte {
+	return this.pData[4:]
+}
+
+func (this *Packet) DecBody() error {
+	return json.Unmarshal([]byte(this.pData[4:]), this)
+}
+
+func NewPacket(buff []byte, hasLengthField bool) *Packet {
+	p := &Packet{}
+
+	if hasLengthField {
+		p.pData = buff
+
+	} else {
+		p.pData = make([]byte, 4+len(buff))
+		binary.BigEndian.PutUint32(p.pData[0:4], uint32(len(buff)))
+		copy(p.pData[4:], buff)
+
+		//log.Println(p.pData[0:4])
+	}
+
+	return p
+}
+
+func NewPacketFromStr(buff string, hasLengthField bool) *Packet {
+	p := &Packet{}
+
+	bBuff := []byte(buff)
+
+	if hasLengthField {
+		p.pData = bBuff
+
+	} else {
+		p.pData = make([]byte, 4+len(bBuff))
+		binary.BigEndian.PutUint32(p.pData[0:4], uint32(len(bBuff)))
+		copy(p.pData[4:], bBuff)
+	}
+
+	return p
+}
+
+type PacketProtocol struct {
+}
+
+func (this *PacketProtocol) ReadPacket(conn *net.TCPConn) (gotcp.Packet, error) {
+
+	var (
+		lengthBytes []byte = make([]byte, 4)
+		length      uint32
+	)
+	// read length 数据太大的时候，防火墙会屏蔽
+	if _, err := io.ReadFull(conn, lengthBytes); err != nil {
+		return nil, err
+	}
+	if length = binary.BigEndian.Uint32(lengthBytes); length > MaxBodyLen {
+		return nil, errors.New("the size of packet is larger than the limit")
+	}
+	buff := make([]byte, 4+length)
+	copy(buff[0:4], lengthBytes)
+
+	if _, err := io.ReadFull(conn, buff[4:]); err != nil {
+		return nil, err
+	}
+	return NewPacket(buff, true), nil
+}
+
+type PacketCallback struct {
+}
+
+func (this *PacketCallback) OnConnect(c *gotcp.Conn) bool {
+	addr := c.GetRawConn().RemoteAddr()
+	c.PutExtraData(addr)
+	global.Logger.Debug("OnConnect:%s", addr)
+	return true
+}
+
+func (this *PacketCallback) OnMessage(c *gotcp.Conn, p gotcp.Packet) bool {
+	addr := c.GetRawConn().RemoteAddr().String()
+	c.PutExtraData(addr)
+	addrs := strings.Split(addr, ":")[0]
+	num := CheckWhiteList(addrs)
+	if num == 0 {
+		global.Logger.Error("TCP wallet ip is not in whitelist: %s", addrs)
+		Send(c, `{"code":1006,"msg":"TCP wallet ip is not in whitelist: `+addrs+`"}`)
+		return true
+	}
+	packet := p.(*Packet)
+	global.Logger.Debug("OnMessage:[%v] [%v]\n", packet.GetLength(), string(packet.GetBody()))
+	err := packet.DecBody()
+	if err != nil {
+		global.Logger.Error("DecBody err:%s", err.Error())
+		Send(c, `{"code":1001,"msg":"DecBody err"}`)
+		return true
+	}
+	key_real := global.Md5(packet.Data + global.Cfg.MD5Key)
+	if key_real != packet.Key {
+		global.Logger.Error("MD5Key or DESKey err key_real:%s packet_key:%s", key_real,packet.Key)
+		Send(c, `{"code":1002,"msg":"MD5Key or DESKey err"}`)
+		return true
+	}
+	_, errr := DecParams(packet.Data, global.Cfg.DESKey)
+	if errr != nil {
+		global.Logger.Error("DecParams error Data:%s DESKey:%s  %s", packet.Data, global.Cfg.DESKey, errr.Error())
+		Send(c, `{"code":1003,"msg":"MD5Key or DESKey err"}`)
+		return true
+	}
+	body, err := SendDistance(string(packet.GetBody()))
+	if err != nil {
+		global.Logger.Error("SendDistance err:%s", err.Error())
+		Send(c, `{"code":1005,"msg":"SendDistance`+err.Error()+`"}`)
+	} else {
+		Send(c, body)
+	}
+	return true
+	//解析并返回数据
+}
+
+func SendDistance(msg string) (body string, err error) {
+	tcpAddr, err := net.ResolveTCPAddr("tcp4", global.Cfg.SendAdd)
+	conn, err := net.DialTCP("tcp", nil, tcpAddr)
+	if err != nil {
+		global.Logger.Error("error:%s", err)
+		return body, err
+	}
+	echoProtocol := PacketProtocol{}
+	int, err := conn.Write(NewPacket([]byte(msg), false).Serialize())
+	if err != nil {
+		global.Logger.Error("error:%s %v", err, int)
+		return body, err
+	}
+
+	p, err := echoProtocol.ReadPacket(conn)
+	if err == nil {
+		q := p.(*Packet)
+		body = string(q.GetBody())
+		global.Logger.Debug("ReadPacket:%s", body)
+		return body, nil
+	} else {
+		global.Logger.Error("error:%s", err)
+		return body, err
+	}
+	return body, nil
+}
+
+func (this *PacketCallback) OnClose(c *gotcp.Conn) {
+	global.Logger.Debug("OnClose:s", c.GetExtraData())
+}
+
+func Send(c *gotcp.Conn, data string) error {
+	return c.AsyncWritePacket(NewPacketFromStr(data, false), 3*time.Second)
+}
+
+func DecParams(params, DESKey string) (*models.RequestBody, error) {
+	params = strings.Replace(params, " ", "+", -1) //base64bug
+	if len(params) == 0 {
+		return nil, nil
+	}
+	param, err := global.DesDecrypt([]byte(params), []byte(DESKey))
+	if err != nil {
+		return nil, err
+	}
+	global.Logger.Debug("params:" + string(param))
+	result := new(models.RequestBody)
+	if err := json.Unmarshal(param, &result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func CheckWhiteList(ip string) (isExist int) {
+	WhiteListKey = "whitelist_wallet"
+	datas, err := global.Redisdb.Get(WhiteListKey).Result()
+	if err != nil {
+		global.Logger.Debug("GetWhiteList error: %v", err.Error())
+		return 1
+	}
+	//["11.11.111.111","127.0.0.1"]
+	if len(datas) > 0 {
+		err := json.Unmarshal([]byte(datas), &n)
+		if err != nil {
+			global.Logger.Error("json Unmarshal error: %s", err)
+			return 0
+		}
+		for _, v := range n {
+			if v == ip {
+				isExist = 1
+				return
+			}
+		}
+		return isExist
+
+	}
+	return 1
+}

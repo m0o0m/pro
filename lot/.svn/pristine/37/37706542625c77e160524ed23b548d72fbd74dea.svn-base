@@ -1,0 +1,241 @@
+@import "./function.scss";
+.integrate {
+  .box {
+    width: 912px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 12px;
+    overflow: hidden;
+    .uls {
+      width: 20%;
+      float: left;
+      border-left: 1px solid $border_color;
+      .thend {
+        height: 40px;
+        line-height: 40px;
+        background-color: #eee;
+        border-top: 1px solid $border_color;
+        border-bottom: 1px solid $border_color;
+      }
+      .list {
+        border-bottom: 1px solid $border_color;
+      }
+      // overflow: hidden;
+      .one, .tow {
+        // float: left;
+        // display: inline-block;
+        width: 50px;
+        height: 40px;
+        color: #000;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .one {
+        font-size: 14px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        line-height: 30px;
+      }
+      .tow {
+        line-height: 40px;
+        border-left: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+      }
+      .three {
+        float: left;
+        line-height: 40px;
+        height: 40px;
+        width: 74px;
+        input {
+          float: left;
+          width: 36px;
+          height: 16px;
+          color: #000;
+          border: 1px solid #b1b1b1;
+        }
+      }
+    }
+    .uls1 {
+      width: 25%;
+      float: left;
+      border-left: 1px solid $border_color;
+      .thend {
+        height: 40px;
+        line-height: 40px;
+        background-color: #eee;
+        border-top: 1px solid $border_color;
+        border-bottom: 1px solid $border_color;
+      }
+      .list {
+        border-bottom: 1px solid $border_color;
+      }
+      // overflow: hidden;
+      .one, .tow {
+        // float: left;
+        // display: inline-block;
+        width: 50px;
+        height: 40px;
+        color: #000;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .one {
+        font-size: 14px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        line-height: 30px;
+      }
+      .tow {
+        line-height: 40px;
+        border-left: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+      }
+      .three {
+        float: left;
+        line-height: 40px;
+        height: 40px;
+        width: 118px;
+        input {
+          float: left;
+          width: 36px;
+          height: 16px;
+          color: #000;
+          border: 1px solid #b1b1b1;
+        }
+      }
+    }
+  }
+}
+
+.uls:nth-child(1), .uls:nth-child(2), .uls:nth-child(3), .uls:nth-child(4), .uls:nth-child(5)
+.uls:nth-child(6), .uls:nth-child(7), .uls:nth-child(8), .uls:nth-child(11), .uls:nth-child(12)
+.uls:nth-child(13), .uls:nth-child(14) {
+  .list:last-child {
+    border-bottom: none !important;
+  }
+  // background-color: red;
+}
+.uls1:nth-child(11){
+    .list:last-child{
+      border-right:1px solid $border_color;
+    }
+}
+
+.uls:nth-child(6), .uls:nth-child(7), .uls:nth-child(8), .uls:nth-child(9), .uls:nth-child(10) {
+  height: 244px;
+}
+
+.uls:nth-child(11), .uls:nth-child(12), .uls:nth-child(13), .uls:nth-child(14), .uls:nth-child(15) {
+  height: 245px;
+  border-bottom: 1px solid $border_color;
+}
+.uls:nth-child(1),.uls:nth-child(2),.uls:nth-child(3),.uls:nth-child(4){
+  border-bottom: 1px solid $border_color;
+}
+
+.uls:nth-child(5), .uls:nth-child(10), .uls:nth-child(15) {
+  border-right: 1px solid $border_color;
+  // border-bottom: 1px solid $border_color;
+}
+
+.ball {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  line-height: 30px;
+  background: $ball;
+  color: #fff;
+}
+
+.footer1 {
+  width: 920px;
+  float: left;
+  margin-top: 10px;
+  padding-right: 20px;
+  // padding-bottom: 45px;
+  .input {
+    width: 85px;
+    padding: 5px;
+    background-color: #eeeeee;
+    margin-right: 10px;
+    border-radius: 5px;
+    float: right;
+  }
+  button {
+    width: 85px;
+    padding: 5px;
+    float: right;
+    outline: none 0;
+    border-radius: 5px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  .img {
+    margin-left: 136px;
+    float: left;
+    span {
+      //margin-left: 30px;
+      //height: 60px;
+      float: left;
+      display: block;
+      cursor: pointer;
+    }
+    .s1 {
+      height: 60px;
+      width: 64px;
+      background: url("../../assets/img/Chips.png") no-repeat 0 0px;
+      background-size: 368px;
+    }
+    .s2 {
+      height: 60px;
+      width: 64px;
+      background: url("../../assets/img/Chips.png") no-repeat -64px 0px;
+      background-size: 368px;
+    }
+    .s3 {
+      height: 60px;
+      width: 64px;
+      background: url("../../assets/img/Chips.png") no-repeat -128px 0px;
+      background-size: 368px;
+    }
+    .s4 {
+      height: 60px;
+      width: 64px;
+      background: url("../../assets/img/Chips.png") no-repeat -192px 0px;
+      background-size: 368px;
+    }
+    .s5 {
+      height: 60px;
+      width: 64px;
+      background: url("../../assets/img/Chips.png") no-repeat -256px 0px;
+      background-size: 368px;
+    }
+    .s6 {
+      height: 60px;
+      width: 73px;
+      background: url("../../assets/img/Chips.png") no-repeat -320px 0px;
+      background-size: 368px;
+    }
+  }
+  .one {
+    width: 160px;
+    float: left;
+    background-color: #eee;
+    span {
+      color: $bg_color;
+    }
+    .left {
+      color: #999999
+    }
+  }
+  .two {
+    float: right;
+    background-color: $bg_color;
+    color: #fff
+  }
+}
+
+.styleclect {
+  background-color: $bg_select;
+}

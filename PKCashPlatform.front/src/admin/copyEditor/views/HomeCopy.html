@@ -1,0 +1,180 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>首页文案</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+                                            <label class="col-md-1 col-xs-3 input-label">站点</label>
+                                            <div class="col-md-2 col-xs-6">
+                                                <div class="form-group">
+                                                    <select data-smart-select2  class="selectWidth" ng-model="site_index_id" ng-change="search()">
+                                                        <option value="">请选择</option>
+                                                        <option value="{{itemSite.site_index_id}}" ng-repeat="itemSite in sharedJson">{{itemSite.site_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>代码</th>
+                                                    <th>文案标题</th>
+                                                    <th>使用联络表单</th>
+                                                    <th>代理登录</th>
+                                                    <th>状态</th>
+                                                    <th>排序</th>
+                                                    <th>文案类型</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list">
+                                                    <td>{{item.code}}</td>
+                                                    <td>{{item.title}}</td>
+                                                    <td>{{item.is_use===1?"使用":"未使用"}}</td>
+                                                    <td>{{item.is_login===1?"登录":"未登录"}}</td>
+                                                    <td>{{item.status===1?"启用":"禁用"}}</td>
+                                                    <td>{{item.order}}</td>
+                                                    <td>{{item.type}}</td>
+                                                    <td ng-show="item.is_status==2">
+                                                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#dialog_homecopy" ng-click="modify(item.id,item.title,item.is_use,item.is_login,item.status,item.order,item.type,item.code)">编辑</button>
+                                                        <button class="btn btn-warning btn-xs" ng-click="modifyContent(item.id)">编辑内容</button>
+                                                        <button class="btn btn-success btn-xs" ng-click="storage(item.id)">储存案件</button>
+                                                    </td>
+                                                    <td ng-show="item.is_status==1" class="text-red">
+                                                       已建立案件
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <div class="modal fade" id="dialog_homecopy" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="addAccount">是否确定修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">文案代码</label>
+                                    <div class="col-md-6 col-xs-8">
+                                        <input class="form-control" type="text" ng-model="code">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">标题</label>
+                                    <div class="col-md-6 col-xs-8">
+                                        <input class="form-control" type="text" ng-model="title">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">排序</label>
+                                    <div class="col-md-6 col-xs-8">
+                                        <input class="form-control" type="number" ng-model="num">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="smart-form">
+                                <fieldset >
+                                    <label class="col-md-3 col-xs-4 input-label">是否启用</label>
+                                    <div class="col-md-6 col-xs-8">
+                                        <div class="col-md-6  col-xs-6">
+                                            <label class="radio no-paddtop">
+                                                <input type="radio" value="1" name="status">
+                                                <i></i>启用
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6  col-xs-6">
+                                            <label class="radio no-paddtop">
+                                                <input type="radio" value="2" name="status">
+                                                <i></i>禁用
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset >
+                                    <label class="col-md-3 col-xs-4 input-label">使用联络表单</label>
+                                    <div class="col-md-6 col-xs-8">
+                                        <div class="col-md-6  col-xs-6">
+                                            <label class="radio no-paddtop">
+                                                <input type="radio" value="1" name="form">
+                                                <i></i>使用
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6  col-xs-6">
+                                            <label class="radio no-paddtop">
+                                                <input type="radio" value="2" name="form">
+                                                <i></i>未使用
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset >
+                                    <label class="col-md-3 col-xs-4 input-label">代理登录</label>
+                                    <div class="col-md-6 col-xs-8">
+                                        <div class="col-md-6  col-xs-6">
+                                            <label class="radio no-paddtop">
+                                                <input type="radio" value="1" name="login">
+                                                <i></i>登录
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6  col-xs-6">
+                                            <label class="radio no-paddtop">
+                                                <input type="radio" value="2" name="login">
+                                                <i></i>未登录
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-click="sub()" data-dismiss="modal">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+

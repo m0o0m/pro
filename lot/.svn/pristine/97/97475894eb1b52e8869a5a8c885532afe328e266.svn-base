@@ -1,0 +1,1254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3198bd22-ddc8-40bd-a46b-57e5cca32d4e" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileColors">
+    <fileColor scope="Non-Project Files (Material Default)" color="2E3C43" />
+    <fileColor scope="Non-Project Files (Material Darker)" color="323232" />
+    <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
+    <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="chart-lotteryId=bj_10.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=bj_10.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="34">
+                  <caret line="596" column="8" lean-forward="true" selection-start-line="596" selection-start-column="8" selection-end-line="600" selection-end-column="10" />
+                  <folding>
+                    <marker date="1513421257280" expanded="true" signature="31214:31408" ph="..." />
+                    <marker date="1513421257280" expanded="true" signature="39992:40003" ph="..." />
+                    <marker date="1513421257280" expanded="true" signature="41091:41139" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="chart-lotteryId=fc_3d.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=fc_3d.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="184">
+                  <caret line="821" column="10" lean-forward="false" selection-start-line="821" selection-start-column="10" selection-end-line="821" selection-end-column="10" />
+                  <folding>
+                    <marker date="1513422518828" expanded="true" signature="56268:56278" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="56588:56598" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="57607:57655" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="58962:58980" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="59052:59107" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="59299:59347" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="59538:59548" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75097:75107" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75151:75161" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75205:75215" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75281:75291" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75335:75345" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75389:75399" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75465:75475" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75519:75529" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75573:75583" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75649:75659" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75703:75713" ph="..." />
+                    <marker date="1513422518828" expanded="true" signature="75757:75767" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=gx_k3.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=gx_k3.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="367">
+                  <caret line="595" column="34" lean-forward="false" selection-start-line="595" selection-start-column="34" selection-end-line="595" selection-end-column="34" />
+                  <folding>
+                    <marker date="1513422839719" expanded="true" signature="42140:42150" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="43392:43440" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="44838:44856" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="44930:44995" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="45207:45240" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="45431:45441" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59305:59315" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59359:59369" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59414:59424" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59470:59480" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59547:59557" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59601:59611" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59656:59666" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59712:59722" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59789:59799" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59843:59853" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59898:59908" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="59954:59964" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="60031:60041" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="60085:60095" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="60140:60150" ph="..." />
+                    <marker date="1513422839719" expanded="true" signature="60196:60206" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=jnd_28.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=jnd_28.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="349">
+                  <caret line="559" column="33" lean-forward="true" selection-start-line="559" selection-start-column="33" selection-end-line="559" selection-end-column="33" />
+                  <folding>
+                    <marker date="1513422916192" expanded="true" signature="41122:41170" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=jnd_bs.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=jnd_bs.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="343">
+                  <caret line="484" column="34" lean-forward="false" selection-start-line="484" selection-start-column="34" selection-end-line="484" selection-end-column="34" />
+                  <folding>
+                    <marker date="1513423036458" expanded="true" signature="34413:34455" ph="..." />
+                    <marker date="1513423036458" expanded="true" signature="34518:34547" ph="..." />
+                    <marker date="1513423036458" expanded="true" signature="35043:35067" ph="..." />
+                    <marker date="1513423036458" expanded="true" signature="35347:35394" ph="..." />
+                    <marker date="1513423036458" expanded="true" signature="35540:35587" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=js_k3.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=js_k3.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="285">
+                  <caret line="594" column="34" lean-forward="false" selection-start-line="594" selection-start-column="34" selection-end-line="594" selection-end-column="34" />
+                  <folding>
+                    <marker date="1513423156344" expanded="true" signature="42136:42146" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="43388:43436" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="44834:44852" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="44926:44991" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="45203:45236" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="45427:45437" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59301:59311" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59355:59365" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59410:59420" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59466:59476" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59543:59553" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59597:59607" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59652:59662" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59708:59718" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59785:59795" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59839:59849" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59894:59904" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="59950:59960" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="60027:60037" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="60081:60091" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="60136:60146" ph="..." />
+                    <marker date="1513423156344" expanded="true" signature="60192:60202" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=jx_11.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=jx_11.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="333">
+                  <caret line="612" column="34" lean-forward="false" selection-start-line="612" selection-start-column="34" selection-end-line="612" selection-end-column="34" />
+                  <folding>
+                    <marker date="1513423246229" expanded="true" signature="42616:42664" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=liuhecai.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=liuhecai.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="389">
+                  <caret line="491" column="34" lean-forward="false" selection-start-line="491" selection-start-column="34" selection-end-line="491" selection-end-column="34" />
+                  <folding>
+                    <marker date="1513423494400" expanded="true" signature="37106:37135" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="37283:37324" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="37775:37804" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="37930:37959" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="38270:38293" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="38597:38649" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="39741:39797" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="39877:39933" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="40040:40096" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="40392:40448" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="40594:40650" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="40812:40868" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="41045:41101" ph="..." />
+                    <marker date="1513423494400" expanded="true" signature="41293:41349" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=pc_28.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=pc_28.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="420">
+                  <caret line="567" column="21" lean-forward="true" selection-start-line="567" selection-start-column="21" selection-end-line="567" selection-end-column="21" />
+                  <folding>
+                    <marker date="1513423588123" expanded="true" signature="41087:41135" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=pl_3.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=pl_3.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="210">
+                  <caret line="670" column="25" lean-forward="false" selection-start-line="670" selection-start-column="21" selection-end-line="670" selection-end-column="25" />
+                  <folding>
+                    <marker date="1513423892921" expanded="true" signature="56354:56364" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="56674:56684" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="57693:57741" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="59048:59066" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="59138:59193" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="59385:59433" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="59624:59634" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75183:75193" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75237:75247" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75291:75301" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75367:75377" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75421:75431" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75475:75485" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75551:75561" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75605:75615" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75659:75669" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75735:75745" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75789:75799" ph="..." />
+                    <marker date="1513423892921" expanded="true" signature="75843:75853" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=sd_11.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=sd_11.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="201">
+                  <caret line="604" column="13" lean-forward="false" selection-start-line="604" selection-start-column="8" selection-end-line="604" selection-end-column="13" />
+                  <folding>
+                    <marker date="1513424165366" expanded="true" signature="42607:42655" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=tj_ssc.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=tj_ssc.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="580">
+                  <caret line="617" column="21" lean-forward="true" selection-start-line="617" selection-start-column="21" selection-end-line="617" selection-end-column="21" />
+                  <folding>
+                    <marker date="1513424220352" expanded="true" signature="43559:43607" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chart-lotteryId=xj_ssc.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/chart-lotteryId=xj_ssc.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="233">
+                  <caret line="601" column="10" lean-forward="false" selection-start-line="601" selection-start-column="10" selection-end-line="601" selection-end-column="10" />
+                  <folding>
+                    <marker date="1513424291505" expanded="true" signature="43610:43658" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>shuju</find>
+      <find>shuju1</find>
+      <find>ah_k3</find>
+      <find>ajaxRequest</find>
+      <find>ajax</find>
+      <find>bj_10</find>
+      <find>bj_28</find>
+      <find>split</find>
+      <find>startT</find>
+      <find>cq_ssc</find>
+      <find>liuhecai</find>
+      <find>console.log(json);</find>
+      <find>pl_3</find>
+      <find>top</find>
+      <find>ajaxR</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/../chart-lotteryId=ah_k3.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=bj_8.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=ah_k3.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=bj_28.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=bj_10.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=cq_ssc.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=cq_ten.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=dm_28.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=dm_klc.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=fc_3d.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=gd_11.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=gd_ten.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=gx_k3.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=jnd_28.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=jnd_bs.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=js_k3.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=jx_11.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=liuhecai.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=pc_28.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=pl_3.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=sd_11.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=tj_ssc.html" />
+        <option value="$PROJECT_DIR$/chart-lotteryId=xj_ssc.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="812" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AngularJS</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="trend_chart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="trend_chart" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="JavaScriptPreferStrict" value="false" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="node.js.selected.package.tslint" value="" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
+    <property name="node.js.selected.package.stylelint" value="" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3198bd22-ddc8-40bd-a46b-57e5cca32d4e" name="Default" comment="" />
+      <created>1513239193508</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1513239193508</updated>
+      <workItem from="1513239194651" duration="2714000" />
+      <workItem from="1513411836979" duration="11345000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="14059000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="812" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15785764" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=ah_k3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12831">
+          <caret line="611" column="41" lean-forward="false" selection-start-line="611" selection-start-column="41" selection-end-line="611" selection-end-column="41" />
+          <folding>
+            <marker date="1513420446409" expanded="true" signature="41988:41998" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="43246:43294" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="44697:44715" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="44793:44858" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="45070:45103" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="45294:45304" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59309:59319" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59363:59373" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59418:59428" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59474:59484" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59551:59561" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59605:59615" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59660:59670" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59716:59726" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59793:59803" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59847:59857" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59902:59912" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59958:59968" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="60035:60045" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="60089:60099" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="60144:60154" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="60200:60210" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=bj_28.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11298">
+          <caret line="538" column="7" lean-forward="true" selection-start-line="538" selection-start-column="7" selection-end-line="538" selection-end-column="7" />
+          <folding>
+            <marker date="1513420773282" expanded="true" signature="41020:41068" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=cq_ssc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12348">
+          <caret line="588" column="21" lean-forward="true" selection-start-line="588" selection-start-column="21" selection-end-line="588" selection-end-column="21" />
+          <folding>
+            <marker date="1513421762944" expanded="true" signature="43683:43731" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=cq_ten.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11529">
+          <caret line="549" column="56" lean-forward="false" selection-start-line="549" selection-start-column="56" selection-end-line="549" selection-end-column="56" />
+          <folding>
+            <marker date="1513421926536" expanded="true" signature="40812:40823" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="42042:42053" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="42130:42141" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="42218:42229" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="42630:42640" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45300:45311" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45358:45369" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45416:45427" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45474:45484" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45531:45542" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45589:45600" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45647:45658" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45705:45715" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45762:45773" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45820:45831" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45878:45889" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45936:45946" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=dm_28.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11340">
+          <caret line="540" column="56" lean-forward="false" selection-start-line="540" selection-start-column="56" selection-end-line="540" selection-end-column="56" />
+          <folding>
+            <marker date="1513422040451" expanded="true" signature="41115:41163" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=dm_klc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9786">
+          <caret line="466" column="56" lean-forward="false" selection-start-line="466" selection-start-column="56" selection-end-line="466" selection-end-column="56" />
+          <folding>
+            <marker date="1513422285369" expanded="true" signature="34361:34403" ph="..." />
+            <marker date="1513422285369" expanded="true" signature="34466:34495" ph="..." />
+            <marker date="1513422285369" expanded="true" signature="34991:35015" ph="..." />
+            <marker date="1513422285369" expanded="true" signature="35295:35342" ph="..." />
+            <marker date="1513422285369" expanded="true" signature="35488:35535" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=fc_3d.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17073">
+          <caret line="813" column="56" lean-forward="false" selection-start-line="813" selection-start-column="56" selection-end-line="813" selection-end-column="56" />
+          <folding>
+            <marker date="1513422518828" expanded="true" signature="56268:56278" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="56588:56598" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="57607:57655" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="58962:58980" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="59052:59107" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="59299:59347" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="59538:59548" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75097:75107" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75151:75161" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75205:75215" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75281:75291" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75335:75345" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75389:75399" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75465:75475" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75519:75529" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75573:75583" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75649:75659" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75703:75713" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75757:75767" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=gd_11.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12474">
+          <caret line="594" column="56" lean-forward="false" selection-start-line="594" selection-start-column="56" selection-end-line="594" selection-end-column="56" />
+          <folding>
+            <marker date="1513422655954" expanded="true" signature="42607:42655" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=gd_ten.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10983">
+          <caret line="523" column="31" lean-forward="true" selection-start-line="523" selection-start-column="31" selection-end-line="523" selection-end-column="31" />
+          <folding>
+            <marker date="1513422715202" expanded="true" signature="40742:40753" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="41972:41983" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="42060:42071" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="42148:42159" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="42560:42570" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45230:45241" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45288:45299" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45346:45357" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45404:45414" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45461:45472" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45519:45530" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45577:45588" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45635:45645" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45692:45703" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45750:45761" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45808:45819" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45866:45876" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=gx_k3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12096">
+          <caret line="576" column="56" lean-forward="false" selection-start-line="576" selection-start-column="56" selection-end-line="576" selection-end-column="56" />
+          <folding>
+            <marker date="1513422839719" expanded="true" signature="42140:42150" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="43392:43440" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="44838:44856" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="44930:44995" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="45207:45240" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="45431:45441" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59305:59315" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59359:59369" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59414:59424" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59470:59480" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59547:59557" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59601:59611" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59656:59666" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59712:59722" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59789:59799" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59843:59853" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59898:59908" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59954:59964" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="60031:60041" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="60085:60095" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="60140:60150" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="60196:60206" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=jnd_28.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11340">
+          <caret line="540" column="56" lean-forward="false" selection-start-line="540" selection-start-column="56" selection-end-line="540" selection-end-column="56" />
+          <folding>
+            <marker date="1513422916192" expanded="true" signature="41122:41170" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=jnd_bs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9786">
+          <caret line="466" column="56" lean-forward="false" selection-start-line="466" selection-start-column="56" selection-end-line="466" selection-end-column="56" />
+          <folding>
+            <marker date="1513423036458" expanded="true" signature="34413:34455" ph="..." />
+            <marker date="1513423036458" expanded="true" signature="34518:34547" ph="..." />
+            <marker date="1513423036458" expanded="true" signature="35043:35067" ph="..." />
+            <marker date="1513423036458" expanded="true" signature="35347:35394" ph="..." />
+            <marker date="1513423036458" expanded="true" signature="35540:35587" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=js_k3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12096">
+          <caret line="576" column="56" lean-forward="false" selection-start-line="576" selection-start-column="56" selection-end-line="576" selection-end-column="56" />
+          <folding>
+            <marker date="1513423156344" expanded="true" signature="42136:42146" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="43388:43436" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="44834:44852" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="44926:44991" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="45203:45236" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="45427:45437" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59301:59311" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59355:59365" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59410:59420" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59466:59476" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59543:59553" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59597:59607" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59652:59662" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59708:59718" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59785:59795" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59839:59849" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59894:59904" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59950:59960" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="60027:60037" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="60081:60091" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="60136:60146" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="60192:60202" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=jx_11.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12117">
+          <caret line="577" column="0" lean-forward="true" selection-start-line="577" selection-start-column="0" selection-end-line="577" selection-end-column="0" />
+          <folding>
+            <marker date="1513423246229" expanded="true" signature="42616:42664" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=liuhecai.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9576">
+          <caret line="456" column="0" lean-forward="true" selection-start-line="456" selection-start-column="0" selection-end-line="456" selection-end-column="0" />
+          <folding>
+            <marker date="1513423494400" expanded="true" signature="37106:37135" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="37283:37324" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="37775:37804" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="37930:37959" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="38270:38293" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="38597:38649" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="39741:39797" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="39877:39933" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="40040:40096" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="40392:40448" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="40594:40650" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="40812:40868" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="41045:41101" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="41293:41349" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=pc_28.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11340">
+          <caret line="540" column="56" lean-forward="false" selection-start-line="540" selection-start-column="56" selection-end-line="540" selection-end-column="56" />
+          <folding>
+            <marker date="1513423588123" expanded="true" signature="41087:41135" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=pl_3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16674">
+          <caret line="794" column="13" lean-forward="true" selection-start-line="794" selection-start-column="13" selection-end-line="794" selection-end-column="13" />
+          <folding>
+            <marker date="1513423892921" expanded="true" signature="56354:56364" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="56674:56684" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="57693:57741" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="59048:59066" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="59138:59193" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="59385:59433" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="59624:59634" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75183:75193" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75237:75247" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75291:75301" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75367:75377" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75421:75431" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75475:75485" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75551:75561" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75605:75615" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75659:75669" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75735:75745" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75789:75799" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75843:75853" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=sd_11.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12474">
+          <caret line="594" column="56" lean-forward="false" selection-start-line="594" selection-start-column="56" selection-end-line="594" selection-end-column="56" />
+          <folding>
+            <marker date="1513424165366" expanded="true" signature="42607:42655" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=tj_ssc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12432">
+          <caret line="592" column="56" lean-forward="false" selection-start-line="592" selection-start-column="56" selection-end-line="592" selection-end-column="56" />
+          <folding>
+            <marker date="1513424220352" expanded="true" signature="43559:43607" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=xj_ssc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12453">
+          <caret line="593" column="56" lean-forward="false" selection-start-line="593" selection-start-column="56" selection-end-line="593" selection-end-column="56" />
+          <folding>
+            <marker date="1513424291505" expanded="true" signature="43610:43658" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../chart-lotteryId=ah_k3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="597" column="20" lean-forward="true" selection-start-line="597" selection-start-column="20" selection-end-line="597" selection-end-column="20" />
+          <folding>
+            <marker date="1513415647505" expanded="true" signature="42531:42541" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="43783:43831" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="45229:45247" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="45321:45386" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="45598:45631" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="45822:45832" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="59696:59706" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="59750:59760" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="59805:59815" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="59861:59871" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="59938:59948" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="59992:60002" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60047:60057" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60103:60113" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60180:60190" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60234:60244" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60289:60299" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60345:60355" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60422:60432" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60476:60486" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60531:60541" ph="..." />
+            <marker date="1513415647505" expanded="true" signature="60587:60597" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=bj_8.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2178">
+          <caret line="376" column="22" lean-forward="true" selection-start-line="376" selection-start-column="22" selection-end-line="376" selection-end-column="22" />
+          <folding>
+            <marker date="1513417595361" expanded="true" signature="33602:33644" ph="..." />
+            <marker date="1513417595361" expanded="true" signature="33707:33736" ph="..." />
+            <marker date="1513417595361" expanded="true" signature="34230:34254" ph="..." />
+            <marker date="1513417595361" expanded="true" signature="34536:34583" ph="..." />
+            <marker date="1513417595361" expanded="true" signature="34729:34776" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=bj_28.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-54">
+          <caret line="545" column="10" lean-forward="true" selection-start-line="545" selection-start-column="10" selection-end-line="545" selection-end-column="10" />
+          <folding>
+            <marker date="1513420773282" expanded="true" signature="41020:41068" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=ah_k3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-445">
+          <caret line="616" column="8" lean-forward="false" selection-start-line="616" selection-start-column="8" selection-end-line="620" selection-end-column="10" />
+          <folding>
+            <marker date="1513420446409" expanded="true" signature="41988:41998" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="43246:43294" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="44697:44715" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="44793:44858" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="45070:45103" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="45294:45304" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59309:59319" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59363:59373" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59418:59428" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59474:59484" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59551:59561" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59605:59615" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59660:59670" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59716:59726" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59793:59803" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59847:59857" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59902:59912" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="59958:59968" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="60035:60045" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="60089:60099" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="60144:60154" ph="..." />
+            <marker date="1513420446409" expanded="true" signature="60200:60210" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=cq_ssc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="633" column="23" lean-forward="true" selection-start-line="633" selection-start-column="23" selection-end-line="633" selection-end-column="23" />
+          <folding>
+            <marker date="1513421762944" expanded="true" signature="43683:43731" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=cq_ten.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="567" column="34" lean-forward="false" selection-start-line="567" selection-start-column="34" selection-end-line="567" selection-end-column="34" />
+          <folding>
+            <marker date="1513421926536" expanded="true" signature="40812:40823" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="42042:42053" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="42130:42141" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="42218:42229" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="42630:42640" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45300:45311" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45358:45369" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45416:45427" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45474:45484" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45531:45542" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45589:45600" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45647:45658" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45705:45715" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45762:45773" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45820:45831" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45878:45889" ph="..." />
+            <marker date="1513421926536" expanded="true" signature="45936:45946" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=dm_28.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="549" column="26" lean-forward="false" selection-start-line="549" selection-start-column="26" selection-end-line="549" selection-end-column="26" />
+          <folding>
+            <marker date="1513422040451" expanded="true" signature="41115:41163" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=dm_klc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="484" column="34" lean-forward="false" selection-start-line="484" selection-start-column="34" selection-end-line="484" selection-end-column="34" />
+          <folding>
+            <marker date="1513422285369" expanded="true" signature="34361:34403" ph="..." />
+            <marker date="1513422285369" expanded="true" signature="34466:34495" ph="..." />
+            <marker date="1513422285369" expanded="true" signature="34991:35015" ph="..." />
+            <marker date="1513422285369" expanded="true" signature="35295:35342" ph="..." />
+            <marker date="1513422285369" expanded="true" signature="35488:35535" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=gd_11.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="612" column="34" lean-forward="false" selection-start-line="612" selection-start-column="34" selection-end-line="612" selection-end-column="34" />
+          <folding>
+            <marker date="1513422655954" expanded="true" signature="42607:42655" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=gd_ten.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="557" column="10" lean-forward="false" selection-start-line="557" selection-start-column="10" selection-end-line="557" selection-end-column="10" />
+          <folding>
+            <marker date="1513422715202" expanded="true" signature="40742:40753" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="41972:41983" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="42060:42071" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="42148:42159" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="42560:42570" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45230:45241" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45288:45299" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45346:45357" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45404:45414" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45461:45472" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45519:45530" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45577:45588" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45635:45645" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45692:45703" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45750:45761" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45808:45819" ph="..." />
+            <marker date="1513422715202" expanded="true" signature="45866:45876" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=fc_3d.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="821" column="10" lean-forward="false" selection-start-line="821" selection-start-column="10" selection-end-line="821" selection-end-column="10" />
+          <folding>
+            <marker date="1513422518828" expanded="true" signature="56268:56278" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="56588:56598" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="57607:57655" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="58962:58980" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="59052:59107" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="59299:59347" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="59538:59548" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75097:75107" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75151:75161" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75205:75215" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75281:75291" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75335:75345" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75389:75399" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75465:75475" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75519:75529" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75573:75583" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75649:75659" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75703:75713" ph="..." />
+            <marker date="1513422518828" expanded="true" signature="75757:75767" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=gx_k3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="595" column="34" lean-forward="false" selection-start-line="595" selection-start-column="34" selection-end-line="595" selection-end-column="34" />
+          <folding>
+            <marker date="1513422839719" expanded="true" signature="42140:42150" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="43392:43440" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="44838:44856" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="44930:44995" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="45207:45240" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="45431:45441" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59305:59315" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59359:59369" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59414:59424" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59470:59480" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59547:59557" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59601:59611" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59656:59666" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59712:59722" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59789:59799" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59843:59853" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59898:59908" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="59954:59964" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="60031:60041" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="60085:60095" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="60140:60150" ph="..." />
+            <marker date="1513422839719" expanded="true" signature="60196:60206" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=jnd_28.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="559" column="33" lean-forward="true" selection-start-line="559" selection-start-column="33" selection-end-line="559" selection-end-column="33" />
+          <folding>
+            <marker date="1513422916192" expanded="true" signature="41122:41170" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=jnd_bs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="484" column="34" lean-forward="false" selection-start-line="484" selection-start-column="34" selection-end-line="484" selection-end-column="34" />
+          <folding>
+            <marker date="1513423036458" expanded="true" signature="34413:34455" ph="..." />
+            <marker date="1513423036458" expanded="true" signature="34518:34547" ph="..." />
+            <marker date="1513423036458" expanded="true" signature="35043:35067" ph="..." />
+            <marker date="1513423036458" expanded="true" signature="35347:35394" ph="..." />
+            <marker date="1513423036458" expanded="true" signature="35540:35587" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=js_k3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="594" column="34" lean-forward="false" selection-start-line="594" selection-start-column="34" selection-end-line="594" selection-end-column="34" />
+          <folding>
+            <marker date="1513423156344" expanded="true" signature="42136:42146" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="43388:43436" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="44834:44852" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="44926:44991" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="45203:45236" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="45427:45437" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59301:59311" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59355:59365" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59410:59420" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59466:59476" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59543:59553" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59597:59607" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59652:59662" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59708:59718" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59785:59795" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59839:59849" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59894:59904" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="59950:59960" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="60027:60037" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="60081:60091" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="60136:60146" ph="..." />
+            <marker date="1513423156344" expanded="true" signature="60192:60202" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=jx_11.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="612" column="34" lean-forward="false" selection-start-line="612" selection-start-column="34" selection-end-line="612" selection-end-column="34" />
+          <folding>
+            <marker date="1513423246229" expanded="true" signature="42616:42664" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=liuhecai.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="491" column="34" lean-forward="false" selection-start-line="491" selection-start-column="34" selection-end-line="491" selection-end-column="34" />
+          <folding>
+            <marker date="1513423494400" expanded="true" signature="37106:37135" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="37283:37324" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="37775:37804" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="37930:37959" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="38270:38293" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="38597:38649" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="39741:39797" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="39877:39933" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="40040:40096" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="40392:40448" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="40594:40650" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="40812:40868" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="41045:41101" ph="..." />
+            <marker date="1513423494400" expanded="true" signature="41293:41349" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=pc_28.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="567" column="21" lean-forward="true" selection-start-line="567" selection-start-column="21" selection-end-line="567" selection-end-column="21" />
+          <folding>
+            <marker date="1513423588123" expanded="true" signature="41087:41135" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=pl_3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="670" column="25" lean-forward="false" selection-start-line="670" selection-start-column="21" selection-end-line="670" selection-end-column="25" />
+          <folding>
+            <marker date="1513423892921" expanded="true" signature="56354:56364" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="56674:56684" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="57693:57741" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="59048:59066" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="59138:59193" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="59385:59433" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="59624:59634" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75183:75193" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75237:75247" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75291:75301" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75367:75377" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75421:75431" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75475:75485" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75551:75561" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75605:75615" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75659:75669" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75735:75745" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75789:75799" ph="..." />
+            <marker date="1513423892921" expanded="true" signature="75843:75853" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=sd_11.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="604" column="13" lean-forward="false" selection-start-line="604" selection-start-column="8" selection-end-line="604" selection-end-column="13" />
+          <folding>
+            <marker date="1513424165366" expanded="true" signature="42607:42655" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=tj_ssc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="617" column="21" lean-forward="true" selection-start-line="617" selection-start-column="21" selection-end-line="617" selection-end-column="21" />
+          <folding>
+            <marker date="1513424220352" expanded="true" signature="43559:43607" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=bj_10.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="596" column="8" lean-forward="true" selection-start-line="596" selection-start-column="8" selection-end-line="600" selection-end-column="10" />
+          <folding>
+            <marker date="1513421257280" expanded="true" signature="31214:31408" ph="..." />
+            <marker date="1513421257280" expanded="true" signature="39992:40003" ph="..." />
+            <marker date="1513421257280" expanded="true" signature="41091:41139" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chart-lotteryId=xj_ssc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="601" column="10" lean-forward="false" selection-start-line="601" selection-start-column="10" selection-end-line="601" selection-end-column="10" />
+          <folding>
+            <marker date="1513424291505" expanded="true" signature="43610:43658" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

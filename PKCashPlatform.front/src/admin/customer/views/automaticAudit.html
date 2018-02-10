@@ -1,0 +1,96 @@
+<!-- 自动稽核 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>自动稽核</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+
+                                        <label class="col-md-1 control-label allsite">站点</label>
+                                        <div class="col-md-2 col-xs-12 allsite">
+                                            <div class="form-group">
+                                                <!--<div class="form-group">-->
+                                                <select data-smart-select2 class="selectWidth" ng-model="siteName">
+                                                    <option value="">请选择</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                                <!--</div>-->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-8">
+                                            <div class="form-group">
+                                                <!--<select class="form-control" ng-model="keyName">-->
+                                                <!--<option value="">请选择</option>-->
+                                                <!--<option ng-value="s.id" ng-repeat="s in json.option_states">{{s.status}}</option>-->
+                                                <!--</select>-->
+                                                <select class="form-control" ng-model="keyName"  ng-options="item.value as item.name for item in keyNameJson"></select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="请输入账号" ng-model="valueName">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-8">
+                                            <div class="form-group">
+                                                <select class="form-control" ng-model="deviceName"  ng-options="item.value as item.name for item in deviceNameJson"></select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-6">
+                                            <a href-void="" class="btn btn-primary" href="#" ng-click="autoSearch()">查询</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                            <tr >
+                                                <th class="text-align-center">WWW</th>
+                                                <th class="text-align-center">设备</th>
+                                                <th class="text-align-center">账号</th>
+                                                <th class="text-align-center">讯息</th>
+                                                <th class="text-align-center">登入时间</th>
+                                                <th class="text-align-center">IP位置</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-align-center" ng-repeat="item in autoList">
+                                                <td>{{item.domains}}</td>
+                                                <td>{{item.device}}</td>
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.login_result}}</td>
+                                                <td>{{item.login_time | fiterTime}}</td>
+                                                <td>{{item.login_ip}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <span style="display: none" class="zz">{{lang['accounts']}}</span>
+</div>

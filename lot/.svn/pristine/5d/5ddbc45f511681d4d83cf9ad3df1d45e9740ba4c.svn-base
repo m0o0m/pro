@@ -1,0 +1,194 @@
+@import "./function.scss";
+
+div,
+ul,
+li,
+span,
+i {
+  box-sizing: border-box;
+}
+
+.box {
+  width: 912px;
+  // margin: 0 auto;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 12px;
+  overflow: hidden;
+  .footer1 {
+    width: 100%;
+    float: left;
+    margin-top: 20px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+    }
+    .one {
+      background-color: #eeeeee;
+      margin-right: 15px;
+      span {
+        color: $Button_color;
+      }
+      .left {
+        color: #999999;
+      }
+    }
+    .two {
+      background-color: $Button_color;
+      color: #fff;
+    }
+  }
+}
+
+.object {
+  color: #999;
+  background-color: #eee;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  // text-indent: 26px;
+  border: 1px solid $border_color;
+}
+
+.lis_2 {
+  width: 25%;
+}
+
+.fllis33 {
+  width: 33.33333333%;
+}
+
+// .fllis:first-child {
+//   border-right: none;
+// }
+// .fllis:nth-child(2) {
+//   border-left: 1px solid $border_color;
+//   border-right: 1px solid $border_color;
+// }
+// .fllis:nth-child(3) {
+//   border-left: none;
+// }
+
+.list2 {
+  border-left: 1px solid $border_color;
+  border-right: 1px solid $border_color;
+}
+
+.tr_2 {
+  border-bottom: 1px solid $border_color;
+  font-weight: 700;
+  li {
+    line-height: 39px;
+    height: 39px;
+  }
+}
+
+.tr_2:last-child {
+  border-bottom: none;
+  // border-bottom: 1px solid $border_color;
+  // .cla {
+  //   background: none;
+  //   color: #000;
+  // }
+}
+
+// .lis_2:last-child{
+//   border-bottom: 1px solid $border_color;
+// }
+
+.cla {
+  display: inline-block;
+  width: 70px;
+  border-right: 1px solid $border_color;
+  cursor: pointer;
+}
+
+.cla2 {
+  width: 60px;
+  display: inline-block;
+  margin: 0 auto;
+  color: rgb(64, 64, 64);
+  border-right: 1px solid $border_color;
+  cursor: pointer;
+}
+
+.cla3 {
+  width: 83px;
+  display: inline-block;
+  font-weight: 700;
+  margin: 0 auto;
+  input {
+    width: 36px;
+    border: 1px solid $border_color;
+    border-radius: 3px;
+    height: 20px;
+    margin-top: 10px;
+    outline: none;
+  }
+  // input:focus {
+  //   color: #cb3640;
+  //   border-color: #cb3640;
+  // }
+}
+
+.lis_2 {
+  // border-bottom: 1px solid $border_color;
+  border-right: 1px solid $border_color;
+}
+
+.lis_2:last-child {
+  border-right: none;
+}
+
+.list:nth-child(1) .lis_2:last-child,
+.list:nth-child(2) .lis_2:last-child {
+  border-bottom: none;
+}
+
+.table-current {
+  background-color: #ffeef1;
+}
+
+.classbox3 {
+  .fllis33 {
+    // line-height: 38px;
+    height: 319px;
+    border: 1px solid $border_color;
+    > li:first-child {
+      border-bottom: 1px solid $border_color;
+    }
+    .object {
+      border: none;
+    }
+  }
+  .fllis33:first-child {
+    border-right: none;
+    .tr_2 {
+      border-bottom: 1px solid $border_color;
+    }
+  }
+  .fllis33:last-child {
+    border-left: none;
+    .tr_2 {
+      border-bottom: 1px solid $border_color;
+    }
+  }
+  .cla3 {
+    width: 160px;
+  }
+}
+
+.footer1 {
+  margin-bottom: 45px;
+}

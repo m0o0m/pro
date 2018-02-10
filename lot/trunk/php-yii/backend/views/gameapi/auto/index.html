@@ -1,0 +1,236 @@
+
+<!-- 搜索栏 -->
+<style>select{width:auto !important;}#search-form label{margin-right:10px}</style>
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="search-form" action="" method="">
+            <label for="fc_type">彩票种类:
+                <select type="select" id="fc_type" name="fc_type" field="search">
+                    <option value="">请选择</option>
+                  <{foreach from=$data.games item=val key=key}>
+                    <option value="<{$val.fc_type}>" <{if !isset($smarty.get.fc_type) && $val.fc_type == 'cq_ssc'}> selected<{/if}> <{if isset($smarty.get.fc_type) && $smarty.get.fc_type eq $val.fc_type}> selected<{/if}>><{$val.fc_name}></option>
+                  <{/foreach}>
+                </select>
+            </label>
+            <label for="qishu">期号:
+                <input placeholder="请输入期号进行查询" type="text" id="qishu" name="qishu" field="search" value="<{if isset($smarty.get.qishu)}><{$smarty.get.qishu}><{/if}>">
+            </label>
+            <label for="">添加时间:
+                <input class="laydate-icon" placeholder="请输入日期" type="text" id="starttime" name="starttime" field="search" style="width:180px;" value="<{if isset($smarty.get.starttime)}><{$smarty.get.starttime}><{/if}>">
+                ~
+                <input class="laydate-icon" placeholder="请输入日期" type="text" id="endtime" name="endtime" field="search" style="width:180px;" value="<{if isset($smarty.get.endtime)}><{$smarty.get.endtime}><{/if}>">
+            </label>
+			<br>
+            <label for="status">状态:
+                <select type="select" id="status" name="status" field="search">
+                    <option value="">全部</option>
+                  <{foreach from=$data.trans.status item=val key=key}>
+                    <option <{if isset($smarty.get.status) && $smarty.get.status neq '' && $smarty.get.status eq $key}> selected<{/if}> value="<{$key}>"><{$val}></option>
+                  <{/foreach}>
+                </select>
+            </label>
+            <label for="page">
+                <span id="page_container">
+                    每页显示条数:
+                    <select id="pagenum" name="pagenum" onchange="pagenumTurn()" field="search">
+                       <option <{if $result.pagenum eq 10}> selected<{/if}> value="10">10</option>
+                       <option <{if $result.pagenum eq 100}> selected<{/if}> value="100">100</option>
+                       <option <{if $result.pagenum eq 500}> selected<{/if}> value="500">500</option>
+                       <option <{if $result.pagenum eq 1000}> selected<{/if}> value="1000">1000</option>
+                    </select>
+                     页码:
+                    <select id="page" name="page" onchange="pageTurn()" field="search">
+                    <{for $i=1 to $result.totalpage}>
+                        <option <{if $result.page eq $i}> selected<{/if}> value="<{$i}>"><{$i}></option>
+                    <{/for}>
+                    </select>
+                     共<{$result.totalpage}>页
+                </span>
+            </label>
+            <label>
+                <input type="submit" id="button" class="btn btn-sm btn-success" value="搜索" />
+            </label>
+        </form>
+    </div>
+</div>
+
+<!-- 列表 -->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <{include file="_list.html"}>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+// $(document).ready(function(){
+// ------------------ -- ------------------------------------
+    // $("#search-form select").each(function(){
+    //     $(this).data("lastIndex",$(this).find(':selected').index()).change(function(){
+    //         var lastIndex = $(this).data('lastIndex');
+    //         var curIndex = $(this).find(':selected').index();
+    //         if(lastIndex != curIndex){
+    //             $(this).css({'color':'red'});
+    //         }else{
+    //             $(this).css({'color':''});
+    //         }
+    //     });
+    // });
+
+    // 手动刷新
+    $('#refresh').click(function(){
+        var fc_type = $('#fc_type').val();
+        $('[field=search]').val('');
+        $('#fc_type').val(fc_type);
+        _refresh();
+    });
+    // 刷新列表
+    function _refresh(){
+        doSubmit();
+    }
+
+// ------------------ 查 ------------------------------------
+    // 控制查询提交事件
+    $('#search-form').submit(function(){
+        actionSubmit();
+        return false;
+    });
+    $('#page').change(function(){
+        pageTurn();
+    });
+    $('#pagenum').change(function(){
+        pagenumTurn();
+    });
+    $('#fc_type').change(function(){
+        // typeChange();
+    });
+
+    // 翻页
+    function pageTurn(){
+        doSubmit();
+    }
+    function pagenumTurn(){
+        actionSubmit();
+    }
+    // 切换种类
+    function typeChange(){
+        var fc_type = $('#fc_type').val();
+        if(!fc_type){
+            return;
+        }
+        $('[field=search]').val('');
+        $('#fc_type').val(fc_type);
+        // actionSubmit();// 自动提交
+    }
+
+    // 提交查询
+    function actionSubmit(){
+        $('#page').val(1);
+        doSubmit();
+    }
+    // 当前的表单状态提交
+    function doSubmit(){
+        var fc_type = $('#fc_type').val();
+        if(!fc_type){
+            layer.alert('请选择彩种',{icon:0});
+            return;
+        }
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: 'index',
+            container: '#container'
+        });
+    }
+
+
+
+// ------------------ 控件 ------------------------------------
+    // 弹框
+    function openLayer(title, height) {
+        open = layer.open({
+            type: 1, //Page层类型
+            area: ['666px', height],
+            title: title,
+            shade: 0.5, //遮罩透明度
+            maxmin: true, //允许全屏最小化
+            anim: 1, //0-6的动画形式，-1不开启
+            content: $('#_form')
+        });
+    }
+
+    //时间控件
+    var start = {
+        elem: '#starttime',
+        format: 'YYYY-MM-DD hh:mm:ss',
+        max: laydate.now(),
+        istime: true,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas;
+        }
+    }
+    laydate(start);
+    var end = {
+        elem: '#endtime',
+        format: 'YYYY-MM-DD hh:mm:ss',
+        max: laydate.now(),
+        istime: true,
+        istoday: true
+    }
+    laydate(end);
+    <{if !isset($smarty.get.starttime)}>
+        $('#starttime').val(laydate.now(0, 'YYYY-MM-DD 00:00:00'));
+    <{/if}>
+    <{if !isset($smarty.get.endtime)}>
+        $('#endtime').val(laydate.now(0, 'YYYY-MM-DD 23:59:59'));
+    <{/if}>
+
+
+// ------------------ 公用 ------------------------------------
+    // ajax 提交
+    function request(url,type,data,callback,dataType) {
+        if(!dataType) dataType = 'json';
+        $.ajax({
+            type: type,
+            url: url,
+            data: data,
+            dataType:dataType,
+            beforeSend:function(){
+                showLoad();
+            },
+            success: function(data,textStatus){
+                closeLoad();
+                var result = data;
+                if(result.ErrorCode == 2){
+                    layer.alert(result.ErrorMsg, {icon: 0});
+                    return;
+                }
+                callback(result);
+                if(result.ErrorMsg){
+                    layer.msg(result.ErrorMsg);
+                }
+            },
+            error: function(XMLHttpRequest,textStatus,errorThrown){
+                closeLoad();
+                layer.alert(textStatus, {icon: 0});
+            }
+        });
+
+    }
+    // 加载中...
+    function showLoad(){
+        load = layer.load(1, {
+            shade: [0.5, '#000000'] // loading...
+        });
+    }
+    // 关闭加载中
+    function closeLoad(){
+        layer.close(load);
+    }
+// });
+</script>

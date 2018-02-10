@@ -1,0 +1,411 @@
+<template lang="html">
+  <div class="bet" v-show="modal">
+    <div class="pk_bet">
+    </div>
+    <div class="modal">
+      <div class="header">
+        <h3>下注金额</h3>
+      </div>
+      <p>当前投注：</p>
+      <div class="bet_center" v-show="!sw">
+        <p class="center_top">
+          <span class="one">类型</span>
+          <span class="two">号码</span>
+          <span class="three">赔率</span>
+          <span class="four">金额</span>
+        </p>
+        <div class="bet_six_modal" style="overflow:auto;height: 145px;">
+          <p class="center_content" v-for="item in lists" v-if="item.money">
+            <span class="one">{{item.remark.split('#')[1]}}</span>
+            <span class="two"><i class="box">{{item.boll_name}}</i></span>
+            <span class="three">{{item.odd}}</span>
+            <span class="four">{{item.money}}</span>
+          </p>
+        </div>
+      </div>
+      <div class="bet_center" v-show="sw">
+          <div class="center_six_content">
+            <!-- <p :class="[sw_top.length > 4?'bb':'aa']"> -->
+            <p v-if="sw_top.length == 1" class='bb one_boll'>
+              <span v-for="item in sw_top" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <p v-else-if="sw_top.length == 2" class='bb two_boll'>
+              <span v-for="item in sw_top" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <p v-else-if="sw_top.length == 3" class='bb three_boll'>
+              <span v-for="item in sw_top" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <p v-else-if="sw_top.length == 4" class='bb four_boll'>
+              <span v-for="item in sw_top" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <p v-else-if="sw_top.length == 5" class='bb five_boll'>
+              <span v-for="item in sw_top" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <h2><span>碰</span></h2>
+            <!-- <p :class="[sw_bottom.length > 4?'bb':'aa']">
+              <span v-for="item in sw_bottom" class="two"><i class="box">{{item}}</i></span>
+            </p> -->
+            <p v-if="sw_bottom.length == 1" class='bb one_boll'>
+              <span v-for="item in sw_bottom" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <p v-else-if="sw_bottom.length == 2" class='bb two_boll'>
+              <span v-for="item in sw_bottom" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <p v-else-if="sw_bottom.length == 3" class='bb three_boll'>
+              <span v-for="item in sw_bottom" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <p v-else-if="sw_bottom.length == 4" class='bb four_boll'>
+              <span v-for="item in sw_bottom" class="two"><i class="box">{{item}}</i></span>
+            </p>
+            <p v-else-if="sw_bottom.length == 5" class='bb five_boll'>
+              <span v-for="item in sw_bottom" class="two"><i class="box">{{item}}</i></span>
+            </p>
+          </div>
+      </div>
+      <div style="text-align: center;padding: 10px 0" v-show="!sw">
+        <span style="margin-right:10px">共选：{{number}}个号码</span>
+        <span style="margin-right:10px">复式共分为：{{team}}组</span>
+        <span>金额合计：{{money}}</span>
+      </div>
+      <div style="text-align: center;padding: 10px 0" v-show="sw">
+        <span style="margin-right:10px">复式共分为：{{team}}组</span>
+        <span>金额合计：{{money}}</span>
+      </div>
+      <div style="padding: 10px 0">
+        <button type="button" v-if="!loading" class="bet_bottom color1" @click="pour()">下注</button>
+        <button type="button" v-else class="bet_bottom color1">下单中...</button>
+        <button type="button" class="bet_bottom color2 font" @click="cancel()">取消</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import api from '../api/config'
+  import algorithm from '../assets/js/split'
+  import share from './share'
+  import mymousewheel from '../assets/js/mousewheel'
+  import {Modal} from 'iview';
+  import '../assets/css/bet.scss';
+  export default {
+    components: {Modal},
+    props:{
+      modal:{
+        type:Boolean,
+        default: false
+      }
+    },
+    data(){
+      return{
+        sw_top:[],
+        sw_bottom:[],
+        sw: false,//控制显示生肖尾数对应modal
+        number:'',//注单量
+        loading: false,
+        lists: [],
+        arr: [],
+        qishu: '',
+        money: 0,
+        team:0,
+        go_pour:[]
+      }
+    },
+    mounted(){
+      let bet_six_modal = document.querySelector(".bet_six_modal");
+      mymousewheel(bet_six_modal);
+    },
+    created() {
+      //正常玩法
+      this.$root.$on('id-selected-normal', (e) => {
+        this.sw = false;
+        console.log(e);
+        for (let i = 0; i < e.length; i++) {
+          for (let j = 0; j < e[i].object.length; j++) {
+            //添加金额参数入对象
+//          console.log( e[i].object);
+            let money = e[i].object[j].money;
+            this.arr.push(Object.assign(e[i].object[j], {
+              'money': money,'input_name':e[i].object[j].boll_name
+            }));
+          }
+        }
+        if (this.arr) {
+          this.lists = this.unique(this.arr);
+          let arr = [];
+          for(let i = 0;i < this.lists.length;i++){
+            if(this.lists[i].flag){
+              arr.push(this.lists[i])
+            }
+          }
+          this.lists = arr;
+          this.number = arr.length;
+          var moj = 0;
+          //计算金额
+          for (let l = 0; l < this.lists.length; l++) {
+            if (this.lists[l].money) {
+              moj = Number(this.lists[l].money);
+              this.money = moj
+            }
+          }
+          this.computed();
+        }
+      });
+      //胆拖
+      this.$root.$on('id-selected-dan',(e,type)=>{
+        this.sw = false;
+        this.reset();
+        console.log(e);
+        this.lists = e;
+        this.number = this.lists.length;
+        var llll = [];
+        //判断type拼接不同的数组
+        if(type < 3){
+          for(let i =1;i<e.length;i++){
+            llll.push(e[0].boll_name +','+ e[i].boll_name)
+          }
+        }else if(type == 3 || type == 4){
+          for(let i =2;i<e.length;i++){
+            llll.push(e[0].boll_name +','+ e[1].boll_name + ',' + e[i].boll_name)
+          }
+        }else if(type == 5){
+          for(let i =1;i<e.length;i++){
+            llll.push(e[0].boll_name +','+ e[i].boll_name)
+          }
+        }
+        console.log(llll);
+        this.team = llll.length;
+        this.money = e[0].money * this.team;
+        let checkedArr = [];
+        for(let b =0;b<llll.length;b++){
+          checkedArr.push(this.extend(e[b],{input_name:llll[b]}))
+        }
+        console.log(checkedArr);
+        this.go_pour = checkedArr
+      });
+      //生肖和尾数
+      this.$root.$on('id-selected-sw',(e,k,all_list,money)=>{
+        this.sw = true;
+        var kk = [];
+        for (let i = 0; i < all_list.length; i++) {
+          for (let j = 0; j < all_list[i].object.length; j++) {
+            kk.push(all_list[i].object[j]);
+          }
+        }
+        this.sw_top = e;
+        this.sw_bottom = k;
+        var aaaa = [];
+        for(let i =0;i<k.length;i++){
+          if(k.length == 5 && e.length == 4){
+            aaaa.push(e[0] +','+ k[i]);
+            aaaa.push(e[1] +','+ k[i]);
+            aaaa.push(e[2] +','+ k[i]);
+            aaaa.push(e[3] +','+ k[i]);
+          }else if (k.length == 4 && e.length == 5) {
+            aaaa.push(e[0] +','+ k[i]);
+            aaaa.push(e[1] +','+ k[i]);
+            aaaa.push(e[2] +','+ k[i]);
+            aaaa.push(e[3] +','+ k[i]);
+            aaaa.push(e[4] +','+ k[i]);
+          }else if (k.length == 4 && e.length == 4) {
+            aaaa.push(e[0] +','+ k[i]);
+            aaaa.push(e[1] +','+ k[i]);
+            aaaa.push(e[2] +','+ k[i]);
+            aaaa.push(e[3] +','+ k[i]);
+          }else if (k.length == 5 && e.length == 5) {
+            aaaa.push(e[0] +','+ k[i]);
+            aaaa.push(e[1] +','+ k[i]);
+            aaaa.push(e[2] +','+ k[i]);
+            aaaa.push(e[3] +','+ k[i]);
+            aaaa.push(e[4] +','+ k[i]);
+          }
+        }
+        this.team = aaaa.length;
+        this.money = money * this.team;
+        let checkedArr = [];
+        for(let b =0;b < aaaa.length;b++){
+          let all_arr = Object.assign(kk[b],{input_name:aaaa[b],money:money});
+          checkedArr.push(all_arr)
+        }
+        console.log(checkedArr);
+        this.go_pour = checkedArr
+      });
+      this.$root.$on('id-selected-random',(e,k,all_list,random_money)=>{
+        this.sw = true;
+        var kk = [];
+        for (let i = 0; i < all_list.length; i++) {
+          for (let j = 0; j < all_list[i].object.length; j++) {
+            kk.push(all_list[i].object[j]);
+          }
+        }
+        console.log(e);
+        let random_arr1 = [];
+        let random_arr2 = [];
+        for(let i in e){
+          if(e[i].input_name){
+            random_arr1.push(e[i].input_name)
+          }
+        }
+        for(let i in k){
+          if(k[i].input_name){
+            random_arr2.push(k[i].input_name)
+          }
+        }
+        this.sw_top = random_arr1;
+        this.sw_bottom = random_arr2;
+        var bbbb = [];
+        for(let i =0;i<random_arr1.length;i++){
+          for(let j= 0;j<random_arr2.length;j++){
+            bbbb.push(random_arr1[i] +','+ random_arr2[j]);
+          }
+        }
+        this.team = bbbb.length;
+        this.money = random_money * this.team;
+        let checkedArr = [];
+        for(let b =0;b < bbbb.length;b++){
+          let all_arr = Object.assign(kk[b],{input_name:bbbb[b]});
+          checkedArr.push(all_arr)
+        }
+        for(let i in checkedArr){
+          Object.assign(checkedArr[i],{money:random_money})
+        }
+        console.log(checkedArr);
+        this.go_pour = checkedArr
+      })
+      this.$root.$on('reset', (e) => {
+        this.money = e
+      });
+      this.$root.$on('c_data', (e) => {
+        this.qishu = e.qishu
+      })
+    },
+    methods: {
+      //对象的拼接
+      extend: function(target, source) {
+        for (var obj in source) {
+          target[obj] = source[obj];
+        }
+        return target;
+      },
+      choose_box: function() {
+        var box_arr = [];
+        for(let i = 0;i < this.lists.length;i++){
+          if(this.lists[i].flag){
+            box_arr.push(this.lists[i].input_name)
+          }
+        }
+        return box_arr
+      },
+      //排列组合输出二维数组
+      computed: function(){
+        var send_data = this.lists;
+        var money_data = {};
+        send_data.forEach(function(e){
+          if(e.money){
+            money_data = e;
+          }
+        });
+        //抽取选中的那种类型
+        let select_type = 0;
+        if(send_data[0].mingxi == "2/2:30,2/1:50"){
+          select_type = 2
+        }else if (send_data[0].mingxi == "second_full") {
+          select_type = 2
+        }else if (send_data[0].mingxi == "Special_series") {
+          select_type = 2
+        }else if (send_data[0].mingxi == "third_full") {
+          select_type = 3
+        }else if (send_data[0].mingxi == "3/3:10,3/2:20") {
+          select_type = 3
+        }else if(send_data[0].mingxi == 'fourth_full'){
+          select_type = 4
+        }
+        //二维数组转换
+        const newGroup = algorithm.groupSplit(this.choose_box(), select_type);//select_type是选中的是类型,比如2
+        console.log(newGroup);
+        this.team = newGroup.length;
+        this.money = this.money * this.team;
+        let checkedArr = [];
+        newGroup.forEach((item, index) => {
+          checkedArr[index] = JSON.parse(JSON.stringify(money_data));
+          checkedArr[index].input_name = item.join()
+        });
+        console.log(checkedArr);
+        this.go_pour = checkedArr
+      },
+      pour: function() {
+        window.pour_status = 1;
+        //去除不必要的key和值
+        // var send_op = [];
+        // for (let l = 0; l < send_data.length; l++) {
+        //   if (send_data[l].money) {
+        //     // console.log(send_data[l]);
+        //     // delete send_data[l].flag;
+        //     // delete send_data[l].num;
+        //     delete send_data[l].number;
+        //     send_op.push(send_data[l]);
+        //   }
+        // };
+        const body = {
+          fc_type: JSON.stringify(this.$route.query.page),
+          qishu: JSON.stringify(this.qishu),
+          data: JSON.stringify(this.go_pour)
+        };
+        this.loading = true;
+        api.addbet(this, body, (res) => {
+          if (res.data.ErrorCode == 1) {
+            window.pour_status = 2;
+            this.loading = false;
+            this.$Modal.success({
+              content: "下注成功",
+              onOk: () => {
+                this.$root.$emit('success', true);
+                this.$root.$emit('bet_success',true);
+              },
+            });
+            window.setTimeout(() => {
+              this.$root.$emit('success',true);
+              this.$root.$emit('bet_success',true);
+              this.$Modal.remove()
+            }, share.bet_time)
+          }else if(res.data.ErrorCode == 2) {
+            this.loading = false;
+            // this.$Modal.warning({
+            //   content: res.data.ErrorMsg,
+            //   onOk: () => {
+            //     this.$root.$emit('success', true)
+            //   },
+            // });
+            // window.setTimeout(() => {
+            //   this.$root.$emit('success',true);
+            //   this.$Modal.remove()
+            // }, 500)
+          }
+        });
+        // console.log(param)
+      },
+      reset: function() {
+        // this.modal = false;
+        this.lists = [];
+        this.money = '';
+        this.number = '';
+        this.team = '';
+        this.$root.$emit('reset', '');
+      },
+      cancel: function() {
+        this.loading = false;
+        this.$emit('cancel', false);
+        this.money = ''
+      },
+      //数组去重
+      unique: function(arr) {
+        var newArr = [];
+        for (var i in arr) {
+          if (newArr.indexOf(arr[i]) == -1) {
+            newArr.push(arr[i])
+          }
+        }
+        return newArr;
+      }
+    }
+  }
+</script>

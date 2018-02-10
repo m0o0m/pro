@@ -1,0 +1,26 @@
+package schema
+
+//现金流水表
+type UserCashRecord struct {
+	Id          int64   `insert:"id;auto;mycat:next value for MYCATSEQ_USERCASHRECORD" xorm:"'id' PK autoincr notnull"` //主键id
+	Uid         int64   `insert:"uid" xorm:"'uid' notnull"`                                                             //用户id
+	LineId      string  `insert:"line_id" xorm:"'line_id' notnull"`                                                     //站点id
+	AgentId     int64   `insert:"agent_id" xorm:"'agent_id' notnull"`                                                   //代理id
+	CashType    int64   `insert:"cash_type" xorm:"'cash_type' notnull default(1)"`                                      //类型1为存入2为取出'
+	CashDoType  int64   `insert:"cash_do_type" xorm:"'cash_do_type' notnull"`                                           //1为彩票下注2为彩票派彩3为彩票和局返还本金4为api转入5为api转出6注单取消7注单无效'
+	Dids        string  `insert:"dids" xorm:"'dids' notnull"`                                                           //注单id(以逗号分隔)
+	CashNum     float64 `insert:"cash_num" xorm:"'cash_num' notnull default(0.00)"`                                     //交易金额
+	CashBalance float64 `insert:"cash_balance" xorm:"'cash_balance' notnull default(0.00)"`                             //现有资金
+	Remark      string  `insert:"remark" xorm:"'remark' default('null')"`                                                //备注
+	Ptype       int64   `insert:"ptype" xorm:"'ptype' notnull default(1)"`                                              //1为pc端2为wap端3为app'
+	Addtime     int64   `insert:"addtime" xorm:"'addtime' notnull index(index_unity)"`                                  //插入时间
+	Addday      int64   `insert:"addday" xorm:"'addday' PK notnull"`                                                    //下注的日期例如：20170612'
+	Uname       string  `insert:"uname" xorm:"'uname' notnull"`                                                         //用户名
+	FcType      string  `insert:"fc_type" xorm:"'fc_type' notnull"`                                                     //彩种
+	Periods     int64   `insert:"periods" xorm:"'periods' notnull"`                                                     //期数
+	IsShiwan    int64   `insert:"is_shiwan" xorm:"'is_shiwan' notnull default(1)"`                                      //1:非试玩现金流水2:试玩现金流水'
+}
+
+func (*UserCashRecord) TableName() string {
+	return "my_user_cash_record"
+}

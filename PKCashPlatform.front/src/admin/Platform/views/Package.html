@@ -1,0 +1,182 @@
+<!-- 套餐管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{lang['PackageManagement']}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodow}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodow, 'fa fa-times': newTodow}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div ng-show="newTodow">
+                            <div class="widget-body-toolbar">
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <label class="col-md-1 col-xs-4 col control-label">状态</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group" ng-init="type=''">
+                                                <select class="form-control selectWidth" ng-model="type">
+                                                    <option value="">全部</option>
+                                                    <option ng-value="item.value" ng-repeat="item in json.option_status" >{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-8 col-md-offset-1 col-xs-offset-4">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="请输入套餐名称" ng-model="combo_name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-8">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-4">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <button type="submit"  data-toggle="modal" data-target="#myModal1"  class="btn btn-primary" ng-click="add()">新增套餐</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">套餐ID</th>
+                                            <th class="text-center">套餐名称</th>
+                                            <th class="text-center">站点数</th>
+                                            <th class="text-center">添加时间</th>
+                                            <th class="text-center">套餐状态</th>
+                                            <th  class="text-center">功能</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.combo_name}}</td>
+                                            <td>{{item.site_count}}</td>
+                                            <td>{{item.create_time|formatDate}}</td>
+                                            <td>{{item.status|fiterStatused}}</td>
+
+                                            <td class="text-align-center">
+                                                <button class="btn btn-default btn-xs" data-ui-sref="app.Platform.allocation({ids: item.id})">配置</button>
+                                                <button class="btn btn-default btn-xs" ng-click="disables(item)" ng-bind="item.status==1?'禁用':'启用'"></button>
+                                                <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="getID(item.id)">{{lang['Modify']}}</button>
+                                                <button class="btn btn-default btn-xs" ng-click="del(item.id)">删除</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <span style="display: none" class="zz">{{lang['accounts']}}</span>
+    <!--<input type="text" value="{{lang['accounts']}}" class="zz">-->
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccounts">新建套餐</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">套餐名称</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control" type="text" ng-model="add.combo_name" name="combo_name">
+                                    <b class="tooltip tooltip-top-right">
+                                        名称长度1-20位</b>
+                                </label>
+                            </section>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden" name="roleId"  hidden="hidden" value="5" ng-model="formData.roleId">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden"  disabled="disabled" value="0" name="parentId" ng-model="formData.parentId">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adds()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">修改套餐</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">套餐名称</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control"  type="text" ng-model="modifyes.combo_name" name="password" >
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合）</b>
+                                </label>
+                            </section>
+
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden" name="roleId"  hidden="hidden" value="5" ng-model="formData.roleId">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden"  disabled="disabled" value="0" name="parentId" ng-model="formData.parentId">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submiteds()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

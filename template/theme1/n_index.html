@@ -1,0 +1,322 @@
+{{template "header" .Header}}
+<!--banner-->
+<div id="banner">
+    <div class="swiper flexslider wrapper ">
+    <style>
+    #b03 {width:100%;height:429px;margin:0 auto;}
+    #b03 .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
+    #b03 .dots li 
+    { 
+      display: inline-block; 
+      width: 10px; 
+      height: 10px; 
+      margin: 0 4px; 
+      text-indent: -999em; 
+      border: 2px solid #fff; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      opacity: .4; 
+      -webkit-transition: background .5s, opacity .5s; 
+      -moz-transition: background .5s, opacity .5s; 
+      transition: background .5s, opacity .5s;
+    }
+    #b03 .dots li.active 
+    {
+      background: #fff;
+      opacity: 1;
+    }
+    .dots{width:1000px;margin:auto;text-align: center;}
+    #b03 .b02 li{float:left;height: 429px;}
+    </style>
+
+    <div class="bd" id="b03">
+        <ul class="b02">
+            {{$cdnUrl := .Header.CdnUrl}}
+            {{range .FlashList}}
+            <li style="background: url({{$cdnUrl}}{{.ImgUrl}}) center center no-repeat; width: 100%;">
+            </li>
+            {{end}}
+        </ul>
+    </div>                
+    <script type="text/javascript">
+    $(document).ready(function(e) {
+        $('#b03').unslider({
+        dots: true,
+        loop:true
+      });
+    });
+    </script>
+
+    </div>
+</div>
+<div class="news">
+<div class="wrapper" style="cursor: pointer;">
+<div class="new01">
+<img src="{{.Header.CdnUrl}}/theme1/public/images/new/news.png">
+<span id="">最新消息：</span>
+</div>
+<div class="new02">
+    <marquee scrollamount="3" scrolldelay="150" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="cursor: pointer;"><span id="bulletinMsg" data="left"onclick="notice_data();">{{.Header.Notice}}</span></marquee>
+</div>
+</div>
+</div>
+<div class="main_content">
+<div class="wrapper">
+<div class="main_left">
+<p><b>游戏中心</b><span>GAMECENTER</span></p>
+<dl class="mag_bottom10" onclick="getPager('-','lottery');">
+    <dt class="dt-01"></dt>
+    <dd class="dd_sty01"><b>彩票</b></dd>
+    <dd class="dd_sty02">LOTTERY</dd>
+    <div class="dask" style="top: -10px; opacity: 0;">
+        <p class="title">进入游戏</p>
+        <span>START</span>
+    </div>
+</dl>
+
+<dl class="mag_left10 mag_bottom10" onclick="getPager('-','livetop','m');">
+    <dt class="dt-02"></dt>
+    <dd class="dd_sty01"><b>真人娱乐</b></dd>
+    <dd class="dd_sty02">CASINO</dd>
+    <div class="dask" style="top: -10px; opacity: 0;">
+        <p class="title">进入游戏</p>
+        <span>START</span> 
+    </div>
+</dl>
+<dl class="mag_left10 mag_bottom10" onclick="getPager('-','sports','m');">
+    <dt class="dt-03"></dt>
+    <dd class="dd_sty01"><b>体育博弈</b></dd>
+    <dd class="dd_sty02">SPORTS</dd>
+    <div class="dask" style="top: -10px; opacity: 0;">
+        <p class="title">进入游戏</p>
+        <span>START</span>
+    </div>
+</dl>
+<dl class="" onclick="getPager('-','egame','m');">
+    <dt class="dt-04"></dt>
+    <dd class="dd_sty01"><b>老虎机</b></dd>
+    <dd class="dd_sty02">SLOTS</dd>
+    <div class="dask" style="top: -10px; opacity: 0;">
+        <p class="title">进入游戏</p>
+        <span>START</span>
+    </div>
+</dl>
+<dl class="mag_left10" onclick="openGame('dz','gg_dz')">
+    <dt class="dt-05"></dt>
+    <dd class="dd_sty01"><b>捕鱼达人</b></dd>
+    <dd class="dd_sty02">FISHING</dd>
+    <div class="dask" style="top: -10px; opacity: 0;">
+        <p class="title">进入游戏</p>
+        <span>START</span>
+    </div>
+</dl>
+<dl class="mag_left10" onclick="iworkJump('代理文案');">
+    <dt class="dt-06"></dt>
+    <dd class="dd_sty01"><b>代理加盟</b></dd>
+    <dd class="dd_sty02">AGENT</dd>
+    <div class="dask" style="top: -10px; opacity: 0;">
+        <p class="title">点击合作</p>
+        <span>START</span>
+    </div>
+</dl>
+</div>
+
+<div class="main_right">
+<p><b>游戏排行</b><span>HOTGAMES</span></p>
+<a href="javascript:void(0);" onclick="getPager('-','pk_lottery','cq_ssc');" class="mag_bottom10 pc01"><span>重庆时时彩</span></a>
+<a href="javascript:void(0);" onclick="getPager('-','pk_lottery','bj_10');" class="mag_left10 mag_bottom10 pc02"><span>北京PK10</span></a>
+<a href="javascript:void(0);" onclick="getPager('-','pk_lottery');" class="pc03"><span>香港六合彩</span></a>
+<a href="javascript:void(0);" onclick="getPager('-','egame','m');" class="mag_left10 pc04"><span>幸运农场</span></a>
+<div class="more">
+    <ul>
+        <li onclick="getPager('-','pk_lottery','cq_ssc');">
+            <span class="span01">5</span>
+            <span class="span02">时时彩</span>
+            <span class="span02">423847 
+                <img src="{{.Header.CdnUrl}}/theme1/public/images/new/hot01.gif" alt="">
+            </span>
+        </li>
+        <li onclick="getPager('-','pk_lottery','bj_10');">
+            <span class="span01">6</span>
+            <span class="span02">PK拾</span>
+            <span class="span02">322908 
+                <img src="{{.Header.CdnUrl}}/theme1/public/images/new/hot01.gif" alt="">
+            </span>
+        </li>
+        <li onclick="getPager('-','pk_lottery');">
+            <span class="span01">7</span>
+            <span class="span02">六合彩</span>
+            <span class="span02">320199 
+                <img src="{{.Header.CdnUrl}}/theme1/public/images/new/hot01.gif" alt="">
+            </span>
+        </li>
+        <li onclick="getPager('-','egame','m');">
+            <span class="span01">8</span>
+            <span class="span02">幸运农场</span>
+            <span class="span02">298870 
+                <img src="{{.Header.CdnUrl}}/theme1/public/images/new/hot01.gif" alt="">
+            </span>
+        </li>
+    </ul>
+</div>
+</div>
+</div>
+</div>
+<script>
+$(function () {
+        $(".main_left dl").hover(
+            function () {
+                $(this).find(".dask").stop().delay(50).animate({"top":0,opacity:0.8},300)
+             },
+            function () {
+                $(this).find(".dask").stop().animate({"top":-10,opacity:0},300)
+            }
+            
+        )
+    })
+</script>
+
+<script type="text/javascript">
+    var quata = "<link rel=\"stylesheet\" href=\"" + cdnUrl + "/shared/quotazh/css/quota.css\" />" +
+            "<script type=\"text/javascript\" src=\"" + cdnUrl + "/shared/quotazh/js/quota.js\"><\/script>";
+    document.writeln(quata);
+</script>
+
+<div class="position_quata">
+    <script type="text/javascript">
+        document.writeln("<img  id ='quata_close' src=\"" + cdnUrl + "/shared/quotazh/images/close-btn.png\">");
+    </script>
+    <div class="panel" style="display:none;">
+        <div class="radiobox">
+            <div class="radio-tile-group">
+                <div class=''>
+                </div>
+            {{range .Platform}}
+                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id={{.Id}}/>
+                    <div class="radio-tile">
+                        <label class="radio-tile-label">{{.Platform}}</label>
+                    </div>
+                </div>
+            {{end}}
+
+                <input type="hidden" id="vdtype" value="">
+                <input type="hidden" id="quatatoken" value="">
+                <div class="inputbox">
+                    <p style="color: red;">余额:<span id="ssmoney"></span></p>
+                    <p>* 请输入您要转换的额度</p>
+
+                    <div class="input-number" min="1">
+                        <input type="text" id="quata_money" onkeyup="quataclearNoNum(this);" placeholder='转换金额不能小于  元'/>
+                    </div>
+                    <p style="height: 20px;width: 100px;margin: 0 auto;">
+                        <label><input style="-webkit-appearance:radio;" name="Fruit" type="radio" value="1"/>转入 </label>
+                        <label><input style="-webkit-appearance:radio;" name="Fruit" type="radio" value="2"/>转出 </label>
+                    </p>
+                    <a href="#" class="button_quota">确认转换</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p class="flipquota"></p>
+</div>
+<script>
+    window.onload = function () {
+        var min_money = Number("");
+        $("input[name='radio']").bind("click", function () {
+            $('#vdtype').val($(this).attr('id'));
+        });
+        $('.button_quota').click(function () {
+
+            var fruit = $("input[name='Fruit']:checked").val();
+            var p3_Amt = Number($('#quata_money').val());
+            var token = $('#quatatoken').val();
+
+            if (fruit == 1) {
+                var trtype1 = 'sport';
+                var trtype2 = $('#vdtype').val().toLowerCase();
+            } else if (fruit == 2) {
+                var trtype1 = $('#vdtype').val().toLowerCase();
+                var trtype2 = 'sport';
+            } else {
+                alert('请选择转换状态');
+                return false;
+            }
+
+            if (trtype2 == '') {
+                alert("请选择您要转换的视讯类型");
+                return false;
+            }
+            if (p3_Amt - parseInt(p3_Amt) !== 0) {
+                alert("转换金额不得为非整数！");
+                return false;
+            }
+            if (p3_Amt < min_money) {
+                alert("转换金额不得小于" + min_money + "，或者输入金额不能为空！");
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "<{$site_url}>/index.php/member/new/bank/bank_transf_index_do",
+                data: "trtype1=" + trtype1 + "&trtype2=" + trtype2 + "&p3_Amt=" + p3_Amt + '&quatatoken=' + token + '&edtype=' + '1',
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.status == 18) {
+                        alert("额度转换成功");
+                        ajax_again();
+                    } else {
+                        alert(msg.info);
+                        ajax_again();
+                    }
+                },
+            });
+        })
+
+        var $quataClose = $('#quata_close');
+        var $positionQuata = $('.position_quata');
+
+        $quataClose.click(function () {
+            $positionQuata.css("display", "none");
+        })
+
+        $positionQuata.mouseover(function () {
+            $quataClose.css("display", "block");
+        })
+
+        $positionQuata.mouseleave(function () {
+            $quataClose.css("display", "none");
+        })
+
+        $positionQuata.mouseleave(function () {
+            $(".panel").css("display", "none");
+        });
+
+        function ajax_again() {
+            $.ajax({
+                type: "POST",
+                url: "/index.php/index/auata_token",
+                dataType: 'json',
+                success: function (msg) {
+                    $('#quatatoken').val(msg.token);
+                },
+            })
+        }
+    }
+
+    function quataclearNoNum(obj) {
+        obj.value = obj.value.replace(/[^\d+]/g, '');
+    }
+
+    $("p.flipquota").css("background", "url(" + cdnUrl + "/shared/quotazh/images/blue.png) no-repeat");
+
+    $(function () {
+        //获取会员数据
+        var loginIn = localStorage.getItem('loginIn');
+        if (loginIn) {
+            var loginData = JSON.parse(localStorage.getItem('loginData'));
+            $("div.panel #ssmoney").html(loginData.balance);
+        }
+    })
+</script>
+{{template "footer" .Footer}}

@@ -1,0 +1,3142 @@
+<template lang="html">
+  <div class="bj">
+    <div class="pk_time">
+      <div class="time_left">
+        <div class="left_logo">
+          <img :src="c_data.img_path" alt="">
+        </div>
+        <div class="left_text">
+          <p>{{c_data.fc_name}}</p>
+          <p><span>第</span> {{c_data.qishu}} <span>期</span></p>
+        </div>
+      </div>
+      <div class="time_center">
+        <p class="center_top">投注剩余时间</p>
+        <div class="center_bottom">
+          <div class="fl time_content" v-if="h < 10 && h >= 0">0{{h}}</div>
+          <div class="fl time_content" v-else-if="h < 0">--</div>
+          <div class="fl time_content" v-else>{{h}}</div>
+          <div class="fl fs">时</div>
+          <div class="fl time_content" v-if="m < 10 && m >= 0">0{{m}}</div>
+          <div class="fl time_content" v-else-if="m < 0">--</div>
+          <div class="fl time_content" v-else>{{m}}</div>
+          <div class="fl fs">分</div>
+          <div class="fl time_content" v-if="s < 10 && s >= 0">0{{s}}</div>
+          <div class="fl time_content" v-else-if="s < 0">--</div>
+          <div class="fl time_content" v-else>{{s}}</div>
+          <div class="fl fs">秒</div>
+        </div>
+      </div>
+      <div class="time_bottom">
+        <div class="bottom_left"><span>第</span> {{auto.qishu}} <span>期开奖</span></div>
+        <div v-if="this.$route.query.page == 'liuhecai'" class='bottom_center6'>
+          <div class="bottom_content">
+            <div class="content_list" v-for="item in auto.ball">
+              <p :class="[item.color,'box']">{{item.number}}</p>
+              <p class="animal">{{item.animal}}</p>
+            </div>
+          </div>
+        </div>
+        <div v-else :class="[auto.ball.length >= 10?'bottom_center_other':'bottom_center']">
+          <div :class="[auto.ball.length == 10?'other_content':'bottom_content']">
+            <div class="content_list" v-for="item in auto.ball">
+              <p class="box blue">{{item}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_bottom">
+        <p @click="history()">历史结果</p>
+        <p @click="open_way()">开奖走势</p>
+        <p @click="show_rule()">玩法规则</p>
+      </div>
+    </div>
+    <Nav-top :lists="menus" v-on:menu="go_child"></Nav-top>
+    <router-view :cdata="c_data" :TooLists="TooLists" :esfLists="esfLists" :OptLists="OptLists" :OptType="OptType" :GroupType="GroupType"  :GroupLists="GroupLists" :JustLists="JustLists" :JustType="JustType"></router-view>
+  </div>
+</template>
+
+<script>
+//两面盘初始
+function eleventoo() {
+  return [
+    {
+      name: "总和",
+      object: [
+        {
+          li_id: 0,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 1,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 2,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 3,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 4,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 5,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 6,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 7,
+          flag: false,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第一球",
+      object: [
+        {
+          li_id: 8,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 9,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 10,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 11,
+          flag: false,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第二球",
+      object: [
+        {
+          li_id: 12,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 13,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 14,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 15,
+          flag: false,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第三球",
+      object: [
+        {
+          li_id: 16,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 17,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 18,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 19,
+          flag: false,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第四球",
+      object: [
+        {
+          li_id: 20,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 21,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 22,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 23,
+          flag: false,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第五球",
+      object: [
+        {
+          li_id: 24,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 25,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 26,
+          flag: false,
+          money: null
+        },
+        {
+          li_id: 27,
+          flag: false,
+          money: null
+        }
+      ]
+    }
+  ];
+}
+//1-5球初始
+function esfInitial() {
+  return [
+    {
+      name: "第一球",
+      object: [
+        {
+          flag: false,
+          li_id: 0,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 1,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 2,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 3,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 4,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 5,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 6,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 7,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 8,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 9,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 10,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第二球",
+      object: [
+        {
+          flag: false,
+          li_id: 11,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 12,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 13,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 14,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 15,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 16,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 17,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 18,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 19,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 20,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 21,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第三球",
+      object: [
+        {
+          flag: false,
+          li_id: 22,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 23,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 24,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 25,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 26,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 27,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 28,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 29,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 30,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 31,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 32,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第四球",
+      object: [
+        {
+          flag: false,
+          li_id: 33,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 34,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 35,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 36,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 37,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 38,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 39,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 40,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 41,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 42,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 43,
+          money: null
+        }
+      ]
+    },
+    {
+      name: "第五球",
+      object: [
+        {
+          flag: false,
+          li_id: 44,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 45,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 46,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 47,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 48,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 49,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 50,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 51,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 52,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 53,
+          money: null
+        },
+        {
+          flag: false,
+          li_id: 54,
+          money: null
+        }
+      ]
+    }
+  ];
+}
+
+//任选初始
+function eleoptInitial() {
+  return [{ object: [] }];
+}
+function OptLists() {
+  return [
+    {
+      name: "一中一 1.9",
+      arr: [],
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "二中二 5.1",
+      arr: [],
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "三中三 15",
+      arr: [],
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "四中四 60",
+      arr: [],
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "五中五 420",
+      arr: [],
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "六中五 70",
+      arr: [],
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "七中五 20",
+      arr: [],
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "八中五 7.57",
+      arr: [],
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    }
+  ];
+}
+
+//组选初始
+function elegroupInitial() {
+  return [{ object: [] }];
+}
+function GroupLists() {
+  return [
+    {
+      name: "前二50",
+      arr: [],
+      object: [
+        {
+          name: 1,
+          money: null,
+          flag: false
+        },
+        {
+          name: 2,
+          money: null,
+          flag: false
+        },
+        {
+          name: 3,
+          money: null,
+          flag: false
+        },
+        {
+          name: 4,
+          money: null,
+          flag: false
+        },
+        {
+          name: 5,
+          money: null,
+          flag: false
+        },
+        {
+          name: 6,
+          money: null,
+          flag: false
+        },
+        {
+          name: 7,
+          money: null,
+          flag: false
+        },
+        {
+          name: 8,
+          money: null,
+          flag: false
+        },
+        {
+          name: 9,
+          money: null,
+          flag: false
+        },
+        {
+          name: 10,
+          money: null,
+          flag: false
+        },
+        {
+          name: 11,
+          money: null,
+          flag: false
+        }
+      ]
+    },
+    {
+      name: "前三150",
+      arr: [],
+      object: [
+        {
+          name: 1,
+          money: null,
+          flag: false
+        },
+        {
+          name: 2,
+          money: null,
+          flag: false
+        },
+        {
+          name: 3,
+          money: null,
+          flag: false
+        },
+        {
+          name: 4,
+          money: null,
+          flag: false
+        },
+        {
+          name: 5,
+          money: null,
+          flag: false
+        },
+        {
+          name: 6,
+          money: null,
+          flag: false
+        },
+        {
+          name: 7,
+          money: null,
+          flag: false
+        },
+        {
+          name: 8,
+          money: null,
+          flag: false
+        },
+        {
+          name: 9,
+          money: null,
+          flag: false
+        },
+        {
+          name: 10,
+          money: null,
+          flag: false
+        },
+        {
+          name: 11,
+          money: null,
+          flag: false
+        }
+      ]
+    }
+  ];
+}
+
+//直选初始
+function JustLists() {
+  return [
+    {
+      name: "第一球",
+      arr: null,
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "第二球",
+      arr: null,
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "第一球",
+      arr: null,
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "第二球",
+      arr: null,
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    },
+    {
+      name: "第三球",
+      arr: null,
+      object: [
+        {
+          flag: false,
+          money: null,
+          name: 1
+        },
+        {
+          flag: false,
+          money: null,
+          name: 2
+        },
+        {
+          flag: false,
+          money: null,
+          name: 3
+        },
+        {
+          flag: false,
+          money: null,
+          name: 4
+        },
+        {
+          flag: false,
+          money: null,
+          name: 5
+        },
+        {
+          flag: false,
+          money: null,
+          name: 6
+        },
+        {
+          flag: false,
+          money: null,
+          name: 7
+        },
+        {
+          flag: false,
+          money: null,
+          name: 8
+        },
+        {
+          flag: false,
+          money: null,
+          name: 9
+        },
+        {
+          flag: false,
+          money: null,
+          name: 10
+        },
+        {
+          flag: false,
+          money: null,
+          name: 11
+        }
+      ]
+    }
+  ];
+}
+function elejustInitial() {
+  return [{ object: [] }];
+}
+
+import api from "../../../api/config";
+import NavTop from "../../../share_components/default_nav";
+import ws from '../../../assets/js/socket'
+export default {
+  components: {
+    NavTop
+  },
+  data() {
+    return {
+      margin: false,
+      menus: [
+        { name: "两面盘", item: '11' },
+        { name: "1-5球", item: '11_e_s_f' },
+        { name: "任选", item: '11_opt' },
+        { name: "组选", item: '11_group' },
+        { name: "直选", item: '11_just' }
+      ],
+      timer: null,
+      h: 0,
+      m: 0,
+      s: 0,
+      c_data: {
+        fc_name: "",
+        img_path: "",
+        qishu: ""
+      },
+      auto: {
+        qishu: null,
+        datetime: "",
+        ball: []
+      },
+      closetime: {
+        fengpan: "",
+        kaijiang: "",
+        kaipan: "",
+        now_time: ""
+      },
+      routePage: null,
+      TooLists: [
+        {
+          name: "总和",
+          object: [
+            {
+              li_id: 0,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 1,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 2,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 3,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 4,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 5,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 6,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 7,
+              flag: false,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第一球",
+          object: [
+            {
+              li_id: 8,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 9,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 10,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 11,
+              flag: false,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第二球",
+          object: [
+            {
+              li_id: 12,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 13,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 14,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 15,
+              flag: false,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第三球",
+          object: [
+            {
+              li_id: 16,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 17,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 18,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 19,
+              flag: false,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第四球",
+          object: [
+            {
+              li_id: 20,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 21,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 22,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 23,
+              flag: false,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第五球",
+          object: [
+            {
+              li_id: 24,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 25,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 26,
+              flag: false,
+              money: null
+            },
+            {
+              li_id: 27,
+              flag: false,
+              money: null
+            }
+          ]
+        }
+      ],
+      esfLists: [
+        {
+          name: "第一球",
+          object: [
+            {
+              flag: false,
+              li_id: 0,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 1,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 2,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 3,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 4,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 5,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 6,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 7,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 8,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 9,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 10,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第二球",
+          object: [
+            {
+              flag: false,
+              li_id: 11,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 12,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 13,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 14,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 15,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 16,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 17,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 18,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 19,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 20,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 21,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第三球",
+          object: [
+            {
+              flag: false,
+              li_id: 22,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 23,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 24,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 25,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 26,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 27,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 28,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 29,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 30,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 31,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 32,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第四球",
+          object: [
+            {
+              flag: false,
+              li_id: 33,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 34,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 35,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 36,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 37,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 38,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 39,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 40,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 41,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 42,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 43,
+              money: null
+            }
+          ]
+        },
+        {
+          name: "第五球",
+          object: [
+            {
+              flag: false,
+              li_id: 44,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 45,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 46,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 47,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 48,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 49,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 50,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 51,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 52,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 53,
+              money: null
+            },
+            {
+              flag: false,
+              li_id: 54,
+              money: null
+            }
+          ]
+        }
+      ],
+
+      OptType: [],
+      OptLists: [
+        {
+          name: "一中一 1.9",
+          arr: [],
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 2
+            },
+            {
+              flag: false,
+              money: null,
+              name: 3
+            },
+            {
+              flag: false,
+              money: null,
+              name: 4
+            },
+            {
+              flag: false,
+              money: null,
+              name: 5
+            },
+            {
+              flag: false,
+              money: null,
+              name: 6
+            },
+            {
+              flag: false,
+              money: null,
+              name: 7
+            },
+            {
+              flag: false,
+              money: null,
+              name: 8
+            },
+            {
+              flag: false,
+              money: null,
+              name: 9
+            },
+            {
+              flag: false,
+              money: null,
+              name: 10
+            },
+            {
+              flag: false,
+              money: null,
+              name: 11
+            }
+          ]
+        },
+        {
+          name: "二中二 5.1",
+          arr: [],
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 2
+            },
+            {
+              flag: false,
+              money: null,
+              name: 3
+            },
+            {
+              flag: false,
+              money: null,
+              name: 4
+            },
+            {
+              flag: false,
+              money: null,
+              name: 5
+            },
+            {
+              flag: false,
+              money: null,
+              name: 6
+            },
+            {
+              flag: false,
+              money: null,
+              name: 7
+            },
+            {
+              flag: false,
+              money: null,
+              name: 8
+            },
+            {
+              flag: false,
+              money: null,
+              name: 9
+            },
+            {
+              flag: false,
+              money: null,
+              name: 10
+            },
+            {
+              flag: false,
+              money: null,
+              name: 11
+            }
+          ]
+        },
+        {
+          name: "三中三 15",
+          arr: [],
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 2
+            },
+            {
+              flag: false,
+              money: null,
+              name: 3
+            },
+            {
+              flag: false,
+              money: null,
+              name: 4
+            },
+            {
+              flag: false,
+              money: null,
+              name: 5
+            },
+            {
+              flag: false,
+              money: null,
+              name: 6
+            },
+            {
+              flag: false,
+              money: null,
+              name: 7
+            },
+            {
+              flag: false,
+              money: null,
+              name: 8
+            },
+            {
+              flag: false,
+              money: null,
+              name: 9
+            },
+            {
+              flag: false,
+              money: null,
+              name: 10
+            },
+            {
+              flag: false,
+              money: null,
+              name: 11
+            }
+          ]
+        },
+        {
+          name: "四中四 60",
+          arr: [],
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 2
+            },
+            {
+              flag: false,
+              money: null,
+              name: 3
+            },
+            {
+              flag: false,
+              money: null,
+              name: 4
+            },
+            {
+              flag: false,
+              money: null,
+              name: 5
+            },
+            {
+              flag: false,
+              money: null,
+              name: 6
+            },
+            {
+              flag: false,
+              money: null,
+              name: 7
+            },
+            {
+              flag: false,
+              money: null,
+              name: 8
+            },
+            {
+              flag: false,
+              money: null,
+              name: 9
+            },
+            {
+              flag: false,
+              money: null,
+              name: 10
+            },
+            {
+              flag: false,
+              money: null,
+              name: 11
+            }
+          ]
+        },
+        {
+          name: "五中五 420",
+          arr: [],
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 2
+            },
+            {
+              flag: false,
+              money: null,
+              name: 3
+            },
+            {
+              flag: false,
+              money: null,
+              name: 4
+            },
+            {
+              flag: false,
+              money: null,
+              name: 5
+            },
+            {
+              flag: false,
+              money: null,
+              name: 6
+            },
+            {
+              flag: false,
+              money: null,
+              name: 7
+            },
+            {
+              flag: false,
+              money: null,
+              name: 8
+            },
+            {
+              flag: false,
+              money: null,
+              name: 9
+            },
+            {
+              flag: false,
+              money: null,
+              name: 10
+            },
+            {
+              flag: false,
+              money: null,
+              name: 11
+            }
+          ]
+        },
+        {
+          name: "六中五 70",
+          arr: [],
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 2
+            },
+            {
+              flag: false,
+              money: null,
+              name: 3
+            },
+            {
+              flag: false,
+              money: null,
+              name: 4
+            },
+            {
+              flag: false,
+              money: null,
+              name: 5
+            },
+            {
+              flag: false,
+              money: null,
+              name: 6
+            },
+            {
+              flag: false,
+              money: null,
+              name: 7
+            },
+            {
+              flag: false,
+              money: null,
+              name: 8
+            },
+            {
+              flag: false,
+              money: null,
+              name: 9
+            },
+            {
+              flag: false,
+              money: null,
+              name: 10
+            },
+            {
+              flag: false,
+              money: null,
+              name: 11
+            }
+          ]
+        },
+        {
+          name: "七中五 20",
+          arr: [],
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 2
+            },
+            {
+              flag: false,
+              money: null,
+              name: 3
+            },
+            {
+              flag: false,
+              money: null,
+              name: 4
+            },
+            {
+              flag: false,
+              money: null,
+              name: 5
+            },
+            {
+              flag: false,
+              money: null,
+              name: 6
+            },
+            {
+              flag: false,
+              money: null,
+              name: 7
+            },
+            {
+              flag: false,
+              money: null,
+              name: 8
+            },
+            {
+              flag: false,
+              money: null,
+              name: 9
+            },
+            {
+              flag: false,
+              money: null,
+              name: 10
+            },
+            {
+              flag: false,
+              money: null,
+              name: 11
+            }
+          ]
+        },
+        {
+          name: "八中五 7.57",
+          arr: [],
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 2
+            },
+            {
+              flag: false,
+              money: null,
+              name: 3
+            },
+            {
+              flag: false,
+              money: null,
+              name: 4
+            },
+            {
+              flag: false,
+              money: null,
+              name: 5
+            },
+            {
+              flag: false,
+              money: null,
+              name: 6
+            },
+            {
+              flag: false,
+              money: null,
+              name: 7
+            },
+            {
+              flag: false,
+              money: null,
+              name: 8
+            },
+            {
+              flag: false,
+              money: null,
+              name: 9
+            },
+            {
+              flag: false,
+              money: null,
+              name: 10
+            },
+            {
+              flag: false,
+              money: null,
+              name: 11
+            }
+          ]
+        }
+      ],
+
+      GroupType: [],
+      GroupLists: [
+        {
+          name: "前二50",
+          arr: [],
+          object: [
+            {
+              name: 1,
+              money: null,
+              flag: false
+            },
+            {
+              name: 2,
+              money: null,
+              flag: false
+            },
+            {
+              name: 3,
+              money: null,
+              flag: false
+            },
+            {
+              name: 4,
+              money: null,
+              flag: false
+            },
+            {
+              name: 5,
+              money: null,
+              flag: false
+            },
+            {
+              name: 6,
+              money: null,
+              flag: false
+            },
+            {
+              name: 7,
+              money: null,
+              flag: false
+            },
+            {
+              name: 8,
+              money: null,
+              flag: false
+            },
+            {
+              name: 9,
+              money: null,
+              flag: false
+            },
+            {
+              name: 10,
+              money: null,
+              flag: false
+            },
+            {
+              name: 11,
+              money: null,
+              flag: false
+            }
+          ]
+        },
+        {
+          name: "前三150",
+          arr: [],
+          object: [
+            {
+              name: 1,
+              money: null,
+              flag: false
+            },
+            {
+              name: 2,
+              money: null,
+              flag: false
+            },
+            {
+              name: 3,
+              money: null,
+              flag: false
+            },
+            {
+              name: 4,
+              money: null,
+              flag: false
+            },
+            {
+              name: 5,
+              money: null,
+              flag: false
+            },
+            {
+              name: 6,
+              money: null,
+              flag: false
+            },
+            {
+              name: 7,
+              money: null,
+              flag: false
+            },
+            {
+              name: 8,
+              money: null,
+              flag: false
+            },
+            {
+              name: 9,
+              money: null,
+              flag: false
+            },
+            {
+              name: 10,
+              money: null,
+              flag: false
+            },
+            {
+              name: 11,
+              money: null,
+              flag: false
+            }
+          ]
+        }
+      ],
+
+      JustType: [],
+      JustLists: [
+        {
+          name: "第一球",
+          arr: null,
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            }
+          ]
+        },
+        {
+          name: "第二球",
+          arr: null,
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            }
+          ]
+        },
+        {
+          name: "第一球",
+          arr: null,
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            }
+          ]
+        },
+        {
+          name: "第二球",
+          arr: null,
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            }
+          ]
+        },
+        {
+          name: "第三球",
+          arr: null,
+          object: [
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            },
+            {
+              flag: false,
+              money: null,
+              name: 1
+            }
+          ]
+        }
+      ]
+    };
+  },
+  created() {
+//    this.setRoutePage();
+    this.fetchData();
+  },
+  mounted(){
+    this.socket_change(this.$route.query.page);
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route.query.page':function(to,from) {
+      this.$root.$off(from);
+      this.$root.$off(from+'lefttime');
+      this.socket_change(to);
+      this.fetchData();
+//      this.setRoutePage();
+    }
+  },
+  destroyed(){
+    console.log('清除定时器：'+this.timer);
+    window.clearInterval(this.timer);
+    if(!this.isIE9){
+      ws.close_ws(false);
+    }
+    this.$root.$off(this.$route.query.page);
+    this.$root.$off(this.$route.query.page+'lefttime')
+  },
+  methods:{
+    socket_change: function(to){
+      if(!this.isIE9){
+        let self = this;
+        ws.createWebSocket(to,self,true);
+        this.$root.$on(to,(e)=>{
+          this.auto = e;
+        });
+        this.$root.$on(to+'lefttime',(e)=>{
+          console.log(e);
+          this.c_data.qishu = e.qishu;
+          this.closetime.fengpan = e.close_time;
+          this.closetime.now_time = e.now_time;
+          let t1 = e.close_time - e.now_time;
+          if(t1 == 0){
+            this.fetchData(2)
+          }
+        })
+      }
+    },
+    open_way: function (){
+      let page = 'trend_chart/chart-lotteryId='+this.$route.query.page+'.html'+'?tab=1';
+      window.open(page)
+    },
+    history: function () {
+      let page = 'trend_chart/chart-lotteryId='+this.$route.query.page+'.html'+'?tab=3';
+      window.open(page)
+    },
+    show_rule: function() {
+      this.$root.$emit("rule_show", true);
+      this.$root.$emit("now_page", this.$route.query.page);
+    },
+    run_time: function() {
+      this.timer = window.setInterval(this.getRTime, 1000);
+    },
+    getRTime: function() {
+      this.closetime.now_time += 1;
+      var t1 = this.closetime.fengpan * 1000 - this.closetime.now_time * 1000;
+      this.h = Math.floor((t1 / 1000 / 60 / 60) % 24);
+      this.m = Math.floor((t1 / 1000 / 60) % 60);
+      this.s = Math.floor((t1 / 1000) % 60);
+      if (this.h == 0 && this.m == 0 && this.s == 0) {
+        this.fetchData(2);
+        this.$root.$emit("success", true);
+      }else if(this.h < 0 && this.m < 0 && this.s < 0){
+        window.clearInterval(this.timer);
+        this.h = -1;
+        this.m = -1;
+        this.s = -1;
+      }
+    },
+    init: function() {
+      this.run_time();
+    },
+    sortNumber: function(a, b) {
+      return a.sort - b.sort;
+    },
+    go_child: function(child) {
+      this.$router.push({ name: child, query: { page: this.$route.query.page } });
+    },
+    fetchData(type) {
+      if(type == 2){
+        this.$root.$emit('loading',true,true);
+        window.clearInterval(this.timer);
+      }else{
+        this.$root.$emit('loading',true);
+        window.clearInterval(this.timer);
+      }
+      let body = {
+        fc_type: this.$route.query.page
+      };
+      api.getgameindex(this, body, res => {
+        if (res.data.ErrorCode == 1) {
+          this.auto = res.data.Data.auto;
+          this.closetime = res.data.Data.closetime;
+          this.c_data = res.data.Data.c_data;
+          var data = res.data.Data.odds;
+          if(res.data.is_wh == 2){
+            this.$root.$emit('wh_modal',true)
+          }else if(res.data.is_wh == 1){
+            this.$root.$emit('wh_modal',false)
+          }
+          data.sort(this.sortNumber);
+          this.computedToo(data);
+          this.computedSf(data);
+          this.computedopt(data);
+          this.computedGroup(data);
+          this.computedJust(data);
+          this.$root.$emit("loading", false);
+          this.init();
+        }
+      });
+    },
+    computedToo(data) {
+      this.$set(this.TooLists, this.TooLists);
+      this.TooLists = eleventoo();
+      var k = 75;
+      //总合
+      for (let i = 0; i < this.TooLists[0].object.length; i++, k++) {
+        Object.assign(this.TooLists[0].object[i], data[k]);
+        let name_one = data[k].remark.slice(
+          data[k].remark.search("#") + 1,
+          data[k].remark.length
+        );
+        this.TooLists[0].object[i].name = name_one;
+      }
+      //1~5球
+      k = 11;
+      for (let l = 1; l < this.TooLists.length; l++, k += 11) {
+        for (let i = 0; i < this.TooLists[l].object.length; i++, k++) {
+          Object.assign(this.TooLists[l].object[i], data[k]);
+          let name_two = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          );
+          this.TooLists[l].object[i].name = name_two;
+        }
+      }
+    },
+    computedSf(data) {
+      this.$set(this.esfLists, this.esfLists);
+      this.esfLists = esfInitial();
+      //1~5球
+      var k = 0;
+      for (let l = 0; l < this.esfLists.length; l++, k += 4) {
+        for (let i = 0; i < this.esfLists[l].object.length; i++, k++) {
+          Object.assign(this.esfLists[l].object[i], data[k]);
+          let name = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          );
+          this.esfLists[l].object[i].name = name;
+        }
+      }
+    },
+    computedopt(data) {
+      this.$set(this.OptLists, this.OptLists);
+      this.$set(this.OptType, this.OptType);
+
+      this.OptType = eleoptInitial();
+      this.OptLists = OptLists();
+
+      for (var i = 0, k = 83; i < 8; i++, k++) {
+        this.OptType[0].object.push(data[k]);
+        this.OptType[0].object[i].money = null;
+        this.OptType[0].object[i].flag = false;
+        let name = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          )+data[k].odd;
+//        console.log(name);
+        this.OptLists[i].name = name;
+      }
+    },
+    computedGroup(data) {
+      this.$set(this.GroupType, this.GroupType);
+      this.$set(this.GroupLists, this.GroupLists);
+
+      this.GroupType = elegroupInitial();
+      this.GroupLists = GroupLists();
+
+      for (var i = 0, k = 91; i < 2; i++, k++) {
+        this.GroupType[0].object.push(data[k]);
+        this.GroupType[0].object[i].money = null;
+        this.GroupType[0].object[i].flag = false;
+        let name = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          )+data[k].odd;
+//        console.log(name);
+        this.GroupLists[i].name = name;
+      }
+    },
+    computedJust(data) {
+      this.$set(this.JustLists, this.JustLists);
+      this.$set(this.JustType, this.JustType);
+      this.JustLists = JustLists();
+      this.JustType = elejustInitial();
+      for (var i = 0, k = 93; i < 2; i++, k++) {
+        this.JustType[0].object.push(data[k]);
+        this.JustType[0].object[i].money = null;
+        this.JustType[0].object[i].flag = false;
+        let name = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          )+data[k].odd;
+        console.log(name);
+        this.JustLists[i].top_name = name;
+      }
+    }
+  }
+};
+</script>

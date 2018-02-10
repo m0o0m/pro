@@ -1,0 +1,116 @@
+<div id="content">
+    <div class="row">
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('PreferentialInquiry')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div ng-show="newTodo">
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select data-smart-select2  class="selectWidth" ng-model="site_index_id">
+                                                    <option value="">请选择</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label" >年月份选择</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select class="form-control"  name="year" ng-model="yy">
+                                                    <option class="hidden"></option>
+                                                    <option value="">全部</option>
+                                                    <option value="{{year}}">{{year}}年</option>
+                                                    <option value="{{year-1}}">{{year-1}}年</option>
+                                                    <!--<option value="{{year-2}}">{{year-2}}年</option>-->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-md-offset-0 col-xs-8 col-xs-offset-4">
+                                            <div class="form-group ">
+                                                <select class="form-control"  name="month" ng-model="mm">
+                                                    <option class="hidden"></option>
+                                                    <option value="">全部</option>
+                                                    <option value="01">1月</option>
+                                                    <option value="02">2月</option>
+                                                    <option value="03">3月</option>
+                                                    <option value="04">4月</option>
+                                                    <option value="05">5月</option>
+                                                    <option value="06">6月</option>
+                                                    <option value="07">7月</option>
+                                                    <option value="08">8月</option>
+                                                    <option value="09">9月</option>
+                                                    <option value="10">10月</option>
+                                                    <option value="11">11月</option>
+                                                    <option value="12">12月</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div  class="col-sm-2  col-sm-offset-2 col-xs-6 col-xs-offset-6">
+                                            <div class="input-group pull-right">
+                                                <button type="submit"  ng-click="search()"  class="btn btn-primary">
+                                                    {{getWord('Search')}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>编号</th>
+                                                <th>事件</th>
+                                                <th>返水区间(起)</th>
+                                                <th>返水区间(止)</th>
+                                                <th>人数/金额</th>
+                                                <th>创建日期</th>
+                                                <th>创建者</th>
+                                                <th>综合打码倍数</th>
+                                                <th>查询明细</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.event}}</td>
+                                                <td>{{item.start_time|formatDate}}</td>
+                                                <td>{{item.end_time|formatDate}}</td>
+                                                <td>{{item.people_num}}/{{item.money}}</td>
+                                                <td>{{item.create_time|formatDate}}</td>
+                                                <td>{{item.admin_user}}</td>
+                                                <td>{{item.bet}}</td>
+                                                <td><button type="submit"  class="btn btn-primary" data-ui-sref="app.Precalcula.Detailed({id:item.id})">
+                                                    {{getWord('detailed')}}
+                                                </button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+

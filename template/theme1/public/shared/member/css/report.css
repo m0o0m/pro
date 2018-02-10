@@ -1,0 +1,172 @@
+#page-body {
+  /* .date_nav .ul1, .date_nav .ul2, .video_nav .ul2{
+      background-color: #ff4341;
+  } */
+  /*.video_nav .ul2 li{*/
+  /*float: left;*/
+  /*width: 228px;*/
+  /*text-align: center;*/
+  /*font-size: 14px;*/
+  /*}*/
+  /*.video_nav .ul2f li{*/
+  /*float: left;*/
+  /*width: 228px;*/
+  /*text-align: center;*/
+  /*float: left;*/
+  /*color: #000;*/
+  /*font-size: 12px;*/
+  /*}*/
+  /*.video_nav .ul2b li{*/
+  /*float: left;*/
+  /*width: 228px;*/
+  /*text-align: center;*/
+  /*float: left;*/
+  /*color: #000;*/
+  /*font-size: 12px;*/
+  /*}*/ }
+  #page-body .report {
+    margin-top: 20px; }
+  #page-body .txt_l, #page-body .txt_r {
+    width: 180px;
+    height: 46px;
+    line-height: 46px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    float: left;
+    text-align: center;
+    cursor: pointer; }
+  #page-body .r_center {
+    overflow: hidden;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    margin-top: 10px;
+    min-height: 500px; }
+  #page-body .r_center .weeks {
+    /*height: 50px;*/
+    /*line-height: 50px;*/
+    border-bottom: 1px solid #ddd;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    position: relative; }
+  #page-body .r_center .weeks .one {
+    width: 0;
+    height: 0;
+    border-top: 50px solid #e85036;
+    border-left: 50px solid bisque; }
+  #page-body .r_center .weeks .sp1 {
+    font-size: 12px;
+    position: absolute;
+    left: 23px;
+    top: 3px;
+    color: #fff; }
+  #page-body .r_center .weeks .sp2 {
+    font-size: 12px;
+    position: absolute;
+    left: 3px;
+    top: 29px;
+    color: #fff; }
+  #page-body .r_center .weeks li {
+    float: left;
+    width: 115px;
+    height: 50px;
+    line-height: 25px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f6f6f6;
+    font-size: 14px;
+    color: #666; }
+  #page-body .r_center .weeks .lastli {
+    line-height: 50px;
+    font-size: 14px;
+    color: #666; }
+  #page-body .r_center .weeks .weeks_active {
+    background-color: #fec23b;
+    color: #fff; }
+  #page-body .txt_active {
+    border-top: 1px solid red;
+    border-left: none;
+    border-bottom: none;
+    border-right: none; }
+  #page-body .record_item {
+    display: none; }
+  #page-body .show {
+    display: block; }
+  #page-body .r_center .navs .navs_active {
+    background-color: red;
+    color: #fff; }
+  #page-body .tabs_center .tabs_item {
+    display: none; }
+  #page-body .tabs_center .show {
+    display: block; }
+  #page-body .tabs_center {
+    padding: 15px 30px; }
+  #page-body .date_nav, #page-body .video_nav {
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 10px; }
+  #page-body .date_nav .ul1 li {
+    float: left;
+    width: 16%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .ul1f, #page-body .date_nav .ul2f {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer; }
+  #page-body .date_nav .ul1f li {
+    float: left;
+    width: 16%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .weeks-content li {
+    float: left;
+    width: 16%;
+    text-align: center;
+    font-size: 14px;
+    background-color: #f5f5f5; }
+  #page-body .date_nav .weeks-content {
+    display: none; }
+  #page-body .date_nav .ul1b, #page-body .video_nav .ul2b {
+    background-color: #f5f5f5;
+    color: #000; }
+  #page-body .date_nav .ul1b li {
+    float: left;
+    width: 16%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .ul2 li {
+    font-size: 14px;
+    float: left;
+    width: 16%;
+    text-align: center; }
+  #page-body .date_nav .ul2f li {
+    float: left;
+    width: 16%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .ul2b {
+    background-color: #f5f5f5;
+    color: #000; }
+  #page-body .date_nav .ul2b li {
+    float: left;
+    width: 16%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .sum1 {
+    background-color: #f4fcea;
+    border-top: 1px solid #97cd34;
+    border-bottom: 1px solid #97cd34; }
+  #page-body .date_nav .sum1 li {
+    float: left;
+    width: 16%;
+    text-align: center;
+    font-size: 14px;
+    color: #000; }
+  #page-body .weeks-content li {
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    color: #000; }
+
+/*# sourceMappingURL=report.css.map */

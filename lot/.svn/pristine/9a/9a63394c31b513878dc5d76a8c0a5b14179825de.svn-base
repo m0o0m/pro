@@ -1,0 +1,20 @@
+package schema
+
+//代理现金流水表
+type AgentCashRecord struct {
+	Id          int64   `insert:"id;auto;mycat:next value for MYCATSEQ_AGENTCASHRECORD" xorm:"'id' PK autoincr"` //主键id
+	AgentId     int64   `insert:"agent_id" xorm:"'agent_id' notnull"`                                                                 //代理id
+	AgentUser   string  `insert:"agent_user" xorm:"'agent_user' notnull"`                                                             //代理账号
+	LineId      string  `insert:"line_id" xorm:"'line_id' notnull"`                                                                   //站点id
+	HanderId    int64   `insert:"hander_id" xorm:"hander_id"`                                                                         //操作者id
+	CashNum     float64 `insert:"cash_num" xorm:"cash_num"`                                                                           //交易金额
+	CashBalance float64 `insert:"cash_balance" xorm:"'cash_balance' notnull"`                                                         //现有资金
+	Remark      string  `insert:"remark" xorm:"remark"`                                                                               //备注
+	Addtime     int64   `insert:"addtime" xorm:"'addtime' notnull"`                                                                   //插入时间
+	Addday      int64   `insert:"addday" xorm:"'addday' notnull"`                                                                     //下注的日期
+	CashType    int64   `insert:"cash_type" xorm:"'cash_type' notnull default(1)"`                                                    //1-存入,2-取出
+}
+
+func (*AgentCashRecord) TableName() string {
+	return "my_agent_cash_record"
+}

@@ -1,0 +1,188 @@
+.casinoBg {
+  background-image: url(../../images/live6/casino-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+/*--------------一张图片----------------*/
+.casino-divBg {
+  overflow: hidden;
+  width: 1000px;
+  height: auto;
+  margin: auto;
+}
+.casino-divBg .casino-oneImg {
+  margin: auto;
+  width: 950px;
+  height: 300px;
+  margin-bottom: 15px;
+}
+.casino-divBg .casino-oneImg .casino-agBg {
+  position: relative;
+  width: 950px;
+  height: 300px;
+}
+.casino-divBg .casino-oneImg .casino-agBg .casino-agImg {
+  overflow: hidden;
+  position: absolute;
+  z-index: 1000;
+}
+.casino-divBg .casino-oneImg .casino-agBg .casino-agImg .shine {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: -1000px;
+  width: 100%;
+  height: 100%;
+  background: url(../../images/live6/shine_datouwang.png) no-repeat;
+}
+.casino-divBg .casino-oneImg .casino-agBg .casino-btn {
+  position: absolute;
+  z-index: 1010;
+  top: 180px;
+  left: 40px;
+}
+.casino-divBg .casino-oneImg .casino-agBg .casino-btn .casino-btnGame,
+.casino-divBg .casino-oneImg .casino-agBg .casino-btn .casino-btnRule {
+  width: 94px;
+  height: 39px;
+  text-align: center;
+  line-height: 39px;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+.casino-divBg .casino-oneImg .casino-agBg .casino-btn .casino-btnGame {
+  background-image: url(../../images/live6/casino-brnBlue.png);
+  color: #fff;
+}
+.casino-divBg .casino-oneImg .casino-agBg .casino-btn .casino-btnGame:hover {
+  background-image: url(../../images/live6/casino-yellow.png);
+  color: #4b4703;
+}
+.casino-divBg .casino-oneImg .casino-agBg .casino-btn .casino-btnRule {
+  background-image: url(../../images/live6/casino-yellow.png);
+  color: #4b4703;
+  margin-left: 30px;
+}
+.casino-divBg .casino-oneImg .casino-agBg .casino-btn .casino-btnRule:hover {
+  background-image: url(../../images/live6/casino-brnBlue.png);
+  color: #fff;
+}
+.casino-divBg .casino-twoImg {
+  margin-bottom: 15px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 18px;
+}
+.casino-divBg .casino-twoImg .casino-Bg {
+  width: 470px;
+  height: 210px;
+  background-image: url(../../images/live6/casino-bg.jpg);
+  background-repeat: no-repeat;
+  padding-top: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.casino-divBg .casino-twoImg .casino-Bg .casino-Img {
+  overflow: hidden;
+}
+.casino-divBg .casino-twoImg .casino-Bg .casino-Img .shine {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: -500px;
+  width: 100%;
+  height: 100%;
+  background: url(../../images/live6/shine_datouwang_2.png) no-repeat;
+}
+.casino-divBg .casino-twoImg .casino-Bg .casino-btn {
+  position: absolute;
+  z-index: 1010;
+  top: 120px;
+  left: 40px;
+}
+.casino-divBg .casino-twoImg .casino-Bg .casino-btn .casino-btnGame,
+.casino-divBg .casino-twoImg .casino-Bg .casino-btn .casino-btnRule {
+  width: 75px;
+  height: 29px;
+  text-align: center;
+  line-height: 29px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-size: 12px;
+}
+.casino-divBg .casino-twoImg .casino-Bg .casino-btn .casino-btnGame {
+  background-image: url(../../images/live6/casino-brnBlue.png);
+  color: #fff;
+}
+.casino-divBg .casino-twoImg .casino-Bg .casino-btn .casino-btnGame:hover {
+  background-image: url(../../images/live6/casino-yellow.png);
+  color: #4b4703;
+}
+.casino-divBg .casino-twoImg .casino-Bg .casino-btn .casino-btnRule {
+  background-image: url(../../images/live6/casino-yellow.png);
+  color: #4b4703;
+  margin-left: 10px;
+}
+.casino-divBg .casino-twoImg .casino-Bg .casino-btn .casino-btnRule:hover {
+  background-image: url(../../images/live6/casino-brnBlue.png);
+  color: #fff;
+}
+.casino-divBg .casino-threeImg {
+  display: inline-block;
+  margin-left: 22px;
+  text-align: center;
+}
+.casino-divBg .casino-threeImg .casino-Bg {
+  width: 300px;
+  height: 210px;
+  background-image: url(../../images/live6/casino-bg.jpg);
+  background-repeat: no-repeat;
+  padding-top: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.casino-divBg .casino-threeImg .casino-Bg .casino-Img .shine {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: -400px;
+  width: 100%;
+  height: 100%;
+  background: url(../../images/live6/shine_datouwang_2.png) no-repeat;
+}
+.casino-divBg .casino-threeImg .casino-Bg .casino-btn {
+  position: absolute;
+  z-index: 1010;
+  top: 100px;
+  left: 30px;
+}
+.casino-divBg .casino-threeImg .casino-Bg .casino-btn .casino-btnGame,
+.casino-divBg .casino-threeImg .casino-Bg .casino-btn .casino-btnRule {
+  width: 75px;
+  height: 29px;
+  text-align: center;
+  line-height: 29px;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.casino-divBg .casino-threeImg .casino-Bg .casino-btn .casino-btnGame {
+  background-image: url(../../images/live6/casino-brnBlue.png);
+  color: #fff;
+}
+.casino-divBg .casino-threeImg .casino-Bg .casino-btn .casino-btnGame:hover {
+  background-image: url(../../images/live6/casino-yellow.png);
+  color: #4b4703;
+}
+.casino-divBg .casino-threeImg .casino-Bg .casino-btn .casino-btnRule {
+  background-image: url(../../images/live6/casino-yellow.png);
+  color: #4b4703;
+}
+.casino-divBg .casino-threeImg .casino-Bg .casino-btn .casino-btnRule:hover {
+  background-image: url(../../images/live6/casino-brnBlue.png);
+  color: #fff;
+}
+/*# sourceMappingURL=casino.css.map */

@@ -1,0 +1,291 @@
+.casino-live {
+  overflow: hidden;
+  width: 1000px;
+  height: 640px;
+  margin: auto;
+  position: relative;
+}
+.casino-live .casino-bgDiv {
+  position: absolute;
+  width: 1000px;
+  height: 609px;
+  background-image: url(../../images/live4/csino-bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.casino-live .casino-tableDiv {
+  position: absolute;
+  bottom: 5px;
+  left: 110px;
+  width: 800px;
+  height: 244px;
+  background-image: url(../../images/live4/table.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.casino-live .casino-chongzhi a {
+  display: block;
+  position: absolute;
+  bottom: 110px;
+  z-index: 1000;
+  left: 155px;
+  width: 170px;
+  height: 80px;
+  background-image: url(../../images/live4/chongzhi-1.png);
+  background-repeat: no-repeat;
+}
+.casino-live .casino-chongzhi a:hover {
+  bottom: 102px;
+  left: 160px;
+  background-image: url(../../images/live4/chongzhi.png);
+}
+.casino-live .casino-guize a {
+  display: block;
+  position: absolute;
+  bottom: 75px;
+  left: 255px;
+  z-index: 1000;
+  width: 178px;
+  height: 70px;
+  background-image: url(../../images/live4/guize-1.png);
+  background-repeat: no-repeat;
+}
+.casino-live .casino-guize a:hover {
+  left: 240px;
+  bottom: 75px;
+  background-image: url(../../images/live4/guize.png);
+}
+.casino-live .casino-kaishiyx a {
+  display: block;
+  position: absolute;
+  bottom: 75px;
+  right: 240px;
+  z-index: 1000;
+  width: 176px;
+  height: 70px;
+  background-image: url(../../images/live4/ksyx-1.png);
+  background-repeat: no-repeat;
+}
+.casino-live .casino-kaishiyx a:hover {
+  right: 225px;
+  background-image: url(../../images/live4/ksyx.png);
+}
+.casino-live .casino-eduzh a {
+  display: block;
+  position: absolute;
+  bottom: 110px;
+  right: 140px;
+  z-index: 1000;
+  width: 164px;
+  height: 78px;
+  background-image: url(../../images/live4/edzh-img-1.png);
+  background-repeat: no-repeat;
+}
+.casino-live .casino-eduzh a:hover {
+  right: 145px;
+  bottom: 105px;
+  background-image: url(../../images/live4/edzh-img.png);
+}
+.casino-live .casino-nav {
+  z-index: 1200;
+  position: relative;
+  top: 120px;
+  text-align: center;
+}
+.casino-live .casino-nav ul {
+  padding-left: 0px;
+}
+.casino-live .casino-nav ul li {
+  list-style: none;
+  display: inline-block;
+  margin-right: 20px;
+}
+.casino-live .casino-nav ul li a {
+  font-family: "微软雅黑";
+  font-weight: bold;
+  font-size: 26px;
+  text-decoration: none;
+  color: #a08d67;
+}
+.casino-live .casino-nav ul li .casino-hover {
+  color: #003918;
+}
+.casino-live .casino-mm {
+  position: relative;
+  z-index: 1100;
+}
+.casino-live .casino-mm img {
+  position: absolute;
+}
+.casino-live .casino-mm .casino-ag-mm {
+  left: 380px;
+  top: 190px;
+}
+.casino-live .casino-mm .casino-bbin-mm {
+  left: 380px;
+  top: 160px;
+}
+.casino-live .casino-mm .casino-mg-mm {
+  left: 380px;
+  top: 165px;
+}
+.casino-live .casino-mm .casino-og-mm {
+  left: 400px;
+  top: 176px;
+}
+.casino-live .casino-mm .casino-gpi-mm {
+  left: 380px;
+  top: 145px;
+}
+.casino-live .casino-mm .casino-lmg-mm {
+  left: 350px;
+  top: 140px;
+}
+.casino-live .casino-mm .casino-lebo-mm {
+  left: 360px;
+  top: 158px;
+}
+.casino-live .casino-mm .casino-ct-mm {
+  left: 380px;
+  top: 195px;
+}
+.casino-live .casino-mm .casino-gd-mm {
+  left: 380px;
+  top: 200px;
+}
+.casino-live .casino-mm .casino-ab-mm {
+  left: 390px;
+  top: 143px;
+}
+.casino-live .casino-mm .casino-sa-mm {
+  top: 195px;
+  left: 410px;
+}
+
+.casino-live .casino-mm .casino-dg-mm {
+  left: 390px;
+  top: 143px;
+}
+
+.casino-live .casino-mm .casino-pk-mm {
+  left: 390px;
+  top: 143px;
+}
+
+.casino-live #casino-tit-img {
+  position: absolute;
+  z-index: 1300;
+  width: 160px;
+  height: 61px;
+  overflow: hidden;
+  background-image: url(../../images/live4/casino-tit-img.png);
+  background-repeat: no-repeat;
+  bottom: 80px;
+  left: 440px;
+  cursor: pointer;
+}
+.casino-live #casino-tit-img.casino-dg-tit{
+  width: 160px;
+  left: 430px;
+  background-position: -1630px;
+}
+.casino-live #casino-tit-img.casino-dg-tit:hover {
+    background-image: url(../../images/live4/casino-tit-img-2.png);
+    background-position: -1809px;
+}
+.casino-live #casino-tit-img.casino-ag-tit {
+  background-position: -10px 0px;
+}
+.casino-live #casino-tit-img.casino-ag-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+  background-position: -1px -2px;
+}
+.casino-live #casino-tit-img.casino-bbin-tit {
+  width: 170px;
+  left: 430px;
+  background-position: -176px;
+}
+.casino-live #casino-tit-img.casino-bbin-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+}
+.casino-live #casino-tit-img.casino-mg-tit {
+  width: 160px;
+  left: 430px;
+  background-position: -340px;
+}
+.casino-live #casino-tit-img.casino-mg-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+}
+.casino-live #casino-tit-img.casino-og-tit {
+  width: 160px;
+  left: 430px;
+  background-position: -488px;
+}
+.casino-live #casino-tit-img.casino-og-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+}
+.casino-live #casino-tit-img.casino-gpi-tit {
+  width: 160px;
+  left: 430px;
+  background-position: -585px;
+}
+.casino-live #casino-tit-img.casino-gpi-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+  background-position: -638px;
+}
+.casino-live #casino-tit-img.casino-lmg-tit {
+  width: 160px;
+  left: 430px;
+  background-position: -740px;
+}
+.casino-live #casino-tit-img.casino-lmg-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+  background-position: -818px;
+}
+.casino-live #casino-tit-img.casino-lebo-tit {
+  width: 180px;
+  left: 424px;
+  background-position: -915px;
+}
+.casino-live #casino-tit-img.casino-lebo-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+  background-position: -1007px;
+}
+.casino-live #casino-tit-img.casino-pk-tit {
+  width: 160px;
+  left: 430px;
+  background-position: -1078px;
+}
+.casino-live #casino-tit-img.casino-pk-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+  background-position: -1185px;
+}
+.casino-live #casino-tit-img.casino-gd-tit {
+  width: 160px;
+  left: 430px;
+  background-position: -1216px;
+}
+.casino-live #casino-tit-img.casino-gd-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+  background-position: -1343px;
+}
+.casino-live #casino-tit-img.casino-ab-tit {
+  width: 160px;
+  left: 430px;
+  background-position: -1354px;
+}
+.casino-live #casino-tit-img.casino-ab-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+  background-position: -1490px;
+
+}
+.casino-live #casino-tit-img.casino-sa-tit {
+  width: 160px;
+  left: 430px;
+  background-position: -1490px;
+}
+.casino-live #casino-tit-img.casino-sa-tit:hover {
+  background-image: url(../../images/live4/casino-tit-img-2.png);
+  background-position: -1642px;
+}
+/*# sourceMappingURL=csino-style.css.map */

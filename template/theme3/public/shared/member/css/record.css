@@ -1,0 +1,391 @@
+@charset "UTF-8";
+#page-body {
+  /* .date_nav .ul1, .date_nav .ul2, .video_nav .ul2{
+      background-color: #ff4341;
+  } */ }
+  #page-body .choose .notenum span, #page-body .bettime span, #page-body .s_type span {
+    font-size: 14px; }
+  #page-body .choose .select1 {
+    display: none;
+    margin-left: 10px;
+    width: 110px !important;
+  }
+  #page-body .select span, #page-body .select1 span {
+    display: block;
+    /*height: 34px;*/
+    cursor: pointer;
+    font-size: 14px; }
+  #page-body .select ul, #page-body li, #page-body .select1 ul, #page-body li {
+    padding: 0;
+    margin: 0; }
+  #page-body .choose .select li, #page-body .choose .select1 li {
+    text-align: center;
+    /*line-height: 30px;*/
+    color: #666;
+    list-style-type: none;
+    /*border-bottom: 1px dashed #eee;*/
+    cursor: pointer;
+    /*transition: all 1s ease 0s;*/ }
+  #page-body .choose .select li:hover, #page-body .choose .select1 li:hover {
+    background-color: #DAF0FF;
+    font-weight: bold; }
+  #page-body .select li:last-child, #page-body .select1 li:last-child {
+    border-bottom: 0; }
+  #page-body .select ul, #page-body .select1 ul {
+    display: none;
+    background-color: #fff; }
+  #page-body .choose .select-group {
+    height: 34px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100px; 
+    display: inline-block;
+  }
+  #page-body .choose select {
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    width: auto;
+    height: 30px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background-color: #fff;
+    /* border-radius: 0; */
+    /* -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -khtml-border-radius: 0;
+    border-radius: 5px; */
+    padding:0 10px;
+    margin: 0 auto;
+    display: block;
+  }
+  #page-body .choose select option {
+    text-align: center;
+    -moz-appearance: none;
+    /* Firefox */
+    -webkit-appearance: none;
+    /* Safari 和 Chrome */
+    appearance: none; }
+  #page-body .flipx {
+    transform: rotateY(180deg); }
+  #page-body .record {
+    margin-top: 20px; }
+  #page-body .txt_l, #page-body .txt_r,#page-body .txt_m {
+    width: 180px;
+    height: 46px;
+    line-height: 46px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    float: left;
+    text-align: center;
+    cursor: pointer; }
+
+    #page-body .txt_r{
+      border-right: none;
+      border-left: none;
+      
+    } 
+  #page-body .r_center {
+    overflow: hidden;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    margin-top: 10px;
+    min-height: 500px; }
+  #page-body .r_center .navs {
+    border-bottom: 1px solid #ddd;
+    margin-top: 20px;
+    padding-bottom: 20px; }
+  #page-body .r_center .navs li {
+    margin: 0 15px;
+    float: left;
+    width: 66px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 5px;
+    background-color: #e3e3e3;
+    text-align: center;
+    cursor: pointer; }
+  #page-body .txt_active {
+    border-top: 1px solid red;
+    /* border-left: none;
+    border-bottom: none; */
+    /* border-right: none;  */
+  }
+  #page-body .record_item {
+    display: none; }
+  #page-body .show {
+    display: block; }
+  #page-body .r_center .navs .navs_active {
+    background-color: red;
+    color: #fff; }
+  #page-body .tabs_item {
+    display: none; }
+  #page-body .tabs_center .show {
+    display: block; }
+  #page-body .tabs_center {
+    padding: 15px 30px; }
+  #page-body .choose {
+    position: relative; }
+  #page-body .choose .select {
+    width: 100px;
+    height: 32px;
+    border-radius: 5px; 
+     -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+
+
+  #page-body .notenum input, #page-body .bettime input {
+    width: 100px;
+    height: 31px;
+    outline: none;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    border-radius: 5px;
+    text-align: center; }
+  #page-body .sports input, #page-body .s_type input, #page-body .s_type1 input {
+    width: 116px;
+    height: 32px;
+    outline: none;
+    border: 1px solid #ddd;
+    font-size: 14px; }
+  #page-body .bettime, #page-body .sports, #page-body .s_type, #page-body .s_type1 {
+    margin-left: 10px;
+    line-height: 32px; }
+  #page-body .btn_search {
+    width: 80px;
+    height: 33px;
+    line-height: 33px;
+    background-color: #FF4341;
+    text-align: center;
+    color: #fff;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer; }
+  #page-body .date_nav, #page-body .video_nav {
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 10px; }
+  #page-body .date_nav .ul1 li {
+    float: left;
+    width: 16.666%;
+    /* width: 190px; */
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .ul1f, #page-body .date_nav .ul2f {
+    background-color: #fff;
+    color: #000; }
+  #page-body .date_nav .ul1f li {
+    float: left;
+    width: 16.666%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .show-cash-list .ul1f li {
+    float: left;
+    width: 13.33%;
+    text-align: center;
+    font-size: 14px;
+    height: 40px;
+    line-height: 32px;
+    overflow: hidden; }
+  #page-body .show-cash-list .ul1f li:first-child {
+    float: left;
+    width: 13.33%;
+    text-align: center;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden; }
+  #page-body .date_nav .ul1b, #page-body .video_nav .ul2b {
+    background-color: #f5f5f5;
+    color: #000; }
+  #page-body .date_nav .ul1b li {
+    float: left;
+    width: 16.666%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .ul2 li {
+    font-size: 14px;
+    float: left;
+    width: 10%;
+    text-align: center; }
+  #page-body .date_nav .ul2f li {
+    float: left;
+    width: 10%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .ul2b {
+    background-color: #f5f5f5;
+    color: #000; }
+  #page-body .date_nav .ul2b li {
+    float: left;
+    width: 10%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .date_nav .ul2b > li:nth-child(1) {
+    margin-top: 5px;
+    line-height: 22px;
+    height: 50px;
+    /*font-size: 50px;*/ }
+  #page-body .date_nav .ul2f > li:nth-child(1) {
+    margin-top: 5px;
+    line-height: 22px;
+    height: 50px;
+    /*font-size: 50px;*/ }
+  #page-body .video_nav .ul2 li {
+    float: left;
+    width: 13.33%;
+    text-align: center;
+    font-size: 14px; }
+  #page-body .video_nav .ul2f li {
+    float: left;
+    width: 13.33%;
+    text-align: center;
+    float: left;
+    color: #000;
+    font-size: 14px; }
+  #page-body .video_nav .ul2b li {
+    float: left;
+    width: 12.5%;
+    text-align: center;
+    float: left;
+    color: #000;
+    font-size: 14px; }
+  #page-body .video_nav .ul2f > li:nth-child(1), #page-body .video_nav .ul2b > li:nth-child(1) {
+    margin-top: 6px;
+    line-height: 20px; }
+
+  #page-body #schedule-box, #page-body #schedule-box2, #page-body #schedule-box3, #page-body #schedule-box4, #page-body #schedule-box5, #page-body #schedule-box6 {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 265px;
+    width: 300px;
+    margin: 0 auto;
+    font-size: 13px;
+    background-color: #fff; }
+  #page-body .schedule-hd {
+    padding: 10px 15px; }
+  #page-body .schedule-hd > span {
+    display: inline-block; }
+  #page-body .schedule-hd > span:nth-child(2) {
+    width: 170px; }
+  #page-body .schedule-hd > span:nth-child(1) {
+    width: 50px; }
+  #page-body .schedule-hd > span:nth-child(3) {
+    text-align: right;
+    width: 50px; }
+  #page-body .today {
+    flex: 1;
+    text-align: center; }
+  #page-body .ul-box {
+    overflow: hidden;
+    padding: 5px 0 5px 0px; }
+  #page-body .ul-box > li {
+    float: left;
+    width: 14.28%;
+    text-align: center;
+    /* padding: 5px 0; */
+    margin-bottom: 0; }
+  #page-body .other-month {
+    color: #999; }
+  #page-body .current-month {
+    color: #333333; }
+  #page-body .today-style {
+    border-radius: 50%;
+    background: #58d321; }
+  #page-body .arrow {
+    cursor: pointer; }
+  #page-body .dayStyle {
+    display: inline-block;
+    width: 35px !important;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center !important;
+    line-height: 35px;
+    cursor: pointer; }
+  #page-body .current-month > .dayStyle:hover {
+    background: #00BDFF;
+    color: #ffffff; }
+  #page-body .today-flag {
+    background: #00C2B1;
+    color: #fff; }
+  #page-body .boxshaw {
+    box-shadow: 2px 2px 15px 2px #e3e3e3; }
+  #page-body .selected-style {
+    background: #00BDFF;
+    color: #ffffff; }
+  #page-body .show-cash-list {
+    color: #666; }
+  #page-body .show-cash-list ul li {
+    float: left; }
+  .one-foot div span{
+    cursor: pointer;
+    width: 27px;
+    height: 27px;
+    line-height: 27px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50px;
+  }
+.one-foot div p{
+  float: right;
+}
+
+/* #page-body .select select,#page-body .select1 select,
+#page-body .select select option,#page-body .select1 select option{text-align: center;} */
+/*# sourceMappingURL=record.css.map */
+
+/*分页样式勿动！！！！！！！*/
+.one-foot {
+  padding: 20px 0;
+  color: #8e8e8e; }
+.one-foot-circle {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid #d6d6d6;
+  background-color: #fff;
+  text-align: center;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #ababab;
+  cursor: pointer;
+  line-height: 19px; }
+.one-foot .fr {
+  color: #8e8e8e; }
+.one-foot-circle-t {
+  margin: 0 10px;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid #d6d6d6;
+  background-color: #fff;
+  text-align: center;
+  font-size: 14px;
+  color: #ababab;
+  line-height: 19px; }
+.xla_k {
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  margin: 0 10px;
+  outline: none;
+  color: #ababab; }
+.xla_k option {
+  border: none; }
+.page-active {
+  background-color: #f2233a;
+  color: #fff; }
+.page-disable{
+    color:#a1a1a1;
+    cursor: default !important;
+}
+/*分页样式勿动！！！！！！！*/

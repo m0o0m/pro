@@ -1,0 +1,9 @@
+package function
+
+type BetRecordBean struct {
+}
+
+//查询注单记录
+func (m *BetRecordBean) GetRecord() {
+
+}

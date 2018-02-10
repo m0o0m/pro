@@ -1,0 +1,89 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('MembershipReturns')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 control-label allsite col-xs-3 reltop">状态</label>
+                                    <div class="col-md-1 col-xs-5">
+                                        <div class="form-group">
+                                            <select class="form-control" ng-model="status">
+                                                <option >全部</option>
+                                                <option ng-value="itemStatus.id" ng-repeat="itemStatus in json.option_detail" ng-selected="$index==1">{{itemStatus.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-4 ">
+                                        <a href-void="" class="btn btn-primary" href="#" ng-click="search()">查询</a>
+                                    </div>
+                                    <div class="col-md-1 col-xs-8 ">
+                                        <a href-void="" class="btn btn-default" href="#" onclick="window.history.back();">返回</a>
+                                    </div>
+                                    <div class="col-md-1 col-xs-4 detail_C">
+                                        <button class="btn btn-success" ng-click="check()">冲销</button>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="table-responsive">
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <td class="text-align-center" rowspan="2">
+                                                        <input type="checkbox" id="all" name="items" ng-click="doallcheck()">全选
+                                                    </td>
+                                                    <td class="text-align-center" rowspan="2">代理商</td>
+                                                    <td class="text-align-center" rowspan="2">会员</td>
+                                                    <td class="text-align-center" rowspan="2">有效总投注</td>
+                                                    <td class="text-align-center" colspan="{{name.length}}">有效投注/返点</td>
+                                                    <td class="text-align-center" rowspan="2">返佣小计</td>
+                                                    <td class="text-align-center" rowspan="2">返佣状态</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-align-center" rowspan="2" ng-repeat="item in name">{{item}}</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="text-align-center" ng-repeat="a in list">
+                                                    <td>
+                                                        <span ng-show="a.status==1" class="text-red">冲销</span>
+                                                        <input type="checkbox" class="test" value="{{a.id}}" ng-show="a.status==2">
+                                                    </td>
+                                                    <td>{{a.agency}}</td>
+                                                    <td>{{a.account}}</td>
+                                                    <td>{{a.all_bet}}</td>
+                                                    <td ng-repeat="b in a.rate">
+                                                        {{b}}
+                                                    </td>
+                                                    <td>{{a.rebate}}</td>
+                                                    <td>{{a.status|fiterCX}}</td>
+                                                </tr>
+                                                <tr class="text-align-center">
+                                                    <td>总计:</td>
+                                                    <td colspan="2">总人数：<span>{{total.all_people}}</span>人  <span class="text-red">(冲销{{total.people}})人</span></td>
+                                                    <td>{{total.all_bet}}</td>
+                                                    <td ng-repeat="d in total.rate">{{d}}</td>
+                                                    <td>{{total.rebate}}</td>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>
+

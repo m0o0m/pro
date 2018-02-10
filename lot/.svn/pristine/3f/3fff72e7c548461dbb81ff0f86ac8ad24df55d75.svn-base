@@ -1,0 +1,28 @@
+package models
+
+type Member struct {
+	SiteId   string    `json:"siteId,omitempty"`
+	AgentId  string    `json:"agentId,omitempty"`
+	Username string    `json:"username,omitempty"`
+	Balance  float64    `json:"balance,omitempty"`
+	Currency string    `json:"currency,omitempty"`
+	Amount   float64    `json:"amount,omitempty"`
+}
+
+type RequestBody struct {
+	Cmd       string  `json:"cmd"`
+	RequestId string    `json:"requestId,omitempty"`
+	TicketId  string    `json:"ticketId,omitempty"`
+	Data      string    `json:"data,omitempty"`
+	Member    *Member    `json:"member,omitempty"`
+}
+
+type ResponseBody struct {
+	Code      int        `json:"code"`
+	RequestId string    `json:"requestId,omitempty"`
+	TicketId  string    `json:"ticketId,omitempty"`
+	Member    *Member    `json:"member,omitempty"`
+}
+
+
+

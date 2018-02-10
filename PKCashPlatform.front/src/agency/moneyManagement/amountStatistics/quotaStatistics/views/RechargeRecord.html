@@ -1,0 +1,93 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('RechargeRecord')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">状态</label>
+                                    <div class="col-md-1 allsite col-xs-8">
+                                        <div class="form-group">
+                                            <select class="form-control" ng-model="status">
+                                                <option value="">请选择</option>
+                                                <option ng-value="a.site_index_id" ng-repeat="a in site" ng-selected="$index==1">{{a.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">类型</label>
+                                    <div class="col-md-1 allsite col-xs-8">
+                                        <div class="form-group">
+                                            <select class="form-control" ng-model="type">
+                                                <option value="">请选择</option>
+                                                <option ng-value="a.site_index_id" ng-repeat="a in site" ng-selected="$index==1">{{a.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label  class="col-md-1 col-xs-4 input-label">查询时间</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" ng-model="start_time" placeholder="{{getWord('Creation Time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-md-offset-0 col-xs-8 col-xs-offset-4">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" ng-model="end_time" placeholder="{{getWord('End time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1 col-xs-offset-8 col-md-offset-1">
+                                        <a href-void="" class="btn btn-primary" href="#" ng-click="search()">查询</a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">订单号</th>
+                                                <th class="text-center">充值金额</th>
+                                                <th class="text-center">交易日期</th>
+                                                <th class="text-center">支付状态</th>
+                                                <th class="text-center">支付类型</th>
+                                                <th class="text-center">备注</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list" class="text-center">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.order_num}}</td>
+                                                <td>{{item.money}}</td>
+                                                <td>{{item.updata_time}}</td>
+                                                <td>{{item.state}}</td>
+                                                <td>{{item.type}}</td>
+                                                <td>{{item.remark}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

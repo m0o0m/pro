@@ -1,0 +1,224 @@
+<!-- 管理员账号 -->
+<div id="content">
+    <div class="row">
+    </div>
+    <section widget-grid id="widget-grid">
+        <div id="tabs" data-smart-jqui-tabs>
+            <ul>
+                <li>
+                    <a href="#tabs-a">{{getWord('selfSetting')}}</a>
+                </li>
+                <li>
+                    <a href="#tabs-b" ng-click="bibie()">{{getWord('rmbSet')}}</a>
+                </li>
+            </ul>
+            <div id="tabs-a">
+                <div class="row">
+                    <article class="col-sm-12">
+                        <div jarvis-widget data-widget-color="darken" data-widget-editbutton="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>{{getWord('selfSetting')}}</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body tab-content">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+
+                                            <div class="col-sm-1">
+                                                <div class="input-group">
+                                                    <!--<button type="submit" data-smart-jqui-dialog-launcher="#dialog_simple"  class="btn btn-primary">-->
+                                                    <button type="submit" data-toggle="modal" data-target="#myModal1"
+                                                            class="btn btn-primary">
+                                                        <i class="fa fa-plus"></i> {{getWord('AddMore')}}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>编号</th>
+                                                    <th>名称</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list">
+                                                    <td>{{item.id}}</td>
+                                                    <td>{{item.title}}</td>
+                                                    <td>
+                                                        <button class="ds btn btn-default btn-xs" data-ui-sref="app.PaymentSetting.DetailsSetting({id:item.id})">{{getWord('Set up')}}</button>
+                                                        <button class="ds btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="datali(item.id)">{{getWord('Modify')}}</button>
+                                                        <button class="ds btn btn-default btn-xs" ng-click="disables(item.id)">{{getWord('Delete')}}</button>
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div id="tabs-b">
+                <div class="row">
+                    <article class="col-sm-12">
+                        <div jarvis-widget data-widget-color="darken" data-widget-editbutton="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>{{getWord('rmbSet')}}</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body tab-content">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+                                        </div>
+                                    </div>
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>币别</th>
+                                                    <th>代码</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list1">
+                                                    <td>{{item.title}}</td>
+                                                    <td>{{item.code}}</td>
+                                                    <td>
+                                                        <button class="ds btn btn-default btn-xs" data-ui-sref="app.PaymentSetting.seedetail({id:item.id})">{{getWord('See')}}</button>
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">{{getWord('newSetting')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item" >
+                                <div class="col-md-3 input-label">站点:</div>
+                                <label class="col-md-7 input">
+                                    <select data-smart-select2  ng-model="site" class="selectWidth">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">名称</label>
+                                <label class="col-md-7 input">
+                                    <input type="text"  placeholder="{{getWord('Name')}}" ng-model="name">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--账号长度5-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item" >
+                                <div class="col-md-3 input-label">选择币别</div>
+                                <label class="col-md-7 input" ng-init="formData.parent_id=''">
+                                    <select class="form-control" ng-model="formData.parent_id" id="parentd">
+                                        <option value="">请选择</option>
+                                        <option ng-value="item.id" ng-repeat="item in da" >{{item.name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAcount()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">{{getWord('modifySetting')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <fieldset>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">{{getWord('Name')}}</label>
+                                    <label class="col-md-7 input">
+                                        <input type="text"  placeholder="{{getWord('Name')}}" ng-model="currency.title">
+                                    </label>
+                                </section>
+                                <section class="input-item" >
+                                    <div class="col-md-3 input-label">选择币别</div>
+                                    <label class="col-md-7 input">
+                                        <select class="form-control" ng-model="currency.id" >
+                                            <option value="{{item.id}}" ng-repeat="item in da" >{{item.name}}</option>
+                                        </select>
+                                    </label>
+                                </section>
+                            </fieldset>
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{getWord('Cancel')}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submitd()">
+                            {{getWord('Confirm')}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

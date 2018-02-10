@@ -1,0 +1,83 @@
+<!-- 体育管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('sportManagement')}} <span class="lable-color"> 修改时序号只能填单数</span>  </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-align-center">序号</th>
+                                            <th class="text-align-center">体育名称</th>
+                                            <th class="text-align-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="text-align-center">
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.order}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>
+                                                <button data-toggle="modal" data-target="#sportModal1" class="ids btn btn-default btn-xs" ng-click="open(item)">{{getWord('modifySort')}}</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!--编辑顺序-->
+    <div class="modal fade" id="sportModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{getWord('Modify')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="text-align-center">体育名称</th>
+                                <th>序号</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-align-center">{{name}}</td>
+                                <td><input type="text" id="videoID"  ng-model="new_order"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default ng-binding" data-dismiss="modal">
+                                取消
+                            </button>
+                            <button type="button" class="btn btn-primary ng-binding" data-dismiss="modal" ng-click="modify()">
+                                确认
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

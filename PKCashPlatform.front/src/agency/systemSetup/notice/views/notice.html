@@ -1,0 +1,44 @@
+<!--上级公告-->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-md-6 col-xs-12" ng-repeat="item in data">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{item.title}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="widget-body-toolbar form-horizontal">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="control-label col-md-2">公告时间</label>
+                                            <div class="col-md-6">
+                                                <lable class="form-control">{{item.date|fiterTime}}</lable>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <div class="col-md-12">
+                                            <label class="control-label col-md-2" >公告内容</label>
+                                            <div class="col-md-10">
+                                                <lable class="">{{item.main}}</lable>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+
+</div>
+
+
+

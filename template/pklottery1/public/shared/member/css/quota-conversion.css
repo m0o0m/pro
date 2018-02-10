@@ -1,0 +1,190 @@
+@charset "UTF-8";
+#page-body {
+  /* 弹窗的样式 */ }
+  #page-body .quota-section {
+    background-color: #f5f5f5;
+    height: 700px;
+    position: relative; }
+  #page-body .quota-conversion {
+    padding: 0 29px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    
+    background-color: #fff;
+    margin-top: 5px; }
+  #page-body .money-self {
+    padding: 20px 0;
+    font-size: 20px; }
+  #page-body .money-self span:nth-child(1) {
+    border-left: 2px solid #fe2626;
+    padding-left: 20px; }
+  #page-body .money-self span:nth-child(2) {
+    display: inline-block;
+    margin-left: 70px; }
+  #page-body .money-self span i {
+    color: #757575; }
+  #page-body .money-video {
+    padding: 10px 29px;
+    border: 1px solid #ddd;
+    font-size: 20px; }
+  #page-body .text-red {
+    color: #f03737; }
+  #page-body .money-video span:nth-child(2) {
+    margin-left: 70px; }
+  #page-body .money-video span:nth-child(3) {
+    color: #fff;
+    width: 58px;
+    height: 28px;
+    background-color: #f94e4d;
+    text-align: center;
+    line-height: 28px; }
+  #page-body .lottery-c li {
+    width: 33.33%;
+    height: 60px;
+    line-height: 60px;
+    text-align: right;
+    font-size: 14px; }
+  #page-body .money-convert-c {
+    width: 48px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    color: #fff;
+    display: inline-block;
+    border-radius: 5px; }
+  #page-body .money-into {
+    background-color: #f7b921;
+    margin: 0 20px;
+    cursor: pointer; }
+  #page-body .refresh, #page-body .flyback {
+    /* width: 48px; */
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    color: #fff;
+    float: right;
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #f03737;
+    padding: 0 10px;
+    margin-left: 20px;
+    cursor: pointer; }
+  #page-body .money-out {
+    background-color: #3299ff;
+    margin-right: 30px;
+    cursor: pointer; }
+  #page-body .lottery-c li .icon-f14 {
+    color: #3299ff; }
+  #page-body .transfer-accounts-notice {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 14px; }
+  #page-body .transfer-accounts-notice div p {
+    margin-bottom: 5px; }
+  #page-body .p-font-size {
+    font-size: 13px; }
+  #page-body .money-transfor-dialog {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none; }
+  #page-body .dialog-money {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 300px;
+    position: relative;
+    border-radius: 10px;
+    position: relative; }
+  #page-body .dialog-money-h {
+    padding: 10px;
+    color: #fff;
+    /* padding-top: 10px;
+    padding-bottom: 20px; */
+    font-size: 18px;
+    background: linear-gradient(red, bisque);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; }
+  /* #page-body .dialog-money-h span {
+    margin: 10px 20px;
+    font-size: 26px;
+    color: #fff; } */
+  #page-body .dialog-money .icon-iconfontroundclosefill {
+    position: absolute;
+    right: -14px;
+    top: -14px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    color: #fff; }
+  #page-body .money-into-c ul {
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    padding: 10px 0; }
+  #page-body .money-into-c {
+    padding: 10px;
+    background-color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; }
+  #page-body .money-into-c >ul:nth-child(1) li {
+    width: 33.13%;
+    text-align: center; }
+  #page-body .money-into-c >ul:nth-child(1) li:nth-child(2) {
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd; }
+  #page-body .transform-money-amount {
+    text-align: center;
+    margin: 10px 0 10px; }
+  #page-body .transform-money-amount input {
+    height: 32px;
+    width: 153px;
+    padding-left: 10px;
+    /* background-color: #f1f1f1; */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+    #page-body .money-into-c .dailog-money-amount{
+      margin-bottom: 10px;
+      padding: 0;
+      height: 38px;
+      line-height: 38px;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    #page-body .money-into-c .dailog-money-amount li{
+      float: left;
+      display: inline-block;
+      width: 16.666%;
+      border-left: 1px solid #ddd;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+    #page-body .money-into-c .dailog-money-amount li:first-child{
+      border-left:none;
+    }
+  /* #page-body .dailog-money-amount {
+    text-align: center;
+    margin: 10px 0px 10px; }
+  #page-body .dailog-money-amount span {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    text-align: center;
+    font-size: 14px; } */
+  #page-body .dialog-submit {
+    background-color: #ff6f50;
+    width: 140px;
+    height: 34px;
+    border-radius: 15px;
+    margin: 0 auto;
+    line-height: 34px;
+    text-align: center;
+    color: #fff; }
+  #page-body .dialog-submit a {
+    color: #fff;
+    font-size: 14px; }
+
+/*# sourceMappingURL=quota-conversion.css.map */

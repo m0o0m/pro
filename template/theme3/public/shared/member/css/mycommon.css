@@ -1,0 +1,281 @@
+@charset "UTF-8";
+#page-body {
+  /* 以下的皮肤颜色 */
+  /* 黑色 */
+  /* .my-theme{
+    background-color: #212121;
+  }
+  
+  .page-active{
+    background-color: #212121 !important;
+    color: #fff;
+  } */
+  /* 红色 */ }
+  #page-body body {
+    background-color: #f5f5f5; }
+  #page-body p, #page-body h1, #page-body input, #page-body ul, #page-body li, #page-body body, #page-body html {
+    padding: 0;
+    margin: 0; }
+  #page-body ul li {
+    list-style: none; }
+  #page-body a {
+    text-decoration: none; }
+  #page-body input, #page-body button {
+    outline: none; }
+  #page-body .center {
+    /*width: 1000px;*/
+    margin: 0 auto; }
+  #page-body .head-center {
+    line-height: 60px;
+    width: 1000px;
+    margin: 0 auto; }
+  #page-body .vip-c {
+    position: relative; }
+  #page-body .vip-h-c {
+    /* background-color: #f2233a; */
+    height: 60px;
+    color: #fff;
+    font-size: 26px; }
+  #page-body .vip-section {
+    font-size: 16px;
+    background-color: #f5f5f5;
+    /* height: 100%; */ }
+  #page-body .huangguan1-color {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 32px;
+    color: #fff; }
+  #page-body .vip-nav {
+    height: 64px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd; }
+  #page-body .vip-tab-1 a {
+    width: 12.5%;
+    font-size: 18px;
+    text-align: center;
+    height: 63px;
+    line-height: 63px;
+    border-bottom: 2px solid transparent;
+    color: #000; }
+  #page-body .vip-tab-1 .tab-1-active {
+    color: #f00;
+    border-bottom: 2px solid #f00 !important; }
+  #page-body .section-c {
+    padding-bottom: 20px; }
+  #page-body .buttonshadowR {
+    box-shadow: 0px 4px 8px #ddd;
+    background: linear-gradient(#BB2001, #FF4341) !important;}
+  #page-body .buttonshadowY {
+    box-shadow: 0px 4px 8px #ddd;
+    background: linear-gradient(#9dc02b, #b6d062) !important; }
+  #page-body .buttonshadowB {
+      box-shadow: 0px 4px 8px #ddd;
+      background: linear-gradient(#6bc89d, #92cab0) !important; } 
+  #page-body .buttonshadowGray {
+      box-shadow: 0px 4px 8px #ddd;
+      background: linear-gradient(#b8b8b8, #f3f3f3) !important; } 
+      #page-body .buttonshadowY {
+        box-shadow: 0px 4px 8px #ddd;
+        background: linear-gradient(#f8b511, #f7b921) !important; } 
+        #page-body .buttonshadowB {
+          box-shadow: 0px 4px 8px #ddd;
+          background: linear-gradient(#0270dd, #3299ff) !important; } 
+  #page-body .my-theme {
+    background-color: #f2233a; }
+  #page-body .page-active {
+    background-color: #f2233a !important;
+    color: #fff; }
+
+/*# sourceMappingURL=mycommon.css.map */
+
+.my_Select {
+  /* margin-top: 100px;
+  margin-left: 100px;
+  width: 120px;
+  height: 30px; */
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.my_Select .checkedDiv {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#page-body .my_Select .checkedDiv .checked {
+  background: transparent;
+  text-align: center;
+  width: 100%;
+  cursor: default;
+  outline: none;
+  border: none;
+  line-height: 100%;
+  height: 100%;
+  font-size: 14px;
+}
+
+.checkedDiv {
+  position: relative;
+}
+
+/* .my_Select .arrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 10px;
+}
+
+.my_Select .arrowshang {
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+  top: calc(50% - 2.5px);
+  transform: rotate(135deg);
+}
+
+.my_Select .arrowxia {
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid #000;
+  border-top: 1px solid #000;
+  top: calc(35% - 2.5px);
+  transform: rotate(135deg);
+} */
+
+.selectUldiv {
+  width: 90%;
+  margin: -5px auto 0 auto !important;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #fff;
+  display: none;
+  overflow: hidden;
+}
+
+.selectUl{
+  width: 120%;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+
+.selectUl li {
+  margin: 5px 0 0 0 !important;
+  cursor: default;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  height: 20px;
+  line-height: 20px;
+}
+.selectUl li:last-child{
+  margin-bottom: 5px !important;
+}
+
+.selectUl li:last-child {
+  margin: 5px 0;
+}
+
+.selectUl li:hover {
+  background: #ddd;
+}
+#page-body .my_pc_Modal {
+  padding: 10px 20px;
+  background-color:rgb(90, 86, 86);
+  
+  transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  /* IE 9 */
+  -webkit-transform: translate(-50%, 0%);
+  /* Safari and Chrome */
+  /* display: none; */
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  color:white;
+  max-width: 600px;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  display: none;
+  opacity: 0;
+  font-size: 16px;
+}
+
+.showAlert{
+  border: none;
+}
+.showAlert_Pro >p{
+  word-wrap: break-word;
+}
+
+
+#page-body #schedule-box, #page-body #schedule-box2, #page-body #schedule-box3, #page-body #schedule-box4, #page-body #schedule-box5, #page-body #schedule-box6,#page-body #schedule-box-x {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 265px;
+  width: 300px;
+  margin: 0 auto;
+  font-size: 13px;
+  background-color: #fff; }
+#page-body .schedule-hd {
+  padding: 10px 15px; }
+#page-body .schedule-hd > span {
+  display: inline-block; }
+#page-body .schedule-hd > span:nth-child(2) {
+  width: 170px; }
+#page-body .schedule-hd > span:nth-child(1) {
+  width: 50px; }
+#page-body .schedule-hd > span:nth-child(3) {
+  text-align: right;
+  width: 50px; }
+#page-body .today {
+  flex: 1;
+  text-align: center; }
+#page-body .ul-box {
+  overflow: hidden;
+  padding: 5px 0 5px 0px; }
+#page-body .ul-box > li {
+  float: left;
+  width: 14.28%;
+  text-align: center;
+  /* padding: 5px 0; */
+  margin-bottom: 0; }
+#page-body .other-month {
+  color: #999; }
+#page-body .current-month {
+  color: #333333; }
+#page-body .today-style {
+  border-radius: 50%;
+  background: #58d321; }
+#page-body .arrow {
+  cursor: pointer; }
+#page-body .dayStyle {
+  display: inline-block;
+  width: 35px !important;
+  height: 35px;
+  border-radius: 50%;
+  text-align: center !important;
+  line-height: 35px;
+  cursor: pointer; }
+#page-body .current-month > .dayStyle:hover {
+  background: #00BDFF;
+  color: #ffffff; }
+#page-body .today-flag {
+  background: #00C2B1;
+  color: #fff; }
+#page-body .boxshaw {
+  box-shadow: 2px 2px 15px 2px #e3e3e3; }
+#page-body .selected-style {
+  background: #00BDFF;
+  color: #ffffff; }
+#page-body .show-cash-list {
+  color: #666; }
+#page-body .show-cash-list ul li {
+  float: left; }

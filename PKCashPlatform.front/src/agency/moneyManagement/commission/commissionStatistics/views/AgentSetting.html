@@ -1,0 +1,88 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('AgentRetirementSetting')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar" ng-show="newTodo">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 input-label col-xs-4">站点</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <select data-smart-select2 class="selectWidth" ng-model="site_index_id" ng-change="search()">
+                                                <option value="">全部</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div  class="col-md-9  col-xs-12">
+                                        <div class="input-group pull-right">
+                                            <button type="submit" data-ui-sref="app.CommissionStatistics.AddFeeSetting"  class="btn btn-primary">
+                                                新增
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-align-center" rowspan="2">自身盈利金额</th>
+                                                <th class="text-align-center" rowspan="2">有效会员</th>
+                                                <th class="text-align-center" colspan="{{arr.length}}" style="text-align: center">退佣比例(%)</th>
+                                                <th class="text-align-center" colspan="{{arr.length}}" style="text-align: center">退水比例(%)</th>
+                                                <th class="text-align-center" rowspan="2">功能</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-align-center" ng-repeat="item in arr track by $index">{{item}}</th>
+                                                <th class="text-align-center" ng-repeat="item in arr track by $index">{{item}}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="text-align-center">
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.amount}}</td>
+                                                <td>{{item.member}}</td>
+                                                <td ng-repeat="tuiyong in item.rebate track by $index">{{tuiyong}}</td>
+                                                <td ng-repeat="tuishui in item.rewater track by $index">{{tuishui}}</td>
+                                                <td>
+                                                    <button data-ui-sref="app.CommissionStatistics.ModifyFeeSetting({id:item.id})" class="btn btn-default btn-xs">{{getWord('Modify')}}</button>
+                                                    <button class="btn btn-default btn-xs" ng-click="del(item.id)">{{getWord('Delete')}}</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                                </form>
+                            </div>
+                            <div ng-init="is_show=true">
+                                <span>有效会员投注金额</span>
+                                <span ng-show="is_show" class="text-red">{{bet_amount}}</span>
+                                <input ng-show="!is_show" type="text" ng-model="bet_amount">
+                                <button ng-show="!is_show" class="btn btn-primary btn-xs" ng-click="setting()">{{getWord('Confirm')}}</button>
+                                <button ng-show="is_show" class="btn btn-primary btn-xs" ng-click="is_show=false">{{getWord('Modify')}}</button>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+

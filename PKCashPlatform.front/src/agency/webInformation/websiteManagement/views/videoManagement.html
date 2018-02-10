@@ -1,0 +1,141 @@
+<!-- 视讯管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('videoManagement')}} <span class="lable-color"> 修改时序号只能填单数</span>  </h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <!--<label class="col-md-1 control-label">站点:</label>-->
+                                    <div class="col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <select data-smart-select2 style="width:100%" class="select2" ng-model="site">
+                                                <option value="">请选择站点</option>
+                                                <option ng-value="item.site_index_id" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--<label class="col-md-1 control-label">类型:</label>-->
+                                    <div class="col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <select data-smart-select2 style="width:100%" class="select2" ng-model="type">
+                                                <option value="">请选择类型</option>
+                                                <option ng-value="item.id" ng-repeat="item in typeDrop">{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--<label class="col-md-1 control-label">风格:</label>-->
+                                    <div class="col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <select data-smart-select2 style="width:100%" class="select2" ng-model="style">
+                                                <option value="">请选择风格</option>
+                                                <option ng-value="item.id" ng-repeat="item in styleDrop">{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-4">
+                                        <div class="input-group">
+                                            <button type="submit" data-toggle="modal" data-target="#dialog_simplexj"  class="btn btn-primary">
+                                                 预览
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-4">
+                                        <div class="form-group">
+                                            <button type="submit"class="btn btn-primary" ng-click="disables()">
+                                                 使用
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-4">
+                                        <div class="form-group">
+                                            <button type="submit" ng-click="reduction()" class="btn btn-primary">
+                                                 还原老版本
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-align-center">序号</th>
+                                            <th class="text-align-center">视讯名称</th>
+                                            <th class="text-align-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="text-align-center">
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.order}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>
+                                                <button data-toggle="modal" data-target="#videoModal1s" class="ids btn btn-default btn-xs" ng-click="open(item)">{{getWord('modifySort')}}</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!--编辑顺序-->
+    <div class="modal fade" id="videoModal1s" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{getWord('Modify')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="text-align-center">视讯名称</th>
+                                <th>序号</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-align-center">{{name}}</td>
+                                <td><input type="text" id="videoID" ng-model="new_order"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default ng-binding" data-dismiss="modal">
+                                取消
+                            </button>
+                            <button type="button" class="btn btn-primary ng-binding" data-dismiss="modal" ng-click="modify()">
+                                确认
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

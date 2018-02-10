@@ -1,0 +1,117 @@
+<{config_load file="public.conf" section="public"}>
+<html>
+    <head>
+        <{include file="../web_public/header_html.html"}>
+    </head>
+    <style>
+        body{margin:0px;padding:0px;}
+        * {
+            font-family: "Microsoft YaHei";
+            list-style: outside none none;
+            text-decoration: none;
+        }
+        ul, li {list-style-type: none;}
+        #Apply_ProForm{width:800px;height:300px;}
+        #Apply_ProForm ul{width:700px}
+        #Apply_ProForm ul li{width:700px;margin-top:10px;}
+        #Apply_ProForm span{display:block;color:#fff;width:80px;height:30px;float:left}
+        #Apply_ProForm p{width:500px;height:30px;float:left;margin-left: 20px;padding: 0px}
+        #Apply_ProForm #check_code{width:50px;height:25px;position: absolute}
+        #Apply_ProForm li.code{position: relative}
+        #Apply_ProForm li.code img{position: absolute;left:140px;cursor:pointer}
+        #Apply_ProForm #submitapply{display:block;width:100px;color:#38260C;position: absolute;
+                                    top:45px;left:80px;background:#FDD033;text-align: center;cursor: pointer}
+        #apply_reason{width:200px;height: 100px;padding: 0px}
+        .pro_content_li{display:none}
+    </style>
+    <body>
+        <div id='Apply_ProForm'>
+            <form  name="doform" id="doform" >
+                <ul class="in_box">
+                    <li>
+                        <span>活动类别</span>
+                        <select id='pro_type'>
+                            <option value=''>请选择</option>
+                            <{foreach from=$auto_pro_data item=v}>
+                            <option value="<{$v['id']}>"><{$v['pro_title']}></option>
+                            <{/foreach}>
+                        </select>
+                    </li>
+                    <li class="pro_content_li">
+                        <{foreach from=$auto_pro_data item=v}>
+                        <span class="pro_content_span<{$v['id']}>"><{$v['pro_content']}></span>
+                        <{/foreach}>
+                    </li>
+                    <li>
+                        <span>会员账号</span>
+                        <input  id="uname"  type="text" value="<{$smarty.session.username}>" disabled="disabled">
+                    </li>
+                    <li>
+                        <span>申请金额</span>
+                        <input  id="apply_money"  type="text" value="" >
+                    </li>
+                    <li>
+                        <span>申请理由</span>
+                        <textarea id='apply_reason'></textarea>
+                    </li>
+                    <li class='code'>
+                        <span>验证码：</span>
+                        <input id="check_code"  type="text" maxlength="4" value="">
+                        <img id="vImg" src="<{$site_url}>/yzm.php" onclick="getYzm();" alt="点击更换验证码"  width="45" height="25">
+                        <a id='submitapply'>提交申请</a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </body>
+    <script>
+        $("#submitapply").click(function () {
+            var int_reg = /^\d+$/;
+            var float_reg = /^\d+\.\d+$/;
+            var pro_type = $.trim($("#pro_type").val());
+            var pro_title = $("#pro_type").find("option:selected").text();
+            var uname = $.trim($("#uname").val());
+            var apply_reason = $.trim($("#apply_reason").val());
+            var check_code = $.trim($("#check_code").val());
+            var apply_money = $.trim($("#apply_money").val());
+            var pro_content = $('.pro_content_span' + pro_type).text();
+            if (pro_type == '') {
+                alert('请选择活动类别');
+                return false;
+            } else if (uname == '') {
+                alert('请先登录');
+                return false;
+            } else if (apply_money == '') {
+                alert('请填写申请金额');
+                return false;
+            } else if (!int_reg.test(apply_money) && !float_reg.test(apply_money)) {
+                alert('申请金额只能为大于0的数字');
+                return false;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/index.php/member/new/memnews/apply_pro_do',
+                data: {
+                    pro_type: pro_type,
+                    pro_title: pro_title,
+                    pro_content: pro_content,
+                    uname: uname,
+                    apply_reason: apply_reason,
+                    check_code: check_code,
+                    apply_money: apply_money
+                },
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 200) {
+                        alert('提交申请成功,请等待审核');
+                        top.location.href = '/';
+                    } else if (res.code == 400) {
+                        alert(res.msg);
+                    } else if (res.code == 300) {
+                        alert('请勿输入' + res.return_str + '等关键字');
+                    }
+                }
+            });
+        })
+    </script>
+</html>

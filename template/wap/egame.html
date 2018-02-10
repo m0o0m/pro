@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>电子游戏</title>
+  <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+  <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+  <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+  <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+  <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+  <style>
+    /* .game-head {
+      height: 45px;
+      width: 100%;
+      background: linear-gradient(to right, #ff223c, #ff6b2a);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    } */
+
+    /* .span-icon {
+      width: 88px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+    }
+
+    .span-icon span {
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .span-icon a {
+      color: #fff;
+      font-size: 22px;
+      font-weight: bold;
+      padding-left: 10px;
+    } */
+
+    /* .h-head >li{
+      flex: 0;
+    } */
+
+    .head-h {
+      height: 79px;
+    }
+
+    .h-head {
+      justify-content: flex-start;
+    }
+
+    .h-head>li:nth-child(1) {
+      flex: 0 0 100px;
+      /* width: 130px; */
+    }
+
+    .h-head>li:nth-child(2) {
+      flex: 0 0 180px;
+      /* width: 180px; */
+    }
+
+    #mescroll {
+      top: 79px;
+    }
+
+
+    #game-search {
+      height: 25px;
+      border-radius: 5px;
+      border: none;
+      width: 100%;
+      padding-left: 5px;
+    }
+
+    .search-c {
+      position: relative;
+      margin-left: 30px;
+      width: 200px;
+    }
+
+
+    /* .egame-c {
+      overflow-x: scroll;
+      overflow-y: hidden;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+    }
+
+    .egame-c .egame-tab {
+      height: 39px;
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid #625b5b47;
+    }
+
+    .egame-c .egame-tab li {
+      width: 100px;
+      text-align: center;
+      line-height: 39px;
+      border-right: 1px solid #625b5b47;
+    }
+
+    .egame-c::-webkit-scrollbar {
+      display: none;
+    } */
+
+    /* .jiantou {
+      position: absolute;
+      top: 0;
+    } */
+
+    .egame-tab-active {
+      color: #f00;
+      border-bottom: 1px solid #f00;
+    }
+
+    /* .egame-bar-item {
+      display: none;
+    } */
+
+    .egame-bar-item ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    /* .show {
+      display: block;
+    } */
+
+    .egame-bar-item li {
+      width: 33.333%;
+    }
+
+    .egame-bar-item li a {
+      display: flex;
+      flex-direction: column;
+      ;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .egame-bar-item li a img {
+      height: 88px;
+      width: 88px;
+    }
+
+    .egame-bar-item li a span {
+      margin-top: 10px;
+    }
+
+    .bank-tab {
+            background-color: #fff;
+            position: relative;
+            height: 31px;
+            overflow: hidden;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .bank-tab>div {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            height: 52px;
+            width: 88%;
+            margin: 0 auto;
+        }
+
+        .bank-tab .bank-nav {
+            display: flex;
+            flex-direction: row;
+            height: 31px;
+            line-height: 31px;
+        }
+
+        .bank-tab .one,
+        .bank-tab .tow {
+            position: absolute;
+            top: 0;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 6px;
+            color: #e3e3e3;
+        }
+
+        .bank-tab .one {
+            left: 0;
+        }
+
+        .bank-tab .tow {
+            right: 0;
+        }
+
+        .bank-nav li {
+            flex: 0 0 100px;
+            text-align: center;
+            border-right: 1px solid #eee;
+            border-bottom: 2px solid transparent;
+        }
+
+        .bank-tab::-webkit-scrollbar {
+            display: none;
+        }
+        .bank-tab .bank-only li {
+            height: auto;
+        }
+  </style>
+</head>
+
+<body ontouchstart>
+  <!-- <header class="game-head">
+    <span class="span-icon">
+      <a class="iconfont a-icon wap-fanhui"></a>
+      <span>电子游戏</span>
+    </span>
+    <div class="search-c">
+      <form action="">
+        <input type="text" id="game-search" placeholder="请输入游戏名">
+      </form>
+      <span class="iconfont"></span>
+    </div>
+  </header> -->
+
+  <header class="head-h">
+    <ul class="h-head">
+      <li>
+        <a>
+          <i class="iconfont wap-fanhui"></i>
+          <span>电子游戏</span>
+        </a>
+      </li>
+      <li class="search-c">
+        <form action="">
+          <input type="text" id="game-search" placeholder="请输入游戏名">
+        </form>
+      </li>
+    </ul>
+    <!-- <div class="egame-c">
+      <i class="iconfont wap-fanhui jiantou"></i>
+      <i class="iconfont wap-fanhui jiantou"></i>
+      <ul class="egame-tab">
+        <li class="egame-tab-active" lang="cn">EG电子</li>
+      </ul>
+    </div> -->
+
+    <div class="bank-tab">
+        <i class="one iconfont wap-fanhui"></i>
+        <div>
+            <ul class="bank-nav bank-only">
+                <li class="egame-tab-active" lang="cn">EG电子</li>
+            </ul>
+        </div>
+        <i class="tow iconfont wap-arrow-left"></i>
+    </div>
+
+  </header>
+
+
+  <section id="mescroll" class="mescroll">
+    <div class="egame-bar-item">
+      <ul>
+      </ul>
+    </div>
+    <input type='hidden' id="etype" />
+
+  </section>
+
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery.quicksearch.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/swiper.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script>
+  var cdnUrl = '{{.CdnUrl}}';
+  $(function (e) { //获取会员信息
+    loginId();
+    if (!getCookie('loginBack')) { //没有登陆信息的时候返回登陆页面
+      $.toast("用户登录信息已过期， 请重新登录！", 'text');
+      setTimeout("window.location.href = '/m/login'; ", 1000);//延迟2秒执行
+      return;
+    }
+    getGameTitle();
+    var $type = getQueryString('type');
+    if ($type) {
+      var $typeSl = $type.split("_");
+      $type = $typeSl[0].toUpperCase();
+      getGameTitle($type);
+      $.EGame.getData($type);
+    } else {
+      getGameTitle('EG');
+      $.EGame.getData('EG');
+    }
+  })
+  $(".bank-nav").on("click", "li", function ($type) {
+    var $type = $(this).data('type');
+    var clickType = this;
+    if (!$(this).hasClass("egame-tab-active")) {
+      $(this).siblings().removeClass("egame-tab-active");
+      $(this).addClass("egame-tab-active");
+    }
+    $.EGame.getData($type);
+  })
+
+  var mescroll = new MeScroll("mescroll", {
+    //下拉刷新的所有配置项
+    down: {
+      use: false, //是否初始化下拉刷新; 默认true
+      auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+      hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+      isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+    }
+  });
+</script>
+
+</html>

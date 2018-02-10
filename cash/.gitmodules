@@ -1,0 +1,3 @@
+[submodule "src/template"]
+	path = src/template
+	url = https://gogs.pk051.com/nothingness/PKCashPlatform.front.theme.git

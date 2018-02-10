@@ -1,0 +1,96 @@
+.sport_bj{width:100%;background:#110F39;}
+.sport_box{ width:998px; height:550px;overflow: hidden; display:block; /* padding:10px;*/ margin:0 auto; border-top:1px solid #fffc03; border-bottom:1px solid #fffc03; background:url("../images/gameArea_bg_y.png")repeat-y; }
+.contentSport1.hg { background: #191919 url("../images/hg_bg.jpg"); height:550px; background-size:cover; background-position: center bottom;-webkit-transition: all 0.3s ease-in-out;-moz-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-ms-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;}
+.contentSport1.bb { background: #191919 url("../images/bb_bg.jpg"); height:550px;  background-size:cover; background-position: center bottom;-webkit-transition: all 0.3s ease-in-out;-moz-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-ms-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;}
+.contentSport1.saba { background: #191919 url("../images/saba_bg.jpg"); height:550px;  background-size:cover; background-position: center bottom;-webkit-transition: all 0.3s ease-in-out;-moz-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-ms-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;}
+.contentSport1.im { background: #191919 url("../images/im_bg.jpg"); height:550px;  background-size:cover; background-position: center bottom;-webkit-transition: all 0.3s ease-in-out;-moz-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-ms-transition: all 0.3s ease-in-out;transition: all 0.3s ease-in-out;}
+
+.game-box { height: 550px; }
+.game-box ul.game-list { position: relative;z-index:100; width: 304px; text-align: center; display: inline-block;}
+.game-box ul.game-list li {cursor:pointer; position: relative; display: inline-block; background-position: center top; background-repeat: no-repeat; width: 180px; height: 76px; background: rgba(0,0,0,0.7);-webkit-box-shadow: 0px 0px 1px #f7f7f7;
+box-shadow: 0px 0px 1px #f7f7f7;
+/* For IE 8 */
+-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=135, Color='#f7f7f7)";
+/* For IE 5.5 - 7 */
+filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=135, Color='#f7f7f7');
+}
+.img_bj1{display: block;width: 0;
+    height: 0;
+    border-bottom: 76px solid rgba(0,0,0,0.7);
+    border-left: 76px solid transparent; position: absolute;left:-76px;top:0px;
+}
+.img_bj3{display: block;width: 0;
+    height: 0;
+   border-top: 76px solid rgba(0,0,0,0.7);
+    border-right: 76px solid transparent; position: absolute;left:180px;top:0px; 
+}
+.img_bj2{display: block;width: 0;
+    height: 0;
+    border-top: 76px solid rgba(0,0,0,0.7);
+    border-left: 76px solid transparent; position: absolute;left:-76px;top:0px;}
+.img_bj4{display: block;width: 0;
+    height: 0;
+   border-bottom: 76px solid rgba(0,0,0,0.7);
+    border-right: 76px solid transparent; position: absolute;left:180px;top:0px; 
+}
+.img_bj5{display: block;width: 0;
+    height: 0;
+    border-top: 38px solid transparent;
+    border-right: 60px solid rgba(0,0,0,0.7);
+    border-bottom:38px solid transparent; position: absolute;left:-60px;top:0px; 
+}
+.img_bj6{display: block;width: 76px;
+    height:76px;
+    background:rgba(0,0,0,0.7);
+ position: absolute;left:180px;top:0px; 
+}
+.img_bj7{display: block;width: 0;
+    height: 0;
+    border-top: 120px solid transparent;
+    border-right:114px solid rgba(0,0,0,0.7);
+    border-bottom:120px solid transparent; position: absolute;left:-114px;top:0px; 
+}
+.img_bj8{display: block;width: 0;
+    height: 0;
+    border-bottom: 220px solid rgba(0,0,0,0.7);
+    border-left: 220px solid transparent; position: absolute;left:-220px;top:0px;
+}
+.img_bj9{display: block;width: 0;
+    height: 0;
+    border-top: 220px solid rgba(0,0,0,0.7);
+    border-right: 220px solid transparent; position: absolute;left:220px;top:0px;
+}
+.ma_top4{margin: 100px auto 0 67px;}
+.ma_top3{margin: 150px auto 0 67px;}
+.ma_top2{margin:180px auto 0 67px;}
+.ma_le_200{ margin-left:200px; margin-bottom: 4px;}
+.ma_le_145{ margin-left:145px;margin-bottom: 4px; }
+.ma_le_120{ margin-left:120px;margin-bottom: 4px; }
+.ma_bo_4{margin-bottom: 4px; }
+.po_1e{ position: absolute; margin-top: 101px;}
+.po_1e_3{ position: absolute; margin-top: 151px;margin-left: 140px;}
+.po_1e_2{ position: absolute; margin-top: 155px;margin-left: 150px;}
+.game-box ul.game-list li.active, .game-box ul.game-list li:hover { background-position: center bottom;-webkit-transition: all 1s ease-in-out;-moz-transition: all 1s ease-in-out;-o-transition: all 1s ease-in-out;-ms-transition: all 1s ease-in-out;transition: all 1s ease-in-out;width:180px; height:76px;}
+.game-box ul.game-list li[data-game="hg"] { background-image: url("../images/hg.png");}
+.game-box ul.game-list li[data-game="bb"] {background-image: url("../images/bb.png");}
+.game-box ul.game-list li[data-game="saba"] { background-image: url("../images/saba.png");}
+.game-box ul.game-list li[data-game="im"] { margin-top:0px; background-image: url("../images/im.png");}
+
+.game-box .info { display: inline-block; width: 490px; height: 322px; /*padding: 85px 120px;*/ background: url("../images/info_4.png"); }
+.game-box .info > div { color: #fffefe; font-size: 14px; line-height: 200%; display: none;
+  padding-top: 85px; padding-left: 110px; width: 300px;}
+.game-box .info > div.active { display: block; }
+/*3*/
+.contentSport1.saba3 { background: #191919 url("../images/saba_bg.jpg"); height:550px;  background-size: contain;background-position: center bottom;-webkit-transition: all 0.3s ease-in-out;-moz-transition: all 0.3s ease-in-out;-o-transition: all 0.4s ease-in-out;-ms-transition: all 0.4s ease-in-out;transition: all 0.3s ease-in-out;}
+.game-box ul.game-list li[data-game="saba3"] { background-image: url("../images/saba.png"); }
+.game-box .info3 { display: inline-block; width: 400px; height: 240px; background:rgba(0,0,0,0.7); }
+.game-box .info3 > div { color: #fffefe; font-size: 14px; line-height: 200%; display: none;
+  padding-top: 50px;  width: 300px;}
+.game-box .info3 > div.active { display: block; }
+/*2*/
+.contentSport1.bb2{ background: #191919 url("../images/bb_bg.jpg"); height:550px;  background-size:center;}
+.game-box ul.game-list li[data-game="bb2"] {background-image: url("../images/bb.png"); }
+.game-box .info2 { display: inline-block; width: 220px; height:220px; background:rgba(0,0,0,0.7); }
+.game-box .info2 > div { color: #fffefe; font-size: 14px; line-height: 200%; display: none;
+width: 300px;position: absolute;top:50px; left:-35px; z-index: 10;}
+.game-box .info2 > div.active { display: block;-webkit-transition: all 1s ease-in-out;-moz-transition: all 1s ease-in-out;-o-transition: all 1s ease-in-out;-ms-transition: all 1s ease-in-out;transition: all 1s ease-in-out; background-position: center bottom;}

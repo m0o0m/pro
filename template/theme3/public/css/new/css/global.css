@@ -1,0 +1,122 @@
+@charset "utf-8";
+/* CSS Document */
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p,
+blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td, /* table elements 表格元素 */
+img/* img elements 图片元素 */{
+  border:medium none;
+  margin:0;
+  padding:0;
+}
+/** 设置默认字体 **/
+body, button, input, select, textarea{
+  font:12px/1'微软雅黑', tahoma,Srial, helvetica,sans-serif;
+}
+h1, h2, h3, h4, h5, h6{font-size:100%;}
+em{font-style:normal;}
+/** 重置列表元素 **/
+ul, ol{list-style:none;}
+/** 重置超链接元素 **/
+a{text-decoration:none; color:inherit;}
+a:hover{text-decoration:none; color:inherit;}
+/** 重置图片元素 **/
+img{border:0px;}
+/** 重置表格元素 **/
+table{border-collapse:collapse; border-spacing:0;}
+/** 清除表单框子 **/
+input, textarea{outline:none;}
+
+/** 载入网页字体 **/
+/*@font-face {
+	font-family: 'mnewsmpro';
+	src: url('../font/a-otf-mnewsmpro-light.eot') format('eot');
+	src: url('../font/a-otf-mnewsmpro-light.otf'), url('../font/a-otf-mnewsmpro-light.ttf'), url('../font/a-otf-mnewsmpro-light.woff');
+	font-weight: normal;
+	font-style: normal;
+}*/
+
+.fl{float:left;}
+.fr{float:right;}
+.of{overflow:hidden;}
+.tl{text-align:left;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.fwb{font-weight:bold;}
+
+/** 设置清除浮动的元素 **/
+ul:after,.clear:after{
+	content:"";
+	display:block;
+	visibility:hidden;
+	height:0;
+	clear:both;
+}
+
+
+
+
+.page {
+	padding: 10px;
+	float: left;
+}
+
+.page a,.page span{
+	display: inline-block;
+	padding:10px;
+	background: #fff;
+	width: 10px;
+	height: 10px;
+	text-align: center;
+	line-height: 10px;
+	float: left;
+	color: #000;
+	margin-right: 4px;
+	border-radius: 4px;
+	color:#000;
+}
+.page .current {
+	background: #03A9F4;
+	color:#fff;
+}
+
+.page .rows {
+	width: auto;
+}
+
+.con2{ height:310px;display: none;}
+.con2 table{width: 600px; margin: 0 auto}
+.con2 table tr td{border: 1px solid #545454;height: 40px;line-height: 40px;color: #959595; font-size: 14px;padding-left: 20px;}
+
+
+
+/* ===== Form validation ===== */
+
+.inputContainer { position: relative; float: left; }
+.formError { position: absolute; top: 300px; left: 282px; display: block; z-index: 998; cursor: pointer; }
+.ajaxSubmit { padding: 20px; background: #55ea55; border: 1px solid #999; display: none; }
+
+.formError .formErrorContent { background: #202020; position:relative; z-index:5001; color: #fff; width: 122px; font-size: 11px; border: 1px solid #000; padding: 2px 10px; border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; }
+.greenPopup .formErrorContent { background: #33be40; }
+.blackPopup .formErrorContent { background: #393939; color: #FFF; }
+.formError .formErrorArrow { width: 15px; margin: -2px 0 0 13px;  position:relative; z-index: 5006; }
+.formError .formErrorArrowBottom { box-shadow: none; margin: 0px 0 0 12px; top:2px; }
+.formError .formErrorArrow div { font-size: 0px; height: 1px; background: #202020; margin: 0 auto; line-height: 0; font-size: 0; display: block; }
+.formError .formErrorArrowBottom div { box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; }
+
+.greenPopup .formErrorArrow div { background: #33be40; }
+.blackPopup .formErrorArrow div { background: #393939; color: #FFF; }
+
+.formError .formErrorArrow .line10 { width: 15px; border: none; }
+.formError .formErrorArrow .line9 { width: 13px; border: none; }
+.formError .formErrorArrow .line8 { width: 11px; }
+.formError .formErrorArrow .line7 { width: 9px; }
+.formError .formErrorArrow .line6 { width: 7px; }
+.formError .formErrorArrow .line5 { width: 5px; }
+.formError .formErrorArrow .line4 { width: 3px; }
+.formError .formErrorArrow .line3 { width: 1px; border-left: 2px solid #ddd; border-right: 2px solid #ddd; border-bottom: 0 solid #ddd; }
+.formError .formErrorArrow .line2 { width: 3px; border: none; background: #ddd; }
+.formError .formErrorArrow .line1 { width: 1px; border: none; background: #ddd; }

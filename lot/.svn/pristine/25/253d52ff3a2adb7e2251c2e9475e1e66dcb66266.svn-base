@@ -1,0 +1,176 @@
+<template>
+  <div class="or">
+    <div class="box">
+      <div class="clearfix">
+        <ul v-for="item in Olists" class="uls">
+          <li class="thend">{{item.name}}</li>
+          <li>
+            <ul>
+              <li v-for="key in item.object" :class="[key.flag?'styleclect':'']" class="list clearfix">
+                <span class="one" @click="myclick(key)">{{key.name}}</span>
+                <span class="tow" @click="myclick(key)">{{key.odd}}</span>
+                <span class="three" @click.self="myclick(key)">
+                  <I-Input @on-keydown="tab_now(key)" @on-change="onchange(key)" :maxlength="9" ref="myfocus" style="width: 55px" @on-focus="onfocus(key)" v-model="key.money" size="small" @on-keyup="gogo(key)" @on-afterpaste="gogo(key)"></I-Input>
+                </span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer1 clearfix" style="margin-bottom: 20px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength="9" style="width: 100px" size="small" v-model="money" @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+  </div>
+</template>
+
+<script>
+import {Input, Modal} from 'iview';
+import MeModal from "../../../share_components/bet";
+import api from "../../../api/config";
+export default {
+components: { MeModal,'I-Input':Input,Modal},
+  data() {
+    return {
+      money: "",
+      modal: false
+    };
+  },
+  created() {
+    this.$root.$on("success", e => {
+      if (e) {
+        this.modal = false;
+        this.reset();
+      }
+    });
+    this.reset()
+  },
+  watch:{
+    'route':'reset'
+  },
+  methods: {
+    myclick: function(item, i) {
+        console.log(item);
+        console.log(item.flag);
+        if(item.money && item.flag == true){
+          item.flag = false;
+          item.money = '';
+          this.$refs.myfocus[item.or_id].blur()
+        }else if(item.money == '' && item.flag == false){
+          this.$refs.myfocus[item.or_id].focus();
+        }else if (item.flag == true && item.money == ''){
+          item.flag = false;
+        }else if (item.flag == true){
+          item.money = this.money;
+        }
+      },
+      onfocus: function(item){
+        if(item.flag == false && item.money == ''){
+          item.flag = true;
+          item.money = this.money;
+        }
+      },
+    //模态框相关
+    cancel: function(item) {
+      this.modal = false;
+      document.querySelector("body").style.overflow = "auto";
+    },
+    push_money: function() {
+      this.money = this.money.replace(/\D/g, "");
+      this.computed_money();
+    },
+    change_money: function () { this.computed_money() },
+    //处理金额
+    computed_money: function() {
+      for (let i = 0; i < this.Olists.length; i++) {
+        for (let j = 0; j < this.Olists[i].object.length; j++) {
+          //添加金额参数入对象
+          if (this.Olists[i].object[j].flag) {
+            this.Olists[i].object[j].money = this.money;
+          } else if (!this.Olists[i].object[j].flag) {
+            this.Olists[i].object[j].money = "";
+          }
+        }
+      }
+    },
+    go_to: function() {
+      let a = this.money + 'a';
+      this.money = a.replace(/\D/g, "");
+      var kk = 0;
+      for (let i = 0; i < this.Olists.length; i++) {
+        for (let j = 0; j < this.Olists[i].object.length; j++) {
+          let b = this.Olists[i].object[j].money + 'b';
+          this.Olists[i].object[j].money = b.replace(/\D/g, "");
+          kk += Number(this.Olists[i].object[j].money);
+        }
+      }
+      // console.log("kk:" + kk);
+      if (kk != 0) {
+        this.modal = true;
+        this.$root.$emit("c_data", this.cdata);
+        this.$root.$emit("id-selected", this.Olists);
+        document.querySelector("body").style.overflow = "hidden";
+      } else if (kk == 0) {
+        this.$Modal.warning({
+          content: "请先下注"
+        });
+        window.setTimeout(() => {
+          this.$Modal.remove()
+        }, 500)
+      }
+    },
+    reset: function() {
+      for (let i = 0; i < this.Olists.length; i++) {
+        for (let j = 0; j < this.Olists[i].object.length; j++) {
+          this.Olists[i].object[j].money = "";
+          this.Olists[i].object[j].flag = "";
+        }
+      }
+      this.money = "";
+      this.$root.$emit("reset", "");
+    },
+    add_money: function(type) {
+      let money = this.money;
+      this.money = Number(money) + type;
+      this.computed_money();
+    },
+    //按键tab
+    tab_now: function(key) {
+      if (!key.money) {
+        key.flag = false;
+      } else if (key.money) {
+        key.flag = true;
+      }
+    },
+    //监听input值得变化
+    onchange: function(key) {
+      if (!key.money) {
+        key.flag = false;
+      } else if (key.money) {
+        key.flag = true;
+      }
+    },
+    //每个球对应的输入框
+    gogo: function(key) {
+      key.money = key.money.replace(/\D/g, "");
+    }
+  },
+  props: ["Olists", "cdata"]
+};
+</script>
+
+<style lang="scss" src="../../../assets/css/often_or.scss" scoped>
+
+</style>

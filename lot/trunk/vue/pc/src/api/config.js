@@ -1,0 +1,227 @@
+let api = {};
+import Qs from "qs";
+import cm_cookie from '../assets/js/com_cookie'
+// const basePath1 = 'http://pkapi.pk1358.com/';//打包时候注释掉
+// const basePath1 = 'http://api.pk.com/';//打包时候注释掉
+// const basePath = 'http://adminyii-lotteryapi.pk051.com:32795/';//打包时候注释掉
+const basePath = window.configs.net_url;//打包时候解开
+window.pour_status = 2;
+function putApi(name, url, method) {
+  if (!method) {
+    method = 'post';
+  }
+  api[name] = (context, body, fun) => {
+    if (getCookie('token') == '') {
+      body.token = ''
+    } else {
+      body.token = getCookie('token');
+    }
+    context.axios[method](url, getCreds(body),
+      {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        // timeout: 2000,
+      }
+    )
+      .then((back) => {
+        if (fun) {
+          fun(back)
+        }
+        // back.data.ErrorCode = 10000;
+        if (back.data.ErrorCode == 10000) {
+          if(cm_cookie.getCookie('token')){
+            cm_cookie.delCookie('token');
+          }
+          context.$Modal.warning({
+            content: '请重新登录！',
+            onOk: () => {
+              window.close();
+            }
+          });
+        }else if (back.data.ErrorCode == 10001) {
+          if(context.$route.query.page != 'wei_hu'){
+            context.$Modal.warning({
+              content: '网站维护中。。。',
+              onOk: () => {
+                context.$router.push({name: 'wei_hu',query:{page:'wei_hu'}});
+              }
+            });
+          }
+        }else if (back.data.ErrorCode == 2) {
+          context.$root.$emit('loading', false);
+          if (back.data.is_wh == 2) {
+            back.data.ErrorMsg = '抱歉！该彩种已经在维护中，点击确定之后返回首页'
+          }
+          context.$Modal.warning({
+            content: back.data.ErrorMsg,
+            onOk: () => {
+              if (back.data.is_wh == 2) {
+                window.is_wh = 2;
+                context.$router.push({name: 'home'});
+              } else {
+                context.$root.$emit('success', true);
+              }
+            }
+          });
+        } else if (back.data.ErrorCode == 1) {
+          if (Object.keys(back.data.Data.auto).length === 0) {
+            let ball = {
+              ball: [
+                'null'
+              ]
+            };
+            context.$root.$emit('auto', ball);
+          } else if (back.data.Data.odds.length == 0) {
+              context.$Modal.warning({
+                  content: '系统错误，请稍后再试',
+                  onOk: () => {
+                      context.$router.go(0);
+                  }
+              });
+          } else if (Object.keys(back.data.Data.closetime).length === 0) {
+              context.$Modal.warning({
+                  content: '系统错误，请稍后再试',
+                  onOk: () => {
+                      context.$router.go(0);
+                  }
+              });
+          } else if (Object.keys(back.data.Data.c_data).length === 0) {
+              context.$Modal.warning({
+                  content: '系统错误，请稍后再试',
+                  onOk: () => {
+                      context.$router.go(0);
+                  }
+              });
+          } else if (Object.keys(back.data.Data.c_data).length != 0) {
+            console.log(11111);
+            context.$root.$emit('get_fcName', back.data.Data.c_data.fc_name)
+          }
+        }
+
+      })
+      .catch((err) => {
+        console.log('error:' + err);
+        if (err.request) {
+          if (err.request.status == 500 && window.pour_status == 1) {
+            document.querySelector('body').style.overflow = 'auto';
+            context.$Modal.warning({
+              content: '系统错误，请稍后再试',
+              onOk: () => {
+                context.$router.go(0);
+              }
+            });
+            context.$root.$emit('loading', false);
+          }else if(err.request.status == 500 && window.pour_status == 2){
+            document.querySelector('body').style.overflow = 'auto';
+            context.$Modal.warning({
+              content: '网络错误,请刷新页面重试',
+              onOk: () => {
+                context.$router.go(0);
+              }
+            });
+            context.$root.$emit('loading', false);
+          }
+          if (err.request.readyState == 4 && err.request.status == 0) {
+            //超时我在这里重新请求
+            console.log('我在这里重新请求');
+            context.$Modal.warning({
+              content: '网络错误,请检查网络或者刷新页面',
+              onOk: () => {
+                context.$router.go(0);
+              }
+            });
+          }
+        } else if (err.response) {
+          if (err.response.status == 500 && window.pour_status == 1) {
+            document.querySelector('body').style.overflow = 'auto';
+            context.$Modal.warning({
+              content: '系统错误，请稍后再试',
+              onOk: () => {
+                context.$router.go(0);
+              }
+            });
+            context.$root.$emit('loading', false);
+          }else if(err.response.status == 500 && window.pour_status == 2){
+            document.querySelector('body').style.overflow = 'auto';
+            context.$Modal.warning({
+              content: '网络错误,请刷新页面重试',
+              onOk: () => {
+                context.$router.go(0);
+              }
+            });
+            context.$root.$emit('loading', false);
+          }
+        }
+        // if(fun) {
+        //   fun(err)
+        // }
+      })
+  }
+}
+// 获取cookie
+function getCookie(name) {
+  var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+  if (arr = document.cookie.match(reg))
+
+    return unescape(arr[2]);
+  else
+    return null;
+}
+function getCreds(body) {
+  // return {
+  //     base: {
+  //         proNo: proNo,
+  //         reqTime: new Date().valueOf()
+  //     },
+  //     body:body
+  // }
+  return Qs.stringify(body)
+}
+// 首页彩种菜单
+putApi('alltype', basePath + 'site/alltype', 'post');
+// 会员余额
+putApi('userbalance', basePath + 'user/userbalance', 'post');
+// 公告
+putApi('notice', basePath + 'site/notice', 'post');
+// 轮播
+putApi('slideimg', basePath + 'site/slideimg', 'post');
+// 下注页面全部彩票
+putApi('bet', basePath + 'bet/alltype', 'post');
+// 我喜欢的
+putApi('loves', basePath + 'user/loves', 'post');
+// 开奖首页
+putApi('auto', basePath + 'auto/index', 'post');
+// 开奖内页
+putApi('getautolist', basePath + 'auto/getautolist', 'post');
+//添加／删除成为喜欢
+putApi('updateloves', basePath + 'user/updateloves', 'post');
+//获取概率
+putApi('getgameindex', basePath + 'bet/getgameindex', 'post');
+//下注，给后台传参
+putApi('addbet', basePath + 'bet/addbet', 'post');
+//投注记录
+putApi('bets', basePath + 'user/bets', 'post');
+//现金流水
+putApi('cashs', basePath + 'user/cashs', 'post');
+//报表统计
+putApi('report', basePath + 'user/report', 'post');
+//个人消息
+putApi('message', basePath + 'user/message', 'post');
+//公告中心
+putApi('user_notice', basePath + 'user/notice', 'post');
+//全网维护
+putApi('maintain', basePath + 'site/maintain', 'post');
+//全网维护
+putApi('dewdrop', basePath + 'auto/list', 'post');
+// putApi('test', basePath1 + 'users/getUserInfo?id=1', 'get');
+//获取微信openID
+// putApi('start', basePath + 'start/returnMessage',10001,'post',false);
+
+// 调用方式示例
+// var body = {
+// 	"jsurl": location.href.split('#')[0]
+// };
+// api.insertInfo(this, body, (res)=> {
+//
+// });
+export default api;

@@ -1,0 +1,88 @@
+<?php
+/* Smarty version 3.1.31, created on 2017-12-12 12:42:38
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/gameapi/setlimit/_list.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a2fcebe4a1da0_78585283',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '9e7fb1e0dd10b7811b8f89f487f5340cb39a5797' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/gameapi/setlimit/_list.html',
+      1 => 1511588096,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a2fcebe4a1da0_78585283 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+<!-- 列表 -->
+    <thead>
+        <tr>
+            <th class="center"></th>
+            <th class="center">彩票玩法</th>
+            <th class="center">彩票类型</th>
+          <?php if (!empty($_GET['line_id'])) {?>
+            <!-- <th class="center">线路</th> -->
+          <?php }?>
+            <th class="center">最小限额</th>
+            <th class="center">单场最大限额</th>
+            <th class="center">单笔最大限额</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+<?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'])) {?>
+    <tbody>
+    <?php if (count($_smarty_tpl->tpl_vars['result']->value['data']) == 0) {?>
+        <tr><th class="center" colspan="20">无记录</th></tr>
+    <?php } else { ?>
+      <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value['data'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+        <tr id="item<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" iscustom="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['iscustom'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['iscustom'];
+} else { ?>0<?php }?>">
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+</td>
+            <td class="center" <?php if (isset($_smarty_tpl->tpl_vars['v']->value['iscustom']) && $_smarty_tpl->tpl_vars['v']->value['iscustom'] == 1) {?> style="color:red;"<?php } elseif ($_smarty_tpl->tpl_vars['v']->value['iscustom'] == -1) {?> style="color:blue;"<?php }?> ><?php echo $_smarty_tpl->tpl_vars['v']->value['gameplayText'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['fc_name'];?>
+</td>
+          <?php if (!empty($_GET['line_id'])) {?>
+            <!-- <td class="center"><?php echo $_GET['line_id'];?>
+</td> -->
+          <?php }?>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['limit_min'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['single_field_max'];?>
+</td>
+            <td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['single_note_max'];?>
+</td>
+            <td class="center">
+                <a onclick="actionEdit('<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+',<?php if (isset($_smarty_tpl->tpl_vars['v']->value['iscustom'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['iscustom'];
+} else { ?>0<?php }?>)" class="btn btn-xs btn-success update">修改</a>
+            </td>
+        </tr>
+      <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+    <?php }?>
+    </tbody>
+<?php }
+}
+}

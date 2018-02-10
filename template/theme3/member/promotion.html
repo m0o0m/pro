@@ -1,0 +1,182 @@
+{{define "memberpromotion"}}
+{{template "memberheader" .}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我要推广</title>
+    <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/font/iconfont.css" type="text/css">
+    <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/mycommon.css" type="text/css">
+    <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/promotion.css" type="text/css">
+
+</head>
+
+<div class="">
+    <div class="vip-bar-1">
+        <div class="vip-bar-item show">
+            <div class="promotion">
+                <ul class="r_name clearfix">
+                    <li class="txt_l txt_active">我要推广</li>
+                    <li class="txt_r">排行榜</li>
+                </ul>
+                <div class="r_center clearfix">
+                    <div class="show record_item clearfix">
+                        <div class="tabs_center clearfix">
+                            <h2 class="extension">推广资料</h2>
+                            <div class="show tabs_item clearfix">
+                                <div class="date_nav clearfix">
+                                    <ul class="ul1b bd clearfix">
+                                        <li>账号</li>
+                                        <li>推广人数</li>
+                                        <li>收益</li>
+                                        <li>推广网址</li>
+                                    </ul>
+                                    <ul class="ul1f bd border_eee clearfix" style="position:relative;">
+                                        <li>1111</li>
+                                        <li>20</li>
+                                        <li>20.00</li>
+                                        <li id="url">www.wohenshuai.com</li>
+                                        <span class="btn_copy" data-clipboard-action="copy" data-clipboard-target="#url">复制</span>
+                                    </ul>
+                                    <ul class="ul1 clearfix my-theme">
+                                        <li>推广返利比例</li>
+                                    </ul>
+                                    <ul class="ul1f clearfix" id="rebate_rate">
+                                        <li>PK彩票</li>
+                                        <li>100.00</li>
+                                        <li>100.00</li>
+                                        <li>100.00</li>
+                                        <li>100.00</li>
+                                        <li>100.00</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="record_item">
+                        <div class="tabs_center clearfix">
+                            <h2 class="extension">人数排行榜</h2>
+                            <div class="show tabs_item clearfix">
+                                <div class="date_nav clearfix" id="ranking_people">
+                                    <ul class="ul2 clearfix my-theme">
+                                        <li>排行</li>
+                                        <li>账号</li>
+                                        <li>推广人数</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h2 class="extension">获利排行榜</h2>
+                            <div class="show tabs_item clearfix">
+                                <div class="date_nav clearfix" id="ranking_money">
+                                    <ul class="ul2 clearfix my-theme">
+                                        <li>排行</li>
+                                        <li>账号</li>
+                                        <li>推广获利</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</body>
+<!-- <script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/jquery-2.1.4.js"></script> -->
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/clipboard.js"></script>
+<style>
+    .btn_copy{
+        display: block;
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+        color: #007922;
+        line-height: 20px;
+        cursor: pointer;
+        position: absolute;
+        right: -10px;
+        top: 15px;
+    }
+</style>
+<script>
+    if (getCookie('loginBack')) {
+        $.ajax({
+            type: "get",
+            url: "/base/rebate/all",
+            data: {},
+            dataType: 'json',
+            success: function (data) {
+                if (data.code) {
+                    console.log("发生错误:" + data);
+                    $.toast(data.msg, 'text');
+                } else {
+                    console.log(data);
+                    var $sData = data.data;
+                    $('#account').text($sData['account']);
+                    $('#spread_num').text($sData['spread_num']);
+                    $('#spread_money').text($sData['spread_money']);
+                    $('#spread_url').text($sData['spread_url']);
+                    str = "";
+                    $.each($sData['rebate_sets'], function (key, val) {
+                        str += "<ul class=\"ul1f clearfix\">";
+                        str += "<li>"+val.title+"</li>";
+                        for (var i = 0; i < val.values.length; i++) {
+                            str += "<li>" + val.values[i] + "</li>"
+                        }
+                        str += "</ul>"
+                    });
+                    $('#rebate_rate').html(str);
+                    str = "";
+                    $.each($sData['ranking_list']['ranking_num_list'], function (key, val) {
+                        str += "<ul class=\"ul2f clearfix\">";
+                        str += "<li>" + val.id + "</li>";
+                        str += "<li>" + val.account + "</li>";
+                        str += "<li>" + val.num + "</li>";
+                        str += "</ul>"
+                    });
+                    $('#ranking_people').append(str);
+                    str = "";
+                    $.each($sData['ranking_list']['ranking_money_list'], function (key, val) {
+                        str += "<ul class=\"ul2f clearfix\">";
+                        str += "<li>" + val.id + "</li>";
+                        str += "<li>" + val.account + "</li>";
+                        str += "<li>" + val.money + "</li>";
+                        str += "</ul>"
+                    });
+                    $('#ranking_money').append(str);
+                }
+            }
+        })
+    } else {
+        $.toast("用户登录信息已失效， 请重新登录！", 'text');
+        window.location.href = "/m/login"
+    }
+
+    $('.r_name').on('click', 'li', function () {
+        var index = $(this).index();
+        console.log(index);
+        $(this).addClass('txt_active').siblings().removeClass('txt_active');
+        $('.r_center .record_item').eq(index).show().siblings().hide();
+    })
+    var clipboard3 = new Clipboard('.btn_copy');
+        clipboard3.on('success', function() {
+            // alert("复制成功！");
+            $.Pro("复制成功！",{Time:2})  
+        });
+        clipboard3.on('error', function() {
+            // alert("复制失败！请手动复制");
+            $.Pro("复制失败！请手动复制",{Time:2})  
+        });
+
+</script>
+
+</html>
+{{end}}

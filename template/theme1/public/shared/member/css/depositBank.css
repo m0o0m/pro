@@ -1,0 +1,669 @@
+@charset "UTF-8";
+#page-body {
+  /* .deposit-schedule{
+      border: 1px solid #DDD;
+      height: 120px;
+      background-color: #fff;
+      position: relative;
+  }
+  .deposit-schedule .round{
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      top: 18px;
+      z-index: 10;
+      text-align: center;
+  }
+  .deposit-schedule .line{
+      position: absolute;
+      top: 50px;
+      width: 288px;
+  } */
+  /* .round .round-2{
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #E8E8E8;
+      line-height: 60px;
+      text-align: center;
+  }
+  
+  .round .round-2 .myicon{
+      font-size: 30px;
+      color: #666;
+  }
+  .FEF7F9{
+      color: #FEF7F9 !important;
+  } */
+  /* .round p{
+      font-size: 14px;
+  }
+  .round .myd-t-gou{
+      color: #29BA1A;
+  }
+  
+  
+  } */
+  /* .deposit-schedule .round:nth-child(3){
+      left: 20%;
+  }
+  .deposit-schedule .round:nth-child(4){
+      left: 47.5%;
+  }
+  .deposit-schedule .round:nth-child(5){
+      left: 75%;
+  } */
+  /* .deposit-schedule .line:nth-child(1){
+      left: 240px;
+  }
+  .deposit-schedule .line:nth-child(2){
+      left: 515px;
+  } */
+  /* 
+  这是日期插件的css
+  #schedule-box{
+      display: none;
+      position: absolute;
+      top: 0px;
+      left: 90px;
+      width: 300px;
+      margin: 0 auto;
+      font-size: 13px;
+      background-color: #fff;
+  }
+  
+  .schedule-hd{
+      padding: 10px 15px;
+  }
+  .schedule-hd >span{
+      display: inline-block;
+  }
+  .schedule-hd >span:nth-child(2){
+      width: 170px;
+  }
+  .schedule-hd >span:nth-child(1){
+      width: 50px;
+  }
+  .schedule-hd >span:nth-child(3){
+      text-align: right;
+      width: 50px;
+  }
+  
+  .today{
+      flex: 1;
+      text-align: center;
+  }
+  .ul-box{
+      overflow: hidden;
+      padding: 5px 0 5px 0px;
+  }
+  .ul-box > li{
+      float: left;
+      width: 14.28%;
+      text-align: center;
+      margin-bottom: 0;
+  }
+  .other-month{
+      color: #999;
+  }
+  .current-month{
+      color: #333333;
+  }
+  .today-style{
+      border-radius: 50%;
+      background: #58d321;
+  }
+  .arrow{
+      cursor: pointer;
+  }
+  .dayStyle{
+      display: inline-block;
+      width: 35px !important;
+      height: 35px;
+      border-radius: 50%;
+      text-align: center !important;
+      line-height: 35px;
+      cursor: pointer;
+  }
+  .current-month > .dayStyle:hover{
+      background: #00BDFF;
+      color: #ffffff;
+  }
+  .today-flag{
+      background: #00C2B1;
+      color: #fff;
+  }
+  .boxshaw{
+      box-shadow: 2px 2px 15px 2px #e3e3e3;
+  }
+  .selected-style {
+      background: #00BDFF;
+      color: #ffffff;
+  }
+  
+  .d-3-span2-click .myiocn-gou{
+      opacity: 1;
+  } */
+  /* .deposit-div2-item-cen{
+      width: 3864px;
+      height: auto;
+  }
+  
+  .deposit-div2-item{
+      width: 966px;
+      overflow: hidden;
+  } */
+  /* .deposit-div2 .d-div1{
+      padding-bottom: 18px;
+  } */
+  /* .d-div1 input{
+      text-align: left;
+      padding-left: 10px;
+      padding-right: 0px;
+  } */
+  /* .d-div2 p{
+      font-size: 12px;
+      padding-left: 160px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+  } */
+  /* .d-div3{
+      padding-top: 25px;
+      margin-right: 30px;
+      padding: 23px 10px 0px 10px;
+      border-bottom: none;
+  }
+  
+  .d-div3 .d-3-span2{
+      display: inline-block;
+      width: 796px;
+  }
+  .d-div3 .d-3-span2 li{
+      border: 1px solid #DDD;
+      width: 170px;
+      height: 50px;
+      margin-right: 23px;
+      margin-bottom: 23px;
+      position: relative;
+  } */
+  /* .d-div4{
+      padding-left: 120px;
+      font-size: 14px;
+      color: #505050;
+      padding-bottom: 30px;
+  } */
+  /* .deposittwo-ul2 div{
+      height: 50%;
+      line-height: 40px;
+      text-align: center;
+      width: 100%;
+      overflow: hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+  }
+  .deposittwo-ul2 .deposittwo-ul2-div1{
+      font-weight: 700;
+      background-color: #F5F5F5;
+  }
+  .deposittwo-ul2 .deposittwo-ul2-div2{
+      background-color: #fff;
+      color: #686868;
+  } */
+  /* .deposit-b-c .deposit-b-c-1{
+      
+      font-size: 18px;
+  }
+  .deposit-b-c .deposit-b-c-1 span:nth-child(2){
+      color: red;
+  } */
+  /* .deposit-b-c-2{
+      height: 216px;
+  } */
+  /* >div:nth-child(2){
+      width: 70%;
+  } */
+  /* .div-1 div{
+      padding-left: 16px;
+  }
+  .div-1 div p{
+      border-left: 2px solid red;
+      padding-left: 10px;
+      font-size: 20px;
+  }
+  .div-1 .div-img{
+      width: 202px;
+      height: 60px;
+      border: 1px solid #DDD;
+      margin-top: 20px;
+      margin-left: 16px;
+  } */
+  /* .deposit-b-c-3{
+      text-align: center;
+      color: #FB6965;
+      padding-bottom: 10px;
+  } */
+  /* .deposit-b-b{
+      margin-top: 32px;
+      text-align: right;
+  }
+  .deposit-b-b a{
+      display: inline-block;
+      width: 90px;
+      height: 34px;
+      line-height: 34px;
+      text-align: center;
+      border-radius: 2px;
+  }
+  .deposit-b-b .but1{
+      margin-right: 5px;
+      background-color: #EEEEEE;
+      color: #C0C0C0;
+  }
+  .deposit-b-b .but2{
+      background-color: #F84C2F;
+      color: #fff;
+  } */
+  /* .deposit-div2-item-but{
+      padding-top: 12px;
+      padding-bottom: 12px;
+  } */
+  /*新添加的银行卡*/
+  /*新添加的银行卡结束*/ }
+  #page-body a {
+    color: #000; }
+  #page-body .deposit-div1 {
+    border: 1px solid #DDD;
+    margin-top: 5px; }
+  #page-body .deposit-div1 .deposit-top {
+    height: 37px;
+    background-color: #F0F0F0;
+    padding-top: 12px; }
+  #page-body .deposit-top p {
+    margin-left: 27px;
+    padding-left: 10px;
+    border-left: 2px solid #FF3440; }
+  #page-body .deposit-nuv {
+    padding: 8px 0 8px 38px;
+    background-color: #fff; }
+  #page-body .deposit-nuv li {
+    margin-right: 5px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer; }
+  #page-body .deposit-nuv li:hover {
+    box-shadow: 0px 4px 8px #ddd; }
+  #page-body .deposit-nuv li a {
+    width: 100%;
+    height: 100%;
+    display: inline-block; }
+  #page-body .deposit-nuv-shadow {
+    box-shadow: 0px 4px 8px #ddd;
+    background-color: #F2255F;
+    border: 1px solid transparent !important; }
+  #page-body .deposit-nuv-shadow a {
+    color: #fff; }
+  #page-body .deposit-div2 {
+    margin-top: 5px;
+    overflow: hidden;
+    /* padding-left: 30px; */
+    background-color: #fff;
+    border: 2px solid #FFC832;
+    padding: 25px 30px 25px 30px; }
+  #page-body .caveat {
+    opacity: 0;
+    font-size: 12px;
+    padding-left: 20px; }
+  #page-body .myd-red {
+    color: red !important; }
+  #page-body .opacity {
+    opacity: 1 !important; }
+  #page-body .myiocn-gou {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #0BBE43;
+    opacity: 0; }
+  #page-body .my-ma-show {
+    display: block; }
+  #page-body .my-ma-hide {
+    display: none; }
+  #page-body .vo {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+  #page-body .deposit-div2 .d-span1 {
+    display: inline-block;
+    text-align: right;
+    width: 115px; }
+  #page-body .deposit-div2 .deposit-div2-lis {
+    margin-bottom: 10px;
+    /* position: relative; */ }
+  #page-body .deposit-div2 .deposit-div2-lis:nth-child(1) .myd-red, #page-body .deposit-div2 .deposit-div2-lis:nth-child(5) .myd-red {
+    font-size: 12px;
+    padding-left: 120px;
+    padding-top: 5px; }
+  #page-body .deposit-div2 .deposit-div2-lis.clearfix {
+    padding: 5px 0 5px 0;
+    display: inline-block;
+    width: 800px; }
+  #page-body .deposit-div2 .deposit-div2-lis.clearfix li {
+    border: 1px solid #DDD;
+    position: relative; }
+  #page-body .deposit-div2 .deposit-div2-lis input {
+    height: 30px;
+    width: 280px;
+    border: 1px solid #DDD;
+    outline: none;
+    padding-right: 10px;
+    padding-left: 10px; }
+  #page-body .deposit-div2 select {
+    height: 32px;
+    width: 302px;
+    border: 1px solid #DDD;
+    outline: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    background: transparent; }
+  #page-body .d-3-span2-click {
+    border: 1px solid #E93030 !important;
+    box-shadow: 0px 3px 3px #FFF3F2; }
+  #page-body .d-3-span2-click .myiocn-gou {
+    opacity: 1; }
+  #page-body .deposit-bottom {
+    margin-top: 5px;
+    margin-right: 30px;
+    /* border: 2px solid #6EC51A; */
+    padding-top: 23px; }
+  #page-body .deposit-bottom > div {
+    /* padding-top: 25px; */
+    padding: 0px 10px 0px 10px; }
+  #page-body .deposit-bottom > div:nth-child(1) li {
+    border: 1px solid #DDD;
+    width: 170px;
+    height: 50px;
+    margin-right: 23px;
+    margin-bottom: 20px;
+    position: relative; }
+  #page-body .deposit-bottom > div:nth-child(1) li img {
+    width: 100%; }
+  #page-body .deposit-bottom > div ul {
+    display: inline-block;
+    width: 796px; }
+  #page-body .deposit-bottom .deposittwo-ul2 li {
+    height: 80px;
+    width: 38%;
+    margin-bottom: 4px;
+    border: 1px solid #DDD; }
+  #page-body .deposit-bottom .deposittwo-ul2 li:nth-child(2) {
+    width: 20%;
+    margin-left: 10px;
+    margin-right: 10px; }
+  #page-body .deposittwo-ul-click {
+    border: 1px solid #E93030 !important;
+    box-shadow: 0px 3px 3px #FFF3F2; }
+  #page-body .deposittwo-ul-click .myiocn-gou {
+    opacity: 1; }
+  #page-body .deposit-for {
+    /* border: 2px solid #6EC51A; */
+    padding: 0px 0 0 20px;
+    margin-right: 30px;
+    border-top: none; }
+  #page-body .deposit-for-left li {
+    margin-bottom: 16px; }
+  #page-body .deposit-for-left li > span {
+    display: inline-block;
+    width: 96px;
+    text-align: right; }
+  #page-body .deposit-for-left li input[type='text'] {
+    width: 195px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 5px;
+    margin-left: 5px;
+    color: #999; }
+  #page-body .deposit-for-left li select {
+    color: #686868;
+    width: 202px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 5px;
+    margin-left: 5px; }
+  #page-body .deposit-div2-but {
+    padding-right: 50px;
+    text-align: right;
+    vertical-align: middle;
+    position: relative; }
+  #page-body .deposit-div2-but #submit1 {
+    display: inline-block;
+    line-height: 34px;
+    text-align: center;
+    height: 34px;
+    width: 90px;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #FF4341;
+    /* outline: none; */
+    cursor: default;
+    vertical-align: middle; }
+  #page-body .deposit-div2-but .txt {
+    font-size: 14px;
+    vertical-align: middle;
+    text-decoration: underline;
+    padding-right: 10px;
+    cursor: default; }
+  #page-body .protocol {
+    position: absolute;
+    top: -120px;
+    left: 85px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    display: none; }
+  #page-body .protocol a {
+    text-decoration: underline;
+    cursor: default;
+    padding: 0px 5px 0 5px; }
+  #page-body .protocol .myd-red {
+    margin-bottom: 10px;
+    position: relative; }
+  #page-body .protocol .myd-red .icon {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    font-size: 16px;
+    color: #000; }
+  #page-body .deposit-b-c {
+    margin-bottom: 12px;
+    border: 2px solid #FEC370;
+    /* padding: 5px; */
+    padding: 16px 16px 0px 16px;
+    position: relative;
+    display: none; }
+  #page-body .deposit-b-c .li1 {
+    margin-bottom: 22px;
+    vertical-align: middle; }
+  #page-body .deposit-b-c .li1 li {
+    display: inline-block; }
+  #page-body .deposit-b-c .div-2-span1 {
+    width: 80px;
+    text-align: right; }
+  #page-body .deposit-b-c .div-2-span2 {
+    min-width: 265px; }
+  #page-body .deposit-b-c .div-2-span2 input {
+    font-size: 14px; }
+  #page-body .deposit-b-c .div-2-span3 {
+    width: 76px; }
+  #page-body .deposit-b-c .div-2-span3 button {
+    width: 100%;
+    height: 24px;
+    background-color: #E85036;
+    color: #fff;
+    border-radius: 2px;
+    outline: none; }
+  #page-body .copyPrompt {
+    padding: 10px 20px;
+    background-color: #fff;
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+    /* IE 9 */
+    -webkit-transform: translate(-50%, 0%);
+    /* Safari and Chrome */
+    display: none;
+    border-radius: 5px;
+    border: 1px solid #ddd; }
+  #page-body .class-1 {
+    background-position: 5px 1px; }
+  #page-body .class-2 {
+    background-position: -145px 1px; }
+  #page-body .class-3 {
+    background-position: -293px 1px; }
+  #page-body .class-4 {
+    background-position: -450px 1px; }
+  #page-body .class-5 {
+    background-position: -595px 1px; }
+  #page-body .class-7 {
+    background-position: -745px 1px; }
+  #page-body .class-8 {
+    background-position: -595px -299px; }
+  #page-body .class-9 {
+    background-position: 5px -52px; }
+  #page-body .class-10 {
+    background-position: -145px -52px; }
+  #page-body .class-11 {
+    background-position: -293px -52px; }
+  #page-body .class-12 {
+    background-position: -450px -52px; }
+  #page-body .class-13 {
+    background-position: -595px -52px; }
+  #page-body .class-14 {
+    background-position: -745px -52px; }
+  #page-body .class-15 {
+    background-position: -745px -300px; }
+  #page-body .class-16 {
+    background-position: 5px -99px; }
+  #page-body .class-17 {
+    background-position: -145px -99px; }
+  #page-body .class-18 {
+    background-position: -293px -99px; }
+  #page-body .class-19 {
+    background-position: -450px -99px; }
+  #page-body .class-20 {
+    background-position: -595px -99px; }
+  #page-body .class-21 {
+    background-position: -745px -99px; }
+  #page-body .class-22 {
+    background-position: 5px -350px; }
+  #page-body .class-23 {
+    background-position: 5px -149px; }
+  #page-body .class-24 {
+    background-position: -145px -149px; }
+  #page-body .class-25 {
+    background-position: -293px -149px; }
+  #page-body .class-26 {
+    background-position: -450px -149px; }
+  #page-body .class-27 {
+    background-position: -595px -149px; }
+  #page-body .class-28 {
+    background-position: -745px -149px; }
+  #page-body .class-29 {
+    background-position: -145px -350px; }
+  #page-body .class-30 {
+    background-position: 5px -199px; }
+  #page-body .class-31 {
+    background-position: -145px -199px; }
+  #page-body .class-32 {
+    background-position: -293px -199px; }
+  #page-body .class-33 {
+    background-position: -450px -199px; }
+  #page-body .class-34 {
+    background-position: -595px -199px; }
+  #page-body .class-35 {
+    background-position: -745px -199px; }
+  #page-body .class-36 {
+    background-position: -293px -350px; }
+  #page-body .class-37 {
+    background-position: 5px -245x; }
+  #page-body .class-38 {
+    background-position: -145px -245x; }
+  #page-body .class-39 {
+    background-position: -293px -245x; }
+  #page-body .class-40 {
+    background-position: -450px -245x; }
+  #page-body .class-41 {
+    background-position: -595px -245x; }
+  #page-body .class-42 {
+    background-position: -745px -245x; }
+  #page-body .class-43 {
+    background-position: -450px -351px; }
+  #page-body .class-50 {
+    background-position: 5px -300px; }
+  #page-body .class-65 {
+    background-position: -605px -453px; }
+  #page-body .class-103 {
+    background-position: -595px -341px; }
+  #page-body .class-104 {
+    background-position: -745px -338px; }
+  #page-body .class-105 {
+    background-position: 5px -395px; }
+  #page-body .class-106 {
+    background-position: -135px -395px; }
+  #page-body .class-107 {
+    background-position: -294px -399px; }
+  #page-body .class-108 {
+    background-position: -445px -399px; }
+  #page-body .class-109 {
+    background-position: -595px -399px; }
+  #page-body .class-110 {
+    background-position: -745px -399px; }
+  #page-body .class-111 {
+    background-position: 5px -450px; }
+  #page-body .class-112 {
+    background-position: -145px -448px; }
+  #page-body .class-113 {
+    background-position: -295px -445px; }
+  #page-body .class-115 {
+    background-position: -145px 5px; }
+  #page-body .class-116 {
+    background-position: -745px 5px; }
+  #page-body .class-117 {
+    background-position: -450px -450px; }
+  #page-body .class-123 {
+    background-position: -155px -488px; }
+  #page-body .class-126 {
+    background-position: -760px -445px; }
+  #page-body .class-100 {
+    background-position: -145px -299px; }
+  #page-body .class-101 {
+    background-position: -293px -299px; }
+  #page-body .class-102 {
+    background-position: -450px -299px; }
+  #page-body .class-119 {
+    background-position: -5px -485px; }
+  #page-body .class-120 {
+    background-position: -145px -485px; }
+  #page-body .class-121 {
+    background-position: -755px -445px; }
+  #page-body .class-122 {
+    background-position: -445px -299px; }
+  #page-body .class-123 {
+    background-position: -447px -485px; }
+  #page-body .myiocn-gou2 {
+    color: #0BBE43; }
+  #page-body .myiocn-cuo {
+    color: red; }
+
+/*# sourceMappingURL=depositBank.css.map */

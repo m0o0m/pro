@@ -1,0 +1,15 @@
+{{template "header" .Header}}
+        <!--主要内容-->
+        <div style="height:20px;"></div>
+        <div class="sports_content">
+			{{template "sport" .}}
+
+        </div>
+    </div>
+</div>
+<style>
+.cp_content .wrapper {width: 1024px !important;}
+.cp_content .news .new02 {    width: 899px;}
+.slots_banner{background: url({{.Header.CdnUrl}}/theme1/public/images/new/sports_banner.jpg) no-repeat top center !important;}
+</style>
+{{template "footer" .Footer}}

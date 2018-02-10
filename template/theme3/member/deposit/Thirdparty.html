@@ -1,0 +1,480 @@
+{{define "thirdparty"}} {{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/font/iconfont.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/mycommon.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/reset.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/depositBank.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/Thirdparty.css" type="text/css">
+<div class="">
+    <div class="vip-bar-1">
+        <div class="vip-bar-item">
+            <div class="deposit-div1">
+                <div class="deposit-top">
+                    <p>支付方式</p>
+                </div>
+                <ul class="deposit-nuv clearfix">
+                    <li class="fl">
+                        <a href="/member/bank">网银转账</a>
+                    </li>
+
+                    <li class="fl deposit-nuv-shadow">
+                        <a href="/member/bank/third">第三方转账</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="deposit-account clearfix" id="thirdType">
+                <li class="fl" paidType="bank" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+                <li class="fl" paidType="visapay" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+                <li class="fl" paidType="wechat" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+                <li class="fl" paidType="jdpay" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+                <li class="fl" paidType="bdpay" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+                <li class="fl" paidType="qqpay" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+                <li class="fl" paidType="tenpay" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+                <li class="fl" paidType="alipay" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+                <li class="fl" paidType="cardpay" style="display: none;">
+                    <i class='icon iconfont icon-gou myiocn-gou'></i>
+                </li>
+            {{/*//visa支付待添加*/}}
+            </ul>
+            <div class="deposit-div2">
+                <div class="deposit-div2-item-cen">
+                    <div class="deposit-div2-item  item1">
+                        <div id="depositWord"></div>
+                    {{/*
+                        <div class="fl deposit-for-1">
+                            <div class="deposit-for-img">
+                                <img src="{{.Header.CdnUrl}}/theme3/public/shared/member/image/QRCode.png" alt="">
+                                <span class="deposit-for-mod">暂无二维码</span>
+                            </div>
+                            <div class="text">
+                                <span>支付宝账号：</span>
+                                <span>13411783396</span>
+                                <span>
+                                    <button>复制</button>
+                                </span>
+                            </div>
+                            <div class="text">
+                                <span>支付宝名称：</span>
+                                <span>老王</span>
+                                <span>
+                                    <button>复制</button>
+                                </span>
+                            </div>
+                        </div>*/}}
+                        <div class=" deposit-for-2">
+                            <ul class="deposit-for-left">
+                                <li>
+                                    <span>
+                                        <span class="myd-red">*</span>充值金额：</span>
+                                    <input type="text" value="" placeholder="输入充值金额" class="my-money" id="money">
+                                    <!-- <span class="caveat myd-red">请输入带两位小数的数字</span> -->
+                                    <i class="iconfont icon-gou myiocn-gou2 my-ma-hide"></i>
+                                    <i class="iconfont icon-iconfontroundclosefill myiocn-cuo my-ma-hide"></i>
+                                </li>
+                                <!--<li>
+                                                    <span>
+                                                        <span class="myd-red">*</span>转账支付宝账号：</span>
+                                                    <input type="text" value="" placeholder="输入存款支付宝账号">
+                                                </li>
+                                                <li>
+                                                    <span>存款优惠：</span>
+                                                    <select>
+                                                        <option value="">首存优惠</option>
+                                                    </select>
+                                                </li>
+                                                <li class="li_time">
+                                                    <span>存入时间：</span>
+                                                    <input type="text" value="">
+                                                    <div id='schedule-box' class="boxshaw"></div>
+                                                </li>-->
+                            </ul>
+                            <div class="deposit-for-right-bot">
+                                <div class="myd-red">*温馨提示：</div>
+                                <ul>
+                                    <li>1. 单笔最低存款金额为<font id="numDown"></font>元,最高存款金额为<font id="numUp">50000</font>元；
+                                    </li>
+                                    <li>2. 为了保证您的利益，请提交保单后转账；</li>
+                                    <li>3. 存款时，建议金额后面加上零头，便于财务查看，加快到账速度，例如388.01；</li>
+                                    <li>4.若充值中遇到问题，<a href="javascript:OnlineService('{{.Header.UrlLink}}');" style="text-decoration: none;">请联系客服</a>；
+                                    </li>
+                                </ul>
+                                <div class="deposit-for-right-button item-but2">
+                                    <a class="but2" id="submit1">提交申请</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</body>
+<!-- <script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/schedule.js"></script> -->
+<script>
+
+    var nowType = 0;
+    var moneyCapped;
+    var moneyLower;
+
+
+    $(document).ready(function (e) {
+        //加载时异步请求会员相关信息
+        if (getCookie('loginBack')) {
+            $.ajax({
+                type: "GET",
+                data: {},
+                headers: {
+                    'Authorization': 'bearer ' + getCookie('loginBack'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'pc'
+                },
+                dataType: "json",
+                async: false,
+                url: '/member/GetCompanyData',
+                success: function (data) {
+                    accountInfo = data
+                    console.log(data)
+                    //数据渲染
+                    if (data.data.PaidType['alipay'] > 0) {
+                        $("[paidType='alipay']").attr("paidId", data.data.PaidType['alipay'])
+                        $("[paidType='alipay']").show()
+                    }
+                    if (data.data.PaidType['wechat'] > 0) {
+                        $("[paidType='wechat']").attr("paidId", data.data.PaidType['wechat'])
+                        $("[paidType='wechat']").show()
+                    }
+                    if (data.data.PaidType['jdpay'] > 0) {
+                        $("[paidType='jdpay']").attr("paidId", data.data.PaidType['jdpay'])
+                        $("[paidType='jdpay']").show()
+                    }
+                    if (data.data.PaidType['bdpay'] > 0) {
+                        $("[paidType='bdpay']").attr("paidId", data.data.PaidType['bdpay'])
+                        $("[paidType='bdpay']").show()
+                    }
+                    if (data.data.PaidType['qqpay'] > 0) {
+                        $("[paidType='qqpay']").attr("paidId", data.data.PaidType['qqpay'])
+                        $("[paidType='qqpay']").show()
+                    }
+                    if (data.data.PaidType['tenpay'] > 0) {
+                        $("[paidType='tenpay']").attr("paidId", data.data.PaidType['tenpay'])
+                        $("[paidType='tenpay']").show()
+                    }
+                    if (data.data.PaidType['bank'] > 0) {//网银
+                        $("[paidType='bank']").attr("paidId", data.data.PaidType['bank'])
+                        $("[paidType='bank']").show()
+                    }
+                    if (data.data.PaidType['visapay'] > 0) {//网银
+                        $("[paidType='visapay']").attr("paidId", data.data.PaidType['visapay'])
+                        $("[paidType='visapay']").show()
+                    }
+                    if (data.data.PaidType['cardpay'] > 0) {//网银
+                        $("[paidType='cardpay']").attr("paidId", data.data.PaidType['cardpay'])
+                        $("[paidType='cardpay']").show()
+                    }
+                    //visa支付待添加
+                    //console.log(data['data']['OnlineDepositMax'])
+                    //$(".minMoney").html(data['data']['OnlineDepositMin'])
+                    //$(".maxMoney").html(data['data']['OnlineDepositMax'])
+                    $("#numUp").html(data.data.PaySet.onlineDepositMax)
+                    $("#numDown").html(data.data.PaySet.onlineDepositMin)
+                    moneyCapped = data.data.PaySet.onlineDepositMax;
+                    moneyLower = data.data.PaySet.onlineDepositMin;
+                }
+            })
+
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            window.location.href = "/m/login"
+        }
+
+        //console.log(orderNow)
+        //console.log(datetimeNow)
+        //$(".orderNow").val("订单号:"+orderNow)
+        //$(".datetimeNow").val(nowTime.getFullYear()+"-"+nowTime.getMonth()+"-"+nowTime.getDate())
+        // $("#bank").html("公司入款")
+        // $("#wechat").html("微信")
+        // $("#alipay").html("支付宝")
+        // $("#qqpay").html("QQ钱包")
+        // $("#tenpay").html("财付通")
+        // $("#visapay").html("visa支付")
+        // $("#jdpay").html("京东钱包")
+        // $("#bdpay").html("百度钱包")
+        // $("#cardpay").html("点卡")
+
+
+        $("#thirdType").on('click', 'li', function () {
+            nowType = $(this).attr("paidId")
+            console.log(nowType)
+            switch (nowType) {
+                case "1"://网银
+                    if ("{{index .IncomeWord "网银支付"}}" != "") {
+                        var depositWord ={{index .IncomeWord "网银支付"}}
+                                $("#depositWord").html("<div>网银支付</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                case "2"://微信
+                    if ("{{index .IncomeWord "微信支付"}}" != "") {
+                        var depositWord ={{index .IncomeWord "微信支付"}}
+                                $("#depositWord").html("<div>微信支付</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                case "3"://阿里
+                    if ("{{index .IncomeWord "支付宝支付"}}" != "") {
+                        var depositWord ={{index .IncomeWord "支付宝支付"}}
+                                $("#depositWord").html("<div>支付宝支付</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                case "4"://qq钱包
+                    if ("{{index .IncomeWord "QQ钱包支付"}}" != "") {
+                        var depositWord ={{index .IncomeWord "QQ钱包支付"}}
+                                $("#depositWord").html("<div>QQ钱包支付</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                case "5"://财付通
+                    if ("{{index .IncomeWord "财付通支付"}}" != "") {
+                        var depositWord ={{index .IncomeWord "财付通支付"}}
+                                $("#depositWord").html("<div>财付通支付</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                case "6"://visa
+                    if ("{{index .IncomeWord "银联扫码"}}" != "") {
+                        var depositWord ={{index .IncomeWord "银联扫码"}}
+                                $("#depositWord").html("<div>银联扫码</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                case "7"://京东钱包
+                    if ("{{index .IncomeWord "京东钱包支付"}}" != "") {
+                        var depositWord ={{index .IncomeWord "京东钱包支付"}}
+                                $("#depositWord").html("<div>京东钱包支付</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                case "8"://百度钱包
+                    if ("{{index .IncomeWord "百度钱包支付"}}" != "") {
+                        var depositWord ={{index .IncomeWord "百度钱包支付"}}
+                                $("#depositWord").html("<div>百度钱包支付</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                case "9"://点卡支付
+                    if ("{{index .IncomeWord "点卡支付"}}" != "") {
+                        var depositWord ={{index .IncomeWord "点卡支付"}}
+                                $("#depositWord").html("<div>点卡支付</div><div>" + depositWord + "</div>")
+                    }
+                    break;
+                default://线上入款
+                    if ("{{index .IncomeWord "线上入款"}}" != "") {
+                        var depositWord ={{index .IncomeWord "线上入款"}}
+                                $("#depositWord").html("<div>线上入款</div><div>" + depositWord + "</div>")
+                    }
+            }
+        })
+
+
+        /*    $(".d-3-span2 ul").on('click', 'li', function () {
+                $(this).addClass('d-3-span2-click').siblings().removeClass('d-3-span2-click');
+            })*/
+
+        //
+
+        $(".deposit-account").on('click', 'li', function () {
+            console.log($(this))
+            $(this).addClass('d-3-span2-click').siblings().removeClass('d-3-span2-click');
+            // var index = $(this).index();
+            //$(".deposit-b-c").eq(index).removeClass('my-ma-hide').siblings().addClass('my-ma-hide')
+        })
+
+
+        $('.deposit-for-right-button').on("click", ".my-next", function () {
+            var ItemWidth = $(".deposit-div2-item").width();
+            var index = $(this).parent().parent().index();
+            $(".deposit-div2-item-cen").animate({
+                "marginLeft": (index) * ItemWidth * -1 + "px"
+            })
+        })
+        $('.deposit-for-right-button').on("click", ".my-upper", function () {
+            var ItemWidth = $(".deposit-div2-item").width();
+
+            var index = $(this).parent().parent().index();
+            $(".deposit-div2-item-cen").animate({
+                "marginLeft": (index - 1) * ItemWidth * -1 + "px"
+            })
+        })
+
+
+        $("#money").keyup(function () {
+            var val = $(this).val();
+            val = val.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+            val = val.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+            val = val.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+            val = val.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+            $(this).val(val);
+        })
+
+        $("#money").blur(function () {
+
+            var val = $(this).val()
+
+            val = toDecimal2(val)
+            // console.log(moneyLower)
+
+            if (val > moneyCapped || val < moneyLower || val == 0) {
+                $($(this).siblings()[1]).hide();
+                $($(this).siblings()[2]).show();
+                return
+            }
+            if (val) {
+                $(this).val(val);
+                $($(this).siblings()[1]).show()
+                $($(this).siblings()[2]).hide();
+            }
+        })
+
+        function toDecimal2(x) {
+            var f = parseFloat(x);
+            if (isNaN(f)) {
+                return false;
+            }
+
+            var s = f.toString();
+
+            var rs = s.indexOf('.');
+
+            var l = null;
+            var r = null
+
+            if (rs > 0) {
+                l = s.slice(0, rs)
+                r = s.slice(rs + 1, rs + 3)
+            } else {
+                l = s;
+                r = ""
+            }
+
+            var str = l + "." + r;
+
+            var i = r.length;
+            while (i <= 1) {
+                str += '0';
+                i++
+            }
+
+            return str;
+        }
+
+        $('#submit1').on('click', function () {
+            if (getCookie('loginBack')) {
+
+                if ($("#money").val() <= 0 || $("#money").val() == '') {
+                    // alert('请填写申请金额，只能为大于0的数字');
+                    $.Pro("请填写正确的申请金额", {
+                        Time: 2, StartOn: function () {
+                            $("html").click(function () {
+                                $(".showAlert_Pro").hide()
+                            })
+                        }
+                    })
+                    return false;
+                } else if (nowType == 0) {
+                    // alert('请选择支付类型');
+                    $.Pro("请选择支付类型", {
+                        Time: 2, StartOn: function () {
+                            $("html").click(function () {
+                                $(".showAlert_Pro").hide()
+                            })
+                        }
+                    })
+                    return false;
+                }
+                $.ajax({
+                    type: "post",
+                    //url: "http://localhost:9595/online/wechat/deposit",
+                    url: "/member/onlineIncome",
+                    headers: {
+                        'Authorization': 'bearer ' + getCookie('loginBack'),
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'platform': 'pc'
+                    },
+                    data: JSON.stringify({
+                        account: "aaaaaa",
+                        money: parseFloat($("#money").val()),
+                        paidType: parseInt(nowType),
+                        isFast: parseInt(2)
+                    }),
+                    dataType: 'json',
+                    success: function (data2) {
+                        console.log(data2)
+                        if (data2 == null) {//data2.msg!="undefined"
+                            //window.location.href = "/pay/callback"
+                            window.open('/pay/callback')
+                            //console.log(data2)
+                            //window.location.href = "/member/bank/complete"
+                        } else {
+                            // alert('添加公司入款失败，请联系客服！原因：' + data2.msg)
+                            $.Pro('添加公司入款失败，请联系客服！原因：' + data2.msg, {
+                                Time: 2, StartOn: function () {
+                                    $("html").click(function () {
+                                        $(".showAlert_Pro").hide()
+                                    })
+                                }
+                            })
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        $.Pro("添加公司入款失败，请联系客服", {
+                            Time: 2, StartOn: function () {
+                                $("html").click(function () {
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }
+                        })
+
+                    }
+                })
+
+
+            } else {
+                $.toast("用户登录信息已失效， 请重新登录！", 'text');
+                window.location.href = "/index"
+            }
+        })
+
+        function buttonMouse(dom, classss) {
+            dom.mousedown(function (e) {
+                if ((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)) {
+                    $(this).addClass(classss)
+                }
+            })
+            dom.mouseup(function () {
+                $(this).removeClass(classss)
+            })
+        }
+
+        buttonMouse($("#submit1"), "buttonshadowR");
+
+    });
+</script>
+
+</html>
+{{end}}

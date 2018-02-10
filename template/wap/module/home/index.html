@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>PK</title>
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+    <ul class="h-head">
+            <li>
+                <!-- <a>
+                    <i class="iconfont wap-fanhui"></i>
+                </a> -->
+            </li>
+            <li>
+                <h2>个人中心主页</h2>
+            </li>
+            <li>
+                <!-- <a href="/m">首页</a> -->
+            </li>
+        </ul>
+</header>
+
+<div id="mescroll" class="mescroll">
+	<dl class="meber">
+    	<a class="dt" href="/m/info">
+        	<img src="{{.CdnUrl}}/wap/style/images/icon/home_03.png">
+            <div>
+            	<h1><span class='realname'></span><!--<i class="iconfont">&#xe643;</i>--></h1>
+                <p class='account'></p>
+            </div>
+            <i class="iconfont wap-arrow-left"></i>
+        </a>
+        <dd>
+            <a class='total-balance'></a>
+        	<a class='balance'></a>
+        </dd>
+    </dl>
+    <dl class="list">
+    	<dt>
+        	<a href="/m/bank"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_03.png"> <p>存款</p><i class="iconfont wap-arrow-left"></i></a>
+            <a href="/m/withdraw"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_06.png"> <p>取款</p><i class="iconfont wap-arrow-left"></i></a>
+            <a href="/m/convert"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_08.png"> <p>额度转换</p><i class="iconfont wap-arrow-left"></i></a>
+        </dt>
+        <dt>
+        	<a href="/m/record"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_10.png"> <p>交易记录</p><i class="iconfont wap-arrow-left"></i></a>
+            <a href="/m/statisticsthis"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_12.png"> <p>报表中心</p><i class="iconfont wap-arrow-left"></i></a>
+        </dt>
+    {{if eq .IsSelf 1}}
+        <dt>
+            <a href="/m/returnwater"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_14.png"> <p>自助反水</p><i class="iconfont wap-arrow-left"></i></a>
+        </dt>
+        {{end}}
+        <dt>
+        	<a href="/m/mescenter"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_16.png"> <p>消息中心</p><i class="iconfont wap-arrow-left"></i></a>
+            <a href="/m/discount"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_18.png"> <p>活动中心</p><i class="iconfont wap-arrow-left"></i></a>
+        </dt>
+        <dt>
+            <a href="javascript:OnlineService('{{.UrlLink}}');"><img src="{{.CdnUrl}}/wap/style/images/icon/hy_20.png"> <p>客服</p><i class="iconfont wap-arrow-left"></i></a>
+        </dt>
+        <button onclick="logOut()">退出</button>
+    </dl>
+
+</div>
+{{template "footer" .}}
+
+<!-- {{/*<style>*/}}
+{{/*section.pop dt a p{*/}}
+    {{/*background: #bbb;*/}}
+    {{/*color: #fff;*/}}
+    {{/*border-radius: 13px;*/}}
+    {{/*width: 70px;*/}}
+    {{/*margin: 0 auto;*/}}
+{{/*}*/}}
+{{/*section.pop dt a.sure p{*/}}
+    {{/*background: #ff3636;*/}}
+{{/*}*/}}
+{{/*</style>*/}} -->
+<section class="big-shade-all" style="display:none"></section>
+<section class="pop" style="display:none">
+	<dl class="p-hins">
+    	<h1>提示</h1>
+        <dd>
+        	<i class="iconfont"></i>
+            <p>您的资料尚未完善，请尽快补充！</p>
+        </dd>
+        <dt>
+        	<a><p>取消</p></a>
+            <a class="sure"><p>前往</p></a>
+        </dt>
+    </dl>
+</section>
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script> 
+<!-- <script src="{{.CdnUrl}}/wap/style/js/marquee.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/swiper.min.js"></script>
+<script>
+$(document).ready(function(e) {
+    if(getCookie('loginBack')){
+        $.ajax({
+            type: "get",
+            url: "/m/back",
+            headers: {
+                'Authorization': 'bearer ' + $loginBack,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'platform': platform
+            },
+            data: {},
+            dataType: 'json',
+            success: function (data) {
+                if (data.code) {
+                    $.toast(data.msg, 'text');
+                } else {
+                    var $sdata = data.data;
+                    if (!$sdata) {
+                        $('section.big-shade-all, section.pop').show();
+                    }
+                }
+            }
+        });
+    }else{
+        $.toast("用户登录信息已失效， 请重新登录！", 'text');
+        setTimeout("window.location.href = '/m/login'; ",1000);//延迟1秒执行
+    }
+
+    var mescroll = new MeScroll("mescroll", {
+                //下拉刷新的所有配置项
+                down:{
+                    use: false, //是否初始化下拉刷新; 默认true
+                    auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                    hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                    isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+                }
+			});
+    
+    $('.p-hins dt a p').click(function(e){
+        var $className = $(this).parent('a').attr("class");
+        if ($className == 'sure') {
+            window.location.href = '/m/bankCardAdd?pass=1';
+        }
+        $('.big-shade-all').fadeToggle()
+        $('.pop').fadeToggle()
+    })
+
+	$('.h-head dd a').click(function(){
+		$('.h-pop').slideToggle()
+	})
+	$('.h-pop').click(function(){
+		$('.h-pop').slideToggle()
+    })
+    
+    
+
+
+});
+
+$(window).load(function(e){
+    if(!getCookie('loginBack')){ //没有登陆信息的时候返回登陆页面
+        $.toast("用户登录信息已过期， 请重新登录！", 'text');
+        setTimeout("window.location.href = '/m/login'; ",1000);//延迟2秒执行
+    }
+    if(loginData){
+        var $loginData = loginData;
+        $(".meber .realname").text($loginData.realname);
+        $accountStr = "账号"+$loginData.account;
+        $(".meber .account").text($accountStr);
+        for(var k in $loginData.TBalance){
+            var v = $loginData.TBalance[k];
+            if(v.type == 2){
+                var $balanceStr = "帐户余额："+v.balance+"元";
+                $(".meber .balance").text($balanceStr);
+            }else if(v.type == 3){
+                var $totalBalanceStr = "账户总余额："+v.balance+"元";
+                $(".meber .total-balance").text($totalBalanceStr);
+            }
+        }
+    }
+})
+
+</script>
+</html>

@@ -1,0 +1,298 @@
+
+ <h1>lottery_api</h1> 
+ 
+ 以下接口均使用了数据加密(除获取余额接口外),测试时,如果需要取消加密,在配置文件中,将enable参数改为非1数字类型就可以了.
+ 加密方式,将参数和值用/\\/拼接,然后通过des加密,作为params参数的值
+`````````go
+例: 
+	params=加密(a1=aa/\\/a2=bb/\\/a3=cc)
+```
+md5校验:将params的和md5盐连接,然后进行md5计算,并赋值给key参数
+```go
+例: key=md5运算(加密(a1=aa/\\/a2=bb/\\/a3=cc)+md5盐)
+```
+然后将params参数和md5参数传入,并在请求参数的Header中加入参数
+```go
+"User-Agent":"Lottery_Api_Go_站点名称"
+```
+这个站点名称是解密关键,必传
+ 
+<br>
+
+
+
+## 注册
+<a id=注册> </a>
+### 基本信息
+
+**Path：** /account/create
+
+**Method：** GET
+
+**接口描述：**
+<p><br></p>
+
+### Request
+**Headers**
+
+| 参数名称  | 参数值  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| User-Agent  |  Lottery_Api_Go_站点名称 | 是  |  Lottery_Api_Go_aaa |  用站点来获取对应的md5key和deskey |
+
+**Query**
+
+| 参数名称  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ |
+| agent_name | 是  |  at_01 |  代理账号 |
+| uname | 是  |  bb1 |  账号 |
+| pwd | 是  |  111111 |  密码 |
+
+### Response
+
+成功返回
+```json
+{
+    "code": 200,
+    "msg": "success",
+    "data": "www.baidu.com"
+}
+```
+失败返回
+```json
+{
+    "code": 10011, //错误码
+    "msg": "账号已存在", //失败消息
+    "data": null //错误详情
+}
+```
+
+## 登录
+<a id=登录> </a>
+### 基本信息
+
+**Path：** /account/login
+
+**Method：** GET
+
+**接口描述：**
+<p><br></p>
+
+### Request
+**Headers**
+
+| 参数名称  | 参数值  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| User-Agent  |  Lottery_Api_Go_站点名称 | 是  |  Lottery_Api_Go_aaa |  用站点来获取对应的md5key和deskey |
+
+**Query**
+
+| 参数名称  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ |
+| uname | 是  |  bb1 |  账号 |
+| pwd | 是  |  111111 |  密码 |
+
+### Response
+
+登录成功
+```json
+{
+    "code": 200, //成功码
+    "msg": "success",//成功消息
+    "data": "www.baidu.com" //游戏链接
+}
+```
+登录失败
+```json
+{
+    "code": 10005, //错误码
+    "msg": "登陆失败",//失败消息
+    "data": null //失败详情
+}
+    
+```
+
+## 获取余额
+<a id=获取余额> </a>
+### 基本信息
+
+**Path：** /account/balance
+
+**Method：** GET
+
+**接口描述：**
+<p><br></p>
+
+### Request
+**Headers**
+
+| 参数名称  | 参数值  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| User-Agent  |  Lottery_Api_Go_站点名称 | 是  |  Lottery_Api_Go_aaa |  用站点来获取对应的md5key和deskey |
+
+**Query**
+
+| 参数名称  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ |
+| uname | 是  |  bb1 |  账号 |
+| pwd | 是  |  111111 |  密码 |
+
+### Response
+```json
+{
+    "code": 200,
+    "msg": "success",
+    "data": 300 //金额
+}
+```
+//失败
+```json
+{
+    "code": 10012, //错误码
+    "msg": "验证登录信息失败", //错误消息
+    "data": null //
+}
+```
+
+## 修改密码
+<a id=修改密码> </a>
+### 基本信息
+
+**Path：** /account/update_pwd
+
+**Method：** GET
+
+**接口描述：**
+<p><br></p>
+
+### Request
+**Headers**
+
+| 参数名称  | 参数值  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| User-Agent  |  Lottery_Api_Go_站点名称 | 是  |  Lottery_Api_Go_aaa |  用站点来获取对应的md5key和deskey |
+**Query**
+
+| 参数名称  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ |
+| uname | 是  |  111111 |  账号 |
+| pwd | 是  |  111111 |  旧密码 |
+| new_pwd | 是  |  222222 |  新密码 |
+
+### Response
+
+//成功
+```json
+{
+    "code": 200, 
+    "msg": "success",//成功消息
+    "data":null
+}
+```
+//失败
+```json
+{
+    "code": 60000, //错误码
+    "msg": "服务器错误", //错误消息
+    "data": null //
+}
+```
+## 额度转换
+<a id=额度转换> </a>
+### 基本信息
+
+**Path：** /account/transfer_credit
+
+**Method：** GET
+
+**接口描述：**
+<p><br></p>
+
+### Request
+**Headers**
+
+| 参数名称  | 参数值  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| User-Agent  |  Lottery_Api_Go_站点名称 | 是  |  Lottery_Api_Go_aaa |  用站点来获取对应的md5key和deskey |
+**Query**
+
+| 参数名称  |  是否必须 | 示例  | 备注  |
+| ------------ | ------------ | ------------ | ------------ |
+| uname | 是  |  111111 |  账号 |
+| pwd | 是  |  111111 |  旧密码 |
+| c_type | 是  |  222222 |  新密码 || c_type | 是  |  1 |  类型,1转入,2转出 |
+| money | 是  |  20 |  金额 |
+| p_type | 否  |  1 |  平台(1为pc端 2为wap端  3为app) |
+
+### Response
+
+//成功
+```json
+{
+    "code": 200, 
+    "msg": "success",//成功消息
+    "data":null
+}
+```
+//失败
+```json
+{
+    "code": 10012, //错误码
+    "msg": "验证登录信息失败", //错误消息
+    "data": null //
+}
+```
+
+## 刷新缓存key
+<a id=刷新缓存key> </a>
+### 基本信息
+
+**Path：** /refresh/key
+
+**Method：** GET
+
+**接口描述：**
+<p><br></p>
+
+### Request
+
+### Response
+
+//刷新成功
+```json
+{
+    "code": 200,//code码
+    "msg": "success",//成功消息
+    "data": null //
+}
+```
+//刷新失败
+```json
+{
+    "code": 60000, //错误码
+    "msg": "登陆失败",//失败消息
+    "data": null //失败详情
+}
+```
+
+### code码对照表
+
+|code| ch |en|
+|:---|:---|:---|
+|10000|参数绑定失败|Parameter binding failed|
+|10001|站点id不合法|Site id is not valid|
+|10002|账号不合法|Account illegal|
+|10003|代理账号不合法|The agent account is not legal|
+|10004|密码不合法|Password invalid|
+|10005|登陆失败|login failure|
+|10006|额度不能为0|The limit cannot be 0|
+|10007|转换方向错误(1进2出)|Switching direction error (1 in 2 out)|
+|10008|平台错误(1为pc端 2为wap端  3为app)|Platform error (1 for PC end 2 and wap end 3 for app)|
+|10009|会员不存在|Membership does not exist|
+|10010|解密失败|decryption failure|
+|10011|账号已存在|Account already exists|
+|10012|验证登录信息失败|Verify the login information failed|
+|10013|获取站点信息失败|Failed to obtain site information|
+|10014|请求数据获取失败|Failed to request data.|
+|10015|数据完整性验证失败|Data integrity verification failed.|
+|10016|站点数据不存在|Site data does not exist.|
+|60000|服务器错误|server error|

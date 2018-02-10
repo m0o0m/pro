@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="{{.CdnUrl}}/theme1/public/shared/sitepublic/js/jquery-1.7.2.min.js"></script>
+    <script src="{{.CdnUrl}}/theme1/public/shared/sitepublic/js/common_helper.js"></script>
+    <script src="{{.CdnUrl}}/theme1/public/shared/sitepublic/js/common_member.js"></script>
+    <script src="{{.CdnUrl}}/theme1/public/js/user_info.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="{{.CdnUrl}}/theme1/public/css/pc.css">
+    <link type="text/css" rel="stylesheet"
+          href="{{.CdnUrl}}/theme1/public/shared/new_member/js/date/skin/WdatePicker.css">
+    <link href="{{.CdnUrl}}/theme1/public/shared/new_member/js/date/skin/WdatePicker.css" rel="stylesheet"
+          type="text/css">
+    <style> .laydate_body .laydate_bottom li {
+        float: left;
+        height: 20px;
+        line-height: 20px;
+        border-right: none;
+        font-weight: 900;
+        width: 28px
+    }
+
+    .pay-label {
+        padding: 0 13px 0 13px;
+    }</style>
+</head>
+<body>
+
+<form id="pay" action="<{$site_url}>/index.php/member/income/Index/common" method="post" name="dinpayRedirect"
+      target="_blank">
+    <div class="header">
+        <div id="indexLgDIV" class="logo">
+            <img src="{{.LogoUrl}}" class="logoObj" style="width: 296px; height: 124px;">
+        </div>
+        <div class="online-service">
+            <img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/online_right.png" align="">
+        </div>
+        <div class="topbar">
+            <a onclick="SetHome(this, top.location)" style="cursor: pointer;">设为首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a onclick="AddFavorite(window.location, document.title)" style="cursor: pointer;">加入收藏</a>
+        </div>
+    </div>
+    <div class="content">
+        <a href="javascript:OnlineService('{{.UrlLink}}');" class="service">在线客服</a>
+        <div class="item" style="margin-right: 10px;">
+            <div class="hd">
+                <h2 style="color:#000000">{{.SiteName}}</h2>
+                <a href="###">
+                    <!--  <span class="txt"><font color="#FF0000">最新公告：<{$deposit_new}></font></span> -->
+                    <span class="txt"><font color="#FF0000">最新公告:欢迎使用快捷支付！</font></span>
+                </a>
+            </div>
+            <div class="bd">
+                <div class="btnbox">
+                    <a class="btn" href="###"><img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/i-logo1.png">资讯端</a>
+                    <a class="btn" href="javascript:OnlineService('{{.UrlLink}}');"
+                       target="_blank"><img
+                            src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/i-logo2.png">满意度调查</a>
+                    <a class="btn" onclick="getPager('-','zhuce');" href="javascript:void(0);" target="_blank"><img
+                            src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/i-logo3.png">立即开户</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="hd">
+
+            </div>
+            <div class="bd">
+                <div class="btnbox">
+                    <a class="btn" href="javascript:void(0);" onclick="getPager('-','detect');"><img
+                            src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/i-logo4.png">线路检测</a>
+                    <a class="btn" href="javascript:void(0);" onclick='alert("敬请期待!")'><img
+                            src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/i-logo5.png">幸运大转盘</a>
+                    <a class="btn" href="/index.php/index/applypro"><img
+                            src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/i-logo6.png">申请大厅</a>
+
+                </div>
+            </div>
+        </div>
+        <!--提示文字-->
+        <div></div>
+        <!--提示文字-->
+        <table class="content-table">
+            <tbody>
+            <tr>
+                <td class="title"><b>会员账号：</b></td>
+                <td class="inputtd">
+                    <input name="account" id="username" type="text" value="" class="table-input"
+                           placeholder="请填写会员账号！！！">
+                </td>
+                <td align="center"><font color="#FF0000">*必填</font></td>
+            </tr>
+            <tr>
+                <td class="title"><b>确认账号：</b></td>
+                <td>
+                    <input name="account" id="rusername" type="text" value="" class="table-input"
+                           placeholder="请再次填写会员账号！！！">
+                </td>
+                <td align="center"><font color="#FF0000">*必填</font></td>
+            </tr>
+            <tr>
+                <td class="title"><b>支付类型：</b></td>
+                <td>
+                {{if  eq (index .PaidType "alipay") 1}}
+                    <label class="pay-label" id="label_alipay" onclick="change('ali')">
+                        <input type="radio" name="bank_code" data-max=""
+                               data-min="" id="ali" class="regular-radio"
+                               value="alipay">
+                        <img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/alipay.png" alt=""
+                             style="height: 44px; width: 150px; cursor:pointer; vertical-align:middle;">
+                    </label>
+                {{end}}
+                {{if  eq (index .PaidType "wechat") 1}}
+                    <label class="pay-label" id="label_wechat" onclick="change('wechat')">
+                        <input type="radio" name="bank_code" data-max=""
+                               data-min="" id="wechat" class="regular-radio"
+                               value="wechat">
+                        <img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/wechat.png" alt=""
+                             style="height: 44px; width: 150px; cursor:pointer; vertical-align:middle;">
+                    </label>
+                {{end}}
+                {{if  eq (index .PaidType "qqpay") 1}}
+                    <label class="pay-label" id="label_qb" onclick="change('qb')">
+                        <input type="radio" name="bank_code" data-max=""
+                               data-min="" id="qb" class="regular-radio"
+                               value="qqpay">
+                        <img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/qqqb.png" alt=""
+                             style="height: 44px; width: 150px; cursor:pointer; vertical-align:middle;">
+                    </label>
+                {{end}}
+                {{if  eq (index .PaidType "tenpay") 1}}
+                    <label class="pay-label" id="label_cft" onclick="change('cft')">
+                        <input type="radio" name="bank_code" data-max=""
+                               data-min="" id="cft" class="regular-radio"
+                               value="tenpay">
+                        <img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/cft.png" alt=""
+                             style="height: 44px; width: 150px; cursor:pointer; vertical-align:middle;">
+                    </label>
+                {{end}}
+                {{if  eq (index .PaidType "visapay") 1}}
+                    <label class="pay-label" id="label_yl" onclick="change('yl')">
+                        <input type="radio" name="bank_code" data-max=""
+                               data-min="" id="yl" class="regular-radio"
+                               value="visapay">
+                        <img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/yl.png" alt=""
+                             style="height: 44px; width: 150px; cursor:pointer; vertical-align:middle;">
+                    </label>
+                {{end}}
+                {{if  eq (index .PaidType "jdpay") 1}}
+                    <label class="pay-label" id="label_jd" onclick="change('jd')">
+                        <input type="radio" name="bank_code" data-max=""
+                               data-min="" id="jd" class="regular-radio"
+                               value="jdpay">
+                        <img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/jd.png" alt=""
+                             style="height: 44px; width: 150px; cursor:pointer; vertical-align:middle;">
+                    </label>
+                {{end}}
+                {{if  eq (index .PaidType "bdpay") 1}}
+                    <label class="pay-label" id="label_bd" onclick="change('bd')">
+                        <input type="radio" name="bank_code" data-max=""
+                               data-min="" id="bd" class="regular-radio"
+                               value="bdpay">
+                        <img src="{{.CdnUrl}}/theme1/public/shared/images/quick_pay/bd.png" alt=""
+                             style="height: 44px; width: 150px; cursor:pointer; vertical-align:middle;">
+                    </label>
+                {{end}}
+                </td>
+                <td align="center"><font color="#FF0000">*必选</font></td>
+            </tr>
+            <tr>
+                <td class="title"><b>存款额度：</b></td>
+                <td>
+                    <input type="text" name="s_amount" id="coin" class="table-input"
+                           onkeyup="value=this.value.replace(/\D+/g,&#39;&#39;)">
+                </td>
+                <td align="center"><font color="#FF0000">*必填</font></td>
+            </tr>
+            <tr>
+                <td class="title"><b>存款时间：</b></td>
+                <td>
+                    <input type="text" readonly="readonly" id="in_date" value="{{.Datetime}}" class=" table-input"
+                           style="width:160px">
+                </td>
+                <td align="center">无需填写</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="form-btn">
+            <a id='tests'>确认支付</a>
+        </div>
+        <p class="tips">
+            <span style="color:#f00;">温馨提示：</span>为了避免掉单情况的发生，请您在支付完成后，需等"支付成功"页面跳转出来, 再关闭页面，以免掉单！感谢配合！！！
+            支付成功后，若3分钟内未能及时到达您的会员账号请联系<a href="javascript:OnlineService('{{.UrlLink}}');"
+                                         target="_blank" style="color:#f00">【在线客服】</a>咨询!&nbsp; 单笔最低存款金额 <span
+                id="font_ol_catm_min"></span>元以上!&nbsp; 单笔最高存款金额 <span id="font_ol_catm_max"></span>元以下!{{.SiteName}}
+            祝您游戏愉快，盈利多多！O(∩_∩)O　　&nbsp;
+        </p>
+    </div>
+    <input type="hidden" name="order_num" value="{{.OrderNum}}" id="order_num">
+    <input type="hidden" name="ali_code" value="ali">
+    <input type="hidden" name="wechat_code" value="wechat">
+    <input type="hidden" name="TradeDate" value={{.TradeDate}}>
+    <input type="hidden" name="return_params" value="return_params">
+    <input type="hidden" name="bank" value="" id="bank">
+    <input type="hidden" value="" id="ol_catm_min">
+    <input type="hidden" value="" id="ol_catm_max">
+</form>
+
+<!-- 支付银行 -->
+
+<script type="text/javascript">
+    var xia = '';
+    var shang = '';
+
+    function change(id) {
+        xia = $("#" + id).attr('data-min');
+        shang = $("#" + id).attr('data-max');
+        $("#font_ol_catm_min").html(xia);
+        $("#font_ol_catm_max").html(shang);
+        $("#ol_catm_min").val(xia);
+        $("#ol_catm_max").val(shang);
+    }
+
+    $(function () {
+        var loginBack = getCookie('loginBack');
+        if (getCookie('loginBack')) {
+            //$("#username").val(loginData['account'])
+            //$("#rusername").val(loginData['account'])
+            //alert(loginBack)
+        }
+		$.ajax({
+            type: "GET",
+            data: {},
+            dataType: "json",
+            async: false,
+            headers: {
+                'Authorization': 'bearer ' + loginBack,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'platform': 'pc'
+            },
+            url: '/member/level/payset',
+            success: function (data) {
+                //alert('/pay/set/level?id=' + data['data']['paySetId'])
+                if (data['data']['paySetId'] > 0) {
+                    //alert('/pay/set/level?id=' + data['data']['pay_set_id'])
+                    $.ajax({
+                        type: "GET",
+                        data: {},
+                        dataType: "json",
+                        headers: {
+                            'Authorization': 'bearer ' + loginBack,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'platform': 'pc'
+                        },
+                        async: true,
+                        url: '/pay/set/level?id=' + data['data']['paySetId'],
+                        success: function (data2) {
+                            //alert(data2['data']['OnlineDepositMin'])
+                            //alert(data2['data']['OnlineDepositMax'])
+                            if (data2['data']['OnlineDepositMax'] >= 0) {
+                                $("label>input").attr("data-min", data2['data']['OnlineDepositMin'])
+                                $("label>input").attr("data-max", data2['data']['OnlineDepositMax'])
+                                return true;
+                            } else {
+                                alert("[提示]获取支付设定上下限额失败！")
+                                return false;
+                            }
+                        }
+                    })
+                } else {
+                    alert("[提示]获取支付设定失败！")
+                    return false;
+                }
+            }
+        })
+
+
+        $("#label_bank").click(function (a) {
+            $("#allCity").slideDown(300);
+            a.stopPropagation();
+            $(this).blur()
+        });
+
+        $("#allCity").click(function (a) {
+            a.stopPropagation()
+        });
+
+        $(document).click(function (a) {
+            a.button != 2 && $("#allCity").slideUp(300)
+        });
+
+        $("#foldin").click(function () {
+            $("#allCity").slideUp(300)
+        });
+
+        function aaa() {
+            var is_login = $("#order_num").val();
+            if (is_login == null || is_login == "") {
+                alert("[提示]请登陆后再进行支付！");
+                return false;
+            } else {
+
+                var xia = $("#ol_catm_min").val();
+                var shang = $("#ol_catm_max").val();
+                var coin = $("#coin").val();
+                var bankck = $('input[name="bank_code"]:checked').val();
+                $('#bank').val(bankck);
+                if (bankck == null || bankck == "") {
+                    alert("[提示]支付类型不能为空！");
+                    return false;
+                }
+                if (isNaN(coin) || coin == '') {
+                    alert("[提示]存款额度非有效数字！");
+                    $("#coin").focus();
+                    return false;
+                }
+                var info1 = '[提示]存款金额不能低于';
+                var info1 = info1 + xia;
+                if (Number(coin) < Number(xia)) {
+                    alert(info1);
+                    $("#coin").focus();
+                    return false;
+                }
+                var info = '[提示]存款金额不能超过';
+                var info = info + shang;
+                if (Number(coin) > Number(shang)) {
+                    alert(info)
+                    $("#coin").focus();
+                    return false;
+                }
+            }
+            var username = $("#username").val();
+            var usern = /^[a-zA-Z0-9]{1,}$/;
+            if (!usern.test(username)) {
+                alert('会员帐号只能由数字、大小写字母组成!');
+                return false;
+            }
+            var rusername = $("#rusername").val();
+            if (username == null || username == "") {
+                alert("[提示]用户名不能为空！");
+                $("#username").focus();
+                return false;
+            }
+            if (rusername == null || rusername == "" || rusername != username) {
+                alert("[提示]2次用户输入不一致！");
+                $("#rusername").focus();
+                return false;
+            }
+            var id = 1;
+            var rid = $(":radio:checked").attr("id");
+            if (rid == "wechat") {//根据id号判断哪个radio被选中
+                var id = 'wechat';
+            } else if (rid == "ali") {
+                var id = 'ali';
+            } else if (rid == "qb") {
+                var id = 'qb';
+            } else if (rid == "cft") {
+                var id = 'cft';
+            } else if (rid == "yl") {
+                var id = 'yl';
+            } else if (rid == "jd") {
+                var id = 'jd';
+            } else if (rid == "bd") {
+                var id = 'bd';
+            }
+            $.ajax({
+                type: "GET",
+                data: {},
+                dataType: "json",
+                async: false,
+                url: '/index.php/member/new/Bank/get_qucik_pay?id=' + id,
+                success: function (data) {
+                    if (data == 1) {
+                        $("#pay").submit();
+                        return true;
+                    } else {
+                        alert("[提示]请您登陆之后再使用快捷支付！")
+                        return false;
+                    }
+                }
+            })
+            return true;
+        }
+
+        $("#tests").click(function () {
+            alert("对接第三方时，再写快捷支付对接接口！")
+            if (aaa()) {
+                setTimeout(function () {
+                    location.reload();
+                }, 3000)
+            }
+        })
+
+    });
+
+    var loginInfo = loginId();
+    var loginIn = getCookie('loginBack');
+    if (loginIn) {
+        $("#username").value = loginInfo["account"];
+        $("#rusername").value = loginInfo["account"];
+    }
+</script>
+</body>
+</html>

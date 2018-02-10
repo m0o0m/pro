@@ -1,0 +1,658 @@
+<template lang="html">
+  <div class="thirteen">
+    <div class="nav">
+      <ul>
+        <li v-for="(item,i) in getlist[0].object" :class="{'item_class':selectItem==i}" @click="type(item,i)">{{item.name}}</li>
+      </ul>
+    </div>
+    <div class="footer1 clearfix" style="margin-top: 0;">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength='9' style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <div class="content">
+      <ul v-for="(item,i) in lists1" class='list clearfix fl'>
+        <li class="top">
+          <ul class='clearfix'>
+            <li class="fl">号码</li>
+            <li class="fl">赔率</li>
+            <li class="fl">勾选</li>
+          </ul>
+        </li>
+        <li v-for="(key,k) in item.object" class="cen" @click.prevent="numClick(key)" :class="{'table-current':key.flag}">
+          <ul class='clearfix'>
+            <li class="one fl">
+              <i class="ball" :style="{background:key.color}">{{key.lname}}</i>
+            </li>
+            <li class="two fl">
+              {{odd}}
+            </li>
+            <li class="three fl">
+              <!-- <Checkbox v-model="key.flag"></Checkbox> -->
+              <i class="icon iconfont pk-selected my_icon-g" :class="{'my_icon-g_click':key.flag}"></i>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="footer1 clearfix" style="margin-bottom: 20px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength='9' style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+  </div>
+</template>
+
+<script>
+import {Modal,Input,Checkbox} from 'iview';
+import api from "../../../api/config";
+import MeModal from "../../../share_components/bet_happy_tail";
+export default {
+  components: {
+    MeModal,
+    Modal,'I-Input':Input,Checkbox
+  },
+  props: {},
+  data() {
+    return {
+      cdata: null,
+      odd: null,
+      money: "",
+      modal: false,
+      leng: 5,
+      selectItem: 0,
+      arr: [],
+      // flag: true,
+      lists1: [
+        {
+          object: [
+            {
+              lname: "1",
+              // li_id: 0,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "2",
+              // li_id: 1,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "3",
+              // li_id: 2,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "4",
+              // li_id: 3,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "5",
+              // li_id: 4,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "6",
+              // li_id: 5,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "7",
+              // li_id: 6,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "8",
+              // li_id: 7,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "9",
+              // li_id: 8,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "10",
+              // li_id: 9,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "11",
+              // li_id: 10,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "12",
+              // li_id: 11,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "13",
+              // li_id: 12,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            }
+          ]
+        },
+        {
+          object: [
+            {
+              lname: "14",
+              // li_id: 13,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "15",
+              // li_id: 14,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "16",
+              // li_id: 15,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "17",
+              // li_id: 16,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "18",
+              // li_id: 17,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "19",
+              // li_id: 18,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "20",
+              // li_id: 19,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "21",
+              // li_id: 20,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "22",
+              // li_id: 21,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "23",
+              // li_id: 22,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "24",
+              // li_id: 23,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "25",
+              // li_id: 24,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "26",
+              // li_id: 25,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            }
+          ]
+        },
+        {
+          object: [
+            {
+              lname: "27",
+              // li_id: 26,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "28",
+              // li_id: 27,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "29",
+              // li_id: 28,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "30",
+              // li_id: 29,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "31",
+              // li_id: 30,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "32",
+              // li_id: 31,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "33",
+              // li_id: 32,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "34",
+              // li_id: 33,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "35",
+              // li_id: 34,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "36",
+              // li_id: 35,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "37",
+              // li_id: 36,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "38",
+              // li_id: 37,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "39",
+              // li_id: 38,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            }
+          ]
+        },
+        {
+          object: [
+            {
+              lname: "40",
+              // li_id: 39,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "41",
+              // li_id: 40,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "42",
+              // li_id: 41,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "43",
+              // li_id: 42,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "44",
+              // li_id: 43,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            },
+            {
+              lname: "45",
+              // li_id: 44,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "46",
+              // li_id: 45,
+              flag: false,
+              color: "linear-gradient(#ee4c19, #bd2706)",
+              money: null
+            },
+            {
+              lname: "47",
+              // li_id: 46,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "48",
+              // li_id: 47,
+              flag: false,
+              color: "linear-gradient(#2991d2, #1c6196)",
+              money: null
+            },
+            {
+              lname: "49",
+              // li_id: 48,
+              flag: false,
+              color: "linear-gradient(#3ec948, #026d09)",
+              money: null
+            }
+          ]
+        }
+      ],
+      getlist: [
+        {
+          object: [
+            { name: "五不中" },
+            { name: "六不中" },
+            { name: "七不中" },
+            { name: "八不中" },
+            { name: "九不中" },
+            { name: "十不中" },
+            { name: "十一不中" },
+            { name: "十二不中" }
+          ]
+        }
+      ]
+    };
+  },
+  created() {
+    this.fetchData();
+    this.$root.$on("success", e => {
+      if (e) {
+        this.modal = false;
+        this.reset();
+      }
+    });
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    $route: "fetchData" // 只有这个页面初始化之后，这个监听事件才开始生效
+  },
+  mounted() {
+    this.$root.$emit('child_change',0);
+    this.$root.$on('time_out',(e)=>{
+      if(e){
+        this.fetchData(2)
+      }
+    })
+  },
+  destroyed(){
+    this.$root.$off('time_out')
+  },
+  methods: {
+    sortNumber: function(a, b) {
+      return a.sort - b.sort;
+    },
+    fetchData(type) {
+      type==2?this.$root.$emit('loading',true,true):this.$root.$emit('loading',true);
+      let body = {
+        fc_type: this.$route.query.page,
+        gameplay: 178
+      };
+      api.getgameindex(this, body, res => {
+        if (res.data.ErrorCode == 1) {
+          this.$root.$emit("auto", res.data.Data.auto);
+          this.$root.$emit("closetime", res.data.Data.closetime);
+          this.$root.$emit("c_data", res.data.Data.c_data);
+          let back_data = res.data.Data.odds;
+          this.cdata = res.data.Data.c_data;
+          back_data.sort(this.sortNumber);
+          this.computed(back_data);
+          this.$root.$emit("loading", false);
+          this.$root.$emit('get_closetime',res.data.Data.closetime);
+        }
+      });
+    },
+    computed(data) {
+      this.$set(this.lists1, this.lists1);
+      this.getlist[0].object = data;
+      for (let i = 0; i < this.getlist[0].object.length; i++) {
+        this.getlist[0].object[i].flag = false;
+        // this.getlist[0].object[i].leng = i + 5;
+        let name = this.getlist[0].object[i].remark.replace(/全不中#/, "");
+        this.getlist[0].object[i].name = name;
+      }
+
+      this.odd = this.getlist[0].object[0].odd;
+      this.getlist[0].object[0].flag = true;
+      this.leng = 5;
+    },
+    type(key, i) {
+      this.reset();
+      this.getlist[0].object[this.selectItem].flag = false;
+      this.selectItem = i;
+      this.leng = i + 5;
+      this.arr = [];
+      for (let i = 0; i < this.lists1.length; i++) {
+        for (var k = 0; k < this.lists1[i].object.length; k++) {
+          this.lists1[i].object[k].flag = false;
+        }
+      }
+      this.getlist[0].object[i].flag = true;
+      this.odd = this.getlist[0].object[i].odd;
+    },
+    numClick(item) {
+      if (!item.flag) {
+        if (this.arr.length < this.leng + 3) {
+          this.arr.push(item);
+          item.flag = true;
+          item.money = this.money;
+        } else {
+          this.$Modal.warning({
+            content: "最多选择"+(this.leng+3)+'个选项',
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        }
+      } else {
+        for (let i = 0; i < this.arr.length; i++) {
+          if (this.arr[i].lname == item.lname) {
+            item.money = "";
+            item.flag = false;
+            this.arr.splice(i, 1);
+            break;
+          }
+        }
+      }
+    },
+    push_money() {
+      this.money = this.money.replace(/\D/g, "");
+      this.computed_money();
+    },
+    change_money: function () { this.computed_money() },
+    go_to() {
+
+      let a = this.money + 'a';
+      this.money = a.replace(/\D/g, "");
+      if (this.arr.length >= this.leng) {
+        var kk = Number(this.getlist[0].object[this.selectItem].money);
+
+        // var input_name = "";
+
+        if (kk != 0) {
+          var getlist = [
+            {
+              object: []
+            }
+          ];
+          getlist[0].object = this.arr;
+
+          for (var i = 0; i < getlist[0].object.length; i++) {
+            Object.assign(
+              getlist[0].object[i],
+              this.getlist[0].object[this.selectItem]
+            );
+            getlist[0].object[i].name = getlist[0].object[i].lname;
+          }
+
+          this.modal = true;
+          this.$root.$emit("c_data", this.cdata);
+          this.$root.$emit("id-selected-tail", getlist, function() {});
+        } else if (kk == 0) {
+          this.$Modal.warning({
+            content: "请先下注",
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        }
+      } else  {
+        this.$Modal.warning({
+          content: "请选择 " + this.leng + "至" + (this.leng + 3) + "个选项",
+          onOk: () => {
+            clearTimeout(time);
+          }
+        });
+        var time = setTimeout(() => {
+          this.$Modal.remove();
+        }, 500);
+      }
+    },
+    reset() {
+      for (let i = 0; i < this.lists1.length; i++) {
+        for (let k = 0; k < this.lists1[i].object.length; k++) {
+          this.lists1[i].object[k].flag = false;
+        }
+      }
+      this.getlist[0].object[this.selectItem].money = "";
+      this.arr = [];
+      this.money = "";
+      this.$root.$emit("reset", "");
+    },
+    cancel: function(item) {
+      this.modal = false;
+      document.querySelector("body").style.overflow = "auto";
+    },
+    computed_money() {
+      for (let j = 0; j < this.getlist[0].object.length; j++) {
+        if (this.getlist[0].object[j].flag) {
+          this.getlist[0].object[j].money = this.money;
+        } else {
+          this.getlist[0].object[j].money = "";
+        }
+      }
+    },
+    add_money: function(type) {
+      // console.log(type);
+      let money = this.money;
+      this.money = Number(money) + type;
+      this.computed_money();
+    }
+  }
+};
+</script>
+
+<style lang="scss" src="../../../assets/css/six_thirteen.scss" scoped>
+
+</style>

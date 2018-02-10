@@ -1,0 +1,225 @@
+<div id="content">
+    <div class="row">
+    </div>
+    <div class="row">
+        <section widget-grid id="widget-grid">
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('OnlinePaymentSetup')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset>
+                                                   <label class="col-md-2 col-xs-4 input-label">层级选择</label>
+                                                    <div class="widget-body no-padding form-group col-md-6 col-xs-12 inline-group">
+                                                        <div class="panel-group smart-accordion-default" id="accordion-2" style="margin-left: 10px; margin-top: 10px;">
+                                                        <div class="panel panel-default">
+                                                                <div class="panel-heading ">
+                                                                    <h4 class="panel-title">
+                                                                        <a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-1" class="collapsed">
+                                                                            <i class="fa fa-fw fa-plus-circle txt-color-green"></i>
+                                                                            <i class="fa fa-fw fa-minus-circle txt-color-red"></i>
+                                                                            点击展开
+                                                                        </a>
+                                                                    </h4>
+                                                                </div>
+                                                                <div id="collapseTwo-1" class="panel-collapse collapse ">
+                                                                    <div class="panel-body inline-group col-md-12">
+                                                                        <label class="radio col  col-md-4 col-xs-4 " ng-repeat="item in drp">
+                                                                            <input type="checkbox" name="radio-inline2" class="disable ched" value="{{item.level_id}}" style="margin-top: 1px" ng-checked="isSelected(item.level_id)"  >
+                                                                            {{item.level_id}}
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">站点选择</label>
+                                                        <div class="col-md-2 col-xs-8">
+                                                            <div class="form-group">
+                                                                <select data-smart-select2 class="selectWidth" ng-model="res.site_index_id" >
+                                                                    <option value="">请选择</option>
+                                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">支付域名</label>
+                                                        <div class="col-md-2 col-xs-8">
+                                                            <div class=" form-group">
+                                                                <input class="form-control inp_2" placeholder="" type="text" ng-model="res.paid_domain">
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-md-3 col-md-offset-0 col-xs-8 col-xs-offset-4 input-label text-align-right" style="color: red">【支付域名，只写域名】</lable>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">返回地址</label>
+                                                        <div class="col-md-2 col-xs-8">
+                                                            <div class=" form-group">
+                                                                <input class="form-control inp_2" placeholder="" type="text" ng-model="res.back_address">
+                                                            </div>
+                                                        </div>
+
+                                                        <lable class="col-md-3 col-md-offset-0 col-xs-10 col-xs-offset-2 input-label text-align-right" style="color: red">【支付成功后写的地址，只写域名】</lable>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">商户ID</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="input-group form-group">
+                                                                <input class="form-control inp_2" placeholder="" type="text" ng-model="res.merchat_id" >
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">秘钥:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="input-group form-group">
+                                                                <textarea rows="4" ng-model="res.private_key"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label  class="col-md-2 col-xs-4 input-label text-align-right">公钥:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="input-group form-group">
+                                                                <textarea rows="4" ng-model="res.public_key"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">支付限额:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class=" form-group">
+                                                                <input class="form-control inp_2" placeholder="" type="text" ng-model="res.paid_limit" >
+                                                            </div>
+                                                        </div>
+
+                                                        <lable class="col-md-3 col-md-offset-0 col-xs-8 col-xs-offset-4 input-label text-align-right" style="color: red">【到达支付限额自动停用】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label  class="col-md-2 col-xs-4 input-label text-align-right">支付名搜索</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class=" form-group">
+                                                                <input class="form-control inp_2" placeholder="" type="text" ng-model="res.paid_platform" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label  class="col-md-2 col-xs-4 input-label text-align-right">适用设备</label>
+                                                        <div class="col-md-2 col-xs-8">
+                                                            <div class="form-group">
+                                                                <select class="form-control"ng-model="res.suitable_equipment"  >
+                                                                    <option value="{{item.id}}" ng-repeat="item in shebei">{{item.name}}</option>
+                                                                </select>
+                                                                <!--<select data-smart-select2 class="selectWidth"ng-model="res.suitable_equipment" >-->
+                                                                    <!--<option value="">请选择</option>-->
+                                                                    <!--<option value="{{item.id}}" ng-repeat="item in json.shebei">{{item.name}}</option>-->
+                                                                <!--</select>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label  class="col-md-2 col-xs-4 input-label text-align-right">添加类型</label>
+                                                        <div class="col-md-2 col-xs-8">
+                                                            <div class="form-group">
+                                                                <select class="form-control" name="status" ng-model="res.paid_type" >
+                                                                    <option value="{{data.typeId}}" ng-repeat="data in paid_types">{{data.typeName}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label  class="col-md-2 col-xs-4 input-label text-align-right">code码</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="input-group form-group">
+                                                                <input class="form-control inp_2" placeholder="" type="text" ng-model="res.paid_code" >
+                                                            </div>
+                                                        </div>
+
+                                                        <lable class="col-md-3 col-md-offset-0 col-xs-9 col-xs-offset-3 input-label text-align-right" style="color: red">【第三方支付业务code码不止一个时】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <section class="input-item">
+                                                            <label class="col-md-2 col-xs-4 input-label"">状态</label>
+                                                            <label class="col-md-7 col-xs-8 input-label text-left ng-binding">
+                                                                <input type="radio" ng-value="1" name="aa" ng-model="res.status" class="ng-pristine ng-untouched ng-valid" value="1">
+                                                                启用
+                                                                <input type="radio" ng-value="2" name="aa" ng-model="res.status" class="ng-pristine ng-untouched ng-valid" value="0">
+                                                                停用
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <div class="row">
+                                                            <div class="col-md-1 ">
+                                                                <button class="btn btn-primary ng-binding" type="submit" onclick="history.go(-1)">
+                                                                    <i class="fa fa-save"></i>
+                                                                    返回
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <div class="row">
+                                                            <div class="col-md-1 ">
+                                                                <button class="btn btn-primary ng-binding" type="submit" ng-click="se()">
+                                                                    <i class="fa fa-save"></i>
+                                                                    确定
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

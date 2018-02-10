@@ -1,0 +1,91 @@
+<!-- 角色管理权限配置 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div id="tabs" data-smart-jqui-tabs>
+            <div id="tabs-c">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">角色管理</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-1">角色名称</label>
+                                <div class="col-md-4">
+                                    <input class="form-control" id="role_name" placeholder="" type="text" ng-model="role_name">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group" ng-if="is_operate!==1">
+                            <label class="col-md-1">角色状态</label>
+                            <div class="col-md-4">
+                                <input type="radio" value="1" name="status" ng-model="status">
+                                启用
+                                <input type="radio" value="2" name="status" ng-model="status">
+                                禁用
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">功能权限</label>
+                        </div>
+                        <div class="tab-pane" data-smart-wizard-pane="2" >
+                            <div class="form-group">
+                                <div class="table-scroll smart-form">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>{{lang['Functional module']}}</th>
+                                            <th>{{lang['Function selection']}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+                                            <td>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="admin" ng-click="selectAll($event)">
+                                                    <i></i>{{items.module}}
+                                                </label>
+                                                <!--<input name="admin" type="checkbox" ng-click="selectAll($event)" />{{item.module}}-->
+
+                                            </td>
+                                            <td>
+
+                                                <!--<label class="checkbox">-->
+                                                    <!--<input type="checkbox" name="checkbox">-->
+                                                    <!--<i></i>Alice</label>-->
+                                                <!--<label class="checkbox">-->
+                                                    <!--<input type="checkbox" name="admin" ng-click="selectAll($event)">-->
+                                                    <!--<i></i>{{items.module}}-->
+                                                <!--</label>-->
+
+                                                <label class="checkbox" style="display: inline-block;padding-right: 20px;line-height: 15px;" ng-repeat="item1 in item.permission" >
+                                                    <input class="check" type="checkbox" value={{item1.id}} ng-checked="item1.is_permission===1" />
+                                                    <i></i>
+                                                    <span>{{item1.permission_name}}</span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="submit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</div>

@@ -1,0 +1,77 @@
+<!-- 管理员账号 -->
+<div id="content">
+
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>菜单管理</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <form class="" method="post">
+                                <div class="row menu_table">
+                                    <ul class="row menu_tbody" ng-repeat="item in listd1">
+                                        <li class="col-md-1 col-xs-1">
+                                            <i class="fa fa-lg fa-plus-circle" ng-click="showFace($index,$event)"></i>
+                                        </li>
+                                        <li class="col-md-8 col-xs-7">
+                                            {{item.menu_name}}
+                                        </li>
+                                        <li class="col-md-3 col-xs-3" style="margin-top: -5px">
+                                            <div class=" no-margin" >
+                                                <label>
+                                                    <input type="checkbox" class="checkbox style-0" value="{{item.id}}" ng-checked="item.is_menu===1" name="checkbox" ng-click="selectAll($event)">
+                                                    <span class="font-xs">启用</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <ul class="col-md-12 col-xs-12 secondul" ng-repeat="list1 in item.Children" style="background-color: #f7f7f7;">
+                                            <li class="col-md-1 col-xs-1 secondli">
+                                                <i class="fa fa-lg fa-plus-circle" ng-click="showFace($index,$event)"></i>
+                                            </li>
+                                            <li class="col-md-8 col-xs-8">
+                                                {{list1.menu_name}}
+                                            </li>
+                                            <li class="col-md-3 col-xs-3" style="margin-top: -5px">
+                                                <div class=" no-margin" >
+                                                    <label>
+                                                        <input type="checkbox" class="checkbox style-0"  ng-checked="list1.is_menu===1" value="{{list1.id}}" name="checkbox">
+                                                        <span class="font-xs">启用</span>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <ul class="col-md-12 secondul" ng-repeat="data in list1.Children" style="background-color: #e3e2e1;">
+                                                <!--<li class="col-md-1 col-xs-1 thirdli">-->
+                                                <!--</li>-->
+                                                <li class="col-md-8 col-xs-9">
+                                                    {{data.menu_name}}
+                                                </li>
+                                                <li class="col-md-3 col-xs-3" style="margin-top: -5px">
+                                                    <div class=" no-margin" >
+                                                        <label>
+                                                            <input type="checkbox" class="checkbox style-0" ng-checked="data.is_menu===1" value="{{data.id}}" name="checkbox">
+                                                            <span class="font-xs">启用</span>
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="smart-form ">
+                            <footer>
+                                <button type="submit" class="btn btn-primary" ng-click="sub()">提交</button>
+                                <button type="button" class="btn btn-default" onclick="history.go(-1);">返回</button>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

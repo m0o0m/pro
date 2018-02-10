@@ -1,0 +1,7 @@
+@import "./function.scss";
+
+.happy {
+  // margin-top: 80px;
+  width: rem(1475);
+  overflow: hidden;
+}

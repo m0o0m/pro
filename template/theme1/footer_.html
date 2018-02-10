@@ -1,0 +1,299 @@
+{{define "footer_"}}
+<script type="text/javascript">
+    if (parent.cyjiframe == true) {
+        var links = document.getElementsByTagName('link');
+        for (var i = 0; i < links.length; i++) {
+            var link = links[i];
+            if (link.href.indexOf('.ico') > 0) {
+                var head = parent.window.document.head;
+                linkTag = parent.window.document.createElement('link');
+                linkTag.href = link.href;
+                linkTag.setAttribute('rel', 'shortcut icon');
+                linkTag.setAttribute('type', 'image/vnd.microsoft.icon');
+                head.appendChild(linkTag);
+            }
+        }
+    }
+</script>
+{{if ne (len .LeftFloat) 0}}
+<ul picfloat="left" style="position: absolute; cursor: pointer; z-index: 8000;left: 0px; width: 134px;padding-left: 0px;display:none;" class="TplFloatSet"
+    id="TplFloatPic_0">
+{{range .LeftFloat}}
+    <li>
+        <a target="{{if eq .IsBlank 1}}_blank{{else}}_self{{end}}" onclick="eval({{.UrlInter}})" href="{{.Url}}" style="width: 134px; height: 268px;">
+            <img align="middle" class="png_fix" alt="" src="{{.ImgA}}" style="display: inline;">
+            {{if .ImgB}}
+                <img align="middle" class="png_fix" alt="" style="display: none;" src="{{.ImgB}}">
+            {{end}}
+        </a>
+    </li>
+{{end}}
+</ul>
+{{end}}
+
+{{if ne (len .RightFloat) 0}}
+<ul picfloat="right" style="position: absolute; cursor: pointer; z-index: 8000;right: 0px; width: 134px;display:none;" class="TplFloatSet" id="TplFloatPic_1">
+{{range .RightFloat}}
+    <li>
+        <a target="{{if eq .IsBlank 1}}_blank{{else}}_self{{end}}" onclick="eval({{.UrlInter}})" href="{{.Url}}" style="width: 134px; height: 268px;">
+            <img align="middle" class="png_fix" alt="" src="{{.ImgA}}" style="display: inline;">
+            <img align="middle" class="png_fix" alt="" style="display: none;" src="{{.ImgB}}">
+        </a>
+    </li>
+{{end}}>
+</ul>
+{{end}}
+<style>
+    .TplFloatSet a {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .TplFloatSet img {
+        vertical-align: bottom;
+    }
+
+    .TplFloatSet li {
+        list-style: none;
+        font-size: 0px;
+    }
+</style>
+
+<script>
+    //關閉效果
+    function FloatClose(t) {
+        $(t).parents('.TplFloatSet').hide();
+        t.preventDefault(); 
+        return;
+    }
+
+    var float_list = [], float_side = 5;
+    if (typeof(FloatL_Top) == 'undefined' || FloatL_Top == '' || FloatL_Top == 0) {
+        var left_top = 180;
+    } else {
+        var left_top = FloatL_Top;
+    }
+    if (typeof(FloatR_Top) == 'undefined' || FloatR_Top == '' || FloatR_Top == 0) {
+        var right_top = 180;
+    } else {
+        var right_top = FloatR_Top;
+    }
+    $(window).load(function () {
+// s廳主自改 - 浮動圖V2 -2013.7.19
+            {{if ne (len .LeftFloat) 0}}
+                float_list['0'] = $('#TplFloatPic_0')
+            {{end}}
+            {{if ne (len .RightFloat) 0}}
+                float_list['1'] = $('#TplFloatPic_1')
+            {{end}}
+
+                for (var i in float_list) {
+                    var self = float_list[i],
+                            picfloat = (self.attr('picfloat') == 'right') ? 1 : 0;
+                    self.show().Float({'floatRight': picfloat, 'topSide': ((picfloat == 1) ? right_top : left_top), side: float_side});
+                    var w = 0;
+                    $.each(self.find('img'), function () {
+                        var width = $(this).width();
+                        w = (width > w) ? width : w;//取圖片最大寬度
+                        $(this).attr({
+                            'width': width,
+                            'height': $(this).height()
+                        });
+                    });
+                    self.css('width', w);
+                    if (picfloat) {
+                        right_top = right_top + 10 + (self.height() || 250);
+                    } else {
+                        left_top = left_top + 10 + (self.height() || 250);
+                    }
+
+                    $('a', self).each(function () {
+                        $(this).css({'width': $(this).find('img:first').width(), 'height': $(this).find('img:first').height()});
+                        $(this).hover(function () {
+                            $(this).find('img:first').hide();
+                            $(this).find('img:last').show();
+                        }, function () {
+                            $(this).find('img:last').hide();
+                            $(this).find('img:first').show();
+                        });
+                    });
+                }
+            }
+    );
+    document.writeln('<script src=\"' + cdnUrl + '/shared/sitepublic/js/jquery.easing.1.3.min.js\"><\/script>');
+</script>
+
+{{$data := .}}
+{{$popInfo := (index .PopAdv 0)}}
+{{if eq $popInfo.State 1}}
+    {{template "pop_adv" $data}}
+{{end}}
+
+{{if ne (len .LeftAdvList) 0}}
+<style>
+    .left_ad ul, ol {
+        padding: 0;
+        margin: 0;
+    }
+
+    .left_ad {
+        position: relative;
+        overflow: auto;
+        text-align: center;
+    }
+
+    .left_ad li {
+        list-style: none;
+    }
+
+    .left_ad ul li {
+        float: left;
+    }
+</style>
+<div class="left_ad" id="ele-adv">
+    <div id="mBox" class="mBox zh-cn">
+        <ul>
+
+        {{range .LeftAdvList}}
+            <li style="text-align: left;">
+                <img src='{{.Content}}' style="display: none;"/>
+                <script type="text/javascript">
+                    var isLogin = getCookie('loginBack');
+                    var url = "";
+                    if (isLogin) {
+                        url = "{{.AfterUrl}}"
+                    } else {
+                        url = "{{.BeforeUrl}}"
+                    }
+                    var img = new Image();
+                    img.src = "{{.Content}}";
+                    {{if eq .IsLink 1}}
+                    if (img.width < 181) {
+                        $("#mBox").css('width', '180px');
+                        document.write("<a onclick=\"" + url + "\"><img src='{{.Content}}'/></a>");
+                    } else {
+                        $("#mBox").css('width', '280px');
+                        document.write("<a onclick=\"" + url + "\" style='display: block;height:280px;width:280px;'><img src='{{.Content}}' style='width:280px;height:280px;'/></a>");
+                    }
+                    {{else}}
+                    if (img.width < 181) {
+                        $("#mBox").css('width', '180px');
+                        document.write("<a href=\"" + url + "\"><img src='{{.Content}}'/></a>");
+                    } else {
+                        $("#mBox").css('width', '280px');
+                        document.write("<a href=\"" + url + "\" style='display: block;height:280px;width:280px;'><img src='{{.Content}}' style='width:280px;height:280px;'/></a>");
+                    }
+                    {{end}}
+                </script>
+            </li>
+        {{end}}
+
+        </ul>
+    </div>
+    <div class="dv-colse" style="display: none;" onclick="document.getElementById('ele-adv').style.display = 'none';"></div>
+</div>
+<script>
+    $(".dv-colse").css("background", "url(" + cdnUrl + "/shared/egames/images/icon01.png) no-repeat");
+    $(document).ready(function (e) {
+        $('#mBox').unslider({
+            speed: 1
+        });
+
+    });
+</script>
+<style>
+    #mBox {
+        width: 180px;
+        height: 135px
+    }
+
+    #ele-adv {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1010;
+    }
+
+    .dv-colse {
+        height: 26px;
+        width: 26px;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        cursor: pointer;
+        display: none;
+        z-index: 1100;
+    }
+</style>
+<script>
+    $(window).load(function () {
+        $("#ele-adv").hover(function () {
+            $(".dv-colse").css("display", "block");
+        }, function () {
+            $(".dv-colse").css("display", "none");
+        });
+    })
+</script>
+{{end}}
+
+<!-- 回到顶部按钮-开始 -->
+<style type="text/css">
+    #ele-float-top-wrap {
+        position: fixed;
+        right: 5px;
+        bottom: 90px;
+        min-width: 40px;
+        z-index: 20;
+    }
+
+    #ele-float-top {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 40px;
+        display: none;
+    }
+
+    .ele-float-top-btn {
+        margin-top: 2px;
+        display: block;
+        position: relative;
+        height: 40px;
+        border-radius: 3px;
+        transition: opacity 0.6s ease;
+        background-color: white;
+        background-position: 50% 0;
+        background-repeat: no-repeat;
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+        filter: alpha(opacity=80);
+        opacity: 0.8;
+    }
+
+    #ele-float-top-up {
+        display: none;
+        cursor: pointer;
+        margin-top: -40px;
+    }
+
+    .ele-float-top-btn:hover {
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+        filter: alpha(opacity=100);
+        opacity: 1;
+        background-position: 50% 100%;
+    }
+</style>
+<div id="ele-float-top-wrap">
+    <div id="ele-float-top">
+        <div id="ele-float-top-up" class="ele-float-top-btn"></div>
+    </div>
+</div>
+<!-- 回到顶部按钮-结束 -->
+
+<!-- 红包活动-->
+<script type="text/javascript">
+    $("#ele-float-top-up").css("background-image", "url('" + cdnUrl + "/shared/sitepublic/images/float_top_up.png')");
+    document.writeln('<script src=\"' + cdnUrl + '/shared/red/js/redbag.js\"><\/script>');
+</script>
+<!-- 红包活动-->
+{{end}}

@@ -1,0 +1,59 @@
+workspace:
+  base: /go
+  path: src/pk-cash-platform-front/
+
+
+clone:
+  git:
+    image: plugins/git
+    environment:
+      - GIT_SSL_NO_VERIFY=true
+
+
+pipeline:
+#  build:
+#    image: node:latest
+#    environment:
+#      - STATIC_HOST_IP_PORT=management.pk051.com:8081
+#      - MANAGEMENT_IP_PORT=management.pk051.com:9696
+#    commands:
+#      - sh .drone.sh
+#      - cat smart/master/js/config.js
+#    when:
+#      branch: test
+#      event: [ push, pull_request, tag ]
+
+#  build-admin:
+#    image: node:latest
+#    environment:
+#      - STATIC_HOST_IP_PORT=management.pk051.com:8088
+#      - MANAGEMENT_IP_PORT=management.pk051.com:9797
+#    commands:
+#      - sh .drone.sh
+#      - cat smart/master/js/config.js
+#    when:
+#      branch: admin
+#      event: [ push, pull_request, tag ]
+
+  publish_static_sandbox:
+    image: plugins/drone-rsync:latest
+    commands: sh .rsync.sh
+    secrets: [ ssh_key, deploy_sandbox_path ]
+    when:
+      branch: master
+
+#  publish_admin:
+#    image: plugins/drone-rsync:latest
+#    commands: sh .rsync.sh
+#    secrets: [ ssh_key, deploy_admin_path ]
+#    when:
+#      branch: admin
+#      event: [ push, tag ]
+
+  slack:
+    image: plugins/slack
+    channel: dev
+    webhook: https://hooks.slack.com/services/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
+    when:
+      branch: [ test, admin ]
+      status: [ success, failure ]

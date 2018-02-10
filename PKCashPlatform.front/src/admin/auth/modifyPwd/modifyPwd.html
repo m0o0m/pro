@@ -1,0 +1,79 @@
+<header id="header"  class="animated fadeInDown" >
+
+    <div id="logo-group">
+        <span id="logo"> <img src="app/styles/img/logo.png" alt="SmartAdmin"> </span>
+    </div>
+
+    <!--<span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a-->
+            <!--ui-sref="register" class="btn btn-danger">Create account</a> </span>-->
+
+</header>
+<div id="main" role="main"  class="animated fadeInDown" >
+
+    <div id="content" class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4"></div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="well no-padding">
+                    <form class="smart-form client-form">
+                        <header>
+                            修改密码
+                        </header>
+
+                        <fieldset>
+
+                            <!--<section>-->
+                                <!--<label class="label">账号</label>-->
+                                <!--<label class="input"> <i class="icon-append fa fa-user"></i>-->
+                                    <!--<input type="text" name="username" ng-model="account">-->
+                                    <!--<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> 请输入账号</b></label>-->
+                            <!--</section>-->
+                            <section>
+                                <label class="label">原密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="old_password"  ng-model="old_password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> 请输入原密码</b> </label>
+                            </section>
+                            <section>
+                                <label class="label">新密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="new_password"  ng-model="new_password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> 请输入新密码</b> </label>
+                            </section>
+                            <section>
+                                <label class="label">确认密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="reply_password"  ng-model="reply_password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> 请再次输入密码</b> </label>
+                            </section>
+
+                        </fieldset>
+                        <footer>
+                            <button type="submit" ng-click="modify()" class="btn btn-primary">
+                                确认修改
+                            </button>
+                        </footer>
+                    </form>
+
+                </div>
+
+                <!--<h5 class="text-center"> - Or sign in using -</h5>-->
+
+                <!--<ul class="list-inline text-center">-->
+                    <!--<li>-->
+                        <!--<a href-void class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href-void class="btn btn-info btn-circle"><i class="fa fa-twitter"></i></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href-void class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+
+            </div>
+        </div>
+    </div>
+
+</div>

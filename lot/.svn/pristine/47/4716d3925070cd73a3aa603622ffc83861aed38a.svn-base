@@ -1,0 +1,275 @@
+<?php
+namespace Applications\Upload\Lib;
+
+use \Applications\Common\Config\Config;
+use \Applications\Common\Helper\Db;
+use \Applications\Common\Helper\Redis;
+use \Applications\Common\Helper\Cut;
+
+class Common
+{
+    public static $connection;
+    public static $db;
+    public static $redis;
+
+    public static function init($worker){
+        self::$db = Db::instance('manage');
+        self::$redis = Redis::instance();
+    }
+
+    public static function insert($set){
+        return self::$db->insert(Config::$prefix . 'upload_list')
+            ->cols($set)
+            ->query();
+    }
+
+    public static function send($result){
+        self::$connection->send(json_encode($result));
+    }
+
+    public static function run($connection, $header){
+        self::$connection = $connection;
+
+        $act = isset($_REQUEST['act']) ? $_REQUEST['act'] : '';
+        $signParams['line_id'] = $line_id = isset($_REQUEST['line_id']) ? $_REQUEST['line_id'] : '';
+        $signParams['agent_id'] = $agent_id = isset($_REQUEST['agent_id']) ? $_REQUEST['agent_id'] : 0;
+        $signParams['nonce_str'] = $nonce_str = isset($_REQUEST['nonce_str']) ? $_REQUEST['nonce_str'] : '';
+        $sign = isset($_REQUEST['sign']) ? $_REQUEST['sign'] : '';
+
+        if(empty($_FILES) || empty($line_id) || !is_numeric($agent_id) || empty($nonce_str)){
+            self::send(['errcode'=>11,'errmsg'=>'参数错误!']);
+            return;
+        }
+
+        if($nonce_str == self::$redis->get('upload_nonce_str')){
+            self::send(['errcode'=>10,'errmsg'=>'请勿重复提交!']);
+            return;
+        }
+        self::$redis->set('upload_nonce_str',$nonce_str);
+
+        if(empty($sign) || $sign != self::getSign($signParams)){
+            self::send(['errcode'=>9,'errmsg'=>'校验失败!']);
+            return;
+        }
+
+        if($nonce_str < ( time()-30 )){
+            self::send(['errcode'=>8,'errmsg'=>'参数过期!']);
+            return;
+        }
+
+        unset($signParams['nonce_str']);
+        if($act == 'del'){
+            $filepath = isset($_REQUEST['filepath']) ? $_REQUEST['filepath'] : false ;
+            $result = self::del($signParams,$filepath);
+        }else{
+            $result = self::up($signParams);
+        }
+
+        self::send($result);
+        return;
+    }
+
+    // 校验值 生成规则
+    public static function getSign($params){
+        asort($params,2);
+        foreach($params as $k => $v){
+            if(!empty($v)){
+                if(!isset($signTemp))
+                    $signTemp = $k . '=' . $v;
+                else
+                    $signTemp .= '&' . $k . '=' . $v;
+            }
+        }
+        $signTemp = $signTemp . '&key=' . self::getKey();
+        $sign = strtoupper( MD5($signTemp) );
+        return $sign;
+    }
+
+    // 校验密钥 可更改
+    public static function getKey(){
+        return 'vantone';
+    }
+
+    public static function up($params){
+        $upfolder = Config::$upload['upfolder'];// 上传文件夹
+        $basepath = Config::$upload['basepath'];// 上传文件基本路径
+
+        foreach($params as $param){
+            if(!empty($param)){
+                if(isset($path_suffix)){
+                    $path_suffix .= '/' . $param;
+                    $name_prefix .= '_' . $param;
+                }
+                else{
+                    $path_suffix = $param;
+                    $name_prefix = $param;
+                }
+            }
+        }
+
+        $uptypes = Config::$upload['uptypes'];// 上传文件类型列表
+        $max_file_size = Config::$upload['max_file_size'];// 上传文件大小限制, 单位BYTE
+        $overwrite = Config::$upload['overwrite'];// 同名是否覆盖
+
+        if ($_SERVER['REQUEST_METHOD'] != 'POST')
+        {
+            $_result['errcode'] = 7;
+            $_result['errmsg'] = '非法请求!';
+            return $_result;
+        }
+        else
+        {
+            foreach ($_FILES as $file)
+            {
+                if(!isset($file['file_size']) || $file['file_size'] <= 0)
+                    // 是否存在文件
+                {
+                    $_result['errcode'] = 6;
+                    $_result['errmsg'] = '请选择上传的图片!';
+                    return $_result;
+                }
+
+                if($max_file_size < $file['file_size'])
+                    // 检查文件大小
+                {
+                    $_result['errcode'] = 5;
+                    $_result['errmsg'] = '文件太大!';
+                    return $_result;
+                }
+
+                if(!in_array(strtolower($file['file_type']), $uptypes))
+                    // 检查文件类型
+                {
+                    $_result['errcode'] = 4;
+                    $_result['errmsg'] = '文件类型不符!' . $file['file_type'];
+                    return $_result;
+                }
+
+                $destination_folder = $basepath . '/' . $upfolder . '/' . $path_suffix;
+                if(!file_exists($destination_folder))
+                {
+                    mkdir($destination_folder, 0777, true);
+                }
+
+                $original_filename = $file['file_name'];
+
+                $pinfo = pathinfo($original_filename);
+                $ftype = $pinfo['extension'];
+
+                $filename = $name_prefix . '_' . date('YmdHis',time()) . '.' . $ftype;
+                $filepath = $upfolder . '/' . $path_suffix . '/' . $filename;
+                $destination_path = $destination_folder . '/' . $filename;
+
+                if (file_exists($destination_path) && $overwrite != true)
+                {
+                    $_result['errcode'] = 2;
+                    $_result['errmsg'] = '同名文件已经存在!';
+                    return $_result;
+                }
+                if(!file_put_contents($destination_path, $file['file_data']))
+                {
+                    $_result['errcode'] = 1;
+                    $_result['errmsg'] = '移动文件出错!';
+                    return $_result;
+                }
+                //获取缩略图的宽高、路径并生成缩略图
+                $is_thumb = isset($_REQUEST['is_thumb']) ? $_REQUEST['is_thumb'] : 2;
+
+                $thumbpath = '';
+                if($is_thumb == 1){
+                    $width = isset($_REQUEST['width']) ? $_REQUEST['width'] : null ;
+                    $height = isset($_REQUEST['height']) ? $_REQUEST['height'] : null ;
+                    if($width > 2000 || $height > 2000){
+                         $_result['errcode'] = 1;
+                         $_result['errmsg'] = '缩略图大小超出范围!';
+                         unlink($destination_path);
+                         return $_result;
+                    }
+                    // 路径
+                    $thumb_destination_folder = $destination_folder . '/' . 'thumb';
+                    if(!file_exists($thumb_destination_folder))
+                    {
+                        mkdir($thumb_destination_folder);
+                    }
+                    if( (!empty($width)) && (!empty($height)) ){
+                        $thumbname = 'thumb_' . $filename;
+                        $thumbpath = $upfolder . '/' . $path_suffix . 'thumb' . '/' . $thumbname;
+                        $thumb_destination_path = $thumb_destination_folder . '/' . $thumbname;
+
+                        $ic=new Cut($destination_path,$thumb_destination_path);
+                        $ic->Crop($width,$height,4);
+                        $ic->SaveAlpha();
+                        $ic->destory();
+                    }else{
+                        $_result['errcode'] = 1;
+                        $_result['errmsg'] = '获取缩略图宽高失败!';
+                        unlink($destination_path);
+                        return $_result;
+                    }
+                }
+            }
+
+            $set = [
+                'filename'=>$filename,
+                'filepath'=>$filepath,
+                'thumb'=>$thumbpath,
+                'original_filename'=>$original_filename,
+                'addtime'=>time()
+            ];
+            foreach($params as $key => $param){
+                $set[$key] = $param;
+            }
+
+            self::insert($set);
+
+            self::$redis->del('wap' . $params['line_id'] . 'flash');// 删除前台获取图片列表的key
+
+            $_result['errcode'] = 0;
+            $_result['result'] = ['filepath'=>$filepath,'filename'=>$filename,'thumbpath'=>$thumbpath,'original_filename'=>$original_filename];
+            $_result['errmsg'] = '上传成功';
+            return $_result;
+        }
+    }
+
+    public static function del($params,$filepath){
+        if(!file_exists($filepath)){
+            $_result['errcode'] = 2;
+            $_result['errmsg'] = '文件不存在!' . $filepath;
+            return $_result;
+        }
+
+        $upfolder = Config::$upload['upfolder'];
+        $delfolder = $upfolder . '/' . 'del';
+        $del_path = Config::$upload['basepath'] . '/' . $delfolder;
+
+        foreach($params as $param){
+            if(!empty($param)){
+                if(isset($path_suffix)){
+                    $path_suffix .= '/' . $param;
+                    $name_prefix .= '_' . $param;
+                }
+                else{
+                    $path_suffix = $param;
+                    $name_prefix = $param;
+                }
+            }
+        }
+        $destination_folder = $del_path . '/' . $path_suffix;
+
+        if(!file_exists($destination_folder))
+        {
+            mkdir($destination_folder, 0777, true);
+        }
+
+        $destination_path = preg_replace('/' . $upfolder . '/', $delfolder, $filepath, 1);
+        if(!rename($filepath,$destination_path)){
+            $_result['errcode'] = 1;
+            $_result['errmsg'] = '删除失败!';
+            return $_result;
+        }
+
+        $_result['errcode'] = 0;
+        $_result['errmsg'] = '删除成功';
+        return $_result;
+    }
+}

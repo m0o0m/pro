@@ -1,0 +1,248 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-02-01 19:46:22
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/noticefront/_form.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a72fe0ea92be5_44810929',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'ea19df16e5bff7a989cba808fc369487cc83c279' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/noticefront/_form.html',
+      1 => 1516879976,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a72fe0ea92be5_44810929 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<div class="page-header">
+    <p id="me-table-buttons">
+    <h1>
+        <a href="javascript:;" id="front_index">前台公告列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            <?php if (isset($_GET['id'])) {?>
+                修改公告
+            <?php } else { ?>
+                添加公告
+            <?php }?>
+        </small>
+    </h1>
+
+</p>
+</div>
+
+<!-- 添加/修改 表单 -->
+<div class="isHide layui-layer-wrap">
+    <div class="modal-body">
+        <form id="add-form" class="form-horizontal" action="?" method="POST">
+            <input type="hidden" name="id" value="<?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['id']) {
+echo $_smarty_tpl->tpl_vars['item']->value['id'];
+}?>">
+            <input type="hidden" name="info" value='<?php if (isset($_smarty_tpl->tpl_vars['item']->value)) {
+echo json_encode($_smarty_tpl->tpl_vars['item']->value);
+}?>'>
+            <fieldset style="width:60%;">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 类型: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="type" style="width:30%;" id="type">
+                          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['show']->value['types'], 'val', false, 'key');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+?>
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+" <?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['type'] && $_smarty_tpl->tpl_vars['item']->value['type'] == $_smarty_tpl->tpl_vars['key']->value) {?>selected<?php }?> ><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</option>
+                          <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                        </select>
+                    </div>
+                </div>
+<!--                 <div class="form-group">
+                    <label class="col-sm-3 control-label"> 代理类型: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="agent_type" id="agent_type">
+                            <option value="">请选择</option>
+                          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['show']->value['atypes'], 'val', false, 'key');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+?>
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+" <?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['agent_type'] && $_smarty_tpl->tpl_vars['item']->value['agent_type'] == $_smarty_tpl->tpl_vars['key']->value) {?>selected<?php }?> ><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</option>
+                          <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                        </select>
+                        <br>
+                        <span class="children">
+                          <?php if (isset($_smarty_tpl->tpl_vars['item']->value['agents'])) {?>
+                          代理:
+                          <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['item']->value['agents'], 'val', false, 'key');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['key']->value => $_smarty_tpl->tpl_vars['val']->value) {
+?>
+                            <label>
+                                <input type="checkbox" name="agent_id[]" value="<?php echo $_smarty_tpl->tpl_vars['val']->value['id'];?>
+" <?php if (isset($_smarty_tpl->tpl_vars['item']->value['aids']) && in_array($_smarty_tpl->tpl_vars['val']->value['id'],$_smarty_tpl->tpl_vars['item']->value['aids'])) {?>checked<?php }?> />
+                                <?php echo $_smarty_tpl->tpl_vars['val']->value['login_name'];?>
+&nbsp;&nbsp;
+                            </label>
+                          <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                          <?php }?>
+                        </span>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 标题: </label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" id="title"  name="title" value="<?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['title']) {
+echo $_smarty_tpl->tpl_vars['item']->value['title'];
+}?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 内容: </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="content" id="content" rows="6"><?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['content']) {
+echo $_smarty_tpl->tpl_vars['item']->value['content'];
+}?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 备注: </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="remark" id="remark" ><?php if (isset($_smarty_tpl->tpl_vars['item']->value) && $_smarty_tpl->tpl_vars['item']->value['remark']) {
+echo $_smarty_tpl->tpl_vars['item']->value['remark'];
+}?></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" type="button" id='add-form-btn' >
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                提交
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="button" id='reset' >
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                重置
+            </button>
+        </div>
+    </div>
+
+    <!-- <div>
+        <center>
+        <label>
+            <input id="add-form-btn" type="submit" class="btn btn-info" value = "提交">
+        </label>
+         </center>
+    </div> -->
+</div>
+
+<?php echo '<script'; ?>
+>
+    $('#front_index').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/noticefront/index',
+            container: '#container'
+        });
+    })
+
+    $('#reset').click(function(){
+        $('#title').val('');
+        $('#remark').val('');
+        $('#content').val('');
+        $('#type').children().prop('selected',false);
+    })
+// ------------------ 增/改 ------------------------------------
+    $('#add-form-btn').click(function(){
+        var title = $('#title').val();
+        var content = $('#content').val();
+        if(title == ''){
+            layer.alert('公告标题不能为空',{icon:2});
+            return false;
+        }
+
+        if(content == ''){
+            layer.alert('公告内容不能为空',{icon:2});
+            return false;
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'add',
+            data: $('#add-form').serialize(),
+            dataType:'json',
+            success: function(data,textStatus){
+                var result = data;
+                if(result.ErrorCode > 0){
+                    layer.alert(result.ErrorMsg, {icon: 0});
+                    return;
+                }
+                if(result.ErrorMsg){
+                    layer.alert(result.ErrorMsg, {icon: 1}, function(){
+                        location = 'index?p';
+                    });
+                }
+            }
+        });
+    });
+    $('#agent_type').change(function(){
+        var agent_type = $('#agent_type').val();
+        if(!agent_type){
+            $('#agent_type ~ .children').html('');
+            return;
+        }
+        $.ajax({
+            type: 'post',
+            url: 'agent',
+            data: 'agent_type=' + agent_type,
+            dataType:'json',
+            success: function(data,textStatus){
+                var html = '代理:';
+                for(x in data){
+                    html += '<label>';
+                    html += '&nbsp;&nbsp;<input type="checkbox" name="agent_id[]" value="'+data[x].id+'" />';
+                    html += data[x].login_name;
+                    html += '</label>';
+                }
+                if(data.length == 0){
+                    html += 'null'
+                }
+
+                $('#agent_type ~ .children').html(html);
+            }
+        });
+    });
+<?php echo '</script'; ?>
+><?php }
+}

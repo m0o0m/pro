@@ -1,0 +1,974 @@
+@charset "UTF-8";
+/* 禁用iPhone中Safari的字号自动调整 */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* 取消链接高亮  */
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 设置HTML5元素为块 */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+/* 图片自适应 */
+img {
+    height: auto;
+}
+
+/* 初始化 */
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    font-family: 'Microsoft YaHei', Arial;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+em, i {
+    font-style: normal;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.xl-center {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.xl-lottery-top {
+    font-size: 12px;
+    padding: 10px 0;
+    background: #f2f2f2;
+}
+
+.xl-lottery-top p a {
+    color: #19609f;
+}
+
+.xl-lottery-top p a:first-child {
+    margin: 0 20px;
+}
+
+.xl-lottery-top p a:last-child {
+    color: #8c8b8b;
+}
+
+.xl-lottery-top ul li a {
+    color: #000;
+}
+
+.xl-lottery-top ul li:first-child {
+    position: relative;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div {
+    display: none;
+    background-color: #fff;
+    width: 165px;
+    border: 1px solid #ccc;
+    position: absolute;
+    right: 0;
+    top: 15px;
+    z-index: 99;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-code-small li {
+    width: 50%;
+    height: 20px;
+    text-align: center;
+    background-color: #19609f;
+    border-top: 2px solid #19609f;
+    color: #fff;
+    cursor: pointer;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-img {
+    display: none;
+    color: #fff;
+    font-weight: 900;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-img p {
+    color: #19609f;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-img div {
+    text-align: center;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-scan-img div img {
+    display: block;
+    margin: 5px auto;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-img-div .xl-div-show {
+    display: block;
+}
+
+.xl-lottery-top ul li:first-child .xl-div-show {
+    display: block;
+}
+
+.xl-lottery-top ul li:first-child .xl-scan-code-active {
+    color: #19609f !important;
+    background-color: #fff !important;
+}
+
+.xl-lottery-top ul li:first-child .icon-shouji {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.xl-lottery-top ul li:first-child .icon-xiangxia {
+    margin: 0 10px;
+}
+
+.xl-lottery-top ul li:hover a {
+    color: #19609f;
+}
+
+.xl-lottery-top ul .top-line {
+    color: #ccc;
+    margin: 0 10px;
+}
+
+.xl-lottery-logo {
+    height: 68px;
+}
+
+.xl-lottery-logo img {
+    margin-top: 6px;
+}
+
+.xl-lottery-logo input {
+    height: 30px;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    padding-left: 10px;
+    color: #999999;
+    margin-top: 18px;
+    outline: none;
+    font-size: 16px;
+}
+
+.xl-lottery-logo .input-verity {
+    width: 100px;
+}
+
+.xl-lottery-logo span {
+    display: inline-block;
+    color: #fff;
+    font-size: 18px;
+    width: 90px;
+    height: 32px;
+    margin-top: 18px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.xl-lottery-logo .xl-login {
+    background-color: #19609f;
+}
+
+.xl-lottery-logo .xl-register {
+    background-color: #ec1e22;
+    margin-right: 80px;
+}
+
+.xl-lottery-nav {
+    height: 56px;
+    background: #19609f;
+}
+
+.xl-lottery-content-top {
+    height: 56px;
+    background-color: #fff;
+}
+
+.xl-lottery-content-top p {
+    width: 240px;
+    text-align: center;
+    background-color: #2282d7;
+    height: 56px;
+    line-height: 56px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.xl-lottery-content-top ul {
+    background-color: #19609f;
+    height: 56px;
+    padding: 0 61px;
+    font-size: 20px;
+}
+
+.xl-lottery-content-top ul li {
+    width: 106px;
+    height: 100%;
+}
+
+.xl-lottery-content-top ul li a {
+    color: #fff;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 56px;
+    text-align: center;
+}
+
+.active-station-li {
+    background-color: #08447a;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left {
+    width: 238px;
+    height: 312px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-top: none;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div {
+    border-bottom: 1px dashed #ccc;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div p {
+    color: #19609f;
+    margin: 10px 0;
+    font-weight: 900;
+    padding-left: 10px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div p span.fr {
+    display: inline-block;
+    height: 21px;
+    line-height: 21px;
+    margin-right: 5px;
+    color: #19609f;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div p span.fl img {
+    margin-right: 5px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div p .icon-huo {
+    margin-right: 5px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div ul {
+    margin: 0 5px 0 10px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div ul li {
+    width: 33.33333%;
+    height: 30px;
+    font-size: 12px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div ul li a {
+    display: inline-block;
+    text-align: center;
+    color: #939393;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div ul li a span {
+    color: #ff0024;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div ul li a img {
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-left .toggle-c-div ul li a:hover {
+    color: #19609f;
+    text-decoration: underline;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-right {
+    width: 758px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-right .my-lottery-notice-c {
+    color: #19609f;
+    font-size: 14px;
+    height: 34px;
+    border: 1px solid #7bacd8;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-right .my-lottery-notice-c p {
+    width: 130px;
+    height: 34px;
+    text-align: center;
+    font-size: 18px;
+    overflow: hidden;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-right .my-lottery-notice-c p .icon-laba1 {
+    font-size: 30px;
+    margin: 0 5px 0 10px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-right .my-lottery-notice-c p i {
+    display: inline-block;
+    line-height: 34px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-center-right .my-lottery-notice-c marquee {
+    width: 625px;
+    height: 34px;
+    line-height: 34px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center {
+    width: 758px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .index-lunbo {
+    width: 500px;
+    height: 267px;
+    padding: 10px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice {
+    margin-top: 10px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .lottery-win {
+    width: 218px;
+    height: 42px;
+    background-color: #19609f;
+    color: #fff;
+    line-height: 42px;
+    padding: 0 10px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .lottery-win span {
+    font-size: 14px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 0 10px;
+    height: 224px;
+    font-size: 12px;
+    overflow-y: scroll;
+    color: #484848;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every {
+    border-bottom: 1px dashed #ccc;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every p {
+    padding: 8px 0;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every p span {
+    display: inline-block;
+    width: 33.33333%;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every p span:first-child {
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every p span:first-child:hover {
+    color: #19609f;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every p a {
+    display: inline-block;
+    width: 33.333%;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every p a {
+    text-align: right;
+    color: #19609f;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every ul {
+    padding-bottom: 8px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every ul li {
+    width: 8%;
+    text-align: center;
+    color: #19609f;
+    height: 17px;
+    margin-right: 2%;
+    text-align: center;
+    line-height: 17px;
+}
+
+.xl-center .xl-lottery-content-center .xl-lottery-right-center .draw-notice .draw-notice-c .draw-notice-every ul li:hover {
+    background: #716f6b;
+    color: #fff;
+}
+
+.xl-center .net-notice-c {
+    width: 240px;
+}
+
+.xl-center .net-notice-c p {
+    font-size: 16px;
+    color: #fff;
+    padding: 0 10px;
+    line-height: 44px;
+    background: #19609f;
+}
+
+.xl-center .net-notice-c p a {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+}
+
+.xl-center .net-notice-c .notice-div {
+    overflow-y: scroll;
+    height: 219px;
+    border: 1px solid #ccc;
+    border-top: none;
+    font-size: 12px;
+    padding: 0 5px;
+    color: #484848;
+}
+
+.xl-center .net-notice-c .notice-div ul li {
+    color: #000;
+    line-height: 30px;
+}
+
+.xl-center .net-notice-c .notice-div ul li a {
+    color: #000;
+    display: inline-block;
+    width: 80%;
+}
+
+.xl-center .net-notice-c .notice-div ul li a:hover {
+    color: #19609f;
+}
+
+.xl-center .net-notice-c .notice-div ul li .overflow-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.xl-center .lottery-nav {
+    width: 500px;
+    margin: 0 10px 0 12px;
+}
+
+.xl-center .lottery-nav .lottery-name-c {
+    width: 500px;
+    overflow: hidden;
+}
+
+.xl-center .lottery-nav .lottery-name-c ul {
+    width: 100%;
+}
+
+.xl-center .lottery-nav .lottery-name-c ul li {
+    width: 100px;
+    height: 44px;
+    background-color: #19609f;
+}
+
+.xl-center .lottery-nav .lottery-name-c ul li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    line-height: 44px;
+}
+
+.xl-center .lottery-nav .lottery-name-c ul .active-li {
+    background-color: #ffbb00;
+}
+
+.xl-center .lottery-nav .lottery-content-c {
+    width: 498px;
+    height: 219px;
+    border: 1px solid #ccc;
+    border-top: none;
+    font-size: 14px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item {
+    display: none;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item p {
+    color: #19609f;
+    font-weight: 900;
+    padding: 10px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item p i {
+    margin-left: 5px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item p.fr span a {
+    color: #19609f;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item img {
+    padding: 10px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .win-number {
+    padding: 0 40px;
+    background-color: #0e3a61;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .win-number ul {
+    color: #fff;
+    font-weight: 900;
+    font-size: 22px;
+    margin: 0 auto;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .win-number ul li {
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    background-color: #ffbb00;
+    margin: 10px 5px;
+    border-radius: 50%;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .bet-number {
+    margin: 0 0 10px 20px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .bet-number span {
+    display: inline-block;
+    width: 35px;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    color: #fff;
+    font-weight: 900;
+    font-size: 20px;
+    background-color: #19609f;
+    cursor: pointer;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .bet-number span:first-child {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .bet-number span:last-child {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .bet-number input {
+    width: 40px;
+    height: 34px;
+    outline: none;
+    background-color: #6e89a1;
+    color: #fff;
+    text-align: center;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .bet-button {
+    font-weight: 900;
+    color: #fff;
+    margin-right: 20px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .bet-button span {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 20px;
+    background-color: #19609f;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    border-radius: 30px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .lottery-content-item .bet-button span:last-child {
+    margin: 0 10px;
+}
+
+.xl-center .lottery-nav .lottery-content-c .xl-div-show {
+    display: block;
+}
+
+.xl-center .erweima-div {
+    width: 238px;
+}
+
+.xl-center .erweima-div .nav-p {
+    height: 44px;
+    background-color: #19609f;
+}
+
+.xl-center .erweima-div .nav-p a {
+    display: inline-block;
+    width: 50%;
+    height: 44px;
+    color: #fff;
+    line-height: 44px;
+    text-align: center;
+}
+
+.xl-center .erweima-div .nav-p .active-li {
+    background-color: #ffbb00;
+}
+
+.xl-center .erweima-div .item-tab-c {
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 219px;
+}
+
+.xl-center .erweima-div .item-tab-c .item-tab {
+    display: none;
+}
+
+.xl-center .erweima-div .item-tab-c .item-tab p {
+    color: #f46e6e;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.xl-center .erweima-div .item-tab-c .item-tab a img {
+    display: block;
+    margin: 2px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.xl-center .erweima-div .item-tab-c .xl-div-show {
+    display: block;
+}
+
+.xl-center .xl-lottery-help {
+    margin-top: 10px;
+}
+
+.xl-center .xl-lottery-help .help-left {
+    width: 240px;
+}
+
+.xl-center .xl-lottery-help .help-left p {
+    color: #fff;
+    line-height: 44px;
+    padding: 0 10px;
+    background-color: #19609f;
+}
+
+.xl-center .xl-lottery-help .help-left p a {
+    color: #fff;
+    font-size: 14px;
+    line-height: 42px;
+}
+
+.xl-center .xl-lottery-help .help-left ul {
+    height: 357px;
+    width: 238px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.xl-center .xl-lottery-help .help-left ul li {
+    line-height: 45px;
+    font-size: 14px;
+}
+
+.xl-center .xl-lottery-help .help-left ul li span.iconfont {
+    color: #19609f;
+    font-size: 16px;
+    margin: 0 20px 0 10px;
+}
+
+.xl-center .xl-lottery-help .help-left ul li a {
+    color: #000;
+    display: inline-block;
+}
+
+.xl-center .xl-lottery-help .help-left ul li a .chongzhi {
+    font-size: 12px;
+}
+
+.xl-center .xl-lottery-help .help-left ul li a:hover {
+    text-decoration: underline;
+    color: #19609f;
+}
+
+.xl-center .xl-lottery-help .chart-c {
+    width: 500px;
+    margin: 0 10px 0 12px;
+}
+
+.xl-center .xl-lottery-help .chart-c p {
+    height: 44px;
+    color: #fff;
+    line-height: 44px;
+    padding: 0 10px;
+    background-color: #19609f;
+}
+
+.xl-center .xl-lottery-help .chart-c p a {
+    color: #fff;
+    line-height: 44px;
+    font-size: 14px;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c {
+    border: 1px solid #ccc;
+    height: 356px;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c .chart-img img {
+    display: block;
+    margin: 20px;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c ul {
+    padding: 0 20px;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c ul li {
+    width: 20%;
+    margin-bottom: 25px;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c ul li a {
+    color: #000;
+    display: inline-block;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c ul li a img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c ul li a span {
+    text-align: center;
+    font-size: 14px;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c ul li a:hover {
+    color: #19609f;
+}
+
+.xl-center .xl-lottery-help .chart-c .chart-content-c ul li a:hover span {
+    border-bottom: 1px solid #19609f;
+}
+
+.xl-center .xl-lottery-help .win-ranking {
+    width: 238px;
+}
+
+.xl-center .xl-lottery-help .win-ranking .ranking {
+    height: 44px;
+    line-height: 44px;
+    background-color: #19609f;
+    padding-left: 10px;
+    color: #fff;
+}
+
+.xl-center .xl-lottery-help .win-ranking .ranking-c {
+    border: 1px solid #ccc;
+    border-top: none;
+    font-size: 14px;
+}
+
+.xl-center .xl-lottery-help .win-ranking .ranking-c p {
+    line-height: 40px;
+}
+
+.xl-center .xl-lottery-help .win-ranking .ranking-c p span {
+    display: inline-block;
+    width: 50%;
+    color: #19609f;
+    text-align: center;
+}
+
+.xl-center .xl-lottery-help .win-ranking .ranking-c .ranking-ul-c {
+    overflow: hidden;
+    height: 317px;
+}
+
+.xl-center .xl-lottery-help .win-ranking .ranking-c .ranking-ul-c li {
+    line-height: 30px;
+}
+
+.xl-center .xl-lottery-help .win-ranking .ranking-c .ranking-ul-c li span {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+.xl-center .xl-lottery-help .win-ranking .ranking-c .ranking-ul-c li .text-color {
+    color: #19609f;
+}
+
+.xl-lottery-footer {
+    background-color: #332c2c;
+    color: #413d3d;
+}
+
+.xl-lottery-footer .footer-top {
+    font-weight: 900;
+}
+
+.xl-lottery-footer .footer-top a {
+    display: inline-block;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.xl-lottery-footer .footer-top a span {
+    font-size: 35px;
+    color: #19609f;
+    line-height: 30px;
+}
+
+.xl-lottery-footer .footer-top a div {
+    font-weight: 900;
+}
+
+.xl-lottery-footer .footer-top a div p:last-child {
+    font-size: 12px;
+    color: #413d3d;
+    text-align: center;
+    line-height: 5px;
+}
+
+.xl-lottery-footer .footer-top a:first-child {
+    margin-right: 495px;
+}
+
+.xl-lottery-footer .footer-top a:nth-child(2) {
+    margin-right: 220px;
+}
+
+.xl-lottery-footer .introduce {
+    font-size: 14px;
+}
+
+.xl-lottery-footer .introduce li {
+    width: 9%;
+    border-right: 1px solid #413d3d;
+}
+
+.xl-lottery-footer .introduce li a {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #413d3d;
+}
+
+.xl-lottery-footer .introduce li:nth-child(8) {
+    border: none;
+}
+
+.xl-lottery-footer .introduce li:last-child {
+    border: none;
+}
+
+.xl-lottery-footer .footer-ul-img {
+    width: 840px;
+    padding: 40px 0;
+    margin: 0 auto;
+}
+
+.xl-lottery-footer .footer-ul-img li {
+    width: 120px;
+    line-height: 40px;
+}
+
+.xl-lottery-footer .footer-ul-img li img {
+    vertical-align: middle;
+}
+
+.xl-lottery-footer .footer-text {
+    font-size: 12px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.xl-div-show {
+    display: block;
+}
+
+.xl-lottery-center-left::-webkit-scrollbar {
+    display: none;
+}
+
+.draw-notice-c::-webkit-scrollbar {
+    display: none;
+}
+
+.notice-div::-webkit-scrollbar {
+    display: none;
+}
+
+.swiper-button-next, .swiper-container-rtl .swiper-button-next {
+    right: 0;
+    display: none;
+}
+
+.swiper-button-prev, .swiper-container-rtl .swiper-button-prev {
+    left: 0;
+    display: none;
+}
+
+.ul2 {
+    height: auto;
+}
+
+/*# sourceMappingURL=index.css.map */

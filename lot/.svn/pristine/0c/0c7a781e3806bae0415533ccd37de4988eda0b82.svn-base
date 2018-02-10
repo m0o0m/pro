@@ -1,0 +1,309 @@
+
+<div class="page-header">
+    <p id="me-table-buttons">
+        <h1>
+           <a href="index">列表</a>
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                <{if isset($smarty.get.id)}>修改
+                <{else}>添加
+                <{/if}>
+            </small>
+        </h1>
+    </p>
+</div>
+
+<div class="isHide layui-layer-wrap" id="_form">
+    <div class="modal-body">
+        <form id="add-form" class="form-horizontal" >
+            <input id="id" name="id" type="hidden" value="<{if isset($item.id)}><{$item.id}><{/if}>">
+            <input id="act" name="act" type="hidden" value="<{if isset($item.id)}>update<{else}>insert<{/if}>">
+            <input id="info" name="info" type="hidden" value='<{if isset($item)}><{$item|json_encode}><{/if}>'>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 终端: </label>
+                    <div class="col-sm-9" id="_client_limit">
+                        <label>
+                            <input type="radio" name="client_limit" value="0" <{if !isset($item.client_limit) || $item.client_limit eq 0}> checked<{/if}>>
+                            <span class="lbl"> 不限制 </span>
+                        </label>
+                        <label>
+                            <input type="radio" name="client_limit" value="1" <{if isset($item.client_limit) && $item.client_limit eq 1}> checked<{/if}>>
+                            <span class="lbl"> 限制 </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="client_limit_container" <{if !isset($item.client_limit) || $item.client_limit eq 0}> style="display:none;"<{/if}>>
+                    <label class="col-sm-3 control-label">  </label>
+                    <div class="col-sm-9">
+                        <label>
+                            <input onclick="checkAllForm('client_limit_container')" type="checkbox" name="checkAll">
+                            <span class="lbl"> 全选&nbsp;&nbsp; </span>
+                        </label>
+                        <label>
+                            <input onclick="checkResetForm('<{if isset($item.clients)}><{','|implode:$item.clients}><{/if}>', 'clients')" type="button" value="重置" >
+                            <span class="lbl">  </span>
+                        </label>
+                        <br>
+                      <{foreach from=$data.show.clients item=val key=key}>
+                        <label>
+                            <input onclick="checkOneForm('client_limit_container')" type="checkbox" name="clients[]" value="<{$key}>" <{if isset($item.clients) && in_array($key,$item.clients)}> checked<{/if}>>
+                            <span class="lbl"> <{$val}>&nbsp;&nbsp; </span>
+                        </label>
+                      <{/foreach}>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 线路: </label>
+                    <div class="col-sm-9" id="_line_limit">
+                        <label>
+                            <input type="radio" name="line_limit" value="0" <{if !isset($item.line_limit) || $item.line_limit eq 0}> checked<{/if}>>
+                            <span class="lbl"> 不限制 </span>
+                        </label>
+                        <label>
+                            <input type="radio" name="line_limit" value="1" <{if isset($item.line_limit) && $item.line_limit eq 1}> checked<{/if}>>
+                            <span class="lbl"> 限制 </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="line_limit_container" <{if !isset($item.line_limit) || $item.line_limit eq 0}> style="display:none;"<{/if}>>
+                    <label class="col-sm-3 control-label">  </label>
+                    <div class="col-sm-9">
+                        <label>
+                            <input onclick="checkAllForm('line_limit_container')" type="checkbox" name="checkAll">
+                            <span class="lbl"> 全选&nbsp;&nbsp; </span>
+                        </label>
+                        <label>
+                            <input onclick="checkResetForm('<{if isset($item.lines)}><{','|implode:$item.lines}><{/if}>', 'lines')" type="button" value="重置" >
+                            <span class="lbl">  </span>
+                        </label>
+                        <br>
+                      <{foreach from=$data.show.lines item=val key=key}>
+                        <label>
+                            <input onclick="checkOneForm('line_limit_container')" type="checkbox" name="lines[]" value="<{$val.line_id}>" <{if isset($item.lines) && in_array($val.line_id,$item.lines)}> checked<{/if}>>
+                            <span class="lbl"> <{$val.line_id}>&nbsp;&nbsp; </span>
+                        </label>
+                      <{/foreach}>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 游戏: </label>
+                    <div class="col-sm-9" id="_game_limit">
+                        <label>
+                            <input type="radio" name="game_limit" value="0" <{if !isset($item.game_limit) || $item.game_limit eq 0}> checked<{/if}>>
+                            <span class="lbl"> 不限制 </span>
+                        </label>
+                        <label>
+                            <input type="radio" name="game_limit" value="1" <{if isset($item.game_limit) && $item.game_limit eq 1}> checked<{/if}>>
+                            <span class="lbl"> 限制 </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="game_limit_container" <{if !isset($item.game_limit) || $item.game_limit eq 0}> style="display:none;"<{/if}>>
+                    <label class="col-sm-3 control-label">  </label>
+                    <div class="col-sm-9">
+                        <label>
+                            <input onclick="checkAllForm('game_limit_container')" type="checkbox" name="checkAll">
+                            <span class="lbl"> 全选&nbsp;&nbsp; </span>
+                        </label>
+                        <label>
+                            <input onclick="checkResetForm('<{if isset($item.games)}><{','|implode:$item.games}><{/if}>', 'games')" type="button" value="重置" >
+                            <span class="lbl">  </span>
+                        </label>
+                        <br>
+                      <{foreach from=$data.show.games item=val key=key}>
+                        <label>
+                            <input onclick="checkOneForm('group_limit_container')" type="checkbox" name="games[]" value="<{$val.type}>" <{if isset($item.games) && in_array($val.type,$item.games)}> checked<{/if}>>
+                            <span class="lbl"> <{$val.name}>&nbsp;&nbsp; </span>
+                        </label>
+                      <{/foreach}>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 群组: </label>
+                    <div class="col-sm-9" id="_group_limit">
+                        <label>
+                            <input type="radio" name="group_limit" value="0" <{if !isset($item.group_limit) || $item.group_limit eq 0}> checked<{/if}>>
+                            <span class="lbl"> 不限制 </span>
+                        </label>
+                        <label>
+                            <input type="radio" name="group_limit" value="1" <{if isset($item.group_limit) && $item.group_limit eq 1}> checked<{/if}>>
+                            <span class="lbl"> 限制 </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="group_limit_container" <{if !isset($item.group_limit) || $item.group_limit eq 0}> style="display:none;"<{/if}>>
+                    <label class="col-sm-3 control-label">  </label>
+                    <div class="col-sm-9">
+                        <label>
+                            <input onclick="checkAllForm('group_limit_container')" type="checkbox" name="checkAll">
+                            <span class="lbl"> 全选&nbsp;&nbsp; </span>
+                        </label>
+                        <label>
+                            <input onclick="checkResetForm('<{if isset($item.groups)}><{','|implode:$item.groups}><{/if}>', 'groups')" type="button" value="重置" >
+                            <span class="lbl">  </span>
+                        </label>
+                        <br>
+                        <label>
+                            <input onclick="checkOneForm('group_limit_container')" type="checkbox" name="groups[]" value="1" <{if isset($item.groups) && in_array(1,$item.groups)}> checked<{/if}>>
+                            <span class="lbl"> group1&nbsp;&nbsp; </span>
+                        </label>
+                        <label>
+                            <input onclick="checkOneForm('group_limit_container')" type="checkbox" name="groups[]" value="2" <{if isset($item.groups) && in_array(2,$item.groups)}> checked<{/if}>>
+                            <span class="lbl"> group2&nbsp;&nbsp; </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 用户: </label>
+                    <div class="col-sm-9" id="_user_limit">
+                        <label>
+                            <input type="radio" name="user_limit" value="0" <{if !isset($item.user_limit) || $item.user_limit eq 0}> checked<{/if}>>
+                            <span class="lbl"> 不限制 </span>
+                        </label>
+                        <label>
+                            <input type="radio" name="user_limit" value="1" <{if isset($item.user_limit) && $item.user_limit eq 1}> checked<{/if}>>
+                            <span class="lbl"> 限制 </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="user_limit_container" <{if !isset($item.user_limit) || $item.user_limit eq 0}> style="display:none;"<{/if}>>
+                    <label class="col-sm-3 control-label">  </label>
+                    <div class="col-sm-9">
+                        <label>
+                            <input onclick="checkAllForm('user_limit_container')" type="checkbox" name="checkAll">
+                            <span class="lbl"> 全选&nbsp;&nbsp; </span>
+                        </label>
+                        <label>
+                            <input onclick="checkResetForm('<{if isset($item.users)}><{','|implode:$item.users}><{/if}>', 'users')" type="button" value="重置" >
+                            <span class="lbl">  </span>
+                        </label>
+                        <br>
+                        <label>
+                            <input onclick="checkOneForm('user_limit_container')" type="checkbox" name="users[]" value="1" <{if isset($item.users) && in_array(1,$item.users)}> checked<{/if}>>
+                            <span class="lbl"> uid1&nbsp;&nbsp; </span>
+                        </label>
+                        <label>
+                            <input onclick="checkOneForm('user_limit_container')" type="checkbox" name="users[]" value="2" <{if isset($item.users) && in_array(2,$item.users)}> checked<{/if}>>
+                            <span class="lbl"> uid2&nbsp;&nbsp; </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 发送时间: </label>
+                    <div class="col-sm-9">
+                        <input class="form-control " type="text" placeholder="请输入日期" id="_sendtime" name="sendtime" field="_form" value="<{if isset($item.sendtime)}><{$item.sendtime}><{/if}>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 标题: </label>
+                    <div class="col-sm-9">
+                        <input class="form-control " type="text" id="_title" name="title" field="_form" value="<{if isset($item.title)}><{$item.title}><{/if}>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 内容: </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control " id="_content" name="content" field="_form"><{if isset($item.content)}><{$item.content}><{/if}></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 备注: </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control " id="_remark" name="remark" field="_form"><{if isset($item.remark)}><{$item.remark}><{/if}></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <label>
+            <input id="formSubmit" type="submit" class="btn btn-info" value = "提交">
+        </label>
+    </div>
+</div>
+
+<script>
+    // 切换radio选项
+    $('[name$=_limit]').click(function(){
+        var fieldkey = $(this).attr('name');
+        var fieldval = $(this).val();
+        setRadioVal(fieldkey, fieldval);
+    });
+    function setRadioVal(fieldkey, fieldval){
+        if(fieldval == 1){
+            $('#' + fieldkey + '_container').show();
+        }else{
+            $('#' + fieldkey + '_container').hide();
+        }
+    }
+
+    // 选择全部
+    function checkAllForm(id){
+        if($('#' + id + ' input[name=checkAll]').is(':checked')){
+            $('#' + id + ' input[type=checkbox]').prop('checked',true);
+        }else{
+            $('#' + id + ' input[type=checkbox]').attr('checked',false);
+        }
+    }
+    // 选择一条
+    function checkOneForm(obj){
+        if(typeof obj != 'object') var obj = $('#' + obj);
+        var flag = false;
+        obj.find('input[type=checkbox][name!=checkAll]').each(function(index,obj){
+            if(!$(this).is(':checked')){
+                flag = true;
+            }
+        });
+        if(flag){
+            obj.find('input[name=checkAll]').prop('checked',false);
+        }else{
+            obj.find('input[name=checkAll]').prop('checked',true);
+        }
+    }
+    // 重置checkbox选项
+    function checkResetForm(fieldval, fieldkey){
+        setCheckBoxVal(fieldkey, fieldval);
+    }
+    function setCheckBoxVal(fieldkey, fieldval){
+        // if(fieldval){
+            var obj = $('#' + fieldkey.substring(0,fieldkey.length-1) + '_limit_container');
+            obj.find('[type=checkbox]').removeAttr('checked');
+            var vals = fieldval.toString().split(',');
+            for(x in vals){
+                obj.find('[type=checkbox][value="' + vals[x] + '"]').prop('checked',true);
+            }
+
+            checkOneForm(obj);
+        // }
+    }
+
+// ------------------ 编辑 ------------------------------------
+    $('#formSubmit').click(function(){
+        $.ajax({
+            type: 'post',
+            url: 'query',
+            data: $('#add-form').serialize(),
+            dataType:'json',
+            success: function(result,textStatus){
+                if(result.ErrorCode == 2){
+                    layer.alert(result.ErrorMsg, {icon: 0});
+                    return;
+                }
+                layer.alert(result.ErrorMsg, {icon: 1},function(){
+                    location = 'index?tmp';
+                });
+            }
+        });
+    });
+
+// ------------------ 控件 ------------------------------------
+    //时间控件
+    var send = {
+        elem: '#_sendtime',
+        format: 'YYYY-MM-DD hh:mm:ss',
+        istime: true,
+        istoday: true,
+    }
+    laydate(send);
+</script>

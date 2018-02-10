@@ -1,0 +1,119 @@
+@import "./function.scss";
+
+.record {
+  // margin-top: 75px;
+  margin-left: 10px;
+
+  .dates {
+    // float: left;
+    margin-top: 10px;
+    text-align: left;
+    // position: fixed;
+    // top: 135px;
+    // z-index: 888;
+    span {
+      font-size: 14px;
+      font-weight: bold;
+      .titles {
+        margin: 0 5px;
+      }
+    }
+  }
+  .table {
+    .thend {
+      margin-top: 10px;
+      width: 900px;
+      line-height: 50px;
+      height: 50px;
+      background-color: $Button_color;
+      li {
+        font-size: 14px;
+        color: #fff;
+        float: left;
+        width: 100px;
+      }
+    }
+    .forms {
+      width: 900px;
+      border-left: 1px solid $border_color;
+      border-right: 1px solid $border_color;
+      border-bottom: 1px solid $border_color;
+      li {
+        width: 99px;
+        float: left;
+        line-height: 60px;
+        height: 60px;
+        word-wrap: break-word;
+        overflow: hidden;
+      }
+
+      li:nth-child(1), li:nth-child(2) {
+        padding-top: 10px;
+        line-height: 20px;
+      }
+      .input_nameTxt {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 99px;
+      }
+    }
+  }
+}
+
+.button_color {
+  background: $Button_color;
+}
+
+.styleBg {
+  background: $Button_color;
+  border-radius: 10px 10px 0 0px;
+  color: #fff;
+}
+
+.footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  .top_txt {
+    padding-bottom: 10px;
+    text-align: left;
+  }
+  // .footerUl{
+  //   text-align: left;
+  // }
+  .txt {
+    height: 32px;
+    line-height: 32px;
+    margin-right: 14px;
+  }
+  .inputTxt {
+    height: 30px;
+    width: 50px;;
+    margin-right: 14px;
+    padding-bottom: 0px;
+    line-height: 30px;
+    text-align: center;
+    color: #666;
+    font-family: Arial;
+    border: 1px solid #dddee1;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+  }
+  .inputTxt:hover {
+    border-color: #2d8cf0;
+  }
+}
+
+.ulfor {
+  li {
+    height: 60px;
+    line-height: 60px;
+    color: red;
+    border: 1px solid #eee;
+  }
+}
+
+.red {
+  color: red;
+}

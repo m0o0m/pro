@@ -1,0 +1,163 @@
+@import "./function.scss";
+
+.eleven_just {
+  .top {
+    background-color: #eeee;
+    float: left;
+    margin-left: 20px;
+    .top_one {
+      width: 350px;
+      display: inline-block;
+      padding: 10px
+    }
+    .top_two {
+      width: 530px;
+      display: inline-block;
+      padding: 10px
+    }
+  }
+  .e_j_box {
+    width: 912px;
+    // padding-top: 7px;
+    padding-left: 20px;
+    padding-right: 12px;
+    overflow: hidden;
+    ul {
+      border-top: 1px solid $border_color;
+      border-left: 1px solid $border_color;
+      width: 176px;
+      float: left;
+      .thend {
+        height: 40px;
+        line-height: 40px;
+        background-color: #eee;
+      }
+      li {
+        border-bottom: 1px solid $border_color;
+      }
+      .num {
+        font-weight: 700;
+        height: 40px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        line-height: 30px;
+        cursor: pointer;
+        color: #fff;
+        background-size: 28px;
+        font-size: 14px;
+        .ball {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          border-radius: 30px;
+          line-height: 30px;
+          background: $ball;
+          // color: #fff;
+        }
+      }
+    }
+    ul:last-child {
+      border-right: 1px solid $border_color;
+    }
+  }
+  .allowed {
+    cursor: not-allowed !important;
+    background-color: #f9f7f4 !important;
+  }
+  .footer1 {
+    width: 920px;
+    float: left;
+    margin-top: 10px;
+    padding-right: 20px;
+    // padding-bottom: 45px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .img {
+      margin-left: 136px;
+      float: left;
+      span {
+        //margin-left: 30px;
+        //height: 60px;
+        float: left;
+        display: block;
+        cursor: pointer;
+      }
+      .s1 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat 0 0px;
+        background-size: 368px;
+      }
+      .s2 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -64px 0px;
+        background-size: 368px;
+      }
+      .s3 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -128px 0px;
+        background-size: 368px;
+      }
+      .s4 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -192px 0px;
+        background-size: 368px;
+      }
+      .s5 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -256px 0px;
+        background-size: 368px;
+      }
+      .s6 {
+        height: 60px;
+        width: 73px;
+        background: url("../../assets/img/Chips.png") no-repeat -320px 0px;
+        background-size: 368px;
+      }
+    }
+    .one {
+      width: 160px;
+      float: left;
+      background-color: #eee;
+      padding: 5px;
+      border-radius: 10px;
+      margin-top: 12px;
+      border: none;
+      span {
+        color: $bg_color;
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      float: right;
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+}
+
+.styleclect {
+  background-color: $bg_select !important;
+}
+

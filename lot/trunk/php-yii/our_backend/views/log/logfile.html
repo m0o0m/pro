@@ -1,0 +1,145 @@
+<style>
+    #datalist .arr_one{float: left;margin: 3px;padding: 2px;border: 1px #ddd solid;}
+    #datalist .arr_one{padding: 2px;border: 1px #ddd solid;}
+</style>
+
+<div class="row">
+    <div class="page-header col-xs-12">
+        <div class="table-responsive">
+            <table id="datalist" class="table  table-bordered table-hover">
+                <thead><tr><th colspan="7">当前路径:<{$path}></th></tr></thead><tr/>
+                <tr>
+                    <{foreach from=$data item=v key=k}>
+                    <td><{$v}></td>
+                    <{/foreach}>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
+</div>
+<div id="showcontent" class="layer-photos" display="none">
+    <div id="content"></div>
+    <div id="showpage">
+        <div id="page" style=""></div>
+        <input type="hidden" name="f_name" id="f_name" />
+        <input type="hidden" name="f_page" id="f_page" />
+    </div>
+</div>
+<script>
+    //进入下级目录
+    function getmore(type, obj) {
+        var name = obj.attributes.rel.value;
+        var data = 'type=' + type + '&basename=' + name + '&data_type=ajax';
+        $('#f_name').val(name);//路径
+        todo(data);
+    }
+    //返回上级目录
+    function goback(obj) {
+        var name = obj.attributes.rel.value;
+        var data = 'type=dir&basename=' + name + '&data_type=ajax';
+        todo(data);
+    }
+    //处理操作
+    function todo(data) {
+        var url = 'logfile?'
+        doajax(url, data, callback);
+
+    }
+    var callback = function (res) {
+        layer.close(index);
+        if (res.ErrorCode == 1) {
+            var arr = res.ErrorMsg;
+            var length = arr.length;
+            var html = '';
+            var beforedir = ' <a href="javascript:void(0);" onclick="goback(this)"; rel="' + res.beforePath + '">   点击此处返回上级目录</a>';
+            if (res.is_base == '.') {
+                html = '<thead><tr><th colspan="7">当前路径：' + res.path + '</th></tr>' + '</thead><tr/>';
+            } else {
+                html = '<thead><tr><th colspan="7">当前路径：' + res.path + beforedir + '</th></tr>' + '</thead><tr/>';
+
+            }
+
+            for (var i = 0; i < length; i++) {
+                if (i % 7 == 0 && i != 0) {
+                    html += '</tr>' + '<tr>' + '<td>' + arr[i] + '</td>'
+                } else {
+                    html += '<td>' + arr[i] + '</td>';
+                }
+            }
+            html += '</tr>';
+            $('#datalist').html('').html(html);
+        } else if (res.ErrorCode == 2) {
+            layer.alert(res.ErrorMsg, {icon: 0});
+            // $('#datalist').html('').html('没有目录和文件');
+        } else if (res.ErrorCode == 3) { //读取文件内容
+            $('#f_page').val(res.page);//页码
+            var up = '<a href="javascript:changepage(1);"> 上一页 </a>';
+            var down = '<a href="javascript:changepage(2);"> 下一页 </a>';
+            var go = ' 跳到第<input type="text" name="gopage" id="gopage" value="" style="width:50px;">页 <input type="button" onclick="javascript:changepage(3);" value="跳转" />';
+            $('#content').html('').html(res.ErrorMsg);
+            $('#page').html('').html('第' + res.page + '页  总页数' + res.totalpage + '页 ' + up + down + go);
+            layer.closeAll('page');
+            layer.open({
+                title: '日志内容  文件大小: ' + res.filesize,
+                type: 1,
+                skin: '', //加上边框
+                area: ['600px', '540px'], //宽高
+                content: $('#showcontent')
+                        // content: res.ErrorMsg
+            });
+            $('#content').find('p').css({'margin-left': '20px'});
+            $('#showpage').css({'margin': '50px 75px'});
+
+        } else {
+            layer.alert("出错啦！", {icon: 0});
+        }
+    }
+
+    //分页
+    function changepage(type) {
+        var filename = $('#f_name').val();
+        var page = $('#f_page').val();
+        var gopage = $('#gopage').val();
+        page = parseInt(page);
+        gopage = parseInt(gopage);
+        if (type == 1) {//上一页
+            page -= 1;
+        } else if (type == 2) {//下一页
+            page += 1;
+        } else if (type == 3) {//跳转页
+            if (gopage != '') {
+                page = gopage;
+            } else {
+                layer.alert('请输入页码');
+                return;
+            }
+        }
+        var data = 'type=file&basename=' + filename + '&data_type=ajax&page=' + page;
+
+        todo(data, filename);
+
+    }
+
+    function doajax(url, data, callback) {
+        $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+                callback(res);
+            }
+        });
+    }
+</script>

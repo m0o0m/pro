@@ -1,0 +1,180 @@
+
+.flt{
+	float: left;
+}
+.frt{
+	float: right;
+}
+.clr{
+	clear: both;
+}
+.zhu-modal{position: fixed;width: 100%;left:0;top: 0;bottom: 0;background: rgba(0,0,0,0.6);z-index: 10000;}
+.zhu-modalPanel{
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%,-80%);
+	-ms-transform: translate(-50%,-80%);
+	-moz-transform: translate(-50%,-80%);
+	-webkit-transform: translate(-50%,-80%);
+	-o-transform: translate(-50%,-80%);
+	border-radius: 5px;
+	border:1px solid #efefef;
+	background: #efefef;
+	overflow: hidden;
+	box-shadow: 1px 1px 70px rgba(0,0,0,0.75);
+	min-width: 280px;
+}
+.zhu-modalPanel.login{
+	width: 380px;
+}
+.zhu-modalHead{
+	height: 50px;
+	background: #271313;
+	line-height: 50px;
+	font:20px/46px Microsoft YaHei;
+	padding:0 20px;
+	overflow: hidden;
+	text-shadow: 0 0 7px #000;
+}
+.zhu-modalBody{
+	padding: 20px 25px 0px 25px;
+	max-height: 300px;
+	overflow-y:auto;
+	color: #333;
+}
+.zhu-modalBody p{
+	font: 16px/22px Microsoft YaHei;
+}
+.zhu-modalFoot{
+	background: #efefef;
+	padding:8px 10px;
+	position: relative;
+}
+.zhu-modalFoot:before{
+	content: "";
+	display: block;
+	position: absolute;
+	top: -2px;
+	left: 0;
+	height: 1px;
+	width: 100%;
+	background:#efefef;
+}
+.zhu-enterBtn,
+.zhu-cancelBtn{
+	text-decoration: none;
+	display: block;
+	border-radius: 5px;
+	height: 30px;
+	font:14px/30px Microsoft YaHei;
+	width: 90px;
+	text-align: center;
+	margin:0 5px;
+	overflow: hidden;
+}
+.zhu-enterBtn:hover,
+.zhu-cancelBtn:hover,
+.zhu-enterBtn:focus,
+.zhu-cancelBtn:focus
+{
+	color: #fff;
+}
+.zhu-enterBtn{
+	background: #271313;
+}
+.zhu-enterBtn span{
+	position: relative;
+	z-index: 3;
+}
+.zhu-cancelBtn{
+	background: #999;
+}
+.zhu-modalPanel.login .zhu-registLink{
+	font-size:12px; 
+	text-decoration: none;
+}
+.zhu-modalPanel.login .zhu-registLink:hover{
+	text-decoration: underline;
+}
+.zhu-modalPanel.login label{
+	display: block;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+}
+.zhu-modalPanel.login label span{
+	display: inline-block;
+	width:30%;text-align: right;
+	color:#666;
+	font:14px/30px Microsoft YaHei;
+	padding-right: 20px;
+	box-sizing: border-box;
+}
+.zhu-modalPanel.login label input[type="text"],
+.zhu-modalPanel.login label input[type="password"]{
+	display: inline-block;
+	width:70%;color:#666;
+	font:14px/30px Microsoft YaHei;
+	padding:0 10px;
+	border-radius: 3px;
+	border:1px solid #ddd;
+	vertical-align: middle;
+	box-sizing: border-box;
+}
+.zhu-modalPanel.login label input.zhu-inputW40{
+	width: 40%;
+}
+.zhu-modalPanel.login label input.zhu-inputW40~.zhu-codeImg{
+	display: inline-block;
+	height: 30px;
+	width: 30%;
+	padding-left: 10px;
+	vertical-align: middle;
+	box-sizing: border-box;
+}
+.zhu-modalPanel.login label input.zhu-inputW40~.zhu-codeImg img{
+	width: 100%;
+	height: 100%;
+}
+.zhu-modalPanel .login-box{
+	padding:0 25px;
+}
+.zhu-transparent{
+	filter:alpha(opacity=0);
+	opacity: 0;
+	-webkit-opacity: 0;
+	-o-opacity: 0;
+	-moz-opacity: 0;
+	-ms-opacity: 0;
+	pointer-events: none;
+}
+.zhu-amd{
+	transition:all 1s;
+	-webkit-transition:all 1s;
+	-o-transition:all 1s;
+	-moz-transition:all 1s;
+	-ms-transition:all 1s;
+}
+.zhu-modalPanel.zhu-amd{
+	transition:all 0.7s;
+	-webkit-transition:all 0.7s;
+	-o-transition:all 0.7s;
+	-moz-transition:all 0.7s;
+	-ms-transition:all 0.7s;
+}
+.zhu-transparent .zhu-modalPanel{
+	top:30%;
+}
+
+.zhu-modalHead{
+	color: #fff;
+}
+.zhu-enterBtn{
+	color: #fff;
+}
+.zhu-cancelBtn{
+	color: #fff;
+}
+.zhu-registLink{
+	color: #DA6946;
+}

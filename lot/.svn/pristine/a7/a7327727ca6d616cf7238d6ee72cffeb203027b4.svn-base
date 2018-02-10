@@ -1,0 +1,529 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-02-01 19:46:29
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/stat/chart.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a72fe15723df6_66953271',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '4f316842cf5432020c5bc8693ff6c0ff93530d46' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/stat/chart.html',
+      1 => 1517446384,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a72fe15723df6_66953271 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+<style>#search-form label{margin-right:10px}</style>
+<div class="page-header col-xs-12">
+    <form id="search-form">
+        <!-- <label> 线路:
+            <select type="select" name="line_id" id="line_id">
+                <option value="">全部</option>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value['show']['lines'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+"<?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+$_prefixVariable1=ob_get_clean();
+if (isset($_GET['line_id']) && $_GET['line_id'] == $_prefixVariable1) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+</option>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+            </select>
+        </label> -->
+        <!-- <label> 代理帐号:
+            <input type="text" placeholder="请输入代理账号" name="agentname" id="agentname" value="<?php if (isset($_GET['agentname'])) {
+echo $_GET['agentname'];
+}?>">
+        </label> -->
+        <!-- <label> 会员帐号:
+            <input type="text" placeholder="请输入会员账号" name="username" id="username" value="<?php if (isset($_GET['username'])) {
+echo $_GET['username'];
+}?>">
+        </label> -->
+        <label> 彩票种类:
+            <select type="select" name="fc_type" id="fc_type">
+                <option value="">全部</option>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value['show']['games'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+"<?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+$_prefixVariable2=ob_get_clean();
+if (isset($_GET['fc_type']) && $_GET['fc_type'] == $_prefixVariable2) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</option>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+            </select>
+        </label>
+        <!-- <br> -->
+        <label for=""> 日期:
+            <input class="laydate-icon" type="text" placeholder="请输入日期" name="starttime" id="starttime" value="<?php if (isset($_GET['starttime'])) {
+echo $_GET['starttime'];
+}?>">
+            ~
+            <input class="laydate-icon" type="text" placeholder="请输入日期" name="endtime" id="endtime" value="<?php if (isset($_GET['endtime'])) {
+echo $_GET['endtime'];
+}?>">
+        </label>
+        <label> 显示类型:
+            <select type="select" name="display" id="display">
+                <!-- <option value="1"<?php if (isset($_GET['display']) && $_GET['display'] == '1') {?>selected<?php }?>>线路</option> -->
+                <option value="2"<?php if (isset($_GET['display']) && $_GET['display'] == '2') {?>selected<?php }?>>彩种</option>
+                <option value="3"<?php if (isset($_GET['display']) && $_GET['display'] == '3') {?>selected<?php }?>>代理</option>
+                <!-- <option value="4"<?php if (isset($_GET['display']) && $_GET['display'] == '4') {?>selected<?php }?>>会员</option> -->
+            </select>
+        </label>
+        <label> 图表类型:
+            <select type="select" name="chart_type" id="chart_type">
+                <option value="column"<?php if (isset($_GET['chart_type']) && $_GET['chart_type'] == 'column') {?>selected<?php }?>>柱状图</option>
+                <?php if (isset($_GET['chart_type']) && $_GET['chart_type'] == 'bar') {?><option value="bar"<?php if (isset($_GET['chart_type']) && $_GET['chart_type'] == 'bar') {?>selected<?php }?>>柱状图-纵向</option><?php }?>
+                <option value="pie"<?php if (isset($_GET['chart_type']) && $_GET['chart_type'] == 'pie') {?>selected<?php }?>>饼状图</option>
+            </select>
+        </label>
+        <label>
+            <input type="button" class="btn btn-sm btn-success" id="search" value="搜索"/>
+        </label>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+
+                <?php echo '<script'; ?>
+ src="<?php echo Yii::getAlias('@js');?>
+/pack/hcharts/highcharts.js"><?php echo '</script'; ?>
+>
+                <!-- https://img.hcharts.cn/highcharts/modules/exporting.js -->
+                <!-- https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js -->
+                <!-- <?php echo '<script'; ?>
+ src="<?php echo Yii::getAlias('@js');?>
+/pack/hcharts/exporting.js"><?php echo '</script'; ?>
+> --><!-- 打印图表 -->
+                <!-- <?php echo '<script'; ?>
+ src="<?php echo Yii::getAlias('@js');?>
+/pack/hcharts/highcharts-zh_CN.js"><?php echo '</script'; ?>
+> -->
+                <?php if (empty($_smarty_tpl->tpl_vars['chart']->value)) {?>
+                    <center><div style="margin-top:20px;font-size:30px;">抱歉,暂无数据</div></center>
+                <?php } else { ?>
+                <style>
+                    #chart{
+                        overflow-x:scroll;
+                    }
+                    #chart_container{
+                        min-width:100%;
+                        min-height:500px;
+                        <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['width'])) {?>width:<?php echo $_smarty_tpl->tpl_vars['chart']->value['width'];?>
+px;<?php }?>
+                        <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['height'])) {?>height:<?php echo $_smarty_tpl->tpl_vars['chart']->value['height'];?>
+px;<?php }?>
+                    }
+                    [id^=chart_pie_container]{
+                        float:left;
+                        width:50%;
+                        margin-bottom:60px;
+                    }
+                </style>
+                <div id="chart"><div id="chart_container"></div></div>
+                <div id="chart_pie_container1"></div>
+                <div id="chart_pie_container2"></div>
+                <div id="chart_pie_container3"></div>
+                <div id="chart_pie_container4"></div>
+                <div id="chart_pie_container5"></div>
+                <div id="chart_pie_container6"></div>
+                <!-- <div id="chart_pie_container"></div> -->
+                <?php echo '<script'; ?>
+>
+                    _hcharts('#chart_container');
+                    pie_hcharts('#chart_pie_container');
+                    function _hcharts(id) {
+                        $(id).highcharts({
+                            chart: {
+                                type: '<?php if (isset($_GET['chart_type'])) {
+echo $_GET['chart_type'];
+}?>'
+                            },
+                            title: {
+                                text: '<?php if (isset($_smarty_tpl->tpl_vars['chart']->value['title'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['title'];
+}?>'
+                            },
+                            subtitle: {
+                                text: '<?php if (isset($_smarty_tpl->tpl_vars['chart']->value['subtitle'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['subtitle'];
+}?>'
+                            },
+                            xAxis: {
+                                categories: [// 横坐标 根据什么分类
+                                    <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['xaxis_categories'])) {?>
+                                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['chart']->value['xaxis_categories'], 'v', false, 'k', 'foo', array (
+  'iteration' => true,
+  'index' => true,
+));
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration']++;
+$_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index']++;
+?>
+                                            '<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+'
+                                        <?php if ((isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration'] : null) < count($_smarty_tpl->tpl_vars['chart']->value['xaxis_categories'])) {?>,<?php }?>
+                                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                                    <?php }?>],
+                                title: {
+                                    text: null
+                                }
+                            },
+                            yAxis: [{// 纵坐标栏目单位
+                                title:{
+                                    text:'金额(元)',
+                                    align: 'high',
+                                    rotation: 0
+                                },
+                                opposite:false
+                            },{
+                                title:{
+                                    text:'笔数',
+                                    align: 'high',
+                                    rotation: 0
+                                },
+                                opposite:true
+                            }],
+                            tooltip: {// 提示/单位
+                                headerFormat: '<p style="font-size:16px;font-weight:bold;">{point.key}</p><table>',
+                                // pointFormat: 
+                                //     '<tr>' +
+                                //         '<td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                //         '<td style="padding:0"><b>{point.y:.2f} <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix'];
+}?></b></td>' +
+                                //     '</tr>',
+                                footerFormat: '</table>',
+                                shared: true,
+                                useHTML: true
+                            },
+                            plotOptions: {
+                                <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['series_type'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['series_type'];
+}?>: {
+                                    dataLabels: {
+                                        enabled: true,
+                                        allowOverlap: true,
+                                      <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['series']['bet']['data']) && count($_smarty_tpl->tpl_vars['chart']->value['series']['bet']['data']) > 3) {?>
+                                        <?php if (isset($_GET['chart_type']) && $_GET['chart_type'] != 'bar') {?>
+                                            rotation: 270 // 横坐标分类小于三种才显示纵坐标数值
+                                        <?php }?>
+                                      <?php }?>
+                                    }
+                                }
+                            },
+                            legend: {// 统计栏目位置
+                                align: 'center',
+                                verticalAlign: 'bottom',
+                                x: 0,
+                                y: 0,
+                                // floating: true,
+                                borderWidth: 0
+                            },
+                            credits: {// 官网链接
+                                enabled: false
+                            },
+                            series: [
+                            <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['series'])) {?>
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['chart']->value['series'], 'v', false, 'k', 'foo', array (
+  'iteration' => true,
+  'index' => true,
+));
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration']++;
+$_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index']++;
+?>{
+                                    type: '<?php if (isset($_smarty_tpl->tpl_vars['chart']->value['series_type'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['series_type'];
+}?>',
+                                    name: '<?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+',
+                                    data: [
+                                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v']->value['data'], 'v2', false, 'k2', 'foo2', array (
+  'iteration' => true,
+));
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k2']->value => $_smarty_tpl->tpl_vars['v2']->value) {
+$_smarty_tpl->tpl_vars['__smarty_foreach_foo2']->value['iteration']++;
+?>
+                                        ['<?php echo $_smarty_tpl->tpl_vars['k2']->value;?>
+',<?php echo $_smarty_tpl->tpl_vars['v2']->value;?>
+]
+                                        <?php if ((isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo2']->value['iteration']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo2']->value['iteration'] : null) < count($_smarty_tpl->tpl_vars['v']->value['data'])) {?>,<?php }?>
+                                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                                    ],
+                                    yAxis: <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index'] : null)%2;?>
+,
+                                    <?php if ((isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index'] : null)%2 == 0) {?>
+                                    tooltip: {
+                                        valuePrefix: '￥',
+                                        valueSuffix: ' <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix'];
+}?>'
+                                    }
+                                    <?php } else { ?>
+                                    tooltip: {
+                                        valueSuffix: ' <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix2'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix2'];
+}?>'
+                                    }
+                                    <?php }?>
+                                }<?php if ((isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration'] : null) < count($_smarty_tpl->tpl_vars['chart']->value['series'])) {?>,<?php }?>
+                                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                            <?php }?>]
+                        });
+                    };
+                    function pie_hcharts(id) {
+                        <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['series'])) {?>
+                            <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['chart']->value['series'], 'v', false, 'k', 'foo', array (
+  'iteration' => true,
+  'index' => true,
+));
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration']++;
+$_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index']++;
+?>
+                        $(id + <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['iteration'] : null);?>
+).highcharts({
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false
+                            },
+                            title: {
+                                text: '<?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+ 占比图'
+                            },
+                            subtitle: {
+                                text: '<?php if (isset($_smarty_tpl->tpl_vars['chart']->value['subtitle'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['subtitle'];
+}?>'
+                            },
+                            tooltip: {
+                                headerFormat: '{series.name}<br>',
+                                pointFormat: '{point.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.y} ({point.percentage:.1f}%)',
+                                        style: {
+                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                        }
+                                    }
+                                }
+                            },
+                            credits: {// 官网链接
+                                enabled: false
+                            },
+                            series: [{
+                                type: 'pie',
+                                name: '<?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+',
+                                data: [
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v']->value['data'], 'v2', false, 'k2', 'foo2', array (
+  'iteration' => true,
+));
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k2']->value => $_smarty_tpl->tpl_vars['v2']->value) {
+$_smarty_tpl->tpl_vars['__smarty_foreach_foo2']->value['iteration']++;
+?>
+                                    ['<?php echo $_smarty_tpl->tpl_vars['k2']->value;?>
+',<?php echo $_smarty_tpl->tpl_vars['v2']->value;?>
+]
+                                    <?php if ((isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo2']->value['iteration']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo2']->value['iteration'] : null) < count($_smarty_tpl->tpl_vars['v']->value['data'])) {?>,<?php }?>
+                                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                                ],
+                                yAxis: <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index'] : null)%2;?>
+,
+                                <?php if ((isset($_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_foreach_foo']->value['index'] : null)%2 == 0) {?>
+                                tooltip: {
+                                    valueSuffix: ' <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix'];
+}?>'
+                                }
+                                <?php } else { ?>
+                                tooltip: {
+                                    valueSuffix: ' <?php if (isset($_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix2'])) {
+echo $_smarty_tpl->tpl_vars['chart']->value['tooltip_valuesuffix2'];
+}?>'
+                                }
+                                <?php }?>
+                            }]
+                        });
+                            <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                        <?php }?>
+                    };
+                <?php echo '</script'; ?>
+>
+                <?php }?>
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<?php echo '<script'; ?>
+>
+    // pjax局部加载列表
+    function search() {
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: '?',
+            container: '#container'
+        });
+    }
+    // 搜索
+    $('#search').click(function () {
+        search();
+    });
+    // 切换
+    $('#display,#line_id,#fc_type').change(function () {
+        search();
+    });
+    // 柱状图 饼状图 切换 不刷新
+    change_chart('<?php if (isset($_GET['chart_type'])) {
+echo $_GET['chart_type'];
+}?>');
+    $('#chart_type').change(function () {
+        change_chart($(this).val(), 1);
+    });
+    function change_chart(val, replace) {
+        var title = '';
+        var url = url_arg_replace('chart_type', val, location.href);
+        var state = {
+            title: title,
+            url: url,
+            container: '#container'
+        };
+        if (replace) history.pushState(state,title,url);
+        switch(val){
+            case 'column':
+            case 'bar':
+                $('[id^=chart_pie_container]').hide();
+                $('#chart_container').show();
+                break;
+            case 'pie':
+                $('[id^=chart_pie_container]').show();
+                $('#chart_container').hide();
+                break;
+        }
+    };
+    // 替换URL参数
+    function url_arg_replace(arg,replace,url){
+        var pattern=arg+'=([^&]*)';
+        var replaceText=arg+'='+replace;
+        if(url.match(pattern)){
+            var tmp='/('+ arg+'=)([^&]*)/gi';
+            tmp=url.replace(eval(tmp),replaceText);
+            return tmp;
+        }else{
+            if(url.match('[\?]')){
+                return url+'&'+replaceText;
+            }else{
+                return url+'?'+replaceText;
+            }
+        }
+        return url+'\n'+arg+'\n'+replace;
+    }
+
+    //时间控件
+    var starttime = {
+        elem: '#starttime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            endtime.min = datas;
+        }
+    };
+    laydate(starttime);
+    var endtime = {
+        elem: '#endtime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true
+    };
+    laydate(endtime);
+
+    <?php if (!isset($_GET['starttime'])) {?>
+        $('#starttime').val(laydate.now(0, 'YYYY-MM-DD'));
+    <?php }?>
+    <?php if (!isset($_GET['endtime'])) {?>
+        $('#endtime').val(laydate.now(0, 'YYYY-MM-DD'));
+    <?php }
+echo '</script'; ?>
+>
+<?php }
+}

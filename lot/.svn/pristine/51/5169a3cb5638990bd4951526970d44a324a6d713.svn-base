@@ -1,0 +1,182 @@
+<style>
+    .select{width:20%;float:left;margin-right:10px}
+    #sh-select{display: none}
+    #money{width:20%}
+</style>
+
+<div class="page-header">
+    <{if $smarty.get.type=='user_sh'}>
+    <h1>
+         <a href="javascript:jump('shindex');" id="agent_index">股东列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            股东密码修改
+        </small>
+    </h1>
+    <{/if}>
+    <{if $smarty.get.type=='user_ua'}>
+    <h1>
+         <a href="javascript:jump('uaindex');" id="agent_index">总代列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            总代密码修改
+        </small>
+    </h1>
+    <{/if}>
+    <{if $smarty.get.type=='user_agent'}>
+    <h1>
+         <a href="javascript:jump('index');" id="agent_index">代理列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            代理密码修改
+        </small>
+    </h1>
+    <{/if}>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" role="form"  id="pwd-form">
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">账号</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled='disabled' value="<{$data['login_user']}>" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">昵称</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled='disabled' value="<{$data['login_name']}>" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">密码</label>
+                <div class="col-sm-9">
+                    <input type="password" id='pwd' value="" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-2">确认密码</label>
+                <div class="col-sm-9">
+                    <input type="password" id='confPwd' value=""  class="col-xs-10 col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="button" id='save'>
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        提交
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="button" id='reset' >
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="hr hr-18 dotted hr-double"></div>
+    </div>
+</div>
+
+<script>
+
+    //重置
+    $('#reset').click(function () {
+        $('#pwd-form').find('input').val("");
+    })
+
+    //提交
+    $('#save').click(function () {
+        var agent_id = "<{$smarty.get.id}>";
+        var type = "<{$smarty.get.type}>";
+        var pwd = $.trim($('#pwd').val());
+        var conf_pwd = $.trim($('#confPwd').val());
+
+        var error = false;
+        var msg = '';
+
+        if (pwd == '') {
+            error = true;
+            msg = '密码不能为空!';
+        } else if (pwd.length < 6 || pwd.length > 20) {
+            error = true;
+            msg = '密码长度只能为6-20位之间!';
+        } else if (!/^[A-Za-z0-9_]*$/g.test(pwd)) {
+            error = true;
+            msg = '密码只能为数字字母下划线!';
+        } else if (conf_pwd == '') {
+            error = true;
+            msg = '确认密码不能为空!';
+        } else if (conf_pwd.length < 6 || conf_pwd.length > 20) {
+            error = true;
+            msg = '确认密码长度只能为6-20位之间!';
+        } else if (!/^[A-Za-z0-9_]*$/g.test(conf_pwd)) {
+            error = true;
+            msg = '确认密码只能为数字字母下划线!';
+        } else if (conf_pwd != pwd) {
+            error = true;
+            msg = '密码和确认密码不一致!';
+        } else {
+            error = false;
+            msg = '';
+        }
+
+        if (error) {
+            layer.alert(msg, {icon: 2});
+            return false;
+        }
+
+
+        var data = {
+            type:type,
+            pwd: pwd,
+            conf_pwd: conf_pwd,
+            agent_id: agent_id
+        };
+        var lurl;
+        if(type == 'user_agent'){
+            lurl = '/agent/index';
+        }else if(type == 'user_ua'){
+            lurl = '/agent/uaindex';
+        }else if(type == 'user_sh'){
+            lurl = '/agent/shindex';
+        }
+        $.ajax({
+            type: "post",
+            url: '/agent/savepwd',
+            data: data,
+            dataType: 'json',
+            error: function () {
+                layer.alert('网络异常,请稍后再试!', {icon: 2});
+            },
+            success: function (res) {
+                if (res.code == 400) {
+                    layer.alert(res.msg, {icon: 0});
+                } else if(res.ErrorCode == 2){
+                    layer.close(load);
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                } else if (res.code == 200) {
+                    layer.alert(res.msg, {icon: 1},function(){
+                        window.location.href = lurl;
+                    });
+                }
+            }
+        });
+
+
+
+    })
+    function jump(url){
+         $.pjax({
+            method: 'get',
+            url: '/agent/' + url,
+            container: '#container'
+        });
+    }
+
+</script>

@@ -1,0 +1,93 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('Membership details')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding" >
+                            <div class="table-responsive" >
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 control-label col-xs-4 reltop" style="font-size: 15px">会员</label>
+                                    <div class="col-md-3 form-group col-xs-8" style="margin-top: 4px;">
+                                        <div class="form-control" style="border: none">
+                                            <b>日期:</b>
+                                            <b >2017-10-09~2017-10-11</b>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 control-label col-xs-4 reltop" style="font-size:10px; margin-top: 8px"><b>投注类型</b>:</label>
+                                    <div class="col-md-1 form-group col-xs-8" style="margin-top: 8px;">
+                                        <div class="form-control" style="border: none">
+                                            <b>全部</b>
+                                            <b ></b>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 control-label col-xs-4 reltop" style="font-size:10px; margin-top: 8px"><b>投注方式</b>:</label>
+                                    <div class="col-md-1 form-group col-xs-5" style="margin-top: 8px;">
+                                        <div class="form-control" style="border: none">
+                                            <b>全部</b>
+                                            <b ></b>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 control-label col-xs-3">
+                                        <button class="btn btn-default ng-binding" type="submit" onclick="history.go(-2)">
+                                            返回
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <tbody class="reportdetail">
+                                        <tr>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">名称</td>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">总笔数</td>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">总下注</td>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">总有效下注</td>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">总派彩</td>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">JACK</td>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">小费</td>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">公司占成</td>
+                                            <td rowspan="2" style="vertical-align: middle" class="text-align-center">公司损益</td>
+                                            <td colspan="5" style="vertical-align: middle" class="text-align-center">总各层交收</td>
+                                        </tr>
+                                        <tr>
+                                            <td>会员</td>
+                                            <td>代理商</td>
+                                            <td>总代</td>
+                                            <td>股东</td>
+                                            <td>公司</td>
+                                        </tr>
+                                        <tr ng-repeat="tr in list2" class="a1">
+                                            <td >{{tr.v1}}</td>
+                                            <td class="aa" myAttr="1">{{tr.v2}}</td>
+                                            <td>{{tr.v3}}</td>
+                                            <td>{{tr.Total_effective_bets}}</td>
+                                            <td>{{tr.payout}}</td>
+                                            <td>{{tr.JACK}}</td>
+                                            <td>{{tr.Tip}}</td>
+                                            <td>{{tr.meber}}</td>
+                                            <td>{{tr.Agent}}</td>
+                                            <td>{{tr.profit_and_loss}}</td>
+                                            <td>{{tr.meber}}</td>
+                                            <td>{{tr.generation}}</td>
+                                            <td>{{tr.Shareholder}}</td>
+                                            <td>{{tr.company}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="14">&nbsp;</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

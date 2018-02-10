@@ -1,0 +1,108 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{template "header_" .}}
+    <link rel="stylesheet" href="{{.CdnUrl}}/pklottery1/public/css/new/font/iconfont.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/pklottery1/public/css/new/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/pklottery1/public/css/new/red.css">
+</head>
+<body>
+<div>
+    <div>
+        <!-- 这是头部区 -->
+        <div class="xl-lottery-top">
+            <div class="xl-center clearfix">
+                <div class="fl">
+                    <p>欢迎来到{{.SiteName}}！<a href="javascript:;" onclick="getPager('-','zhuce');">免费注册</a></p>
+                </div>
+                <ul class="fr clearfix">
+                    <li class="fl sa"><a href="javascript:;"><span class="iconfont icon-shouji"></span>手机购彩<span class="iconfont icon-xiangxia"></span></a>
+                        <div class="xl-scan-img-div">
+                            <ul class="xl-scan-code-small clearfix">
+                                <li class="fl xl-scan-code-active">苹果版</li>
+                                <li class="fl">安卓版</li>
+                            </ul>
+                            <div class="xl-scan-img-c">
+                                <div class="xl-scan-img xl-div-show">
+                                    <p>使用于IOS6.0版本及以上平台</p>
+                                    <div>
+                                        <img src="{{.CdnUrl}}/pklottery1/public/images/new/small.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="xl-scan-img">
+                                    <p>使用于安卓6.0版本及以上平台</p>
+                                    <div>
+                                        <div>
+                                            <img src="{{.CdnUrl}}/pklottery1/public/images/new/small.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </li>
+                    <li class="fl"><a href="javascript:;">免费试玩</a></li>
+                    <li class="fl top-line">|</li>
+                    <li class="fl"><a href="javascript:;">加入代理</a></li>
+                    <li class="fl top-line">|</li>
+                    <li class="fl"><a href="javascript:;">加入收藏</a></li>
+                    <li class="fl top-line">|</li>
+                    <li class="fl"><a href="javascript:;">帮助中心</a></li>
+                    <li class="fl top-line">|</li>
+                    <li class="fl"><a href="javascript:;">玩法</a></li>
+                    <li class="fl top-line">|</li>
+                    <li class="fl"><a href="javascript:;">优惠活动</a></li>
+                    <li class="fl top-line">|</li>
+                    <li class="fl"><a href="javascript:OnlineService('{{.Header.UrlLink}}');" style="text-decoration: none;">联系客服</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- 这是logo区 -->
+        <div class="xl-center xl-lottery-logo clearfix">
+            <img src="{{.LogoUrl}}"alt="" class="fl">
+            <div class="fr pk_login_before">
+                <form id="loginform">
+                    <input type="text" size="12" class="login-input" tabindex="1" name="account" id="username" placeholder="账号">
+                    <input type="password" class="login-input" tabindex="2" name="password" id="password"
+                           placeholder="密码">
+                        <input type="text" name="code" id="rmNum" size="7"  tabindex="3" placeholder="验证码" class="input-verity">
+                        <img src="{{.CdnUrl}}/theme3/public/images/new/no.png" id="vImg" onclick="getYzm();" width="40"
+                             height="18" style="position: absolute;right: 2px;top: 4px;cursor: pointer;">
+                    <span type="button" id="submit" onclick="aLeftForm1Sub();" class="xl-login">登入</span>
+                    <span class="xl-register" onclick="getPager('-','zhuce');">注册</span>
+                </form>
+            </div>
+            <!-- 这是登入后的 -->
+            <div class="fr after-login pk_login_after" style="display: none;">
+                <ul cllass="clearfix">
+                    <li class="fl"><a href="javascript:;">您好，<i id="pk_account"></i></a></li>
+                    <li class="fl"><a href="javascript:;">余额：<i id="pk_money"></i> <em class="iconfont icon-shuaxin"></em></a></li>
+                    <li class="fl"><a href="/member/account">会员中心</a></li>
+                    <li class="fl">|</li>
+                    <li class="fl"><a href="/member/bank">充值</a></li>
+                    <li class="fl">|</li>
+                    <li class="fl"><a href="/member/withdraw">提现</a></li>
+                    <li class="fl">|</li>
+                    <li class="fl"><a href="/member/record">交易记录</a></li>
+                    <li class="fl">|</li>
+                    <li class="fl"><a href="/member/mescenter">个人消息</a></li>
+                    <li class="fl">|</li>
+                    <li class="fl"><a href="javascript:void(0)" onclick="logOut();">退出</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 这是导航栏区域 -->
+        <div class="xl-lottery-nav clearfix">
+            <div class="xl-lottery-content-top xl-center clearfix">
+                <p class="fl">选择彩种</p>
+                <ul class="clearfix fr">
+                    <li class="fl active-station-li"><a href="javascript:;">下注大厅</a></li>
+                    <li class="fl"><a href="javascript:;">手机购彩</a></li>
+                    <li class="fl"><a href="javascript:;">优惠活动</a></li>
+                    <li class="fl"><a href="javascript:;">开奖公告</a></li>
+                    <li class="fl"><a href="javascript:;">走势图表</a></li>
+                    <li class="fl"><a href="javascript:;">代理合作</a></li>
+                </ul>
+            </div>
+        </div>
+{{end}}

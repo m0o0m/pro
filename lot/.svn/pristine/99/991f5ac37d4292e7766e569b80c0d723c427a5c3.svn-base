@@ -1,0 +1,283 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-02-01 19:38:38
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/stat/index.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a72fc3e71b692_56086898',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '3d31fe0d7037094b8a0ff9b1d53f6a088dc6c768' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/stat/index.html',
+      1 => 1517446384,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:_list.html' => 1,
+  ),
+),false)) {
+function content_5a72fc3e71b692_56086898 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+<style>#search-form label{margin-right:10px}</style>
+<div class="page-header col-xs-12">
+    <form id="search-form">
+        <?php if ($_smarty_tpl->tpl_vars['this']->value->context->action->id == 'line' || (isset($_GET['tab']) && $_GET['tab'] == 'line')) {?>
+        <!-- <label> 线路:
+            <select type="select" name="line_id" id="line_id">
+                <option value="">全部</option>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value['show']['lines'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+"<?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+$_prefixVariable1=ob_get_clean();
+if (isset($_GET['line_id']) && $_GET['line_id'] == $_prefixVariable1) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+</option>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+            </select>
+        </label> -->
+        <label> 彩票种类:
+            <select type="select" name="fc_type" id="fc_type">
+                <option value="">全部</option>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value['show']['games'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+"<?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+$_prefixVariable2=ob_get_clean();
+if (isset($_GET['fc_type']) && $_GET['fc_type'] == $_prefixVariable2) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</option>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+            </select>
+        </label>
+        <?php } else { ?>
+        <!-- <label> 代理帐号:
+            <input type="text" placeholder="请输入代理账号" name="agentname" id="agentname" value="<?php if (isset($_GET['agentname'])) {
+echo $_GET['agentname'];
+}?>">
+        </label> -->
+        <label> 会员帐号:
+            <input type="text" placeholder="请输入会员账号" name="username" id="username" value="<?php if (isset($_GET['username'])) {
+echo $_GET['username'];
+}?>">
+        </label>
+        <?php }?>
+        <label for=""> 日期:
+            <input class="laydate-icon" type="text" placeholder="请输入日期" name="starttime" id="starttime" value="<?php if (isset($_GET['starttime'])) {
+echo $_GET['starttime'];
+}?>">
+            ~
+            <input class="laydate-icon" type="text" placeholder="请输入日期" name="endtime" id="endtime" value="<?php if (isset($_GET['endtime'])) {
+echo $_GET['endtime'];
+}?>">
+        </label>
+        <br>
+        <?php if (!($_smarty_tpl->tpl_vars['this']->value->context->action->id == 'line' || (isset($_GET['tab']) && $_GET['tab'] == 'line'))) {?>
+        <label> 彩票种类:
+            <select type="select" name="fc_type" id="fc_type">
+                <option value="">全部</option>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value['show']['games'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+"<?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+$_prefixVariable3=ob_get_clean();
+if (isset($_GET['fc_type']) && $_GET['fc_type'] == $_prefixVariable3) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</option>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+            </select>
+        </label>
+        <?php }?>
+        <label> 排序:
+            <select type="select" name="order_sort" id="order_sort">
+                <option value="">请选择</option>
+                <option value="bet-asc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'bet-asc') {?> selected <?php }?> >总注单-升序</option>
+                <option value="bet-desc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'bet-desc') {?> selected <?php }?> >总注单-降序</option>
+                <option value="bet_count-asc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'bet_count-asc') {?> selected <?php }?> >总笔数-升序</option>
+                <option value="bet_count-desc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'bet_count-desc') {?> selected <?php }?> >总笔数-降序</option>
+                <option value="valid_bet-asc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'valid_bet-asc') {?> selected <?php }?> >有效注单-升序</option>
+                <option value="valid_bet-desc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'valid_bet-desc') {?> selected <?php }?> >有效注单-降序</option>
+                <option value="valid_bet_count-asc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'valid_bet_count-asc') {?> selected <?php }?> >有效笔数-升序</option>
+                <option value="valid_bet_count-desc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'valid_bet_count-desc') {?> selected <?php }?> >有效笔数-降序</option>
+                <option value="win-asc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'win-asc') {?> selected <?php }?> >盈利-升序</option>
+                <option value="win-desc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'win-desc') {?> selected <?php }?> >盈利-降序</option>
+                <option value="win_count-asc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'win_count-asc') {?> selected <?php }?> >赢笔数-升序</option>
+                <option value="win_count-desc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'win_count-desc') {?> selected <?php }?> >赢笔数-降序</option>
+                <option value="addday-asc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'addday-asc') {?> selected <?php }?> >日期-升序</option>
+                <option value="addday-desc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'addday-desc') {?> selected <?php }?> >日期-降序</option>
+                <option value="updatetime-asc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'updatetime-asc') {?> selected <?php }?> >时间-升序</option>
+                <option value="updatetime-desc" <?php if (isset($_GET['order_sort']) && $_GET['order_sort'] == 'updatetime-desc') {?> selected <?php }?> >时间-降序</option>
+            </select>
+        </label>
+        <label> 每页显示条数:
+            <select type="select" name="pagenum" id="pagenum">
+                <option value="100" <?php if (isset($_GET['pagenum']) && $_GET['pagenum'] == 100) {?>selected<?php }?>>100</option>
+                <option value="500" <?php if (isset($_GET['pagenum']) && $_GET['pagenum'] == 500) {?>selected<?php }?>>500</option>
+                <option value="1000" <?php if (isset($_GET['pagenum']) && $_GET['pagenum'] == 1000) {?>selected<?php }?>>1000</option>
+            </select>
+        </label>
+        <label> 页码:
+            <select type="select" name="page" id="page">
+                <?php
+$__section_loop_0_saved = isset($_smarty_tpl->tpl_vars['__smarty_section_loop']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop'] : false;
+$__section_loop_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['result']->value['pagecount']) ? count($_loop) : max(0, (int) $_loop));
+$__section_loop_0_total = $__section_loop_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = new Smarty_Variable(array());
+if ($__section_loop_0_total != 0) {
+for ($__section_loop_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] = 0; $__section_loop_0_iteration <= $__section_loop_0_total; $__section_loop_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']++){
+?>
+                <option value="<?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+"
+                    <?php if (isset($_GET['page']) && $_GET['page'] == (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1) {?>selected<?php }?>>
+                    <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+
+                </option>
+                <?php
+}
+}
+if ($__section_loop_0_saved) {
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = $__section_loop_0_saved;
+}
+?>
+            </select>
+             共<?php echo $_smarty_tpl->tpl_vars['result']->value['pagecount'];?>
+页
+        </label>
+        <label>
+            <input type="button" class="btn btn-sm btn-success" id="search" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="export">导出到Excel</span></label>
+    </form>
+</div>
+
+<!-- 本次的搜索项 用于导出excel -->
+<form id="export-form">
+  <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value['export_query'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+    <input type="hidden" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+">
+  <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+    <!-- <input type="hidden" name="list" value='<{ $result.data|json_encode}>'> -->
+</form>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <?php $_smarty_tpl->_subTemplateRender("file:_list.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<?php echo '<script'; ?>
+>
+    //pjax局部加载列表
+    function search() {
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: '?',
+            container: '#container'
+        });
+    }
+    // 搜索
+    $('#search').click(function () {
+        search();
+    });
+    // 彩种,排序,显示数,翻页
+    $('#fc_type,#order_sort,#pagenum,#page').change(function () {
+        search();
+    });
+    // 导出
+    $('#export').click(function () {
+        var query = $('#export-form').serialize();
+        if(!query){
+            layer.msg('请先搜索');
+            return;
+        }
+        <?php if (isset($_smarty_tpl->tpl_vars['result']->value['data']) && count($_smarty_tpl->tpl_vars['result']->value['data']) == 0) {?>
+            layer.msg('数据为空');
+            return;
+        <?php }?>
+        layer.confirm('确定导出吗？', {
+            btn: ['确定','取消']
+        }, function(){
+            layer.closeAll('dialog');
+            location.href = 'export?' + $('#export-form').serialize();
+        });
+    });
+
+    //时间控件
+    var starttime = {
+        elem: '#starttime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            endtime.min = datas;
+        }
+    };
+    laydate(starttime);
+    var endtime = {
+        elem: '#endtime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true
+    };
+    laydate(endtime);
+
+    <?php if (!isset($_GET['starttime'])) {?>
+        $('#starttime').val(laydate.now(0, 'YYYY-MM-DD'));
+    <?php }?>
+    <?php if (!isset($_GET['endtime'])) {?>
+        $('#endtime').val(laydate.now(0, 'YYYY-MM-DD'));
+    <?php }
+echo '</script'; ?>
+>
+<?php }
+}

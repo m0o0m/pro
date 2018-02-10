@@ -1,0 +1,56 @@
+<!-- 管理员账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div id="tabs" data-smart-jqui-tabs>
+            <div id="tabs-c">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">{{getWord('Add Account')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('accounts')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('accounts']}}" type="text" ng-model="accounts.accounts">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('A_1')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('Name')}}" type="text" ng-model="accounts.passwords">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('Password')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{lang['Password']}}" type="text" ng-model="accounts.passwords">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('Confirm password')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('Confirm password')}}" type="text" ng-model="accounts.passwords">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

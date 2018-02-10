@@ -1,0 +1,208 @@
+<div id="content">
+    <div class="row">
+
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>层级管理</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="form-horizontal">
+                                        <div class="row form-horizontal">
+                                            <!--<label class="col-md-1 control-label col-xs-4">站点：</label>-->
+                                            <!--<div class="col-md-2 col-xs-8">-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<select data-smart-select2 class="selectWidth" ng-model="site_id">-->
+                                                        <!--<option value="">请选择</option>-->
+                                                        <!--<option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>-->
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--<div class="col-sm-1">-->
+                                                <!--<div class="input-group">-->
+                                                    <!--<a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <div class="col-sm-1">
+                                                <div class="input-group">
+                                                    <button class="btn btn-default " data-toggle="modal" data-target="#myModal1" >添加层级</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>层级编号</th>
+                                            <th>层级名称</th>
+                                            <th ng-repeat="item_1 in arr">{{item_1}}</th>
+                                            <th>描述</th>
+                                            <th>备注</th>
+                                            <th>站点</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.lid}}</td>
+                                            <td>{{item.level_name}}</td>
+                                            <td ng-repeat="a in item.proportion track by $index">{{a}}</td>
+                                            <td>{{item.talk}}</td>
+                                            <td>{{item.remark}}</td>
+                                            <td>{{item.site}}</td>
+                                            <td>
+                                                <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="modify(item)">{{lang['Modify']}}</button>
+                                                <button class="btn btn-default btn-xs" ng-click="del(item.id)">删除</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="mymodel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">添加层级</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid"  enctype="multipart/form-data" >
+                        <div class="row">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">层级编号</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control input" placeholder="" type="text" ng-model="addData.lid" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">层级名称</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control input" placeholder="" type="text" ng-model="addData.level_name" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">描述</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control input" placeholder="" type="text" ng-model="addData.talk" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-repeat="item in arr" >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">{{item}}</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control input platforms" placeholder="" type="text" >
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    {{lang['Cancel']}}
+                                </button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                                    {{lang['Confirm']}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="mymodel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">修改层级</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid"  enctype="multipart/form-data" >
+                        <div class="row">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">层级编号</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control input" placeholder="" type="text" ng-model="modifyData.lid" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">层级名称</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control input" placeholder="" type="text" ng-model="modifyData.level_name" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">描述</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control input" placeholder="" type="text" ng-model="modifyData.talk" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-repeat="item in arr" >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">{{item}}</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control input platformss" placeholder="" type="text" >
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    {{lang['Cancel']}}
+                                </button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifysubmit()">
+                                    {{lang['Confirm']}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

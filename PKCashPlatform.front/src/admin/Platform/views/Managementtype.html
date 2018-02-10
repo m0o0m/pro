@@ -1,0 +1,197 @@
+<!-- 商品类型 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+
+                        <h2>{{lang['Typemanagement']}}</h2>
+
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodow}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodow, 'fa fa-times': newTodow}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div ng-show="newTodow">
+                            <div class="widget-body-toolbar">
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <label class="col-md-1 col-xs-4 input-label">商品类型</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group" ng-init="online=''">
+                                                <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="title">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-3">
+                                            <div class="input-group">
+                                                <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-4">
+                                            <div class="input-group">
+                                                <button type="submit"  data-toggle="modal" data-target="#myModal1"  class="btn btn-default" >新建类型</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-4">
+                                            <div class="input-group">
+                                                <a class="btn btn-default search" onclick="history.go(-1)" href-void>返回</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">类型编号</th>
+                                            <th class="text-center">类型名称</th>
+                                            <th class="text-center">商品数量</th>
+                                            <th class="text-center">状态</th>
+                                            <th class="text-center">功能</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                        <td>
+                                            {{item.id}}
+                                        </td>
+                                        <td>{{item.title}}</td>
+                                        <td>{{item.count}}</td>
+                                        <td>{{item.status|fiterStatused}}</td>
+                                        <td class="text-align-center">
+                                            <button class="btn btn-default btn-xs" ng-click="disables(item)" ng-bind="item.status==1?'禁用':'启用'"></button>
+                                            <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="getID(item.id)">{{lang['Modify']}}</button>
+                                            <button class="btn btn-default btn-xs" ng-click="del(item.id)">删除</button>
+                                        </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+
+    </section>
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccounts">新增商品</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">类型名称</label>
+                                <label class="col-md-7 col-xs-8  input">
+                                    <input class="form-control" type="text" ng-model="formData.title" name="account">
+                                    <b class="tooltip tooltip-top-right">
+                                        名称长度1-30位字符</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">状态</label>
+                                <label class="col-md-2 col-xs-4 input-label text-left">
+                                    <input type="radio" ng-value="1" name="aa" ng-model="formData.status">
+                                    启用
+                                </label>
+                                <label class="col-md-2 col-xs-4 input-label text-left">
+                                    <input type="radio" ng-value="2" name="aa" ng-model="formData.status">
+                                    禁用
+                                </label>
+                            </section>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden" name="roleId"  hidden="hidden" value="5" ng-model="formData.roleId">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden"  disabled="disabled" value="0" name="parentId" ng-model="formData.parentId">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">修改类型</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">类型名称</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control" type="text" ng-model="modifyes.title" name="account">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">状态</label>
+                                <label class="col-md-4 col-xs-4 input-label text-left">
+                                    <input type="radio" ng-value="1" name="aa" ng-model="modifyes.status">
+                                    启用
+                                </label>
+                                <label class="col-md-4 col-xs-4 input-label text-left">
+                                    <input type="radio" ng-value="2" name="aa" ng-model="modifyes.status">
+                                    禁用
+                                </label>
+                            </section>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden" name="roleId"  hidden="hidden" value="5" ng-model="formData.roleId">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden"  disabled="disabled" value="0" name="parentId" ng-model="formData.parentId">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

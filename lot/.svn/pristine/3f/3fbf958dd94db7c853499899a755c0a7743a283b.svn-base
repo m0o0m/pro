@@ -1,0 +1,196 @@
+<?php
+/* Smarty version 3.1.31, created on 2017-12-12 12:16:44
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/agent/role.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a2fc8acb6e484_51267398',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '92a7c54ff07e9e49c3071af74bab98537aa2f375' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/agent/role.html',
+      1 => 1510109525,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a2fc8acb6e484_51267398 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    .detailDiv{display:none}
+</style>
+
+<div class="page-header">
+    <?php if ($_GET['type'] == 'user_sh') {?>
+    <h1>
+         <a href="javascript:jump('shindex');" id="agent_index">股东列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            修改角色
+        </small>
+    </h1>
+    <?php }?>
+    <?php if ($_GET['type'] == 'user_ua') {?>
+    <h1>
+         <a href="javascript:jump('uaindex');" id="agent_index">总代列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            修改角色
+        </small>
+    </h1>
+    <?php }?>
+    <?php if ($_GET['type'] == 'user_agent') {?>
+    <h1>
+         <a href="javascript:jump('index');" id="agent_index">代理列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            修改角色
+        </small>
+    </h1>
+    <?php }?>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form id="w0" >
+            <div class="col-xs-12 col-sm-9 widget-container-col  ui-sortable">
+                <div class="widget-box ui-sortable-handle">
+                    <div class="widget-header">
+                        <h5 class="widget-title">账号:(<?php echo $_smarty_tpl->tpl_vars['data']->value['login_user'];?>
+)&nbsp;&nbsp;&nbsp;&nbsp;昵称:(<?php echo $_smarty_tpl->tpl_vars['data']->value['login_name'];?>
+)</h5>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="checkbox col-sm-10" style="padding:5px;">
+                                        <label>
+                                            <span class="lbl">请选择一个角色</span>
+                                        </label>
+                                    </div>
+                                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['roles']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                                    <div class="checkbox col-sm-4" style="padding:5px;">
+                                        <label>
+                                            <input class="ace ace-checkbox-2 childChecked" 
+                                                   type="checkbox" 
+                                                   name="roleId" 
+                                                   value="<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+"
+                                                   <?php if (isset($_smarty_tpl->tpl_vars['data']->value['role_id']) && $_smarty_tpl->tpl_vars['data']->value['role_id'] == $_smarty_tpl->tpl_vars['v']->value['id']) {?>checked<?php }?>
+                                                   >
+                                                   <span class="lbl"> <?php echo $_smarty_tpl->tpl_vars['v']->value['role'];?>
+(<?php echo $_smarty_tpl->tpl_vars['v']->value['role_name'];?>
+)</span>
+                                        </label>
+                                    </div>
+                                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="button" id="save">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            提交
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="button" id="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>                    
+    </div>
+</div>
+
+<?php echo '<script'; ?>
+>
+    //单选
+    $('.childChecked').click(function () {
+        if ($(this).prop('checked')) {
+            $(this).parents('.checkbox').siblings('.checkbox').find('.childChecked').prop('checked', false);
+        }
+    })
+
+    //重置
+    $('#reset').click(function () {
+        $('.childChecked').prop('checked', false);
+    })
+
+    //提交
+    $('#save').click(function () {
+        if ($('.childChecked:checked').length < 1) {
+            layer.alert('请选择一个角色！', {icon: 2});
+            return false;
+        }
+
+        var role_id = $('.childChecked:checked').val();
+        var agent_id = "<?php echo $_GET['id'];?>
+";
+        var type = "<?php echo $_GET['type'];?>
+";
+        var lurl;
+        if(type == 'user_agent'){
+            lurl = '/agent/index';
+        }else if(type == 'user_ua'){
+            lurl = '/agent/uaindex';
+        }else if(type == 'user_sh'){
+            lurl = '/agent/shindex';
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/agent/saverole',
+            data: {role_id: role_id, agent_id: agent_id, type:type},
+            dataType: 'json',
+            error: function () {
+                layer.alert('网络异常,请稍后再试!', {icon: 2});
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    layer.alert(res.msg, {icon: 1},function(){
+                        window.location.href = lurl;
+                    });
+                } else if (res.code == 400) {
+                    layer.alert(res.msg, {icon: 2});
+                }
+            }
+        });
+
+
+
+
+    })
+
+    function jump(url){
+         $.pjax({
+            method: 'get',
+            url: '/agent/' + url,
+            container: '#container'
+        });
+    }
+
+<?php echo '</script'; ?>
+>
+
+<?php }
+}

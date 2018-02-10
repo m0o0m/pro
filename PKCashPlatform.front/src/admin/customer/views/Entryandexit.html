@@ -1,0 +1,257 @@
+<!-- 出入款管理 -->
+<section widget-grid id="widget-grid">
+    <div id="tabs" data-smart-jqui-tabs>
+        <ul>
+            <li>
+                <a href="#tabs-a">入款选择</a>
+            </li>
+            <li>
+                <a href="#tabs-b" ng-click="Whitelist()">出款选择</a>
+            </li>
+        </ul>
+        <div id="tabs-a">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div id="todo-widgets" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>入款操作</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+
+                                <div ng-show="newTodo">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+                                            <div class="row">
+                                                <label class="col-md-1 col-xs-4 input-label">入款选择</label>
+                                                <div class="col-md-2 col-xs-8">
+                                                    <div class="form-group"  >
+                                                        <select data-smart-select2 class="selectWidth" ng-model="type">
+                                                            <option value="">全部</option>
+                                                            <option value="{{item.value}}" ng-repeat="item in json.option_income_type">{{item.name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                                <div class="col-md-2 col-xs-8">
+                                                    <div class="form-group" ng-init="end_ip==''" >
+                                                        <select data-smart-select2 class="selectWidth" ng-model="site_index_id"  >
+                                                            <option value="">全部</option>
+                                                            <option value="{{item.site_index_id}}" ng-repeat="item in sharedJson">{{item.site_name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                    <label class="col-md-1 col-xs-4 input-label">多站点</label>
+                                                    <div class="col-md-2 col-xs-8" >
+                                                        <div class="form-group ">
+                                                            <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="site">
+                                                        </div>
+                                                    </div>
+                                                <label class="col-md-1 col-xs-4 input-label">账号</label>
+                                                <div class="col-md-2 col-xs-8" >
+                                                    <div class="form-group ">
+                                                        <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="account">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">订单号</label>
+                                            <div class="col-md-2 col-xs-8" >
+                                                <div class="form-group ">
+                                                    <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="orderNum">
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">{{lang['Registration date']}}</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">————</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-4 col-md-offset-1  col-xs-offset-10">
+                                                <div class="form-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">订单号</th>
+                                                <th class="text-center">设备</th>
+                                                <th class="text-center">会员账号</th>
+                                                <th class="text-center">存款人</th>
+                                                <th class="text-center">存款方式</th>
+                                                <th class="text-center">存入金额与优惠</th>
+                                                <th class="text-center">存入总额</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">操作时间</th>
+                                                <th class="text-center">操作者</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-center" ng-repeat="item in listIn">
+                                                <td>{{item.Order_number }}</td>
+                                                <td>{{item.equipment}}</td>
+                                                <td>{{item.Member_account}}</td>
+                                                <td>{{item.Depositor}}</td>
+                                                <td>{{item.Deposit_mode}}</td>
+                                                <td>{{item.Depositamountanddiscount}}</td>
+                                                <td>{{item.Total_deposit}}</td>
+                                                <td>{{item.state}}</td>
+                                                <td>{{item.Operating_time|fiterTime}}</td>
+                                                <td>{{item.Operator}}</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div id="tabs-b">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>出款操作</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+
+                                <div ng-show="newTodo">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+
+                                            <div class="row">
+                                                <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                                <div class="col-md-2 col-xs-8">
+                                                    <div class="form-group" ng-init="end_ip==''" >
+                                                        <select data-smart-select2 class="selectWidth" ng-model="site_index_id_O"  >
+                                                            <option value="">全部</option>
+                                                            <option value="{{item.site_index_id}}" ng-repeat="item in sharedJson">{{item.site_name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <label class="col-md-1 col-xs-4 input-label">多站点</label>
+                                                <div class="col-md-2 col-xs-8" >
+                                                    <div class="form-group ">
+                                                        <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="site_O">
+                                                    </div>
+                                                </div>
+                                                <label class="col-md-1 col-xs-4 input-label">账号</label>
+                                                <div class="col-md-2 col-xs-8" >
+                                                    <div class="form-group ">
+                                                        <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="account_O">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-md-1 col-xs-4 input-label">{{lang['Registration date']}}</label>
+                                                <div class="col-md-2 col-xs-8">
+                                                    <div class="input-group form-group">
+                                                        <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime_O">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                <label class="col-md-1 col-xs-4 input-label">————</label>
+                                                <div class="col-md-2 col-xs-8">
+                                                    <div class="input-group form-group">
+                                                        <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime_O">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 col-xs-4 col-md-offset-1  col-xs-offset-11">
+                                                    <div class="form-group">
+                                                        <a class="btn btn-default search" ng-click="searchOut()" href-void>{{lang['Search']}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+
+                                                <th class="text-center">会员账号</th>
+                                                <th class="text-center">设备</th>
+                                                <th class="text-center">提出额度</th>
+                                                <th class="text-center">手续费</th>
+                                                <th class="text-center">存款方式</th>
+                                                <th class="text-center">优惠金额</th>
+                                                <th class="text-center">行政费</th>
+                                                <th class="text-center">出款金额</th>
+                                                <th class="text-center">账户余额</th>
+                                                <th class="text-center">优惠扣除</th>
+                                                <th class="text-center">出款日期</th>
+                                                <th class="text-center">稽核</th>
+                                                <th class="text-center">状态</th>
+                                                <th class="text-center">操作者</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-center" ng-repeat="item1 in listOut">
+                                                <td>{{item1.user_name }}</td>
+                                                <td>{{item1.client_type}}</td>
+                                                <td>{{item1.outward_num}}</td>
+                                                <td>{{item1.charge}}</td>
+                                                <td>{{item1.client_type}}</td>
+                                                <td>{{item1.favourable_money}}</td>
+                                                <td>{{item1.expenese_money}}</td>
+                                                <td>{{item1.outward_money}}</td>
+                                                <td>{{item1.balance}}</td>
+                                                <td>{{item1.favourable_out}}</td>
+                                                <td>{{item1.out_time|fiterTime}}</td>
+                                                <td>{{item1.normal_money}}</td>
+                                                <td>{{item1.out_status}}</td>
+                                                <td>{{item1.username}}</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+</div>

@@ -1,0 +1,359 @@
+@import "./function.scss";
+
+.chat_box {
+  .new_num {
+    position: fixed;
+    right: 25px;
+    top: 49%;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 98;
+    height: 18px;
+    line-height: 18px;
+    background-color: red;
+  }
+  .two_size {
+    width: 18px;
+  }
+  .three_size {
+    width: 25px;
+  }
+  .chart_button {
+    position: fixed;
+    right: 0px;
+    //right: 15px;
+    top: 30%;
+    height: 85px;
+    z-index: 97;
+    color: #fff;
+    border-radius: 5px;
+    background: linear-gradient(#028BE1, #028BE1 50%, #028BE1, #0991E3);
+    width: 35px;
+    padding-top: 6px;
+    .chart_text {
+      width:19px;
+      writing-mode: vertical-rl;
+      -webkit-writing-mode: vertical-rl;
+      margin: 0 auto;
+      margin-left: 8px;
+    }
+  }
+  .chart_button:hover {
+    cursor: pointer;
+  }
+  .zhan_kai {
+    width: 350px;
+  }
+  .wei_zhan {
+    width: 300px;
+  }
+  .chat_body {
+    height: 500px;
+    background-color: #fff9ee;
+    position: fixed;
+    border: 1px solid #028BE1;
+    right: 0;
+    top: 14%;
+    z-index: 98;
+    border-radius: 5px;
+    .top {
+      //border-top-left-radius: 5px;
+      //border-top-right-radius: 5px;
+      background: linear-gradient(#028BE1, #028BE1 50%, #028BE1, #0991E3);
+      span {
+        color: #fff;
+      }
+      .iconfont {
+        font-size: 25px;
+        color: #fff
+      }
+      .pk-liaotianshi1 {
+        float: left;
+        margin-left: 20px;
+      }
+      .top_text {
+        font-size: 15px;
+        display: inline-block;
+        float: left;
+        width: 155px;
+        text-align: left;
+        margin-top: 9px;
+        margin-left: 6px;
+      }
+      .zhankai {
+        margin-left: 56px;
+      }
+      .zhankai_defalut {
+        margin-left: 10px;
+      }
+      .pk-zhankai:hover {
+        cursor: pointer;
+      }
+      .pk-guanbi1 {
+        margin-left: 15px;
+      }
+      .pk-guanbi1:hover {
+        cursor: pointer;
+      }
+    }
+    .center {
+      height: 390px;
+      overflow-y: scroll;
+      .Item {
+        margin-top: 15px;
+        padding: 5px 10px;
+        width: 100%;
+        .lay-block {
+          overflow: hidden;
+          .avatar {
+            float: left;
+            width: 42px;
+            height: 42px;
+            margin-top: 6px;
+            cursor: pointer
+          }
+          .lay-content {
+            width: 77%;
+            float: left;
+            padding-left: 20px;
+            //margin-left: 57px;
+            .msg-header {
+              overflow: hidden;
+              float: left;
+              width: 100%;
+              text-align: left;
+              .MsgTime {
+                background: rgba(70, 70, 70, .12);
+                color: #a0a0a0;
+                padding: 0 6px;
+                border-radius: 10px;
+                font-weight: 400;
+                font-size: 10px;
+              }
+              h4 {
+                font-size: 12px;
+                color: #4f77ab;
+                display: inline-block;
+                font-weight: 400;
+                cursor: pointer;
+              }
+              span {
+                display: inline-block;
+                margin: 0 2px;
+              }
+            }
+            .defalut_bubble_color {
+              color: #fff;
+              background: #199ed8;
+              border-left-color: #199ed8;
+              border-right-color: #199ed8;
+            }
+            .Bubble {
+              float: left;
+              //background: linear-gradient(to right, rgb(45, 230, 251), rgb(218, 148, 239));
+              //border-left-color: rgb(218, 148, 239);
+              //border-right-color: rgb(45, 230, 251);
+              background-color: deepskyblue;
+              color: rgb(10, 10, 10);
+              margin-top: 3px;
+              position: relative;
+              border-radius: 5px;
+              padding: 6px 9px;
+              font-size: 13px;
+              line-height: 1.2;
+              display: inline-block;
+              //text-shadow: 0 0 1px #35406d;
+              p {
+                .msg {
+                  white-space: pre-wrap;
+                  word-break: break-all;
+                }
+              }
+            }
+            .Bubble:before {
+              position: absolute;
+              content: "";
+              width: 0;
+              height: 0;
+              right: 100%;
+              top: 5px;
+              border-top: 1px solid transparent;
+              //border-right: 10px solid #199ed8;
+              border-right: 10px solid deepskyblue;
+              border-bottom: 5px solid transparent;
+            }
+          }
+        }
+        .me_lay-block {
+          overflow: hidden;
+          .avatar {
+            float: right;
+            width: 42px;
+            height: 42px;
+            margin-top: 6px;
+            cursor: pointer
+          }
+          .lay-content {
+            width: 77%;
+            float: right;
+            padding-right: 20px;
+            .msg-header {
+              overflow: hidden;
+              width: 100%;
+              float: right;
+              text-align: left;
+              .MsgTime {
+                float: right;
+                background: rgba(70, 70, 70, .12);
+                color: #a0a0a0;
+                padding: 0 6px;
+                border-radius: 10px;
+                font-weight: 400;
+                font-size: 10px;
+              }
+              h4 {
+                cursor: pointer;
+                float: right;
+                font-size: 12px;
+                color: #4f77ab;
+                display: inline-block;
+                font-weight: 400;
+              }
+              span {
+                display: inline-block;
+                margin: 0 2px;
+              }
+            }
+            .defalut_bubble_color {
+              color: #fff;
+              border-left-color: #199ed8;
+              border-right-color: #199ed8;
+            }
+            .Bubble {
+              float: right;
+              //background: linear-gradient(to right, rgb(45, 230, 251), rgb(218, 148, 239));
+              //border-left-color: rgb(218, 148, 239);
+              //border-right-color: rgb(45, 230, 251);
+              background-color: #a0f519;
+              color: rgb(10, 10, 10);
+              margin-top: 3px;
+              position: relative;
+              border-radius: 5px;
+              padding: 6px 9px;
+              font-size: 13px;
+              line-height: 1.2;
+              display: inline-block;
+              //text-shadow: 0 0 1px #35406d;
+              p {
+                .msg {
+                  white-space: pre-wrap;
+                  word-break: break-all;
+                }
+              }
+            }
+            .Bubble:before {
+              position: absolute;
+              content: "";
+              width: 0;
+              height: 0;
+              left: 100%;
+              top: 5px;
+              border-top: 1px solid transparent;
+              border-left: 10px solid #a0f519;
+              border-bottom: 5px solid transparent;
+            }
+          }
+        }
+        .join_exit {
+          width: 118px;
+          background: rgba(70, 70, 70, .12);
+          color: #a0a0a0;
+          padding: 0 6px;
+          border-radius: 10px;
+          font-weight: 400;
+          font-size: 10px;
+          margin: 0 auto;
+        }
+      }
+    }
+    .bottom {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      .bottom_top {
+        border-top: 1px solid #ddd;
+        text-align: left;
+        padding: 0;
+        background-color: #fff;
+        .pk-biaoqing {
+          font-size: 25px;
+          margin-left: 10px;
+        }
+        .emoji {
+          position: relative;
+          width: 100%;
+          height: 30px;
+          line-height: 30px;
+          font-size: 12px;
+          padding: 0 5px;
+          box-sizing: border-box;
+          color: #7c7c7c;
+          .en_yl {
+            color: #FFCC00;
+          }
+          .icon-look {
+            cursor: pointer;
+          }
+          .icon-look:hover {
+            color: #1aad19;
+          }
+          .emojiBox {
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            top: -210px;
+            left: -100px;
+            width: 300px;
+            height: 200px;
+            padding: 5px;
+            background-color: #fff;
+            border: 1px solid #d1d1d1;
+            border-radius: 5px;
+            box-shadow: 0 1px 2px 1px #d1d1d1;
+            & .showbox-enter-active, & .showbox-leave-active {
+              transition: all .5s
+            }
+            & .showbox-enter, & .showbox-leave-active {
+              opacity: 0
+            }
+          }
+          .emojiBox:before {
+            position: absolute;
+            content: "";
+            width: 0;
+            height: 0;
+            left: 37%;
+            bottom: -5px;
+            border-top: 1px solid transparent;
+            border-right: 15px solid #fff;
+            border-bottom: 5px solid transparent;
+          }
+        }
+      }
+      .bottom_bottom {
+        padding: 5px 0;
+        .wei_zhan {
+          width: 220px;
+          float: left
+        }
+        .zhan_kai {
+          width: 255px;
+          float: left
+        }
+      }
+
+    }
+  }
+}

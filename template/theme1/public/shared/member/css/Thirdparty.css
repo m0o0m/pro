@@ -1,0 +1,305 @@
+@charset "UTF-8";
+#page-body {
+  /* .deposit-for-2{
+      width: 585px;
+  } */
+  /* .deposit-account li[paidtype="wechat"]{
+      background-position:-560px -212px;
+  } */ }
+  #page-body .deposit-div2-item-cen {
+    width: 1932px; }
+  #page-body .deposit-div2-item {
+    width: 966px; }
+  #page-body .deposit-for {
+    margin-top: 8px;
+    height: 468px;
+    border: 2px solid #FFC832;
+    padding-top: 28px;
+    padding-left: 100px;
+    background-color: #FFFFEE; }
+  #page-body .deposit-for-1 {
+    display: inline-block;
+    width: 300px; }
+  #page-body .deposit-for-1 img {
+    border: 1px solid #DDD;
+    height: 100%;
+    vertical-align: middle; }
+  #page-body .deposit-for-1 .text {
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px; }
+  #page-body .deposit-for-1 .deposit-for-img {
+    position: relative;
+    overflow: hidden;
+    width: 174px; }
+  #page-body .deposit-for-1 .deposit-for-mod {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 170px;
+    height: 170px;
+    line-height: 170px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    display: none; }
+  #page-body .deposit-for-1 .text span {
+    display: inline-block;
+    overflow: hidden; }
+  #page-body .deposit-for-1 .text span:nth-child(2) {
+    width: 100px; }
+  #page-body .deposit-for-1 .text button {
+    background-color: #ec1515;
+    width: 62px;
+    height: 24px;
+    border-radius: 3px;
+    color: #fff; }
+  #page-body .deposit-for-left li {
+    margin-bottom: 16px; }
+  #page-body .deposit-for-left li > span {
+    display: inline-block;
+    width: 136px;
+    text-align: right; }
+  #page-body .deposit-for-left li input[type='text'] {
+    width: 260px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 10px;
+    margin-left: 5px;
+    color: #999; }
+  #page-body .deposit-for-left li select {
+    color: #686868;
+    width: 272px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #DDD;
+    padding-left: 5px;
+    margin-left: 5px; }
+  #page-body .deposit-for-left li:last-child {
+    position: relative; }
+  #page-body .deposit-for-right-bot {
+    font-size: 14px; }
+  #page-body .deposit-for-right-bot li {
+    margin-bottom: 3px; }
+  #page-body .deposit-for-right-bot .myd-red {
+    height: 30px; }
+  #page-body .deposit-for-right-button a, #page-body .deposit-for-right-button button {
+    display: inline-block;
+    line-height: 34px;
+    text-align: center;
+    width: 80px;
+    height: 34px;
+    border-radius: 3px;
+    /* outline: none; */
+    background-color: #FF4341;
+    color: #fff;
+    cursor: pointer; }
+  #page-body .deposit-bottom {
+    margin-top: 8px;
+    border: 1px solid #DDD;
+    height: 566px;
+    background-color: #fff;
+    padding: 16px 99px 0 99px; }
+  #page-body .deposit-b-t {
+    text-align: center; }
+  #page-body .deposit-b-t ul:nth-child(1) {
+    color: #fff; }
+  #page-body .deposit-b-t ul:nth-child(2) {
+    background-color: #F5F5F5;
+    color: #4D4F56; }
+  #page-body .deposit-b-t li {
+    height: 50px;
+    line-height: 50px;
+    width: 20%; }
+  #page-body .deposit-b-c {
+    margin-top: 10px;
+    border: 2px solid #FEC370;
+    /* height: 340px; */ }
+  #page-body .deposit-b-c .deposit-b-c-1 {
+    padding: 16px 0 16px 16px;
+    /* font-weight: 700; */
+    font-size: 18px; }
+  #page-body .deposit-b-c .deposit-b-c-1 span:nth-child(2) {
+    color: red; }
+  #page-body .deposit-b-c-2 {
+    height: 150px; }
+  #page-body .deposit-b-c-2 > div:nth-child(1) {
+    width: 30%; }
+  #page-body .deposit-b-c-2 > div:nth-child(2) {
+    width: 70%; }
+  #page-body .deposit-b-c-2 .div-1 div {
+    padding-left: 16px; }
+  #page-body .deposit-b-c-2 .div-1 div p {
+    border-left: 2px solid red;
+    padding-left: 10px;
+    font-size: 20px; }
+  #page-body .deposit-b-c-2 .div-1 .div-img {
+    width: 202px;
+    height: 60px;
+    border: 1px solid #DDD;
+    margin-top: 20px;
+    margin-left: 16px; }
+  #page-body .deposit-b-c-2 .div-2 .li1 {
+    margin-bottom: 22px;
+    vertical-align: middle; }
+  #page-body .deposit-b-c-2 .div-2 span {
+    display: inline-block; }
+  #page-body .deposit-b-c-2 .div-2 .div-2-span1 {
+    width: 105px;
+    text-align: right; }
+  #page-body .deposit-b-c-2 .div-2 .div-2-span2 {
+    width: 265px; }
+  #page-body .vo {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+  #page-body .deposit-b-c-2 .div-2 .div-2-span3 {
+    width: 76px; }
+  #page-body .deposit-b-c-2 .div-2 .div-2-span3 button {
+    width: 100%;
+    height: 24px;
+    background-color: #ec1515;
+    color: #fff;
+    border-radius: 2px;
+    outline: none; }
+  #page-body .deposit-b-c-3 {
+    padding-top: 15px;
+    padding-bottom: 25px;
+    text-align: center;
+    color: #ff5d5d; }
+  #page-body .deposit-for-right-button a {
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 2px; }
+  #page-body .deposit-for-right-button .but1 {
+    margin-right: 5px;
+    background-color: #EEEEEE;
+    color: #C0C0C0; }
+  #page-body .deposit-for-right-button .but2 {
+    background-color: #ff4341;
+    color: #fff; }
+  #page-body .deposit-for-right-button {
+    text-align: right;
+    margin-right: 50px; }
+  #page-body .item-but2 {
+    margin-top: 42px; }
+  #page-body .vip-bar-item .deposit-account {
+    border: 1px solid #DDD;
+    padding: 17px 0 12px 38px;
+    background-color: #fff;
+    margin-bottom: 5px;
+    margin-top: 5px; }
+  #page-body .deposit-account li {
+    background: url(../image/onlinepay.png) no-repeat;
+    width: 160px;
+    height: 48px;
+    line-height: 26px;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    border: 2px solid #D5D9DC;
+    position: relative; }
+  #page-body .d-3-span2-click {
+    border: 2px solid #E93030 !important;
+    box-shadow: 0px 3px 3px #FFF3F2; }
+  #page-body .deposit-account li[paidtype="wechat"] {
+    background-position: -560px -40px; }
+  #page-body .deposit-account li[paidtype="jdpay"] {
+    background-position: -31px -129px; }
+  #page-body .deposit-account li[paidtype="bdpay"] {
+    background-position: -296px -129px; }
+  #page-body .deposit-account li[paidtype="qqpay"] {
+    background-position: -560px -129px; }
+  #page-body .deposit-account li[paidtype="tenpay"] {
+    background-position: -31px -212px; }
+  #page-body .deposit-account li[paidtype="alipay"] {
+    background-position: -296px -212px; }
+
+/* 这是日期插件的css */
+/* 
+#schedule-box{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 145px;
+    width: 300px;
+    margin: 0 auto;
+    font-size: 13px;
+    background-color: #fff;
+}
+
+.schedule-hd{
+    padding: 10px 15px;
+}
+.schedule-hd >span{
+    display: inline-block;
+}
+.schedule-hd >span:nth-child(2){
+    width: 170px;
+}
+.schedule-hd >span:nth-child(1){
+    width: 50px;
+}
+.schedule-hd >span:nth-child(3){
+    text-align: right;
+    width: 50px;
+}
+
+.today{
+    flex: 1;
+    text-align: center;
+}
+.ul-box{
+    overflow: hidden;
+    padding: 5px 0 5px 0px;
+}
+.ul-box > li{
+    float: left;
+    width: 14.28%;
+    text-align: center;
+    margin-bottom: 0;
+}
+.other-month{
+    color: #999;
+}
+.current-month{
+    color: #333333;
+}
+.today-style{
+    border-radius: 50%;
+    background: #58d321;
+}
+.arrow{
+    cursor: pointer;
+}
+.dayStyle{
+    display: inline-block;
+    width: 35px !important;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center !important;
+    line-height: 35px;
+    cursor: pointer;
+}
+.current-month > .dayStyle:hover{
+    background: #00BDFF;
+    color: #ffffff;
+}
+.today-flag{
+    background: #00C2B1;
+    color: #fff;
+}
+.boxshaw{
+    box-shadow: 2px 2px 15px 2px #e3e3e3;
+}
+.selected-style {
+    background: #00BDFF;
+    color: #ffffff;
+} */
+
+/*# sourceMappingURL=Thirdparty.css.map */

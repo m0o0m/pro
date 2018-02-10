@@ -1,0 +1,146 @@
+<style>
+    .select{width:20%;float:left;margin-right:10px}
+    #sh-select{display: none}
+    #money{width:20%}
+</style>
+
+<div class="page-header">
+    <h1>
+         <a href="javascript:;" id="agent_index">代理列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            额度设置
+        </small>
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" role="form"  id="pwd-form">
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">账号</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled='disabled' value="<{$data['login_user']}>" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">昵称</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled='disabled' value="<{$data['login_name']}>" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">余额</label>
+                <div class="col-sm-9">
+                    <input type="text" id='balance' disabled='disabled' value="<{$data['money']}>" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">交易额度</label>
+                <div class="col-sm-9">
+                    <input type="text" id='money' value="" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">模式</label>
+                <div class="col-sm-9">
+                    <label class="line-height-1 blue">
+                        <input checked='checked' type="radio" name="type" class="ace " value="1" >
+                        <span class="lbl">存入</span>
+                    </label>　 
+                    <label class="line-height-1 blue">
+                        <input type="radio" name="type" class="ace" value="2" >
+                        <span class="lbl">取出</span>
+                    </label>　
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="button" id='save'>
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        提交
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="button" id='reset' >
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="hr hr-18 dotted hr-double"></div>
+    </div>
+</div>
+
+<script>
+    var submit = true;
+
+    //重置
+    $('#reset').click(function () {
+        $('#money').val('');
+        $('input[name="type"][value="1"]').prop('checked', true);
+    })
+
+    //提交
+    $('#save').click(function () {
+        var type = $('input[name="type"]:radio:checked').val();
+        var agent_id = "<{$smarty.get.id}>";
+        var balance = $.trim($('#balance').val());
+        var money = $('#money').val();
+        var reg = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+
+        if (!reg.test(money)) {
+            layer.alert('交易金额只能输入正数!', {icon: 2});
+            return false;
+        } else if (type == 2 && parseInt(money) > parseInt(balance)) {
+            layer.alert('取出额度不能大于当前余额', {icon: 2});
+            return false;
+        }
+
+        var data = {
+            type: type,
+            agent_id: agent_id,
+            money: money
+        };
+
+
+        if (submit) {
+            submit = false;
+            $.ajax({
+                type: "post",
+                url: '/agent/setmoney',
+                data: data,
+                dataType: 'json',
+                error: function () {
+                    submit = true;
+                    layer.alert('网络异常,请稍后再试!', {icon: 2});
+                },
+                success: function (res) {
+                    if (res.code == 400) {
+                        layer.alert(res.msg, {icon: 2});
+                    } else if(res.ErrorCode == 2){
+                        layer.close(load);
+                        layer.alert(res.ErrorMsg, {icon: 2});
+                    }  else if (res.code == 200) {
+                        layer.alert(res.msg, {icon: 2});
+                        window.location.href = '/agent/index';
+                    }
+                }
+            });
+        }
+
+    })
+
+    $('#agent_index').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/agent/index',
+            container: '#container'
+        });
+    })
+</script>

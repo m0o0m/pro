@@ -1,0 +1,493 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-19 18:02:40
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/games/index.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a61c24000f6b0_28511412',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '5dcf0574c404ba01818ff284e5bcff09174656dd' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/games/index.html',
+      1 => 1515980760,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a61c24000f6b0_28511412 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style type="text/css">
+    #role-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="role-form" method='get' action='/games/index'>
+            <label for="fc_name">彩种名称:
+                <input type="text" name="fc_name" id='fc_name' value="<?php if (isset($_GET['name'])) {
+echo $_GET['name'];
+}?>">
+            </label>
+            <label for="fc_type">彩种类型:
+                <input type="text" name="fc_type" id='fc_type' value="<?php if (isset($_GET['type'])) {
+echo $_GET['type'];
+}?>">
+            </label>
+            <label >
+                状态:
+            </label >
+            <label >
+                <select name='state' id='state' >
+                    <option value="">全部</option>
+                    <option value="1" <?php if (isset($_GET['state']) && $_GET['state'] == 1) {?> selected <?php }?> >有效</option>
+                    <option value="2" <?php if (isset($_GET['state']) && $_GET['state'] == 2) {?> selected <?php }?> >无效</option>
+                    <option value="3" <?php if (isset($_GET['state']) && $_GET['state'] == 3) {?> selected <?php }?> >维护</option>
+                </select>
+            </label>
+            <label >
+                热门:
+            </label >
+            <label >
+                <select  name='hot' id='hot'>
+                    <option value="">全部</option>
+                    <option value="1" <?php if (isset($_GET['hot']) && $_GET['hot'] == 1) {?> selected <?php }?>>是</option>
+                    <option value="2" <?php if (isset($_GET['hot']) && $_GET['hot'] == 2) {?> selected <?php }?>>否</option>
+                </select>
+            </label>
+            <label >
+                排序:
+            </label >
+            <label >
+                <select  name='order_by' id='order_by'>
+                    <option value="2" <?php if (isset($_GET['order_by']) && $_GET['order_by'] == 2) {?> selected <?php }?>>倒序</option>
+                    <option value="1" <?php if (isset($_GET['order_by']) && $_GET['order_by'] == 1) {?> selected <?php }?>>正序</option>
+                </select>
+            </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">编号</th>
+                        <th class="center">所属分类</th>
+                        <th class="center">分类模板</th>
+                        <th class="center">彩种名称</th>
+                        <th class="center">彩种类型</th>
+                        <th class="center">图片预览</th>
+                        <th class="center">彩种状态</th>
+                        <th class="center">是否热门</th>
+                        <th class="center">是否推荐</th>
+                        <th class="center">排序</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['ltype_name'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['ltype_name'];
+} else { ?><font color="red">无</font><?php }?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['template'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['template'];
+} else { ?><font color="red">无</font><?php }?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['name'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['name'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['type'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+}?></td>
+                        <td class="center detail" rel="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['img_href'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['img_href'];
+}?>"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['img_href'])) {?><img src="<?php echo $_smarty_tpl->tpl_vars['v']->value['img_href'];?>
+" width="50" height="50" alt="无法显示" ><?php } else { ?>没有图片<?php }?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['stateTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['stateTxt'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['is_hotTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['is_hotTxt'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['is_recomTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['is_recomTxt'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['order_by'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['order_by'];
+}?></td>
+                         <td class="center handle">
+                           <a  class="btn btn-xs btn-success update" data_id = "<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" data_name="<?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+" data_type="<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+" data_path="<?php echo $_smarty_tpl->tpl_vars['v']->value['img_path'];?>
+"  data_order="<?php echo $_smarty_tpl->tpl_vars['v']->value['order_by'];?>
+" data_hot="<?php echo $_smarty_tpl->tpl_vars['v']->value['is_hot'];?>
+" data_state="<?php echo $_smarty_tpl->tpl_vars['v']->value['state'];?>
+" data_ltype="<?php echo $_smarty_tpl->tpl_vars['v']->value['ltype'];?>
+" template ="<?php echo $_smarty_tpl->tpl_vars['v']->value['template'];?>
+"  href='javascript:;'>编辑</a>
+                        </td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<div class="isHide layui-layer-wrap" id="action_cat" style="display: none;">
+    <div class="modal-body">
+        <form  class="form-horizontal" id="act_fom" rel="" >
+            <div class="form-group">
+                <label class="col-sm-3 control-label">彩种分类</label>
+                <div class="col-sm-7">
+                   <select name='type_name' id='act_cat_arr' style="width:120px;" >
+                    <?php if (isset($_smarty_tpl->tpl_vars['cat_arr']->value)) {?>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['cat_arr']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <option value="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['type'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+}?>"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['name'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['name'];
+}?></option>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                    <?php }?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">分类模板</label>
+                <div class="col-sm-7">
+                   <select name='template' id='template' style="width:120px;" >
+                     <option value="">无</option>
+                    <?php if (isset($_smarty_tpl->tpl_vars['data']->value)) {?>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <option value="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['type'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+}?>"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['name'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['name'];
+}?></option>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                    <?php }?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">彩种名称</label>
+                <div class="col-sm-7">
+                    <input type="text" id="act_name" class="form-control" name="act_name" placeholder="如：六合彩" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">彩种类型</label>
+                <div class="col-sm-7">
+                    <input type="text" id="act_type" class="form-control" name="act_type"  placeholder="如：liuhecai" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">图片路径</label>
+                <div class="col-sm-7">
+                    <input type="text" id="act_path" class="form-control" name="act_path"  placeholder="如:liuhecai.png" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">彩种状态</label>
+                <div class="col-sm-7">
+                   <select name='act_state' id='act_state' style="width:120px;" >
+                    <option value="1">有效</option>
+                    <option value="2">无效</option>
+                    <option value="3">维护</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">是否热门</label>
+                <div class="col-sm-7">
+                   <select  name='act_hot' id='act_hot' style="width:120px;" >
+                        <option value="1" >否</option>
+                        <option value="2" >是</option>
+                    </select>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-3 control-label">是否推荐</label>
+                <div class="col-sm-7">
+                   <select  name='act_recom' id='act_recom' style="width:120px;" >
+                        <option value="1" >否</option>
+                        <option value="2" >是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">排序</label>
+                <div class="col-sm-7">
+                    <input type="text" id="act_order" class="form-control" name="act_order"  placeholder="默认0,数字越大越靠前" style="width:200px;" />
+                </div>
+            </div>
+            <div class="form-group">
+               <center>
+                    <input type="hidden" name="act_id" id="act_id" value="" />
+                    <input  type="submit" class="btn btn-info"  value = "确定" onclick="return check()">
+               </center>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="showimg" class="layer-photos" style="text-align:center; display:none;min-height:150px;min-width:300px;">
+  <img layer-pid="" layer-src="" src="" alt="" id="img_src">
+</div>
+<?php echo '<script'; ?>
+>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var name = $.trim($('#fc_name').val());
+        var type = $.trim($('#fc_type').val());
+        var state = $.trim($('#state').val());
+        var hot = $.trim($('#hot').val());
+        var order_by = $.trim($('#order_by').val());
+        var type_name = $.trim($('#type_name').val());
+        var params = {
+            order_by:order_by,
+            name: name,
+            type: type,
+            state: state,
+            type_name: type_name,
+            hot: hot
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/games/index',
+            container: '#container'
+        });
+    }
+
+    //查看图片
+    $('.detail').click(function(){
+        var img_src = $(this).attr('rel');
+        if(img_src == ''){
+            layer.alert('无图片');
+        }else{
+            $('#img_src').attr('src',img_src);
+            $('#img_src').attr('alt','图片无法显示请确认图片路径是否正确');
+            openlayer('','','showimg','图片预览');
+        }
+
+    })
+
+    //添加
+    $('#create').click(function(){
+        // layer.alert('注意：非技术人员请勿轻易添加彩种！',{icon:0});
+        //取消下拉菜单选中
+        $('#act_cat_arr option').prop('selected',false);
+        $('#act_hot option').prop('selected',false);
+        $('#act_state option').prop('selected',false);
+        $('#template option').prop('selected',false);
+        //处理弹窗
+        $('#act_fom').attr('rel','add');
+        $('#act_type').attr('disabled',false);
+        $('#act_fom :input:text').val('');
+        openlayer('600px','550px','action_cat','添加彩种');
+    })
+   //修改
+    $('.update').click(function(){
+        $('#act_fom').attr('rel','edit');
+
+        var id = $(this).attr('data_id');
+        var type = $(this).attr('data_type');
+        var name = $(this).attr('data_name');
+        var path = $(this).attr('data_path');
+        var order = $(this).attr('data_order');
+        var is_hot = $(this).attr('data_hot');
+        var is_recom = $(this).attr('data_recom');
+        var state = $(this).attr('data_state');
+        var ltype = $(this).attr('data_ltype');
+        var template = $(this).attr('template');
+        $('#act_id').val(id);
+        $('#act_name').val(name);
+        $('#act_type').val(type);
+        $('#act_path').val(path);
+        $('#act_order').val(order);
+        //下拉菜单默认选中
+        $("#act_cat_arr option[value='"+ ltype +"']").prop('selected',true);
+        $("#act_state option[value='"+ state +"']").prop('selected',true);
+        $("#act_hot option[value='"+ is_hot +"']").prop('selected',true);
+        $("#act_recom option[value='"+ is_recom +"']").prop('selected',true);
+        $("#template option[value='"+ template +"']").prop('selected',true);
+
+        openlayer('600px','550px','action_cat','修改彩种');
+
+    })
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+    //状态
+    $('#state').change(function () {
+        renderTableByPjax();
+    })
+    //热门
+    $('#hot').change(function () {
+        renderTableByPjax();
+    })
+     //排序
+    $('#order_by').change(function () {
+        renderTableByPjax();
+    })
+
+      //打开Layer弹窗
+    function openlayer(width,height,content,title){
+        layer.open({
+            type: 1 //Page层类型
+            , area: [width, height]
+            , title: title
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: $('#'+content)
+        });
+    }
+    //验证提交
+    function check(){
+       var url,data;
+       var act_type = $('#act_fom').attr('rel');
+       var act_cat_type = $('#act_cat_arr').val();
+       var act_cat_name = $('#act_cat_arr ').find("option:selected").text();
+       var name = $('#act_name').val();
+       var type = $('#act_type').val();
+       var state = $('#act_state').val();
+       var hot = $('#act_hot').val();
+       var recom = $('#act_recom').val();
+       var path = $('#act_path').val();
+       var id = $('#act_id').val();
+       var order_by = $('#act_order').val();
+       var template = $('#template').val();
+
+       if(name == ''){
+         layer.alert('彩种名称不能为空！',{icon:0});
+         return false;
+       }
+       if(type == ''){
+         layer.alert('彩种类型不能为空！',{icon:0});
+         return false;
+       }
+       if(act_type == 'add'){
+          url = '/games/editgame?';
+          data = 'ltype='   + act_cat_type
+                 + '&lname=' + act_cat_name
+                 + '&name=' + name
+                 + '&type=' + type
+                 + '&path=' + path
+                 + '&order_by=' + order_by
+                 + '&is_hot=' + hot
+                 + '&is_recom=' + recom
+                 + '&template=' + template
+                 + '&state=' + state;
+       }else if(act_type == 'edit'){
+          url = '/games/editgame?';
+          data = 'ltype='   + act_cat_type
+                 + '&lname=' + act_cat_name
+                 + '&name=' + name
+                 + '&type=' + type
+                 + '&path=' + path
+                 + '&order_by=' + order_by
+                 + '&is_hot=' + hot
+                 + '&is_recom=' + recom
+                 + '&template=' + template
+                 + '&state=' + state
+                 + '&id=' + id;
+       }else{
+          layer.alert('出错啦,检查你的操作流程');
+          return false;
+       }
+       var callback = function(res){
+            if(res.ErrorCode == 1){
+                layer.alert(res.ErrorMsg,{icon:1},function(){
+                    window.location.reload();
+                })
+            }
+
+            if(res.ErrorCode == 2){
+                layer.close(index);
+                layer.alert(res.ErrorMsg,{icon:0});
+                return false;
+            }
+       }
+       request(url,'post',data,callback);
+       return false;
+    }
+     // ajax 提交
+    function request(url,type,data,callback) {
+         $.ajax({
+            type: type,
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+                return false;
+            },
+            dataType: 'json',
+            success: function (res) {
+               callback(res);
+            }
+        });
+    }
+
+<?php echo '</script'; ?>
+>
+<?php }
+}

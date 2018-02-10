@@ -1,0 +1,104 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>异常会员查询</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar" ng-show="newTodo">
+                                        <div class="row form-horizontal ">
+                                            <!--<label class="col-md-1 col-xs-4 input-label">{{lang['Status']}}：</label>-->
+                                            <div class="col-md-1 col-xs-8">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-change="search()" ng-model="status" ng-init="status='1'" >
+                                                        <option value="1">未处理</option>
+                                                        <option value="2">已处理</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label">处理方式：</label>
+                                            <div class="col-md-1 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <select class="form-control" ng-model="methods" ng-init="methods='1'">
+                                                            <option value="1">单个处理</option>
+                                                            <option value="2">批处理</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-1 col-xs-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="" ng-model="key">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline">
+                                        <div class="table-scroll">
+                                            <table  class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <td ng-show="methods==='2'"><input name="admin" type="checkbox" ng-click="selectAll($event)" /></td>
+                                                    <th>站点</th>
+                                                    <th>登录账号</th>
+                                                    <th>银行卡号</th>
+                                                    <th>持卡人</th>
+                                                    <th>卡开户行</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list">
+                                                    <td ng-show="methods==='2'"><input name="admin" type="checkbox" ng-click="select($event)" /></td>
+                                                    <td>{{item.site}}</td>
+                                                    <td>{{item.loginAccount}}</td>
+                                                    <td>{{item.bankAccount}}</td>
+                                                    <td>{{item.bankOwner}}</td>
+                                                    <td>{{item.bankAddress}}</td>
+                                                    <td>
+                                                        <button ng-show="item.status===1" class="btn btn-default" ng-click="deal()">立即处理</button>
+                                                        <button ng-show="item.status===2" class="btn btn-default">已处理</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+    </div>
+</div>
+</div>
+

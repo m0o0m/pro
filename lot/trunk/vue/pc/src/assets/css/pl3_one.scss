@@ -1,0 +1,230 @@
+@import "./function.scss";
+
+div,
+i,
+li,
+span,
+ul {
+  box-sizing: border-box;
+}
+
+.box {
+  width: 880px;
+  margin: 0 auto;
+  padding-top: 10px;
+  //padding-left: 8px;
+  //padding-right: 8px;
+  overflow: hidden;
+  // position: relative;
+  .footer2 {
+    width: 880px;
+    float: left;
+    //margin-top: 10px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    .money_button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .img {
+      margin-left: 125px;
+      float: left;
+      span {
+        //margin-left: 30px;
+        //height: 60px;
+        float: left;
+        display: block;
+        cursor: pointer;
+      }
+      .s1 {
+        height: 60px;
+        width: 64px;
+        background: url('../img/Chips.png') no-repeat 0px 0px;
+        background-size: 368px;
+        //height: 60px;
+        //width: 73px;
+        //background: url("../img/Chips.png")no-repeat 0 0px;
+      }
+      .s2 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -65px 0px;
+        background-size: 368px;
+      }
+      .s3 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -128px 0px;
+        background-size: 368px;
+      }
+      .s4 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -191px 0px;
+        background-size: 368px;
+      }
+      .s5 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -256px 0px;
+        background-size: 368px;
+      }
+      .s6 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -320px 0px;
+        background-size: 368px;
+      }
+    }
+    .one {
+      width: 160px;
+      float: left;
+      background-color: #eee;
+      padding: 5px;
+      border-radius: 10px;
+      margin-top: 12px;
+      border: none;
+      span {
+        color: $bg_color;
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      float: right;
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+}
+
+.box_table {
+  width: 100%;
+  overflow: hidden;
+}
+
+.list {
+  float: left;
+  width: 33.33333%;
+  line-height: 38px;
+  box-sizing: border-box;
+  > li:first-child {
+    height: 38px;
+    background-color: #eee;
+    color: #999;
+  }
+  > li {
+    border: 1px solid $border_color;
+  }
+  > li:nth-child(2) {
+    border-top: none;
+    color: rgb(64, 64, 64);
+    font-size: 12px;
+  }
+}
+
+.list:nth-child(even) {
+  > li {
+    border-right: none;
+    border-left: none;
+  }
+}
+
+.cla {
+  height: 39px;
+  display: inline-block;
+  width: 93px;
+  border-right: 1px solid $border_color;
+  cursor: pointer;
+  .box_bg {
+    display: block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    // background-color: #2698e2;
+    border-radius: 20px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 2px auto 0;
+  }
+}
+
+.ball {
+  // color: #fff !important;
+  // background: -prefix-linear-gradient(left top, #2698e2, white);
+  // background: linear-gradient(to bottom right, #2698e2, white);
+  // background-image: url("../../../assets/img/blue_box.png");
+  // background-repeat: no-repeat;
+  // background-position-x: 25px;
+  // background-position-y: -1px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 auto;
+  margin-top: 5px;
+  border-radius: 20px;
+  background: $ball;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.cla2 {
+  height: 39px;
+  width: 60px;
+  display: inline-block;
+  font-weight: 700;
+  margin: 0 auto;
+  border-right: 1px solid $border_color;
+  cursor: pointer;
+}
+
+.cla3 {
+  height: 39px;
+  width: 138px;
+  display: inline-block;
+  font-weight: 700;
+  margin: 0 auto;
+  input {
+    width: 36px;
+    border: 1px solid $border_color;
+    height: 20px;
+    margin-top: 10px;
+    border-radius: 3px;
+  }
+  .main {
+    border-color: red;
+    background-color: $bg_select;
+    color: red;
+  }
+}
+
+.lis_2 {
+  border-bottom: 1px solid $border_color;
+}
+
+.main {
+  background-color: $bg_select;
+}
+
+.lis_2:last-child {
+  border-bottom: none;
+}
+
+.table-current {
+  background-color: $bg_select;
+}

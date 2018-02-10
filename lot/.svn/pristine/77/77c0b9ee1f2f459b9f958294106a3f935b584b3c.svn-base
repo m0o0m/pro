@@ -1,0 +1,27 @@
+<?php
+use \Workerman\Worker;
+use \Applications\Upload\Lib\Common;
+require_once __DIR__ . '/../../Workerman/Autoloader.php';
+
+// 创建一个Worker监听2345端口，使用http协议通讯
+$worker = new Worker("http://0.0.0.0:2348");
+
+$worker->name = 'UploadHttp';
+
+// 启动4个进程对外提供服务
+$worker->count = 4;
+
+$worker->onWorkerStart = function($worker)
+{
+    Common::init($worker);
+};
+
+// 接收到浏览器发送的数据时回复hello world给浏览器
+$worker->onMessage = function($connection, $data)
+{
+    // 向浏览器发送hello world
+    Common::run($connection, $data);
+};
+
+// 运行worker
+Worker::runAll();

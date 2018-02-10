@@ -1,0 +1,158 @@
+<!-- 代理推广域名 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('Promote domain names')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 col-xs-3 input-label">{{getWord('Domain extension')}}</label>
+                                        <div class="col-md-2 col-xs-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="domain">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-3 text-center">
+                                            <div class="form-group">
+                                                <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-6 text-center">
+                                            <div class="">
+                                                <button type="submit" onclick="history.go(-1)"  class="btn btn-primary " >
+                                                    {{getWord('Return')}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2  col-xs-6 text-center">
+                                            <div class="">
+                                                <!--<button type="submit" data-smart-jqui-dialog-launcher="#dialog_simple"  class="btn btn-primary">-->
+                                                <button type="submit"  data-toggle="modal" data-target="#myModal1"  class="btn btn-primary btns" >
+                                                    <i class="fa fa-plus"></i> {{getWord('addDomain')}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">代理商</th>
+                                            <th class="text-center">会员总数</th>
+                                            <th class="text-center">域名</th>
+                                            <th class="text-center">添加日期</th>
+                                            <th class="text-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                            <td>{{item.agency_id}}</td>
+                                            <td>{{item.member_count}}</td>
+                                            <td>{{item.domain}}</td>
+                                            <td>{{item.create_time|formatDate}}</td>
+                                            <td>
+                                                <button class="btn btn-default btn-xs" ng-click="disable(item.id)">{{getWord('Delete')}}</button>
+                                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="Modify(item.domain,item.id)">{{getWord('Modify')}}</button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">{{getWord('addPromoteDomain')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Domain extension')}}</label>
+                                <div class="col-md-6 col-xs-8">
+                                    <input class="form-control" type="text"  ng-model="fromData.domain"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="adddomain()" data-dismiss="modal">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">{{getWord('modifyDomain')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Domain extension')}}</label>
+                                <div class="col-md-6 col-xs-8">
+                                    <input class="form-control"  type="text" ng-model="modifys.domain">
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="hidden" ng-model="modifys.domain_id">
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="modifyssubmit()" data-dismiss="modal">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

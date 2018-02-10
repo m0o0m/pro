@@ -1,0 +1,3 @@
+2017-09-12 13:59:52
+gd_ten select 2017091230 count error
+SELECT count(id) as count FROM my_bet_gd_ten where periods='2017091230' and js = 1 and addtime >= '1505195400'

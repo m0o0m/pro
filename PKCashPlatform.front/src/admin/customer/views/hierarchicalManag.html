@@ -1,0 +1,241 @@
+<!-- 层级管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue" >
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{lang['A_9']}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <span>
+                                            <label  class="col-md-1 col-xs-3 input-label">站点</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select data-smart-select2 class="selectWidth" ng-model="site_index_id">
+                                                        <option value="">全部站点</option>
+                                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                             <label  class="col-md-1 col-xs-3 input-label">多站点</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" ng-model="site_name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1 col-md-offset-0 col-xs-4 col-xs-offset-7">
+                                                <div class="form-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr class="text-align-center">
+                                                <td rowspan="2" style="vertical-align: middle" >{{lang['Name']}}</td>
+                                                <td rowspan="2" style="vertical-align: middle">{{lang['describe']}}</td>
+                                                <td colspan="3"  class="text-align-center">{{lang['Join condition']}}</td>
+                                                <td rowspan="2" style="vertical-align: middle" >{{lang['membership']}}</td>
+                                                <td rowspan="2" style="vertical-align: middle" >{{lang['Remarks']}}</td>
+                                            </tr>
+                                            <tr class="text-align-center">
+                                                <td>{{lang['Membership time']}}</td>
+                                                <td>{{lang['Deposit times']}}</td>
+                                                <td>{{lang['Total deposits']}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.describe}}</td>
+                                            <td>{{item.member_time}}</td>
+                                            <td>{{item.Deposit_times}}</td>
+                                            <td>{{item.Total_deposits}}</td>
+                                            <td>{{item.membership}}</td>
+                                            <td>{{item.remack}}</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <span style="display: none" class="zz">{{lang['accounts']}}</span>
+    <!--<input type="text" value="{{lang['accounts']}}" class="zz">-->
+
+    <!--分层-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">{{lang['Member hierarchy']}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid" id="aa">
+                        <div class="table-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>选择分层</th>
+                                    <th>名称</th>
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr >
+                                    <td><input type="radio" name="hierarch" ng-value="item.level_id" /></td>
+                                    <td>分层一</td>
+                                    <td>描述一</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="modifyHierarchySubmit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">会员分层</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">股东账号</label>
+                                <div class="col-md-6">
+                                    <label class="control-label">a123</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{lang['Password']}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{lang['Password']}}" type="text" ng-model="accounts.password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">确认密码</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{lang['Password']}}" type="text" ng-model="accounts.password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">股东名称</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" value="我是股东" type="text" >
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--优惠-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">支付平台设定</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <div class="table-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>币别</th>
+                                    <th>设定</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr >
+                                    <td>人民币(RMB)</td>
+                                    <td >
+                                        <select class="form-control" id="pay_set_id">
+                                            <option value="0">测试一</option>
+                                            <option value="10">测试二</option>
+                                            <option value="100">测试三</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="paySettingSubmit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

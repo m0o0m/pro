@@ -1,0 +1,102 @@
+{{template "header" .Header}}
+<style>
+body{
+    color: black;
+}
+</style>
+<!--主要内容-->
+<div class="register_content">
+    <div class="white_bj">
+        <div class="info_left">
+            <ul>
+                <li class="height">
+                <img src="{{.Header.CdnUrl}}/theme1/public/images/new/yhzc_welcom.jpg"></li>
+                {{$type := .Id}}
+                {{range $k,$v:=.Footer.Content}}
+                <a onclick="getPager('-','iword','{{$v.Id}}');" href="javascript:void(0);"><li class="{{if eq $v.Id $type}}active{{end}}" id="about">{{$v.Title}}</li></a> 
+                {{end}}
+            </ul>
+        </div>
+            <div class="info_right">
+                <div class="advertise-title"></div>
+                <div id="joinMember">
+                    <style>
+                        .mtab-menual li {
+                            background: #af1919 none repeat scroll 0 0;
+                            border-radius: 5px 5px 0 0;
+                            color: #fff;
+                            cursor: pointer;
+                            display: block;
+                            float: left;
+                            font-family: "Microsoft YaHei", "微软雅黑";
+                            font-size: 14px;
+                            font-weight: bolder;
+                            height: 32px;
+                            line-height: 32px;
+                            margin-right: 10px;
+                            text-align: center;
+                            width: 118px;
+                        }
+
+                        .mtab-menual li.mtab {
+                            background: #faae30 none repeat scroll 0 0;
+                            color: #fff;
+                        }
+
+                        .mtab-menual {
+                            border-bottom: 1px solid #af1919;
+                            font-family: "Microsoft YaHei", "微软雅黑";
+                            height: 32px;
+                            line-height: 32px;
+                            margin-bottom: 20px;
+                            padding-left: 0;
+                            padding-top: 10px;
+                            width: 100%;
+                        }
+                    </style>
+                    <div id="Union">
+                    {{range .List}}
+                    {{if .IList}}
+                        <ul class="mtab-menual" id="union1">
+                        {{range $key,$value:=.IList}}
+                        {{if ne .Url ""}}
+                            <a href="{{.Url}}">
+                                <li>{{.Title}}</li>
+                            </a>
+                        {{else}}
+                            <li>{{.Title}}</li>
+                        {{end}}
+
+                        {{end}}
+                        </ul>
+                    {{range $key,$value:=.IList}}
+                    {{if eq $key 0}}
+                        <div class="row union">{{.ContentHtml}}</div>
+                    {{else}}
+                        <div style="display: none;" class="row union">{{.ContentHtml}}</div>
+                    {{end}}
+                    {{end}}
+                    {{else}}
+                        <div>{{.Title}}</div>
+                        <div class="row">{{.ContentHtml}}</div>
+                    {{end}}
+                    {{end}}
+                    </div>
+                    <script>
+                        console.log({{.List}})
+                        var union = $('#union1 li');
+                        // alert(union.length)
+                        $('#union1 li').each(function (i) {
+                            $(this).click(function () {
+                                $('.union').hide();
+                                $('.union').eq(i).show();
+                            })
+                        })
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{{template "footer" .Footer}}

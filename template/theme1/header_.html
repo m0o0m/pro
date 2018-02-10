@@ -1,0 +1,563 @@
+{{define "header_"}}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>{{.SiteName}}</title>
+<meta http-equiv="Cache-Control" content="max-age=864000">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link href="{{.CdnUrl}}/theme1/public/css/font-awesome1.css" rel="stylesheet">
+<script type="text/javascript">
+    var $title = document.title;
+    parent.document.title = $title;
+    var CssType = "{{.PageType}}";
+    var cdnUrl = '{{.CdnUrl}}/theme1/public'; //js中調用cdn域名，將域名賦值給js全局變量
+    /*if (window.parent.cdnUrl){//cdn域名一律使用https
+        cdnUrl = window.parent.cdnUrl;
+    }*/
+    var jsVersion = '';
+    if (window.parent.jsVersion) {//js版本号
+        jsVersion = window.parent.jsVersion;
+    }
+    var scriptHtml = "<script src=\"" + cdnUrl + "/shared/sitepublic/js/jquery-1.7.2.min.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/jquery-ui-1.8.21.custom.min.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/md5.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/top.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/common_member.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/common_forpage.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/common_helper.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/common_forgames.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/common_static.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/float.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/jquery.cookie.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/easydialog.min.js\"><\/script>" +
+            "<link href=\"" + cdnUrl + "/shared/sitepublic/css/jquery-ui-1.9.2.custom.css\" type=\"text/css\" rel=\"stylesheet\">" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/unslider.min.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/sitepublic/js/tab.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/js/user_info.js\"><\/script>" +
+            "<script src=\"" + cdnUrl + "/shared/member/js/public.js\"><\/script>";
+    if (CssType == "2") {
+        //推送
+        scriptHtml += "<script src=\"" + cdnUrl + "/shared/push/swfobject.js\"><\/script>" +
+                "<script src=\"" + cdnUrl + "/shared/push/web_socket.js\"><\/script>" +
+                "<script src=\"" + cdnUrl + "/shared/push/config.js\"><\/script>" +
+                "<script src=\"" + cdnUrl + "/shared/push/push.js\"><\/script>";
+    }
+    scriptHtml += "<link href=\"" + cdnUrl + "/shared/simplelogin/css/modalCss.css\" rel=\"stylesheet\">" +
+            "<script src=\"" + cdnUrl + "/shared/simplelogin/js/modalJs.js\"><\/script>";
+    document.writeln(scriptHtml);
+</script>
+
+<script type="text/javascript">
+    var lotterys = '<link rel="stylesheet" href="' + cdnUrl + '/shared/lottlys/css/css/bootstrap.min.css" />'
+    //    lotterys+='<link rel="stylesheet" href="' + cdnUrl + '/shared/lottlys/css/css/lotteryhall.css" />'
+    document.writeln(lotterys)
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        // var imgdom = $("<img src='"+cdnUrl+"/shared/simplelogin/images/no.png'/>");
+        // var io = false;
+        // var config = {
+        //     codesImg : imgdom,
+        //     registHref : 'getPager("-","zhuce");',
+        //     DemoHref : 'javascript:;',
+        //     passwordID : 'passwordID',
+        //     userNameID : 'userNameID',
+        //     codeID     : 'codeID',
+        //     codesClick : function(){
+        //                     var xmlhttp;
+        //                     xmlhttp=new XMLHttpRequest();
+        //                     xmlhttp.open("GET","/code",true);
+        //                     xmlhttp.responseType = "blob";
+        //                     xmlhttp.onload = function(){
+        //                         if (this.status == 200) {
+        //                             var blob = this.response;
+        //                             imgdom.src=window.URL.createObjectURL(blob);
+        //                             imgdom.attr("src",window.URL.createObjectURL(blob))
+        //                             imgdom.show();
+        //                             _Code=xmlhttp.getResponseHeader("Code")
+        //                         }
+        //                     }
+        //                     xmlhttp.send();
+        //                     // imgdom.attr("src", "/yzm.php?type="+Math.random()+(new Date).getTime());
+        //                 },
+        //     enterBtnClick : function(){
+        //         var un  =   $("#userNameID").val();
+        //         if(un == "" || un == "帐户"){
+        //             $("#userNameID").focus();
+        //             return false;
+        //         }
+        //         var pw  =   $("#passwordID").val();
+        //         if(pw == "" || pw == "******"){
+        //             $("#passwordID").focus();
+        //             return false;
+        //         }
+        //         var rmNum   =   $("#codeID").val();
+        //         if(rmNum == "" || rmNum == '验证码'){
+        //             $("#codeID").focus();
+        //             return false;
+        //         }
+        //         if(!io){
+        //             io = true;
+        //             $.ajax({
+        //                 type: "post",
+        //                 url: "login",
+        //                 headers:{"Code":_Code,'platform':'pc'},
+        //                 contentType: "application/json",
+        //                 data: JSON.stringify({account:un,password:pw,code:rmNum}),
+        //                 // dataType: 'json',
+        //                 success: function(data){
+        //                     if(data.code == 20021){
+        //                         zhuModal.show('验证码错误，请重新输入');
+        //                         $("#codeID").val('');
+        //                         $("#codeID").select();
+        //                         io = false;
+        //                         imgdom.attr("src", "/yzm.php?type="+Math.random()+(new Date).getTime());
+        //                     }else if(data.code == 20001){
+        //                         zhuModal.show('账号密码不匹配,请重新输入!');
+        //                         $("#codeID").val('');
+        //                         $("#passwordID").val('');
+        //                         $("#username").select();
+        //                         io = false;
+        //                     }else if(data.code == 30138){
+        //                         zhuModal.show('账号不存在!');
+        //                         $("#codeID").val('');
+        //                         $("#passwordID").val('');
+        //                         $("#username").select();
+        //                         io = false;
+        //                     }else if(data.code == 20002){
+        //                         zhuModal.show('对不起，账户已暂停使用,请联系在线客服！');
+        //                         io = false;
+        //                     }else if(data.code == 60000){
+        //                         zhuModal.show('系统错误！');
+        //                         io = false;
+        //                     }else{
+        //                         setCookie("loginBack", data['data'].token);    //将登陆信息写入缓存
+        //                         window.location.href= '/login/info';
+        //                         return;
+        //                     }   
+        //                 }
+        //             });
+        //         }
+        //     }
+
+        // };
+        zhuModal.init({loginConfig: zhuModalConfig()});
+    })
+
+    function zhuModalConfig() {
+        var imgdom = $("<img src='" + cdnUrl + "/shared/simplelogin/images/no.png'/>");
+        var io = false;
+        var config = {
+            codesImg: imgdom,
+            registHref: 'getPager("-","zhuce");',
+            DemoHref: 'javascript:;',
+            passwordID: 'passwordID',
+            userNameID: 'userNameID',
+            codeID: 'codeID',
+            codesClick: function () {
+                var xmlhttp;
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", "/code", true);
+                xmlhttp.responseType = "blob";
+                xmlhttp.onload = function () {
+                    if (this.status == 200) {
+                        var blob = this.response;
+                        imgdom.src = window.URL.createObjectURL(blob);
+                        imgdom.attr("src", window.URL.createObjectURL(blob))
+                        imgdom.show();
+                        _Code = xmlhttp.getResponseHeader("Code")
+                    }
+                }
+                xmlhttp.send();
+                // imgdom.attr("src", "/yzm.php?type="+Math.random()+(new Date).getTime());
+            },
+            enterBtnClick: function () {
+                var un = $("#userNameID").val();
+                if (un == "" || un == "帐户") {
+                    $("#userNameID").focus();
+                    return false;
+                }
+                var pw = $("#passwordID").val();
+                if (pw == "" || pw == "******") {
+                    $("#passwordID").focus();
+                    return false;
+                }
+                var rmNum = $("#codeID").val();
+                if (rmNum == "" || rmNum == '验证码') {
+                    $("#codeID").focus();
+                    return false;
+                }
+                if (!io) {
+                    io = true;
+                    $.ajax({
+                        type: "post",
+                        url: "login",
+                        headers: {"Code": _Code, 'platform': 'pc'},
+                        contentType: "application/json",
+                        data: JSON.stringify({account: un, password: pw, code: rmNum}),
+                        // dataType: 'json',
+                        success: function (data) {
+                            if (data.code == 20021) {
+                                zhuModal.show('验证码错误，请重新输入');
+                                $("#codeID").val('');
+                                $("#codeID").select();
+                                io = false;
+                                imgdom.attr("src", "/yzm.php?type=" + Math.random() + (new Date).getTime());
+                            } else if (data.code == 20001) {
+                                zhuModal.show('账号密码不匹配,请重新输入!');
+                                $("#codeID").val('');
+                                $("#passwordID").val('');
+                                $("#username").select();
+                                io = false;
+                            } else if (data.code == 30138) {
+                                zhuModal.show('账号不存在!');
+                                $("#codeID").val('');
+                                $("#passwordID").val('');
+                                $("#username").select();
+                                io = false;
+                            } else if (data.code == 20002) {
+                                zhuModal.show('对不起，账户已暂停使用,请联系在线客服！');
+                                io = false;
+                            } else if (data.code == 60000) {
+                                zhuModal.show('系统错误！');
+                                io = false;
+                            } else {
+                                setCookie("loginBack", data['data'].token);    //将登陆信息写入缓存
+                                window.location.href = '/login/info';
+                                return;
+                            }
+                        }
+                    });
+                }
+            }
+
+        };
+        return config
+    }
+</script>
+<style>
+    /*按钮弹出框*/
+
+    .eg_modal {
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10001;
+        background-color: rgba(0, 0, 0, 0.5);
+
+    }
+
+    .eg_money_popup {
+        color: #000;
+        width: 500px;
+        height: 208px;
+        background-color: rgb(248, 248, 248);
+        padding: 5px;
+        font-size: 1.1em;
+        border-radius: 5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        display: none;
+    }
+
+    .eg_money_popup a {
+        text-decoration: none;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .eg_money_popup a:hover {
+        text-decoration: none;
+
+    }
+
+    .eg_money_popup > form > div {
+        overflow: hidden;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .eg_money_popup > form div:nth-child(n+3) {
+        margin-top: 10px;
+    }
+
+    .eg_money_popup > form div:nth-child(2) {
+        margin-top: 5px;
+    }
+
+    .eg_money_popup > form > div:not(.form-submit-list) {
+        font-weight: bold;
+        font-size: 1.4em;
+    }
+
+    .eg_money_popup > form > div:nth-child(1) > a {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        float: right;
+        background: url("{{.CdnUrl}}//theme3/public/shared/lottlys/images/images/popup/cross_normal.png") no-repeat;
+    }
+
+    .eg_money_popup > form > div:nth-child(1) > a:hover {
+        background-image: url("{{.CdnUrl}}//theme3/public/shared/lottlys/images/images/popup/cross_change.png");
+    }
+
+    .eg_money_popup > form > div:nth-child(2) strong {
+        text-decoration: underline;
+        color: red;
+    }
+
+    .eg_money_popup > form > div:nth-child(3) > a {
+        position: absolute;
+        right: 13%;
+        width: 92px;
+        height: 30px;
+        line-height: 30px;
+        color: blue;
+        background: url("{{.CdnUrl}}//theme3/public/shared/lottlys/images/images/popup/gray_dialog.png") no-repeat 12px 0px;
+
+    }
+
+    .eg_money_popup > form > div:nth-child(3) > a:hover {
+        color: red;
+    }
+
+    .eg_money_popup > form > div:nth-child(3) {
+        position: relative;
+    }
+
+    .eg_money_popup > form > div:nth-child(3) p {
+        color: red;
+        position: relative;
+        left: -13%;
+    }
+
+    .eg_money_popup > form > div:nth-child(4) input {
+        position: relative;
+        left: -10%;
+        height: 30px;
+        outline: none;
+    }
+
+    .eg_money_popup > form > div:nth-child(5) a {
+        width: 152px;
+        height: 30px;
+        display: inline-block;
+        line-height: 30px;
+        color: white;
+    }
+
+    .eg_money_popup > form > div:nth-child(5) a:first-child {
+
+        background: url("{{.CdnUrl}}//theme3/public/shared/lottlys/images/images/popup/purple_button.png") no-repeat 13px 0px;
+    }
+
+    .eg_money_popup > form > div:nth-child(5) a:last-child {
+
+        background: url("{{.CdnUrl}}//theme3/public/shared/lottlys/images/images/popup/purple_button.png") no-repeat 13px 0px;
+    }
+
+    .eg_money_popup > form > div:nth-child(5) > a:hover {
+        background-image: url("{{.CdnUrl}}//theme3/public/shared/lottlys/images/images/popup/orange_button.png");
+    }
+
+    .eg_money_popup > form > .form-submit-transfer {
+        display: none;
+    }
+</style>
+<!--弹出框-->
+<div class="eg_modal">
+    <div class="eg_money_popup">
+        <form>
+            <div class="form-group">
+                <a href="#"></a>
+            </div>
+            <div class="form-group">
+                <div id="egtcGameMoney" class="col-sm-offset-2 col-sm-9">EG游戏账户余额（当前：
+                    <strong></strong>
+                    ）
+                </div>
+                <div id="csGameMoney" class="col-sm-offset-2 col-sm-9">官方彩票账户余额（当前：
+                    <strong></strong>
+                    ）
+                </div>
+            </div>
+            <div class="form-group">
+
+                <label for="system_money" class="col-sm-3 col-sm-offset-2">系统余额：</label>
+                <p class="col-sm-3" id="system_money"></p>
+                <!-- <a href="javascript:openmember('1');" class="col-sm-2">去存款</a> -->
+                <a href="/member/bank" class="col-sm-2">去存款</a>
+            </div>
+            <div class="form-group">
+                <label for="rollin_money" class="col-sm-3 col-sm-offset-2">转入金额：</label>
+                <input type="text" class="col-sm-5 form-control" id="rollin_money" onkeyup="quataclearNoNum(this);">
+            </div>
+            <div class="form-group form-submit-list">
+                <a href="#" id="hl" class="col-sm-2 col-sm-offset-2">忽略提醒进入游戏</a>
+                <a href="#" class="col-md-2" id="button_quota">确认转账</a>
+            </div>
+            <div class="from-group form-submit-transfer">
+                <p class="col-sm-10 col-sm-offset-4">转账中,请稍等....</p>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" id="egtc_quatatoken" value="">
+<input type="hidden" id="cs_quatatoken" value="">
+<input id="lotteryTypeName" name="lottery_type_name" type="hidden" value="">
+<script>
+    var min_money = Number("");
+    // 弹框
+    $('#button_quota').click(function () {
+        var rollin_money = $('#rollin_money').val();
+        lotteryTypeName = $("#lotteryTypeName").val();
+        var edtype_num = '';
+        if (lotteryTypeName == 'eg_fc') {
+            edtype_num = '2';
+        }
+        if (lotteryTypeName == 'cs_fc') {
+            edtype_num = '3';
+        }
+        var token = $('#' + lotteryTypeName + '_quatatoken').val();
+
+        if (rollin_money < min_money) {
+            alert("转换金额不得小于" + min_money + "，或者输入金额不能为空！");
+            return false;
+        }
+        $('.form-submit-list').css('display', 'none');
+        $('.form-submit-transfer').css('display', 'block');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/balance/conversions",
+            data: {
+                'money': '',
+                'fromType': '',
+                'forType': ''
+            },
+            dataType: 'json',
+            error: function () {
+                alert('异常错误，请联系客服');
+                hid(lotteryTypeName);
+            },
+            success: function (msg) {
+                if (msg.status == 18) {
+                    alert("额度转换成功");
+                    hid(lotteryTypeName);
+                    opengeme('', 'video', lotteryTypeName)
+                } else {
+                    alert(msg.info);
+                    hid(lotteryTypeName);
+                }
+            },
+        });
+
+    })
+
+    function hid(lotteryTypeName) {
+        ajax_tokn(lotteryTypeName);
+        $('.eg_modal').css('display', 'none');
+        $('.form-submit-list').css('display', 'block');
+        $('.form-submit-transfer').css('display', 'none');
+        history.go(0);
+    }
+
+    function ajax_tokn(lotteryTypeName) {
+        $.ajax({
+            type: "POST",
+            url: "<{$site_url}>/index.php/index/auata_token",
+            data: "type=" + lotteryTypeName,
+            dataType: 'json',
+            success: function (msg) {
+                $('#' + lotteryTypeName + '_quatatoken').val(msg.token);
+            },
+        });
+    }
+
+    var gameHref = {
+        href: '',
+        gameid: '',
+        opengame3: function (href) {
+            if (href.indexOf('eg_fc') >= 0) {
+                $("#lotteryTypeName").val('eg_fc');
+                $('#egtcGameMoney').show();
+                $('#egtcGameMoney strong').html('￥' + openGameMoney('eg'));
+            } else {
+                $('#egtcGameMoney').hide();
+            }
+            if (href.indexOf('cs_fc') >= 0) {
+                $("#lotteryTypeName").val('cs_fc');
+                $('#csGameMoney').show();
+                $('#csGameMoney strong').html('￥' + openGameMoney('cs'));
+            } else {
+                $('#csGameMoney').hide();
+            }
+            $("#system_money").html(loginData.balance);
+            var _this = this;
+            _this.href = href;
+            _this.modal_game();
+        },
+        modal_game: function () {
+//        模态框显示
+            $('.eg_modal').show();
+            $('.eg_money_popup').show();
+            $('.eg_money_popup>form>div:first-child a').click(function () {
+                $('.eg_money_popup').hide();
+                $('.eg_modal').hide();
+            })
+        },
+        hl: function () {
+            var _this = this;
+            opengeme(_this.gameid, 'video', _this.href);
+            $('.eg_modal').css('display', 'none');
+            $('.eg_money_popup').hide();
+        }
+    };
+
+    //判断是直接进入还是带入额度
+    function opengeme2(gameid, vtype) {
+        if (getCookie('loginBack')) {
+            var _this = this;
+            _this.gameid = gameid;
+            gameHref.opengame3(vtype);
+        } else {
+            var config = zhuModalConfig();
+            config.DemoHref = 'opengeme("","video","' + vtype + '");';
+            zhuModal.init({loginConfig: config});
+            zhuModal.login("sw");
+        }
+    }
+
+    // 给忽略绑定事件，目的为了跳转正确的彩票
+    $('#hl').click(function () {
+        gameHref.hl();
+    })
+
+    function quataclearNoNum(obj) {
+        obj.value = obj.value.replace(/[^\d+]/g, '');
+    }
+
+    //获取相关游戏平台余额
+    function openGameMoney(type) {
+        var $money = 0;
+        for (var k in loginData.TBalance) {
+            var v = loginData.TBalance[k];
+            if (type == v.name) {
+                $money = v.balance;
+            }
+        }
+        return $money;
+    }
+</script>
+{{end}}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>Pk</title>
+    <link rel="stylesheet" href="../../style/css/weui.min.css">
+    <link rel="stylesheet" href="../../style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../../style/css/reset.css">
+    <link rel="stylesheet" href="../../style/css/admin.css">
+    <link rel="stylesheet" href="../../style/fonts/iconfont.css">
+</head>
+
+<body ontouchstart style="background-color:#eee;">
+<header class="head-h">
+        <ul class="h-head">
+                <li>
+                        <a>
+                                <i class="iconfont wap-fanhui"></i>
+                            </a>
+                </li>
+                <li>
+                    <h2>优惠活动</h2>
+                </li>
+                <li>
+                    <a href="/m/index">首页</a>
+                </li>
+            </ul>
+</header>
+<div id="wrapper">
+    <div id="scroller">
+        <!--iscroll 滑动 开始-->
+        <main class="apply">
+            <section class="apply-content">
+                <h2>优惠活动自助申请</h2>
+                <div class="total">
+                    <span>活动类别：</span>
+                    <select>
+                        <option value="">--请选择--</option>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                        <option value="">4</option>
+                    </select>
+                    <!-- <i class="iconfont ">&#xe609;</i> -->
+                    <p class="fred">(必须选择)</p>
+                </div>
+            </section>
+
+            <section class="apply-content">
+                <div class="apply-money">
+                    <span>会员账号：</span>
+                    <input type="text">
+                </div>
+            </section>
+
+            <section class="apply-content">
+                <div class="apply-money">
+                    <span>申请金额：</span>
+                    <input type="text">
+                    <p class="fred">(必须填写)</p>
+                </div>
+            </section>
+
+            <section class="apply-content">
+                <div class="apply-sake">
+                    <div>
+                        <span>申请理由：</span>
+                        <p class="fred">(必须填写)</p>
+                    </div>
+                    <div>
+                        <textarea class="apply-txt" cols="25" rows="3"></textarea>
+                    </div>
+                </div>
+            </section>
+            <div class="submit-content">
+                提交申请
+            </div>
+        </main>
+
+
+        <!--iscroll 滑动 结束-->
+    </div>
+</div>
+</body>
+<script src="../../../style/js/jquery-2.1.4.js"></script>
+<script src="../../../style/js/jquery-weui.min.js"></script>
+<script src="../../../style/js/iscroll.js"></script>
+<script src="../../../style/js/admin.js"></script>
+<script>
+    // $(document).ready(function (e) {
+    //     $('.m-statemas .table tbody th').click(function () {
+    //         $(this).parent().siblings('tr').find('td').slideToggle()
+    //         $(this).parent().find('.iconfont').toggleClass('curr')
+    //     })
+    // });
+    // $('.h-head .iconfont').click(function () {
+    //     window.history.go(-1);
+    // })
+</script>
+</html>

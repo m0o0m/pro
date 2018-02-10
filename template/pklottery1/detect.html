@@ -1,0 +1,325 @@
+{{template "header" .Header}}
+<div id="page-container" style="padding:0px;">
+    <div id="page-body" class="clearfix" style="background: #adbfe5">
+        <!-- main -->
+        <div id="page-sidebar">
+            <div class="sidemenu-header"></div>
+            <div class="sidemenu-body">
+                <ul class="sidemenu">
+                {{range .Header.Content}}
+                {{if eq .Module.VType "video"}}
+                {{range .SubModule}}
+                {{if or (eq .VType "bbin") (eq .VType "ag") (eq .VType "dg") (eq .VType "ab") }}
+                    <li>
+                        <a href="javascript:;" onclick="javascript:zhuModal.login();"
+                           onclick="opengeme('','video','{{.VType}}')" title="{{.Name}}">
+                        {{.Name}}
+                        </a>
+                    </li>
+                {{end}}
+                {{end}}
+                {{end}}
+                {{if eq .Module.VType "fc"}}
+                {{range .SubModule}}
+                {{if or (eq .VType "pk_fc") (eq .VType "cs_fc") }}
+                    <li>
+                        <a href="javascript:;" onclick="javascript:zhuModal.login();"
+                           onclick="opengeme('','video','{{.VType}}')" title="{{.Name}}">
+                        {{.Name}}
+                        </a>
+                    </li>
+                {{end}}
+                {{end}}
+                {{end}}
+                {{if eq .Module.VType "dz"}}
+                {{range .SubModule}}
+                {{if or (eq .VType "bbin_dz") (eq .VType "pt_dz") (eq .VType "gd_dz") }}
+                    <li>
+                        <a href="javascript:;" onclick="javascript:zhuModal.login();"
+                           onclick="opengeme('','video','{{.VType}}')" title="{{.Name}}">
+                        {{.Name}}
+                        </a>
+                    </li>
+                {{end}}
+                {{end}}
+                {{end}}
+                {{if eq .Module.VType "sp"}}
+                {{range .SubModule}}
+                {{if or (eq .VType "bbin_sp") (eq .VType "im_sp") (eq .VType "pk_sp") }}
+                    <li>
+                        <a href="javascript:;" onclick="javascript:zhuModal.login();"
+                           onclick="opengeme('','video','{{.VType}}')" title="{{.Name}}">
+                        {{.Name}}
+                        </a>
+                    </li>
+                {{end}}
+                {{end}}
+                {{end}}
+                {{end}}
+                </ul>
+            </div>
+            <div class="sidemenu-footer"></div>
+        </div>
+        <div id="page-right">
+            <style>
+                #contentbg .content .left h2 {
+                    display: block;
+                    width: 460px;
+                    height: 42px;
+                    margin: 0 auto;
+                    color: #502c1e;
+                    font-size: 20px;
+                    text-align: left;
+                    text-indent: 65px;
+                }
+
+                #contentbg .content .left h2 span {
+                    font-size: 12px;
+                }
+
+                #contentbg .content .left h2 {
+                    margin: 0;
+                    text-indent: 0px;
+                }
+
+                #contentbg .content .left {
+                    width: 520px;
+                    min-height: 550px;
+                    float: left;
+                }
+
+                #contentbg .content .right {
+                    width: 340px;
+                    min-height: 550px;
+                    float: right;
+                }
+
+                #contentbg .content .left .top {
+                    width: 520px;
+                    overflow: hidden;
+                }
+
+                #contentbg .content .left .bottom {
+                    width: 520px;
+                    overflow: hidden;
+                }
+
+                #contentbg .content .right p {
+                    line-height: 200%;
+                    font-size: 12px;
+                    color: #502c1e;
+                }
+
+                #contentbg .content .right p span {
+                    font-size: 14px;
+                    color: #502c1e;
+                }
+
+                #contentbg .content .right > a {
+                    float: left;
+                    display: block;
+                    width: 164px;
+                    height: 45px;
+                    line-height: 45px;
+                    font-family: "微软雅黑";
+                    font-size: 13px;
+                    text-indent: 15px;
+                    text-indent: -9999px;
+                }
+
+                #contentbg .content .right a.bt01 {
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/online.png) no-repeat;
+                    margin-right: 10px;
+                }
+
+                #contentbg .content .right a.bt02 {
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/button_note.png) no-repeat;
+                }
+
+                #contentbg .content .right .download {
+                    clear: both;
+                    padding-bottom: 20px;
+                }
+
+                #contentbg .content .right .download h2 {
+                    line-height: 50px;
+                    color: #814600;
+                    font-size: 16px;
+                }
+
+                #contentbg .content .right .download a {
+                    line-height: 30px;
+                    color: #814600;
+                    text-decoration: none;
+                    padding: 2px 5px;
+                    margin: 5px;
+                }
+
+                #contentbg .content .right .download a:hover {
+                    color: #f60;
+                    border-bottom: 2px solid #f60;
+                }
+
+                .footer p {
+                    text-align: center;
+                    color: #69410e;
+                }
+
+                .tline {
+                    width: 520px;
+                    height: 35px;
+                    margin-bottom: 3px;
+                    font-size: 13px;
+                    position: relative;
+                }
+
+                .formclass {
+                    width: 100%;
+                    overflow: hidden;
+                }
+
+                .formclass input {
+                    line-height: 31px;
+                    height: 31px;
+                    font-family: "微软雅黑";
+                    color: #fee633;
+                    margin: 0;
+                    padding: 0;
+                    border: none;
+                }
+
+                .formclass input.msinput {
+                    background: rgb(212, 180, 19);
+                    border: #ccc 0px solid;
+                    color: #fff;
+                    text-align: center;
+                    width: 83px;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                }
+
+                .formclass input.urlinput {
+                    background: rgb(212, 180, 19);
+                    border: 0px solid #ccc;
+                    color: #fff;
+                    width: 215px;
+                    padding-left: 15px;
+                    position: absolute;
+                    top: 0px;
+                    left: 140px;
+                }
+
+                .formclass input.buttonopen {
+                    width: 114px;
+                    height: 34px;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/button.png) no-repeat center center;
+                    cursor: pointer;
+                    border: none;
+                    position: absolute;
+                    top: 0px;
+                    left: 380px;
+                }
+
+                .tline img {
+                    position: absolute;
+                    top: 6px;
+                    left: 100px;
+                }
+
+                .formclass center {
+                    display: block;
+                    width: 520px;
+                    height: 40px;
+                    position: relative;
+                }
+
+                .formclass center input {
+                    background: rgb(212, 180, 19);
+                    color: #fff;
+                    height: 30px;
+                    cursor: pointer;
+                    border: none;
+                    margin: 0;
+                    padding: 0 44px;
+                    position: absolute;
+                    top: 0px;
+                    left: 140px;
+                }
+
+            </style>
+            <div class="advertise-title"></div>
+            <div id="joinMember" style="background:url({{.Header.CdnUrl}}/theme3/public/images/xljc.png) no-repeat;">
+
+                <div class="right">
+                    <!-- <h2 style="margin-bottom:0px;margin:0 auto;width:170px;">线路检测中心<span></span></h2> -->
+                    <div id="Dialog" style="display:none"></div>
+                    <div class="left">
+                        <div class="top">
+                            <!--				<h2>最新网址 <span>WEB SITE</span></h2>-->
+                            <script language="javascript">
+                                console.log({{.InfoDomain}})
+                                var urlArr ={{.InfoDomain}};
+                                tim = 1;
+                                setInterval("tim++", 100);
+                                b = 1;
+                                var autourl = new Array();
+                                $.each(urlArr, function (i, v) {
+                                    n = Number(i) + 1;
+                                    if (v.Domain.indexOf('http://') >= 0 || v.Domain.indexOf('https://') >= 0) {
+                                        autourl[n] = v.Domain;
+                                    } else {
+                                        if (v.status == 1) {
+                                            autourl[n] = "http://" + v.Domain;
+                                        } else {
+                                            autourl[n] = "https://" + v.Domain;
+                                        }
+                                    }
+
+                                });
+                            </script>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <script>
+                    function butt() {
+                        document.write("<form class='formclass' id='csform' name=autof style='padding:0px;  margin-left:125px;margin-top:25px;padding-top: 130px;'>")
+
+                        for (var i = 1; i < autourl.length; i++) document.write("<div class='tline'><input type=text class='msinput' name=txt" + i + " value=测试中……><img src='{{.Header.CdnUrl}}/theme3/public/images/arrow.png' border='0' /><input class='urlinput' type=text name=url" + i + ">&nbsp;<input type='button'  onclick='window.open(this.form.url" + i + ".value)' class='buttonopen'></div>")
+                        document.write("<center><a href='/detect' target='mem_index'><input type=button value=重新检测刷新访问速度 class='buttonsubmit'></a></center></form>")
+                    }
+
+                    butt()
+
+                    function auto(url) {
+                        document.getElementById('csform')["url" + b].value = url
+                        if (tim > 200) {
+                            document.getElementById('csform')["txt" + b].value = "链接超时"
+                        }
+                        else {
+                            document.getElementById('csform')["txt" + b].value = tim * 10 + "ms"
+                        }
+                        b++
+                    }
+
+                    function run() {
+                        for (var i = 1; i < autourl.length; i++) document.write("<img src=" + autourl[i] + " width=1 height=1 onerror=auto('" + autourl[i] + "') style='display:none'>")
+                    }
+
+                    run()
+                </script>
+                <div style="height:125px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+</div>
+{{template "footer" .Footer}}

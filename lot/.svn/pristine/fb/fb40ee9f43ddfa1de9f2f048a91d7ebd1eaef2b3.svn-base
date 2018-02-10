@@ -1,0 +1,42 @@
+package global
+
+import "sync"
+
+type  SyncMap struct {
+	Data map[string]string
+	sync.RWMutex
+}
+
+func (s *SyncMap) Init() {
+	s.Lock()
+	s.Data = make(map[string]string)
+	s.Unlock()
+}
+
+func (s *SyncMap) Set(key string, value string) {
+	s.Lock()
+	s.Data[key] = value
+	s.Unlock()
+}
+func (s *SyncMap) Get(key string) string {
+	s.RLock()
+	defer s.RUnlock()
+	return s.Data[key]
+}
+
+func (s *SyncMap) Del(key string) {
+	s.RLock()
+	defer s.RUnlock()
+	delete(s.Data, key)
+}
+//
+func (s *SyncMap) GetIDs() []interface{} {
+	s.RLock()
+	defer s.RUnlock()
+	ids := make([]interface{}, 0)
+	for k, _ := range s.Data {
+		ids = append(ids, k)
+	}
+	return ids
+}
+

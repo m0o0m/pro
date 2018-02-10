@@ -1,0 +1,66 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('ThePendingCase')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+
+                                    </div>
+                                    <form class="form-inline">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center">案件编号</th>
+                                                    <th class="text-center">文案标题</th>
+                                                    <th class="text-center">添加日期</th>
+                                                    <th class="text-center">文案类别</th>
+                                                    <th class="text-center">操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list" class="text-center">
+                                                    <td>{{item.id}}</td>
+                                                    <td>{{item.title}}</td>
+                                                    <td>{{item.create_time|fiterTime}}</td>
+                                                    <td>{{item.type}}</td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-xs" ng-click="send(item.id)">{{getWord('sendAudit')}}</button>
+                                                        <a class="btn btn-warning btn-xs" href="{{item.url}}">{{getWord('See')}}</a>
+                                                        <button class="btn btn-success btn-xs" ng-click="delete(item.id)">{{getWord('Delete')}}</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+    </div>
+</div>
+</div>
+

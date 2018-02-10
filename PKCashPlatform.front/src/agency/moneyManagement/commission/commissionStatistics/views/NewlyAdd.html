@@ -1,0 +1,86 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('MemberPromotionSettings')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">期数名称:</label>
+                                                        <div class="col-md-3">
+                                                            <div class="input-group">
+                                                                <input class="form-control " placeholder="" type="text" >
+                                                            </div>
+                                                        </div>
+                                                        <lable class=" control-label" style="color: red">【查询区间限制两个月】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">当前状态:</label>
+                                                        <div class="col-md-3 inline-group">
+                                                            <label class="radio col col-md-4 ">
+                                                                <input type="radio" name="radio-inline2" class="enable" checked="checked" value="1" style="margin-top: 1px">
+                                                                {{lang['Enables']}}</label>
+                                                            <label class="radio col col-md-4">
+                                                                <input type="radio" name="radio-inline2" class="disable" value="0" style="margin-top: 1px">
+                                                                <i></i>{{lang['Disable']}}</label>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">开始日期:</label>
+                                                        <div class="col-md-3">
+                                                            <div class="input-group ">
+                                                                <input type="text" name="mydate" placeholder="开始日期" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">结束日期:</label>
+                                                        <div class="col-md-3">
+                                                            <div class="input-group ">
+                                                                <input type="text" name="mydate" placeholder="结束时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6 text-align-center">
+                                                        <button class="btn btn-primary"  type="submit">
+                                                            {{getWord('Confirm')}}
+                                                        </button>
+
+
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

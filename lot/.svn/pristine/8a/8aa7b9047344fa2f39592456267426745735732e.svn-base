@@ -1,0 +1,1436 @@
+<template lang="html">
+  <div class="nine">
+    <div class="nav">
+      <ul>
+        <li v-for="(item,i) in menus" :class="{'item_class':selectItem==i}" @click="type(item,i)">{{item.name}}</li>
+      </ul>
+    </div>
+    <div class="content">
+      <ul v-for="(item,i) in lists[selectItem]" class='list clearfix fl'>
+        <li class="top">
+          <ul class='clearfix'>
+            <li class="fl">生肖</li>
+            <li class="fl">赔率</li>
+            <li class="fl three">勾选</li>
+            <li class="fl four">球号</li>
+          </ul>
+        </li>
+        <li v-for="(key,k) in item.object" class="cen" :class="{'table-current':key.flag}"  @click="numClick(key)">
+          <ul class='clearfix'>
+            <li class="one fl">
+              {{key.lname}}
+            </li>
+            <li class="two fl">
+              {{key.odd}}
+            </li>
+            <li class="three fl">
+               <i class="icon iconfont pk-selected my_icon-g" :class="{'my_icon-g_click':key.flag}"></i>
+            </li>
+            <li class="four four-c fl"><span v-for="yan in key.box" class="ball" :style="{background:yan.color}">{{yan.num}}</span></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="footer1 clearfix" style="margin-bottom: 20px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength='9' style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+  </div>
+</template>
+
+<script>
+import {Modal,Input,Checkbox} from 'iview';
+import api from "../../../api/config";
+import MeModal from "../../../share_components/bet_happy_tail";
+import '../../../assets/css/six_twelve.scss'
+export default {
+  components: {
+    MeModal,Modal,'I-Input':Input,Checkbox
+  },
+  props: {},
+  data() {
+    return {
+      select_num:[],
+      money: "",
+      modal: false,
+      leng: 2,
+      selectItem: 0,
+      // arr: [],
+      ArrIndex: 0,
+      cdata: null,
+      menus: [
+        {
+          name: "二肖",
+          leng: 2
+        },
+        {
+          name: "三肖",
+          leng: 3
+        },
+        {
+          name: "四肖",
+          leng: 4
+        },
+        {
+          name: "五肖",
+          leng: 5
+        },
+        {
+          name: "六肖",
+          leng: 6
+        },
+        {
+          name: "七肖",
+          leng: 7
+        },
+        {
+          name: "八肖",
+          leng: 8
+        },
+        {
+          name: "九肖",
+          leng: 9
+        },
+        {
+          name: "十肖",
+          leng: 10
+        },
+        {
+          name: "十一肖",
+          leng: 11
+        }
+      ],
+      lists: [
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "鼠",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "牛",
+                // index: 1,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "虎",
+                // index: 2,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "兔",
+                // index: 3,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "龙",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "蛇",
+                // index: 4,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "马",
+                // index: 5,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "羊",
+                // index: 6,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猴",
+                // index: 7,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "鸡",
+                // index: 8,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "狗",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              },
+              {
+                lname: "猪",
+                // index: 9,
+                odd: null,
+                flag: false,
+                money: "",
+                box: []
+              }
+            ]
+          }
+        ]
+      ]
+    };
+  },
+  created() {
+    this.fetchData();
+    this.$root.$on("success", e => {
+      if (e) {
+        this.modal = false;
+        this.reset();
+      }
+    });
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    $route: "fetchData", // 只有这个页面初始化之后，这个监听事件才开始生效
+    $route: "reset"
+  },
+  mounted() {
+    this.$root.$emit("child_change", 0);
+    this.$root.$on("time_out", e => {
+      if (e) {
+        this.fetchData(2);
+      }
+    });
+  },
+  destroyed() {
+    this.$root.$off("time_out");
+  },
+  methods: {
+    sortNumber: function(a, b) {
+      return a.sort - b.sort;
+    },
+    fetchData: function(type) {
+      type == 2
+        ? this.$root.$emit("loading", true, true)
+        : this.$root.$emit("loading", true);
+      let body = {
+        fc_type: this.$route.query.page,
+        gameplay: 175
+      };
+      api.getgameindex(this, body, res => {
+        if (res.data.ErrorCode == 1) {
+          this.cdata = res.data.Data.c_data;
+          this.$root.$emit("auto", res.data.Data.auto);
+          this.$root.$emit("closetime", res.data.Data.closetime);
+          this.$root.$emit("c_data", res.data.Data.c_data);
+
+          let back_data = res.data.Data.odds;
+          back_data.sort(this.sortNumber);
+          this.computed(back_data, res.data.shengxiao);
+          this.$root.$emit("loading", false);
+          this.$root.$emit("get_closetime", res.data.Data.closetime);
+        }
+      });
+    },
+    computed: function(data, shengxiao) {
+      this.$set(this.lists, this.lists);
+      this.$set(this.menus, this.menus);
+      var k = 0;
+
+      for (let i = 0; i < this.lists.length; i++) {
+        let name = data[k].remark.slice(
+          data[k].remark.search("#") + 1,
+          data[k].remark.length
+        );
+        this.menus[i].name = name.slice(0, name.search("#"));
+        for (let l = 0, m = 0; l < this.lists[i].length; l++) {
+          for (var n = 0; n < this.lists[i][l].object.length; n++, k++, m++) {
+            Object.assign(this.lists[i][l].object[n], data[k]);
+            switch (this.lists[i][l].object[n].lname) {
+              case "鼠":
+                this.lists[i][l].object[n].name = "mouse";
+                this.lists[i][l].object[n].box = shengxiao.mouse;
+                break;
+              case "牛":
+                this.lists[i][l].object[n].name = "cattle";
+                this.lists[i][l].object[n].box = shengxiao.cattle;
+                break;
+              case "虎":
+                this.lists[i][l].object[n].name = "tiger";
+                this.lists[i][l].object[n].box = shengxiao.tiger;
+                break;
+              case "兔":
+                this.lists[i][l].object[n].name = "rabbit";
+                this.lists[i][l].object[n].box = shengxiao.rabbit;
+                break;
+              case "龙":
+                this.lists[i][l].object[n].name = "dragon";
+                this.lists[i][l].object[n].box = shengxiao.dragon;
+                break;
+              case "蛇":
+                this.lists[i][l].object[n].name = "snake";
+                this.lists[i][l].object[n].box = shengxiao.snake;
+                break;
+              case "马":
+                this.lists[i][l].object[n].name = "horse";
+                this.lists[i][l].object[n].box = shengxiao.horse;
+                break;
+              case "羊":
+                this.lists[i][l].object[n].name = "sheep";
+                this.lists[i][l].object[n].box = shengxiao.sheep;
+                break;
+              case "猴":
+                this.lists[i][l].object[n].name = "monkey";
+                this.lists[i][l].object[n].box = shengxiao.monkey;
+                break;
+              case "鸡":
+                this.lists[i][l].object[n].name = "chicken";
+                this.lists[i][l].object[n].box = shengxiao.chicken;
+                break;
+              case "狗":
+                this.lists[i][l].object[n].name = "dog";
+                this.lists[i][l].object[n].box = shengxiao.dog;
+                break;
+              case "猪":
+                this.lists[i][l].object[n].name = "pig";
+                this.lists[i][l].object[n].box = shengxiao.pig;
+                break;
+            }
+            for (var v = 0; v < this.lists[i][l].object[n].box.length; v++) {
+              if (this.lists[i][l].object[n].box.length == 5) {
+                this.lists[i][l].object[n].box.pop();
+              }
+              switch (this.lists[i][l].object[n].box[v].color) {
+                case "blue":
+                  this.lists[i][l].object[n].box[v].color =
+                    "linear-gradient(#2991d2, #1c6196)";
+                  break;
+                case "green":
+                  this.lists[i][l].object[n].box[v].color =
+                    "linear-gradient(#3ec948, #026d09)";
+                  break;
+                case "red":
+                  this.lists[i][l].object[n].box[v].color =
+                    "linear-gradient(#ee4c19, #bd2706)";
+                  break;
+              }
+            }
+          }
+        }
+      }
+    },
+    type(key, i) {
+      this.reset();
+      this.selectItem = i;
+      this.leng = this.menus[i].leng;
+       console.log('选择了几？：'+this.selectItem);
+    },
+
+    numClick: function(item) {
+      console.log(item);
+      if (item.flag) {
+        this.ArrIndex -= 1;
+        item.flag = false;
+        item.money = "";
+      } else {
+        this.ArrIndex += 1;
+        if(this.ArrIndex == this.leng+1){
+          item.flag = false;
+          this.ArrIndex -= 1;
+          this.$Modal.warning({
+            content: "只允许选择" + this.leng + "个生肖",
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        }else{
+          item.flag = true;
+          item.money = this.money;
+        }
+      }
+    },
+    push_money() {
+      this.money = this.money.replace(/\D/g, "");
+      this.computed_money();
+    },
+    change_money: function () { this.computed_money() },
+    computed_money() {
+      for (let l = 0; l < this.lists[this.selectItem].length; l++) {
+        for (var n = 0; n < this.lists[this.selectItem][l].object.length; n++) {
+          if (this.lists[this.selectItem][l].object[n].flag) {
+            this.lists[this.selectItem][l].object[n].money = this.money;
+          } else {
+            this.lists[this.selectItem][l].object[n].money = "";
+          }
+        }
+      }
+    },
+    go_to() {
+      let a = this.money + 'a';
+      this.money = a.replace(/\D/g, "");
+      if (this.ArrIndex < this.leng && this.ArrIndex != 0) {
+        this.$Modal.warning({
+          content: "您还需选择" + (this.leng-this.ArrIndex) + "个生肖",
+          onOk: () => {
+            clearTimeout(time);
+          }
+        });
+        var time = setTimeout(() => {
+          this.$Modal.remove();
+        }, 500);
+      }else{
+        var kk = 0;
+        for (let l = 0; l < this.lists[this.selectItem].length; l++) {
+          for (
+            var n = 0;
+            n < this.lists[this.selectItem][l].object.length;
+            n++
+          ) {
+            let b = this.lists[this.selectItem][l].object[n].money + 'b';
+            this.lists[this.selectItem][l].object[n].money = b.replace(/\D/g, "");
+            kk += Number(this.lists[this.selectItem][l].object[n].money);
+          }
+        }
+        if (kk != 0) {
+          this.modal = true;
+          this.$root.$emit("c_data", this.cdata);
+          document.querySelector("body").style.overflow = "hidden";
+          this.$root.$emit(
+            "id-selected-tail",
+            this.lists[this.selectItem],
+            function() {}
+          );
+        } else if (kk == 0) {
+          this.$Modal.warning({
+            content: "请先下注"
+          });
+          window.setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        }
+      }
+    },
+    reset() {
+      this.ArrIndex = 0;
+      this.money = "";
+      this.$root.$emit("reset", "");
+      for (let l = 0; l < this.lists[this.selectItem].length; l++) {
+        for (var n = 0; n < this.lists[this.selectItem][l].object.length; n++) {
+          this.lists[this.selectItem][l].object[n].money = "";
+          this.lists[this.selectItem][l].object[n].flag = false;
+        }
+      }
+    },
+    cancel: function(item) {
+      this.modal = false;
+      document.querySelector("body").style.overflow = "auto";
+    },
+    add_money: function(type) {
+      let money = this.money;
+      this.money = Number(money) + type;
+      console.log(type);
+      this.computed_money();
+    }
+  }
+};
+</script>
+
+

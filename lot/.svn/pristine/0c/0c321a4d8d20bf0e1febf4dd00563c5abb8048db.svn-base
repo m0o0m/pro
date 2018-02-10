@@ -1,0 +1,65 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"net"
+	"time"
+	"core"
+)
+
+func main() {
+	tcpAddr, err := net.ResolveTCPAddr("tcp4", "127.0.0.1:9999")
+	checkError(err)
+	conn, err := net.DialTCP("tcp", nil, tcpAddr)
+	checkError(err)
+
+	echoProtocol := &core.PacketProtocol{}
+
+	message := `hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello
+	hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohe
+	llohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohell
+	ohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohelloh
+	hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohe
+	llohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohell
+	ohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohelloh
+	hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohe
+	llohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohell
+	ohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohelloh
+	hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohe
+	llohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohell
+	`
+
+	// ping <--> pong
+	for i := 0; i < 30000000000; i++ {
+		// write
+		//超过2M的防火墙会屏蔽
+		int, err := conn.Write(core.NewPacket([]byte(message), false).Serialize())
+		if err != nil {
+			fmt.Printf("Server error----1 :[%v] [%v]\n", err, int)
+		}
+
+
+		fmt.Printf("Server error----1 :[%v] [%v]\n", err, core.NewPacket([]byte("123456789012"),false))
+
+
+		// read
+		p, err := echoProtocol.ReadPacket(conn)
+		if err == nil {
+			packet := p.(*core.Packet)
+			fmt.Printf("Server reply:[%v] [%v]\n", packet.GetLength(), string(packet.GetBody()))
+		} else {
+			fmt.Printf("Server error :[%v]\n", err)
+		}
+
+		time.Sleep(2 * time.Second)
+	}
+
+	conn.Close()
+}
+
+func checkError(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}

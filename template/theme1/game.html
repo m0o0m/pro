@@ -1,0 +1,13 @@
+{{template "header" .Header}}
+        <!--主要内容-->
+        <div style="height:20px;"></div>
+        <div class="game_main">
+			{{template "game" .}}
+        </div>
+    </div>
+</div>
+<style>
+.cp_content .news .new02 {    width: 875px;}
+.slots_banner{background: url({{.Header.CdnUrl}}/theme1/public/images/new/slots_banner.jpg) no-repeat top center !important;}
+</style>
+{{template "footer" .Footer}}

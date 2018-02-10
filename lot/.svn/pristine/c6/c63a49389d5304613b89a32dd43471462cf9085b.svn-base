@@ -1,0 +1,8 @@
+/**
+ * Created by huygo on 2017/12/9.
+ */
+window.configs = {
+  // net_url:"http://adminyii-lotteryapi.pk051.com:32795/",
+  net_url:"http://pkapi.pk1358.com/",
+  lan_url:"192.168.0.111/api/"
+};

@@ -1,0 +1,307 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-30 10:57:11
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/admin/index.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a6fdf07c37c79_81214486',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '3073cb25a25a529f3248df269cf6f59b6861fe0f' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/admin/index.html',
+      1 => 1517016145,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a6fdf07c37c79_81214486 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    #admin-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="admin-form" method='get' action='/admin/index'>
+            <label for="login_user">账号:
+                <input type="text" name="login_user" id='login_user' value="<?php if (isset($_GET['login_user'])) {
+echo $_GET['login_user'];
+}?>">
+            </label>
+            <!-- <label for="login_name">昵称:
+                <input type="text" name='login_name'  id="login_name" value="<?php if (isset($_GET['login_name'])) {
+echo $_GET['login_name'];
+}?>">
+            </label> -->
+
+            <label for="line_reload"> 所属角色:</label>
+            <select type="select" name="role"  id="role" style="width:120px;">
+                <option value="" selected>全部</option>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['roles']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                <option value="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?>"  <?php if (isset($_GET['role']) && $_smarty_tpl->tpl_vars['v']->value['id'] == $_GET['role']) {?>selected<?php }?> ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['role_name'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['role_name'];
+}?></option>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+            </select>
+            <label for="online"> 在线状态:
+                <select type="select" name="online"  id="online">
+                    <option value="" >全部</option>
+                    <option value="1" <?php if (isset($_GET['online']) && $_GET['online'] == 1) {?>selected<?php }?>>在线</option>
+                    <option value="2" <?php if (isset($_GET['online']) && $_GET['online'] == 2) {?>selected<?php }?>>离线</option>
+                </select>
+            </label>
+
+            <label > 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum" >
+                    <option value="100"  <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 100) {?>selected<?php }?>>100</option>
+                    <option value="500" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 500) {?>selected<?php }?>>500</option>
+                    <option value="1000" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 1000) {?>selected<?php }?>>1000</option>
+                </select>
+            </label>
+            <label > 页码:
+                <select type="select" name="page"  id="page">
+                    <?php
+$__section_loop_0_saved = isset($_smarty_tpl->tpl_vars['__smarty_section_loop']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop'] : false;
+$__section_loop_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['pagecount']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_loop_0_total = $__section_loop_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = new Smarty_Variable(array());
+if ($__section_loop_0_total != 0) {
+for ($__section_loop_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] = 0; $__section_loop_0_iteration <= $__section_loop_0_total; $__section_loop_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']++){
+?>
+                    <option value="<?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+"
+                            <?php if (isset($_GET['page']) && $_GET['page'] == (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1) {?>selected<?php }?>>
+                            <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+
+                </option>
+                <?php
+}
+}
+if ($__section_loop_0_saved) {
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = $__section_loop_0_saved;
+}
+?>
+            </select>
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">账号</th>
+                        <th class="center">昵称</th>
+                        <th class="center">角色</th>
+                        <th class="center">是否在线</th>
+                        <th class="center">IP</th>
+                        <th class="center">状态</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['login_user'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['login_user'];
+}?></a>
+                        </td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['login_name'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['login_name'];
+}?></td>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['role_name'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['role_name'];
+}?></a>
+                        </td>
+                        <td class="center"> <?php if ($_smarty_tpl->tpl_vars['v']->value['is_withdrawals']) {?>在线<?php } else { ?><font color="#999">离线</font><?php }?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['login_ip'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['login_ip'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['deleteTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['deleteTxt'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['addDate'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['addDate'];
+}?></td>
+                        <td class="center handle">
+                           <a  class="btn btn-xs btn-success detail" data_a = "<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" data_b="detail" href='javascript:;'>详情</a>
+                            <a  class="btn btn-xs btn-success update" data_a = "<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" data_b="update" href='javascript:;'>角色</a>
+                            <?php if ($_smarty_tpl->tpl_vars['v']->value['is_withdrawals']) {?>
+                            <a  class="btn btn-xs btn-success withdrawals" onclick="javascript:withdrawals(<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+);" >踢线</a>
+                            <?php }?>
+                        </td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<?php echo '<script'; ?>
+>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var login_user = $.trim($('#login_user').val());
+        var login_name = $.trim($('#login_name').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+        var role = $.trim($('#role').val());
+        var online = $.trim($('#online').val());
+
+        var params = {
+            login_user: login_user,
+            login_name: login_name,
+            role: role,
+            online: online,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/admin/index',
+            container: '#container'
+        });
+    }
+    //祥情
+    $('.detail').click(function(){
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/admin/edit?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+
+     //踢线
+    function withdrawals(uid){
+        var url = 'withdrawals';
+        var data = 'uid=' + uid + '&type=ourbackend_UserOnline';
+        var callback = function(res){
+            if (res.ErrorCode == 2) {
+                layer.alert(res.ErrorMsg, {icon: 2});
+                layer.close(index);
+            } else if (res.ErrorCode == 1) {
+                layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.reload();});
+            }
+        }
+
+        doajax(url,data,callback);
+    }
+
+    //添加
+    $('#create').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/admin/edit/?type=create',
+            container: '#container'
+        });
+    })
+    //修改
+    $('.update').click(function(){
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/admin/edit?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+    //角色
+    $('#role').change(function () {
+        renderTableByPjax();
+    })
+    $('#online').change(function () {
+        renderTableByPjax();
+    })
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+    $('#page').change(function () {
+        renderTableByPjax();
+    })
+
+     function doajax(url,data,callback){
+         $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+               callback(res);
+            }
+        });
+    }
+
+<?php echo '</script'; ?>
+>
+<?php }
+}

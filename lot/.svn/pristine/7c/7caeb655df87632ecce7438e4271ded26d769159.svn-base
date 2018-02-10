@@ -1,0 +1,6 @@
+@import "./function.scss";
+
+.mark_six {
+  width: 920px;
+  overflow: hidden;
+}

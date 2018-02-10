@@ -1,0 +1,174 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-02-01 19:38:38
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/stat/_list.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a72fc3e74abb5_06776553',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '2f03875ecc7a3f71d3126afebc61dc31b5258998' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/stat/_list.html',
+      1 => 1514631398,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a72fc3e74abb5_06776553 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">彩种</th>
+                        <!-- <th class="center">线路ID</th> -->
+                        <?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'][0]['at_id'])) {?><th class="center">代理编号</th><?php }?>
+                        <?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'][0]['at_username'])) {?><th class="center">代理帐号</th><?php }?>
+                        <?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'][0]['uid'])) {?><th class="center">会员编号</th><?php }?>
+                        <?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'][0]['uname'])) {?><th class="center">会员帐号</th><?php }?>
+                        <th class="center">总注单</th>
+                        <th class="center">总笔数</th>
+                        <th class="center">有效注单</th>
+                        <th class="center">有效笔数</th>
+                        <th class="center">赢金额</th>
+                        <th class="center">赢笔数</th>
+                        <th class="center">盈利</th>
+                        <th class="center">注单日期</th>
+                        <th class="center">最近统计时间</th>
+                    </tr>
+                </thead>
+                <?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'])) {?>
+                <tbody>
+                  <?php if (count($_smarty_tpl->tpl_vars['result']->value['data']) == 0) {?>
+                    <tr><th class="center" colspan="20">无记录</th></tr>
+                  <?php } else { ?>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value['data'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['fc_typeTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['fc_typeTxt'];
+} elseif (isset($_smarty_tpl->tpl_vars['v']->value['fc_type'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['fc_type'];
+}?></td>
+                        <!-- <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+}?></td> -->
+                        <?php if (isset($_smarty_tpl->tpl_vars['v']->value['at_id'])) {?><td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['at_id'];?>
+</td><?php }?>
+                        <?php if (isset($_smarty_tpl->tpl_vars['v']->value['at_username'])) {?><td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['at_username'];?>
+</td><?php }?>
+                        <?php if (isset($_smarty_tpl->tpl_vars['v']->value['uid'])) {?><td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['uid'];?>
+</td><?php }?>
+                        <?php if (isset($_smarty_tpl->tpl_vars['v']->value['uname'])) {?><td class="center"><?php echo $_smarty_tpl->tpl_vars['v']->value['uname'];?>
+</td><?php }?>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['bet'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['bet'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['bet_count'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['bet_count'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['valid_bet'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['valid_bet'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['valid_bet_count'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['valid_bet_count'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['win'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['win'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['win_count'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['win_count'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['money'])) {?>
+                        <?php if ($_smarty_tpl->tpl_vars['v']->value['money'] > 0) {?><font color="red"><?php } else { ?><font color="green"><?php }
+echo $_smarty_tpl->tpl_vars['v']->value['money'];?>
+</font>
+                        <?php }?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['addday'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['addday'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['updatedate'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['updatedate'];
+}?></td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+
+<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+     <tr>
+        <td colspan="2">本页注单下注金额:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['bet'];?>
+ 元</td>
+        <td colspan="2">本页注单下注笔数:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['bet_count'];?>
+ 笔</td>
+    </tr>
+    <tr>
+        <td colspan="2">本页注单有效下注金额:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['valid_bet'];?>
+ 元</td>
+        <td colspan="2">本页注单有效下注笔数:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['valid_bet_count'];?>
+ 笔</td>
+    </tr>
+     <tr>
+        <td colspan="2">本页注单贏金额:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['win'];?>
+ 元</td>
+        <td colspan="2">本页注单赢笔数:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['win_count'];?>
+ 笔</td>
+    </tr>
+    <tr>
+        <td colspan="2">符合条件注单下注金额:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['all_bet'];?>
+ 元</td>
+        <td colspan="2">符合条件注单下注笔数:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['all_bet_count'];?>
+ 笔</td>
+    </tr>
+    <tr>
+        <td colspan="2">符合条件注单有效下注金额:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['all_valid'];?>
+ 元</td>
+        <td colspan="2">符合条件注单有效下注笔数:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['all_valid_count'];?>
+ 笔</td>
+    </tr>
+    <tr>
+        <td colspan="2">符合条件注单赢金额:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['all_win'];?>
+ 元</td>
+        <td colspan="2">符合条件注单赢笔数:</td>
+        <td colspan="4"><?php echo $_smarty_tpl->tpl_vars['result']->value['total']['all_win_count'];?>
+ 笔</td>
+    </tr>
+    <tr><th colspan="2">统计数据：</th><th colspan="10">
+            本页总盈利： <span style="<?php if ($_smarty_tpl->tpl_vars['result']->value['total']['money'] > 0) {?>color:red;<?php } else { ?>color:green;<?php }?>"> <?php echo $_smarty_tpl->tpl_vars['result']->value['total']['money'];?>
+</span> 元 
+            符合条件注单总盈利：<span style="<?php if ($_smarty_tpl->tpl_vars['result']->value['total']['all_money'] > 0) {?>color:red;<?php } else { ?>color:green;<?php }?>"> <?php echo $_smarty_tpl->tpl_vars['result']->value['total']['all_money'];?>
+</span> 元</th>
+    </tr>
+
+</table>
+                  <?php }
+}
+}
+}

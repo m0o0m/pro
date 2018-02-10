@@ -1,0 +1,98 @@
+<!-- 代理申请管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>视讯账号管理</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <label class="col-md-1 col-xs-4 input-label">站点：</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select data-smart-select2  class="selectWidth" ng-model="site">
+                                                        <option value="">请选择</option>
+                                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">视讯类型：</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select class="form-control"  ng-model="videoType">
+                                                        <option value="">请选择</option>
+                                                        <option value="{{item.id}}" ng-repeat="item in siteJson">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-4 input-label">账号：</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select class="form-control"  ng-model="accountType">
+                                                        <option value="">请选择</option>
+                                                        <option value="1">系统用户名</option>
+                                                        <option value="2">第三方平台用户名</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-0 col-xs-8 col-xs-offset-4">
+                                                <div class="searchselect">
+                                                    <input class="form-control"  type="text" ng-model="key" placeholder="{{lang['Administrator account search']}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-md-offset-0 col-xs-4 col-xs-offset-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">系统用户名</th>
+                                            <th class="text-center">第三方平台用户名</th>
+                                            <th class="text-center">用户余额</th>
+                                            <th class="text-center">站点SITE_ID</th>
+                                            <th class="text-center">站点INDEX_ID</th>
+                                            <th class="text-center">创建日期</th>
+                                            <th class="text-center">状态</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                            <td>{{item.systemUsername}}</td>
+                                            <td>{{item.thirdUsername}}</td>
+                                            <td>{{item.userBalance}}</td>
+                                            <td>{{item.siteId}}</td>
+                                            <td>{{item.indexId}}</td>
+                                            <td>{{item.createTime|fiterTime}}</td>
+                                            <td>{{item.status|fiterStatused}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

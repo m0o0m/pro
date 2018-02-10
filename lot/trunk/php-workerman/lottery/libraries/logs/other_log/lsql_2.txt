@@ -1,0 +1,83 @@
+2017-12-29 13:55:06
+SELECT COUNT(id) FROM `my_bet_record` WHERE `js`=2 and `addday` = 20171201
+
+2017-12-29 13:55:07
+SELECT
+                    `fc_type` ,
+                    `uid` ,
+                    min(`sh_id`) as sh_id,
+                    min(`ua_id`) as ua_id,
+                    min(`at_id`) as at_id ,
+                    min(`line_id`) as line_id ,
+                    min(`at_username`) as at_username ,
+                    min(`uname`) as uname,
+                    min(`addday`) as addday,
+                    count(1) as bet_count,
+                    sum(bet) as bet,
+                    sum(case when status in (2, 3,6,7) then 1 else 0 end) as valid_bet_count,
+                    sum(case when status in (2, 3,6,7) then bet else 0 end) as valid_bet,
+                    sum(case when status in (2,6,7) then 1 else 0 end) as win_count,
+                    sum(case when status in (2,6,7) then bet else 0 end) as win
+                    FROM
+                    my_bet_record
+                    WHERE
+                    `js`=2 and `addday` = 20171201
+                    GROUP BY
+                    fc_type ,
+                    uid 
+                    limit 357478
+
+2017-12-29 13:57:37
+SELECT COUNT(id) FROM `my_bet_record` WHERE `js`=2 and `addday` = 20171127
+
+2017-12-29 13:57:37
+SELECT
+                    `fc_type` ,
+                    `uid` ,
+                    min(`sh_id`) as sh_id,
+                    min(`ua_id`) as ua_id,
+                    min(`at_id`) as at_id ,
+                    min(`line_id`) as line_id ,
+                    min(`at_username`) as at_username ,
+                    min(`uname`) as uname,
+                    min(`addday`) as addday,
+                    count(1) as bet_count,
+                    sum(bet) as bet,
+                    sum(case when status in (2, 3,6,7) then 1 else 0 end) as valid_bet_count,
+                    sum(case when status in (2, 3,6,7) then bet else 0 end) as valid_bet,
+                    sum(case when status in (2,6,7) then 1 else 0 end) as win_count,
+                    sum(case when status in (2,6,7) then bet else 0 end) as win
+                    FROM
+                    my_bet_record
+                    WHERE
+                    `js`=2 and `addday` = 20171127
+                    GROUP BY
+                    fc_type ,
+                    uid 
+                    limit 111
+
+2017-12-29 13:57:37
+SELECT DISTINCT(concat(uid,fc_type)) as unique_key  from my_stat_data_bet where addday =20171127
+
+2017-12-29 13:57:37
+update my_stat_data_bet set bet_count= case concat(uid,fc_type) when "1bj_10" then "23" when "1bj_28" then "6" when "1bj_kl8" then "1" when "1cq_ssc" then "10" when "1gx_k3" then "13" when "1js_k3" then "6" when "1jx_11" then "26" when "1pc_28" then "8" when "1sd_11" then "6" when "1tj_ssc" then "9" when "1xj_ssc" then "3"  end ,bet= case concat(uid,fc_type) when "1bj_10" then "22515.00" when "1bj_28" then "466.00" when "1bj_kl8" then "1.00" when "1cq_ssc" then "1867.00" when "1gx_k3" then "374.00" when "1js_k3" then "3488.00" when "1jx_11" then "950.00" when "1pc_28" then "1688.00" when "1sd_11" then "7.00" when "1tj_ssc" then "889.00" when "1xj_ssc" then "2223.00"  end ,valid_bet_count= case concat(uid,fc_type) when "1bj_10" then "23" when "1bj_28" then "6" when "1bj_kl8" then "1" when "1cq_ssc" then "10" when "1gx_k3" then "13" when "1js_k3" then "6" when "1jx_11" then "26" when "1pc_28" then "8" when "1sd_11" then "6" when "1tj_ssc" then "9" when "1xj_ssc" then "3"  end ,valid_bet= case concat(uid,fc_type) when "1bj_10" then "22515.00" when "1bj_28" then "466.00" when "1bj_kl8" then "1.00" when "1cq_ssc" then "1867.00" when "1gx_k3" then "374.00" when "1js_k3" then "3488.00" when "1jx_11" then "950.00" when "1pc_28" then "1688.00" when "1sd_11" then "7.00" when "1tj_ssc" then "889.00" when "1xj_ssc" then "2223.00"  end ,win_count= case concat(uid,fc_type) when "1bj_10" then "0" when "1bj_28" then "0" when "1bj_kl8" then "0" when "1cq_ssc" then "0" when "1gx_k3" then "0" when "1js_k3" then "0" when "1jx_11" then "0" when "1pc_28" then "0" when "1sd_11" then "0" when "1tj_ssc" then "0" when "1xj_ssc" then "0"  end ,win= case concat(uid,fc_type) when "1bj_10" then "0.00" when "1bj_28" then "0.00" when "1bj_kl8" then "0.00" when "1cq_ssc" then "0.00" when "1gx_k3" then "0.00" when "1js_k3" then "0.00" when "1jx_11" then "0.00" when "1pc_28" then "0.00" when "1sd_11" then "0.00" when "1tj_ssc" then "0.00" when "1xj_ssc" then "0.00"  end ,updatetime= case concat(uid,fc_type) when "1bj_10" then "1514527057" when "1bj_28" then "1514527057" when "1bj_kl8" then "1514527057" when "1cq_ssc" then "1514527057" when "1gx_k3" then "1514527057" when "1js_k3" then "1514527057" when "1jx_11" then "1514527057" when "1pc_28" then "1514527057" when "1sd_11" then "1514527057" when "1tj_ssc" then "1514527057" when "1xj_ssc" then "1514527057"  end  where addday=20171127 and concat(uid,fc_type) in ("1bj_10","1bj_28","1bj_kl8","1cq_ssc","1gx_k3","1js_k3","1jx_11","1pc_28","1sd_11","1tj_ssc","1xj_ssc")
+
+2017-12-29 13:57:37
+SELECT 
+                line_id,fc_type,min(addday) as addday,
+                sum(bet_count) as bet_count,
+                sum(bet) as bet ,
+                sum(valid_bet_count) as valid_bet_count ,
+                sum(valid_bet) as valid_bet,
+                sum(win_count) as win_count,
+                sum(win) as win
+                from my_stat_data_bet
+                where addday=20171127
+                GROUP BY line_id,fc_type
+
+2017-12-29 13:57:37
+SELECT DISTINCT(concat(line_id,fc_type)) as unique_key from my_stat_data_line_bet where addday =20171127
+
+2017-12-29 13:57:37
+update my_stat_data_line_bet set bet_count= case concat(line_id,fc_type) when "aaabj_10" then "23" when "aaabj_28" then "6" when "aaabj_kl8" then "1" when "aaacq_ssc" then "10" when "aaagx_k3" then "13" when "aaajs_k3" then "6" when "aaajx_11" then "26" when "aaapc_28" then "8" when "aaasd_11" then "6" when "aaatj_ssc" then "9" when "aaaxj_ssc" then "3"  end ,bet= case concat(line_id,fc_type) when "aaabj_10" then "22515.00" when "aaabj_28" then "466.00" when "aaabj_kl8" then "1.00" when "aaacq_ssc" then "1867.00" when "aaagx_k3" then "374.00" when "aaajs_k3" then "3488.00" when "aaajx_11" then "950.00" when "aaapc_28" then "1688.00" when "aaasd_11" then "7.00" when "aaatj_ssc" then "889.00" when "aaaxj_ssc" then "2223.00"  end ,valid_bet_count= case concat(line_id,fc_type) when "aaabj_10" then "23" when "aaabj_28" then "6" when "aaabj_kl8" then "1" when "aaacq_ssc" then "10" when "aaagx_k3" then "13" when "aaajs_k3" then "6" when "aaajx_11" then "26" when "aaapc_28" then "8" when "aaasd_11" then "6" when "aaatj_ssc" then "9" when "aaaxj_ssc" then "3"  end ,valid_bet= case concat(line_id,fc_type) when "aaabj_10" then "22515.00" when "aaabj_28" then "466.00" when "aaabj_kl8" then "1.00" when "aaacq_ssc" then "1867.00" when "aaagx_k3" then "374.00" when "aaajs_k3" then "3488.00" when "aaajx_11" then "950.00" when "aaapc_28" then "1688.00" when "aaasd_11" then "7.00" when "aaatj_ssc" then "889.00" when "aaaxj_ssc" then "2223.00"  end ,win_count= case concat(line_id,fc_type) when "aaabj_10" then "0" when "aaabj_28" then "0" when "aaabj_kl8" then "0" when "aaacq_ssc" then "0" when "aaagx_k3" then "0" when "aaajs_k3" then "0" when "aaajx_11" then "0" when "aaapc_28" then "0" when "aaasd_11" then "0" when "aaatj_ssc" then "0" when "aaaxj_ssc" then "0"  end ,win= case concat(line_id,fc_type) when "aaabj_10" then "0.00" when "aaabj_28" then "0.00" when "aaabj_kl8" then "0.00" when "aaacq_ssc" then "0.00" when "aaagx_k3" then "0.00" when "aaajs_k3" then "0.00" when "aaajx_11" then "0.00" when "aaapc_28" then "0.00" when "aaasd_11" then "0.00" when "aaatj_ssc" then "0.00" when "aaaxj_ssc" then "0.00"  end ,updatetime= case concat(line_id,fc_type) when "aaabj_10" then "1514527057" when "aaabj_28" then "1514527057" when "aaabj_kl8" then "1514527057" when "aaacq_ssc" then "1514527057" when "aaagx_k3" then "1514527057" when "aaajs_k3" then "1514527057" when "aaajx_11" then "1514527057" when "aaapc_28" then "1514527057" when "aaasd_11" then "1514527057" when "aaatj_ssc" then "1514527057" when "aaaxj_ssc" then "1514527057"  end  where addday=20171127 and concat(line_id,fc_type) in ("aaabj_10","aaabj_28","aaabj_kl8","aaacq_ssc","aaagx_k3","aaajs_k3","aaajx_11","aaapc_28","aaasd_11","aaatj_ssc","aaaxj_ssc")
+

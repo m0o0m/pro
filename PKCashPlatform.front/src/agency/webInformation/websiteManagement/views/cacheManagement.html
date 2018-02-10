@@ -1,0 +1,64 @@
+<!--缓存管理-->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('cacheManagement')}} </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="widget-body-toolbar">
+                                <form class="form-horizontal">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="input-label col-md-2 ">选择站点：</label>
+                                            <div class="col-md-4">
+                                                <select data-smart-select2 style="width:100%" class="select2" ng-model="site">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="input-label col-md-2" >选择界面:</label>
+                                            <div class="col-md-4">
+                                                <select data-smart-select2 style="width:100%" class="select2" ng-model="page">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.id}}" ng-repeat="item in pageDrop">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="input-label col-md-2" >状态:</label>
+                                            <div class="col-md-4" >
+                                               <label class="form-control">成功生成缓存！</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="input-label col-md-2" >温馨提示：</label>
+                                            <div class="col-md-4" style="margin-top:5px">
+                                                <lable class="lable-color">点击完成后，请勿刷新网页，否则将生成失败！每个页面 一小时内 只能生成 一次 缓存，请谨慎操作！ 全部选项容易造成某个页面生成失败但提示生成成功的情况哦，
+                                                    如果您使用全部选项请注意检查您的站点页面访问是否正常！</lable>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-6 col-xs-12 text-align-center">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button" ng-click="submit()">{{getWord('Done')}}</button>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

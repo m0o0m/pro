@@ -1,0 +1,403 @@
+<!-- 子账号 -->
+    <section widget-grid id="widget-grid">
+        <div id="tabs" data-smart-jqui-tabs>
+            <ul>
+                <li>
+                    <a href="#tabs-a">{{getWord('ChildAccount')}}</a>
+                </li>
+                <li>
+                    <a href="#tabs-b">{{getWord('Password authentication settings')}}</a>
+                </li>
+            </ul>
+            <div id="tabs-a">
+                <div class="row">
+                    <article class="col-sm-12">
+                        <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                <h2>{{getWord('ChildAccount')}}</h2>
+                                <div class="widget-toolbar">
+                                    <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                                </div>
+                            </header>
+                            <div>
+                                <div class="widget-body tab-content">
+
+                                    <div ng-show="newTodo">
+                                        <!--头部筛选查找以及添加-->
+                                        <div class="widget-body-toolbar">
+                                            <div class="row form-horizontal">
+                                                <label class="col-md-1 col-xs-4 input-label">{{getWord('On-line')}}:</label>
+                                                <div class="col-md-2 col-xs-8">
+                                                    <div class="form-group" ng-init="lineState=''">
+                                                        <select class="form-control" ng-model="lineState">
+                                                            <option value="">全部</option>
+                                                            <option value="1">在线</option>
+                                                            <option value="2">离线</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <label class="col-md-1 col-xs-4 input-label">{{getWord('Search')}}</label>
+                                                <div class="col-md-1 col-xs-8">
+                                                    <div class="form-group" ng-init="type=''">
+                                                        <select class="form-control" ng-model="type">
+                                                            <option value="">全部</option>
+                                                            <option value="account">账号</option>
+                                                            <option value="username">用户名</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-xs-8">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control inp_2" placeholder="{{getWord('Administrator account search')}}" ng-model="searchKey">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-1 col-xs-4 text-center">
+                                                    <div class="form-group">
+                                                        <a class="btn btn-default search" ng-click="search()" href-void>{{getWord('Search')}}</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 col-md-offset-0 col-xs-4 col-xs-offset-8 text-center">
+                                                    <div class="form-group">
+                                                        <button type="submit" data-toggle="modal" data-target="#myModal1"
+                                                                class="btn btn-primary" ng-click="openAdd()">
+                                                            <i class="fa fa-plus"></i> {{getWord('AddMore')}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center">{{getWord('Status')}}</th>
+                                                    <th class="text-center">{{getWord('Name')}}</th>
+                                                    <th class="text-center">{{getWord('Login account')}}</th>
+                                                    <th class="text-center">{{getWord('Last logon time')}}</th>
+                                                    <th class="text-center">{{getWord('Finally login to IP')}}</th>
+                                                    <th class="text-center">{{getWord('New date')}}</th>
+                                                    <th class="text-center">{{getWord('Landing error times')}}</th>
+                                                    <th class="text-center">状况</th>
+                                                    <th class="text-center">{{getWord('function')}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="text-center" ng-repeat="item in list">
+                                                    <td>{{item.login_key | fiterStatuseds}}</td>
+                                                    <td>{{item.username}}</td>
+                                                    <td>{{item.account}}</td>
+                                                    <td>{{item.last_login_time}}</td>
+                                                    <td>{{item.last_login_ip}}</td>
+                                                    <td>{{item.create_time|fiterTime}}</td>
+                                                    <td>{{item.login_err_count}}</td>
+                                                    <td>{{item.status | fiterStatused}}</td>
+                                                    <td>
+                                                        <button class="btn btn-default btn-xs" data-ui-sref="app.administrators.childAccountPermissions({id:item.id, site_id:item.site_index_id})">{{getWord('Power')}}</button>
+                                                        <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="getID(item.id)">{{getWord('Modify')}}</button>
+                                                        <button class="btn btn-default btn-xs" ng-click="disable(item.status,item.id)" ng-show="item.status==2">{{getWord('Enables')}}</button>
+                                                        <button class="btn btn-default btn-xs" ng-click="disable(item.status,item.id)"ng-show="item.status==1">{{getWord('Disable')}}</button>
+                                                        <button class="btn btn-default btn-xs" ng-click="kick(item.id)">{{getWord('Delete')}}</button>
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="tabs-b">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">{{getWord('Add Account')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('Do you want to enable dynamic password settings')}}</label>
+                                <div class="col-md-10 inline-group">
+                                    <label class="radio col col-md-1 ">
+                                        <input type="radio" name="radio-inline1" class="checkP" value="1" style="margin-top: 1px" ng-model="coderadio">
+                                        {{getWord('yes')}}</label>
+                                    <label class="radio col col-md-1">
+                                        <input type="radio" class="checkP" name="radio-inline1" value="2"
+                                               style="margin-top: 1px" ng-model="coderadio">
+                                        <i></i>{{getWord('No')}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{getWord('secret key')}}</label>
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="" type="text" ng-model="key" disabled="disabled">
+                                    <label class="col-md-12 control-label text-left">{{getWord('accountLength')}}</label>
+                                </div>
+                                <button type="button" class="btn btn-primary" ng-click="codeKey()">
+                                    {{getWord('secret key')}}
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="codeSubmit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">{{getWord('Add Account')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">{{getWord('accounts')}}</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <i class="icon-append fa fa-question-circle"></i>
+                                    <input type="text" name="account" placeholder="{{getWord('accounts')}}" ng-model="formData.account">
+                                    <b class="tooltip tooltip-top-right">
+                                        <i class="fa fa-warning txt-color-teal"></i>
+                                        {{getWord('digitalLetter')}}</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Password')}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="password"  placeholder="{{getWord('Password')}}" ng-model="formData.password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        {{getWord('passwordDigitalLetter')}}</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Confirm password')}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="password" name="account" placeholder="{{getWord('Confirm password')}}" ng-model="formData.confirm_password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        {{getWord('passwordDigitalLetter')}}</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Name')}}</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="text"  placeholder="{{getWord('Name')}}" ng-model="formData.username">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Operation password')}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="password"  placeholder="{{getWord('Operation password')}}" ng-model="formData.operate_password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        {{getWord('passwordDigitalLetter')}}</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Status')}}</label>
+                                <label class="col-md-4 col-xs-4 input-label text-left">
+                                    <label class="radio no-paddtop">
+                                    <input type="radio" ng-value="1" name="status" ng-model="formData.status">
+                                        <i></i>{{getWord('Enables')}}
+                                    </label>
+                                </label>
+                                <label class="col-md-4 col-xs-4 input-label text-left">
+                                    <label class="radio no-paddtop">
+                                        <input type="radio" ng-value="2" name="status" ng-model="formData.status">
+                                        <i></i>{{getWord('Disable')}}
+                                    </label>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-5 input-label">{{getWord('Do you need a password')}}</label>
+                                <label class="col-md-4 col-xs-3 input-label text-left">
+                                    <label class="radio no-paddtop">
+                                        <input type="radio" ng-value="1" name="aa" ng-model="formData.aa">
+                                        <i></i>{{getWord('Yes')}}
+                                    </label>
+                                </label>
+                                <label class="col-md-4 col-xs-3 input-label text-left">
+                                    <label class="radio no-paddtop">
+                                        <input type="radio" ng-value="2" name="aa" ng-model="formData.aa">
+                                        <i></i>{{getWord('No')}}
+                                    </label>
+                                </label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAcount()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--日志-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{getWord('Journal')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>{{getWord('Time')}}</th>
+                                <th>{{getWord('Operation record')}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>2017-05-12</td>
+                                <td>1111111111111111111111111</td>
+                            </tr>
+                            <tr>
+                                <td>2017-05-12</td>
+                                <td>1111111111111111111111111</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a ng-click="accounts.Previous()">
+                                        <span>{{getWord('PreviousPage')}}</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in accounts.pageList"
+                                    ng-class="{active: accounts.isActivePage(page)}">
+                                    <a ng-click="accounts.selectPage(page)">{{ page }}</a>
+                                </li>
+                                <li>
+                                    <a ng-click="accounts.Next()">
+                                        <span>{{getWord('NextPage')}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">{{getWord('modifyChildren')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">{{getWord('accounts')}}</div>
+                                <div class="col-md-7 col-xs-8 input-label text-left" ng-bind="modifyData.account"></div>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Password')}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="password" name="account" placeholder="{{getWord('Password')}}"  ng-model="modifyData.password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        {{getWord('passwordDigitalLetter')}}</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Confirm password')}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="password" name="account" placeholder="{{getWord('Confirm password')}}"  ng-model="modifyData.confirm_password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        {{getWord('passwordDigitalLetter')}}</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Name')}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="text" name="account" placeholder="{{getWord('Name')}}"  ng-model="modifyData.username">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        {{getWord('digitalLetter')}}</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Operation password')}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="password" name="account" placeholder="{{getWord('Operation password')}}"  ng-model="modifyData.operate_password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        {{getWord('passwordDigitalLetter')}}</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-5 input-label">{{getWord('Do you need a password')}}</label>
+                                <label class="col-md-3 col-xs-3 input-label text-left">
+                                    <label class="radio">
+                                    <input type="radio" ng-value="1" name="aa" ng-model="modifyData.aa">
+                                    <i></i>{{getWord('Yes')}}
+                                    </label>
+                                </label>
+                                <label class="col-md-3 col-xs-4 input-label text-left">
+                                    <label class="radio">
+                                        <input type="radio" ng-value="2" name="aa" ng-model="modifyData.aa">
+                                        <i></i>{{getWord('No')}}
+                                    </label>
+                                </label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{getWord('Cancel')}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">
+                            {{getWord('Confirm')}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

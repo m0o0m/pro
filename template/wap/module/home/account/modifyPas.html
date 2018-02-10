@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>修改密码</title>
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+<style>
+.m-myaccount select{
+    height: 35px;
+}
+#mescroll{
+    bottom: 0;
+}
+</style>
+</head>
+
+<body ontouchstart>
+    <header class="head-h">
+        <ul class="h-head">
+                <li>
+                    <a>
+                        <i class="iconfont wap-fanhui"></i>
+                    </a>
+                </li>
+                <li>
+                    <h2>修改密码</h2>
+                </li>
+                <li>
+                    <a href="/m/index">首页</a>
+                </li>
+            </ul>
+    </header>
+    <div id="mescroll" class="mescroll">
+            <dl class="m-myaccount">
+                    <dt>
+                      <!--  <li><span>类型选择</span><p>修改密码</p><a class="iconfont">&#xe609;</a></li>-->
+                        <li>
+                            <span>类型选择</span>
+                            <select name='type'>
+                                <option value = '1'>修改登录密码</option>
+                                <option value = '2'>修改取款密码</option>
+                            </select>
+                        </li>
+                    </dt>
+                </dl>
+                <dl class="m-myaccount">
+                    <dt>
+                        <li><span>原密码：</span><input type="password" name='beforePassword' placeholder="密码" maxlength='12'></li>
+                        <li><span>新密码：</span><input type="password" name='password' placeholder="密码" maxlength='12'></li>
+                        <li><span>重新输入新密码：</span><input type="password" name='confirmPassword' placeholder="密码" maxlength='12'></li>
+                    </dt>
+                    <button class="save">保存</button>
+                </dl>
+    </div>
+
+
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script> 
+<script>
+$(document).ready(function(e) {
+    $("select[name='type']").on('change', function(){
+        if ($(this).val() == 2) {
+            $(this).parents('#scroller').find('input').attr({"maxlength":4,});
+        }else{
+            $(this).parents('#scroller').find('input').attr({"maxlength":12});
+        }
+        $('#scroller').find('input').val('');
+    });
+
+    $('button').click(function(){
+        eidtPas();
+	})
+    // 输入框验证
+    var $beforePassword = $("input[name='beforePassword']").val();
+    var $password = $("input[name='password']").val();
+    var $confirmPassword = $("input[name='confirmPassword']").val();
+
+    $("input[name='beforePassword']").focus(function () {
+        if ($(this).val() == $beforePassword) {
+            $(this).val('');
+        }
+    }).blur(function () {
+        if ($(this).val() == '') {
+            $(this).val($beforePassword);
+        }
+    });
+
+    $("input[name='password']").focus(function () {
+        if ($(this).val() == $password) {
+            $(this).val('');
+        }
+    }).blur(function () {
+        if ($(this).val() == '') {
+            $(this).val($password);
+        }
+    });
+
+    $("input[name='confirmPassword']").focus(function () {
+        if ($(this).val() == $confirmPassword) {
+            $(this).val('');
+        }
+    }).blur(function () {
+        if ($(this).val() == '') {
+            $(this).val($confirmPassword);
+        }
+    });
+
+
+    var mescroll = new MeScroll("mescroll", {
+                //下拉刷新的所有配置项
+                down:{
+                    use: false, //是否初始化下拉刷新; 默认true
+                    auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                    hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                    isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+                }
+			});
+});
+
+$(window).load(function(e){
+    loginId();
+    if(!getCookie('loginBack')){ //没有登陆信息的时候返回登陆页面
+        $.toast("用户登录信息已过期， 请重新登录！", 'text');
+        setTimeout("window.location.href = '/m/login'; ",1000);//延迟1秒执行
+    }
+})
+</script>
+</html>

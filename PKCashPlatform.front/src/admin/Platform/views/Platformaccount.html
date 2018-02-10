@@ -1,0 +1,259 @@
+<!-- 管理员账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>平台管理</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar">
+                                <div class="row">
+                                    <div class="form-horizontal">
+                                        <label class="col-md-1 col-xs-4 col control-label">角色</label>
+                                        <div class="col-md-2 col-xs-12">
+                                            <div class="form-group">
+                                                <div class=""  ng-init="type=''">
+                                                    <select class="form-control" ng-model="type">
+                                                        <option value="">请选择</option>
+                                                        <option ng-value="item.id" ng-repeat="item in selectJson" >{{item.role_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-xs-12">
+                                            <div class="form-group" >
+                                                <label class="col-md-3 col-xs-12 col control-label">当前状态:</label>
+                                                <div class="col-md-9 col-xs-12  ">
+                                                    <div class="" ng-init="idinfo=''">
+                                                        <select class="form-control" ng-model="idinfo" id="seled_1">
+                                                            <option value="">请选择</option>
+                                                            <option ng-value="item.value" ng-repeat="item in json.option_status">{{item.name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control inp_2"  ng-model="account">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-3 text-center">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <button class="btn btn-default search" ng-click="search()" href-void>搜索</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <button type="submit"  data-toggle="modal" data-target="#myModal1"  class="btn btn-primary">添加</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover text-center">
+                                        <thead>
+                                            <tr>
+                                                <th  class="text-center">状态</th>
+                                                <th  class="text-center">角色名称</th>
+                                                <th  class="text-center">账号</th>
+                                                <th  class="text-center">新增日期</th>
+                                                <th  class="text-center">功能</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.status|currentstate}}</td>
+                                                <td>{{item.role_name}}</td>
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.create_time|formatDate}}</td>
+                                                <td class="text-align-center">
+                                                    <button class="btn btn-default btn-xs" ng-click="disables(item)" ng-bind="item.status==1?'禁用':'启用'"></button>
+                                                    <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="getID(item)">{{lang['Modify']}}</button>
+                                                    <button class="btn btn-default btn-xs" ng-click="del(item.id)" ng-hide="item.id==1">删除</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+
+    </section>
+    <span style="display: none" class="zz">{{lang['accounts']}}</span>
+    <!--<input type="text" value="{{lang['accounts']}}" class="zz">-->
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccounts">新建账号</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item" >
+                                <div class="col-md-3 col-xs-4 input-label">角色</div>
+                                <label class="col-md-7 col-xs-8 input" ng-init="add.type=''">
+                                    <select class="form-control" ng-model="add.type">
+                                        <option value="">请选择</option>
+                                        <option ng-value="item.id" ng-repeat="item in selectJson" >{{item.role_name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">账号</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control" type="text" ng-model="add.account" name="account">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">密码</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control"  type="password" ng-model="add.password" name="password" >
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合）</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">确认密码</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control"  type="password" ng-model="add.confirm_password" name="password" >
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合）</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">状态</label>
+                                <label class="col-md-2 col-xs-4 input-label text-left">
+                                    <input type="radio" ng-value="1" name="aa" ng-model="add.status">
+                                    {{lang['Enables']}}
+                                </label>
+                                <label class="col-md-2 col-xs-4 input-label text-left">
+                                    <input type="radio" ng-value="0" name="aa" ng-model="add.status">
+                                    {{lang['Disable']}}
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adds()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">修改账号</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item" >
+                                <div class="col-md-3 col-xs-4 input-label">角色</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <select class="form-control" ng-model="role_id" id="numbers">
+                                        <option class="hidden"></option>
+                                        <option ng-value="item.id" ng-repeat="item in selectJson">{{item.role_name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">账号</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control" disabled="disabled" value="{{modifyes.account}}">
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">密码</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control"  type="password" ng-model="modifyes.password" name="password" >
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合）</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">确认密码</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control"  type="password" ng-model="modifyes.confirm_password" name="password" >
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合）</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">状态</label>
+                                <label class="col-md-2 col-xs-4 input-label text-left">
+                                    <input type="radio" ng-value="1" name="aa" ng-model="modifyes.status">
+                                    启用
+                                </label>
+                                <label class="col-md-2 col-xs-4 input-label text-left">
+                                    <input type="radio" ng-value="2" name="aa" ng-model="modifyes.status">
+                                    禁用
+                                </label>
+                            </section>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden" name="roleId"  hidden="hidden" value="5" ng-model="formData.roleId">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden"  disabled="disabled" value="0" name="parentId" ng-model="formData.parentId">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submited()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

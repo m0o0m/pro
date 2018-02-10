@@ -1,0 +1,127 @@
+<div id="content">
+    <div class="row">
+        <section widget-grid id="widget-grid">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>添加层级</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid" ng-model="formData">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">站点:</label>
+                                                        <div class="col-md-3" ng-init="site_index_id=''">
+                                                            <select class="form-control" id="site_index_id" ng-model="site_index_id" ng-change="siteId()" >
+                                                                <option value="">请选择</option>
+                                                                <option ng-value="item.site_index_id" ng-repeat="item in siteJson" >{{item.site_name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">支付配置:</label>
+                                                        <div class="col-md-3">
+                                                            <select class="form-control" id="pay_set">
+                                                                <option value="1">RMB</option>
+                                                                <option value="10">美金</option>
+                                                                <option value="100">欧元</option>
+                                                            </select>
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">RMB表示人民预设，必选</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">层级名称:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text" ng-model="formData.level_id">
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">固定编号（最多4位）</lable>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">描述:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="text"  ng-model="formData.description">
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">必填，请勿使用特殊字符</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">会员加入时间:</label>
+                                                        <div class="col-md-3">
+                                                            <div class="input-group ">
+                                                                <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="formData.start_time">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="input-group ">
+                                                                <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="formData.end_time">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">存款次数:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control " type="number" min="0" ng-model="formData.deposit_num">
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">默认0为整数，0表示无限制</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">存款总额:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control" type="number" min="0"  ng-model="formData.deposit_count">
+                                                        </div>
+                                                        <lable class=" col-md-3 control-label" style="color: red">默认0为整数，0表示无限制</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">备注:</label>
+                                                        <div class="col-md-3">
+                                                            <textarea row="4" ng-model="formData.remark"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 text-align-center">
+                                                        <button class="btn btn-primary"  type="submit" ng-click="sumbit()">
+                                                            {{lang['Confirm submission']}}
+                                                        </button>
+
+                                                        <button class="btn btn-primary"  type="submit" onclick="window.history.back();" >
+                                                            返回
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

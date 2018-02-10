@@ -1,0 +1,573 @@
+{{template "header" .Header}}
+<div class="ad-flash">
+    <style>
+        .ele-slideshow-wrap {
+            width: 998px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .ele-slideshow-scroll {
+            width: 998px;
+            height: 409px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+        }
+
+        .ele-slideshow-wrap ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 998px;
+            height: 409px;
+        }
+
+        .ele-slideshow-wrap li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 998px;
+            height: 409px;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+        .ele-slideshow-wrap li a {
+            display: block;
+            width: 998px;
+            height: 409px;
+        }
+
+        .ele-slideshow-wrap li a img {
+            image-rendering: optimizeQuality;
+        }
+
+        .ele-slideshow-control-wrap {
+            position: absolute;
+            z-index: 3;
+            bottom: 0;
+            padding: 5px;
+        }
+
+        .ele-slideshow-nav {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .ele-slideshow-nav a {
+            width: 16px;
+            height: 16px;
+            background-color: #8296B1;
+            display: inline-block;
+            text-align: center;
+            color: #FFF;
+            line-height: 16px;
+            margin: 0 2px;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .ele-slideshow-nav a.active, .ele-slideshow-nav a:hover {
+            background-color: #74B0CE;
+            color: #FFF;
+        }
+
+        .ele-slideshow-clip {
+            background-repeat: no-repeat;
+        }
+    </style>
+    <div id="js-ele-slideshow1" class="ele-slideshow-wrap" onselectstart="return false;">
+        <div class="js-ele-slideshow-scroll ele-slideshow-scroll">
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    $('#slider').nivoSlider({
+                        effect: 'random',
+                        slices: 15,
+                        animSpeed: 500,
+                        pauseTime: 3000,
+                        directionNav: true,
+                        controlNav: true,
+                        keyboardNav: true
+                    });
+
+                });
+            </script>
+        {{$cdnUrl := .Header.CdnUrl}}
+            <div class="theme-default">
+
+                <div id="slider" class="nivoSlider">
+                {{range .FlashList}}
+                    <a href="{{.ImgLink}}" class="nivo-imageLink"><img src="{{$cdnUrl}}{{.ImgUrl}}" width="100%" height="409"/></a>
+                {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 最新消息 -->
+<div class="news-wrap clearfix">
+    <div class="news-item ele-msg-cp">
+        <div class="ele-news-txt" style="display: inline-block; height: 44px; overflow: hidden; word-break: break-all; word-wrap: break-word; width: 874px;">
+            <marquee scrollamount="3" scrolldelay="150" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="cursor: pointer;"><span
+                    id="bulletinMsg" data="left" onclick="notice_data();">{{.Header.Notice}}</span></marquee>
+        </div>
+    </div>
+</div>
+<!-- 登入 -->
+
+<style>
+    .first-login-wrap .login-unit{
+        border: 1px solid #92b1e0;
+    }
+    .first-login-wrap #vImg{
+        top: 2px;
+    }
+    #rmNum{
+        height: 18px;
+    }
+</style>
+<div class="first-login-wrap clearfix pk-login-before">
+    <p class="login-unit login-unit-user">
+        <input type="text" size="12" class="login-input" tabindex="1" name="account" id="username" placeholder="账号">
+    </p>
+    <p class="login-unit login-unit-pwd">
+        <input type="password" class="login-input" tabindex="2" name="password" id="password" placeholder="密码">
+    </p>
+    <p class="login-unit login-unit-chk">
+        <input type="text" name="code" id="rmNum" size="7" maxlength="4" tabindex="3" placeholder="验证码">
+        <img src="{{.Header.CdnUrl}}/theme3/public/images/new/no.png" id="vImg" onclick="getYzm();" width="40" height="18"></p>
+    <a href="javascript:;" onclick="alert('忘记密码，请联系在线客服！');" class="login-forgetpw">忘记密码?</a>
+    <p class="login-links">
+        <input type="button" id="submit" onclick="aLeftForm1Sub();" class="login-submit" tabindex="4">
+        <a onclick="getPager('-','zhuce');" href="javascript:void(0);" class="login-joinmember"></a>
+    </p>
+</div>
+<div class="first-login-data pk-login-after" style="display: none">
+    <div class="mem-info">
+        <style>.ele-accinfo {
+            display: block;
+            padding-right: 5px;
+            padding-bottom: 4px;
+        }
+
+        .ele-accinfo .fa {
+            padding: 0 2px;
+            font-size: 14px;
+        }
+
+        .ele-first-balance {
+            display: inline-block;
+        }
+
+        .ele-acc-unit {
+            display: inline-block;
+        }
+
+        .ele-obalance-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        .ele-other-balance {
+            cursor: pointer;
+        }</style>
+        <div class="ele-accinfo ele-acc-name">
+            <span>帐号：</span>
+            <strong></strong></div>
+        <div class="ele-acc-unit">
+            <div id="_bbsportBalance" class="ele-accinfo ele-first-balance">
+                <span>系统余额：</span>
+                <strong></strong></div>
+            <div class="ele-obalance-wrap js_ele_obalance_wrap">
+                <div class="ele-accinfo ele-other-balance">
+                    <i class="fa fa-plus-square" style="line-height: 10px;"></i>
+                </div>
+                <div class="js_ele_obalance_item_wrap" style="margin-right: -130px;">
+                    <div class="ele-obalance-item">
+
+                    </div>
+                    <div class="ele-balance-tool clearfix">
+                        <a href="/member/convert">额度转换</a>
+                    </div>
+                    <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/css/font-awesome1.css">
+                    <style>
+                        /*clear float*/
+                        .clearfix:before, .clearfix:after {
+                            content: "";
+                            display: table;
+                        }
+
+                        .clearfix:after {
+                            clear: both;
+                        }
+
+                        .clearfix {
+                            *zoom: 1;
+                        }
+
+                        .js_ele_obalance_item_wrap {
+                            display: none;
+                            position: absolute;
+                            opacity: 1;
+                            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                            width: 270px;
+                            -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                            -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                            border-radius: 2px;
+                            color: #000;
+                            font-size: 12px;
+                            background: #FFF56B;
+                            cursor: default;
+                            z-index: 9999;
+                            right: 0;
+                            text-align: left;
+                        }
+
+                        .js_ele_obalance_wrap {
+                            position: relative
+                        }
+
+                        .js_ele_obalance_wrap .ele-obalance {
+                            line-height: 22px;
+                            color: #000;
+                        }
+
+                        .js_ele_obalance_wrap .ele-obalance strong {
+                            color: #000;
+                        }
+
+                        .ele-obalance-item {
+                            padding: 16px;
+                        }
+
+                        .ele-obalance-item strong {
+                            font-weight: normal;
+                        }
+
+                        .ele-obalance {
+                            padding-bottom: 2px;
+                            color: #444;
+                        }
+
+                        /* 額度轉換 */
+                        .ele-balance-tool {
+                            padding: 4px;
+                            background: #F4F4F4;
+                        }
+
+                        .ele-balance-tool a {
+                            float: right;
+                            padding: 4px 8px;
+                            color: #FFF;
+                            background: #555;
+                            -o-transition: background-color .20s linear;
+                            -webkit-transition: background-color .20s linear;
+                            -moz-transition: background-color .20s linear;
+                            transition: background-color .20s linear;
+                            border-radius: 2px;
+                            text-decoration: none;
+                        }
+
+                        .ele-balance-tool a:hover {
+                            background: #000;
+                        }
+
+                        .js_ele_obalance_wrap:hover .js_ele_obalance_item_wrap {
+                            display: block;
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="SU-Menual clearfix">
+        <ul class="login-Menual">
+            <li>
+                <a id="su-macenter" href="/member/account" title="会员中心">会员中心</a></li>
+            <li>
+                <a id="su-deposite" href="/member/bank" title="线上存款">线上存款</a></li>
+            <li>
+                <a id="su-withdraw" href="/member/withdraw" title="线上取款">线上取款</a></li>
+            <li>
+                <a id="su-switch" href="/member/convert" title="额度转换">额度转换</a></li>
+            <li>
+                <a id="su-msg" href="/member/mescenter" title="未读讯息">未读讯息</a>(
+                <span id="MsgNotReadCount" class="MsgNotReadCount"></span>)
+            </li>
+        </ul>
+        <a href="javascript:void(0)" onclick="logOut();" class="su-logout"></a>
+    </div>
+</div>
+<a href="javascript:void(0);" onclick="window.open('download','','width=1040,height=706,fullscreen=1,scrollbars=0,location=no');" class="first-download"></a>
+</div>
+</div>
+<div id="page-container">
+    <div id="page-body">
+        <div class="first-game-wrap">
+            <style>
+                .ele-firstgame {
+                    position: relative;
+                }
+
+                .ele-firstgame-1 {
+                    width: 243px;
+                    height: 188px;
+                    float: left;
+                    _display: inline;
+                    position: relative;
+                    overflow: hidden;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/new/143158777147.jpg) -243px bottom no-repeat;
+                }
+
+                .ele-firstgame-1 span {
+                    width: 243px;
+                    height: 188px;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/new/143158776878.jpg) left top no-repeat;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    cursor: pointer;
+                }
+
+                .ele-firstgame-2 {
+                    width: 243px;
+                    height: 188px;
+                    float: left;
+                    _display: inline;
+                    position: relative;
+                    overflow: hidden;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/new/143156800458.jpg) -243px bottom no-repeat;
+                }
+
+                .ele-firstgame-2 span {
+                    width: 243px;
+                    height: 188px;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/new/143156800261.jpg) left top no-repeat;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    cursor: pointer;
+                }
+
+                .ele-firstgame-3 {
+                    width: 243px;
+                    height: 188px;
+                    float: left;
+                    _display: inline;
+                    position: relative;
+                    overflow: hidden;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/new/143156804438.jpg) -243px bottom no-repeat;
+                }
+
+                .ele-firstgame-3 span {
+                    width: 243px;
+                    height: 188px;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/new/143156804234.jpg) left top no-repeat;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    cursor: pointer;
+                }
+
+                .ele-firstgame-4 {
+                    width: 243px;
+                    height: 188px;
+                    float: left;
+                    _display: inline;
+                    position: relative;
+                    overflow: hidden;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/new/143156808138.jpg) -243px bottom no-repeat;
+                }
+
+                .ele-firstgame-4 span {
+                    width: 243px;
+                    height: 188px;
+                    background: url({{.Header.CdnUrl}}/theme3/public/images/new/143156807935.jpg) left top no-repeat;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    cursor: pointer;
+                }
+            </style>
+            <div class="ele-firstgame-wrap" onselectstart="return false">
+                <div class="clearfix ele-firstgame" id="js-firstgame-slider">
+                    <a href="javascript:void(0);" onclick="getPager('-','sports','m');" class="ele-firstgame-1 js-ele-firstgame-fade"
+                       style="background-position-x: -243px;">
+                        <span style="background-position-x: 0px;"></span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="getPager('-','livetop','m');" class="ele-firstgame-2 js-ele-firstgame-fade"
+                       style="background-position-x: -243px;">
+                        <span style="background-position-x: 0px;"></span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="getPager('-','egame','m');" class="ele-firstgame-3 js-ele-firstgame-fade"
+                       style="background-position-x: -243px;">
+                        <span style="background-position-x: 0px;"></span>
+                    </a>
+                    <a href="javascript:void(0);" onclick="getPager('-','lottery');" class="ele-firstgame-4 js-ele-firstgame-fade"
+                       style="background-position-x: -243px;">
+                        <span style="background-position-x: 0px;"></span>
+                    </a>
+                </div>
+            </div>
+            <script>
+                $('.js-ele-firstgame-fade > span').hover(function () {
+                            $(this).css("background-position-x", "-243px").parent().css("background-position-x", "0");
+                        },
+                        function () {
+                            $(this).css("background-position-x", "0").parent().css("background-position-x", "-243px");
+                        });
+            </script>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var quata = "<link rel=\"stylesheet\" href=\"" + cdnUrl + "/shared/quotazh/css/quota.css\" />" +
+            "<script type=\"text/javascript\" src=\"" + cdnUrl + "/shared/quotazh/js/quota.js\"><\/script>";
+    document.writeln(quata);
+</script>
+
+<div class="position_quata">
+    <script type="text/javascript">
+        document.writeln("<img  id ='quata_close' src=\"" + cdnUrl + "/shared/quotazh/images/close-btn.png\">");
+    </script>
+    <div class="panel" style="display:none;">
+        <div class="radiobox">
+            <div class="radio-tile-group">
+                <div class=''>
+                </div>
+            {{range .Platform}}
+                <div class="input-container">
+                    <input class="radio-button" type="radio" name="radio" id={{.Id}}/>
+                    <div class="radio-tile">
+                        <label class="radio-tile-label">{{.Platform}}</label>
+                    </div>
+                </div>
+            {{end}}
+
+                <input type="hidden" id="vdtype" value="">
+                <input type="hidden" id="quatatoken" value="">
+                <div class="inputbox">
+                    <p style="color: red;">余额:<span id="ssmoney"></span></p>
+                    <p>* 请输入您要转换的额度</p>
+
+                    <div class="input-number" min="1">
+                        <input type="text" id="quata_money" onkeyup="quataclearNoNum(this);" placeholder='转换金额不能小于  元'/>
+                    </div>
+                    <p style="height: 20px;width: 100px;margin: 0 auto;">
+                        <label><input style="-webkit-appearance:radio;" name="Fruit" type="radio" value="1"/>转入 </label>
+                        <label><input style="-webkit-appearance:radio;" name="Fruit" type="radio" value="2"/>转出 </label>
+                    </p>
+                    <a href="#" class="button_quota">确认转换</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <p class="flipquota"></p>
+</div>
+<script>
+    window.onload = function () {
+        var min_money = Number("");
+        $("input[name='radio']").bind("click", function () {
+            $('#vdtype').val($(this).attr('id'));
+        });
+        $('.button_quota').click(function () {
+
+            var fruit = $("input[name='Fruit']:checked").val();
+            var p3_Amt = Number($('#quata_money').val());
+            var token = $('#quatatoken').val();
+
+            if (fruit == 1) {
+                var trtype1 = 'sport';
+                var trtype2 = $('#vdtype').val().toLowerCase();
+            } else if (fruit == 2) {
+                var trtype1 = $('#vdtype').val().toLowerCase();
+                var trtype2 = 'sport';
+            } else {
+                alert('请选择转换状态');
+                return false;
+            }
+
+            if (trtype2 == '') {
+                alert("请选择您要转换的视讯类型");
+                return false;
+            }
+            if (p3_Amt - parseInt(p3_Amt) !== 0) {
+                alert("转换金额不得为非整数！");
+                return false;
+            }
+            if (p3_Amt < min_money) {
+                alert("转换金额不得小于" + min_money + "，或者输入金额不能为空！");
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "<{$site_url}>/index.php/member/new/bank/bank_transf_index_do",
+                data: "trtype1=" + trtype1 + "&trtype2=" + trtype2 + "&p3_Amt=" + p3_Amt + '&quatatoken=' + token + '&edtype=' + '1',
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.status == 18) {
+                        alert("额度转换成功");
+                        ajax_again();
+                    } else {
+                        alert(msg.info);
+                        ajax_again();
+                    }
+                },
+            });
+        })
+
+        var $quataClose = $('#quata_close');
+        var $positionQuata = $('.position_quata');
+
+        $quataClose.click(function () {
+            $positionQuata.css("display", "none");
+        })
+
+        $positionQuata.mouseover(function () {
+            $quataClose.css("display", "block");
+        })
+
+        $positionQuata.mouseleave(function () {
+            $quataClose.css("display", "none");
+        })
+
+        $positionQuata.mouseleave(function () {
+            $(".panel").css("display", "none");
+        });
+
+        function ajax_again() {
+            $.ajax({
+                type: "POST",
+                url: "/index.php/index/auata_token",
+                dataType: 'json',
+                success: function (msg) {
+                    $('#quatatoken').val(msg.token);
+                },
+            })
+        }
+    }
+
+    function quataclearNoNum(obj) {
+        obj.value = obj.value.replace(/[^\d+]/g, '');
+    }
+
+    $("p.flipquota").css("background", "url(" + cdnUrl + "/shared/quotazh/images/blue.png) no-repeat");
+
+    $(function () {
+        //获取会员数据
+        var loginIn = localStorage.getItem('loginIn');
+        if (loginIn) {
+            var loginData = JSON.parse(localStorage.getItem('loginData'));
+            $("div.panel #ssmoney").html(loginData.balance);
+        }
+    })
+</script>
+<!-- <{include file="../web_public/Nindex_html.html"}> -->
+{{template "footer" .Footer}}

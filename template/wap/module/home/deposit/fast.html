@@ -1,0 +1,576 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>PK</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+    <style>
+
+        .bank-content {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 45px;
+            bottom: 50px;
+            background-color: #fff;
+        }
+
+        .weui-navbar {
+            background-color: #fff;
+            overflow-x: scroll;
+            overflow-y: auto;
+        }
+
+        .button-c {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .submit {
+            width: 70%;
+            background: #ec1f1f;
+            margin: 20px auto;
+            display: block;
+            height: 45px;
+            border-radius: 22px;
+            font-size: 16px;
+        }
+
+        .bank-tab {
+            background-color: #fff;
+            position: relative;
+            height: 31px;
+            overflow: hidden;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .bank-tab>div {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            height: 52px;
+            width: 88%;
+            margin: 0 auto;
+        }
+
+        .bank-tab .bank-nav {
+            display: flex;
+            flex-direction: row;
+            height: 31px;
+            line-height: 31px;
+        }
+
+        .bank-tab .one,
+        .bank-tab .tow {
+            position: absolute;
+            top: 0;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 6px;
+            color: #e3e3e3;
+        }
+
+        .bank-tab .one {
+            left: 0;
+        }
+
+        .bank-tab .tow {
+            right: 0;
+        }
+
+        .bank-nav li {
+            flex: 0 0 100px;
+            text-align: center;
+            border-right: 1px solid #eee;
+            border-bottom: 2px solid transparent;
+        }
+
+        .bank-tab::-webkit-scrollbar {
+            display: none;
+        }
+
+        .bank-nav .bank-li-active {
+            color: #f00;
+            border-bottom: 2px solid #f00;
+        }
+
+        .bank-item {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .head-h {
+            height: auto;
+        }
+
+        #mescroll {
+            top: 79px;
+        }
+
+        .bank-c {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body ontouchstart>
+    <header class="head-h">
+        <ul class="h-head">
+            <li>
+                <a>
+                    <i class="iconfont wap-fanhui"></i>
+                </a>
+            </li>
+            <li>
+                <h2>快捷支付-存款</h2>
+            </li>
+            <li>
+                <a href="/m/index">首页</a>
+            </li>
+        </ul>
+        <div class="bank-tab">
+            <i class="one iconfont wap-fanhui"></i>
+            <div>
+                <ul class="bank-nav">
+                    {{range $k,$v:=.PaidType}} {{if eq $k "bank" "cardpay"}} {{/*
+                    <li class="bank-li-active" id="{{$k}}" paidTypeId="{{$v}}"></li>*/}} {{else}}
+                    <li id="{{$k}}" paidTypeId="{{$v}}"></li>
+                    {{end}} {{end}}
+                </ul>
+            </div>
+            <i class="tow iconfont wap-arrow-left"></i>
+        </div>
+    </header>
+    <div id="mescroll" class="mescroll">
+
+        <div class="bank-c">
+            <div id="tab2" class="bank-item">
+                <section class="m-depositad">
+                    <div>
+                        <ul>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>帐号名称：</span>
+                                </span>
+                                <input type="tel" id="submitAcc2" placeholder="帐号名称" value="">
+                            </li>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>确认帐号：</span>
+                                </span>
+                                <input type="text" id="submitAccount2" placeholder="确认帐号名称">
+                            </li>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>充值金额：</span>
+                                </span>
+                                <input type="text" id="money2" placeholder="充值金额" onkeyup="validationNumber(this,2)">
+                            </li>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>卡面值：</span>
+                                </span>
+                                <input type="text" id="cardMoney" placeholder="卡面值">
+                            </li>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>卡序列号：</span>
+                                </span>
+                                <input type="text" id="cardNumber" placeholder="卡序列号">
+                            </li>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>卡密码：</span>
+                                </span>
+                                <input type="text" id="cardPassword" placeholder="卡密码">
+                            </li>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>选卡类型：</span>
+                                </span>
+                                <select id="cardType">
+                                    <option>111</option>
+                                    <option>111</option>
+                                    <option>111</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="minim">
+                        <p>1. 单笔最低存款金额为
+                            <font class="minMoney">10</font>元。</p>
+                        <p>2. 单笔最高存款金额为
+                            <font class="maxMoney">100000</font>元。</p>
+                        <!--<p>3.首次充值可得100优惠。</p>-->
+                        <p>3. 若充值未到账，
+                            <a href="javascript:OnlineService('{{.UrlLink}}');">请联系客服</a>
+                        </p>
+                    </div>
+                    <div class="button-c">
+                        <button class="submit" id="submit2">提交</button>
+                    </div>
+                </section>
+            </div>
+            <div id="tab3" class="bank-item">
+                <section class="m-depositad">
+                    <div>
+                        <ul>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>帐号名称：</span>
+                                </span>
+                                <input type="tel" id="submitAcc3" placeholder="帐号名称" value="">
+                            </li>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>确认帐号：</span>
+                                </span>
+                                <input type="text" id="submitAccount3" placeholder="确认帐号名称">
+                            </li>
+                            <li>
+                                <span>
+                                    <i>*</i>
+                                    <span>充值金额：</span>
+                                </span>
+                                <input type="tel" id="money3" placeholder="充值金额" onkeyup="validationNumber(this,2)">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="minim">
+                        <p>1. 单笔最低存款金额为
+                            <font class="minMoney">10</font>元。</p>
+                        <p>2. 单笔最高存款金额为
+                            <font class="maxMoney">100000</font>元。</p>
+                        <!--<p>3.首次充值可得100优惠。</p>-->
+                        <p>3. 若充值未到账，
+                            <a href="javascript:OnlineService('{{.UrlLink}}');">请联系客服</a>
+                        </p>
+                    </div>
+                    <div class="button-c">
+                        <button class="submit" id="submit3">提交</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </div>
+
+{{template "mem_footer" .}}
+
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/swiper.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/city-picker.min.js"></script>
+
+<script>
+
+    // swiper样式
+    var mySwiper=new Swiper('.swiper-container',{
+        // setWrapperSize:true,
+        // freeMode:true,
+        slidesPerView : 4,
+        slidesPerGroup : 4,
+        nextButton:'.swiper-button-next',
+        prevButton:'.swiper-button-prev'
+
+    })
+
+</script>
+<script>
+
+    var nowTime = new Date()
+    var loginBack
+    var accountInfo
+    //var orderNow=nowTime.getFullYear()+""+nowTime.getMonth()+""+nowTime.getDate()+""+nowTime.getHours()+""+nowTime.getMinutes()+""+nowTime.getSeconds()+""+parseInt(100+Math.random()*899)+""+(Date.parse(new Date())/1000);
+    //var datetimeNow=nowTime.getFullYear()+"-"+nowTime.getMonth()+"-"+nowTime.getDate()+" "+nowTime.getHours()+":"+nowTime.getMinutes()+":"+nowTime.getSeconds()
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 5,
+        spaceBetween: 0
+    });
+    $("#city-picker").cityPicker({
+        title: "请选择地址"
+    });
+
+    $(document).ready(function (e) {
+
+        if (getCookie('loginBack')) {
+
+
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            window.location.href = "/m/login"
+        }
+
+        $("#bank").html("公司入款")
+        $("#wechat").html("微信")
+        $("#alipay").html("支付宝")
+        $("#qqpay").html("QQ钱包")
+        $("#tenpay").html("财付通")
+        $("#visapay").html("visa支付")
+        $("#jdpay").html("京东钱包")
+        $("#bdpay").html("百度钱包")
+        $("#cardpay").html("点卡")
+        $('.swiper-slide').click(function () {
+            $(this).addClass('curr').siblings().removeClass('curr')
+        })
+        $('.m-navbacn li').click(function () {
+            $(this).addClass('curr').siblings().removeClass('curr')
+        })
+        $('.m-depositad dl dd li a').click(function () {
+            var Url2 = $(this).siblings('input')
+            Url2.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+            alert("已复制好，可贴粘。");
+        })
+
+        var mescroll = new MeScroll("mescroll", {
+            //下拉刷新的所有配置项
+            down: {
+                use: false, //是否初始化下拉刷新; 默认true
+                auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+            }
+        });
+
+    });
+
+    function validationNumber(e, num) {
+        var regu = /^[0-9]+\.?[0-9]*$/;
+        if (e.value != "") {
+            if (!regu.test(e.value)) {
+                $.toast("请输入正确的数字", 'text');
+                e.value = e.value.substring(0, e.value.length - 1);
+                e.focus();
+            } else {
+                if (num == 0) {
+                    if (e.value.indexOf('.') > -1) {
+                        e.value = e.value.substring(0, e.value.length - 1);
+                        e.focus();
+                    }
+                }
+                if (e.value.indexOf('.') > -1) {
+                    if (e.value.split('.')[1].length > num) {
+                        e.value = e.value.substring(0, e.value.length - 1);
+                        e.focus();
+                    }
+                }
+
+            }
+        }
+    }
+
+
+    $('.bank-nav').on('click', 'li', function () {
+        var index = $(this).index();
+        $(this).addClass('bank-li-active').siblings().removeClass('bank-li-active');
+        if ($(this).attr('id') == 'cardpay') {
+            $('.bank-c .bank-item').eq(0).show().siblings().hide();
+        } else {
+            $('.bank-c .bank-item').eq(1).show().siblings().hide();
+        }
+    })
+
+    $('.showorh').on('change',
+        function () {
+            var aaa = '.' + $(this).val()
+            $("section>dl>dd").css("display", "none")
+            $(aaa).css("display", "")
+        })
+
+    //点卡支付
+    $('#submit2').on('click', function () {
+        if (getCookie('loginBack')) {
+            var loginBack = getCookie('loginBack');
+            console.log(getCookie('loginBack'))
+            if ($("#money2").val() <= 0 || $("#money2").val() == '') {
+                alert('请填写申请金额，只能为大于0的数字');
+                return false;
+            } else if (parseFloat($("#cardMoney").val()) <= 0 || parseFloat($("#cardMoney").val()) == '') {
+                alert('请填写卡金额，只能为大于0的数字');
+                return false;
+            } else if (parseFloat($("#cardNumber").val()) == '') {
+                alert('请填写卡号');
+                return false;
+            } else if (parseFloat($("#cardPassword").val()) == '') {
+                alert('请填写卡密码');
+                return false;
+            } else if (parseFloat($("#cardPassword").val()) == '') {
+                alert('请填选择卡类型');
+                return false;
+            } else if ($("#submitAcc2").val() == '') {
+                alert('请填写账号');
+                return false;
+            } else if ($("#submitAccount2").val() == '') {
+                alert('请确认账号');
+                return false;
+            } else if ($("#submitAccount2").val() != $("#submitAcc2").val()) {
+                alert('填写的账号与确认的账号不一致');
+                return false;
+            }
+            $.ajax({
+                type: "GET",
+                data: {},
+                dataType: "json",
+                async: false,
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'wap'
+                },
+                url: '/m/company/getPaySetDataByAccount?account=' + $("#submitAccount2").val(),
+                success: function (data) {
+                    accountInfo = data
+                    //console.log(data['data']['OnlineDepositMax'])
+                    $(".minMoney").html(data['data']['OnlineDepositMin'])
+                    $(".maxMoney").html(data['data']['OnlineDepositMax'])
+                }
+            })
+
+            $.ajax({
+                type: "post",
+                //url: "http://localhost:9595/online/card/deposit",
+                url: "/m/onlineIncome/card",
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'wap'
+                },
+                data: JSON.stringify({
+                    // account: $("#submitAccount2").val(),
+                    money: parseFloat($("#money2").val()),
+                    cardMoney: parseFloat($("#cardMoney").val()),
+                    cardNumber: $("#cardNumber").val(),
+                    cardPassword: $("#cardPassword").val(),
+                    id: parseInt(1),//点卡类型暂未使用到
+                    paidType: parseInt($(".bank-li-active").attr('paidTypeId'))
+                }),
+                dataType: 'json',
+                success: function (data2) {
+                    if (data2 == null) {
+                        window.location.href = "/m/finished2"
+                    } else {
+                        alert('添加公司入款失败，请联系客服！原因：' + data2.msg)
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(XMLHttpRequest.status)
+                    console.log(XMLHttpRequest.readyState)
+                    console.log(textStatus)
+                    console.log(errorThrown)
+                    alert('添加公司入款失败，请联系客服')
+                }
+            })
+
+
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            window.location.href = "/m/login"
+        }
+    })
+    //微信支付
+    $('#submit3').on('click', function () {
+        if (getCookie('loginBack')) {
+            var loginBack = getCookie('loginBack');
+            if ($("#money3").val() <= 0 || $("#money3").val() == '') {
+                alert('请填写申请金额，只能为大于0的数字');
+                return false;
+            } else if ($("#submitAcc3").val() == '') {
+                alert('请填写账号');
+                return false;
+            } else if ($("#submitAccount3").val() == '') {
+                alert('请确认账号');
+                return false;
+            } else if ($("#submitAccount3").val() != $("#submitAcc3").val()) {
+                alert('填写的账号与确认的账号不一致');
+                return false;
+            }
+
+            $.ajax({
+                type: "GET",
+                data: {},
+                dataType: "json",
+                async: false,
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'wap'
+                },
+                url: '/m/company/getPaySetDataByAccount?account=' + $("#submitAccount3").val(),
+                success: function (data) {
+                    accountInfo = data
+                    //console.log(data['data']['OnlineDepositMax'])
+                    $(".minMoney").html(data['data']['OnlineDepositMin'])
+                    $(".maxMoney").html(data['data']['OnlineDepositMax'])
+                }
+            })
+            $.ajax({
+                type: "post",
+                //url: "http://localhost:9595/online/wechat/deposit",
+                url: "/m/onlineIncome",
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'wap'
+                },
+                data: JSON.stringify({
+                    account: $("#submitAccount3").val(),
+                    money: parseFloat($("#money3").val()),
+                    paidType: parseInt($(".bank-li-active").attr('paidTypeId')),
+                    isFast: parseInt(1)
+                }),
+                dataType: 'json',
+                success: function (data2) {
+                    if (data2 == null) {
+                        window.location.href = "/m/finished2"
+                    } else {
+                        alert('添加公司入款失败，请联系客服！原因：' + data2.msg)
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(XMLHttpRequest.status)
+                    console.log(XMLHttpRequest.readyState)
+                    console.log(textStatus)
+                    console.log(errorThrown)
+                    alert('添加公司入款失败，请联系客服')
+                }
+            })
+
+
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            window.location.href = "/m/login"
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,18 @@
+<?php
+
+use \Workerman\Worker;
+use \GatewayWorker\Gateway;
+
+require_once __DIR__ . '/../../Workerman/Autoloader.php';
+
+$gateway = new Gateway("http://0.0.0.0:3528");
+
+$gateway->name = 'ChatHttp';
+
+$gateway->count = 4;
+
+$gateway->registerAddress = '127.0.0.1:3258';
+
+if(!defined('GLOBAL_START')) {
+    Worker::runAll();
+}

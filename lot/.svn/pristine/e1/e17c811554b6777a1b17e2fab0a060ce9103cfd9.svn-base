@@ -1,0 +1,383 @@
+<template>
+  <div class="eleven_just">
+    <div class="footer1 clearfix">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength="9" style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <div class="top">
+      <span :class="[i==1?'top_two':'top_one']" v-for="(key,i) in JustLists" v-if="key.top_name">{{key.top_name}}</span>
+    </div>
+    <div class="e_j_box">
+      <ul v-for="(item,i) in JustLists">
+        <li class="thend">{{item.name}}</li>
+        <li v-for="(key,k) in item.object" @click="myclick(item,key,i,k)" :class="{'styleclect':key.flag}" class='num'>
+          <!-- <span ref="myfocus" class="one"><i></i></span> -->
+          <i class="ball">{{key.name}}</i>
+        </li>
+      </ul>
+    </div>
+    <div class="footer1 clearfix" style="margin-bottom: 20px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength="9" style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+  </div>
+</template>
+
+<script>
+import api from "../../../api/config";
+import MeModal from "../../../share_components/bet";
+import {Input, Modal} from 'iview';
+export default {
+components: { MeModal,'I-Input':Input,Modal},
+  data() {
+    return {
+      money: "",
+      modal: false,
+      listsOne: [],
+      listsTwo: []
+    };
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': 'reset'   // 只有这个页面初始化之后，这个监听事件才开始生效
+  },
+  props: ["cdata", "JustLists", "JustType"],
+  created() {
+    this.$root.$on("success", e => {
+      if (e) {
+        this.modal = false;
+        this.reset();
+      }
+    });
+    this.reset();
+  },
+  methods: {
+    myclick(item, key, i, k) {
+      console.log(key);
+      this.columnClaic(item, key, i, k);
+    },
+
+    cancel: function(item) {
+      this.modal = false;
+      document.querySelector("body").style.overflow = "auto";
+    },
+    push_money: function() {
+      this.money = this.money.replace(/\D/g, "");
+      this.computed_money();
+    },
+    change_money: function () { this.computed_money() },
+    go_to: function() {
+      let a = this.money + 'a';
+      this.money = a.replace(/\D/g, "");
+      var flag = true;
+      var flag2 = true;
+      var k = 0,
+        k2 = 0;
+      for (let i = 0; i < this.listsOne.length; i++) {
+        if (this.listsOne[i]) {
+          k++;
+        }
+      }
+      for (let i = 0; i < this.listsTwo.length; i++) {
+        if (this.listsTwo[i]) {
+          k2++;
+        }
+      }
+
+      if (k == 0) {
+      } else if (k == 2) {
+        this.JustType[0].object[0].input_name = "";
+        let input_name = this.listsOne[0].name + "," + this.listsOne[1].name;
+        this.JustType[0].object[0].input_name = input_name;
+        this.JustType[0].object[0].flag = true;
+        this.JustType[0].object[0].money = this.money;
+      } else {
+        flag = false;
+        this.$Modal.warning({
+          content: "直选#前二少选 1 个球",
+          onOk: () => {
+            clearTimeout(time);
+          }
+        });
+        var time = setTimeout(() => {
+          this.$Modal.remove();
+        }, 500);
+      }
+
+      if (k2 == 0) {
+      } else if (k2 == 3) {
+        this.JustType[0].object[1].input_name = "";
+        let input_name =
+          this.listsTwo[0].name +
+          "," +
+          this.listsTwo[1].name +
+          "," +
+          this.listsTwo[2].name;
+        this.JustType[0].object[1].input_name = input_name;
+        this.JustType[0].object[1].flag = true;
+        this.JustType[0].object[1].money = this.money;
+      } else {
+        flag2 = false;
+        clearTimeout(time);
+        this.$Modal.warning({
+          content: "直选#前三少选 " + (3 - k2) + " 个球",
+          onOk: () => {
+            clearTimeout(time2);
+          }
+        });
+        var time2 = setTimeout(() => {
+          this.$Modal.remove();
+        }, 500);
+      }
+
+      if (flag2 && flag) {
+        var kk = 0;
+        for (let i = 0; i < this.JustType.length; i++) {
+          for (let j = 0; j < this.JustType[i].object.length; j++) {
+            let b = this.JustType[i].object[j].money + 'b';
+            this.JustType[i].object[j].money = b.replace(/\D/g, "");
+            kk += Number(this.JustType[i].object[j].money);
+          }
+        }
+
+        if (kk != 0) {
+          this.modal = true;
+          this.$root.$emit("c_data", this.cdata);
+          this.$root.$emit("id-selected", this.JustType);
+          document.querySelector("body").style.overflow = "hidden";
+        } else if (kk == 0) {
+          this.$Modal.warning({
+            content: "请先下注"
+          });
+        }
+      }
+    },
+    computed_money() {
+      for (let i = 0; i < this.JustLists.length; i++) {
+        for (let j = 0; j < this.JustLists[i].object.length; j++) {
+          if (this.JustLists[i].object[j].flag) {
+            this.JustLists[i].object[j].money = this.money;
+          } else {
+            this.JustLists[i].object[j].money = "";
+          }
+        }
+      }
+    },
+    reset: function() {
+      console.log('change');
+      for (let i = 0; i < this.JustLists.length; i++) {
+        this.JustLists[i].arr = null;
+        for (let j = 0; j < this.JustLists[i].object.length; j++) {
+          this.JustLists[i].object[j].money = "";
+          this.JustLists[i].object[j].flag = false;
+        }
+      }
+      if(this.JustType.length != 0){
+        for (let i = 0; i < this.JustType[0].object.length; i++) {
+          this.JustType[0].object[i].flag = false;
+          this.JustType[0].object[i].money = "";
+        }
+      }
+      this.listsOne = [];
+      this.listsTwo = [];
+      this.money = "";
+      this.$root.$emit("reset", "");
+    },
+
+    columnClaic(item, key, i, k) {
+      if (item.arr) {
+        if (item.arr.name == key.name) {
+          item.arr = null;
+          key.flag = false;
+          if (i < 2) {
+            this.listsOne[i] = undefined;
+          } else {
+            i -= 2;
+            this.listsTwo[i] = undefined;
+          }
+        } else {
+          this.$Modal.warning({
+            content: "当前组的相同号码只能选一个",
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        }
+      } else {
+        switch (i) {
+          case 0:
+            if (this.JustLists[1].arr) {
+              if (this.JustLists[1].arr.name == key.name) {
+                this.$Modal.warning({
+                  content: "当前组的相同号码只能选一个",
+                  onOk: () => {
+                    clearTimeout(time);
+                  }
+                });
+                var time = setTimeout(() => {
+                  this.$Modal.remove();
+                }, 500);
+              } else {
+                item.arr = key;
+                key.flag = true;
+                this.listsOne[0] = key;
+                key.money = this.money;
+              }
+            } else {
+              item.arr = key;
+              key.flag = true;
+              this.listsOne[0] = key;
+              key.money = this.money;
+            }
+            break;
+          case 1:
+            if (this.JustLists[0].arr) {
+              if (this.JustLists[0].arr.name == key.name) {
+                this.$Modal.warning({
+                  content: "当前组的相同号码只能选一个",
+                  onOk: () => {
+                    clearTimeout(time);
+                  }
+                });
+                var time = setTimeout(() => {
+                  this.$Modal.remove();
+                }, 500);
+              } else {
+                item.arr = key;
+                key.flag = true;
+                this.listsOne[1] = key;
+                key.money = this.money;
+              }
+            } else {
+              item.arr = key;
+              key.flag = true;
+              this.listsOne[1] = key;
+              key.money = this.money;
+            }
+            break;
+          case 2:
+            var flag = true;
+            if (this.JustLists[3].arr) {
+              if (this.JustLists[3].arr.name == key.name) {
+                flag = false;
+              }
+            }
+            if (this.JustLists[4].arr) {
+              if (this.JustLists[4].arr.name == key.name) {
+                flag = false;
+              }
+            }
+            if (flag) {
+              item.arr = key;
+              key.flag = true;
+              this.listsTwo[0] = key;
+              key.money = this.money;
+            } else {
+              this.$Modal.warning({
+                content: "当前组的相同号码只能选一个",
+                onOk: () => {
+                  clearTimeout(time);
+                }
+              });
+              var time = setTimeout(() => {
+                this.$Modal.warning();
+              }, 1000);
+            }
+            break;
+          case 3:
+            var flag = true;
+            if (this.JustLists[2].arr) {
+              if (this.JustLists[2].arr.name == key.name) {
+                flag = false;
+              }
+            }
+            if (this.JustLists[4].arr) {
+              if (this.JustLists[4].arr.name == key.name) {
+                flag = false;
+              }
+            }
+            if (flag) {
+              item.arr = key;
+              key.flag = true;
+              this.listsTwo[1] = key;
+              key.money = this.money;
+            } else {
+              this.$Modal.warning({
+                content: "当前组的相同号码只能选一个",
+                onOk: () => {
+                  clearTimeout(time);
+                }
+              });
+              var time = setTimeout(() => {
+                this.$Modal.remove();
+              }, 500);
+            }
+            break;
+          case 4:
+            var flag = true;
+            if (this.JustLists[3].arr) {
+              if (this.JustLists[3].arr.name == key.name) {
+                flag = false;
+              }
+            }
+            if (this.JustLists[2].arr) {
+              if (this.JustLists[2].arr.name == key.name) {
+                flag = false;
+              }
+            }
+            if (flag) {
+              item.arr = key;
+              key.flag = true;
+              this.listsTwo[2] = key;
+              key.money = this.money;
+            } else {
+              this.$Modal.warning({
+                content: "当前组的相同号码只能选一个",
+                onOk: () => {
+                  clearTimeout(time);
+                }
+              });
+              var time = setTimeout(() => {
+                this.$Modal.remove();
+              }, 500);
+            }
+            break;
+        }
+      }
+    },
+    add_money: function(type) {
+      let money = this.money;
+      this.money = Number(money) + type;
+      this.computed_money();
+    }
+  }
+};
+</script>
+
+<style lang="scss" src="../../../assets/css/eleven_just.scss" scoped>
+
+</style>

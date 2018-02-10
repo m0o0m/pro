@@ -1,0 +1,116 @@
+<!-- 日志管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>登录日志</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+
+                                        <label class="col-md-1 col-xs-4 input-label allsite">站点</label>
+                                        <div class="col-md-2 col-xs-8 allsite">
+                                            <div class="form-group">
+                                                <!--<div class="form-group">-->
+                                                <select data-smart-select2 class="selectWidth" ng-model="site_index_id">
+                                                    <option value="">请选择</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                                <!--</div>-->
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label">多站点</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control inp_2" ng-model="site_id">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-8 col-md-offset-0 col-xs-offset-4">
+                                            <div class="form-group">
+                                                <select class="form-control" ng-model="account_id"  ng-options="item.value as item.name for item in accountJson"></select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-8 col-md-offset-0 col-xs-offset-4">
+                                            <div class="form-group">
+                                                <select class="form-control" ng-model="login_id"  ng-options="item.value as item.name for item in loginJson"></select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-8 col-md-offset-0 col-xs-offset-4">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control inp_2" ng-model="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 col-xs-4 control-label">操作日期</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 control-label">————</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-1 col-xs-6 col-md-offset-0 col-xs-offset-10">
+                                            <a href-void="" class="btn btn-primary" href="#" ng-click="search()">查询</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                            <tr >
+                                                <th class="text-align-center">WWW</th>
+                                                <th class="text-align-center">设备</th>
+                                                <th class="text-align-center">账号</th>
+                                                <th class="text-align-center">讯息</th>
+                                                <th class="text-align-center">登入时间</th>
+                                                <th class="text-align-center">IP位置</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-align-center" ng-repeat="item in commodity">
+                                                <td>{{item.domains}}</td>
+                                                <td>{{item.device}}</td>
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.content}}</td>
+                                                <td>{{item.login_time}}</td>
+                                                <td>{{item.login_ip}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <span style="display: none" class="zz">{{lang['accounts']}}</span>
+</div>

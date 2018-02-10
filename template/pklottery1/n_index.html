@@ -1,0 +1,562 @@
+{{template "header" .Header}}
+        <div class="xl-center">
+            <div class="xl-lottery-content-center clearfix">
+                <div class="xl-lottery-center-left fl">
+                    <div class="toggle-c-div">
+                        <p><span class="iconfont icon-huo"></span>热门彩</p>
+                        <ul class="clearfix">
+                            <li class="fl"><a href="javascript:;">六合彩</a></li>
+                            <li class="fl"><a href="javascript:;">福彩3D</a></li>
+                            <li class="fl"><a href="javascript:;">广西快3</a></li>
+                            <li class="fl"><a href="javascript:;">加拿大卑斯</a></li>
+                            <li class="fl"><a href="javascript:;">北京快乐8</a></li>
+                            <li class="fl"><a href="javascript:;">安徽快3</a></li>
+                        </ul>
+                    </div>
+                    <div class="toggle-c-div">
+                        <p class="clearfix">
+                            <span class="fl"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/highlottery.png">快频彩</span>
+                            <span class="iconfont icon-xiangxiajiantou fr"></span>
+                        </p>
+                        <ul class="clearfix">
+                            <li class="fl"><a href="javascript:;">安徽快3</a></li>
+                            <li class="fl"><a href="javascript:;">江苏快3</a></li>
+                            <li class="fl"><a href="javascript:;">PC蛋蛋</a></li>
+                            <li class="fl"><a href="javascript:;">广西快3</a></li>
+                            <li class="fl"><a href="javascript:;">PK北京28</a></li>
+                            <li class="fl"><a href="javascript:;">六合彩</a></li>
+                        </ul>
+                    </div>
+                    <div class="toggle-c-div">
+                        <p class="clearfix">
+                            <span class="fl"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lowlottery.png">低频彩</span>
+                            <span class="iconfont icon-xiangxiajiantou fr"></span>
+                        </p>
+                        <ul class="clearfix">
+                            <li class="fl"><a href="javascript:;">天津时时彩</a></li>
+                            <li class="fl"><a href="javascript:;">赛车PK拾</a></li>
+                            <li class="fl"><a href="javascript:;">新疆时时彩</a></li>
+                            <li class="fl"><a href="javascript:;">重庆时时彩</a></li>
+                            <li class="fl"><a href="javascript:;">重庆快乐十分</a></li>
+                            <li class="fl"><a href="javascript:;">快乐十分</a></li>
+                        </ul>
+                    </div>
+                    <div class="toggle-c-div">
+                        <p>热门彩</p>
+                        <ul class="clearfix">
+                            <li class="fl"><a href="javascript:;">六合彩</a></li>
+                            <li class="fl"><a href="javascript:;">六合彩</a></li>
+                            <li class="fl"><a href="javascript:;">六合彩</a></li>
+                            <li class="fl"><a href="javascript:;">六合彩</a></li>
+                            <li class="fl"><a href="javascript:;">六合彩</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="xl-lottery-center-right fr">
+                    <div class="my-lottery-notice-c ">
+                        <p class="fl clearfix">
+                            <span class="iconfont icon-laba1 fl"></span>
+                            <i class="fl">最新公告:</i>
+                        </p>
+                        <marquee class="fl" scrollamount="3" scrolldelay="150" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="cursor: pointer;"><span id="bulletinMsg" data="left" onclick="notice_data();">元旦快乐，pk全体员工祝大家工作顺利，阖家幸福！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></marquee>
+                    </div>
+                    <div class="xl-lottery-right-center clearfix">
+                        <div class="index-lunbo fl">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/theme3/public/shared/lotterypk/images/banner.png" alt=""></a></div>
+                                    <div class="swiper-slide"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/theme3/public/shared/lotterypk/images/banner1.png" alt=""></a></div>
+                                    <div class="swiper-slide"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/theme3/public/shared/lotterypk/images/banner.png" alt=""></a></div>
+                                    <div class="swiper-slide"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/theme3/public/shared/lotterypk/images/banner1.png" alt=""></a></div>
+                                </div>
+                                <!-- 如果需要分页器 -->
+                                <div class="swiper-pagination"></div>
+
+                                <!-- 如果需要导航按钮 -->
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <div class="draw-notice fr">
+                            <p class="lottery-win">开奖公告<span class="fr">更多</span></p>
+                            <div class="draw-notice-c">
+                                <div class="draw-notice-every">
+                                    <p class="clearfix"><span class="fl">六合彩</span><span class="fl">第182412期</span><a href="javascript:;" class="fr">投注</a></p>
+                                    <ul class="clearfix">
+                                        <li class="fl">01</li>
+                                        <li class="fl">04</li>
+                                        <li class="fl">24</li>
+                                        <li class="fl">34</li>
+                                        <li class="fl">03</li>
+                                    </ul>
+                                </div>
+                                <div class="draw-notice-every">
+                                    <p class="clearfix"><span class="fl">六合彩</span><span class="fl">第182412期</span><a href="javascript:;" class="fr">投注</a></p>
+                                    <ul class="clearfix">
+                                        <li class="fl">01</li>
+                                        <li class="fl">04</li>
+                                        <li class="fl">24</li>
+                                        <li class="fl">34</li>
+                                        <li class="fl">03</li>
+                                    </ul>
+                                </div>
+                                <div class="draw-notice-every">
+                                    <p class="clearfix"><span class="fl">六合彩</span><span class="fl">第182412期</span><a href="javascript:;" class="fr">投注</a></p>
+                                    <ul class="clearfix">
+                                        <li class="fl">01</li>
+                                        <li class="fl">04</li>
+                                        <li class="fl">24</li>
+                                        <li class="fl">34</li>
+                                        <li class="fl">03</li>
+                                    </ul>
+                                </div>
+                                <div class="draw-notice-every">
+                                    <p class="clearfix"><span class="fl">六合彩</span><span class="fl">第182412期</span><a href="javascript:;" class="fr">投注</a></p>
+                                    <ul class="clearfix">
+                                        <li class="fl">01</li>
+                                        <li class="fl">04</li>
+                                        <li class="fl">24</li>
+                                        <li class="fl">34</li>
+                                        <li class="fl">03</li>
+                                    </ul>
+                                </div>
+                                <div class="draw-notice-every">
+                                    <p class="clearfix"><span class="fl">六合彩</span><span class="fl">第182412期</span><a href="javascript:;" class="fr">投注</a></p>
+                                    <ul class="clearfix">
+                                        <li class="fl">01</li>
+                                        <li class="fl">04</li>
+                                        <li class="fl">24</li>
+                                        <li class="fl">34</li>
+                                        <li class="fl">03</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="net-notice-c fl">
+                    <p>网站公告<a href="javascript:;" class="fr">更多</a></p>
+                    <div class="notice-div">
+                        <ul>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                            <li class="clearfix">
+                                <a href="javascript:;" class="fl overflow-text">这是最新一条公告标题这是最新一条公告标题</a>
+                                <span class="fr">12-35</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lottery-nav fl" >
+                    <div class="lottery-name-c">
+                        <ul class="clearfix">
+                            <li class="fl active-li">
+                                <a href="javascript:;">重庆时时彩</a>
+                            </li>
+                            <li class="fl">
+                                <a href="javascript:;">天津时时彩</a>
+                            </li>
+                            <li class="fl">
+                                <a href="javascript:;">广东快乐十分</a>
+                            </li>
+                            <li class="fl">
+                                <a href="javascript:;">江苏快三</a>
+                            </li>
+                            <li class="fl">
+                                <a href="javascript:;">福彩3D</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="lottery-content-c">
+                        <div class="lottery-content-item xl-div-show">
+                            <div class="clearfix">
+                                <p class="fl">
+                                    <span>第2017120243434期</span>&nbsp;&nbsp;截止:&nbsp;<i>0</i>天<i>0</i>小时<i>0分</i><i>17</i>秒
+                                </p>
+                                <p class="fr">
+                                    <span><a href="javascript:;">自助选号</a></span>
+                                    <span>|</span>
+                                    <span><a href="javascript:;">走势图</a></span>
+                                </p>
+                            </div>
+                            <div class="clearfix">
+                                <img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/large/chongqing.png" alt="" class="fl">
+                                <div class="win-number fl">
+                                    <ul class="clearfix">
+                                        <li class="fl">3</li>
+                                        <li class="fl">3</li>
+                                        <li class="fl">3</li>
+                                        <li class="fl">3</li>
+                                        <li class="fl">3</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="bet-number fl">
+                                    <span class="fl minus">-</span>
+                                    <input class="fl betnum" type="text" value="1">
+                                    <span class="fl plus">+</sp>
+                                </div>
+                                <div class="bet-button fr">
+                                    <span>换一注</span>
+                                    <span>立即投注</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lottery-content-item">
+                            <div class="clearfix">
+                                <p class="fl">
+                                    <span>第2017120243434期</span>&nbsp;&nbsp;截止:&nbsp;<i>0</i>天<i>0</i>小时<i>0分</i><i>17</i>秒
+                                </p>
+                                <p class="fr">
+                                    <span><a href="javascript:;">自助选号</a></span>
+                                    <span>|</span>
+                                    <span><a href="javascript:;">走势图</a></span>
+                                </p>
+                            </div>
+                            <div class="clearfix">
+                                <img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/chongqing.png" alt="" class="fl">
+                                <div class="win-number fl">
+                                    <ul class="clearfix">
+                                        <li class="fl">23</li>
+                                        <li class="fl">31</li>
+                                        <li class="fl">13</li>
+                                        <li class="fl">34</li>
+                                        <li class="fl">26</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="bet-number fl">
+                                    <span class="fl minus">-</span>
+                                    <input class="fl betnum" type="text" value="1">
+                                    <span class="fl plus">+</sp>
+                                </div>
+                                <div class="bet-button fr">
+                                    <span>换一注</span>
+                                    <span>立即投注</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lottery-content-item">
+                            <div class="clearfix">
+                                <p class="fl">
+                                    <span>第2017120243434期</span>&nbsp;&nbsp;截止:&nbsp;<i>0</i>天<i>0</i>小时<i>0分</i><i>17</i>秒
+                                </p>
+                                <p class="fr">
+                                    <span><a href="javascript:;">自助选号</a></span>
+                                    <span>|</span>
+                                    <span><a href="javascript:;">走势图</a></span>
+                                </p>
+                            </div>
+                            <div class="clearfix">
+                                <img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/chongqing.png" alt="" class="fl">
+                                <div class="win-number fl">
+                                    <ul class="clearfix">
+                                        <li class="fl">3</li>
+                                        <li class="fl">36</li>
+                                        <li class="fl">13</li>
+                                        <li class="fl">3</li>
+                                        <li class="fl">8</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="bet-number fl">
+                                    <span class="fl minus">-</span>
+                                    <input class="fl betnum" type="text" value="1">
+                                    <span class="fl plus">+</sp>
+                                </div>
+                                <div class="bet-button fr">
+                                    <span>换一注</span>
+                                    <span>立即投注</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lottery-content-item">
+                            <div class="clearfix">
+                                <p class="fl">
+                                    <span>第2017120243434期</span>&nbsp;&nbsp;截止:&nbsp;<i>0</i>天<i>0</i>小时<i>0分</i><i>17</i>秒
+                                </p>
+                                <p class="fr">
+                                    <span><a href="javascript:;">自助选号</a></span>
+                                    <span>|</span>
+                                    <span><a href="javascript:;">走势图</a></span>
+                                </p>
+                            </div>
+                            <div class="clearfix">
+                                <img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/chongqing.png" alt="" class="fl">
+                                <div class="win-number fl">
+                                    <ul class="clearfix">
+                                        <li class="fl">3</li>
+                                        <li class="fl">3</li>
+                                        <li class="fl">3</li>
+                                        <li class="fl">3</li>
+                                        <li class="fl">3</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="bet-number fl">
+                                    <span class="fl minus">-</span>
+                                    <input class="fl betnum" type="text" value="1">
+                                    <span class="fl plus">+</sp>
+                                </div>
+                                <div class="bet-button fr">
+                                    <span>换一注</span>
+                                    <span>立即投注</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="erweima-div fr">
+                    <p class="nav-p">
+                        <a href="javascript:;" >IOS版</a><a href="javasscript:;" class="active-li">Android版</a>
+                    </p>
+                    <div class="item-tab-c">
+                        <div class="item-tab">
+                            <p>适用于IOS及以上平台</p>
+                            <a href="javascript:;">
+                                <img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/big.png" alt="">
+                            </a>
+                            <p>
+                                扫一扫二维码下载IOS版
+                            </p>
+                        </div>
+                        <div class="item-tab xl-div-show">
+                            <p>适用于Android及以上平台</p>
+                            <a href="javascript:;">
+                                <img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/big.png" alt="">
+                            </a>
+                            <p>
+                                扫一扫二维码下载Android版
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 这是帮助中心 -->
+            <div class="xl-lottery-help clearfix">
+                <div class="help-left fl">
+                    <p>帮助中心
+                        <a href="javascript:;" class="fr">更多</a>
+                    </p>
+                    <ul>
+                        <li><span class="iconfont icon-gantanhao"></span><a href="javascript:;">彩种规则介绍</a></li>
+                        <li><span class="iconfont icon-guanyu"></span><a href="javascript:;">关于取款</a></li>
+                        <li><span class="iconfont icon-gou2"></span><a href="javascript:;">关于充值</a></li>
+                        <li><span class="iconfont icon-gou"></span><a href="javascript:;">规则条款</a></li>
+                        <li><span class="iconfont icon-piliangshezhiyinsibaohu"></span><a href="javascript:;">隐私政策</a></li>
+                        <li><span class="iconfont icon-yingyongxingnengguanlifuwuapm"></span><a href="javascript:;">理性博彩</a></li>
+                    </ul>
+                </div>
+                <div class="chart-c fl">
+                    <p>走势图表<a href="javascript:;" class="fr">更多</a></p>
+                    <div class="chart-content-c">
+                        <div class="chart-img">
+                            <img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/trend.png" alt="">
+                        </div>
+                        <ul class="clearfix">
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/PC_egg.png" alt="">
+                                <span>PC蛋蛋</span></a>
+                            </li>
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/MarkSix.png" alt="">
+                                <span>六合彩</span></a>
+                            </li>
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/Canada28.png" alt="">
+                                <span>加拿大28</span></a>
+                            </li>
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/Canadianbass.png" alt="">
+                                <span>加拿大卑斯</span></a>
+                            </li>
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/bj_happy_8.png" alt="">
+                                <span>北京快乐8</span></a>
+                            </li>
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/gd_elect_5.png" alt="">
+                                <span>广东11选5</span></a>
+                            </li>
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/xj_lottery.png" alt="">
+                                <span>新疆时时彩</span></a>
+                            </li>
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/lottery3D.png" alt="">
+                                <span>福彩3D</span></a>
+                            </li>
+                            <li class="fl"><a href="javascript:;"><img src="{{.Header.CdnUrl}}/pklottery1/public/images/new/lotteryKinds/small/cq_happy_10.png" alt="">
+                                <span>重庆快乐10分</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="win-ranking fr">
+                    <p class="ranking">中奖排行榜</p>
+                    <div class="ranking-c">
+                        <p><span>用户名</span><span>奖金</span></p>
+                        <div class="ranking-ul-c">
+                            <ul class="ul1">
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                                <li><span>jiisdn</span><span class="text-color">345元</span></li>
+                            </ul>
+                            <div class="ul2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{{/*<script src="{{.Header.CdnUrl}}/pklottery1/public/jd/new/jquery-2.1.4.js"></script>*/}}
+{{/*<script src="{{.Header.CdnUrl}}/pklottery1/public/jd/new/swiper-3.4.2.jquery.min.js"></script>*/}}
+<script src="{{.Header.CdnUrl}}/pklottery1/public/js/new/Marquee.js"></script>
+<script>
+    $(function(){
+
+        $('.sa').click(function(){
+            $('.xl-scan-img-div').toggleClass('xl-div-show');
+        })
+
+
+        $('.xl-lottery-center-left .toggle-c-div p span').click(function(){
+            console.log($(this).hasClass('icon-xiangxiajiantou'));
+            if($(this).hasClass('icon-xiangxiajiantou')){
+                $(this).removeClass('icon-xiangxiajiantou').addClass('icon-xiangyoujiantou');
+                $(this).parents('p').siblings('ul').slideToggle();
+            }else{
+                $(this).removeClass('icon-xiangyoujiantou').addClass('icon-xiangxiajiantou');
+                $(this).parents('p').siblings('ul').slideToggle();
+            }
+
+        })
+        $('.xl-scan-code-small').on('click','li',function(){
+            var liindex = $(this).index();
+            $(this).addClass('xl-scan-code-active').siblings('li').removeClass('xl-scan-code-active');
+            $('.xl-scan-img-c .xl-scan-img').eq(liindex).show().siblings('.xl-scan-img').hide();
+        })
+
+        $('.notice-div a').click(function(){
+            $(this).toggleClass('overflow-text')
+        })
+
+        $('.nav-p').on('click','a',function(){
+            var indexli = $(this).index();
+            $(this).addClass('active-li').siblings('a').removeClass('active-li');
+            $('.item-tab-c .item-tab').eq(indexli).show().siblings('.item-tab').hide();
+        })
+
+
+        $('.lottery-name-c ul').on('click','li',function(){
+            var ind = $(this).index();
+            $(this).addClass('active-li').siblings('li').removeClass('active-li');
+            console.log(ind)
+            $('.lottery-content-c .lottery-content-item').eq(ind).addClass('xl-div-show').siblings('.lottery-content-item').removeClass('xl-div-show');
+        })
+
+
+
+        // 这是下注加减
+        var num = parseInt($('.betnum').val());
+        $('.minus').click(function(){
+            num--;
+            if(num<=0){
+                num =1;
+            }
+            $('.betnum').val(String(num));
+            console.log($('betnum').val());
+
+        })
+        $('.plus').click(function(){
+            num++;
+            $('.betnum').val(String(num));
+            console.log($('betnum').val());
+        })
+
+        // 这是中奖排行榜文字滚动
+        $('.ranking-ul-c').kxbdSuperMarquee({
+            isMarquee:true,
+            isEqual:false,
+            scrollDelay:20,
+            controlBtn:{up:'#goUM',down:'#goDM'},
+            direction:'up'
+        });
+
+        // 这是轮播图
+        var mySwiper = new Swiper('.swiper-container',{
+            loop: true,
+            autoplay: 1500,
+            direction : 'horizontal',
+            autoplayDisableOnInteraction : false,
+            pagination: '.swiper-pagination',
+            paginationClickable :true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+        })
+
+        $('.swiper-container').mouseenter(function () {
+            mySwiper.stopAutoplay();
+            $('.swiper-button-prev').show()
+            $('.swiper-button-next').show()
+        })
+        $('.swiper-container').mouseleave(function () {
+            mySwiper.startAutoplay();
+            $('.swiper-button-prev').hide()
+            $('.swiper-button-next').hide()
+        })
+    })
+</script>
+<!-- 这是尾部 -->
+{{template "footer" .Footer}}

@@ -1,0 +1,623 @@
+{{define "pop_adv"}}
+<style>
+    #Lsj-fkinglayer {
+        display: none;
+        position: fixed;
+        z-index: 9998;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+</style>
+{{if gt (len .PopAdv) 1}}
+    <style>
+        .Lsj-Modal {
+            display: none;
+            z-index: 9999;
+            position: absolute; 
+            top: 15px; 
+            left: 0; 
+            right: 0;  
+        }
+        .Lsj_modal-content {
+            z-index: 9999;
+            position: relative;
+            background-color: #F7F7F7;
+            margin: auto;
+            padding: 0;
+            overflow:hidden;
+            width: 720px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        .Lsj-close {
+            color: #555555;
+            float: right;
+            padding: 5px 0px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .Lsj-close:hover,
+        .Lsj-close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .Lsj_modal-header {
+            width:100%;
+            height: 40px;
+            background-color: #F7F7F7;
+            color: #555555;
+            overflow:hidden;
+        }
+
+        .Lsjmodal-body_contents {
+            display:block;
+            clear:both;
+            width:100%;
+            height:500px;
+            overflow:hidden;
+        }
+
+        .Lsj_modal-footer {
+            clear:both;
+            width:100%;
+            padding: 2px 0px;
+            background-color: #F7F7F7;
+            color: #555555;
+        }
+
+        .Lsjbtn-bottom-two-right {
+            width:100%;
+            text-align: center;
+        }
+
+        .Lsjbtn-bottom-two-right a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+
+        .LsjmodalBody-slider_box {
+            clear:both;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            vertical-align: middle;
+        }
+
+        .LsjmodalBody-slider_box ul {
+            list-style: none;
+            width: 100%;
+            overflow:hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .Lsjmodal-body_contents .LsjmodalBody-slider_box li {
+            clear: both;
+            width:100%;
+            height:500px;
+            overflow: hidden;
+        }
+        
+        .LsjmodalBody-slider_box li img {
+            display:block;
+            clear:both;
+            margin: 0;
+            padding: 0;
+            width:100%;
+            height:500px;
+            overflow:hidden;
+        }
+
+        .LsjmodalBody-slider_box button {
+            position: absolute;
+            display: block;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+            top: 0;
+            bottom: 0;
+            width: 15%;
+            background-color: transparent;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            opacity: 1;
+            z-index: 9999;
+            font-size: 90px;
+        }
+
+        .LsjmodalBody-slider_box button.click_last_button {
+            left: 0px;
+        }
+
+        .LsjmodalBody-slider_box button.click_next_button{
+            right: 0;
+        }
+
+        .LsjmodalBody-slider_box button:hover,
+        .LsjmodalBody-slider_box button:active {
+            cursor: pointer;
+            color: #ccc;
+        }
+
+        /*  Button */
+        .Lsj_okBtn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 5px;
+            border: none;
+            outline: none;
+            background-color: #3276b1;
+            color: #fff;
+            font-size: 16px;
+            line-height: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 150ms ease-out;
+            width: 180px;
+            letter-spacing: 4px;
+            border-radius: 2px;
+        }
+        .Lsj_okBtn.Lsj_filled:focus, 
+        .Lsj_okBtn.Lsj_filled:hover {
+            background-color: #3276b1;
+            box-shadow: 0 0 0 0.1875rem white, 
+                0 0 0 0.375rem #3276b1;
+        }
+        .Lsj_okBtn.Lsj_filled:active {
+            background-color: #285e8e;
+            box-shadow: 0 0 0 0.1875rem #285e8e, 
+                0 0 0 0.375rem #285e8e;
+            transition-duration: 75ms;
+        }
+
+        .Lsj_okBtn.Lsj_outline {
+            border: 2px solid #555555;
+            background-color: transparent;
+            color: #555555;
+        }
+        .Lsj_okBtn.Lsj_outline:focus, 
+        .Lsj_okBtn.Lsj_outline:hover {
+            border-color: #555555;
+            box-shadow: 0 0 0 0.1875rem white, 
+                0 0 0 0.375rem #555555;
+            color: #555555;
+        }
+        .Lsj_okBtn.Lsj_outline:active {
+            border-color: #555555;
+            color: #555555;
+            box-shadow: 0 0 0 0.1875rem #555555, 
+                0 0 0 0.375rem #555555;
+            transition-duration: 75ms;
+        }
+        .Lsj_modal-content .Lsj_modal-header h3{
+            width:100%;
+            height:40px;
+            clear:both;
+            font-weight: 600;
+            text-align: center;
+            line-height:40px;
+            font-size:16px;
+        }
+    </style>
+    <div id="LsjmyModal" class="Lsj-Modal">
+        <div class="Lsj_modal-content pop_border_color">
+            <div class="Lsj_modal-header pop_title_box_bcolor">
+                <div id="fking-header-div">
+                    {{range $key, $val := .PopAdv}}
+                    <h3 onmouseout="slideStop()" onmouseover="slideNumBox({{$key}},1)" id="pop_title_contents_{{$key}}" class="pop_title_color" style="{{if eq $key 0}}display:block{{else}}display:none{{end}}">{{$val.Title}}</h3>
+                    {{end}}
+                </div>
+            </div>
+            <div class="Lsjmodal-body_contents pop_box_bg_color">   
+                <div class="LsjmodalBody-slider_box">
+                    <ul id="modalBody_slider">
+                        {{range $key, $val := .PopAdv}}
+                        <li onmouseout="slideStop()" onmouseover="slideNumBox({{$key}},1)" id="pop_slide_box_{{$key}}" style="{{if eq $key 0}}display:block{{else}}display:none{{end}}">
+                            {{$val.Content}}
+                        </li>
+                        {{end}}
+                    </ul>
+                    <button id="clickLastButton" class="click_last_button">&lsaquo;</button>
+                    <button id="clickNextButton" class="click_next_button">&rsaquo;</button>
+                </div>
+            </div>
+            <div class="Lsj_modal-footer">
+                <div class="Lsjbtn-bottom-two-right">
+                    <button class="Lsj_okBtn Lsj_outline" onclick="removers(1);">下次不再显示</button>
+                    <button class="Lsj_okBtn Lsj_filled" onclick="removers();">确定</button>
+                </div>
+            </div>
+        </div>
+        <div id="Lsj-fkinglayer"></div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#LsjmyModal').css('display', 'none');
+            $('#Lsj-fkinglayer').css('display', 'block');
+            $('#clickNextButton').click(function(event) {
+            $("#modalBody_slider li:visible").each(function() {
+                fking_id = $(this);
+                $(fking_id).css('display', 'none');
+                if (!(fking_id.is(':last-child'))) {
+                    $(fking_id).next().css('display', 'block');
+                } else {
+                    $('#modalBody_slider > li:first-child').css('display', 'block');
+                }
+            });
+                $("#fking-header-div h3:visible").each(function() {
+                    fking_h3_id = $(this);
+                    $(fking_h3_id).css('display', 'none');
+                    if (!(fking_h3_id.is(':last-child'))) {
+                        $(fking_h3_id).next().css('display', 'block');
+                    } else {
+                        $('#fking-header-div > h3:first-child').css('display', 'block');
+                    }
+                });
+            });
+        $('#clickLastButton').click(function(event) {
+            $("#modalBody_slider li:visible").each(function() {
+                fking_id = $(this);
+                $(fking_id).css('display', 'none');
+                if (!(fking_id.is(':first-child'))) {
+                    $(fking_id).prev().css('display', 'block');
+                } else {
+                    $('#modalBody_slider > li:last-child').css('display', 'block');
+                }
+            });
+            $("#fking-header-div h3:visible").each(function() {
+                fking_h3_id = $(this);
+                $(fking_h3_id).css('display', 'none');
+                if (!(fking_h3_id.is(':first-child'))) {
+                    $(fking_h3_id).prev().css('display', 'block');
+                } else {
+                    $('#fking-header-div > h3:last-child').css('display', 'block');
+                }
+            });
+        });
+    });
+    </script>
+    <script>
+        var count_slide={{.PopAdv}};
+            count_slide=count_slide.length;
+            x = - 1;
+        function slideNumBox(a, b) {
+            for (i = 0; i < count_slide; i++) {
+                //上侧
+                $('#pop_slide_box_' + i).hide();
+                //下侧
+                $("#pop_title_contents_" + i).hide();
+            }
+            x++;
+            if (x > (count_slide-1)) {
+                x = 0;
+            }
+            if (b == 1) {
+                x = a;
+                clearInterval(num);
+            }
+            $('#pop_slide_box_' + x).show();
+            $('#pop_title_contents_' + x).show();
+        }
+            num = setInterval("slideNumBox()", 2000);
+        function slideStop() {
+            num = setInterval("slideNumBox()", 2000);
+        }
+    </script>
+    <style type="text/css">
+        /*标题栏背景色*/
+        .pop_title_box_bcolor{
+            background:{{.PopAdvC.PopoverBarColor}};
+        }
+        /*    标题颜色*/
+        .pop_title_color{color:{{.PopAdvC.PopoverTitleColor}};}
+        /*    背景色*/
+        .pop_box_bg_color{background:{{.PopAdvC.PopoverBgColor}}}
+        /*    边框颜色*/
+        .pop_border_color{border:2px solid {{.PopAdvC.PopoverBarColor}};}
+    </style>
+{{else}}
+    <style>
+        .Lsj-Modal {
+            display: none;
+            z-index: 9999;
+            position: absolute;
+            top: 50px; 
+            left: 0; 
+            right: 0;  
+        }
+        
+        .Lsj_modal-content {
+            position: relative;
+            z-index:9999;
+            background-color: transparent;
+            margin: auto;
+            padding: 0;
+            min-width: 250px;
+            max-width: 1000px;
+            overflow:hidden;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        .Lsj-close {
+            color: #fff;
+            float: right;
+            padding: 5px 0px;
+            font-size: 20px;
+            font-weight: bold;
+            overflow:hidden;
+        }
+
+        .Lsj-close:hover,
+        .Lsj-close:focus {
+            color: #555;
+            text-decoration: none;
+            cursor: pointer;
+            overflow:hidden;
+        }
+
+        .Lsj_modal-header {
+            height: 40px;
+            padding: 0 10px;
+            background-color: transparent;
+            color: #fff;
+            overflow:hidden;
+        }
+
+        .Lsjmodal-body_contents {
+            display:block;
+            clear:both;
+            width:100%;
+            min-height: 40px;
+            max-height: 550px;
+            overflow:hidden;
+        }
+        .Lsjmodal-body_contents p{
+            display:block;
+            clear:both;
+            width:100%;
+            overflow:hidden;
+            height:auto;
+            font-size:12px;
+        }
+        .Lsjmodal-body_contents p img {
+            padding: 0;
+            margin: 0;
+            width:100%;
+            min-height: 40px;
+            max-height: 550px;
+            overflow: hidden;
+        }
+
+        .Lsj_modal-footer {
+            padding: 2px 10px;
+            color: #555555;
+        }
+
+        .Lsjbtn-bottom-two-right {
+            text-align: center;
+        }
+
+        .Lsjbtn-bottom-two-right a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .Lsj_okBtn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 5px;
+            border: none;
+            outline: none;
+            background-color: #3276b1;
+            color: #fff;
+            font-size: 16px;
+            line-height: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 150ms ease-out;
+            width: 180px;
+            letter-spacing: 4px;
+            border-radius: 2px;
+        }
+
+        .Lsj_okBtn.Lsj_filled:focus, 
+        .Lsj_okBtn.Lsj_filled:hover {
+            background-color: #3276b1;
+            box-shadow: 0 0 0 0.1875rem white, 
+                0 0 0 0.375rem #3276b1;
+        }
+        .Lsj_okBtn.Lsj_filled:active {
+            background-color: #285e8e;
+            box-shadow: 0 0 0 0.1875rem #285e8e, 
+                0 0 0 0.375rem #285e8e;
+            transition-duration: 75ms;
+        }
+
+        .Lsj_modal-content .Lsj_modal-header h3{
+            text-align: center;
+            line-height:40px;
+            font-weight: 600;
+            margin: 0;
+            font-size:16px;
+        }
+    </style>
+    {{$pop := (index .PopAdv 0)}}
+    {{ if eq .PopAdvC.AdWay 2}}
+    <style>
+        .Lsj_modal-footer{
+            background-color: transparent;
+        }
+        
+        /* Outline Button */
+        .Lsj_okBtn.Lsj_outline {
+            border: 2px solid #fff;
+            background-color: transparent;
+            color: #fff;
+        }
+        .Lsj_okBtn.Lsj_outline:focus, 
+        .Lsj_okBtn.Lsj_outline:hover {
+            border-color: #555;
+            box-shadow: 0 0 0 0.1875rem white, 
+                0 0 0 0.375rem #555;
+            color: #fff;
+        }
+        .Lsj_okBtn.Lsj_outline:active {
+            border-color: #fff;
+            color: #fff;
+            box-shadow: 0 0 0 0.1875rem #fff, 
+                0 0 0 0.375rem #fff;
+            transition-duration: 75ms;
+        }
+    </style>
+    <div id="LsjmyModal" class="Lsj-Modal">
+        <div class="Lsj_modal-content Pop_bor_2">
+            <div class="Lsjmodal-body_contents">
+                {{ $pop.Content }}
+            </div>
+            <div class="Lsj_modal-footer">
+                <div class="Lsjbtn-bottom-two-right">
+                    <button class="Lsj_okBtn Lsj_outline" onclick="removers(1);">下次不再显示</button>
+                    <button class="Lsj_okBtn Lsj_filled" onclick="removers();">确定</button>
+                </div>
+            </div>
+        </div>
+        <div id="Lsj-fkinglayer"></div>
+    </div>
+    {{else}}
+    <div id="LsjmyModal" class="Lsj-Modal">
+        <div class="Lsj_modal-content pop_border_color">
+            <div class="Lsj_modal-header pop_title_box_bcolor">
+                <span class="Lsj-close" onclick="removers();">&times;</span>
+                <h3 class="pop_title_color">{{ $pop.Title }}</h3>
+            </div>
+            <div class="Lsjmodal-body_contents pop_box_bg_color">
+                {{ $pop.Content }}
+            </div>
+            <div class="Lsj_modal-footer">
+                <div class="Lsjbtn-bottom-two-right">
+                    <button class="Lsj_okBtn Lsj_outline" onclick="removers(1);">下次不再显示</button>
+                    <button class="Lsj_okBtn Lsj_filled" onclick="removers();">确定</button>
+                </div>
+            </div>
+        </div>
+        <div id="Lsj-fkinglayer"></div>
+    </div>
+    <style type="text/css">
+        /*标题栏背景色*/
+        .pop_title_box_bcolor{
+            background:{{.PopAdvC.PopoverBarColor}};
+        }
+        /*    标题颜色*/
+        .pop_title_color{color:{{.PopAdvC.PopoverTitleColor}};}
+        /*    背景色*/
+        .pop_box_bg_color{background:{{.PopAdvC.PopoverBgColor}}}
+        /*    边框颜色*/
+        .pop_border_color{border:2px solid {{.PopAdvC.PopoverBarColor}};}
+        .Lsj_modal-footer{
+            background-color: #F7F7F7;
+        }
+        /*  Button */
+
+        .Lsj_okBtn.Lsj_outline {
+            border: 2px solid #555555;
+            background-color: transparent;
+            color: #555555;
+        }
+        .Lsj_okBtn.Lsj_outline:focus, 
+        .Lsj_okBtn.Lsj_outline:hover {
+            border-color: #555555;
+            box-shadow: 0 0 0 0.1875rem white, 
+                0 0 0 0.375rem #555555;
+            color: #555555;
+        }
+        .Lsj_okBtn.Lsj_outline:active {
+            border-color: #555555;
+            color: #555555;
+            box-shadow: 0 0 0 0.1875rem #555555, 
+                0 0 0 0.375rem #555555;
+            transition-duration: 75ms;
+        }
+    </style>
+    {{end}}
+    <script>
+        $(document).ready(function(){ 
+            $("#LsjmyModal").hide();
+            $('#Lsj-fkinglayer').hide();
+        });
+    </script>
+{{end}}
+<script>
+    function removers(i) {
+        if (i == 1) {
+            $.cookie('PKBET_ORG', 'Y', {path: '/', expires: ''});
+        }
+        $('#LsjmyModal').remove();
+    }
+    $(window).load(function(){
+        if ($.cookie('PKBET_ORG')){
+            $("#LsjmyModal").hide();
+            $('#Lsj-fkinglayer').hide();
+            return;
+        }else{
+            var count_slide={{.PopAdv}};
+                count_slide=count_slide.length;
+            if(count_slide==1){
+                var label_empty=$(".Lsjmodal-body_contents").find("img").length;
+                if(label_empty){
+                    var img_obj = new Image();
+                    img_obj.src=$(".Lsjmodal-body_contents img").attr('src');
+                    var img_width=img_obj.width;
+                    var img_height=img_obj.height;
+                    $(".Lsj_modal-content").css('width',img_width);
+                    $(".Lsjmodal-body_contents").css('height',img_height);
+                    $(".Lsjmodal-body_contents p img").css('height',img_height);
+                }else{
+                    $(".Lsj_modal-content").css('width',720);
+                }
+            }
+            $('#Lsj-fkinglayer').show();
+            $("#LsjmyModal").show();    
+        }
+    });
+</script>
+{{end}}

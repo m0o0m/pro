@@ -1,0 +1,48 @@
+
+    <thead>
+        <tr>
+            <th class="center">种类</th>
+            <th class="center">期号</th>
+            <th class="center">开奖时间</th>
+            <th class="center">添加时间</th>
+            <th class="center" style="width:233px;">彩票控</th>
+            <th class="center" style="width:233px;">开奖网</th>
+        </tr>
+    </thead>
+<{if isset($result['data'])}>
+    <tbody ball_num="<{$result.ball_num}>">
+    <{if count($result['data']) == 0}>
+        <tr><td class="center" colspan="20">无记录</td></tr>
+    <{else}>
+      <{foreach from=$result.data item=v key=k}>
+        <tr id="item<{$v.id}>">
+            <td class="center" name="record" style="display:none;">
+              <{foreach from=$v item=vv key=kk}>
+                <i fieldkey="<{$kk}>"><{if is_array($vv)}><{$vv|@json_encode}><{else}><{$vv}><{/if}></i>
+              <{/foreach}>
+                <info><{$v|@json_encode}></info>
+            </td>
+            <td class="center" name="fc_type"><{$result.fc_type}></td>
+            <td class="center" name="qishu"><{$v.qishu}></td>
+            <td class="center" name="datedate"><{$v.datedate}></td>
+            <td class="center" name="adddate"><{$v.adddate}></td>
+            <td class="center" name="balls">
+              <{for $i=1 to $result.ball_num}>
+                <span name="ball_<{$i}>" style="display:inline-block;width:3em;margin-bottom:3px;text-align:center;color:white;background:#081D27;"><{$v['ball_'|cat:$i]}></span>
+              <{/for}>
+            </td>
+            <td class="center" name="oballs">
+              <{if isset($v.oauto)}>
+              <{foreach from=$v.oauto item=vv key=kk}>
+                <span style="display:inline-block;width:3em;margin-bottom:3px;text-align:center;color:white;background:#081D27;<{if isset($v.diff)}><{if in_array($kk,$v.diff)}>color:red;<{/if}><{/if}>"><{$vv}></span>
+              <{/foreach}>
+              <{else}>
+                无数据
+              <{/if}>
+            </td>
+
+        </tr>
+      <{/foreach}>
+    <{/if}>
+    </tbody>
+<{/if}>

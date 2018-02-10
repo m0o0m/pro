@@ -1,0 +1,320 @@
+<?php
+
+namespace backend\controllers;
+
+use Yii;
+use backend\controllers\Controller;
+use backend\models\AdminModel;
+
+class RoleController extends Controller {
+
+    //管理员子帐号角色列表
+    public function actionIndex() {
+        $session = Yii::$app->session;
+        $user_type = $session['user_type'];
+        if ($user_type != 1) {
+            $this->wrong_msg();
+        }
+        $get = Yii::$app->request->get();
+        if (isset($get['_pjax']))
+            unset($get['_pjax']);
+        $session = Yii::$app->session;
+        if (empty($get)) {
+            $render = [
+                'data' => array(),
+                'pagecount' => 1,
+                'page' => 1
+            ];
+            if (Yii::$app->request->isAjax) {
+                return $this->renderAjax('index.html', $render);
+            } else {
+                return $this->render('index.html', $render);
+            }
+        }
+        $where = ['and'];
+        $where[] = 'is_agent=1';
+        if (isset($get['roleName']) && !empty($get['roleName'])) {
+            $where[] = 'role_name="' . trim($get['roleName']) . '"';
+        }
+        if (isset($get['status']) && !empty($get['status'])) {
+            $where[] = 'is_delete=' . trim($get['status']);
+        }
+        //添加时间
+        if (isset($get['startTime']) && !empty($get['startTime'])) {
+            $where[] = ['>=', 'addtime', strtotime(trim($get['startTime']))];
+        }
+        if (isset($get['endTime']) && !empty($get['endTime'])) {
+            $where[] = ['<=', 'addtime', strtotime(trim($get['endTime']))];
+        }
+        //所属
+        $where[] = 'line_id=' . "'{$session['line_id']}'";
+
+        $pagenum = isset($get['pageNum']) && !empty($get['pageNum']) ? $get['pageNum'] : 100;
+        $page = isset($get['page']) && !empty($get['page']) ? $get['page'] : 1;
+        $offset = ($page - 1) * $pagenum;
+
+        $tab = \Yii::$app->manage_db->tablePrefix . 'admin_role';
+
+        $data = AdminModel::getRoleList($tab, $where, $offset, $pagenum);
+        $data = $this->trans($data);
+        $count = AdminModel::getRoleCount($tab, $where);
+        $pagecount = ceil($count / $pagenum);
+        $pagecount = empty($pagecount) ? 1 : $pagecount;
+
+        $render = [
+            'data' => $data,
+            'pagecount' => $pagecount,
+            'page' => $page
+        ];
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('index.html', $render);
+        } else {
+            return $this->render('index.html', $render);
+        }
+    }
+
+    //翻译
+    public function trans($data) {
+        if (is_array($data) && !empty($data)) {
+            foreach ($data as $k => $v) {
+                //状态
+                if ($v['is_delete'] == 1) {
+                    $data[$k]['deleteTxt'] = '有效';
+                } else if ($v['is_delete'] == 2) {
+                    $data[$k]['deleteTxt'] = '无效';
+                }
+                //时间
+                if (!empty($v['addtime'])) {
+                    $data[$k]['addDate'] = date('Y-m-d H:i:s', $v['addtime']);
+                }
+                if (!empty($v['updatetime'])) {
+                    $data[$k]['updateDate'] = date('Y-m-d H:i:s', $v['updatetime']);
+                }
+            }
+        }
+        return $data;
+    }
+
+    //装入菜单
+    private static function getLevel($routes) {
+        $return = array();
+        if (!empty($routes)) {
+            foreach ($routes as $k => $v) {
+                if ($v['level'] == 1) {
+                    $return['oneLevel'][] = $v;
+                } else if ($v['level'] == 2) {
+                    $return['twoLevel'][] = $v;
+                } else if ($v['level'] == 3) {
+                    $return['threeLevel'][] = $v;
+                }
+            }
+        }
+        return $return;
+    }
+
+    //权限编辑
+    public function actionEdit() {
+        $get = Yii::$app->request->get();
+        $id = isset($get['id']) ? $get['id'] : '';
+        $type = isset($get['type']) ? $get['type'] : '';
+        $session = Yii::$app->session;
+        if ($type != 'detail' && $session['user_type'] != 1) {
+            $this->wrong_msg();
+        }
+
+        //角色表名
+        $tab = \Yii::$app->manage_db->tablePrefix . 'admin_role';
+        $data = [];
+        $access = [];
+        if (!empty($id)) {
+            $data = AdminModel::getOneRole($tab, ['id' => $id]);
+            $data['addTimeTxt'] = !empty($data['addtime']) ? date('Y-m-d H:i:s', $data['addtime']) : '';
+            $data['updateTimeTxt'] = !empty($data['updatetime']) ? date('Y-m-d H:i:s', $data['updatetime']) : '';
+            $access = explode(',', $data['access_id']);
+        }
+
+        //所有路由
+        $route_where = [];
+        $route_where['is_delete'] = 1;
+        $route_where['is_agent'] = 2;
+        $routes = AdminModel::getAllRoute($route_where);
+        $level = self::getLevel($routes);
+        $render = [
+            'id' => $id,
+            'data' => $data,
+            'access' => $access,
+            'oneLevel' => $level['oneLevel'],
+            'twoLevel' => $level['twoLevel'],
+            'threeLevel' => $level['threeLevel']
+        ];
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('form.html', $render);
+        } else {
+            return $this->render('form.html', $render);
+        }
+    }
+
+    public function actionSave() {
+        $session = Yii::$app->session;
+        if ($session['user_type'] != 1) {
+            echo json_encode(['code' => 400, 'msg' => '您没有权限操作此功能!']);
+            die;
+        }
+        $post = Yii::$app->request->post();
+        $id = isset($post['id']) ? $post['id'] : '';
+        $role = isset($post['role']) ? $post['role'] : '';
+        $roleName = isset($post['roleName']) ? $post['roleName'] : '';
+        $status = isset($post['status']) ? $post['status'] : '';
+        $access = isset($post['access']) ? $post['access'] : [];
+        $accessStr = implode(',', $access);
+        $state = isset($post['state']) ? $post['state'] : '';
+        //角色表名
+        $tab = \Yii::$app->manage_db->tablePrefix . 'admin_role';
+        if (empty($role)) {
+            echo json_encode(['code' => 400, 'msg' => '角色不能为空!']);
+            die;
+        } else if (!preg_match('/^[A-Za-z0-9_]*$/', $role)) {
+            echo json_encode(['code' => 400, 'msg' => '角色只能为数字字母下划线!']);
+            die;
+        } else if (empty($roleName)) {
+            echo json_encode(['code' => 400, 'msg' => '角色名称不能为空!']);
+            die;
+        }
+
+        // 唯一
+        $has = AdminModel::getRoleCount('my_admin_role', ['and', ['=', 'role', $role], ['<>', 'id', $id]]);
+        if ($has > 0) {
+            echo json_encode(['code' => 400, 'msg' => '角色重名!']);
+            die;
+        }
+
+        $arr = [
+            'line_id' => $session['line_id'],
+            'role' => $role,
+            'role_name' => $roleName,
+            'access_id' => $accessStr,
+            'is_delete' => $status,
+            'handler' => $session['login_name']
+        ];
+        //检测代理角色的唯一性 每个线路只有一个代理角色
+        if ($arr['role'] == 'agent' || $arr['role_name'] == '代理') {
+            echo json_encode(['code' => 400, 'msg' => '请到 权限管理-代理角色分配 管理代理角色!']);
+            die;
+        }
+
+        $oldInfo = array();
+        if (!empty($id)) {
+            $oldInfo = AdminModel::getOneRole($tab, ['id' => $id]);
+            $arr['updatetime'] = time();
+            $res = AdminModel::updateRole($tab, $id, $arr);
+        } else {
+            $arr['addtime'] = time();
+            $arr['updatetime'] = time();
+            $res = AdminModel::addRole($tab, $arr);
+        }
+
+        if ($res) {
+            //mongo日志
+            $uname = $session['uname'];
+            $old = array();
+            $new = $arr;
+            if (!empty($id)) {
+                $remark = '超级管理员:' . $uname . ' 修改了角色:' . $oldInfo['role_name'];
+                parent::insertOperateLog(json_encode($oldInfo), json_encode($new), $remark);
+            } else {//新增
+                $remark = '超级管理员:' . $uname . ' 添加了角色:' . $arr['role_name'];
+                parent::insertOperateLog('', json_encode($new), $remark);
+            }
+
+            echo json_encode(['code' => 200, 'msg' => '更新成功']);
+            die;
+        } else {
+            echo json_encode(['code' => 400, 'msg' => '更新失败']);
+            die;
+        }
+    }
+
+    /**
+     * **********************************************************
+     *  代理角色页面           @author ruizuo qiyongsheng    *
+     * **********************************************************
+     */
+    public function actionAgentindex() {
+        $session = Yii::$app->session;
+        if ($session['user_type'] != 1) {
+            $this->wrong_msg();
+        }
+        $line_id = $session['line_id'];
+        $tab = \Yii::$app->manage_db->tablePrefix . 'admin_role';
+        //查询是否为代理创建过角色，如果没有，自动创建
+        $routes = AdminModel::getAllRoute(['is_delete' => 1, 'is_agent' => 2]);
+        $level = self::getLevel($routes);
+        $is_exist = AdminModel::getOneRole($tab, ['line_id' => $line_id, 'role' => 'agent', 'is_agent' => 2]);
+        if (!$is_exist) {//自动创建
+            $data = array();
+            $data['line_id'] = $line_id;
+            $data['role'] = 'agent';
+            $data['role_name'] = '代理';
+            $data['addtime'] = $data['updatetime'] = time();
+            $data['handler'] = $session['login_name'];
+            $data['is_delete'] = 1;
+            $data['access_id'] = '';
+            $data['is_agent'] = 2;
+            $id = AdminModel::addRole($tab, $data);
+            $data['id'] = $id;
+            $data['addTimeTxt'] = $data['updateTimeTxt'] = date('Y-m-d H:i:s');
+            $is_exist = $data;
+            $access = array();
+        } else {
+            $access = array();
+            if ($is_exist['access_id'] != '') {
+                $access = explode(',', $is_exist['access_id']);
+            }
+            $is_exist['addTimeTxt'] = date('Y-m-d H:i:s', $is_exist['addtime']);
+            $is_exist['updateTimeTxt'] = date('Y-m-d H:i:s', $is_exist['updatetime']);
+            $id = $is_exist['id'];
+        }
+        $render = [
+            'id' => $id,
+            'data' => $is_exist,
+            'access' => $access,
+            'oneLevel' => $level['oneLevel'],
+            'twoLevel' => $level['twoLevel'],
+            'threeLevel' => $level['threeLevel']
+        ];
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('agent_form.html', $render);
+        } else {
+            return $this->render('agent_form.html', $render);
+        }
+    }
+
+    /**
+     * **********************************************************
+     *  修改代理权限           @author ruizuo qiyongsheng    *
+     * **********************************************************
+     */
+    public function actionAgent_role() {
+        $post = Yii::$app->request->post();
+        $access = isset($post['access']) ? $post['access'] : array();
+        $id = isset($post['id']) ? $post['id'] : '';
+        if ($id == '' || empty($access)) {
+            echo json_encode(['code' => 400, 'msg' => '请分配权限!']);
+            die;
+        }
+
+        $access = implode(',', $access);
+
+        $tab = \Yii::$app->manage_db->tablePrefix . 'admin_role';
+        $res = AdminModel::updateRole($tab, $id, ['access_id' => $access]);
+        if ($res) {
+            echo json_encode(['code' => 200, 'msg' => '更新成功!']);
+            die;
+        } else {
+            echo json_encode(['code' => 400, 'msg' => '更新失败!']);
+            die;
+        }
+    }
+
+}

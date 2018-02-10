@@ -1,0 +1,114 @@
+<style>
+    .select{width:20%;float:left;margin-right:10px}
+    #sh-select{display: none}
+    #money{width:20%}
+</style>
+
+<div class="page-header">
+    <{if $smarty.get.type=='user_sh'}>
+    <h1>
+         <a href="javascript:jump('shindex');" id="agent_index">股东列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            股东祥情
+        </small>
+    </h1>
+    <{/if}>
+    <{if $smarty.get.type=='user_ua'}>
+    <h1>
+         <a href="javascript:jump('uaindex');" id="agent_index">总代列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            总代祥情
+        </small>
+    </h1>
+    <{/if}>
+    <{if $smarty.get.type=='user_agent'}>
+    <h1>
+         <a href="javascript:jump('index');" id="agent_index">代理列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            代理祥情
+        </small>
+    </h1>
+    <{/if}>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" role="form"  id="agent-form">
+             <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">所属线路</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<{$data["line_id"]}>' class="col-sm-5">
+                </div>
+            </div>
+            <{if !empty($data['parent'])}>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">所属上级</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='账号:<{$data["parent"]}>  昵称:<{$data["parent_name"]}>' class="col-sm-5">
+                </div>
+            </div>
+            <{/if}>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1">代理类型</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<{$data["agent_type_txt"]}>' class="col-sm-5">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">账号</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<{$data["login_user"]}>' class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-2">昵称</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<{$data["login_name"]}>' class="col-xs-10 col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-2">额度</label>
+                <div class="col-sm-9">
+                    <input type="text"  value='<{$data["money"]}>'  class="col-xs-10 col-sm-5">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-2">状态</label>
+                <div class="col-sm-9">
+                    <select class="form-control select" id="ua-select">
+                        <option value="1" <{if <{$data["is_delete"]}> eq '1'}>selected<{/if}>>有效</option>
+                        <option value="2" <{if <{$data["is_delete"]}> eq '2'}>selected<{/if}>>无效</option>
+                    </select>
+                </div>
+            </div>
+            <div class="space-4"></div>
+        </form>
+        <div class="hr hr-18 dotted hr-double"></div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#agent-form').find('input').attr('disabled',true);
+        $('#agent-form').find('select').attr('disabled',true);
+    })
+    
+    $('#agent_index').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/agent/index',
+            container: '#container'
+        });
+    })
+
+    function jump(url){
+         $.pjax({
+            method: 'get',
+            url: '/agent/' + url,
+            container: '#container'
+        });
+    }
+</script>

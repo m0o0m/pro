@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <meta http-equiv="x-dns-prefetch-control" content="on"/>
+    <title><{{.SiteName}}></title>
+    <link href="{{.CdnUrl}}/theme3/public/shared/css/wapview/onepage-scroll.css" rel="stylesheet" type="text/css"/>
+    <link href="{{.CdnUrl}}/theme3/public/shared/css/wapview/wapIntroduce.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="<{$cdnpcurl}>/shared/css/wapview/global.css?v=<{$pcVersion}>" rel="stylesheet" type="text/css" />-->
+    <link href="{{.CdnUrl}}/theme3/public/shared/css/wapview/phone_betting2.css" rel="stylesheet" type="text/css"/>
+    <link href="{{.CdnUrl}}/theme3/public/shared/css/wapview/jquery.pagepiling.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="{{.CdnUrl}}/theme3/public/shared/sitepublic/js/jquery.min.js"></script>
+</head>
+<body>
+<ul class="onepage-pagination" style="display: none;">
+    <li><a data-index="1" href="#1" class="">1.扫码下载</a></li>
+    <li><a data-index="2" href="#2" class="">2.下载中心</a></li>
+    <li><a data-index="3" href="#3" class="">3.选择下载</a></li>
+    <li><a data-index="4" href="#4" class="active">4.安装步骤</a></li>
+    <li><a data-index="5" href="#5" class="">5.开始游戏</a></li>
+</ul>
+<!--<div id="wapIntroduce_loading">-->
+
+<!--<div class="wapIntroduce_pic"></div>-->
+<!--</div>-->
+
+<div id="wapIntroduce_nav">
+    <ul class="wapIntroduce_nav_content">
+        <li class="wapIntroduce_nav_home"><a href="/../"><i></i>首页</a></li>
+        <li class="wapIntroduce_nav_wapView"><a href="#"><i></i>手机投注指南</a></li>
+        <li class="wapIntroduce_nav_wapIntroduce"><a href="#"><i></i>手机下载</a></li>
+    </ul>
+
+
+</div>
+
+
+<div id="wapIntroduce_content">
+    <section class="wapIntroduce_page1 clear">
+        <div class="wapIntroduce_page1_left lf">
+            <img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone1-1.png" class="img-responsive">
+        </div>
+        <div class="wapIntroduce_page1_right lf">
+            <h2>全新手机下载</h2>
+            <p>多元化移动娱乐平台、精彩随时随地、一切尽在掌中！更美观的界面，更流畅的操作体验，视讯/电子/彩票/体育，即时下注，随时随地尊享优质体验。</p>
+            <h2>扫码立即安装</h2>
+
+            <ul>
+                <li>
+                    <a href="{{.AndroidUrl}}"><img
+                            src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/anz.png"></a>
+                    <div class="codeAndroid">
+                    </div>
+                </li>
+                <li>
+                    <a href="{{.IosUrl}}"><img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/ios2.png"
+                                               alt=""></a>
+                    <div class="codeIos">
+                    </div>
+                    <a href="isoview" target="_blank">查看ios安装信任教程</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+    <section class="wapIntroduce_page2 clear">
+
+        <div class="wapIntroduce_page2_top">
+            <h2>打开手机浏览器扫描二维码</h2>
+        </div>
+        <div class="wapIntroduce_page2_left lf">
+            <div class="codeDownCenter"></div>
+            <a href="http://{{.WapDomain}}/#/downApp">打开下载中心</a>
+            <!--<img src="<{$cdnpcurl}>/shared/images/wapIntroduce/phone2-1.gif" class="img-responsive">-->
+        </div>
+        <div class="wapIntroduce_page2_right lf">
+            <img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/Pixel-5.5.png">
+            <!--<h3>或者输入:</h3>-->
+            <!--<p><b style="color:#a9fd43">android下载地址：</b><{$download_url['android_url']}></p>-->
+            <!--<p><b style="color:#a9fd43;">ios下载地址：</b><{$download_url['ios_url']}></p>-->
+
+            <!--<div class="codeAndroid"></div>-->
+            <!--<img src="<{$cdnpcurl}>/shared/images/wapIntroduce/phone2-2.gif" class="img-responsive animateMove">-->
+        </div>
+    </section>
+    <section class="wapIntroduce_page3">
+        <div class="wapIntroduce_page3_top">
+            <h2>扫码弹出下载页，点击下载进行本地下载</h2>
+        </div>
+        <div class="wapIntroduce_page3_left clear">
+            <img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone3-1.gif" class="img-responsive lf">
+            <img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/right_arrow.png" class="img-responsive lf">
+            <img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone3-2.gif"
+                 class="img-responsive lf animateMove">
+        </div>
+    </section>
+    <section class="wapIntroduce_page4">
+        <div class="wapIntroduce_page4_top">
+            <h2>进入文件管理选择文件进行安装</h2>
+        </div>
+        <div class="wapIntroduce_page4_left clear">
+            <div id="vitrine">
+                <div data-desc="第三步：等待安装完成"><img
+                        src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone4-3.png"></div>
+                <div data-desc="第四步：安装完成直接打开进入游戏"><img
+                        src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone4-4.png">
+                </div>
+                <div data-desc="第一步：点击pk文件进入安装页面<br><span style='font-size:15px;'>(点击右方图片进入下一步)</span>"><img
+                        src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone4-1.png"></div>
+                <div data-desc="第二步：点击安装"><img
+                        src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone4-22.png"></div>
+            </div>
+        </div>
+    </section>
+    <section class="wapIntroduce_page5">
+        <div class="wapIntroduce_page5_top">
+            <h2>进入桌面，点击PK游戏，开启心跳之旅。</h2>
+        </div>
+        <div class="wapIntroduce_page5_left clear">
+            <img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone5-1.gif" class="img-responsive lf">
+            <img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/phone5-2.png" class="img-responsive lf">
+        </div>
+
+        <div class="wapIntroduce__page_bottom">
+            <div class="wapIntroduce__page_bottom_bg">
+                <a href="/../">
+                    <img src="{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/PK.png" class="img-responsive">
+                </a>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+<div id="wapView_content">
+    <div class="mobile_pb" id="pagepiling">
+        <div class="section">
+            <div class="page1">
+                <div class="bnav_con" id="mobile_intro_menu" style="display:none">
+                    <div class="wrap">
+                        <a href="">AG旗舰厅手机客户端</a>
+                        <a href="">AG国际厅手机客户端</a>
+                        <a href="">电子游艺手机客户端</a>
+                    </div>
+                </div>
+                <div class="p1_wrap">
+                    <div class="p1_con">
+                        <div class="p1_phone"><img src="{{.CdnUrl}}/theme3/public/shared/images/wapview/m_pic1.png"
+                                                   class="_img"/></div>
+                        <div class="p1_text">
+                            <span class="_h1">全新手机投注</span><br><br>
+                            <span class="_h2">多元化移动娱乐平台、精彩随时随地、一切尽在掌中！</span><br>
+                            <span class="_h2">美女荷官相伴，刺激不打烊</span><br>
+                            <span class="_t3">一机在手，娱乐无穷。视讯/电子/彩票/体育，即时下注，让您走到哪玩到哪！</span>
+                            <div class="p1_code">
+
+                                <div class="txt">
+
+                                    手机浏览器输入 <a class="_lnk">{{.WapDomain}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p1_down" data-menuanchor="page2">
+                    <a href="#page2"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="p2_up" data-menuanchor="page1"><a href="#page1">&nbsp</a></div>
+            <div class="page2">
+
+                <div class="p2_wrap">
+                    <div class="_tlt">手机投注使用指南</div>
+                    <div class="p2_pager1 pager2">
+                        <span>如何注册</span>
+                        <span>如何登录</span>
+                        <span>如何存款</span>
+                        <span>如何取款</span>
+                        <span>完善银行资料</span>
+                    </div>
+                    <div class="mp_prev" id="p_prev2"></div>
+                    <div class="mp_next" id="p_next2"></div>
+                    <div class="p2_slide_con">
+                        <div class="p2_slider"
+                             data-cycle-fx="scrollHorz"
+                             data-cycle-slides="> div"
+                             data-cycle-timeout="8000"
+                             data-cycle-pager=".pager2"
+                             data-cycle-prev="#p_prev2"
+                             data-cycle-next="#p_next2"
+                             data-cycle-pager-template="">
+
+
+                            <div class="p2_slide">
+                                <div class="sl1"><img src="{{.CdnUrl}}/theme3/public/shared/images/wapview/sl1.png"
+                                                      class="_img"/></div>
+                            </div>
+
+                            <div class="p2_slide">
+                                <div class="sl1"><img src="{{.CdnUrl}}/theme3/public/shared/images/wapview/sl1.png"
+                                                      class="_img"/></div>
+
+                            </div>
+
+                            <div class="p2_slide">
+                                <div class="sl1"><img src="{{.CdnUrl}}/theme3/public/shared/images/wapview/sl2.png"
+                                                      class="_img"/></div>
+
+                            </div>
+
+                            <div class="p2_slide">
+                                <div class="sl1"><img src="{{.CdnUrl}}/theme3/public/shared/images/wapview/sl3.png"
+                                                      class="_img"/></div>
+
+                            </div>
+
+                            <div class="p2_slide">
+                                <div class="sl1"><img src="{{.CdnUrl}}/theme3/public/shared/images/wapview/sl4.png"
+                                                      class="_img"/></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="{{.CdnUrl}}/theme3/public/shared/js/wapview/jquery.onepage-scroll.js"></script>
+
+<script type="text/javascript" src="{{.CdnUrl}}/theme3/public/shared/js/qrcode/utf.js"></script>
+
+<script type="text/javascript" src="{{.CdnUrl}}/theme3/public/shared/js/qrcode/jquery.qrcode.js"></script>
+<script type="text/javascript" src="{{.CdnUrl}}/theme3/public/shared/js/wapview/jQuery.vitrine.js"></script>
+<script type="text/javascript" src="{{.CdnUrl}}/theme3/public/shared/js/wapview/jquery.cycle2.js"></script>
+<script type="text/javascript" src="{{.CdnUrl}}/theme3/public/shared/js/wapview/jquery.pagepiling.js"></script>
+<script type="text/javascript" src="{{.CdnUrl}}/theme3/public/shared/js/wapview/phone_betting2.js"></script>
+
+
+<script>
+
+
+    //  document.onreadystatechange=function () {
+    //    if(document.readyState=="complete"){
+    //      $("#wapIntroduce_loading").fadeOut();
+    //    }
+    //  }
+
+    $(function () {
+
+
+//      页面滚动效果
+
+        $('#wapIntroduce_content').onepage_scroll({
+            sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section
+            easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",// "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
+            animationTime: 1000,             // AnimationTime let you define how long each section takes to animate
+            pagination: true,                // You can either show or hide the pagination. Toggle true for show, false for hide.
+            updateURL: false,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
+            beforeMove: function (index) {
+            },  // This option accepts a callback function. The function will be called before the page moves.
+            afterMove: function (index) {
+            },   // This option accepts a callback function. The function will be called after the page moves.
+            loop: false,                     // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.
+            keyboard: true,                  // You can activate the keyboard controls
+            responsiveFallback: false,        // You can fallback to normal page scroll by defining the width of the browser in which
+            // you want the responsive fallback to be triggered. For example, set this to 600 and whenever
+            // the browser's width is less than 600, the fallback will kick in.
+            direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".
+        })
+    })
+
+
+</script>
+
+<script type="text/javascript">
+    //    第四部分图片展示
+    $('#vitrine').vitrine({loop: true});
+
+    //页面头部选项卡
+    $('.wapIntroduce_nav_wapView').click(function () {
+                $('#wapView_content').show();
+                $('#wapIntroduce_content').hide();
+                $('.onepage-pagination').hide();
+            }
+    )
+
+    $('.wapIntroduce_nav_wapIntroduce').click(function () {
+                $('#wapView_content').hide();
+                $('#wapIntroduce_content').show();
+                $('.onepage-pagination').show();
+            }
+    )
+
+    $('.wapIntroduce_nav_content li').click(function () {
+        $(this).find('a').css('color', '#a9fd43');
+        $(this).siblings().find('a').css('color', 'white');
+    })
+
+    //    section1 下载二维码
+    $('.wapIntroduce_page1_right ul li:first-child a img').hover(function () {
+        $(this).attr('src', '{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/anzhuo.png')
+    }, function () {
+        $(this).attr('src', '{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/anz.png')
+    })
+
+
+    $('.wapIntroduce_page1_right ul li:last-child a:first-child img').hover(function () {
+        $(this).attr('src', '{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/iphone.png')
+    }, function () {
+        $(this).attr('src', '{{.CdnUrl}}/theme3/public/shared/images/wapIntroduce/ios2.png')
+    })
+
+
+</script>
+
+<script type="text/javascript">
+
+
+    //    生成二维码
+
+
+    //  安卓 下载
+    var android_url = '{{.AndroidUrl}}';
+    //
+    if (android_url == null) {
+        alert('链接地址缺失')
+
+    } else {
+        $(".codeAndroid").qrcode({
+            width: 180,
+            height: 180,
+            text: android_url,
+        });
+
+    }
+
+    //  ios下载
+
+    var ios_url = '{{.IosUrl}}';
+    if (ios_url == null) {
+        alert('链接地址缺失')
+
+    } else {
+        $(".codeIos").qrcode({
+            width: 180,
+            height: 180,
+            text: ios_url,
+        });
+    }
+
+    //  手机下载中心
+    $('.codeDownCenter').qrcode({
+        width: 180,
+        height: 180,
+        text: 'http://{{.WapDomain}}/#/downApp'
+    })
+</script>
+
+
+</body>
+
+</html>

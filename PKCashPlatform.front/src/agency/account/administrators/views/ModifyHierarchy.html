@@ -1,0 +1,112 @@
+<!-- 修改层级 -->
+<div id="content">
+    <div class="row">
+        <section widget-grid id="widget-grid">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('hierarchyModify')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="smart-form form-horizontal ng-pristine ng-valid" ng-model="formData">
+                                                <fieldset>
+                                                    <div class="row">
+                                                    <section class="col-12 ">
+                                                        <label class="col-md-2 col-xs-4 input-label ">{{getWord('hierarchyName')}}</label>
+                                                        <div class="col-md-4 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                                            <input class="form-control " type="text" ng-model="formData.level_id">
+                                                            <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                                                {{getWord('fixedNumberComposed')}}</b>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </section>
+
+                                                    <section class="col-12 ">
+                                                        <label class="col-md-2 col-xs-4 input-label ">{{getWord('describe')}}</label>
+                                                        <div class="col-md-4 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                                            <input class="form-control " type="text" ng-model="formData.description">
+                                                            <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                                                {{getWord('requiredSpecialCharacters')}}</b>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </section>
+
+                                                    <section class="col-12 ">
+                                                        <label class="col-md-2 col-xs-4 input-label ">{{getWord('Membership time')}}</label>
+                                                        <div class="col-md-4 col-xs-8">
+                                                            <div class="input-group">
+                                                                <input type="text" id="StartDateline" style="padding-left:10px" ng-value="formData.start_time|formatDate" placeholder="{{getWord('Start time of order creation')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd">
+                                                                <span class="input-group-addon" style="padding-left:20px"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </section>
+
+                                                    <section class="col-12 ">
+                                                        <label class="col-md-2 col-xs-4 input-label "></label>
+                                                        <div class="col-md-4 col-xs-8">
+                                                            <div class="input-group">
+                                                                <input type="text" id="EndDateline" style="padding-left:10px" ng-value="formData.end_time|formatDate" placeholder="{{getWord('End time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd">
+                                                                <span class="input-group-addon" style="padding-left:20px"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </section>
+
+                                                    <section class="col-12 ">
+                                                        <label class="col-md-2 col-xs-4 input-label ">{{getWord('Deposit times')}}</label>
+                                                        <div class="col-md-4 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                                            <input class="form-control " type="number"  ng-model="formData.deposit_num">
+                                                            <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                                                {{getWord('default0,isUnrestricted')}}</b>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </section>
+
+                                                    <section class="col-12 ">
+                                                        <label class="col-md-2 col-xs-4 input-label ">{{getWord('Total deposits')}}</label>
+                                                        <div class="col-md-4 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                                            <input class="form-control " type="number" ng-model="formData.deposit_count">
+                                                            <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                                                {{getWord('default0,isUnrestricted')}}</b>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </section>
+
+                                                    <section class="col-12 ">
+                                                        <label class="col-md-2 col-xs-4 input-label ">{{getWord('Remarks')}}</label>
+                                                        <div class="col-md-4 col-xs-8">
+                                                            <textarea row="6"  class="selectWidth" ng-model="formData.remark"></textarea>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </section>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-xs-12 text-align-center">
+                                                        <button class="btn btn-primary"  type="submit" ng-click="submit()">
+                                                            {{getWord('Confirm submission')}}
+                                                        </button>
+
+                                                        <button class="btn btn-primary"  type="submit" onclick="window.history.back();" >
+                                                            {{getWord('Return')}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

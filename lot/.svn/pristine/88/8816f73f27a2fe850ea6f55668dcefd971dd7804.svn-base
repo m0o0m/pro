@@ -1,0 +1,64 @@
+package main
+
+import (
+	"flag"
+	"runtime"
+	"log"
+	"config"
+	"global"
+	"framework"
+	"models/function"
+)
+
+var (
+	configFile  *string = flag.String("config", "../bin/etc/spider.yaml", "admin config file")
+)
+
+func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
+	var cfg *config.Config
+	var err error
+	//加载config
+	cfg, err = config.ParseConfigFile(*configFile)
+	if err != nil {
+		log.Fatalf("parse config file error:%v\n", err.Error())
+		return
+	}
+
+	//全局初始化
+	global.InitLog(cfg,"spider")
+	defer global.GlobalLogger.Close()
+
+	global.GatherNumber = cfg.GatherNumber
+
+	//初始化数据库
+	err = global.InitMysql(cfg.Mysqls)
+	if err != nil {
+		//数据库连接错误
+		global.GlobalLogger.Error("InitDb error:%v\n", err.Error())
+		return
+	}
+	//初始化redis
+	err = global.InitRedis(cfg)
+	if err != nil {
+		//redis连接失败
+		global.GlobalLogger.Error("Redis connection failed:%v\n", err.Error())
+		return
+	}
+
+	//启动web服务
+	app, err := framework.NewSpiderApp(cfg)
+	if err != nil {
+		//错误日志
+		global.GlobalLogger.Error("NewApp error:%v\n", err.Error())
+		return
+	}
+	new(function.Refresh).UpdateAllKey()
+	//启动
+	err = app.Run()
+	if err != nil {
+		global.GlobalLogger.Error("app start error:%v\n", err.Error())
+		return
+	}
+}

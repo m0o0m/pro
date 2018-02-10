@@ -1,0 +1,21 @@
+package schema
+
+//股东表
+type MyUserSh struct {
+	Id         int64   `xorm:"'id' PK autoincr"`
+	LoginUser  string  `xorm:"login_user"`                     //账号
+	LoginPwd   string  `xorm:"'login_pwd' notnull"`            //密码
+	LoginName  string  `xorm:"login_name"`                     //昵称
+	Addtime    int64   `xorm:"'addtime' notnull"`              //添加时间
+	Updatetime int64   `xorm:"updatetime"`                     //修改时间
+	LoginIp    string  `xorm:"login_ip"`                       //登录ip
+	IsDelete   int64   `xorm:"'is_delete' notnull default(1)"` //(1-有效,2-无效)
+	RoleId     string  `xorm:"'role_id' default('0')"`         //角色id
+	Pid        int64   `xorm:"'pid' notnull default(0)"`       //父级id
+	LineId     string  `xorm:"'line_id' notnull"`              //线路id
+	Money      float64 `xorm:"'money' notnull default(0.00)"`  //代理额度
+}
+
+func (*MyUserSh) TableName() string {
+	return "my_user_sh"
+}

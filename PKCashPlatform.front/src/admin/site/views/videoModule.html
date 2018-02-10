@@ -1,0 +1,54 @@
+<!-- 商品管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>模块管理</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar">
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover" ng-repeat="item in data">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-align-center col-xs-6">{{item.name}}</th>
+                                            <th class="text-align-center col-xs-6">名称</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr  ng-repeat="item1 in item.parms">
+                                            <td class="col-xs-6 text-align-center"><input type="checkbox" name="test_1" class="disable" value="{{item1.id}}" ></td>
+                                            <td class="col-xs-6 text-align-center">
+                                                {{item1.name}}
+                                            </td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12 text-center" style="padding: 10px 0">
+                                    <button class="btn btn-primary ng-binding" type="submit" ng-click="se()">
+                                        <i class="fa fa-save"></i>
+                                        确定
+                                    </button>
+                                    <button class="btn btn-primary ng-binding" type="submit" onclick="history.go(-1)">
+                                        <i class="fa fa-save"></i>
+                                        返回
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

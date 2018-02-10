@@ -1,0 +1,18 @@
+package lottery
+
+import (
+	"github.com/labstack/echo"
+	"global"
+)
+
+type OtherController struct {
+}
+
+func (*OtherController) Refresh(ctx echo.Context) error {
+	err := refreshBean.UpdateAllKey()
+	if err != nil {
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	return ctx.JSON(global.ReplyItem(200, nil))
+}

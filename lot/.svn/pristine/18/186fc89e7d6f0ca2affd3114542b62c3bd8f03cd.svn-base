@@ -1,0 +1,403 @@
+@import "./function.scss";
+
+.happy_three {
+  width: 895px;
+  overflow: hidden;
+  .or {
+    overflow: hidden;
+    width: 900px;
+    padding-left: 20px;
+    float: left;
+    .top {
+      overflow: hidden;
+      width: 878px;
+      margin-bottom: 15px;
+      .my_table {
+        float: left;
+        width: 878px;
+        background: #fff;
+        border-left: 1px solid $border_color
+      }
+      .tab_top {
+        float: left;
+        padding: 6px 0px 6px 10px;
+        width: 877px;
+        background: #eee;
+        color: #999;
+        text-align: center;
+        border-top: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+        border-bottom: 1px solid $border_color;
+      }
+      .all_body {
+        overflow: hidden;
+        width: 877px;
+        .table:last-child {
+          border-right: 1px solid $border_color;
+          border-bottom: 1px solid $border_color
+        }
+        .table:last-child ul li:last-child {
+          border-right: none 0;
+        }
+        .table {
+          float: left;
+          overflow: hidden;
+          height: 200px;
+          .table-current {
+            background-color: $bg_select;
+          }
+          .my_ul {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            overflow: hidden;
+            // width: rem(271);
+            li {
+              cursor: pointer;
+              float: left;
+              // width: rem(85);
+              // line-height: 25px;
+              padding: 10px 0;
+              border: solid $border_color;
+              border-width: 0px 1px 1px 0px;
+              height: 40px;
+              // line-height: rem(40)
+            }
+            .one {
+              width: 56px;
+              // background-color: #f9f7f4
+            }
+            .two {
+              width: 75px;
+            }
+            .three {
+              width: 88px;
+              padding: 8px 0;
+              input {
+                width: 60px;
+                height: 23px;
+                line-height: 25px;
+                border: 1px solid #ddd
+              }
+            }
+          }
+          .nother {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            overflow: hidden;
+            width: 271px;
+            border: solid $border_color;
+            border-width: 0px 1px 1px 0px;
+            li {
+              float: left;
+              width: 90px;
+              height: 39px;
+              border: none 0;
+            }
+          }
+        }
+      }
+    }
+    .list_center {
+      overflow: hidden;
+      width: 878px;
+      margin-bottom: 15px;
+      .my_table {
+        float: left;
+        width: 878px;
+        background: #fff;
+        border-left: 1px solid $border_color
+      }
+      .tab_top {
+        float: left;
+        padding: 6px 0px 6px 10px;
+        width: 877px;
+        background: #eee;
+        color: #999;
+        text-align: center;
+        border-top: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+        border-bottom: 1px solid $border_color;
+      }
+      .all_body {
+        overflow: hidden;
+        width: 877px;
+        .table:last-child {
+          border-right: 1px solid $border_color;
+          border-bottom: 1px solid $border_color
+        }
+        .table:last-child ul li:last-child {
+          border-right: none 0;
+        }
+        .table {
+          float: left;
+          overflow: hidden;
+          height: 160px;
+          .table-current {
+            background-color: $bg_select;
+          }
+          .my_ul {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            overflow: hidden;
+            // width: rem(271);
+            li {
+              float: left;
+              // width: rem(85);
+              // line-height: 25px;
+              padding: 10px 0;
+              border: solid $border_color;
+              border-width: 0px 1px 1px 0px;
+              height: 40px;
+              cursor: pointer;
+              // line-height: rem(40)
+            }
+            .one {
+              width: 56px;
+              // background-color: #f9f7f4
+            }
+            .two {
+              width: 75px;
+            }
+            .three {
+              width: 88px;
+              padding: 8px 0;
+              input {
+                width: 60px;
+                height: 23px;
+                line-height: 25px;
+                border: 1px solid #ddd
+              }
+            }
+          }
+          .nother {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            overflow: hidden;
+            width: 271px;
+            border: solid $border_color;
+            border-width: 0px 1px 1px 0px;
+            li {
+              float: left;
+              width: 90px;
+              height: 39px;
+              border: none 0;
+            }
+          }
+        }
+      }
+    }
+    .bottom {
+      overflow: hidden;
+      width: 877px;
+      .my_table {
+        float: left;
+        width: 292px;
+        height: 312px;
+        border-bottom: 1px solid $border_color;
+        background: #fff;
+        border-right: 1px solid $border_color;
+        // border-width: 1px 0px 0px 1px;
+        .tab_top {
+          float: left;
+          padding: 6px 0px 6px 10px;
+          width: 292px;
+          background: #eee;
+          color: #999;
+          text-align: center;
+          border-top: 1px solid $border_color;
+          border-bottom: 1px solid $border_color;
+          // border: solid $border_color;
+          // border-width: 0px 1px 1px 0px;
+        }
+        .table-current {
+          background-color: $bg_select;
+        }
+        .my_ul {
+          padding: 0px;
+          margin: 0px;
+          list-style: none;
+          overflow: hidden;
+          width: 292px;
+          li {
+            cursor: pointer;
+            float: left;
+            // width: rem(85);
+            // line-height: 25px;
+            padding: 10px 0;
+            border: solid $border_color;
+            border-width: 0px 1px 1px 0px;
+            height: 40px;
+            // line-height: rem(40)
+          }
+          .one {
+            width: 80px;
+            // background-color: #f9f7f4
+          }
+          .two {
+            width: 80px;
+          }
+          .three {
+            width: 132px;
+            padding: 8px 0;
+            input {
+              width: 60px;
+              height: 23px;
+              line-height: 25px;
+              border: 1px solid #ddd
+            }
+          }
+        }
+        .nother {
+          padding: 0px;
+          margin: 0px;
+          list-style: none;
+          overflow: hidden;
+          width: 362px;
+          border: solid $border_color;
+          border-width: 0px 1px 1px 0px;
+          li {
+            float: left;
+            width: 118px;
+            height: 39px;
+            border: none 0;
+          }
+        }
+      }
+      .my_table:last-child .tab_top {
+        border-right: 1px solid $border_color
+      }
+      .my_table:first-child {
+        border-left: 1px solid $border_color
+      }
+    }
+    .footer {
+      width: 920px;
+      float: left;
+      // margin-top: 20px;
+      padding-right: 43px;
+      padding-bottom: 20px;
+      .input {
+        width: 85px;
+        padding: 5px;
+        background-color: #eeeeee;
+        margin-right: 10px;
+        border-radius: 5px;
+        float: right;
+      }
+      button {
+        width: 85px;
+        padding: 5px;
+        float: right;
+        outline: none 0;
+      }
+      .one {
+        background-color: #eeeeee;
+        margin-right: 15px;
+        span {
+          color: $bg_color
+        }
+        .left {
+          color: #999999
+        }
+      }
+      .two {
+        background-color: $bg_color;
+        color: #fff
+      }
+    }
+    .footer1 {
+      width: 878px;
+      float: left;
+      margin-top: 10px;
+      .input {
+        width: 85px;
+        padding: 5px;
+        background-color: #eeeeee;
+        margin-right: 10px;
+        border-radius: 5px;
+        float: right;
+      }
+      button {
+        width: 85px;
+        padding: 5px;
+        float: right;
+        outline: none 0;
+        border-radius: 5px;
+        margin-top: 12px;
+        cursor: pointer;
+      }
+      .img {
+        margin-left: 125px;
+        float: left;
+        span {
+          //margin-left: 30px;
+          //height: 60px;
+          float: left;
+          display: block;
+          cursor: pointer;
+        }
+        .s1 {
+          height: 60px;
+          width: 64px;
+          background: url("../../assets/img/Chips.png") no-repeat 0 0px;
+          background-size: 368px;
+        }
+        .s2 {
+          height: 60px;
+          width: 64px;
+          background: url("../../assets/img/Chips.png") no-repeat -64px 0px;
+          background-size: 368px;
+        }
+        .s3 {
+          height: 60px;
+          width: 64px;
+          background: url("../../assets/img/Chips.png") no-repeat -128px 0px;
+          background-size: 368px;
+        }
+        .s4 {
+          height: 60px;
+          width: 64px;
+          background: url("../../assets/img/Chips.png") no-repeat -192px 0px;
+          background-size: 368px;
+        }
+        .s5 {
+          height: 60px;
+          width: 64px;
+          background: url("../../assets/img/Chips.png") no-repeat -256px 0px;
+          background-size: 368px;
+        }
+        .s6 {
+          height: 60px;
+          width: 73px;
+          background: url("../../assets/img/Chips.png") no-repeat -320px 0px;
+          background-size: 368px;
+        }
+      }
+      .one {
+        width: 160px;
+        float: left;
+        background-color: #eee;
+        padding: 5px;
+        border-radius: 10px;
+        margin-top: 12px;
+        border: none;
+        span {
+          color: $bg_color;
+        }
+        .left {
+          color: #999999
+        }
+      }
+      .two {
+        float: right;
+        background-color: $bg_color;
+        color: #fff
+      }
+    }
+
+  }
+}

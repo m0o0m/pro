@@ -1,0 +1,6 @@
+
+*
+!release/*
+!bin/*
+!src/etc/*
+!src/template

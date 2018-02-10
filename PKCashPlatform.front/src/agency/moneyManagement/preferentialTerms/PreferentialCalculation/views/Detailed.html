@@ -1,0 +1,85 @@
+<div id="content">
+    <div class="row">
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('PreferentialInquiry')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">返水</label>
+                                    <div class="col-md-3 col-xs-8">
+                                        <div class="form-group">
+                                            <label class="form-control" ng-model="typeed">
+                                                <b>
+                                                    2015-10-02 09:12:21 ~ 2015-10-10 19:21:10</b>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div  class="col-sm-2  col-sm-offset-2 col-xs-6">
+                                        <div class="form-group pull-right">
+                                            <button type="submit"  class="btn btn-primary" ng-click="sub()">
+                                                冲销
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div  class="col-sm-1  col-xs-6">
+                                        <div class="input-group pull-right">
+                                            <button type="submit"  onclick="history.go(-1)" class="btn btn-primary">
+                                                返回
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="test_1" ng-model="selectAll" ng-click="all(selectAll)"></th>
+                                                <th>会员</th>
+                                                <th>层级</th>
+                                                <th>总有效%</th>
+                                                <th ng-repeat="c in arr track by $index">{{c}}</th>
+                                                <th>自助返水</th>
+                                                <th>反水状态</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td >
+                                                    <input type="checkbox" name="test" class="selected" ng-value="{{item.member_id}}">
+                                                </td>
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.level}}</td>
+                                                <td>{{item.total_effectiveness}}</td>
+                                                <td ng-repeat="a in item.rate track by $index">{{a}}</td>
+                                                <td>{{item.rebate_water}}</td>
+                                                <td>{{item.status}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td >总计:</td>
+                                                <td colspan="{{bi}}">總人數：5人 (冲销{{total}})人</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

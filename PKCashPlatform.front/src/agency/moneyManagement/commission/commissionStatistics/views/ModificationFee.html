@@ -1,0 +1,97 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('FeeSetting')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset>
+                                                    <div >
+                                                        <label class="col-md-2 input-label col-xs-4 text-align-right">入款手续费:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="form-group">
+                                                            <input class="form-control " type="text" ng-model="income_poundage_ratio">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div >
+                                                        <label  class="col-md-2 input-label col-xs-4 text-align-right">入款手续费上限</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="form-group">
+                                                            <input class="form-control " type="text"  ng-model="income_poundage_up">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label  class="col-md-2 input-label col-xs-4 text-align-right">出款手续费:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="form-group">
+                                                            <input class="form-control " type="text" ng-model="out_poundage_ratio">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div>
+                                                        <label  class="col-md-2 input-label col-xs-4 text-align-right">出款手续费上限</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class="form-group">
+                                                                <input class="form-control " type="text" ng-model="out_poundage_up">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div >
+                                                        <label  class="col-md-2 input-label col-xs-4 control-label">交收模式:</label>
+                                                        <div class="col-md-3 col-xs-8 inline-group">
+                                                            <label class="radio col col-md-5 col-xs-6">
+                                                                <input type="radio" name="radio-inline2" class="enable" ng-checked="is_delivery_model===1"  value="1" style="margin-top: 1px" ng-model="is_delivery_model">
+                                                                开启</label>
+                                                            <label class="radio col col-md-5 col-xs-6">
+                                                                <input type="radio" name="radio-inline2" class="disable" ng-checked="is_delivery_model===2" value="2" style="margin-top: 1px" ng-model="is_delivery_model">
+                                                                <i></i>关闭</label>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 text-align-center">
+                                                        <button class="btn btn-primary"  type="submit" ng-click="modify()">
+                                                            {{getWord('Confirm submission')}}
+                                                        </button>
+
+                                                        <button class="btn btn-primary"  type="submit" onclick="window.history.back();" >
+                                                            {{getWord('Return')}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

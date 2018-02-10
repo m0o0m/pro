@@ -1,0 +1,36 @@
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10425betInfo= Te_Animal#sheep#Te_Animal
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10433betInfo= Te_Animal#mouse#Te_Animal
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10435betInfo= Te_Animal#snake#Te_Animal
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10442betInfo= Te_Animal#mouse#Te_Animal
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10450betInfo= Te_Animal#horse#Te_Animal
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10453betInfo= Te_Animal#tiger#Te_Animal
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10460betInfo= Te_Animal#mouse#Te_Animal
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10482betInfo= Te_Animal#horse#Te_Animal
+2017-09-18 09:15:56
+This bet data maybe Wrong! type=liuhecai id=10483betInfo= Te_Animal#dog#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10425betInfo= Te_Animal#sheep#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10433betInfo= Te_Animal#mouse#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10435betInfo= Te_Animal#snake#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10442betInfo= Te_Animal#mouse#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10450betInfo= Te_Animal#horse#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10453betInfo= Te_Animal#tiger#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10460betInfo= Te_Animal#mouse#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10482betInfo= Te_Animal#horse#Te_Animal
+2017-09-18 09:16:06
+This bet data maybe Wrong! type=liuhecai id=10483betInfo= Te_Animal#dog#Te_Animal

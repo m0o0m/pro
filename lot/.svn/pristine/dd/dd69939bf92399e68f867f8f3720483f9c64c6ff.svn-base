@@ -1,0 +1,271 @@
+<template lang="html">
+  <div class="mark_six">
+    <div class="pk_time">
+      <div class="time_left">
+        <div class="left_logo">
+          <img :src="c_data.img_path" alt="">
+        </div>
+        <div class="left_text">
+          <p>{{c_data.fc_name}}</p>
+          <p><span>第</span> {{c_data.qishu}} <span>期</span></p>
+        </div>
+      </div>
+      <div class="time_center">
+        <p class="center_top">投注剩余时间</p>
+        <div class="center_bottom">
+          <div class="fl time_content" v-if="h < 10 && h >= 0">0{{h}}</div>
+          <div class="fl time_content" v-else-if="h < 0">--</div>
+          <div class="fl time_content" v-else>{{h}}</div>
+          <div class="fl fs">时</div>
+          <div class="fl time_content" v-if="m < 10 && m >= 0">0{{m}}</div>
+          <div class="fl time_content" v-else-if="m < 0">--</div>
+          <div class="fl time_content" v-else>{{m}}</div>
+          <div class="fl fs">分</div>
+          <div class="fl time_content" v-if="s < 10 && s >= 0">0{{s}}</div>
+          <div class="fl time_content" v-else-if="s < 0">--</div>
+          <div class="fl time_content" v-else>{{s}}</div>
+          <div class="fl fs">秒</div>
+        </div>
+      </div>
+      <div class="time_bottom">
+        <div class="bottom_left"><span>第</span> {{auto.qishu}} <span>期开奖</span></div>
+        <div v-if="this.$route.query.page == 'liuhecai'" class='bottom_center6'>
+          <div class="bottom_content">
+            <div class="content_list" v-for="item in auto.ball">
+              <p :class="[item.color,'box']">{{item.number}}</p>
+              <p class="animal">{{item.animal}}</p>
+            </div>
+          </div>
+        </div>
+        <div v-else :class="[auto.ball.length >= 10?'bottom_center_other':'bottom_center']">
+          <div :class="[auto.ball.length == 10?'other_content':'bottom_content']">
+            <div class="content_list" v-for="item in auto.ball">
+              <p class="box blue">{{item}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_bottom">
+        <p @click="history()">历史结果</p>
+        <p @click="open_way()">开奖走势</p>
+        <p @click="show_rule()">玩法规则</p>
+      </div>
+    </div>
+    <Nav-top :lists="menus" @menu="go_child" :isActive="margin"></Nav-top>
+    <!-- <integrate></integrate> -->
+    <router-view></router-view>
+    <!-- <Bet></Bet> -->
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+import api from "../../../api/config";
+import NavTop from "../../../share_components/default_nav";
+import ws from '../../../assets/js/socket'
+export default {
+  components: {
+    NavTop
+  },
+  data() {
+    return {
+      margin: false,
+      timer: null,
+      h: 0,
+      m: 0,
+      s: 0,
+      c_data: {
+        fc_name: "",
+        img_path: "",
+        qishu: ""
+      },
+      auto: {
+        qishu: null,
+        datetime: "",
+        ball: []
+      },
+      close_time: {
+        fengpan: "",
+        kaijiang: "",
+        kaipan: "",
+        now_time: ""
+      },
+      menus: [
+        {
+          name: "特码",
+          item: "liuhecai"
+        },
+        {
+          name: "正码",
+          item: "six_two"
+        },
+        {
+          name: "正码特",
+          item: "six_three"
+        },
+        {
+          name: "正码1-6",
+          item: "six_four"
+        },
+        {
+          name: "过关",
+          item: "six_five"
+        },
+        {
+          name: "连码",
+          item: "six_six"
+        },
+        {
+          name: "半波",
+          item: "six_seven"
+        },
+        {
+          name: "一肖/尾数",
+          item: "six_eight"
+        },
+        {
+          name: "特码生肖",
+          item: "six_nine"
+        },
+        {
+          name: "合肖",
+          item: "six_ten"
+        },
+        {
+          name: "生肖连",
+          item: "six_eleven"
+        },
+        {
+          name: "尾数连",
+          item: "six_twelve"
+        },
+        {
+          name: "全不中",
+          item: "six_thirteen"
+        },
+        {
+          name: "五行",
+          item: "six_row"
+        },
+        {
+          name: "正肖",
+          item: "positiveshaw"
+        },
+        {
+          name: "特码头",
+          item: "specialhead"
+        },
+        {
+          name: "七码",
+          item: "sevencode"
+        },
+        {
+          name: "总肖",
+          item: "totalshaw"
+        }
+      ]
+    };
+  },
+  created() {
+    this.fetchData();
+    this.$root.$on('get_closetime',(e)=>{
+      this.close_time = e
+    })
+  },
+  mounted(){
+    this.socket_change(this.$route.query.page);
+  },
+  destroyed(){
+    console.log('清除定时器：'+this.timer);
+    window.clearInterval(this.timer);
+    if(!this.isIE9){
+      ws.close_ws(false);
+    }
+    this.$root.$off(this.$route.query.page);
+    this.$root.$off(this.$route.query.page+'lefttime')
+  },
+  methods:{
+    socket_change: function(to){
+      if(!this.isIE9){
+        let self = this;
+        ws.createWebSocket(to,self,true);
+        this.$root.$on(to,(e)=>{
+          this.auto = e;
+        });
+        this.$root.$on(to+'lefttime',(e)=>{
+          console.log(e);
+          this.c_data.qishu = e.qishu;
+          this.close_time.fengpan = e.close_time;
+          this.close_time.now_time = e.now_time;
+          let t1 = e.close_time - e.now_time;
+          if(t1 == 0){
+            this.$root.$emit("time_out",true)
+          }
+        })
+      }
+    },
+    open_way: function (){
+      let page = 'trend_chart/chart-lotteryId='+this.$route.query.page+'.html'+'?tab=1';
+      window.open(page)
+    },
+    history: function () {
+      let page = 'trend_chart/chart-lotteryId='+this.$route.query.page+'.html'+'?tab=3';
+      window.open(page)
+    },
+    go_child: function(child) {
+      console.log(child);
+      this.$router.push({ name: child, query: { page: "liuhecai" } });
+    },
+    fetchData: function() {
+      let body = {
+        fc_type: this.$route.query.page,
+        gameplay: 165,
+        'pankou': 'A'
+      };
+      api.getgameindex(this, body, res => {
+        if (res.data.ErrorCode == 1) {
+          this.auto = res.data.Data.auto;
+          if(res.data.is_wh == 2){
+            this.$root.$emit('wh_modal',true)
+          }else if(res.data.is_wh == 1){
+            this.$root.$emit('wh_modal',false)
+          }
+          this.c_data = res.data.Data.c_data;
+          this.init();
+        }
+      })
+    },
+    //aaaaa
+    show_rule: function() {
+      this.$root.$emit("rule_show", true);
+      this.$root.$emit("now_page", this.$route.query.page);
+    },
+    run_time: function() {
+      this.timer = window.setInterval(this.getRTime, 1000);
+      console.log("定时器id（run-time）：" + this.timer);
+    },
+    getRTime: function() {
+      this.close_time.now_time += 1;
+      var t1 = this.close_time.fengpan * 1000 - this.close_time.now_time * 1000;
+      var d= Math.floor(t1/1000/60/60/24);
+      this.h = Math.floor((t1 / 1000 / 60 / 60) % 24 + d*24);
+      this.m = Math.floor((t1 / 1000 / 60) % 60);
+      this.s = Math.floor((t1 / 1000) % 60);
+//      let day_1 = Math.floor(t1 / (1000 * 60 * 60 * 24));
+//      console.log('天数：'+day_1);
+      if (this.h == 0 && this.m == 0 && this.s == 0) {
+        this.$root.$emit("success",true);
+        this.$root.$emit("time_out",true)
+      }else if(this.h < 0 && this.m < 0 && this.s < 0){
+        window.clearInterval(this.timer);
+        this.h = -1;
+        this.m = -1;
+        this.s = -1;
+      }
+    },
+    init: function() {
+      this.run_time();
+    }
+  }
+};
+</script>
+<style lang="scss" src="../../../assets/css/mark_six.scss" scoped></style>

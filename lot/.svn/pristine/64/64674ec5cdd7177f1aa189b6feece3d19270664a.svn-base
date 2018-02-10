@@ -1,0 +1,80 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-26 16:11:59
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/log/count.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a6ae2cfa9bb07_39098721',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '9cc6b5d5e63d4f014bfabcbe878f1a9f2b7adaac' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/log/count.html',
+      1 => 1516623859,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a6ae2cfa9bb07_39098721 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+<!-- 列表 -->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr><th class="center" colspan="4">Mongo数据库</th></tr>
+                    <tr>
+                        <th class="center">表类型</th>
+                        <th class="center">表名</th>
+                        <th class="center">用途</th>
+                        <th class="center">总条数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <?php if (isset($_smarty_tpl->tpl_vars['data']->value)) {?>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                         <td class="center" >  <?php if (isset($_smarty_tpl->tpl_vars['v']->value['type'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+ <?php }?></td>
+                         <td class="center" >  <?php if (isset($_smarty_tpl->tpl_vars['v']->value['table'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['table'];?>
+ <?php }?></td>
+                         <td class="center" >  <?php if (isset($_smarty_tpl->tpl_vars['v']->value['name'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+ <?php }?></td>
+                        <td class="center handle" >  <?php if (isset($_smarty_tpl->tpl_vars['v']->value['count'])) {
+if ($_smarty_tpl->tpl_vars['v']->value['count'] > 5000000) {?> <font color="red"><?php }
+echo $_smarty_tpl->tpl_vars['v']->value['count'];?>
+ <?php }?></td>
+                       
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                  <?php }?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<?php echo '<script'; ?>
+>
+
+  
+<?php echo '</script'; ?>
+>
+<?php }
+}

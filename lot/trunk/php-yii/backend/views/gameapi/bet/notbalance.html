@@ -1,0 +1,134 @@
+<style>
+    #menu-form label{margin-right:10px}
+    .handle span{cursor: pointer}
+    #twoLevel{display: none}
+    .levelDiv{display: none}
+    .other_tr .center{background:#FF6970 !important}
+    .other_tr .center:hover<.other_tr{background-color:yellow !important}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="menu-form" method='get' action='/gameapi/bet/nobalance'>
+            <label for="date"> 日期：
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='s_addtime' value="<{if isset($starttime) }><{$starttime}><{/if}>" id="startTime" style="width:180px;">
+                ~
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='e_addtime' value="<{if isset($endtime) }><{$endtime}><{/if}>" id="endTime" style="width:180px;">
+
+            </label>
+
+        <label>
+            <input type="button" class="btn btn-sm btn-success" id="search" value="搜索"/>
+        </label>
+    </form>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">彩种</th>
+                        <th class="center">期号</th>
+                        <th class="center">是否开奖</th>
+                        <th class="center">未结算注单数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <{foreach from=$data item=val key=type}>
+                    <{foreach from=$val item=other key=periods}>
+
+                    <tr  <{if $other['other'] == 1}> class="other_tr" <{/if}>>
+                        <td class="center"> <{if isset(<{$new_fc_type[<{$type}>]}>)}><{$new_fc_type[<{$type}>]}><{/if}>  </td>
+                        <td class="center"> <{if isset(<{$periods}>)}><{$periods}><{/if}></td>
+                        <td class="center"> <{if isset(<{$other['kaijiang']}>)}><{$other['kaijiang']}><{/if}>  </td>
+                        <td class="center"> <{if isset(<{$other['count']}>)}><{$other['count']}><{/if}>  </td>
+        
+                    </tr>
+                    <{/foreach}>
+                <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+ 
+<script>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+
+        var starttime = $.trim($('#startTime').val());
+        var endtime = $.trim($('#endTime').val());
+
+        var params = {
+            s_addtime: starttime,
+            e_addtime: endtime,
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/gameapi/bet/nobalance',
+            container: '#container'
+        });
+    }
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //返回列表页
+    $('#bet_index').click(function(){
+         $.pjax({
+            method: 'get',
+            url: '/gameapi/bet/index',
+            container: '#container'
+        });
+    })
+    //时间控件
+    var start = {
+        elem: '#startTime',
+        format: 'YYYY/MM/DD',
+        min: laydate.now(-4), //设定最小日期为当前日期
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            res =  GetDateStr(datas, 4, '+');
+            end.max = res; //开始日选好后，重置结束日的最小日期
+            end.min = datas;
+            // end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    var end = {
+        elem: '#endTime',
+        format: 'YYYY/MM/DD',
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            res =  GetDateStr(datas, 4, '-');
+            start.min = res; //开始日选好后，重置结束日的最小日期
+            start.max = datas;
+            // end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    laydate(start);
+    laydate(end);
+   
+
+    function GetDateStr(date, AddDayCount, jj) { 
+          var dd = new Date(date); 
+          if(jj == '+'){
+              dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+          }else if(jj == '-'){
+              dd.setDate(dd.getDate()-AddDayCount);//获取AddDayCount天后的日期 
+          }
+          var y = dd.getFullYear(); 
+          var m = dd.getMonth()+1;//获取当前月份的日期 
+          var d = dd.getDate(); 
+          return y+"/"+m+"/"+d; 
+    } 
+
+   
+</script>

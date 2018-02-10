@@ -1,0 +1,210 @@
+<style>
+    #agent-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+    .width100{width:100px}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="agent-form" method='get' action='/agent/shindex'>
+            <label for="menuLevel"> 线路ID
+                <select type="select" name="line_id"  id="line_id">
+                    <option value="" >全部</option>
+                    <{foreach from=$lines item=v key=k}>
+                    <option value="<{$lines[$k]['line_id']}>" <{if isset($smarty.get.line_id) && $smarty.get.line_id eq <{$lines[$k]['line_id']}> }>selected<{/if}>><{$v['line_id']}></option>
+                    <{/foreach}>
+                </select>
+            </label>
+            <label for="login_user">账号:
+                <input class='width100' type="text" name="login_user" id='login_user' value="<{if isset($smarty.get.login_user)}><{$smarty.get.login_user}><{/if}>">
+            </label>
+            <label for="login_name">昵称:
+                <input class='width100' type="text" name='login_name'  id="login_name" value="<{if isset($smarty.get.login_name)}><{$smarty.get.login_name}><{/if}>">
+            </label>
+            <label for="menuLevel"> 状态:
+                <select type="select" name="status"  id="status">
+                    <option value="" >全部</option>
+                    <option value="1" <{if isset($smarty.get.status) && $smarty.get.status eq 1 }>selected<{/if}>>有效</option>
+                    <option value="2" <{if isset($smarty.get.status) && $smarty.get.status eq 2 }>selected<{/if}>>无效</option>
+                </select>
+            </label>
+
+            <label > 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum" >
+                    <option value="100"  <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 100}>selected<{/if}>>100</option>
+                    <option value="500" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 500}>selected<{/if}>>500</option>
+                    <option value="1000" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 1000}>selected<{/if}>>1000</option>
+                </select>
+            </label>
+            <label > 页码:
+                <select type="select" name="page"  id="page">
+                    <{section name=loop loop=$pagecount}>
+                    <option value="<{$smarty.section.loop.index+1}>"
+                            <{if isset($smarty.get.page) && $smarty.get.page eq $smarty.section.loop.index+1}>selected<{/if}>>
+                            <{$smarty.section.loop.index+1}>
+                </option>
+                <{/section}>
+            </select>
+        </label>
+        <label>
+            <input type="button" id='search' class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <!-- <label><span class="btn btn-sm btn-success" id="create">添加</span></label> -->
+    </form>
+</div>
+</div>
+<div class="row" >
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">线路</th>
+                        <th class="center">账号</th>
+                        <th class="center">昵称</th>
+                        <th class="center">额度</th>
+                        <th class="center">状态</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <{foreach from=$data item=v key=k}>
+                    <tr>
+                        <td class="center">
+                            <a ><{if isset($v['id'])}><{$v['id']}><{/if}></a>
+                        </td>
+                        <td class="center">
+                            <a ><{if isset($v['line_id'])}><{$v['line_id']}><{/if}></a>
+                        </td>
+                        <td class="center">
+                            <a><{if isset($v['login_user'])}><{$v['login_user']}><{/if}></a>
+                        </td>
+                        <td class="center"><{if isset($v['login_name'])}><{$v['login_name']}><{/if}></td>
+                        <td class="center green"><{if isset($v['money'])}><{$v['money']}><{/if}></td>
+                        <td class="center"><{if isset($v['deleteTxt'])}><{$v['deleteTxt']}><{/if}></td>
+                        <td class="center"><{if isset($v['addDate'])}><{$v['addDate']}><{/if}></td>
+                        <td class="center handle">
+                            <span class="btn btn-xs btn-success detail" data="<{$v['id']}>" type="user_sh">
+                                详情
+                            </span>
+                           <!--  <span class="btn btn-xs btn-success update" data="<{$v['id']}>">
+                                修改
+                            </span>
+                            <span class="btn btn-xs btn-success role" data="<{$v['id']}>" type="user_sh">
+                                角色
+                            </span>
+                            <span class="btn btn-xs btn-success update_pwd" data="<{$v['id']}>"  type="user_sh">
+                                密码修改
+                            </span> -->
+
+                        </td>
+                    </tr>
+                    <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<script>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var line_id = $.trim($('#line_id').val());
+        var login_user = $.trim($('#login_user').val());
+        var login_name = $.trim($('#login_name').val());
+        var status = $.trim($('#status').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+        var params = {
+            line_id: line_id,
+            status: status,
+            login_user: login_user,
+            login_name: login_name,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/agent/shindex',
+            container: '#container'
+        });
+    }
+
+    //pjax局部加载表单
+    function renderFormByPjax(url) {
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    }
+
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //线路
+     $('#line_id').change(function () {
+        renderTableByPjax();
+     })
+    //状态
+     $('#status').change(function () {
+        renderTableByPjax();
+     })
+
+    //新增
+    $('#create').click(function () {
+        var url = '/agent/sh_edit?type=create';
+        renderFormByPjax(url);
+    })
+
+    //详情
+    $('.detail').click(function () {
+        var id = $(this).attr('data');
+        var type = $(this).attr('type');
+        var url = '/agent/detail?id=' + id + '&type=' + type;
+        renderFormByPjax(url);
+    })
+
+    //修改
+    $('.update').click(function () {
+        var id = $(this).attr('data');
+        var url = '/agent/sh_edit?id=' + id + '&type=update';
+        renderFormByPjax(url);
+    })
+
+    //角色
+    $('.role').click(function () {
+        var id = $(this).attr('data');
+        var type = $(this).attr('type');
+        var url = '/agent/role?id=' + id + '&type=' + type;
+        renderFormByPjax(url);
+    })
+
+    //密码修改
+    $('.update_pwd').click(function () {
+        var id = $(this).attr('data');
+        var type = $(this).attr('type');
+        var url = '/agent/password?id=' + id + '&type=' + type;
+        renderFormByPjax(url);
+    })
+
+    //额度分配
+    $('.set_money').click(function () {
+        var id = $(this).attr('data');
+        var url = '/agent/money?id=' + id;
+        renderFormByPjax(url);
+    })
+
+
+</script>

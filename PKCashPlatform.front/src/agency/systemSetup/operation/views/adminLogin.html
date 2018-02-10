@@ -1,0 +1,95 @@
+<!-- 管理员登录-->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue" >
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('AdministratorLogin')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar" ng-show="newTodo">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 input-label col-xs-4">站点选择</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <select data-smart-select2 class="selectWidth" ng-model="site_index_id" ng-init="site_index_id=''">
+                                                <option value="">全部</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in sharedJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 input-label col-xs-4">日期</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="开始时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="start_time">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-md-1 input-label col-xs-4">——————</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="{{getWord('End time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="end_time">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 input-label col-xs-4">账号</label>
+                                    <div  class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control inp_2" placeholder="请输入账号" ng-model="account">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 input-label col-xs-4">IP</label>
+                                    <div  class="col-md-2 col-xs-8">
+                                        <div class=" form-group">
+                                            <input type="text" class="form-control inp_2" placeholder="请输入IP"  ng-model="ip">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-12">
+                                        <div class="input-group pull-right">
+                                            <a class="btn btn-default search" ng-click="search()" href-void>{{getWord('Search')}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-align-center">WWW</th>
+                                            <th class="text-align-center">账号</th>
+                                            <th class="text-align-center">讯息</th>
+                                            <th class="text-align-center">登录时间</th>
+                                            <th class="text-align-center">IP位置</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="text-align-center">
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.www}}</td>
+                                            <td>{{item.account}}</td>
+                                            <td>{{item.info}}</td>
+                                            <td>{{item.login_time|fiterTime}}</td>
+                                            <td>{{item.ip}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

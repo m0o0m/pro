@@ -1,0 +1,67 @@
+{{define "live"}}
+<script type="text/javascript">
+    var live1 = "<link rel=\"stylesheet\" href=\""+cdnUrl+"/shared/video/css/live1/css.css\" />"+
+            "<script type=\"text/javascript\" src=\""+cdnUrl+"/shared/video/js/live1/live_sx.js\"><\/script>";
+    document.writeln(live1);
+</script>
+
+<div class="{{if eq .LiveLen 1}}live-one {{else}}live-two{{end}}" {{if ne .LiveLen 1}} style="border-left-style: none; left: 0px;" id="slider"{{end}}>
+
+{{$num := .LiveLen}}
+{{range $k,$v := .LiveOrder}}
+<div class="casino-slide">
+    <script type="text/javascript">
+        document.writeln("<img class=\"{{if ne $num 1}}diapo{{end}}\" src=\""+cdnUrl+"/shared/video/images/live1/live-{{$v.VType}}.jpg\" alt=\"\">");
+    </script>
+    <div class="text">
+        <script type="text/javascript">
+            document.writeln("<img src=\""+cdnUrl+"/shared/video/images/live1/{{$v.VType}}-ti.png\">");
+        </script>
+    </div>
+    <div class="div-btn">
+        <a href="javascript:;" onclick="javascript:zhuModal.login();" class="btna pk-login-before" style="display: none;">进入游戏</a>
+        <a href="javascript:;" onclick="opengeme('','video','{{$v.VType}}')" class="btna pk-login-after" style="display: none;">进入游戏</a>
+
+        {{if eq $v.VType "dg"}}
+            <a href="https://f.dg99.info/home/rule/cn/index.html" target="_blank" class="btnb">游戏规则</a>
+        {{else}}
+            <a href="javascript:;" onclick="getPager('','rule','')" class="btnb">游戏规则</a>
+        {{end}}
+        <div class="clear"></div>
+    </div>
+</div>
+{{end}}
+</div>
+
+<script>
+    $(window).load(function () {
+        $(".casino-slide").mouseenter(function () {
+            $(this).find('.text').animate({
+                opacity: '0.7'
+            }, 1000);
+        });
+
+        $(".casino-slide").mouseleave(function () {
+            $(this).find('.text').animate({
+                opacity: '0'
+            }, 10);
+        });
+
+        $(".live-one .casino-slide").mouseenter(function () {
+            $(this).find('.div-btn').animate({
+                top: '400px'
+            }, 300);
+        });
+
+        $(".live-one .casino-slide").mouseleave(function () {
+            $(this).find('.div-btn').animate({
+                top: '600px'
+            }, 300);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    slider.init();
+</script>
+{{end}}

@@ -1,0 +1,30 @@
+{{define "footer"}}
+<footer class="foot-h">
+    <nav class="f-hmoe">
+        <div class="clear">
+            <a href="/m/index" class="{{if eq .CurrPage 1}}curr{{end}}"><i class="iconfont wap-shouye"></i>
+                <p>首页</p></a>
+            <a href="/m/discount" class="{{if eq .CurrPage 2}}curr{{end}}"><i class="iconfont wap-huo"></i>
+                <p>活动</p></a>
+            <span class="cent"><span class="cnet2"><i class="iconfont wap-icon"></i></span></span>
+            <a href="javascript:OnlineService('{{.UrlLink}}');" class="{{if eq .CurrPage 3}}curr{{end}}"><i class="iconfont wap-kefu-"></i>
+                <p>客服</p></a>
+            <a href="/m/account" class="{{if eq .CurrPage 4}}curr{{end}} pk-login-after" style="display: none;"><i class="iconfont wap-wode"></i>
+                <p>会员中心</p></a>
+            <a href="/m/login" class="{{if eq .CurrPage 4}}curr{{end}} pk-login-before"><i class="iconfont wap-wode"></i>
+                <p>登录</p></a>
+        </div>
+    </nav>
+</footer>
+<section class="big-shade"></section>
+<section class="p-semicircle hide">
+    <ul>
+        <li><a href="/m/bank"><img src="{{.CdnUrl}}/wap/style/images/icon/nav_09.png">
+            <p>存款</p></a></li>
+        <li><a href="/m/convert"><img src="{{.CdnUrl}}/wap/style/images/icon/nav_03.png">
+            <p>额度转换</p></a></li>
+        <li><a href="/m/withdraw"><img src="{{.CdnUrl}}/wap/style/images/icon/nav_06.png">
+            <p>取款</p></a></li>
+    </ul>
+</section>
+{{end}}

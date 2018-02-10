@@ -1,0 +1,36 @@
+{{define "memberheader"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>我的账号</title>
+  <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/font/iconfont.css" type="text/css">
+  <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/mycommon.css" type="text/css">
+  <script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/plug-in.js"></script>
+</head>
+<body>
+  <div class="vip-c">
+    <header class="vip-h-c my-theme">
+      <div class="head-center">
+        <i class="iconfont icon-huangguan1 huangguan1-color"></i>
+        <span>会员中心</span>
+      </div>
+    </header>
+    <section class="vip-section">
+      <div class="section-c">
+        <div class="vip-nav">
+          <div class="vip-tab-1 clearfix center">
+            <a class="fl{{if eq .MemberPage 1}} tab-1-active{{end}}" href="/member/account">我的账号</a>
+            <a class="fl{{if eq .MemberPage 2 9 10}} tab-1-active{{end}}" href="/member/bank">存款</a>
+            <a class="fl{{if eq .MemberPage 3}} tab-1-active{{end}}" href="/member/withdraw" class="fl">取款</a>
+            <a class="fl{{if eq .MemberPage 4}} tab-1-active{{end}}" href="/member/convert" class="fl">额度转换</a>
+            <a class="fl{{if eq .MemberPage 5}} tab-1-active{{end}}" href="/member/record" class="fl">交易记录</a>
+            <a class="fl{{if eq .MemberPage 6}} tab-1-active{{end}}" href="/member/report" class="fl">报表统计</a>
+            <a class="fl{{if eq .MemberPage 7}} tab-1-active{{end}}" href="/member/spread" class="fl">我要推广</a>
+            <a class="fl{{if eq .MemberPage 8}} tab-1-active{{end}}" href="/member/mescenter" class="fl">消息中心</a>
+          </div>
+        </div>
+{{end}}

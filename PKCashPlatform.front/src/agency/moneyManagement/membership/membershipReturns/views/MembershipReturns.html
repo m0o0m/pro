@@ -1,0 +1,83 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('MembershipReturns')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row" style="padding-top: 20px;">
+                                            <fieldset>
+                                                <label class="col-md-2 control-label text-align-right col-xs-4 reltop" style="padding-top: 8px;">站点选择</label>
+                                                <div class="col-md-2 inline-group col-xs-8">
+                                                    <div class="form-group">
+                                                        <select data-smart-select2  class="selectWidth" ng-model="site_index_id">
+                                                            <option value="">请选择</option>
+                                                            <option value="{{item.site_index_id}}" ng-repeat="item in names">{{item.site_name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset>
+                                                <label class="col-md-2 control-label text-align-right col-xs-4 reltop" style="padding-top: 8px;">日期查询</label>
+                                                <div class="col-md-2 col-xs-8">
+                                                    <div class="input-group form-group">
+                                                        <input type="text" name="mydate" placeholder="开始时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-xs-8 col-xs-offset-4 col-md-offset-0">
+                                                    <div class="input-group form-group">
+                                                        <input type="text" name="mydate" placeholder="结束时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 col-xs-4">
+                                                    <button class="btn btn-default" ng-click="lastWeek()">上周</button>
+                                                </div>
+                                                <div class="col-md-1 col-xs-4">
+                                                    <button class="btn btn-default" ng-click="thisWeek(0)">本周</button>
+                                                </div>
+                                                <div class="col-md-1 col-xs-4">
+                                                    <button class="btn btn-default" ng-click="yesTerDay()">昨天</button>
+                                                </div>
+                                                <lable class="control-label col-md-2 col-xs-12" style="color: red;padding-top: 8px;">【请勿跨月份查询】</lable>
+                                            </fieldset>
+                                            <fieldset>
+                                                <label class="col-md-2 control-label text-align-right col-xs-4 reltop" style="padding-top: 8px;">显示条件:</label>
+                                                <div class="col-md-2 inline-group col-xs-8">
+                                                    <div class="form-group">
+                                                        <select class="form-control" ng-model="condition">
+                                                            <option class="hidden"></option>
+                                                            <option ng-value="itemStatus.id" ng-repeat="itemStatus in json.option_return">{{itemStatus.name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="row">
+                                                <div class="col-md-6 text-align-right col-xs-12">
+                                                    <button class="btn btn-primary"  type="submit" ng-click="check()">
+                                                        搜索
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

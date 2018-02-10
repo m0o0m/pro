@@ -1,0 +1,104 @@
+package function
+
+import (
+	"global"
+	"models/schema"
+	"github.com/go-xorm/xorm"
+	"github.com/golyu/sql-build"
+	"errors"
+	"math"
+)
+
+type AgentBean struct {
+}
+
+//根据siteId和loginUser查询代理信息
+func (m *AgentBean) GetAgentByAccount(siteId, agentName string) (agent *schema.UserAgent, err error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	agent = new(schema.UserAgent)
+	//sess.Where("line_id = ?", siteId)
+	//sess.Where("login_user = ?", agentName)
+	//b, err := sess.Get(agent)
+	//if err != nil {
+	//	return
+	//}
+	//if !b {
+	//	err = errors.New("Get 0 row")
+	//}
+	sql, err := sqlBuild.Select(agent.TableName()).
+		Where_(siteId, "line_id").
+		Where_(agentName, "login_user").
+		String()
+	if err != nil {
+		return
+	}
+	b, err := sess.SQL(sql).Get(agent)
+	if err != nil {
+		return
+	}
+	if !b {
+		err = errors.New("Get 0 row")
+	}
+	return
+}
+
+//根据siteId和loginUser查询代理信息
+func (m *AgentBean) GetAgentById(siteId string, id int64) (agent *schema.UserAgent, err error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	agent = new(schema.UserAgent)
+	sql, err := sqlBuild.Select(agent.TableName()).
+		Where_(siteId, "line_id").
+		Where_(id, "id").
+		String()
+	if err != nil {
+		return
+	}
+	b, err := sess.SQL(sql).Get(agent)
+	if err != nil {
+		return
+	}
+	if !b {
+		err = errors.New("Get 0 row")
+	}
+	return
+}
+
+//余额加减
+func (m *AgentBean) UpdateMoney(agent *schema.UserAgent, money float64, cType int64, sessArgs ...*xorm.Session) (int64, error) {
+	var sess *xorm.Session
+	switch len(sessArgs) {
+	case 1:
+		sess = sessArgs[0]
+	case 0:
+		sess = global.NewManagementSession()
+	default:
+		panic("sessArgs 传递参数不正确")
+	}
+	auto := sqlBuild.Update(agent.TableName()).
+		Where_(agent.LineId, "line_id").
+		Where_(1, "is_delete").
+		Where_(agent.LoginUser, "login_user")
+
+	switch cType {
+	case 1: //转入   (注:会员转入,就是代理转出,会员转出,就是代理转入)
+		agent.Money = global.FloatReserve2(agent.Money - money)
+		auto.Where(money, "money>=").
+			Set_(agent.Money, "money", sqlBuild.Rule{Float64Value: -math.MaxFloat64})
+	case 2: //转出
+		agent.Money = global.FloatReserve2(agent.Money + money)
+		auto.Set_(agent.Money, "money", sqlBuild.Rule{Float64Value: -math.MaxFloat64})
+	default:
+		panic("c_type not in (1,2)")
+	}
+	sql, err := auto.String()
+	if err != nil {
+		return 0, err
+	}
+	result, err := sess.Exec(sql)
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}

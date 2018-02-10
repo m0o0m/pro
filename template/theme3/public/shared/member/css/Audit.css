@@ -1,0 +1,78 @@
+#page-body .myd-red {
+  color: red !important; }
+#page-body .myd-green {
+  color: green !important; }
+#page-body .mycenter {
+  /* border: 1px solid #DDD; */
+  height: 664px;
+  /* margin-top: 8px; */
+  /* background-color: #fff; */
+  margin-bottom: 50px; }
+#page-body .deposit-schedule {
+  margin-top: 8px;
+  border: 1px solid #DDD;
+  height: 120px;
+  background-color: #fff;
+  position: relative; }
+#page-body .deposit-schedule .round {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  /* border-radius: 50%;
+  background-color: #E8E8E8; */
+  position: absolute;
+  top: 18px;
+  z-index: 10; }
+#page-body .deposit-schedule .line {
+  position: absolute;
+  top: 50px;
+  width: 288px; }
+#page-body .round .round-2 {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #E8E8E8;
+  line-height: 60px;
+  text-align: center; }
+#page-body .round .round-2 .myicon {
+  font-size: 30px;
+  color: #fff; }
+#page-body .FEF7F9 {
+  color: #FEF7F9 !important; }
+#page-body .myd-red {
+  color: red !important; }
+#page-body .round .myd-t-gou {
+  color: #29BA1A; }
+#page-body .myiocn-gou {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: #0BBE43;
+  opacity: 0; }
+#page-body .deposit-schedule .round:nth-child(3) {
+  left: 20%; }
+#page-body .deposit-schedule .round:nth-child(4) {
+  left: 47.5%; }
+#page-body .deposit-schedule .round:nth-child(5) {
+  left: 75%; }
+#page-body .caveat {
+  opacity: 0;
+  font-size: 12px;
+  padding-left: 20px; }
+#page-body .opacity {
+  opacity: 1 !important; }
+#page-body .deposit-schedule .round:nth-child(3) .round-2 {
+  background-image: url("../image/background-red.png");
+  background-position: 80px -28px; }
+#page-body .deposit-schedule .round:nth-child(4) .round-2 {
+  background-image: url("../image/background-red.png");
+  background-position: 80px -28px; }
+#page-body .deposit-schedule .line:nth-child(1) {
+  left: 250px;
+  border-top: 2px solid red; }
+#page-body .deposit-schedule .line:nth-child(2) {
+  left: 530px;
+  border-top: 2px solid #E8E8E8; }
+
+/*# sourceMappingURL=Audit.css.map */

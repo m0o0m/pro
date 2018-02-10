@@ -1,0 +1,109 @@
+#page-body .deposit-schedule .round:nth-child(4) .round-2 {
+  background-position: 5px -15px; }
+#page-body .deposit-schedule .round:nth-child(3) .round-2 {
+  background-position: 80px -28px; }
+#page-body .deposit-schedule .round:nth-child(5) .round-2 {
+  background-position: 80px -28px; }
+#page-body .deposit-schedule .round .round-2 {
+  background-image: url("../image/background-red.png"); }
+#page-body .deposit-center {
+  margin-top: 8px;
+  border-top: 2px solid #6FC41A;
+  height: 100px;
+  background-color: #EFFFE1;
+  padding-top: 35px;
+  text-align: center;
+  color: #6EBC3B; }
+#page-body .deposit-center .deposit-center-icon {
+  display: inline-block;
+  height: 66px;
+  font-size: 60px;
+  padding-left: 150px; }
+#page-body .deposit-center span {
+  display: inline-block;
+  width: 600px;
+  text-align: left;
+  font-weight: 700; }
+#page-body .deposit-center .big-g {
+  font-size: 26px;
+  padding-left: 20px; }
+#page-body .deposit-center .small-b {
+  /* font-size: 26px; */
+  padding-left: 20px;
+  color: #585954; }
+#page-body .deposit-bottom {
+  margin: 8px auto 0;
+  border-bottom: 1px solid #DDD;
+  border-top: 1px solid #DDD;
+  
+  height: 300px;
+  /* padding-left: 25px; */
+  background-color: #fff; }
+#page-body .deposit-bottom .deposit-bottom-1 {
+  height: 58px;
+  padding-top: 20px; }
+#page-body .deposit-bottom .deposit-bottom-1 > span:nth-child(1) {
+  padding-left: 10px;
+  border-left: 2px solid #E85036;
+  color: #494949;
+  font-weight: 700; }
+#page-body .deposit-bottom .deposit-bottom-1 > span:nth-child(2) {
+  padding-right: 35px; }
+#page-body .deposit-bottom .deposit-bottom-1 .fr {
+  color: #898989; }
+#page-body .deposit-bottom .deposit-bottom-1 .fr .fr-1 {
+  color: #494949;
+  font-weight: 700; }
+#page-body .deposit-bottom-2 {
+  margin: 0 35px 0 10px;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  height: 120px; }
+#page-body .deposit-bottom-2-t {
+  font-size: 15px;
+  height: 50%;
+  line-height: 60px;
+  font-weight: 700;
+  overflow: hidden; }
+#page-body .deposit-bottom-2-b {
+  height: 50%;
+  font-weight: 700;
+  line-height: 60px; }
+#page-body .deposit-bottom-2-t span {
+  display: inline-block;
+  max-width: 128px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+#page-body .deposit-bottom-2 .deposit-bottom-2-t li {
+  /* width: 20%; */
+  margin-right: 20px;
+  overflow: hidden;
+  color: #505050; }
+#page-body .my-bot-red {
+  color: #FE3632; }
+#page-body .my-bot-8E9190 {
+  color: #8E9190; }
+#page-body .deposit-bottom-3 {
+  margin: 0 35px 0 10px;
+  height: 100px; }
+#page-body .deposit-bottom-3 .deposit-bottom-3-t {
+  height: 42px;
+  line-height: 42px; }
+#page-body .deposit-bottom-3-t span {
+  margin-right: 35px;
+  color: #343434; }
+#page-body .deposit-bottom-3 .deposit-bottom-3-b {
+  padding-top: 12px; }
+#page-body .deposit-bottom-3-b a {
+  display: block;
+  border-radius: 3px;
+  width: 110px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  color: #fff;
+  background-color: #ff4342;
+  margin: 0 auto; }
+
+/*# sourceMappingURL=complete.css.map */

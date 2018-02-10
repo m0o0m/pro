@@ -1,0 +1,161 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>维护管理</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                    <label class="col-md-1 control-label">站点ID:</label>
+                                    <div class="col-md-2">
+                                        <div class="input-group form-group">
+                                            <input type="text" class="form-control inp_2" placeholder="请输入站点ID" ng-model="site_index_id">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1 col-xs-6">
+                                        <a href-void="" class="btn btn-primary" href="#" ng-click="search()">搜索</a>
+                                    </div>
+
+                                    <div  class="col-md-2  col-xs-6 col-md-offset-6">
+                                        <div class="input-group form-group">
+                                            <button type="submit" data-ui-sref="app.site.maintenanceItem"  class="btn btn-primary">
+                                                维护项目管理
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <form class="form-inline" method="post">
+                                        <div class="table-scroll">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-align-center">站点ID</th>
+                                                    <th class="text-align-center">前台ID</th>
+                                                    <th class="text-align-center" ng-repeat="item in arr track by $index">{{item}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="text-align-center" ng-repeat="item in list" ng-show="$index==0">
+                                                    <td>全网</td>
+                                                    <td></td>
+                                                    <td ng-repeat="tuiyong in item.id track by $index">
+                                                        <span class="hidden">{{tuiyong}}</span>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal"  data-target="#myModal1">全网维护</button>
+                                                    </td>
+                                                </tr>
+                                                <tr class="text-align-center" ng-repeat="item in list" ng-show="$index!==0">
+                                                    <td>{{item.site_index_id}}</td>
+                                                    <td>{{item.site_id}}</td>
+                                                    <td class="text-align-center" ng-repeat="tuiyong in item.id track by $index">
+                                                        <span class="hidden">{{tuiyong}}</span>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal"  data-target="#myModal2">维护</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">维护详情</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-2 input-label">维护信息</label>
+                                <label class="col-md-10 input">
+                                    <input type="text" ng-model="route">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modelone()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccountss" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccountss">维护详情</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-2 input-label">类型</label>
+                                <label class="col-md-10 control-label">
+                                    <span class="col-md-3"  ng-repeat="type in check">
+                                        <input name="user" type="checkbox" value="{{type.id}}"/>{{type.name}}
+                                    </span>
+                                </label>
+                            </section>
+                        </fieldset>
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-2 input-label">维护信息</label>
+                                <label class="col-md-10 input">
+                                    <input type="text" ng-model="route">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-2 input-label">优先级</label>
+                                <label class="col-md-10 control-label" >
+                                    <input name="level" type="checkbox" value="1" ng-model="status"/>最高
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modeloness();">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

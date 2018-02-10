@@ -1,0 +1,164 @@
+package router
+
+import (
+	"global"
+	"strings"
+
+	"github.com/labstack/echo"
+	"github.com/zengnotes/utility"
+	"net/http"
+)
+
+const USER_HAS_PREFIX = "Lottery_Api_Go_"
+
+//校验站点
+func CheckSite(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		// TODO 取出头部里面存储的里面的siteId,用来获取密钥进行解密
+		siteId := strings.Replace(string(c.Request().UserAgent()), USER_HAS_PREFIX, "", -1)
+		if len(siteId) == 0 {
+			global.GlobalLogger.Error("err:not found siteId", )
+			return c.JSON(200, global.ReplyError(10010, c))
+		}
+		c.SetParam("site_id", siteId)
+		// TODO 获取加密了的数据
+		params := c.FormValue("params")
+		if params == "" {
+			global.GlobalLogger.Error("err:not found params", )
+			return c.JSON(200, global.ReplyError(10014, c))
+		}
+		// TODO 获取数据md5值,用来校验数据完整性
+		md5value := c.FormValue("key")
+		if md5value == "" {
+			global.GlobalLogger.Error("err:not found params", )
+			return c.JSON(200, global.ReplyError(10015, c))
+		}
+		global.GlobalLogger.Info("params:%s", params)
+		global.GlobalLogger.Info("md5value:%s", md5value)
+		params = strings.Replace(params, " ", "+", -1) //base64bug
+		// TODO 通过站点获取密钥信息
+		siteConfig, ok := global.M.Load(siteId)
+		if !ok {
+			global.GlobalLogger.Error("err:not found site config", )
+			return c.JSON(200, global.ReplyError(10016, c))
+		}
+		config, _ := siteConfig.(*global.SiteConfig)
+		desKey := config.DesKey //des密钥
+		md5Key := config.Md5Key //md5盐
+		global.GlobalLogger.Info("deskey:%s,md5key:%s", desKey, md5Key)
+		// TODO 校验数据完整性
+		serviceMd5Value := utility.Md5(params + md5Key)
+		if serviceMd5Value != md5value {
+			global.GlobalLogger.Error("md5 checked failure")
+			return c.JSON(200, global.ReplyError(10010, c))
+		}
+		// TODO 解密数据
+		param, err := utility.DesDecrypt([]byte(params), []byte(desKey))
+		if err != nil {
+			global.GlobalLogger.Error("des checked failure:%s", err.Error())
+			return c.JSON(200, global.ReplyError(10010, c))
+		}
+		paramArr := strings.Split(string(param), "/\\\\/")
+		c.Request().Form.Del("params")
+		for _, v := range paramArr {
+			val := strings.Split(v, "=")
+			if len(val) == 2 {
+				if (val[0] != "site_id") {
+					c.SetParam(val[0], val[1])
+				}
+			}
+		}
+		c.Request().Method = http.MethodGet
+		return next(c)
+	}
+}
+
+
+func CheckMainTainLottery(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		// TODO 取出头部里面存储的里面的siteId,用来获取密钥进行解密
+		siteId := strings.Replace(string(c.Request().UserAgent()), USER_HAS_PREFIX, "", -1)
+		if len(siteId) == 0 {
+			global.GlobalLogger.Error("err:not found siteId", )
+			return c.JSON(200, global.ReplyError(10010, c))
+		}
+		c.SetParam("site_id", siteId)
+
+		//TODO 判断维护
+		maintain := CheckMainTain(siteId,"lottery")
+		//维护中
+		if maintain == 1{
+			global.GlobalLogger.Debug("Lottery is maintain: %v", siteId)
+			return c.JSON(200, global.ReplyError(10021, c))
+		}
+		c.Request().Method = http.MethodGet
+		return next(c)
+	}
+}
+
+
+func CheckMainTainSpider(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		// TODO 取出头部里面存储的里面的siteId,用来获取密钥进行解密
+		siteId := strings.Replace(string(c.Request().UserAgent()), USER_HAS_PREFIX, "", -1)
+		if len(siteId) == 0 {
+			global.GlobalLogger.Error("err:not found siteId", )
+			return c.JSON(200, global.ReplyError(10010, c))
+		}
+		c.SetParam("site_id", siteId)
+
+		//TODO 判断维护
+		maintain := CheckMainTain(siteId,"spider")
+		//维护中
+		if maintain == 1{
+			global.GlobalLogger.Debug("Spider is maintain: %v", siteId)
+			return c.JSON(200, global.ReplyError(10021, c))
+		}
+		c.Request().Method = http.MethodGet
+		return next(c)
+	}
+}
+
+func CheckWhiteListLottery(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		// TODO 取出头部里面存储的里面的siteId,用来获取密钥进行解密
+		siteId := strings.Replace(string(c.Request().UserAgent()), USER_HAS_PREFIX, "", -1)
+		if len(siteId) == 0 {
+			global.GlobalLogger.Error("err:not found siteId", )
+			return c.JSON(200, global.ReplyError(10010, c))
+		}
+		c.SetParam("site_id", siteId)
+		ip:=c.RealIP()
+		//TODO 判断ip是否在白名单中
+		whitelist := CheckWhiteList(siteId,"lottery",ip)
+		//开启了ip白名单限制,并且ip不在白名单中
+		if whitelist == 0{
+			global.GlobalLogger.Error("Lottery ip is not in whitelist: %s,%s", siteId,ip)
+			return c.JSON(200, global.ReplyError(10022, c))
+		}
+		c.Request().Method = http.MethodGet
+		return next(c)
+	}
+}
+
+func CheckWhiteListSpider(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		// TODO 取出头部里面存储的里面的siteId,用来获取密钥进行解密
+		siteId := strings.Replace(string(c.Request().UserAgent()), USER_HAS_PREFIX, "", -1)
+		if len(siteId) == 0 {
+			global.GlobalLogger.Error("err:not found siteId", )
+			return c.JSON(200, global.ReplyError(10010, c))
+		}
+		c.SetParam("site_id", siteId)
+		ip:=c.RealIP()
+		//TODO 判断ip是否在白名单中
+		whitelist := CheckWhiteList(siteId,"spider",ip)
+		//开启了ip白名单限制,并且ip不在白名单中
+		if whitelist == 0{
+			global.GlobalLogger.Error("Spider ip is not in whitelist: %s,%s", siteId,ip)
+			return c.JSON(200, global.ReplyError(10022, c))
+		}
+		c.Request().Method = http.MethodGet
+		return next(c)
+	}
+}

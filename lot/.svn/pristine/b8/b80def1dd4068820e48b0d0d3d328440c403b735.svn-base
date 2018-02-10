@@ -1,0 +1,24 @@
+package schema
+
+//注单统计表-procedure专用
+type OrderStatisticsProcedure struct {
+	Id                  int64   `xorm:"'id' PK autoincr"`                               //自增id
+	FcType              string  `xorm:"'fc_type' notnull"`                              //彩种
+	LineId              int64   `xorm:"'line_id' notnull"`                              //线路id
+	AtId                int64   `xorm:"'at_id' notnull"`                                //代理编号
+	AtUsername          string  `xorm:"'at_username' notnull"`                          //代理帐号
+	Uid                 int64   `xorm:"'uid' notnull"`                                  //会员编号
+	Uname               string  `xorm:"'uname' notnull"`                                //会员帐号
+	TotalAmountBet      float64 `xorm:"'total_amount_bet' notnull default(0.00)"`       //总注单
+	TotalOrderQuantity  float64 `xorm:"'total_order_quantity' notnull default(0.00)"`   //总笔数
+	TotalAmountValidBet float64 `xorm:"'total_amount_valid_bet' notnull default(0.00)"` //有效注单
+	TotalWinAmount      float64 `xorm:"'total_win_amount' notnull default(0.00)"`       //盈利
+	StatisticsDate      int64   `xorm:"statistics_date"`                                //统计数据时间
+	CreateTime          int64   `xorm:"create_time"`                                    //创建时间
+	TotalStatusQuantity float64 `xorm:"'total_status_quantity' notnull default(0)"`     //状态总计
+	Status              int64   `xorm:"'status' notnull default(0)"`                    //状态
+}
+
+func (*OrderStatisticsProcedure) TableName() string {
+	return "order_statistics_procedure"
+}

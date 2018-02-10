@@ -1,0 +1,27 @@
+package function
+
+import (
+	"global"
+)
+
+type Refresh struct {
+}
+
+//更新数据库中的密钥key，保存到缓存中
+func (m *Refresh) UpdateAllKey() error {
+	lineBean := new(LineBean)
+	keys, err := lineBean.GetAll()
+	if err != nil {
+		global.GlobalLogger.Error("err:%s", err.Error())
+		return err
+	}
+	for _, v := range keys {
+		global.M.Store(v.LineId, &global.SiteConfig{Md5Key: v.Md5key, DesKey: v.Deskey})
+		////批量插入redis
+		//err := global.SetLine(v.LineId, global.SiteConfig{Md5Key: v.Md5key, DesKey: v.Deskey})
+		//if err != nil {
+		//	global.GlobalLogger.Error("SetLine err : %v KEY:%s MD5KEY:%s,DESKEY:%s", err, v.LineId, v.Md5key, v.Deskey)
+		//}
+	}
+	return nil
+}

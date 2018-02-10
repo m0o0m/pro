@@ -1,0 +1,325 @@
+<style>
+    .detailDiv{display:none}
+    #accessTree .ace-icon {
+        color: #F9E8CE;
+        width: 13px;
+        height: 13px;
+        line-height: 13px;
+        font-size: 11px;
+        text-align: center;
+        border-radius: 3px;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        background-color: #FAFAFA;
+        border: 1px solid #CCC;
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    }
+
+    #accessTree .fa-check{
+        background-color: #F9A021;
+        border-color: #F9A021;
+        color: #FFF;
+    }
+
+</style>
+<div class="row">
+    <div class="page-header">
+        <h1>
+            <a href="javascript:;" id="role_index">角色列表</a>
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                <{if $smarty.get.type eq 'create'}>
+                角色新增
+                <{elseif $smarty.get.type eq 'update'}>
+                角色编辑
+                <{elseif $smarty.get.type eq 'detail'}>
+                角色详情
+                <{/if}>
+            </small>
+        </h1>
+    </div>
+    <div class="col-xs-12">
+        <form id="role-form" >
+            <div class="col-xs-12 col-sm-3">
+                <div class="col-xs-12 col-sm-12 widget-container-col  ui-sortable">
+                    <div class="widget-box  ui-sortable-handle">
+                        <div class="widget-header">
+                            <h5 class="widget-title">基本信息</h5>
+                            <input type="hidden" name="roleId" id='roleId' value="<{if !empty($id)}><{$id}><{/if}>">
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="form-group ">
+                                    <label class="control-label" for="role">角色</label>
+                                    <input type="text" id="role" class="form-control" name="role" value="<{if isset($data['role'])}><{$data['role']}><{/if}>" >
+                                    <div class="help-block"></div>
+                                </div>
+                                <div class="form-group  ">
+                                    <label class="control-label" for="roleName">角色名称</label>
+                                    <input type="text" id="roleName" class="form-control" name="roleName" value="<{if isset($data['role_name'])}><{$data['role_name']}><{/if}>" >
+                                    <div class="help-block"></div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label" >状态</label>
+                                    <select type="select" name="status" id="status" class="form-control">
+                                        <option value="1" <{if isset($data['is_delete']) && $data['is_delete'] eq 1}>selected<{/if}>>有效</option>
+                                        <option value="2" <{if isset($data['is_delete']) && $data['is_delete'] eq 2}>selected<{/if}>>无效</option>
+                                    </select>
+                                    <div class="help-block"></div>
+                                </div>
+                                <div class="detailDiv">
+                                    <div class="form-group  ">
+                                        <label class="control-label" >操作人</label>
+                                        <input type="text" id="handler" class="form-control" name="handler" value="<{if isset($data['handler'])}><{$data['handler']}><{/if}>" >
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group  ">
+                                        <label class="control-label" for="roleName">添加时间</label>
+                                        <input type="text" id="addTime" class="form-control" name="addTime" value="<{if isset($data['addTimeTxt'])}><{$data['addTimeTxt']}><{/if}>" >
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group  ">
+                                        <label class="control-label" for="roleName">修改时间</label>
+                                        <input type="text" id="updateTime" class="form-control" name="updateTime" value="<{if isset($data['updateTimeTxt'])}><{$data['updateTimeTxt']}><{/if}>" >
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+                                <button type="button" id='save' class="btn btn-primary"><{if $smarty.get.type eq 'create'}>添加<{/if}> <{if $smarty.get.type eq 'update'}>更新<{/if}></button>              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="col-sm-6">
+                <div class="widget-box widget-color-blue2">
+                    <div class="widget-header">
+                        <h4 class="widget-title lighter smaller">权限</h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main padding-8">
+                            <ul id='accessTree'  class="tree tree-unselectable" >
+                                <{foreach from=$oneLevel item=v key=k}>
+                                <li class="tree-branch tree-open oneLi" >
+                                    <div class="tree-branch-header">
+                                        <span class="tree-branch-name oneLevel" >	
+                                            <i class="
+                                               icon-item
+                                               ace-icon 
+                                               <{if in_array($v['id'],$access)}>fa-check<{else}>fa-times<{/if}>" 
+                                               key='<{$v["id"]}>'
+                                               ></i>	
+                                            <span class="tree-label"><{$v['menu_name']}>(<{$v['menu']}>)</span>		
+                                        </span>			
+                                    </div>			
+                                    <ul class="tree-branch-children" >
+                                        <{foreach from=$twoLevel item=tv key=tk}>
+                                        <{if $tv['pid'] eq $v['id']}>
+                                        <li class="tree-branch tree-open twoLi" >
+                                            <div class="tree-branch-header">	
+                                                <span class="tree-branch-name twoLevel" >	
+                                                    <i class="icon-item ace-icon 
+                                                       <{if in_array($tv['id'],$access)}>fa-check<{else}>fa-times<{/if}>"  
+                                                       key='<{$tv["id"]}>'
+                                                       ></i>	
+                                                    <span class="tree-label"><{$tv['menu_name']}>(<{$tv['menu']}>)</span>	
+                                                </span>				
+                                            </div>			
+                                            <ul class="tree-branch-children" >
+                                                <{foreach from=$threeLevel item=thv key=thk}>
+                                                <{if $thv['pid'] eq $tv['id']}>
+                                                <li class="tree-item threeLi" >
+                                                    <span class="tree-item-name threeLevel" >		
+                                                        <i class="icon-item 
+                                                           ace-icon 
+                                                           <{if in_array($thv['id'],$access)}>fa-check<{else}>fa-times<{/if}>" 
+                                                           key='<{$thv["id"]}>'
+                                                           ></i>	
+                                                        <span class="tree-label"><{$thv['menu_name']}>(<{$thv['menu']}>)</span>	
+                                                    </span>			
+                                                </li>
+                                                <{/if}>
+                                                <{/foreach}>
+                                            </ul>	
+                                        </li>
+                                        <{/if}>
+                                        <{/foreach}>
+                                    </ul>	
+                                </li>
+                                <{/foreach}>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<script>
+     $('#role_index').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/role/index',
+            container: '#container'
+        });
+    })
+    //更新
+    $("#save").click(function () {
+        var load;
+        var id = $.trim($('#roleId').val());
+        var role = $.trim($('#role').val());
+        var roleName = $.trim($('#roleName').val());
+        var status = $.trim($('#status').val());
+        var access = [];
+
+        if (role == '') {
+            layer.alert('角色不能为空！', {icon: 2});
+            return false;
+        }else if (!/^[A-Za-z0-9_]*$/g.test(role)){
+            layer.alert('角色只能是数字字母下划线组合！', {icon: 2});
+            return false;
+        }
+
+        if (roleName == '') {
+            layer.alert('角色名称不能为空！', {icon: 2});
+            return false;
+        }
+
+        $.each($('.fa-check'), function (k, v) {
+            access.push($(this).attr('key'));
+        })
+
+
+        var data = {
+            id: id,
+            role: role,
+            roleName: roleName,
+            status: status,
+            access: access
+        };
+        $.ajax({
+            type: "post",
+            url: '/role/save',
+            data: data,
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2})
+                layer.close(load);
+            },
+            dataType: 'json',
+            success: function (res) {
+                layer.alert(res.msg, {icon: 2});
+                if (res.code == 400) {
+                    layer.close(load);
+                } else if(res.ErrorCode == 2){
+                    layer.close(load);
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                } else if (res.code == 200) {
+                    layer.close(load);
+                    layer.alert('更新成功！',{icon:1},function(){
+                        window.location.href = '/role/index';
+                    })
+                }
+            }
+        });
+
+    })
+
+
+
+
+    function disabled() {
+        var type = "<{$smarty.get.type}>";
+        if (type == 'detail') {
+            $('#role-form').find('input').attr('disabled', true);
+            $('#role-form').find('select').attr('disabled', true);
+            $('#save').hide();
+            $('.detailDiv').show();
+        }
+    }
+
+    disabled();
+
+
+
+
+    /********************权限树************************/
+    //一级菜单点击事件
+    $('span.oneLevel').click(function () {
+        var obj = $(this).find('.icon-item');
+        var theLi = $(this).parents('li.oneLi');
+        if (obj.hasClass('fa-times')) {
+            obj.removeClass('fa-times');
+            obj.addClass('fa-check');
+            checkTwo(theLi);
+            checkThree(theLi);
+        } else {
+            obj.removeClass('fa-check');
+            obj.addClass('fa-times');
+            cancelTwo(theLi);
+            cancelThree(theLi);
+        }
+    });
+    //二级菜单点击事件
+    $('span.twoLevel').click(function () {
+        var obj = $(this).find('.icon-item');
+        var theLi = $(this).parents('li.twoLi');
+        if (obj.hasClass('fa-times')) {
+            obj.removeClass('fa-times');
+            obj.addClass('fa-check');
+            checkThree(theLi);
+        } else {
+            obj.removeClass('fa-check');
+            obj.addClass('fa-times');
+            cancelThree(theLi);
+        }
+    });
+
+    //三级菜单点击事件
+    $('span.threeLevel').click(function () {
+        var obj = $(this).find('.icon-item');
+        //var theLi = $(this).parents('li.threeLi');
+        if (obj.hasClass('fa-times')) {
+            obj.removeClass('fa-times');
+            obj.addClass('fa-check');
+        } else {
+            obj.removeClass('fa-check');
+            obj.addClass('fa-times');
+        }
+    });
+
+
+
+    //所有二级选中
+    function　checkTwo(obj) {
+        obj.find('.twoLi').find('.icon-item').removeClass('fa-times');
+        obj.find('.twoLi').find('.icon-item').addClass('fa-check');
+    }
+
+    //所有二级取消
+    function cancelTwo(obj) {
+        obj.find('.twoLi').find('.icon-item').removeClass('fa-check');
+        obj.find('.twoLi').find('.icon-item').addClass('fa-times');
+    }
+
+    //所有三级选中
+    function　checkThree(obj) {
+        obj.find('.threeLi').find('.icon-item').removeClass('fa-times');
+        obj.find('.threeLi').find('.icon-item').addClass('fa-check');
+    }
+
+    //所有三级取消
+    function cancelThree(obj) {
+        obj.find('.threeLi').find('.icon-item').removeClass('fa-check');
+        obj.find('.threeLi').find('.icon-item').addClass('fa-times');
+    }
+
+
+
+
+
+</script>

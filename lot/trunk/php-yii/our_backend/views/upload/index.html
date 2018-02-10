@@ -1,0 +1,302 @@
+
+<!-- 搜索栏 -->
+<style>select{width:auto !important;}#search-form label{margin-right:10px}</style>
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="search-form" action="" method="">
+            <label for="type">线路:
+                <select type="select" id="line_id" name="line_id">
+                    <option value="">全部</option>
+                  <{foreach from=$data.show.lines item=val key=key}>
+                    <option value="<{$val.line_id}>" <{if isset($smarty.get.line_id) && $smarty.get.line_id eq $val.line_id}> selected<{/if}>><{$val.line_id}></option>
+                  <{/foreach}>
+                </select>
+            </label>
+            <label for="keyword">关键词:
+                <input placeholder="请输入关键词进行搜索" type="text" id="keyword" name="keyword" value="<{if isset($smarty.get.keyword)}><{$smarty.get.keyword}><{/if}>">
+            </label>
+           <!--  <label for="roleName">添加时间:
+                <input class="laydate-icon" placeholder="请输入日期" type="text" id="starttime" name="starttime" value="<{if isset($smarty.get.starttime)}><{$smarty.get.starttime}><{/if}>">
+                ~
+                <input class="laydate-icon" placeholder="请输入日期" type="text" id="endtime" name="endtime" value="<{if isset($smarty.get.endtime)}><{$smarty.get.endtime}><{/if}>">
+            </label> -->
+            <label for="enable">启用:
+                <select type="select" id="enable" name="enable">
+                    <option value="">全部</option>
+                  <{foreach from=$data.trans.enable item=val key=key}>
+                    <option <{if isset($smarty.get.enable) && $smarty.get.enable neq '' && $smarty.get.enable eq $key}> selected<{/if}> value="<{$key}>"><{$val}></option>
+                  <{/foreach}>
+                </select>
+            </label>
+            <label for="page">
+                <span id="page_container">
+                    每页显示条数:
+                    <select id="pagenum" name="pagenum" onchange="pagenumTurn()">
+                       <option <{if $result.pagenum eq 100}> selected<{/if}> value="100">100</option>
+                       <option <{if $result.pagenum eq 500}> selected<{/if}> value="500">500</option>
+                       <option <{if $result.pagenum eq 1000}> selected<{/if}> value="1000">1000</option>
+                    </select>
+                     页码:
+                    <select id="page" name="page" onchange="pageTurn()">
+                    <{for $i=1 to $result.totalpage}>
+                        <option <{if $result.page eq $i}> selected<{/if}> value="<{$i}>"><{$i}></option>
+                    <{/for}>
+                    </select>
+                     共<{$result.totalpage}>页
+                </span>
+            </label>
+            <label>
+                <input type="submit" id="button" class="btn btn-sm btn-success" value="搜索" />
+            </label>
+            <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+        </form>
+    </div>
+</div>
+
+<!-- 列表 -->
+<style>#sample-table-1,#sample-table-1 th{text-align:center;}</style>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <{include file="_list.html"}>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 详情 表单 -->
+<div class="isHide layui-layer-wrap" id="_form" style="display: none;">
+    <div class="modal-body">
+        <form id="info-form" class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label id="_fileimg" class="col-sm-12 center"></label>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<script>
+// $(document).ready(function(){
+// ------------------ -- ------------------------------------
+    $("#search-form select").each(function(){
+        $(this).data("lastIndex",$(this).find(':selected').index()).change(function(){
+            var lastIndex = $(this).data('lastIndex');
+            var curIndex = $(this).find(':selected').index();
+            if(lastIndex != curIndex){
+                $(this).css({'color':'red'});
+            }else{
+                $(this).css({'color':''});
+            }
+        });
+    });
+
+    // 手动刷新
+    $('#refresh').click(function(){
+        var page = $('#page').val();
+        var pagenum = $('#pagenum').val();
+        $('[field=search]').val('');
+        $('#page').val(page);
+        $('#pagenum').val(pagenum);
+        _refresh();
+    });
+    // 刷新列表
+    function _refresh(){
+        doSubmit();
+    }
+
+    // 启用 关闭
+    function actionEnable(id, enable){
+        msg = (enable==1) ? '确定关闭吗？' : '确定开启吗？' ;
+        $('#sample-table-1').val(id);
+        $('#sample-table-1').data('enable',enable);
+        layer.confirm(msg, {
+            btn: ['确定','取消']
+        }, function(){
+            layer.closeAll('dialog');
+
+            var id = $('#sample-table-1').val();
+            var enable = $('#sample-table-1').data('enable');
+
+            var url = 'enable?';
+            var type = 'post';
+            var data = 'id=' + id + '&enable=' + enable;
+            var callback = function (result) {
+                if(enable == 1){
+                    $('#item' + id).find('[name=enable]').html('<a onclick="actionEnable('+id+', 0)" class="btn btn-xs btn-default enable">已关闭</a>');
+                }else{
+                    $('#item' + id).find('[name=enable]').html('<a onclick="actionEnable('+id+', 1)" class="btn btn-xs btn-primary enable">已启用</a>');
+                }
+                // _refresh();
+            }
+            request(url,type,data,callback);
+        }, function(){
+            return;
+        });
+    }
+    // 详情
+    function actionView(id){
+        var item = $('#item' + id);
+        var showpath = item.data('showpath');
+        $('#_fileimg').html('<img style="/*max-width:626px;*/" src="'+showpath+'"/>');
+
+        $('#_form').show();
+        openLayer('详情','');
+    }
+// ------------------ 查 ------------------------------------
+    // 控制查询提交事件
+    $('#search-form').submit(function(){
+        actionSubmit();
+        return false;
+    });
+    // 事件触发
+    $('#page').change(function(){
+        pageTurn();
+    });
+    $('#pagenum').change(function(){
+        pagenumTurn();
+    });
+
+    // 翻页
+    function pageTurn(){
+        doSubmit();
+    }
+    function pagenumTurn(){
+        actionSubmit();
+    }
+
+    // 提交查询
+    function actionSubmit(){
+        $('#page').val(1);
+        doSubmit();
+    }
+    // 当前的表单状态提交
+    function doSubmit(){
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: 'index',
+            container: '#container'
+        });
+    }
+
+// ------------------ 增 ------------------------------------
+    function renderFormByPjax(url) {
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    }
+    $('#create').click(function(){
+        renderFormByPjax('add');
+    });
+    function actionEdit(id){
+        renderFormByPjax('edit?id=' + id);
+    };
+
+// ------------------ 批量 ------------------------------------
+    // 选择全部
+    function checkAll(){
+        if($('input[name=batchAll]').is(':checked')){
+            $('input[name=batchId]').prop('checked',true);
+        }else{
+            $('input[name=batchId]').attr('checked',false);
+        }
+    }
+    // 选择一条
+    function checkOne(){
+        var flag = false;
+        $('input[name=batchId]').each(function(index,obj){
+            if(!$(this).is(':checked')){
+                flag = true;
+            }
+        });
+        if(flag){
+            $('input[name=batchAll]').prop('checked',false);
+        }else{
+            $('input[name=batchAll]').prop('checked',true);
+        }
+    }
+
+// ------------------ 控件 ------------------------------------
+    // 弹框
+    function openLayer(title, height) {
+        open = layer.open({
+            type: 1 //Page层类型
+            , area: ['666px', height]
+            , title: title
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: $('#_form')
+        });
+    }
+    // //时间控件
+    // var start = {
+    //     elem: '#starttime',
+    //     format: 'YYYY-MM-DD',
+    //     max: laydate.now(),
+    //     // istime: true,
+    //     istoday: true,
+    //     choose: function (datas) {
+    //         end.min = datas;
+    //     }
+    // }
+    // laydate(start);
+    // var end = {
+    //     elem: '#endtime',
+    //     format: 'YYYY-MM-DD',
+    //     max: laydate.now(),
+    //     // istime: true,
+    //     istoday: true,
+    // }
+    // laydate(end);
+    //  <{if !isset($smarty.get.starttime)}>
+    //     $('#starttime').val(laydate.now(0, 'YYYY-MM-DD'));
+    // <{/if}>
+    // <{if !isset($smarty.get.endtime)}>
+    //     $('#endtime').val(laydate.now(0, 'YYYY-MM-DD'));
+    // <{/if}>
+
+// ------------------ 公用 ------------------------------------
+    // ajax 提交
+    function request(url,type,data,callback,dataType) {
+        if(!dataType) dataType = 'json';
+        $.ajax({
+            type: type,
+            url: url,
+            data: data,
+            dataType:dataType,
+            beforeSend:function(){
+                showLoad();
+            },
+            success: function(data,textStatus){
+                closeLoad();
+                var result = data;
+                if(result.ErrorCode == 2){
+                    layer.alert(result.ErrorMsg, {icon: 0});
+                    return;
+                }
+                callback(result);
+            },
+            error: function(XMLHttpRequest,textStatus,errorThrown){
+                closeLoad();
+                layer.alert(textStatus, {icon: 0});
+            }
+        });
+    }
+    // 加载中...
+    function showLoad(){
+        load = layer.load(1, {
+            shade: [0.5, '#000000'] // loading...
+        });
+    }
+    // 关闭加载中
+    function closeLoad(){
+        layer.close(load);
+    }
+// });
+</script>

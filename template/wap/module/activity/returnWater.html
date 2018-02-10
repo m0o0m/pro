@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>PK</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+    <style>
+        /* .m-commion{
+            height: 100%;
+            ;
+        }
+        .table{
+            height: 100%;
+        } */
+    </style>
+</head>
+
+<body ontouchstart>
+    <header class="head-h outer">
+        <ul class="h-head">
+            <li>
+                <a>
+                    <i class="iconfont wap-fanhui"></i>
+                </a>
+            </li>
+            <li>
+                <h2>自助返水</h2>
+            </li>
+            <li>
+                <a href="/m/index">首页</a>
+            </li>
+        </ul>
+    </header>
+    <div id="mescroll" class="mescroll">
+
+        
+
+
+        <section class="m-commion">
+
+            <div class="m-commion-top">
+                            <a href="#" onclick="GetAllBet();">
+                                <i class="iconfont wap-sousuo"></i>
+                                <span>统计打码</span>
+                            </a>
+                            <button onclick="ReturnMoney();">全部领取</button>
+            </div>
+            <div class="m-commion-cen">
+                <ul>
+                    <li>板块</li>
+                    <li>有效投注</li>
+                    <li>反水金额</li>
+                </ul>
+                <ul>
+                {{range $k,$v := .RData}}
+                <li>
+
+                    <span>{{$v.ProductName}}</span>
+                    <span><a>{{$v.BetValid}}</a></span>
+                    <span>{{$v.ReturnMoney}}</span>
+
+
+                </li>
+                {{end}}
+            </ul>
+            </div>
+        </section>
+
+    </div>
+
+
+    {{template "footer" .}}
+</body>
+
+</html>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script>
+    //验证是否开启自助反水
+    $(window).load(function (e) {
+        if (getCookie('loginBack')) {
+            var loginBack = getCookie('loginBack');
+            $.ajax({
+                type: "get",
+                url: "/m/isself",
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'wap'
+                },
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code) {
+                        $.toast(data.msg, 'text');
+                    } else {
+                        if (data.data != 1) {
+                            $.toast("自助反水未开启！", 'text');
+                            setTimeout(function () {
+                                window.location.href = "/m/index";
+                            }, 2000);
+                        }
+                    }
+                },
+                error: function () {
+                    $.toast("用户登录信息已失效， 请重新登录！", 'text');
+                    setTimeout(function () {
+                        window.location.href = "/m/login";
+                    }, 2000);
+                }
+            });
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            setTimeout(function () {
+                window.location.href = "/m/login";
+            }, 2000);
+        }
+    });
+
+    function GetAllBet() {
+        if (getCookie('loginBack')) {
+            var loginBack = getCookie('loginBack');
+            $.ajax({
+                type: "get",
+                url: "/m/getmemberbet",
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'wap'
+                },
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code) {
+                        $.toast(data.msg, 'text');
+                    } else {
+                        var returnwater = data.data;
+                        if (returnwater != "") {
+                            var str = "";
+                            $.each(returnwater.data, function (key, value) {
+                                str += "<tr>";
+                                str += "<td>" + value.ProductName + "</td>";
+                                str += "<td>" + value.BetValid + "</td>";
+                                str += "<td>" + value.RateMoney + "</td>";
+                                str += "</tr>";
+                            });
+                            $.toast("总计可反水额度：" + returnwater.count, 'text');
+                            if (returnwater.coun >= 0.01) {
+                                $("#tdata").html(str);
+                            }
+                        } else {
+                            $.toast("暂无打码数据！", 'text');
+                        }
+                    }
+                },
+                error: function () {
+                    $.toast("用户登录信息已失效， 请重新登录！", 'text');
+                    setTimeout(function () {
+                        window.location.href = "/m/login";
+                    }, 2000);
+                }
+            });
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            setTimeout(function () {
+                window.location.href = "/m/login";
+            }, 2000);
+        }
+    }
+    function ReturnMoney() {
+        if (getCookie('loginBack')) {
+            var loginBack = getCookie('loginBack');
+            $.ajax({
+                type: "get",
+                url: "/m/postreturnwater",
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'wap'
+                },
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    if (data != "") {
+                        $.toast(data.msg, 'text');
+                    } else {
+                        $.toast("存入成功", 'text');
+                        setTimeout(function () {
+                            window.location.href = "/m/account";
+                        }, 2000);
+                    }
+                },
+                error: function (err) {
+                    $.toast("无可反水数据，请重新统计", 'text');
+                }
+            });
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            setTimeout(function () {
+                window.location.href = "/m/login";
+            }, 2000);
+        }
+    }
+    $(document).ready(function(){
+        var mescroll = new MeScroll("mescroll", {
+                //下拉刷新的所有配置项
+                down:{
+                    use: false, //是否初始化下拉刷新; 默认true
+                    auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                    hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                    isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+                }
+			});
+    })
+</script>

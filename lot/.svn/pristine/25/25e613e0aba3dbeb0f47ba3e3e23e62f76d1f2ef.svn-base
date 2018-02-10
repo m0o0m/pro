@@ -1,0 +1,56 @@
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <h4 class="blue">
+                    <span class="middle"><i class="ace-icon glyphicon glyphicon-user light-blue bigger-110"></i></span>
+                    账号信息
+                </h4>
+                <div class="profile-user-info">
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> 账号  </div>
+                        <div class="profile-info-value">
+                            <span><{if isset($data['login_user'])}><{$data['login_user']}><{/if}></span>
+                        </div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> 昵称  </div>
+                        <div class="profile-info-value">
+                            <span><{if isset($data['login_name'])}><{$data['login_name']}><{/if}></span>
+                        </div>
+                    </div>
+                    <{if isset($data['user_type']) && $data['user_type'] == 2}>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> 角色  </div>
+                        <div class="profile-info-value">
+                            <span>
+                                <{if isset($data['role_name']) && !empty($data['role_name'])}>
+                                <{$data['role_name']}>
+                                <{else}>
+                                暂无角色
+                                <{/if}>
+                            </span>
+                        </div>
+                    </div>
+                    <{/if}>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> 帐号类型  </div>
+                        <div class="profile-info-value">
+                            <span><{if isset(<{$data['user_type_txt']}>)}><{$data['user_type_txt']}><{/if}></span>
+                        </div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">
+                            余额
+                        </div>
+                        <div class="profile-info-value">
+                            <span><{if isset(<{$data['money']}>)}><{$data['money']}><{/if}></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr hr16 dotted"></div>
+            </div>
+        </div>                  
+    </div>
+</div>

@@ -1,0 +1,133 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{lang['Report form']}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 control-label col-xs-4 reltop">OG时间</label>
+                                    <div class="col-md-3 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy/mm/dd" ng-model="ogStartTime">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 control-label col-xs-4"></label>
+                                    <div class="col-md-3 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy/mm/dd" ng-model="ogEndTime">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 control-label col-xs-4 reltop">其他时间</label>
+                                    <div class="col-md-3 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy/mm/dd" ng-model="otherStartTime">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 control-label col-xs-4"></label>
+                                    <div class="col-md-3 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy/mm/dd" ng-model="otherEndTime">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="row form-horizontal">-->
+                                    <!--<label class="col-md-1 control-label col-xs-4 reltop">模式</label>-->
+                                    <!--<div class="col-md-3 col-xs-8">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<select class="form-control" name="status" ng-blur="reportChange()">-->
+                                                <!--<option value="-1">总报表</option>-->
+                                                <!--<option value="1">代理报表</option>-->
+                                                <!--<option value="0">会员报表</option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="row form-horizontal">-->
+                                    <!--<label class="col-md-1 control-label col-xs-4 reltop">站点</label>-->
+                                    <!--<div class="col-sm-3 col-xs-8">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<select data-smart-select2  ng-model="site" class="selectWidth">-->
+                                                <!--<option value="">请选择</option>-->
+                                                <!--<option value="{{item.site_index_id}}" ng-repeat="item in site">{{item.site_name}}</option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="row form-horizontal">-->
+                                    <!--<label class="col-md-1 control-label col-xs-4 reltop">类型</label>-->
+                                    <!--<div class="col-sm-3 col-xs-8">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<select data-smart-select2  ng-model="type" class="selectWidth">-->
+                                                <!--<option value="">请选择</option>-->
+                                                <!--<option value="{{item.site_index_id}}" ng-repeat="item in site">{{item.site_name}}</option>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="row form-horizontal">-->
+                                    <!--<label class="col-md-1 control-label col-xs-4 reltop">时间</label>-->
+                                    <!--<div class="col-md-3 col-xs-8">-->
+                                        <!--<div class="input-group form-group">-->
+                                            <!--<input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy">-->
+                                            <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<label class="col-md-1 control-label col-xs-4"></label>-->
+                                    <!--<div class="col-md-3 col-xs-8">-->
+                                        <!--<div class="input-group form-group">-->
+                                            <!--<input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy">-->
+                                            <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 control-label col-xs-4 reltop">模块选择</label>
+                                    <div class="widget-body no-padding form-group col-md-6 inline-group">
+                                        <div class="panel-group smart-accordion-default" id="accordion-2" style="margin-left: 10px; margin-top: 10px;">
+                                                                <div class="panel panel-default">
+                                        <div class="panel-heading ">
+                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-1" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i>点击展开</a></h4>
+                                        </div>
+                                        <div id="collapseTwo-1" class="panel-collapse collapse ">
+                                            <div class="panel-body inline-group col-md-12">
+                                                <label class="radio col col-md-12 col-xs-4">
+                                                    <input type="radio" name="radio-inline2" ng-click="check=true" style="margin-top: 1px">
+                                                    全选</label>
+                                                <label class="radio col col-md-12 col-xs-4">
+                                                    <input type="radio" name="radio-inline2" ng-click="check=false" style="margin-top: 1px">
+                                                    反选</label>
+                                                <br>
+                                                <label class="radio col col-md-4 col-xs-4" ng-repeat="item in module">
+                                                    <span class="module-id">{{item.id}}</span>
+                                                    <input type="checkbox" name="radio-inline2" class="check" ng-model="check" style="margin-top: 1px">
+                                                    {{item.name}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-horizontal">
+                                    <div class="col-sm-7 col-xs-7 pull-right">
+                                        <a href-void="" class="btn btn btn-primary" href="#" ng-click="detail()">查询</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+</div>
+

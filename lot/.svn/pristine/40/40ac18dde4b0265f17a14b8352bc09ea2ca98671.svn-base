@@ -1,0 +1,26 @@
+package global
+
+import (
+	"fmt"
+	"strconv"
+	"time"
+	"math/rand"
+)
+
+//float类型保留2位小数(四舍五入) ,总感觉这种方式不好,有更好的办法请替换该方法
+func FloatReserve2(src float64) float64 {
+	temp, _ := strconv.ParseFloat(fmt.Sprintf("%0.2f", src), 64)
+	return temp
+}
+
+//生成随机字符串
+func GetRandomString(length int) string {
+	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	bytes := []byte(str)
+	result := []byte{}
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < length; i++ {
+		result = append(result, bytes[r.Intn(len(bytes))])
+	}
+	return string(result)
+}

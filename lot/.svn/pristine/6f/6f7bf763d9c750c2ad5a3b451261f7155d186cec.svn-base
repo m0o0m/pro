@@ -1,0 +1,271 @@
+@import "./function.scss";
+
+.box {
+  width: 880px;
+  margin: 0 auto;
+  // padding-top: 10px;
+  //padding-left: 13px;
+  //padding-right: 13px;
+  overflow: hidden;
+  .footer {
+    width: 100%;
+    float: left;
+    // margin-top: 20px;
+    padding-bottom: 20px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+    }
+    .one {
+      background-color: #eeeeee;
+      margin-right: 15px;
+      span {
+        color: $bg_color;
+      }
+      .left {
+        color: #999999;
+      }
+    }
+    .two {
+      background-color: $bg_color;
+      color: #fff;
+    }
+  }
+  .footer2 {
+    width: 880px;
+    float: left;
+    margin-top: 10px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    .money_button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .img {
+      margin-left: 125px;
+      float: left;
+      span {
+        //margin-left: 30px;
+        //height: 60px;
+        float: left;
+        display: block;
+        cursor: pointer;
+      }
+      .s1 {
+        height: 60px;
+        width: 64px;
+        background: url('../img/Chips.png') no-repeat 0px 0px;
+        background-size: 368px;
+        //height: 60px;
+        //width: 73px;
+        //background: url("../img/Chips.png")no-repeat 0 0px;
+      }
+      .s2 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -65px 0px;
+        background-size: 368px;
+      }
+      .s3 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -128px 0px;
+        background-size: 368px;
+      }
+      .s4 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -191px 0px;
+        background-size: 368px;
+      }
+      .s5 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -256px 0px;
+        background-size: 368px;
+      }
+      .s6 {
+        height: 60px;
+        width: 64px;
+        background: url("../img/Chips.png") no-repeat -320px 0px;
+        background-size: 368px;
+      }
+    }
+    .one {
+      width: 160px;
+      float: left;
+      background-color: #eee;
+      margin-left: 2px;
+      span {
+        color: $bg_color;
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      float: right;
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+}
+
+.box_table {
+  width: 100%;
+  overflow: hidden;
+}
+
+.list {
+  float: left;
+  width: 25%;
+  height: 439px;
+  line-height: 38px;
+  box-sizing: border-box;
+  > li:first-child {
+    height: 38px;
+  }
+  > li:first-child {
+    border: 1px solid $border_color;
+    background-color: #eee;
+    color: #999;
+  }
+  > li:nth-child(2) {
+    color: rgb(64, 64, 64);
+    font-size: 12px;
+  }
+}
+
+.list2 {
+  border-left: 1px solid $border_color;
+  border-right: 1px solid $border_color;
+  border-bottom: 1px solid $border_color;
+  height: 400px;
+}
+
+.list:nth-child(2) {
+  > li {
+    border-left: none;
+    border-right: none;
+  }
+  .list2 {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.list:nth-child(3) {
+  > li {
+    border-right: none;
+  }
+  .list2 {
+    border-right: none;
+  }
+}
+
+.cla {
+  height: 39px;
+  display: inline-block;
+  width: 70px;
+  border-right: 1px solid $border_color;
+  cursor: pointer;
+  .box_bg {
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 20px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 auto;
+    margin-top: 2px;
+  }
+}
+
+.ball {
+  // color: #fff !important;
+  // background: -prefix-linear-gradient(left top, #2698e2, white);
+  // background: linear-gradient(to bottom right, #2698e2, white);
+  // background-image: url("../../../assets/img/blue_box.png");
+  // background-repeat: no-repeat;
+  // background-position-x: 25px;
+  // background-position-y: -1px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 auto;
+  margin-top: 5px;
+  border-radius: 20px;
+  background: $ball;
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.cla2 {
+  height: 39px;
+  width: 60px;
+  display: inline-block;
+  font-weight: 700;
+  margin: 0 auto;
+  border-right: 1px solid $border_color;
+  cursor: pointer;
+}
+
+.cla3 {
+  height: 39px;
+  width: 88px;
+  display: inline-block;
+  font-weight: 700;
+  margin: 0 auto;
+  input {
+    width: 36px;
+    border: 1px solid $border_color;
+    border-radius: 3px;
+    height: 20px;
+    margin-top: 10px;
+  }
+}
+
+.lis_2 {
+  border-bottom: 1px solid $border_color;
+}
+
+.main {
+  background-color: $bg_select;
+}
+
+.list:nth-child(1) .lis_2:last-child,
+.list:nth-child(2) .lis_2:last-child {
+  border-bottom: none;
+}
+
+// .lis_2:last-child{
+//   border-bottom: none;
+// }
+.table-current {
+  background-color: $bg_select;
+}

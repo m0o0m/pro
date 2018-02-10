@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>{{.SiteName}}</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+</head>
+
+<body ontouchstart>
+    <header class="head-h">
+        <ul class="h-head">
+            <li>
+                <a>
+                    <i class="iconfont wap-fanhui"></i>
+                </a>
+            </li>
+            <li>
+                <h2>出款</h2>
+            </li>
+            <li>
+                <a href="/m/index">首页</a>
+            </li>
+        </ul>
+    </header>
+
+    <div id="mescroll" class="mescroll">
+
+        <section class="m-withdrawas" id="m-withdrawas">
+            <dl class="withdrawas">
+                <dt>
+                    <h1>
+                        <i>会员帐号：</i>
+                        <span id="name">1111</span>
+                    </h1>
+                    <h1>
+                        <i>账户余额：</i>
+                        <span id="money">￥1111</span>
+                    </h1>
+                </dt>
+                <ul>
+                    <li>
+                        <p>
+                            <i>*</i>
+                            <span>选择银行：</span>
+                        </p>
+                        {{/*sales_public_pay_set sales_site_pay_set sales_site_poundage*/}}
+                        <select name="bankList">
+                        </select>
+                    </li>
+                    <li>
+                        <p>
+                            <i>*</i>
+                            <span>卡号：</span>
+                        </p>
+                        <span id="card"></span>
+                    </li>
+                    <li>
+                        <p>
+                            <i>*</i>
+                            <span>取款人：</span>
+                        </p>
+                        <span id="cardName"></span>
+                    </li>
+                    <li>
+                        <p>
+                            <i>*</i>
+                            <span>取款金额：</span>
+                        </p>
+                        <input type="tel" name="balance" placeholder="取款金额" onkeyup="if(/\D/.test(this.value)){this.value='';}"
+                        />
+                    </li>
+
+                    <li>
+                        <p>
+                            <i>*</i>
+                            <span>取款密码：</span>
+                        </p>
+                        <input type="password" maxlength="4" name="drawPassword" placeholder="取款密码" onkeyup="if(/\D/.test(this.value)){this.value='';}"
+                        />
+                    </li>
+                </ul>
+                <dd>
+                    <p>1. 取款金额请取整数值，不可增加小数点，如取300、200等。不取300.02、200.89。否则可能延长出款</p>
+                    <p>2. 取款上限：{{.Poundage.OutPoundageUp}}元；取款下限：1元。</p>
+                    <p>3. 提交订单后清注意查收会员消息。</p>
+                    <p>4. 有出款订单未处理时无法提交第二笔订单。</p>
+                </dd>
+                <button id="bankOut">取款</button>
+            </dl>
+
+        </section>
+
+    </div>
+
+    {{template "mem_footer" .}}
+</body>
+<script>
+    var cdnUrl = "{{.CdnUrl}}";
+    var pound = "{{.Poundage}}";
+</script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/bankOut.js"></script>
+
+</html>

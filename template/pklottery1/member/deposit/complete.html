@@ -1,0 +1,114 @@
+{{define "membercomplete"}} {{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/font/iconfont.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/mycommon.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/reset.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/depositBank.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/complete.css" type="text/css">
+
+<div class="">
+    <div class="vip-bar-1">
+        <div class="vip-bar-item show">
+            <div class="deposit-div1">
+                <div class="deposit-top">
+                    <p>支付方式</p>
+                </div>
+                <div>
+                    <ul class="deposit-nuv clearfix">
+                        <li class="fl deposit-nuv-shadow">
+                            <a href="/member/bank">网银转账</a>
+                        </li>
+                        <li class="fl">
+                            <a href="/member/bank/third">第三方转账</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="deposit-div2-item">
+                <div class="deposit-center">
+                    <i class="icon iconfont icon-gou1 deposit-center-icon"></i>
+                    <span>
+                    <span class="big-g">您的订单已经成功提交</span>
+                    <span class="small-b">马上为您安排到款，您可以到我的交易记录中查看存款最新进度</span>
+                  </span>
+                </div>
+                <div class="deposit-bottom">
+                {{/*<div class="deposit-bottom-1 clearfix">
+                    <span class="fl">订单详情</span>
+                    <span class="fr">
+                      <span class="fr-1">订单号：</span> 11111111111111111111111111111</span>
+                  </div>
+                  <div class="deposit-bottom-2">
+                    <ul class="clearfix deposit-bottom-2-t">
+                      <li class="fl">
+                        <span>存入银行：</span>
+                        <span>工商银行</span>
+                      </li>
+                      <li class="fl">
+                        <span>开户姓名：</span>
+                        <span>小绿</span>
+                      </li>
+                      <li class="fl">
+                        <span>存款金额：</span>
+                        <span class="my-bot-red">1000000.00</span>
+                      </li>
+                      <li class="fl">
+                        <span class="my-bot-8E9190">存款方式：</span>
+                        <span>网银转账</span>
+                      </li>
+                      <li class="fl">
+                        <span class="my-bot-8E9190">存款优惠：</span>
+                        <span>首存优惠：</span>
+                        <span class="my-bot-red">100</span>
+                      </li>
+                    </ul>
+                    <div class="deposit-bottom-2-b">
+                      <span class="my-bot-8E9190">订单状态：</span>
+                      <span class="my-bot-red">正在处理</span>
+                    </div>
+                  </div>*/}}
+                    <div class="deposit-bottom-3">
+                    {{/*<div class="deposit-bottom-3-t">
+                      <span>转账时间：2017-12-26 13：40：59</span>
+                      <span>创建时间：2017-12-26 13：40：59</span>
+                    </div>*/}}
+                        <div class="deposit-bottom-3-b">
+                            <a href="/member/record?isOther=1">查看交易记录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</body>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/ws.js"></script>
+<script>
+    depositWsService.Notify(function (data) {
+        // // alert(data)
+
+        $.Pro(data,{Time:2,StartOn:function(){
+            $("html").click(function(){
+                $(".showAlert_Pro").hide()
+            })
+        }})   
+    });
+
+    function buttonMouse(dom, classss) {
+        dom.mousedown(function () {
+            $(this).addClass(classss)
+        })
+        dom.mouseup(function () {
+            $(this).removeClass(classss)
+        })
+    }
+
+    buttonMouse($(".deposit-bottom-3-b a"), "buttonshadowR");
+
+</script>
+
+</html>
+{{end}}

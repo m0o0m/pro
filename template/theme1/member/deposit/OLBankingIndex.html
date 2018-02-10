@@ -1,0 +1,548 @@
+{{define "membercompany"}} {{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/font/iconfont.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/mycommon.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/reset.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/depositBank.css" type="text/css">
+<style>
+    .bgclass {
+        background-image: url({{.Header.CdnUrl}}/theme3/public/shared/member/image/image_bank.png);
+        width: 138px;
+        height: 30px;
+        line-height: 26px;
+        font-size: 14px;
+        display: block;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+</style>
+<div class="vip-bar-1">
+    <div class="vip-bar-item">
+        <div class="deposit-div1">
+            <div class="deposit-top">
+                <p>支付方式</p>
+            </div>
+            <ul class="deposit-nuv clearfix">
+                <li class="fl deposit-nuv-shadow">
+                    <a href="/member/bank">网银转账</a>
+                </li>
+                <li class="fl">
+                    <a href="#">扫码转账</a>
+                </li>
+                <li class="fl">
+                    <a href="/member/bank/third">第三方转账</a>
+                </li>
+            </ul>
+        </div>
+        <div class="deposit-div2">
+            <div id="depositWord"></div>
+            <ul>
+                <!-- <li class="deposit-div2-lis">
+                    <span class="d-span1">开户账号：</span>
+                    <input type="text" value="" placeholder="请输入开户账号" id="incomeBankNum">
+                    <i class="iconfont icon-gou myiocn-gou2 my-ma-hide"></i>
+                    <i class="iconfont icon-iconfontroundclosefill myiocn-cuo my-ma-hide"></i>
+                </li> -->
+                <li class="deposit-div2-lis">
+                    <span class="d-span1">存款金额：</span>
+                    <input type="text" value="" id="incomeMoney">
+                    <i class="iconfont icon-gou myiocn-gou2 my-ma-hide"></i>
+                    <i class="iconfont icon-iconfontroundclosefill myiocn-cuo my-ma-hide"></i>
+                    <p class="myd-red">
+                        存款上限是50000，存款下限是10。按存款金额汇款，包含小数点后两位数，例如0.71
+                    </p>
+                </li>
+                <li class="deposit-div2-lis clearfix">
+                    <span class="d-span1 fl">选择支付银行：</span>
+                    <span class="d-3-span2 fl">
+                        <ul class="clearfix" id="incomeBankUl">
+                            {{/*
+                            <li class="fl d-3-span2-click">
+                                <img src="{{.Header.CdnUrl}}/theme3/public/shared/member/image/yinghang.png" alt="">
+                                <i class="iconfont icon-gou myiocn-gou"></i>
+                            </li>
+                            <li class="fl">
+                                <img src="{{.Header.CdnUrl}}/theme3/public/shared/member/image/yinghang.png" alt="">
+                                <i class="iconfont icon-gou myiocn-gou"></i>
+                            </li>*/}}
+                        </ul>
+                    </span>
+                </li>
+                <li class="deposit-div2-lis">
+                    <span class="d-span1">存款人姓名：</span>
+                    <input type="text" value="" id="personName" placeholder="输入存款人姓名">
+                    <i class="iconfont icon-gou myiocn-gou2 my-ma-hide"></i>
+                    <i class="iconfont icon-iconfontroundclosefill myiocn-cuo my-ma-hide"></i>
+                </li>
+                <li class="deposit-div2-lis">
+                    <span class="d-span1">存款方式：</span>
+                    <select id="paytype">
+                        <option value="1">网银转帐</option>
+                        <option value="4">银行柜台</option>
+                        <option value="3">ATM现金入款</option>
+                        <option value="2">ATM自动柜员机</option>
+                        <option value="5">手机转帐</option>
+                        <option value="6">支付宝转账</option>
+                        <option value="7">财付通</option>
+                        <option value="8">微信支付</option>
+                        <option value="9">京东钱包</option>
+                        <option value="10">百度钱包</option>
+                        <option value="11">QQ钱包</option>
+                    </select>
+                    <i class="iconfont icon-gou myiocn-gou2 my-ma-hide"></i>
+                    <i class="iconfont icon-iconfontroundclosefill myiocn-cuo my-ma-hide"></i>
+                </li>
+                <li class="deposit-div2-lis">
+                    <span class="d-span1">验证码：</span>
+                    <input type="text" value="" id="checkCode" disabled="disabled">
+                    <i class="iconfont icon-gou myiocn-gou2 my-ma-hide"></i>
+                    <i class="iconfont icon-iconfontroundclosefill myiocn-cuo my-ma-hide"></i>
+                    <p class="myd-red">
+                        请记住此验证码，以便到更快查询更快到账！
+                    </p>
+                </li>
+                <li class="deposit-div2-lis clearfix">
+                    <span class="d-span1 fl">选择收款银行：</span>
+                    <span class="d-3-span2 fl">
+                        <ul class="clearfix" id="getIncomeBankUl">
+                            {{/*
+                            <li class="fl d-3-span2-click">
+                                <img src="{{.Header.CdnUrl}}/theme3/public/shared/member/image/yinghang.png" alt="">
+                                <i class="iconfont icon-gou myiocn-gou"></i>
+                            </li>
+                            <li class="fl">
+                                <img src="{{.Header.CdnUrl}}/theme3/public/shared/member/yinghang.png" alt="">
+                                <i class="iconfont icon-gou myiocn-gou"></i>
+                            </li>*/}}
+                        </ul>
+                    </span>
+                </li>
+            </ul>
+
+            <div class="deposit-b-c" id="openBankInfo">
+                <ul>
+                    <li class="li1">
+                        <ul class="clearfix">
+                            <li class="fl div-2-span1">开户银行：</li>
+                            <li class="fl div-2-span2 openBank">
+                                <input type="text" id="openBank" value="" readonly="readonly">
+                            </li>
+                            <li class="fl div-2-span3">
+                                <button data-id="openBank">复制</button>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="li1">
+                        <ul class="clearfix">
+                            <li class="fl div-2-span1">银行卡号：</li>
+                            <li class="fl div-2-span2 openBankNum" id="">
+                                <input type="text" id="openBankNum" readonly="readonly">
+                            </li>
+                            <li class="fl div-2-span3">
+                                <button data-id="openBankNum">复制</button>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="li1">
+                        <ul class="clearfix">
+                            <li class="fl div-2-span1">开户网点：</li>
+                            <li class="fl div-2-span2 openBankAddr" id="">
+                                <input type="text" id="openBankAddr" readonly="readonly">
+                            </li>
+                            <li class="fl div-2-span3">
+                                <button data-id="openBankAddr">复制</button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="li1">
+                        <ul class="clearfix">
+                            <li class="fl div-2-span1">开户姓名：</li>
+                            <li class="fl div-2-span2 openBankPersonName" id="">
+                                <input type="text" id="openBankPersonName" readonly="readonly">
+                            </li>
+                            <li class="fl div-2-span3">
+                                <button data-id="openBankPersonName">复制</button>
+                            </li>
+                        </ul>
+                    </li>
+                    {{/*
+                    <li class="li1">
+                        <ul class="clearfix">
+                            <li class="fl div-2-span1">验证码：</li>
+                            <li class="fl div-2-span2">
+                                <input type="text" placeholder="请输入验证码">
+                            </li>
+                            <li class="fl div-2-span3">
+                                <button>复制</button>
+                            </li>
+                        </ul>
+                    </li>*/}}
+                </ul>
+                <div class="copyPrompt"></div>
+            </div>
+
+            <div class="deposit-div2-but">
+                <span class="txt myd-red">温馨提示</span>
+                <a id="submit1">立即存款</a>
+                <div class="protocol">
+                    <div class="myd-red">*温馨提示
+                        <i class="icon iconfont icon-iconfontroundclosefill"></i>
+                    </div>
+                    <ul>
+                        <li>1. 为了保证您的利益，请提交保单后转账</li>
+                        <li>2. 存款时，建议金额后面加上零头，便于财务插卡，加快到账速度，例如388.01</li>
+                        <li>3. 为快速存款，在转账时记住四位数存款验证码，用于查询；</li>
+                        <li>4. 以上银行账号仅限本次使用，请按照所显示的银行入款，若入款账号过期，请 <a href="javascript:OnlineService('{{.Header.UrlLink}}');">联系客服</a> 索要最新银行卡账号信息</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</body>
+<script>
+
+    $(document).ready(function (e) {
+
+
+        var incomeBankId = -1
+        var incomeBankName
+        var getIncomeBankId = -1
+        var getIncomeBankInfo
+
+        if("{{index .IncomeWord "公司入款"}}"!=""){
+            var depositWord={{index .IncomeWord "公司入款"}}
+            $("#depositWord").html("<span>公司入款</span><br><span>"+depositWord+"</span><br>")
+        }
+        $("#checkCode").val(("000"+Math.floor(Math.random()*10000)).slice(-4))
+
+        //加载时异步请求会员相关信息
+        if (getCookie('loginBack')) {
+            loginBack = getCookie('loginBack');
+            $.ajax({
+                type: "GET",
+                data: {},
+                dataType: "json",
+                async: false,
+                headers: {
+                    'Authorization': 'bearer ' + loginBack,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': 'pc'
+                },
+                url: '/member/GetCompanyData',
+                success: function (data) {
+                    accountInfo = data
+                    console.log(data)
+                    //数据渲染到页面
+                    if (data.code == null) {
+
+                        getIncomeBankInfo = data.data.OnlineIncomeSet;
+
+                        $("#incomeBankUl").html("")
+                        var txt = "";
+                        data.data.SiteIncomeBank.forEach(function (e) {
+                            //txt += "<p><span>"+ e.username +": </span><span>"+ parseFloat(e.money).toFixed(2)+"元</span></p>";
+                            txt += "<li class='fl bgclass class-" + e.id + "' bankId='" + e.id + "' bankName='" + e.title + "'>" + "<i class='iconfont icon-gou myiocn-gou'></i></li>"
+
+                        });
+                        $("#incomeBankUl").html(txt)
+
+                        $("#getIncomeBankUl").html("")
+                        var txt = "";
+                        data.data.OnlineIncomeSet.forEach(function (e) {
+                            //txt += "<p><span>"+ e.username +": </span><span>"+ parseFloat(e.money).toFixed(2)+"元</span></p>";
+                            txt += "<li class='fl bgclass class-" + e.bank_id + "' getBankId='" + e.id + "'><i class='iconfont icon-gou myiocn-gou'></i></li>"
+                        });
+                        $("#getIncomeBankUl").html(txt)
+
+                        // $("#getIncomeBankUl").children().eq(0).addClass('d-3-span2-click');
+
+                    } else {
+                        alert("出错了:" + data.msg);
+                    }
+                    // append()
+
+
+                    //console.log(data['data']['OnlineDepositMax'])
+                    //$(".minMoney").html(data['data']['OnlineDepositMin'])
+                    //$(".maxMoney").html(data['data']['OnlineDepositMax'])
+                }
+            })
+
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            window.location.href = "/login"
+        }
+
+        //console.log(orderNow)
+        //console.log(datetimeNow)
+        //$(".orderNow").val("订单号:"+orderNow)
+        //$(".datetimeNow").val(nowTime.getFullYear()+"-"+nowTime.getMonth()+"-"+nowTime.getDate())
+        $("#bank").html("公司入款")
+        $("#wechat").html("微信")
+        $("#alipay").html("支付宝")
+        $("#qqpay").html("QQ钱包")
+        $("#tenpay").html("财付通")
+        $("#visapay").html("visa支付")
+        $("#jdpay").html("京东钱包")
+        $("#bdpay").html("百度钱包")
+        $("#cardpay").html("点卡")
+
+
+        $("#incomeBankUl").on('click', 'li', function () {
+            $(this).addClass('d-3-span2-click').siblings().removeClass('d-3-span2-click');
+            incomeBankId = $(this).attr('bankId')
+            incomeBankName = $(this).attr('bankName')
+        })
+
+        $("#getIncomeBankUl").on('click', 'li', function () {
+            $(this).addClass('d-3-span2-click').siblings().removeClass('d-3-span2-click');
+            getIncomeBankId = $(this).attr('getBankId')
+
+            getIncomeBankInfo.forEach(function (e) {
+                if (e.id == getIncomeBankId) {
+                    $("#openBank").val(e.title)
+                    $("#openBankNum").val(e.account)
+                    $("#openBankAddr").val(e.open_bank)
+                    $("#openBankPersonName").val(e.payee)
+                    $("#openBankInfo").show()
+
+                    return
+                }
+            })
+        })
+
+        //公司入款提交
+        $('#submit1').on('click', function () {
+            if (getCookie('loginBack')) {
+
+                $($("#paytype").siblings()[1]).show()
+
+                if ($("#personName").val() == '') {
+                    alert('请填写存款人姓名');
+                    return false;
+                } else if ($("#paytype option:checked").val() == '') {
+                    alert('请选择充值方式');
+                    return false;
+                } else if (incomeBankId <= 0) {
+                    alert('请选择入款银行');
+                    return false;
+                } else if ($("#incomeMoney").val() <= 10 || $("#incomeMoney").val() == '' || $("#incomeMoney").val() >= 50000) {
+                    alert('请填写正确的金额，存款上限是50000，存款下限是10');
+                    return false;
+                } else if (getIncomeBankId <= 0) {
+                    alert('请选择收款银行');
+                    return false;
+                }
+                $.ajax({
+                    type: "post",
+                    url: "/member/memberCompanyIncome",
+                    headers: {
+                        'Authorization': 'bearer ' + getCookie('loginBack'),
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'platform': 'pc'
+                    },
+                    data: JSON.stringify({
+                        bank_id: parseInt(incomeBankId),
+                        bank_name: incomeBankName,
+                        deposit_username: $("#name").val(),
+                        deposit_money: parseFloat($("#incomeMoney").val()),
+                        set_id: parseInt(getIncomeBankId),
+                        deposit_method: parseInt($("#paytype option:checked").val()),
+                        remark: $("#checkCode").val()
+                    }),
+                    dataType: 'json',
+                    success: function (data2) {
+                        if (data2 == null) {
+                            window.location.href = "/member/bank/complete"
+                        } else {
+                            console.log(data2.code)
+                            console.log(data2.msg)
+                            alert('添加公司入款失败，请联系客服')
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest.status)
+                        console.log(XMLHttpRequest.readyState)
+                        console.log(textStatus)
+                        console.log(errorThrown)
+                        alert('添加公司入款失败，请联系客服')
+                    }
+                })
+
+            } else {
+                $.toast("用户登录信息已失效， 请重新登录！", 'text');
+                window.location.href = "/index"
+            }
+        })
+
+        //账号验证
+
+        // $("#incomeBankNum").keyup(function () {
+        //     var val = $(this).val();
+        //     $(this).val(val.replace(/\D/g, ""))
+        // })
+
+
+        // $("#incomeBankNum").blur(function () {
+        //     var val = $(this).val();
+        //     $(this).val(val.replace(/\D/g, ""))
+        //     var val = $(this).val();
+        //     if (val.length < 16 || val.length > 20) {
+        //         $($(this).siblings()[1]).hide();
+        //         $($(this).siblings()[2]).show();
+        //     } else {
+        //         $($(this).siblings()[1]).show()
+        //         $($(this).siblings()[2]).hide();
+        //     }
+        // })
+
+        // 金额验证
+
+        $("#incomeMoney").keyup(function () {
+            var val = $(this).val();
+            $(this).val(val.replace(/[^\d^\.]+/g, ''))
+        })
+
+        // $("#incomeMoney").paste(function () {
+        //     // var val = $(this).val();
+        //     // $(this).val(val.replace(/[^\d^\.]+/g, ''))
+        // })
+
+        let moneyCapped = 50000;
+        let moneyLower = 10;
+        $("#incomeMoney").blur(function () {
+
+            var val = parseFloat($(this).val())
+
+            val = toDecimal2(val)
+
+
+
+            // val = String(val * 100);
+
+            // var leng0 = val[val.length - 1]
+            // // console.log(leng0)
+
+            // if (leng0 == 0) {
+            //     val++;
+            // }
+            // val /= 100;
+
+            if (val > moneyCapped || val < moneyLower || val == 0) {
+                $($(this).siblings()[1]).hide();
+                $($(this).siblings()[2]).show();
+                return
+            }
+            if (val) {
+                $(this).val(val);
+                $($(this).siblings()[1]).show()
+                $($(this).siblings()[2]).hide();
+            }
+        })
+
+        function toDecimal2(x) {
+            var f = parseFloat(x);
+            if (isNaN(f)) {
+                return false;
+            }
+            var f = Math.round(x * 100) / 100;
+            var s = f.toString();
+            var rs = s.indexOf('.');
+            if (rs < 0) {
+                rs = s.length;
+                s += '.';
+            }
+            while (s.length <= rs + 2) {
+                s += '0';
+            }
+            return s;
+        }
+
+        //姓名验证 value.replace(/[^\u4E00-\u9FA5]/g,'')" 
+
+        $("#personName").keyup(function () {
+            var val = $(this).val();
+            $(this).val(val.replace(/[^\u4E00-\u9FA5]/g, ''))
+        })
+
+        // $("#personName").paste(function(){
+        //     var val = $(this).val();
+        //     $(this).val(val.replace(/[^\u4E00-\u9FA5]/g,''))
+        // })
+
+        $("#personName").blur(function () {
+            var val = $(this).val();
+            if (val == "") {
+                $($(this).siblings()[1]).hide();
+                $($(this).siblings()[2]).show();
+            } else {
+                $($(this).siblings()[1]).show()
+                $($(this).siblings()[2]).hide();
+            }
+        })
+
+
+
+        $(".deposit-div2-but .txt").click(function () {
+            $(".protocol").slideToggle(300)
+        })
+        $(".protocol .icon-iconfontroundclosefill").click(function () {
+            $(".protocol").slideToggle(300)
+        })
+
+        let copy_flag = true;
+        $("#openBankInfo").on("click", "button", function () {
+
+            if (copy_flag) {
+                copy_flag = false;
+                var id = $(this).attr("data-id");
+                var e = document.getElementById(id);
+                e.select(); //选择对象   
+                tag = document.execCommand("Copy"); //执行浏览器复制命令 
+
+                if (tag) {
+                    var txt = $($(this).parent().siblings()[0]).html();
+                    var val = $(e).val()
+                    $(".copyPrompt").html(txt + val + " 复制成功");
+                    $(".copyPrompt").show()
+                    // alert('复制内容成功');
+                    setTimeout(function () {
+                        $(".copyPrompt").hide();
+                        copy_flag = true;
+                    }, 2000)
+                } else {
+                    copy_flag = true;
+                }
+            }
+        });
+
+        //按钮颜色
+        function buttonMouse(dom, classss) {
+            dom.mousedown(function () {
+                $(this).addClass(classss)
+            })
+            dom.mouseup(function () {
+                $(this).removeClass(classss)
+            })
+        }
+
+        $(".div-2-span3 >button").each(function(i){
+            var _this=$(this);
+            buttonMouse(_this,"buttonshadowR")
+        })
+
+        
+        buttonMouse($("#submit1"),"buttonshadowR")
+
+    });
+</script>
+
+</html>
+{{end}}

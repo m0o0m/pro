@@ -1,0 +1,81 @@
+/**
+ * Created by huygo on 2017/12/29.
+ */
+let lockReconnect = false;  //避免ws重复连接
+let ws = null;          // 判断当前浏览器是否支持WebSocket
+let ws_state = true;//websocket打开状态
+window.ws = [];
+// createWebSocket(wsUrl);   //连接ws
+const wsUrl = `ws://${window.socketConfig.host}:${window.socketConfig.port}`;
+const ws_obj = {
+  close_ws: function (c) {
+    ws.close();
+    ws_state = c;
+  },
+  createWebSocket: function (page, context, ws_state) {
+    try {
+      if ('WebSocket' in window) {
+        ws = new WebSocket(wsUrl);
+        window.ws.push(ws);
+        for (let i = 0; i < window.ws.length - 1; i++) {
+          window.ws[i].close()
+        }
+      } else if ('MozWebSocket' in window) {
+        ws = new MozWebSocket(wsUrl);
+        window.ws.push(ws);
+        for (let i = 0; i < window.ws.length - 1; i++) {
+          window.ws[i].close()
+        }
+      } else {
+        console.log("您的浏览器不支持websocket协议,建议使用新版谷歌、火狐等浏览器，请勿使用IE10以下浏览器，360浏览器请使用极速模式，不要使用兼容模式！");
+      }
+      ws_obj.initEventHandle(page, context, ws_state);
+    } catch (e) {
+      // ws_obj.reconnect(wsUrl);
+      console.log(e);
+    }
+  },
+  initEventHandle: function (page, context, ws_state) {
+    const my_config = {
+      cmd: 'join',
+      fc_type: page,
+      group_list: ['auto', 'lefttime'],
+    };
+    const sendParam = JSON.stringify(my_config);
+    ws.onclose = function () {
+      // ws_obj.reconnect(wsUrl);
+      console.log("llws连接关闭!" + new Date().toUTCString());
+    };
+    ws.onerror = function () {
+      // ws_obj.reconnect(wsUrl);
+      console.log("llws连接错误!");
+    };
+    ws.onopen = function () {
+      ws.send(sendParam);
+      console.log("llws连接成功!" + new Date().toUTCString());
+    };
+    ws.onmessage = function (event) {    //如果获取到消息，心跳检测重置
+      console.log("llws收到消息啦");
+      let back_data = JSON.parse(event.data);
+      console.log('当前路由：' + context.$route.query.page);
+      console.log('page：' + page);
+      if (back_data.cmd == 'ping' && ws_state) {
+        ws.send('{"cmd":"pong"}');
+      } else if (back_data.cmd == 'auto') {
+        context.$root.$emit(page, back_data.data)
+      } else if (back_data.cmd == 'lefttime') {
+        console.log(back_data.data);
+        context.$root.$emit(page + 'lefttime', back_data.data);
+      }
+    };
+  },
+  reconnect: function (url) {
+    if (lockReconnect) return;
+    lockReconnect = true;
+    setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多
+      ws_obj.createWebSocket(url);
+      lockReconnect = false;
+    }, 2000);
+  },
+};
+export default ws_obj;

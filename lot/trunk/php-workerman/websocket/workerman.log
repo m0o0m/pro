@@ -1,0 +1,1181 @@
+2017-11-13 14:39:39 pid:31474 Workerman[start_http_worker.php] start in DEBUG mode
+2017-11-13 14:39:39 pid:31476 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#12 {main}
+2017-11-13 14:39:39 pid:31478 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#12 {main}
+2017-11-13 14:39:39 pid:31477 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#12 {main}
+2017-11-13 14:39:39 pid:31475 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#12 {main}
+2017-11-13 14:39:40 pid:31477 Worker process terminated
+2017-11-13 14:39:40 pid:31475 Worker process terminated
+2017-11-13 14:39:40 pid:31478 Worker process terminated
+2017-11-13 14:39:40 pid:31476 Worker process terminated
+2017-11-13 14:39:40 pid:31474 worker[UploadHttp:31478] exit with status 64000
+2017-11-13 14:39:40 pid:31474 worker[UploadHttp:31477] exit with status 64000
+2017-11-13 14:39:40 pid:31474 worker[UploadHttp:31476] exit with status 64000
+2017-11-13 14:39:40 pid:31474 worker[UploadHttp:31475] exit with status 64000
+2017-11-13 14:39:40 pid:31480 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#14 {main}
+2017-11-13 14:39:40 pid:31479 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#14 {main}
+2017-11-13 14:39:40 pid:31482 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#14 {main}
+2017-11-13 14:39:40 pid:31481 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#14 {main}
+2017-11-13 14:39:41 pid:31480 Worker process terminated
+2017-11-13 14:39:41 pid:31479 Worker process terminated
+2017-11-13 14:39:41 pid:31482 Worker process terminated
+2017-11-13 14:39:41 pid:31481 Worker process terminated
+2017-11-13 14:39:41 pid:31474 worker[UploadHttp:31482] exit with status 64000
+2017-11-13 14:39:41 pid:31474 worker[UploadHttp:31481] exit with status 64000
+2017-11-13 14:39:41 pid:31474 worker[UploadHttp:31480] exit with status 64000
+2017-11-13 14:39:41 pid:31474 worker[UploadHttp:31479] exit with status 64000
+2017-11-13 14:39:41 pid:31483 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#14 {main}
+2017-11-13 14:39:41 pid:31484 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#14 {main}
+2017-11-13 14:39:41 pid:31485 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#14 {main}
+2017-11-13 14:39:41 pid:31486 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/Lib/Common.php(16): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(16): Applications\Upload\Lib\Common::init(Object(Workerman\Worker))
+#5 [internal function]: {closure}(Object(Workerman\Worker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Object(Closure), Object(Workerman\Worker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(Workerman\Worker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Upload/start_http_worker.php(27): Workerman\Worker::runAll()
+#14 {main}
+2017-11-13 14:39:41 pid:31485 Worker process terminated
+2017-11-13 14:39:41 pid:31474 Workerman[start_http_worker.php] stopping ...
+2017-11-13 14:39:41 pid:31484 Worker process terminated
+2017-11-13 14:39:41 pid:31483 Worker process terminated
+2017-11-13 14:39:41 pid:31486 Worker process terminated
+2017-11-13 14:39:41 pid:31474 worker[UploadHttp:31485] exit with status 64000
+2017-11-13 14:39:41 pid:31474 worker[UploadHttp:31483] exit with status 64000
+2017-11-13 14:39:41 pid:31474 worker[UploadHttp:31486] exit with status 64000
+2017-11-13 14:39:41 pid:31474 worker[UploadHttp:31484] exit with status 64000
+2017-11-13 14:39:41 pid:31474 Workerman[start_http_worker.php] has been stopped
+2017-11-13 14:40:34 pid:31504 Workerman[start_http_worker.php] start in DEBUG mode
+2017-11-13 14:44:04 pid:31504 Workerman[start_http_worker.php] stopping ...
+2017-11-13 14:44:04 pid:31504 Workerman[start_http_worker.php] has been stopped
+2017-11-13 16:37:54 pid:32564 Workerman[start_http_worker.php] start in DAEMON mode
+2017-11-14 15:46:09 pid:32566 Workerman[start_http_worker.php] stopping ...
+2017-12-28 14:09:59 pid:41821 Workerman[Applications/Push/start.php] start in DEBUG mode
+2017-12-28 14:09:59 pid:41822 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#15 {main}
+2017-12-28 14:10:00 pid:41822 Worker process terminated
+2017-12-28 14:10:00 pid:41821 worker[PushBusinessWorker:41822] exit with status 64000
+2017-12-28 14:10:00 pid:41832 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:10:01 pid:41832 Worker process terminated
+2017-12-28 14:10:01 pid:41821 worker[PushBusinessWorker:41832] exit with status 64000
+2017-12-28 14:10:01 pid:41833 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:10:01 pid:41821 Workerman[start.php] stopping ...
+2017-12-28 14:10:01 pid:41833 Worker process terminated
+2017-12-28 14:10:01 pid:41821 worker[PushBusinessWorker:41833] exit with status 64000
+2017-12-28 14:10:01 pid:41821 Workerman[start.php] has been stopped
+2017-12-28 14:23:53 pid:41843 Workerman[Applications/Push/start.php] start in DEBUG mode
+2017-12-28 14:23:53 pid:41844 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#15 {main}
+2017-12-28 14:23:54 pid:41844 Worker process terminated
+2017-12-28 14:23:54 pid:41843 worker[PushBusinessWorker:41844] exit with status 64000
+2017-12-28 14:23:54 pid:41854 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:23:55 pid:41854 Worker process terminated
+2017-12-28 14:23:55 pid:41843 worker[PushBusinessWorker:41854] exit with status 64000
+2017-12-28 14:23:55 pid:41855 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:23:56 pid:41855 Worker process terminated
+2017-12-28 14:23:57 pid:41843 worker[PushBusinessWorker:41855] exit with status 64000
+2017-12-28 14:23:57 pid:41856 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:23:58 pid:41856 Worker process terminated
+2017-12-28 14:23:58 pid:41843 worker[PushBusinessWorker:41856] exit with status 64000
+2017-12-28 14:23:58 pid:41857 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:23:59 pid:41857 Worker process terminated
+2017-12-28 14:23:59 pid:41843 worker[PushBusinessWorker:41857] exit with status 64000
+2017-12-28 14:23:59 pid:41858 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:00 pid:41858 Worker process terminated
+2017-12-28 14:24:00 pid:41843 worker[PushBusinessWorker:41858] exit with status 64000
+2017-12-28 14:24:00 pid:41859 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:01 pid:41859 Worker process terminated
+2017-12-28 14:24:01 pid:41843 worker[PushBusinessWorker:41859] exit with status 64000
+2017-12-28 14:24:01 pid:41860 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:02 pid:41860 Worker process terminated
+2017-12-28 14:24:02 pid:41843 worker[PushBusinessWorker:41860] exit with status 64000
+2017-12-28 14:24:02 pid:41861 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:03 pid:41861 Worker process terminated
+2017-12-28 14:24:03 pid:41843 worker[PushBusinessWorker:41861] exit with status 64000
+2017-12-28 14:24:03 pid:41862 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:03 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:04 pid:41862 Worker process terminated
+2017-12-28 14:24:04 pid:41843 worker[PushBusinessWorker:41862] exit with status 64000
+2017-12-28 14:24:04 pid:41863 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:04 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:05 pid:41863 Worker process terminated
+2017-12-28 14:24:05 pid:41843 worker[PushBusinessWorker:41863] exit with status 64000
+2017-12-28 14:24:05 pid:41864 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:05 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:06 pid:41864 Worker process terminated
+2017-12-28 14:24:06 pid:41843 worker[PushBusinessWorker:41864] exit with status 64000
+2017-12-28 14:24:06 pid:41865 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:07 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:07 pid:41865 Worker process terminated
+2017-12-28 14:24:07 pid:41843 worker[PushBusinessWorker:41865] exit with status 64000
+2017-12-28 14:24:07 pid:41866 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:08 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:08 pid:41866 Worker process terminated
+2017-12-28 14:24:08 pid:41843 worker[PushBusinessWorker:41866] exit with status 64000
+2017-12-28 14:24:08 pid:41867 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:09 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:09 pid:41867 Worker process terminated
+2017-12-28 14:24:09 pid:41843 worker[PushBusinessWorker:41867] exit with status 64000
+2017-12-28 14:24:09 pid:41868 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:10 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:10 pid:41868 Worker process terminated
+2017-12-28 14:24:10 pid:41843 worker[PushBusinessWorker:41868] exit with status 64000
+2017-12-28 14:24:10 pid:41869 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:11 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:11 pid:41869 Worker process terminated
+2017-12-28 14:24:11 pid:41843 worker[PushBusinessWorker:41869] exit with status 64000
+2017-12-28 14:24:11 pid:41870 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:12 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:12 pid:41870 Worker process terminated
+2017-12-28 14:24:12 pid:41843 worker[PushBusinessWorker:41870] exit with status 64000
+2017-12-28 14:24:12 pid:41871 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:13 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:13 pid:41871 Worker process terminated
+2017-12-28 14:24:13 pid:41843 worker[PushBusinessWorker:41871] exit with status 64000
+2017-12-28 14:24:13 pid:41872 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:14 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:14 pid:41872 Worker process terminated
+2017-12-28 14:24:14 pid:41843 worker[PushBusinessWorker:41872] exit with status 64000
+2017-12-28 14:24:14 pid:41873 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:15 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:15 pid:41873 Worker process terminated
+2017-12-28 14:24:15 pid:41843 worker[PushBusinessWorker:41873] exit with status 64000
+2017-12-28 14:24:15 pid:41874 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(39): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(8): Applications\Push\Lib\Common::init(Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#7 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#17 {main}
+2017-12-28 14:24:16 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:16 pid:41874 Worker process terminated
+2017-12-28 14:24:16 pid:41843 worker[PushBusinessWorker:41874] exit with status 64000
+2017-12-28 14:24:17 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:18 pid:41853 Register auth timeout (127.0.0.1). See http://wiki.workerman.net/Error4 for detail
+2017-12-28 14:24:18 pid:41843 Workerman[start.php] stopping ...
+2017-12-28 14:24:19 pid:41843 Workerman[start.php] has been stopped
+2017-12-28 14:24:19 pid:41881 Workerman[Applications/Push/start.php] start in DEBUG mode
+2017-12-28 14:25:00 pid:41882 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:25:00 pid:41881 worker[PushBusinessWorker:41882] exit with status 65280
+2017-12-28 14:26:00 pid:41892 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:26:00 pid:41881 worker[PushBusinessWorker:41892] exit with status 65280
+2017-12-28 14:27:00 pid:41894 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:27:00 pid:41881 worker[PushBusinessWorker:41894] exit with status 65280
+2017-12-28 14:28:00 pid:41895 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:28:00 pid:41881 worker[PushBusinessWorker:41895] exit with status 65280
+2017-12-28 14:29:00 pid:41896 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:29:00 pid:41881 worker[PushBusinessWorker:41896] exit with status 65280
+2017-12-28 14:30:00 pid:41897 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:30:00 pid:41881 worker[PushBusinessWorker:41897] exit with status 65280
+2017-12-28 14:31:00 pid:41900 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:31:00 pid:41881 worker[PushBusinessWorker:41900] exit with status 65280
+2017-12-28 14:32:00 pid:41901 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:32:00 pid:41881 worker[PushBusinessWorker:41901] exit with status 65280
+2017-12-28 14:33:00 pid:41902 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:33:00 pid:41881 worker[PushBusinessWorker:41902] exit with status 65280
+2017-12-28 14:34:00 pid:41903 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:34:00 pid:41881 worker[PushBusinessWorker:41903] exit with status 65280
+2017-12-28 14:35:00 pid:41905 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 14:35:00 pid:41881 worker[PushBusinessWorker:41905] exit with status 65280
+2017-12-28 14:40:27 pid:41881 Workerman[start.php] stopping ...
+2017-12-28 14:40:27 pid:41881 Workerman[start.php] has been stopped
+2017-12-28 15:25:43 pid:42001 Workerman[Applications/Push/start.php] start in DEBUG mode
+2017-12-28 15:26:00 pid:42002 Worker process terminated with ERROR: E_ERROR "Uncaught PDOException: SQL:INSERT INTO `my_stat_data_online` ( `unit`,`total`,`starttime`,`endtime`,`addtime`) VALUES ( :unit,:total,:starttime,:endtime,:addtime) SQLSTATE[42S02]: Base table or view not found: 1146 Table 'manage.my_stat_data_online' doesn't exist in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1766
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1824): GatewayWorker\Lib\DbConnection->execute('INSERT INTO `my...', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(283): GatewayWorker\Lib\DbConnection->query()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(232): Applications\Push\Lib\Common::statCode('minute')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(208): Applications\Push\Lib\Common::statRunCode()
+#4 [in in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php on line 1766"
+2017-12-28 15:26:00 pid:42001 worker[PushBusinessWorker:42002] exit with status 65280
+2017-12-28 15:26:11 pid:42001 Workerman[start.php] stopping ...
+2017-12-28 15:26:11 pid:42001 Workerman[start.php] has been stopped
+2017-12-28 16:48:22 pid:42566 Workerman[start.php] start in DEBUG mode
+2017-12-28 16:48:27 pid:42566 Workerman[start.php] stopping ...
+2017-12-28 16:48:27 pid:42566 Workerman[start.php] has been stopped
+2017-12-28 16:52:12 pid:42611 Workerman[start.php] start in DEBUG mode
+2017-12-28 16:52:16 pid:42611 Workerman[start.php] stopping ...
+2017-12-28 16:52:16 pid:42611 Workerman[start.php] has been stopped
+2017-12-28 17:24:07 pid:42990 Workerman[start.php] start in DEBUG mode
+2017-12-28 18:00:04 pid:42990 Workerman[start.php] stopping ...
+2017-12-28 18:00:04 pid:42990 Workerman[start.php] has been stopped
+2018-01-22 12:17:36 pid:97540 Workerman[start.php] start in DEBUG mode
+2018-01-22 12:17:36 pid:97541 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(103): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(411): Applications\Common\Helper\GetQishuOpentime::getAllOpentime('jx_11', 'all')
+#5 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(75): Applications\Common\Helper\GetQishuOpentime::get_gd_11_qishu('jx_11')
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(52): Applications\Common\Helper\GetQishuOpentime::get_qishu('jx_11')
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(41): Applications\Push\Lib\Common::lefttimeCode()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(10): Applications\Push\Lib\Common::lefttime(Object(GatewayWorker\BusinessWorker))
+#9 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#11 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#17 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#18 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#19 {main}
+2018-01-22 12:17:37 pid:97541 Worker process terminated
+2018-01-22 12:17:37 pid:97540 worker[PushBusinessWorker:97541] exit with status 64000
+2018-01-22 12:17:37 pid:97551 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(103): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(411): Applications\Common\Helper\GetQishuOpentime::getAllOpentime('jx_11', 'all')
+#5 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(75): Applications\Common\Helper\GetQishuOpentime::get_gd_11_qishu('jx_11')
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(52): Applications\Common\Helper\GetQishuOpentime::get_qishu('jx_11')
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(41): Applications\Push\Lib\Common::lefttimeCode()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(10): Applications\Push\Lib\Common::lefttime(Object(GatewayWorker\BusinessWorker))
+#9 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#11 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#17 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#18 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#19 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#20 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#21 {main}
+2018-01-22 12:17:38 pid:97551 Worker process terminated
+2018-01-22 12:17:38 pid:97540 worker[PushBusinessWorker:97551] exit with status 64000
+2018-01-22 12:17:38 pid:97552 PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php:1708
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1708): PDO->__construct('mysql:dbname=ma...', 'root', '123456', Array)
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Lib/DbConnection.php(1695): GatewayWorker\Lib\DbConnection->connect()
+#2 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/Db.php(37): GatewayWorker\Lib\DbConnection->__construct('127.0.0.1', '3306', 'root', '123456', 'manage')
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(103): Applications\Common\Helper\Db::instance('manage')
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(411): Applications\Common\Helper\GetQishuOpentime::getAllOpentime('jx_11', 'all')
+#5 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Common/Helper/GetQishuOpentime.php(75): Applications\Common\Helper\GetQishuOpentime::get_gd_11_qishu('jx_11')
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(52): Applications\Common\Helper\GetQishuOpentime::get_qishu('jx_11')
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Lib/Common.php(41): Applications\Push\Lib\Common::lefttimeCode()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/Events.php(10): Applications\Push\Lib\Common::lefttime(Object(GatewayWorker\BusinessWorker))
+#9 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#11 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#13 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#14 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#15 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#16 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#17 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#18 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#19 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#20 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#21 {main}
+2018-01-22 12:17:38 pid:97552 Worker process terminated
+2018-01-22 12:17:38 pid:97540 Workerman[start.php] stopping ...
+2018-01-22 12:17:38 pid:97540 worker[PushBusinessWorker:97552] exit with status 64000
+2018-01-22 12:17:38 pid:97540 Workerman[start.php] has been stopped
+2018-01-22 12:18:05 pid:97568 Workerman[start.php] start in DEBUG mode
+2018-01-22 12:23:37 pid:97568 Workerman[start.php] stopping ...
+2018-01-22 12:23:37 pid:97568 Workerman[start.php] has been stopped
+2018-01-22 14:05:51 pid:97771 Workerman[start.php] start in DEBUG mode
+2018-01-22 14:15:02 pid:97771 Workerman[start.php] stopping ...
+2018-01-22 14:15:02 pid:97771 Workerman[start.php] has been stopped
+2018-01-22 14:15:12 pid:97802 Workerman[start.php] start in DEBUG mode
+2018-01-22 14:19:09 pid:97802 Workerman[start.php] stopping ...
+2018-01-22 14:19:09 pid:97802 Workerman[start.php] has been stopped
+2018-01-22 14:19:10 pid:97824 Workerman[start.php] start in DEBUG mode
+2018-01-22 14:25:47 pid:97824 Workerman[start.php] stopping ...
+2018-01-22 14:25:47 pid:97824 Workerman[start.php] has been stopped
+2018-01-22 14:25:47 pid:97852 Workerman[start.php] start in DEBUG mode
+2018-01-22 14:26:41 pid:97852 Workerman[start.php] stopping ...
+2018-01-22 14:26:41 pid:97852 Workerman[start.php] has been stopped
+2018-01-22 14:26:43 pid:97879 Workerman[start.php] start in DEBUG mode
+2018-01-22 16:13:13 pid:97879 Workerman[start.php] stopping ...
+2018-01-22 16:13:13 pid:97879 Workerman[start.php] has been stopped
+2018-01-22 17:47:23 pid:98128 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:53:22 pid:98128 Workerman[start.php] stopping ...
+2018-01-22 17:53:22 pid:98128 Workerman[start.php] has been stopped
+2018-01-22 17:53:23 pid:98161 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:56:37 pid:98161 Workerman[start.php] stopping ...
+2018-01-22 17:56:37 pid:98161 Workerman[start.php] has been stopped
+2018-01-22 17:56:38 pid:98190 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:56:43 pid:98190 Workerman[start.php] stopping ...
+2018-01-22 17:56:43 pid:98190 Workerman[start.php] has been stopped
+2018-01-22 17:57:08 pid:98217 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:57:19 pid:98217 Workerman[start.php] stopping ...
+2018-01-22 17:57:19 pid:98217 Workerman[start.php] has been stopped
+2018-01-22 17:57:20 pid:98234 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:58:02 pid:98234 Workerman[start.php] stopping ...
+2018-01-22 17:58:02 pid:98234 Workerman[start.php] has been stopped
+2018-01-22 17:58:02 pid:98250 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:58:04 pid:98250 Workerman[start.php] stopping ...
+2018-01-22 17:58:04 pid:98250 Workerman[start.php] has been stopped
+2018-01-22 17:58:05 pid:98266 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:58:13 pid:98266 Workerman[start.php] stopping ...
+2018-01-22 17:58:13 pid:98266 Workerman[start.php] has been stopped
+2018-01-22 17:58:15 pid:98283 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:58:24 pid:98283 Workerman[start.php] stopping ...
+2018-01-22 17:58:24 pid:98283 Workerman[start.php] has been stopped
+2018-01-22 17:58:26 pid:98299 Workerman[start.php] start in DEBUG mode
+2018-01-22 17:59:56 pid:98299 Workerman[start.php] stopping ...
+2018-01-22 17:59:56 pid:98299 Workerman[start.php] has been stopped
+2018-01-22 17:59:56 pid:98322 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:00:01 pid:98322 Workerman[start.php] stopping ...
+2018-01-22 18:00:01 pid:98322 Workerman[start.php] has been stopped
+2018-01-22 18:00:02 pid:98339 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:00:10 pid:98339 Workerman[start.php] stopping ...
+2018-01-22 18:00:10 pid:98339 Workerman[start.php] has been stopped
+2018-01-22 18:00:11 pid:98355 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:01:06 pid:98355 Workerman[start.php] stopping ...
+2018-01-22 18:01:06 pid:98355 Workerman[start.php] has been stopped
+2018-01-22 18:01:06 pid:98371 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:26:50 pid:98371 Workerman[start.php] stopping ...
+2018-01-22 18:26:50 pid:98371 Workerman[start.php] has been stopped
+2018-01-22 18:28:14 pid:98434 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:28:16 pid:98434 Workerman[start.php] stopping ...
+2018-01-22 18:28:16 pid:98434 Workerman[start.php] has been stopped
+2018-01-22 18:30:56 pid:98459 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:31:29 pid:98459 Workerman[start.php] stopping ...
+2018-01-22 18:31:29 pid:98459 Workerman[start.php] has been stopped
+2018-01-22 18:31:48 pid:98476 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:32:25 pid:98476 Workerman[start.php] stopping ...
+2018-01-22 18:32:25 pid:98476 Workerman[start.php] has been stopped
+2018-01-22 18:37:29 pid:98526 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:40:03 pid:98526 Workerman[start.php] stopping ...
+2018-01-22 18:40:03 pid:98526 Workerman[start.php] has been stopped
+2018-01-22 18:40:09 pid:98546 Workerman[start.php] start in DEBUG mode
+2018-01-22 18:40:36 pid:98546 Workerman[start.php] stopping ...
+2018-01-22 18:40:36 pid:98546 Workerman[start.php] has been stopped
+2018-01-22 18:59:27 pid:98578 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:02:55 pid:98578 Workerman[start.php] stopping ...
+2018-01-22 19:02:55 pid:98578 Workerman[start.php] has been stopped
+2018-01-22 19:02:56 pid:98600 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:03:26 pid:98600 Workerman[start.php] stopping ...
+2018-01-22 19:03:26 pid:98600 Workerman[start.php] has been stopped
+2018-01-22 19:03:27 pid:98619 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:04:20 pid:98619 Workerman[start.php] stopping ...
+2018-01-22 19:04:20 pid:98619 Workerman[start.php] has been stopped
+2018-01-22 19:04:21 pid:98638 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:04:26 pid:98638 Workerman[start.php] stopping ...
+2018-01-22 19:04:26 pid:98638 Workerman[start.php] has been stopped
+2018-01-22 19:04:41 pid:98665 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:09:55 pid:98665 Workerman[start.php] stopping ...
+2018-01-22 19:09:55 pid:98665 Workerman[start.php] has been stopped
+2018-01-22 19:09:56 pid:98691 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:10:30 pid:98691 Workerman[start.php] stopping ...
+2018-01-22 19:10:30 pid:98691 Workerman[start.php] has been stopped
+2018-01-22 19:10:30 pid:98713 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:13:11 pid:98713 Workerman[start.php] stopping ...
+2018-01-22 19:13:11 pid:98713 Workerman[start.php] has been stopped
+2018-01-22 19:13:12 pid:98733 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:14:08 pid:98733 Workerman[start.php] stopping ...
+2018-01-22 19:14:08 pid:98733 Workerman[start.php] has been stopped
+2018-01-22 19:14:09 pid:98752 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:14:47 pid:98752 Workerman[start.php] stopping ...
+2018-01-22 19:14:47 pid:98752 Workerman[start.php] has been stopped
+2018-01-22 19:14:48 pid:98770 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:15:26 pid:98770 Workerman[start.php] stopping ...
+2018-01-22 19:15:26 pid:98770 Workerman[start.php] has been stopped
+2018-01-22 19:15:27 pid:98789 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:17:38 pid:98789 Workerman[start.php] stopping ...
+2018-01-22 19:17:38 pid:98789 Workerman[start.php] has been stopped
+2018-01-22 19:17:39 pid:98808 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:19:48 pid:98808 Workerman[start.php] stopping ...
+2018-01-22 19:19:49 pid:98808 Workerman[start.php] has been stopped
+2018-01-22 19:19:50 pid:98827 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:20:49 pid:98827 Workerman[start.php] stopping ...
+2018-01-22 19:20:49 pid:98827 Workerman[start.php] has been stopped
+2018-01-22 19:20:50 pid:98849 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:31:54 pid:98849 Workerman[start.php] stopping ...
+2018-01-22 19:31:55 pid:98849 Workerman[start.php] has been stopped
+2018-01-22 19:31:55 pid:98886 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:32:04 pid:98888 Exception: You can't send(NULL) to client, you need to convert it to a string.  in /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Protocols/Websocket.php:225
+Stack trace:
+#0 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Connection/TcpConnection.php(338): Workerman\Protocols\Websocket::encode(NULL, Object(Workerman\Connection\TcpConnection))
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Gateway.php(692): Workerman\Connection\TcpConnection->send(NULL)
+#2 [internal function]: GatewayWorker\Gateway->onWorkerMessage(Object(Workerman\Connection\TcpConnection), Array)
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Connection/TcpConnection.php(657): call_user_func(Array, Object(Workerman\Connection\TcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #44)
+#5 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Events/Select.php(286): call_user_func_array(Array, Array)
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(2096): Workerman\Events\Select->loop()
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/GatewayWorker/Gateway.php(279): Workerman\Worker->run()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1294): GatewayWorker\Gateway->run()
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\Gateway))
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#12 /Users/doublejian/www/pklottery/newproject/trunk/other/WebSocket/Applications/Push/start.php(33): Workerman\Worker::runAll()
+#13 {main}
+2018-01-22 19:32:04 pid:98888 Worker process terminated
+2018-01-22 19:32:04 pid:98886 worker[PushGateway:98888] exit with status 64000
+2018-01-22 19:32:07 pid:98886 Workerman[start.php] stopping ...
+2018-01-22 19:32:07 pid:98886 Workerman[start.php] has been stopped
+2018-01-22 19:32:18 pid:98915 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:39:52 pid:98915 Workerman[start.php] stopping ...
+2018-01-22 19:39:52 pid:98915 Workerman[start.php] has been stopped
+2018-01-22 19:44:33 pid:98953 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:46:53 pid:98953 Workerman[start.php] stopping ...
+2018-01-22 19:46:53 pid:98953 Workerman[start.php] has been stopped
+2018-01-22 19:47:16 pid:98993 Workerman[start.php] start in DEBUG mode
+2018-01-22 19:48:57 pid:98993 Workerman[start.php] stopping ...
+2018-01-22 19:48:57 pid:98993 Workerman[start.php] has been stopped
+2018-01-22 19:48:58 pid:99026 Workerman[start.php] start in DEBUG mode
+2018-01-22 20:01:20 pid:99026 Workerman[start.php] stopping ...
+2018-01-22 20:01:20 pid:99026 Workerman[start.php] has been stopped
+2018-01-22 20:01:21 pid:99051 Workerman[start.php] start in DEBUG mode
+2018-01-22 20:24:14 pid:99051 Workerman[start.php] stopping ...
+2018-01-22 20:24:14 pid:99051 Workerman[start.php] has been stopped
+2018-01-23 12:06:45 pid:1743 Workerman[start.php] start in DAEMON mode
+2018-01-23 13:54:21 pid:2023 Workerman[start.php] start in DEBUG mode
+2018-01-23 13:55:27 pid:2071 Workerman[start.php] start in DEBUG mode
+2018-01-23 13:57:07 pid:2071 Workerman[start.php] stopping ...
+2018-01-23 13:57:07 pid:2071 Workerman[start.php] has been stopped
+2018-01-23 14:00:39 pid:2109 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:01:49 pid:2109 Workerman[start.php] stopping ...
+2018-01-23 14:01:49 pid:2109 Workerman[start.php] has been stopped
+2018-01-23 14:02:09 pid:2147 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:02:31 pid:2147 Workerman[start.php] stopping ...
+2018-01-23 14:02:31 pid:2147 Workerman[start.php] has been stopped
+2018-01-23 14:03:55 pid:2225 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:05:10 pid:2225 Workerman[start.php] stopping ...
+2018-01-23 14:05:10 pid:2225 Workerman[start.php] has been stopped
+2018-01-23 14:05:11 pid:2249 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:05:47 pid:2249 Workerman[start.php] stopping ...
+2018-01-23 14:05:47 pid:2249 Workerman[start.php] has been stopped
+2018-01-23 14:05:48 pid:2284 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:22:34 pid:2284 Workerman[start.php] stopping ...
+2018-01-23 14:22:34 pid:2284 Workerman[start.php] has been stopped
+2018-01-23 14:22:34 pid:2770 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:23:30 pid:2770 Workerman[start.php] stopping ...
+2018-01-23 14:23:30 pid:2770 Workerman[start.php] has been stopped
+2018-01-23 14:23:31 pid:2816 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:23:53 pid:2816 Workerman[start.php] stopping ...
+2018-01-23 14:23:54 pid:2816 Workerman[start.php] has been stopped
+2018-01-23 14:23:58 pid:2848 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:24:57 pid:2848 Workerman[start.php] stopping ...
+2018-01-23 14:24:57 pid:2848 Workerman[start.php] has been stopped
+2018-01-23 14:24:57 pid:2883 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:26:14 pid:2883 Workerman[start.php] stopping ...
+2018-01-23 14:26:14 pid:2883 Workerman[start.php] has been stopped
+2018-01-23 14:26:15 pid:2924 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:26:36 pid:2924 Workerman[start.php] stopping ...
+2018-01-23 14:26:36 pid:2924 Workerman[start.php] has been stopped
+2018-01-23 14:26:37 pid:2968 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:28:07 pid:2968 Workerman[start.php] stopping ...
+2018-01-23 14:28:07 pid:2968 Workerman[start.php] has been stopped
+2018-01-23 14:28:48 pid:3104 Workerman[start.php] stop 
+2018-01-23 14:28:48 pid:3104 Workerman[start.php] not run
+2018-01-23 14:29:03 pid:3123 Workerman[start.php] start in DEBUG mode
+2018-01-23 14:29:04 pid:3123 Workerman[start.php] stopping ...
+2018-01-23 14:29:04 pid:3123 Workerman[start.php] has been stopped
+2018-02-03 21:28:22 pid:36896 Workerman[start.php] start in DEBUG mode
+2018-02-03 21:28:27 pid:36896 Workerman[start.php] stopping ...
+2018-02-03 21:28:27 pid:36896 Workerman[start.php] has been stopped

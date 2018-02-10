@@ -1,0 +1,3 @@
+2017-09-12 13:57:07
+gx_k3 select 20170912027 count error
+SELECT count(id) as count FROM my_bet_gx_k3 where periods='20170912027' and js = 1 and addtime >= '1505195220'

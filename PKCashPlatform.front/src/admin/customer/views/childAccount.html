@@ -1,0 +1,192 @@
+<!-- 子账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{lang['ChildAccount']}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <label class="col-md-1 input-label allsite col-xs-4">站点</label>
+                                        <div class="col-md-2 col-xs-8 allsite">
+                                            <div class="form-group">
+                                                <select data-smart-select2 style="width: 90%;" ng-model="appsite">
+                                                    <option value="">请选择</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 input-label col-xs-4">操作日期</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="startTime">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 input-label text-align-center col-xs-4">—————</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label col-xs-4">{{lang['On-line']}}</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group"  >
+                                                <select class="form-control" ng-model="lineStat" ng-init="lineStat">
+                                                    <option value="{{item.value}}" ng-repeat="item in option_stateJson">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-8 col-xs-offset-4 col-md-offset-0">
+                                            <div class="form-group"  >
+                                                <select class="form-control" ng-model="accountType" ng-init="accountType">
+                                                    <option value="{{item.id}}" ng-repeat="item in option_accountJson">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 col-xs-4 input-label col-xs-4">搜索条件</label>
+                                        <div class="col-md-1 col-xs-8">
+                                            <div class="form-group" >
+                                                <select class="form-control" ng-model="type" ng-init="type">
+                                                    <option value="{{item.id}}" ng-repeat="item in option_typrJson">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-8 col-xs-offset-4 col-md-offset-0">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="searchKey">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-1 col-xs-4 col-xs-offset-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <a class="btn btn-primary search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">{{lang['Status']}}</th>
+                                            <th class="text-center">{{lang['Name']}}</th>
+                                            <th class="text-center">{{lang['Login account']}}</th>
+                                            <th class="text-center">{{lang['Last logon time']}}</th>
+                                            <th class="text-center">{{lang['Finally login to IP']}}</th>
+                                            <th class="text-center">{{lang['New date']}}</th>
+                                            <th class="text-center">{{lang['Landing error times']}}</th>
+                                            <th class="text-center">状况</th>
+                                            <th class="text-center">{{lang['function']}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                            <td>{{item.login_key | fiterStatuseds}}</td>
+                                            <td>{{item.username}}</td>
+                                            <td>{{item.account}}</td>
+                                            <td>{{item.last_login_time}}</td>
+                                            <td>{{item.last_login_ip}}</td>
+                                            <td>{{item.create_time|fiterTime}}</td>
+                                            <td>{{item.login_err_count}}</td>
+                                            <td>{{item.status | fiterStatused}}</td>
+                                            <td>
+                                                <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="getID(item)">{{lang['Modify']}}</button>
+                                                <button class="btn btn-default btn-xs" ng-click="disable(item)" ng-bind="item.status==1?'禁用':'启用'"></button>
+
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">修改子账号</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">站点名称</div>
+                                <div class="col-md-7 col-xs-8 input-label text-left" ng-bind="sitename"></div>
+                            </section>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">{{lang['accounts']}}</div>
+                                <div class="col-md-7 col-xs-8 input-label text-left" ng-bind="account"></div>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{lang['Password']}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="password" name="account" placeholder="{{lang['Password']}}"  ng-model="password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{lang['Confirm password']}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="password" name="account" placeholder="{{lang['Password']}}"  ng-model="confirm_password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">{{lang['Name']}}</label>
+                                <label class="col-md-7 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                    <input type="text" name="account" placeholder="{{lang['Name']}}"  ng-model="username">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">
+                            {{lang['Confirm']}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

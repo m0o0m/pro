@@ -1,0 +1,250 @@
+<!-- 商品管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>下载链接地址</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <div class="col-sm-1">
+                                            <div class="input-group">
+                                                <button type="submit"  data-toggle="modal" data-target="#myModal1"  class="btn btn-primary" ><i class="fa fa-plus"></i> 添加地址</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-align-center">编号</th>
+                                            <th class="text-align-center">视讯类别</th>
+                                            <th class="text-align-center">IOS链接</th>
+                                            <th class="text-align-center">安卓链接</th>
+                                            <th class="text-align-center">状态</th>
+                                            <th class="text-align-center">功能</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+                                            <td class="text-align-center">
+                                                {{item.code}}
+                                            </td>
+                                            <td class="text-align-center">{{item.type}}</td>
+                                            <td class="text-align-center">{{item.ios}}</td>
+                                            <td class="text-align-center">{{item.andriod}}</td>
+                                            <td class="text-align-center">{{item.status|currentstate}}</td>
+                                            <td class="text-align-center">
+                                                <button class="btn btn-default btn-xs" ng-click="disables(item.status,item.id,item)" ng-show="item.status==1">禁用</button>
+                                                <button class="btn btn-default btn-xs" ng-click="disables(item.status,item.id,item)" ng-show="item.status==2">启用</button>
+                                                <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="getID(item.id)">{{lang['Modify']}}</button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <span style="display: none" class="zz">{{lang['accounts']}}</span>
+    <!--<input type="text" value="{{lang['accounts']}}" class="zz">-->
+    <!--添加-->
+    <div class="modal fade" id="dialog_simplexj" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">{{lang['Add Account']}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['accounts']}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{lang['accounts']}}" type="text" ng-model="accounts.accounts">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['Password']}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{lang['Password']}}" type="text" ng-model="accounts.passwords">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['Permission grouping']}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{lang['Select group name']}}" type="text"  list="list2" ng-model="accounts.groupIds">
+                                    <datalist id="list2">
+                                        <option ng-repeat="list1 in accounts.select">{{list1.group_name}}</option>
+                                    </datalist>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['Remarks']}}</label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" rows="5" ng-model="accounts.remarks"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{lang['Status']}}</label>
+                                <div class="col-md-10 inline-group">
+                                    <label class="radio col col-md-4 ">
+                                        <input type="radio" name="radio-inline1" class="checkP" value="1" checked="checked" style="margin-top: 1px">
+                                        {{lang['Enables']}}</label>
+                                    <label class="radio col col-md-4">
+                                        <input type="radio" class="checkP" name="radio-inline1" value="0" style="margin-top: 1px">
+                                        <i></i>{{lang['Disable']}}</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccounts">添加地址</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item" >
+                                <div class="col-md-3 input-label">视讯类别</div>
+                                <label class="col-md-7 input" ng-init="add.typeed=''">
+                                    <select class="form-control" ng-model="add.typeed">
+                                        <option value="">请选择</option>
+                                        <option ng-value="item.value" ng-repeat="item in option_video_type">{{item.name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">IOS链接</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" type="text" ng-model="add.ios" name="name">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度1-30位</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">安卓链接</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control"  type="text" ng-model="add.andriod" name="api" >
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度1-255位，只能字母和数字组合）</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()"">
+                    {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">地址编辑</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item" >
+                                <div class="col-md-3 input-label">视讯类别</div>
+                                <label class="col-md-7 input">
+                                    <select name="" id="" class="form-control" ng-model="data.type_id">
+                                        <option value="{{item.value}}" ng-repeat="item in option_video_type">{{item.name}}</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">IOS链接</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" type="text" ng-model="data.ios" name="account">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">安卓链接</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control"  type="text" ng-model="data.andriod" >
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合）</b>
+                                </label>
+                            </section>
+
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden" name="roleId"  hidden="hidden" value="5" ng-model="formData.roleId">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control"  type="hidden"  disabled="disabled" value="0" name="parentId" ng-model="formData.parentId">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,251 @@
+<!-- 套餐管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>JS版本号-WEP</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div ng-show="newTodo">
+                                <div class="widget-body-toolbar">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <label class="col-md-1 control-label">版本号</label>
+                                            <div class="col-sm-3 col-xs-9">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="" ng-model="account">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <div class="form-group ">
+                                                    <button type="submit"   class="btn btn-default search" ng-click="add()">
+                                                     生成WEP版本
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2  ">
+                                                <div class="form-group">
+                                                    <button type="submit"    class="btn btn-default search"  ng-click="addl()">
+                                                        生成PC版本
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">WAP可用版本号</th>
+                                            <th class="text-center">与基本版本一致性比较</th>
+                                            <th  class="text-center">功能</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                            <td>{{item.wepsversion_id}}</td>
+                                            <td>{{item.compare}}</td>
+
+                                            <td class="text-align-center">
+                                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal1" ng-click="detail(item.id,item.wepsversion_id)">详情</button>
+                                                <button class="btn btn-default btn-xs" ng-click="delete(item.id)">删除</button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+
+    </section>
+    <!--<input type="text" value="{{lang['accounts']}}" class="zz">-->
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccounts">详情</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <div class="table-scroll">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>版本号</td>
+                                    <td>基础文件路径</td>
+                                    <td>当前版本路径</td>
+                                </tr>
+                                <tr ng-repeat="item in data">
+                                    <td>{{item.type_id}}</td>
+                                    <td>{{item.base_file_path}}</td>
+                                    <td>{{item.current_version_path}}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adds()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">编辑</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">版本号：</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input class="form-control"  type="text" ng-model="Quipment" name="password" >
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合）</b>
+                                </label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submiteds()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--pc端-->
+    <section widget-grid id="widget-grids">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>JS版本号-PC</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">PC端可用版本号</th>
+                                            <th class="text-center">与基本版本一致性比较</th>
+                                            <th  class="text-center">功能</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list1">
+                                            <td>{{item.PCsversion_id}}</td>
+                                            <td>{{item.compare}}</td>
+                                            <td class="text-align-center">
+                                                <button class="btn btn-default btn-xs"data-toggle="modal" data-target="#myModal1" ng-click="detail(item.id,item.PCsversion_id)">详情</button>
+                                                <button class="btn btn-default btn-xs" ng-click="delete(item.id)">删除</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!--总表-->
+
+    <section widget-grid id="widget-grides">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>JS版本号-总表</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">编号</th>
+                                            <th class="text-center">设备</th>
+                                            <th class="text-align-center">当前版本</th>
+                                            <th class="text-align-center">状态</th>
+                                            <th  class="text-center">功能</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list2">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.equipment}}</td>
+                                            <td>{{item.compare}}</td>
+                                            <td>{{item.status}}</td>
+
+                                            <td class="text-align-center">
+                                                <button data-toggle="modal" data-target="#myModal2" class="btn btn-default btn-xs" ng-click="geteQuipment(item.equipment)">编辑</button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,32 @@
+<?php
+
+namespace lotteryApi\models;
+
+use Yii;
+use yii\db\Query;
+
+class SiteModel extends \yii\base\Model {
+
+    /**
+     * @param $where 查询条件
+     * @param string $order 排序方式
+     * @param int $limit  查询限制
+     * @return array 返回查询结果
+     */
+    public static function get_banner_data($where, $order = 'sort', $limit = 5) {
+        return (new Query())->select('*')->from(\Yii::$app->manage_db->tablePrefix . 'upload_list')
+                        ->where($where)->orderBy($order)->limit($limit)->all(\Yii::$app->manage_db);
+    }
+
+    //取公告信息
+    public static function getNoticeInfo($map) {
+        return (new \yii\db\Query())
+                        ->select('id,title,content,addtime')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'frontend_notice')
+                        ->where($map)
+                        ->limit(1)
+                        ->orderby('addtime desc')
+                        ->all(\Yii::$app->manage_db);
+    }
+
+}

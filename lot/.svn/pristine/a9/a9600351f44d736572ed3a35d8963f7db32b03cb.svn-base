@@ -1,0 +1,280 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-23 18:59:01
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/line/add.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a671575d60f75_09317886',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '1f67cdc047dc294aba0b8f23bfcc6a47ebb751f6' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/line/add.html',
+      1 => 1516241407,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a671575d60f75_09317886 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+  .select{width:20%;float:left;margin-right:10px}
+</style>
+<div class="page-header">
+    <p id="me-table-buttons">
+       <h1>
+            <a href="javascript:;" id="line_index">线路列表</a>
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                添加线路
+            </small>
+        </h1>
+        
+    </p>
+</div>
+
+<div class="row">
+<div class="col-xs-12">
+        <form id="line_form" class="form-horizontal" method='post' action='/line/add'>
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="line_id">线路ID:</label>
+              <div class="col-sm-9">
+                  <input type="text" name="line_id" id='line_id' value="" class="col-sm-5" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="line_name">线路名称</label>
+              <div class="col-sm-9">
+                  <input type="text" name="line_name" id='line_name' value="" class="col-sm-5" />
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="url">域名:</label>
+              <div class="col-sm-9">
+                  <input type="text" name="url" id='url' value="" class="col-sm-5" />
+              </div>
+            </div>
+           
+          <!--   <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="money">额度:</label>
+              <div class="col-sm-9">
+                  <input type="text" name="money" id='money' value="" class="col-sm-5" />
+              </div>
+            </div> -->
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="apikey">md5Key:</label>
+              <div class="col-sm-9">
+                  <input type="text" name="apikey" id='apikey' value="" class="col-sm-5" />
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="desKey">desKey:</label>
+              <div class="col-sm-9">
+                  <input type="text" name="deskey" id='deskey' value="" class="col-sm-5" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="status" class="col-sm-3 control-label no-padding-right"> 状态:</label>
+              <div class="col-sm-9">
+                  <select type="select" name="status"  id="status" class="form-control select">
+                      <option value="1">启用</option>
+                      <option value="2">停用</option>
+                      <option value="3">维护</option>
+                  </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="type" class="col-sm-3 control-label no-padding-right"> 交易模式:</label>
+              <div class="col-sm-9">
+                  <select type="select" name="type"  id="type" class="form-control select">
+                      <option value="1">钱包模式</option>
+                      <option value="2">额度转换</option>
+                  </select>
+              </div>
+            </div>
+
+             <div class="form-group">
+              <label for="experience" class="col-sm-3 control-label no-padding-right"> 试玩模式:</label>
+              <div class="col-sm-9">
+                  <select type="select" name="experience"  id="experience" class="form-control select">
+                      <option value="1">否</option>
+                      <option value="2">是</option>
+                  </select>
+              </div>
+            </div>
+        
+           
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="button" id='save' onclick="return check();">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        提交
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="button" id='reset' >
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+
+    </form>
+</div>
+</div>
+<?php echo '<script'; ?>
+>
+    $('#line_index').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/line/index',
+            container: '#container'
+        });
+    })
+
+    function check(){
+        var line_id = $('#line_id').val();
+        var line_name = $('#line_name').val();
+        var money = $('#money').val();
+        var url = $('#url').val();
+        var status = $('#status').val();
+        var type = $('#type').val();
+        var id = $('#id').val();
+        var oldaddtime = $('#oldaddtime').val();
+        var apikey = $('#apikey').val();
+        var deskey = $('#deskey').val();
+        var experience = $('#experience').val();
+
+        if(line_id == ''){
+          layer.alert('线路ID不能为空！', {icon: 2});
+          $('#line_id').focus();
+          return false;
+        }
+        var preg_line = /^[a-zA-z\#]*$/;
+        if(!preg_line.test(line_id)){
+          layer.alert('线路id只能是字母！',{icon:2});
+          $('#line_id').focus();
+          return false;
+        }
+
+        if(line_name == ''){
+          layer.alert('线路名称不能为空！', {icon: 2});
+          $('#line_name').focus();
+          return false;
+        }
+
+        // if(money == ''){
+        //   layer.alert('额度不能为空！', {icon: 2});
+        //   $('#money').focus();
+        //   return false;
+        // }
+        // var preg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+        // if(!preg.test(money)){
+        //   layer.alert('不是有效的额度！',{icon:2});
+        //   $('#money').focus();
+        //   return false;
+        // }
+      // md5Key 17位  desKey 8位
+        if(url == ''){
+          layer.alert('域名不能为空！', {icon: 2});
+          $('#url').focus();
+          return false;
+        }
+        if(apikey == ''){
+          layer.alert('md5Key不能为空!', {icon: 2});
+          $('#apikey').focus();
+          return false;
+        }
+        if(apikey.length != 17){
+          layer.alert('md5Key长度只能为17位', {icon: 2});
+          $('#apikey').focus();
+          return false;
+        }
+        if(deskey == ''){
+          layer.alert('desKey不能为空!', {icon: 2});
+          $('#deskey').focus();
+          return false;
+        }
+        if(deskey != 8){
+          layer.alert('desKey长度只能为8位', {icon: 2});
+          $('#deskey').focus();
+          return false;
+        }
+
+        if(id == '' || oldaddtime == ''){
+          layer.alert('关键数据丢失!',{icon:2});
+          return false;
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/line/add',
+            data: {
+              "id": id,
+              "oldaddtime":oldaddtime,
+              "line_id":line_id,
+              "line_name":line_name,
+              "money":money,
+              "api_key":apikey,
+              "deskey":deskey,
+              "url":url,
+              "status":status,
+              "type":type,
+              "experience":experience
+
+            },
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2})
+                layer.close(load);
+                return false;
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.ErrorCode == 2) {
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                    layer.close(load);
+                } else if (res.ErrorCode == 1) {
+                    layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.href='/line/index';});
+                }
+                return false;
+            },
+            complete: function () {
+                var idx = $('.layui-layer-shade').length - 1;
+                if (idx > 0) {
+                    $('body').find('.layui-layer-shade').eq(idx).remove();
+                }
+            }
+        });
+        
+        return false;
+
+    }
+
+ //重置
+    $('#reset').click(function () {
+        $("#status option:first").prop("selected", 'selected');
+        $("#type option:first").prop("selected", 'selected');
+        $('#line_form').find('input').val("");
+    })
+
+
+<?php echo '</script'; ?>
+><?php }
+}

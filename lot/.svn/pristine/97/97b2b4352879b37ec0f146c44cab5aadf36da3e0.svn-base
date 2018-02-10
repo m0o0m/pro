@@ -1,0 +1,110 @@
+package global
+
+import (
+	"config"
+	"framework/influxdb/v2"
+	"github.com/go-redis/redis"
+	"time"
+	"encoding/json"
+	"bytes"
+	"errors"
+	"log"
+)
+
+type RedisExp struct {
+	Pc      time.Duration `json:"pc"`
+	Wap     time.Duration `json:"wap"`
+	Android time.Duration `json:"android"`
+	Ios     time.Duration `json:"ios"`
+}
+
+//user 登录的时候存储的数据
+type UserRedisToken struct {
+	Is_shiwan  int    `json:"is_shiwan"`  //1非试玩2试玩
+	Sh_id      int64  `json:"sh_id"`      //股东id
+	Ua_id      int64  `json:"ua_id"`      //总代id
+	Agent_id   int64  `json:"agent_id"`   //代理id
+	Agent_name string `json:"agnet_name"` //代理账号
+	Uname      string `json:"uname"`      //账号
+	Line_id    string `json:"line_id"`    //会员所属站点
+	Uid        int64  `json:"uid"`        //会员id
+	Ip         string `json:"ip"`         //会员登陆注册ip
+}
+
+//type SiteConfig struct {
+//	Md5Key string
+//	DesKey string
+//}
+
+const LINE_CACHE_ = "line_cache_"
+
+var (
+	GatherNumber    = 100
+	RedisClient     *redis.Client
+	DataRedisClient *redis.Client
+	Influxdb        client.Client //统计使用的时序数据库
+	RedisExpTime    time.Duration //token过期时间,外面配置文件过期时间以分钟为单位
+)
+
+func InitRedis(conf *config.Config) error {
+	host := conf.Redis.Host
+	password := conf.Redis.Password
+	name := conf.Redis.Name
+	RedisClient = redis.NewClient(&redis.Options{
+		Addr:     host,
+		Password: password,
+		DB:       name})
+	_, err := RedisClient.Ping().Result()
+	if err != nil {
+		return err
+	}
+
+	RedisExpTime = time.Minute * time.Duration(conf.Redis.Expirtime)
+
+	DataRedisClient = redis.NewClient(&redis.Options{
+		Addr:     conf.DataRedis.Host,
+		Password: conf.DataRedis.Password,
+		DB:       conf.DataRedis.Name})
+	_, err = DataRedisClient.Ping().Result()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func SetLine(lineId string, conf SiteConfig) error {
+	RedisClient.Ping()
+	b, err := json.Marshal(conf)
+	if err != nil {
+		GlobalLogger.Error("PutJobLeft error:%v %v", lineId, conf)
+		return err
+	}
+	ic := RedisClient.Set(LINE_CACHE_+lineId, string(b), 0)
+	if ic.Err() != nil {
+		GlobalLogger.Error("PutJobLeft error:%v %v", conf, ic.Err())
+		return err
+	}
+	return nil
+}
+
+func GetLine(lineId string) (SiteConfig, error) {
+	RedisClient.Ping()
+	ssc := RedisClient.Get(LINE_CACHE_ + lineId)
+	if ssc.Err() != nil {
+		GlobalLogger.Error("GetLine error: %v", ssc.Err())
+		return SiteConfig{}, ssc.Err()
+	}
+	log.Println(ssc.Val())
+	str_arr := ssc.Val()
+	if len(str_arr) > 0 {
+		var j SiteConfig
+		decoder := json.NewDecoder(bytes.NewReader([]byte(str_arr)))
+		if err := decoder.Decode(&j); err != nil {
+			GlobalLogger.Error("GetLine error: %v", ssc.Err())
+			return SiteConfig{}, err
+		}
+		return j, nil
+	}
+	return SiteConfig{}, errors.New("no line.")
+}

@@ -1,0 +1,20 @@
+{{template "header" .Header}}
+<script>
+    cdnUrl = "{{.Header.CdnUrl}}/theme3/public";
+</script>
+<div id="page-container" style="width: 998px;padding-bottom: 0px;">
+    <div id="page-body" style="background: url({{.Header.CdnUrl}}/theme3/public/images/new/gameArea_bg_y.png) 50% 0px repeat-y;width:998px;">
+        {{template "sport" .}}
+
+    </div>
+</div>
+<style>
+.first #page-container:before,
+.game #page-container:before,
+.first #page-container:after,
+.game #page-container:after {
+display:block;
+}
+.banner-wrap{background: url({{.Header.CdnUrl}}/theme3/public/images/new/yta.jpg) no-repeat left top !important;}
+</style>
+{{template "footer" .Footer}}

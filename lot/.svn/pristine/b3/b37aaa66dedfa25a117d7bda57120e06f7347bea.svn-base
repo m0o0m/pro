@@ -1,0 +1,199 @@
+
+<div class="page-header">
+    <h1>
+       <a href="index">图片列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            <{if isset($smarty.get.id)}>修改<{else}>添加<{/if}>
+        </small>
+    </h1>
+</div>
+
+<div class="isHide layui-layer-wrap" id="_form">
+    <div class="modal-body">
+        <form id="view-form" class="form-horizontal" enctype="multipart/form-data" >
+            <input id="id" name="id" type="hidden" value="<{if isset($item.id)}><{$item.id}><{/if}>">
+            <input id="act" name="act" type="hidden" value="<{if isset($item.id)}>update<{else}>insert<{/if}>">
+            <input id="info" name="info" type="hidden" value="<{if isset($item)}><{$item|json_encode}><{/if}>">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 请选择线路: </label>
+                    <div class="col-sm-3">
+                        <select type="select" id="line_id" name="line_id" style="width:150px;">
+                            <option value="">请选择</option>
+                          <{foreach from=$data.show.lines item=val key=key}>
+                            <option value="<{$val.line_id}>" <{if isset($smarty.get.line_id) && $smarty.get.line_id eq $val.line_id}> selected<{/if}>><{$val.line_id}></option>
+                          <{/foreach}>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 请选择文件: </label>
+                    <div class="col-sm-3">
+                        <input class="form-control " type="file" id="_filepath" name="filepath" field="_form" value="<{if isset($item.filepath)}><{$item.filepath}><{/if}>">
+                    </div>
+                </div>
+            <label for="_filepath">
+                <div id="preview" class="form-group" style="width:200px;height:100px;border:1px solid #d5d5d5;margin-left:245px;">
+                    <!-- <label class="col-sm-3 control-label">  </label> -->
+                    <!-- <div class="col-sm-9"> -->
+                        <span id="showimg" style="margin-left:60px;line-height:90px;"></span>
+                        <img src="" alt="" />
+                    <!-- </div> -->
+                </div>
+            </label>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 生成缩略图: </label>
+                    <div class="col-sm-9">
+                        <label class="line-height-1 blue">
+                            <input type="radio" checked="" name="thumb" class="ace " value="1">
+                            <span class="lbl"> 是 </span>
+                        </label>
+                        &nbsp;&nbsp;
+                        <label class="line-height-1 blue">
+                            <input type="radio" checked="" name="thumb" class="ace " value="2">
+                            <span class="lbl"> 否 </span>
+                        </label>
+                    </div>
+                </div>
+                <div id="thumb_box" class="form-group" style="display:none;">
+                    <label class="col-sm-3 control-label">  </label>
+                    <div class="col-sm-9">
+                        缩略图宽：<input type="text" name="width" value="" style="width:50px;height:22px;" /> px
+                        &nbsp;&nbsp;
+                        缩略图高：<input type="text" name="height" value="" style="width:50px;height:22px;" /> px
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-3 col-md-9">
+                <input id="formSubmit" type="button" class="btn btn-info" value = "提交">
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ------------------ 编辑 ------------------------------------
+    // 上传预览
+    var previewrWidth = 200;
+    var previewrHeight = 100;
+    var $img = $('#preview img');
+    $('#showimg').html('请选择图片');
+    $('input[type=file]').change(function() {
+        if(this.files.length === 0){
+            $('#showimg').show();
+            $('#preview').css({'border':'1px solid #d5d5d5'});
+            $img.attr('src', '');
+            return;
+        }
+
+
+        $('#showimg').hide();
+        $('#preview').css({'border':'none'});
+        // $('#preview').show();
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $img.prop('src', e.target.result);
+            // console.log($img)
+        }
+
+        reader.readAsDataURL(this.files[0]);
+
+        $('img').load(function() {
+            var size = autoSize(this.naturalWidth, this.naturalHeight);
+            $(this).css({
+                width: size.width,
+                height: size.height,
+                top: (previewrHeight - size.height) / 2,
+                left: (previewrWidth - size.width) / 2
+            }).show();
+        });
+    });
+    function autoSize(width, height) {
+        var scale = width / height;
+        if (scale >= previewrWidth / previewrHeight) {
+            height = previewrWidth / scale;
+            width = previewrWidth;
+        } else {
+            width = previewrHeight * scale;
+            height = previewrHeight;
+        }
+        return {
+            width: width,
+            height: height
+        }
+    }
+
+    $('#formSubmit').click(function(){
+        var line_id = $("#line_id").val();
+        if(!line_id){
+            layer.alert('请选择 线路',{icon:0});
+            return;
+        }
+        var _filepath = $("#_filepath").val();
+        if(!_filepath){
+            layer.alert('请选择 文件',{icon:0});
+            return;
+        }
+        var width = $("input[name='width']").val();
+        var height = $("input[name='height']").val();
+        var is_thumb = $("input[name=thumb]:checked").val();
+        if(is_thumb == 1){
+            if (width == '' || height == ''){
+                layer.alert('缩略图的宽高不能为空',{icon:2});
+                return;
+            }
+            if (isNaN(parseFloat(width)) || parseFloat(width) <= 0 || isNaN(parseFloat(height)) || parseFloat(height) <= 0){
+                layer.alert('缩略图的宽高只能为数字',{icon:2});
+                return;
+            }
+        }
+        var form=document.getElementById("view-form");
+        var fd =new FormData(form);
+        $.ajax({
+             url: "up",
+             type: "POST",
+             data: fd,
+             processData: false,  // 告诉jQuery不要去处理发送的数据
+             contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+             dataType: 'json',
+             beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+             },
+             error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+             },
+             success: function(result,status,xhr){
+                layer.close(index);
+                if(result.ErrorCode == 2){
+                    layer.alert(result.ErrorMsg, {icon: 0});
+                    return;
+                }
+                if(result.ErrorMsg){
+                    layer.alert(result.ErrorMsg, {icon: 1},function(){
+                        location = 'index?tmp';
+                    });
+                    return;
+                }
+             }
+        });
+        return false;
+        
+    });
+
+    // 缩略图输入框
+    $("input[name=thumb]").click(function(){
+        if($(this).val() == '1')
+            $("#thumb_box").show();
+        else
+            $("#thumb_box").hide();
+    });
+</script>

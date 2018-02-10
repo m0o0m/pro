@@ -1,0 +1,575 @@
+<?php
+/* Smarty version 3.1.31, created on 2017-11-27 08:40:24
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/report/chart.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a1bcf78a2e432_92963980',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '27fbe75a08cfa957577327623acf245ca80e7b66' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/report/chart.html',
+      1 => 1511762828,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a1bcf78a2e432_92963980 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>select{width:auto !important;}</style>
+<?php echo '<script'; ?>
+ src="<?php echo Yii::getAlias('@js');?>
+/pack/echarts.common.min.js"><?php echo '</script'; ?>
+>
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="menu-form" action="/report/Chart_do" method="get">
+            <label for="roleName">选择图表类型:
+                <select type="select" name="state" id="FormState">
+                   <option value="1">折现图</option>
+                   <option value="2">饼状图</option>
+				</select>
+            </label>
+			<label for="line_reload"> 选择显示类型:
+				<select type="select" name="type_state" id="type_state">
+					<option value="1">线路</option>
+					<option value="2">彩种</option>
+					<option value="3">代理</option>
+					<option value="4" style="display:none;">会员</option>
+				</select>
+			</label>
+        </form>
+        <form id="report-form" action="/report/Chart_do" method="get">
+			<label for="line_reload"> 选择线路:
+				<select type="select" name="line_id"  id="line_id" style="width:120px;">
+					<option value="" selected>全部</option>
+					<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['line']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					<option value="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+}?>"  <?php if (isset($_GET['line_id']) && isset($_smarty_tpl->tpl_vars['v']->value['line_id']) && $_smarty_tpl->tpl_vars['v']->value['line_id'] == $_GET['line_id']) {?>selected<?php }?> ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+}?></option>
+					<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+				</select>
+			</label>
+			<label for="menuLevel"> 彩票种类:
+                <select type="select" name="fc_type"  id="fc_type" style="width:120px;">
+                    <option value="" >请选择彩种</option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['games']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <option value="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['type'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+}?>"<?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+$_prefixVariable1=ob_get_clean();
+if (isset($_GET['fc_type']) && $_GET['fc_type'] == $_prefixVariable1) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</option>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </select>
+            </label>
+			<label for="route">代理帐号：
+                <input type="text" name="agentName" id='agentName' value="">
+            </label>
+			<label for="uname">会员帐号：
+                <input type="text" name="uname" id='uname' value="">
+            </label><br>
+            <label for="date"> 日期：
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='startTime' value="<?php if (isset($_GET['startTime'])) {
+echo $_GET['startTime'];
+}?>" id="startTime" style="width:180px;">
+                ~
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='endTime' value="<?php if (isset($_GET['endTime'])) {
+echo $_GET['endTime'];
+}?>" id="endTime" style="width:180px;">
+			</label>
+            <label>
+                <input type="button"   id="report_btn" class="btn btn-sm btn-success" value="提交" />
+            </label>
+        </form>
+    </div>
+</div>
+  <div id="content">
+    <div style="float:left;width:100%;margin-left: 10px;" id="BrokenLineDiv">
+            <div  style="width: 100%;height:400px;float:left;" id="BrokenLine1"></div>
+    </div>
+    <div style="float:left;width:100%;margin-left: 10px;;display:none" id="PieDiv" >
+      <div style="width: 50%;height:400px;float:left;" id="Pie1"></div>
+      <div style="width: 50%;height:400px;float:left;" id="Pie2"></div>
+      <div style="width: 50%;height:400px;float:left;" id="Pie3"></div>
+      <div style="width: 50%;height:400px;float:left;" id="Pie4"></div>
+    </div>
+    <div style="float:left;width:100%;margin-left: 10px;display:none;" class="clearfixtext">暂无数据</div>
+        <div class="clearfix"></div>
+    </div>
+    <div style="clear:both"></div>
+<?php echo '<script'; ?>
+>
+	//图标类型切换
+	$("#FormState, #line_id, #type_state, #fc_type").change(function(){
+		var idName = $(this).attr('id');
+		var $val = $(this).val();
+		if(idName == 'FormState'){
+			if($val == 1){
+				$('#BrokenLineDiv').show();
+				$('#PieDiv').hide();
+			}else{
+				$('#BrokenLineDiv').hide();
+				$('#PieDiv').show();
+			}
+		}
+				
+		if(idName == 'line_id' || idName == 'fc_type'){
+			var $eq = type_state_val(idName);
+			var $typeStateOption = $("#type_state option[value='"+$eq+"']");
+			var $unameObj = $("#type_state option[value='4']");
+		
+			if(idName == 'line_id'){
+				$("#fc_type, #agentName, #uname").val('');
+			}else{
+				$("#agentName, #uname").val('');
+			}
+			if($val != ""){
+				if(idName == 'fc_type'){
+					$unameObj.show();
+				}
+				$typeStateOption.hide();
+			}else{
+				if(idName == 'fc_type' || $("#agentName").val() == ''){
+					$unameObj.show();
+				}
+				$typeStateOption.show();
+			}
+		}
+		$('#report_btn').click();
+	});
+	
+	$("#agentName, #uname").change(function(){
+		var idName = $(this).attr('id');
+		var $val = $(this).val();
+		var $eq = type_state_val(idName);
+		var $type_state_option = $("#type_state option[value='"+$eq+"']")
+		var $unameObj = $("#type_state option[value='4']");
+		
+		if(idName == "agentName"){
+			$("#uname").val('');
+		}
+		
+		if($val != ""){
+			if(idName == 'fc_type'){
+				$unameObj.show();
+			}
+			$type_state_option.hide();
+		}else{
+			if(idName == 'fc_type' || $("#agentName").val() == ''){
+				$unameObj.show();
+			}
+			$type_state_option.show();
+		}
+	})
+	
+	function type_state_val(name){
+		switch(name){
+			case "line_id":
+				return 1;
+			case "fc_type":
+				return 2;
+			case "agentName":
+				return 3;
+			case "uname":
+				return 4;
+		}
+	}
+	
+    //提交时间
+    $('#report_btn').click(function(){
+        var line_id = $.trim($('#line_id').val());
+        var agentName = $.trim($('#agentName').val());
+        var uname = $.trim($('#uname').val());
+        var typeState = $.trim($('#type_state').val());
+		var fc_type = $.trim($('#fc_type').val());
+        var starttime = $.trim($('#startTime').val());
+        var endtime = $.trim($('#endTime').val());
+		
+		var $BrokenLineobj = $('#BrokenLineDiv'),$Pieobj = $('#PieDiv'),$clearfixobj = $("#content .clearfixtext");
+		
+		var StateVal = $("#FormState option:selected").val();
+		if(!$clearfixobj.is(':hidden')){
+			if(StateVal == 1){
+				$BrokenLineobj.show();
+			}else{
+				$Pieobj.show();
+			}
+			$clearfixobj.hide();
+		}
+		
+        var url = '/report/chart_do?';
+		var data = {
+            line_id: line_id,
+            agentName: agentName,
+            uname: uname,
+            typeState: typeState,
+            startTime: starttime,
+            endTime: endtime,
+			fc_type: fc_type
+        };
+        var callback = function(res){
+			if(res.ErrorCode == 1){
+                layer.close(index);
+				
+				if(StateVal == 1){
+					BrokenLine(res.Data.title , res.Data.WinData , res.Data.NumData , res.Data.BetData , res.Data.ResData , "BrokenLine1");
+				}else if(StateVal == 2){
+					PieChart(res.Data.title,res.Data.WinData,"Pie1",'赢的笔数');
+					PieChart(res.Data.title,res.Data.NumData,"Pie2",'总笔数');
+					PieChart(res.Data.title,res.Data.BetData,"Pie3",'总计打码数');
+					PieChart(res.Data.title,res.Data.ResData,"Pie4",'总计');
+				}
+
+				if(res.Data.title.length == 0){
+					$BrokenLineobj.hide();
+					$Pieobj.hide();
+					$clearfixobj.show();
+				}
+            }
+            if(res.ErrorCode == 2){
+                layer.close(index);
+				$BrokenLineobj.hide();
+				$Pieobj.hide();
+				$clearfixobj.show();
+            }
+			
+			if(agentName && line_id){
+				$("#type_state").parent('label').hide();
+			}else{
+				$("#type_state").parent('label').show();
+			}
+        }
+        doajax(url,data,callback);
+
+    })
+
+    //时间控件
+	var start_a = {
+        elem: '#startTime',
+        format: 'YYYY/MM/DD',
+        //min: laydate.now(), //设定最小日期为当前日期
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+        }
+    };
+    var end_a = {
+        elem: '#endTime',
+        format: 'YYYY/MM/DD',
+        //min: laydate.now(), //设定最小日期为当前日期
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+        }
+    };
+    laydate(start_a);
+    laydate(end_a);
+
+    function doajax(url,data,callback){
+         $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+               callback(res);
+            }
+        });
+    }
+
+<?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+>
+//折线图js
+function BrokenLine(apiTitle,apiWinData,apiNumData,apiBetData,apiResData,divId){
+
+	var BrokenLine = echarts.init(document.getElementById(divId));
+	var colors = ['#5793f3', '#d14a61', '#675bba','#91c7ae'];
+	var aggregateArr = ['赢的笔数','总笔数','总计打码数','总计'];
+	var aggregateArray = ['赢的笔数折线','总笔数折线','总计打码数折线','总计折线'];
+	
+  // 使用刚指定的配置项和数据显示图表。
+  var option = {
+       color: colors,
+	   
+		title:{text:"注单数据折线图"},
+      tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+              type: 'cross'
+          }
+      },
+      grid: {
+          right: '30%'
+      },
+      toolbox: {
+          feature: {
+              dataView: {show: true, readOnly: false},
+              restore: {show: true},
+              saveAsImage: {show: true},
+              saveAsImage: {show: true},
+          }
+      },
+      legend: {
+          data:[aggregateArr[0],aggregateArr[1],aggregateArr[2],aggregateArr[3],aggregateArray[0],aggregateArray[1],aggregateArray[2],aggregateArray[3]]
+      },
+      xAxis: [
+          {
+              type: 'category',
+              axisTick: {
+                  alignWithLabel: true
+              },
+              data: $.each( apiTitle, function( key, val ) {
+                      val
+                    })
+          }
+      ],
+      yAxis: [
+          {
+              type: 'value',
+              name: aggregateArr[0],
+              // min: 0,
+              // max: 250,
+              position: 'right',
+              axisLine: {
+                  lineStyle: {
+                      color: colors[0]
+                  }
+              },
+              axisLabel: {
+                  formatter: '{value} '
+              }
+          },
+          {
+              type: 'value',
+              name: aggregateArr[1],
+              // min: 0,
+              // max: 250,
+              position: 'right',
+              offset: 100,
+              axisLine: {
+                  lineStyle: {
+                      color: colors[1]
+                  }
+              },
+              axisLabel: {
+                  formatter: '{value} '
+              }
+          },
+          {
+              type: 'value',
+              name: aggregateArr[2],
+              // min: 0,
+              // max: 25,
+              position: 'left',
+
+              axisLine: {
+                  lineStyle: {
+                      color: colors[2]
+                  }
+              },
+              axisLabel: {
+                  formatter: '{value} '
+              }
+          },
+          {
+              type: 'value',
+              name: aggregateArr[3],
+              // min: 0,
+              // max: 100,
+              position: 'left',
+              offset: 100,
+              axisLine: {
+                  lineStyle: {
+                      color: colors[3]
+                  }
+              },
+              axisLabel: {
+                  formatter: '{value} '
+              }
+          }
+      ],
+      series: [
+
+
+          {
+              name:aggregateArr[0],
+              type:'bar',
+              data:
+                  $.each( apiWinData, function( key, val ) {
+                    val
+                  })
+          },
+          {
+              name:aggregateArr[1],
+              type:'bar',
+              yAxisIndex: 1,
+              data:
+                  $.each( apiNumData, function( key, val ) {
+                    val
+                  })
+          },
+          {
+              name:aggregateArr[2],
+              type:'bar', 
+              yAxisIndex: 2,
+              data:
+                  $.each( apiBetData, function( key, val ) {
+                    val
+                  })
+          },
+          {
+              name:aggregateArr[3],
+              type:'bar',
+              yAxisIndex: 3,
+              data:
+                  $.each( apiResData, function( key, val ) {
+                    val
+                  })
+          },
+
+          //line
+          {
+              name:aggregateArray[0],
+              type:'line',
+              data:
+                  $.each( apiWinData, function( key, val ) {
+                    val
+                  })
+          },
+          {
+              name:aggregateArray[1],
+              type:'line',
+              yAxisIndex: 1,
+              data:
+                  $.each( apiNumData, function( key, val ) {
+                    val
+                  })
+          },
+          {
+              name:aggregateArray[2],
+              type:'line', 
+              yAxisIndex: 2,
+              data:
+                  $.each( apiBetData, function( key, val ) {
+                    val
+                  })
+          },
+          {
+              name:aggregateArray[3],
+              type:'line',
+              yAxisIndex: 3,
+              data:
+                  $.each( apiResData, function( key, val ) {
+                    val
+                  })
+          }
+
+
+      ]
+  };
+
+  BrokenLine.setOption(option);
+}
+
+//圆形图js
+function PieChart(apiTitle,apiData,divId,titles){
+
+    var objData = [];
+    var ObjTitle = [];
+    var i = 0;
+    $.each( apiData, function( key, val ) {
+        if (val.value > 0) {
+            objData[i] = val;
+            ObjTitle[i] = apiTitle[key];
+            i++;
+        }
+    });
+	
+    var Pie = echarts.init(document.getElementById(divId));
+    var option  = {
+      title : {
+          text: titles,
+          subtext: '',
+          x:'center'
+      },
+      tooltip : {
+          trigger: 'item',
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data:
+                $.each( ObjTitle, function( key, val ) {
+                    val
+                  })
+
+      },
+      series : [
+          {
+              name: '来源',
+              type: 'pie',
+              radius : '55%',
+              center: ['50%', '60%'],
+              data:
+                  $.each( objData, function( key, val ) {
+                    val
+                  })
+              ,
+              itemStyle: {
+                  emphasis: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+
+    Pie.setOption(option);
+}
+<?php echo '</script'; ?>
+><?php }
+}

@@ -1,0 +1,189 @@
+
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('entryAndExit')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar" ng-show="newTodo">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                    <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select data-smart-select2 style="width: 80%;" ng-model="site_index_id">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">经销商</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                        <select data-smart-select2 style="width: 100%;" >
+                                            <option value="全部">全部</option>
+                                            <option value="经销商1">经销商1</option>
+                                            <option value="经销商2">经销商2</option>
+                                            <option value="经销商3">经销商3</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">查询时间</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="开始时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-md-offset-0 col-xs-8 col-xs-offset-4">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="mydate" placeholder="{{getWord('End time')}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">账号</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control inp_2" placeholder="请输入查询账号" ng-model="IP">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-4">
+                                        <div class="input-group">
+                                            <a class="btn btn-primary" href-void>今日</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-4">
+                                        <div class="input-group">
+                                            <a class="btn btn-primary" href-void>昨日</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-4">
+                                        <div class="input-group">
+                                            <a class="btn btn-primary" href-void>{{getWord('Search')}}</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row form-horizontal">
+                                <div class="col-sm-2 col-xs-6 total">
+                                    <span>实际盈亏(元)</span>
+                                    <p>{{data.sumMary.profit_loss}}</p>
+                                </div>
+                                <div class="col-sm-2 col-xs-6 total">
+                                    <span>入款金额(元)</span>
+                                    <p>{{data.sumMary.deposit_money}}</p>
+                                </div>
+                                <div class="col-sm-2 col-xs-6 total">
+                                    <span>入款人数(人)</span>
+                                    <p>{{data.sumMary.deposit_people}}</p>
+                                </div>
+                                <div class="col-sm-2 col-xs-6 total">
+                                    <span>入款次数(次)</span>
+                                    <p>{{data.sumMary.payout_count}}</p>
+                                </div>
+                                <div class="col-sm-2 col-xs-6 total">
+                                    <span>出款总额(元)</span>
+                                    <p>{{data.sumMary.payout_money}}</p>
+                                </div>
+                                <div class="col-sm-2 col-xs-6 total">
+                                    <span>出款人数(人)</span>
+                                    <p>{{data.sumMary.payout_people}}</p>
+                                </div>
+                                <div class="col-sm-2 col-xs-6 total">
+                                    <span>出款次数(次)</span>
+                                    <p>{{data.sumMary.payout_money}}</p>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>收入</th>
+                                                <th>收入金额</th>
+                                                <th>交易人数</th>
+                                                <th>交易笔数</th>
+                                                <th>支出</th>
+                                                <th>支出明细</th>
+                                                <th>交易人数</th>
+                                                <th>交易笔数</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>公司入款</td>
+                                                <td>{{data.companyIntoMoney.money}}</td>
+                                                <td>{{data.companyIntoMoney.people_num}}</td>
+                                                <td>{{data.companyIntoMoney.count}}</td>
+                                                <td>会员出款</td>
+                                                <td>{{data.memberPayment.money}}</td>
+                                                <td>{{data.memberPayment.people_num}}</td>
+                                                <td>{{data.memberPayment.count}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>线上支付</td>
+                                                <td>{{data.onlinePayment.money}}</td>
+                                                <td>{{data.onlinePayment.people_num}}</td>
+                                                <td>{{data.onlinePayment.count}}</td>
+                                                <td>给予优惠</td>
+                                                <td>{{data.giveDiscount.money}}</td>
+                                                <td>{{data.giveDiscount.people_num}}</td>
+                                                <td>{{data.giveDiscount.count}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>人工存入</td>
+                                                <td>{{data.depositManually.money}}</td>
+                                                <td>{{data.depositManually.people_num}}</td>
+                                                <td>{{data.depositManually.count}}</td>
+                                                <td>人工提现</td>
+                                                <td>{{data.manualWithdrawal.money}}</td>
+                                                <td>{{data.manualWithdrawal.people_num}}</td>
+                                                <td>{{data.manualWithdrawal.count}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>会员出款被扣金额</td>
+                                                <td>{{data.memberPaymentDeducted.money}}</td>
+                                                <td>{{data.memberPaymentDeducted.people_num}}</td>
+                                                <td>{{data.memberPaymentDeducted.count}}</td>
+                                                <td>给予反水</td>
+                                                <td>{{data.giveBackWater.money}}</td>
+                                                <td>{{data.giveBackWater.people_num}}</td>
+                                                <td>{{data.giveBackWater.count}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size: 18px; font-weight: bold">项目汇总</td>
+                                                <td>{{data.income_summary.income_amount}}</td>
+                                                <td>{{data.income_summary.transaction_num}}</td>
+                                                <td>{{data.income_summary.transaction_times}}</td>
+                                                <td></td>
+                                                <td>{{data.expenditure_summary.income_amount}}</td>
+                                                <td>{{data.expenditure_summary.transaction_num}}</td>
+                                                <td>{{data.expenditure_summary.transaction_times}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

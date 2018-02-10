@@ -1,0 +1,238 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>添加广告</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar">
+
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered addAdvertisement">
+                                            <tbody>
+                                            <tr>
+                                                <td colspan="3">基本资料编辑</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col col-md-2 col-lg-2 col-xs-2">排序：</td>
+                                                <td class="col col-md-6 col-lg-6 col-xs-6">
+                                                    <div class="input-group form-group">
+                                                        <input type="text" class="form-control" ng-model="data.order">
+                                                    </div>
+                                                </td>
+                                                <td class="col col-md-4 col-lg-4 col-xs-4"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>广告名称：</td>
+                                                <td>
+                                                    <div class="input-group form-group col col-sm-6">
+                                                        <input type="text" class="form-control" ng-model="data.name">
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>开始时间：</td>
+
+                                                <td>
+                                                    <div class="input-group form-group col col-sm-6">
+                                                        <input type="text" name="mydate" placeholder="开始时间" class="form-control datepicker" data-smart-datepicker options="" data-date-format="yy-mm-dd" ng-model="data.startTime">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>结束时间：</td>
+                                                <td>
+                                                    <div class="input-group form-group col col-sm-6">
+                                                        <input type="text" name="mydate" placeholder="开始时间" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="data.endTime">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="color: orangered;">登录前</span><span>广告链接：</span></td>
+                                                <td class="BeforeLogin">
+                                                    <div class="input-group form-group col col-sm-6 status_r">
+                                                        <input type="text" class="form-control" ng-model="data.link1">
+                                                    </div>
+                                                </td>
+
+                                                <td class="col-xs-2">
+                                                    <label class="col-md-5 control-label" style="margin-top: 8px;">是否为内链:</label>
+                                                    <label class="col-md-7 input-label text-left">
+                                                        <input type="radio" ng-value="1" ng-checked="data.isChain1===1" name="aa" ng-model="data.isChain1" >
+                                                        是
+                                                        <input type="radio" ng-value="2" ng-checked="data.isChain1===2" name="aa" ng-model="data.isChain1" >
+                                                        否
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="color: orangered;">登录后</span>广告链接：</td>
+                                                <td class="AfterLogin">
+                                                    <div class="input-group form-group col col-sm-6 status_r1">
+                                                        <input type="text" class="form-control" ng-model="data.link2">
+                                                    </div>
+                                                </td>
+                                                <td class="col-xs-2">
+                                                    <!--<label class="col-md-5 control-label" style="margin-top: 8px;">是否为内链:</label>-->
+                                                    <!--<div class="col-md-7">-->
+                                                    <!--<div class="form-group input-group col col-md-8 pull-left">-->
+                                                    <!--<select class="form-control" ng-model="modal2">-->
+                                                    <!--<option value="">请选择</option>-->
+                                                    <!--<option ng-value="b.value" ng-repeat="b in json.option_vague">{{b.name}}</option>-->
+                                                    <!--</select>-->
+                                                    <!--</div>-->
+                                                    <!--</div>-->
+                                                    <label class="col-md-5 control-label" style="margin-top: 8px;">是否为内链:</label>
+                                                    <label class="col-md-7 input-label text-left">
+                                                        <input type="radio" ng-value="1" ng-checked="data.isChain2===1" name="bb" ng-model="data.isChain2">
+                                                        是
+                                                        <input type="radio" ng-value="2" ng-checked="data.isChain2===2" name="bb" ng-model="data.isChain2">
+                                                        否
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>状态：</td>
+                                                <td>
+                                                    <div class="input-group form-group col col-sm-6">
+                                                        <!--<select class="form-control">-->
+                                                        <!--<option value="">请选择</option>-->
+                                                        <!--<option ng-value="c.value" ng-repeat="c in json.option_status">{{c.name}}</option>-->
+                                                        <!--</select>-->
+                                                        <label class="col-md-7 input-label text-left">
+                                                            <input type="radio" ng-value="1" ng-checked="data.status===1" name="cc" ng-model="data.status">
+                                                            启用
+                                                            <input type="radio" ng-value="2" ng-checked="data.status===2" name="cc" ng-model="data.status">
+                                                            禁用
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>图片路径：</td>
+                                                <td>
+                                                    <div class="input-group form-group col col col-sm-6">
+                                                        <input type="text" class="form-control setAttr" ng-model="data.imgUrl">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button class="ids btn btn-warning btn-xs" data-toggle="modal" data-target="#addadverModal" style="margin: 5px" ng-click="upload()">
+                                                        上传
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>广告备注：</td>
+                                                <td>
+                                                    <div class="input-group form-group col col col-sm-6">
+                                                        <textarea class="form-control" ng-model="data.remark"></textarea>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>选择站点选择：</td>
+                                                <td colspan="2">
+                                                    <div class="input-group form-group col-md-6">
+                                                        <select data-smart-select2 style="width: 80%;" ng-model="data.site">
+                                                            <option value="">请选择</option>
+                                                            <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <button type="button" class="ids btn btn-primary" style="margin: 5px" ng-click="submitAd()">
+                                                        确定
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+    <div class="modal fade" id="addadverModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" >附件信息修改</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label ng-binding">地址</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="col col-sm-12" ng-model="url">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <button class="btn btn-primary col col-sm-2 col-sm-offset-5" data-dismiss="modal"  aria-hidden="true"  ng-click="submit()">保存</button>
+                            </div>
+                        </fieldset>
+                        <div class="table-scroll">
+                            <table class="table table-bordered" >
+                                <thead>
+                                <tr>
+                                    <th colspan="4" style="text-align: center">附件管理</th>
+                                </tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>附件标题</th>
+                                    <th>附件地址</th>
+                                    <th>上传时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in enclosure">
+                                    <td class="col col-md-1 col-lg-1 col-xs-1">{{item.id}}</td>
+                                    <td class="col col-md-3 col-lg-3 col-xs-3">
+                                        <div class="row">
+                                            <input type="text" ng-model="item.title">
+                                            <button class="btn btn-xs" ng-click="select(item)">选择</button>
+                                            <button class="btn btn-xs" ng-click="modifyTitle(item)">修改</button>
+                                        </div>
+
+                                    </td>
+                                    <td class="col col-md-6 col-lg-6 col-xs-6">
+                                        <input type="text" placeholder="{{item.url}}" class="addCopy" disabled="disabled">
+                                        <button class="btn btn-xs"><a ng-href="{{item.url}}" target="_blank">查看</a></button>
+                                        <button class="btn btn-xs" ng-click="delete(item)">删除</button>
+                                    </td>
+                                    <td class="col col-md-2 col-lg-2 col-xs-2" style="word-wrap:break-word;">{{item.create_time|fiterTime}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,416 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-02-01 17:58:05
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/other/whitelist.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a72e4ad6c4347_93425339',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '06e64c699c100fe33079434eaf4a13bcf33c1b6d' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/other/whitelist.html',
+      1 => 1517292910,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a72e4ad6c4347_93425339 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    #agent-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+    .width100{width:100px}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="agent-form" method='get' action='/agent/index'>
+            <label for="menuLevel"> 线路ID
+                <select type="select" name="line"  id="line">
+                    <option value="" >全部</option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['lines']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['lines']->value[$_smarty_tpl->tpl_vars['k']->value]['line_id'];?>
+" <?php ob_start();
+echo $_smarty_tpl->tpl_vars['lines']->value[$_smarty_tpl->tpl_vars['k']->value]['line_id'];
+$_prefixVariable1=ob_get_clean();
+if (isset($_GET['line_id']) && $_GET['line_id'] == $_prefixVariable1) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+</option>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </select>
+            </label>
+            
+
+             <label for="menuLevel"> 类型:
+                <select type="select" name="showtype"  id="showtype" style="width:160px;">
+                    <option value="" >全部</option>
+                    <option value="1" <?php if (isset($_GET['type']) && $_GET['type'] == 1) {?>selected<?php }?>>前台api</option>
+                    <option value="2" <?php if (isset($_GET['type']) && $_GET['type'] == 2) {?>selected<?php }?>>golang接入api</option>
+                    <option value="3" <?php if (isset($_GET['type']) && $_GET['type'] == 3) {?>selected<?php }?>>golang采集api</option>
+                    <option value="4" <?php if (isset($_GET['type']) && $_GET['type'] == 4) {?>selected<?php }?>>golang钱包模式</option>
+                </select>
+
+            </label>
+
+             <label for="menuLevel"> 状态:
+                <select type="select" name="state"  id="state" style="width:90px;">
+                    <option value="" >全部</option>
+                    <option value="1" <?php if (isset($_GET['state']) && $_GET['state'] == 1) {?>selected<?php }?>>启用</option>
+                    <option value="2" <?php if (isset($_GET['state']) && $_GET['state'] == 2) {?>selected<?php }?>>停用</option>
+                </select>
+            </label>
+
+    
+        <label>
+            <input type="button" id='search' class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+<div class="row" >
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">线路ID</th>
+                        <th class="center">I P</th>
+                        <th class="center">类型</th>
+                        <th class="center">状态</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">修改时间</th>
+                        <th class="center">备注</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a><?php if (isset($_smarty_tpl->tpl_vars['v']->value['ipTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['ipTxt'];
+}?></a>
+                        </td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['typeTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['typeTxt'];
+}?></td>
+                        <td class="center green"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['stateTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['stateTxt'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['addtime'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['addtime'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['updatetime'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['addtime'];
+}?></td>
+                        <td class="center" style="max-width:150px;"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['remark'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['remark'];
+}?></td>
+
+                        <td class="center handle">
+                            <span  class="btn btn-xs btn-success update" lid='<?php echo $_smarty_tpl->tpl_vars['v']->value["id"];?>
+' lstate='<?php echo $_smarty_tpl->tpl_vars['v']->value["state"];?>
+' lip='<?php echo $_smarty_tpl->tpl_vars['v']->value["ip"];?>
+' lremark='<?php echo $_smarty_tpl->tpl_vars['v']->value["remark"];?>
+'  lline='<?php echo $_smarty_tpl->tpl_vars['v']->value["line_id"];?>
+'  ltype='<?php echo $_smarty_tpl->tpl_vars['v']->value["type"];?>
+'>修改</span>
+                        </td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<div class="isHide layui-layer-wrap" id="get_div" style="display: none;">
+    <div class="modal-body">
+        <form  class="form-horizontal" id="fom" >
+           <table id="change_money" class="table table-striped table-bordered table-hover">
+                <tr>
+                    <td>线路:</td>
+                    <td>
+                        <select type="select" name="line_id"  id="line_id" style="width:120px;margin-left:34px;">
+                            <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['lines']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['lines']->value[$_smarty_tpl->tpl_vars['k']->value]['line_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+</option>
+                            <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                            <option value="wallet">钱包模式</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>类型</td>
+                    <td>
+                        <select type="select" name="type"  id="type" style="width:120px;margin-left:35px;">
+                             <option value="1" >前台api</option>
+                             <option value="2" >golang接入api</option>
+                             <option value="3" >golang采集api</option>
+                             <option value="4" >golang钱包模式</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>I P</td>
+                    <td>
+                        <textarea cols="30" rows="5" id="ip" name="ip" placeholder="多个IP请用半角逗号隔开" ></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>状态</td>
+                    <td>
+                    <input type="radio" name="status"  checked="checked" value="1" style="margin-left:20px;"/> 启用
+                    <input type="radio" name="status"  style="margin-left:20px;" value="2" /> 停用
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>备注</td>
+                    <td>
+                        <textarea cols="30" rows="4" id="remark" name="remark" placeholder="" ></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='2'>
+                    <center><input type="button" class="btn btn-info" value = "保存"  onclick="javascript:save();"  style="margin-left:20px;" /></center>
+                    </td>
+                </tr>
+                 <input type="hidden" name="s_id" id="s_id" value="" />
+      
+            </table>
+        </form>
+    </div>
+</div>
+
+
+
+<?php echo '<script'; ?>
+>
+
+
+   
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var line_id = $.trim($('#line').val());
+        var type = $.trim($('#showtype').val());
+        var state = $.trim($('#state').val());
+
+        var params = {
+            line_id: line_id,
+            type: type,
+            state: state
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/other/whitelist',
+            container: '#container'
+        });
+    }
+
+    //pjax局部加载表单
+    function renderFormByPjax(url) {
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    }
+
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+
+  
+    //线路
+     $('#line').change(function () {
+        renderTableByPjax();
+     })
+    //类型
+     $('#showtype').change(function () {
+        renderTableByPjax();
+     })
+    //状态
+     $('#state').change(function () {
+        renderTableByPjax();
+     })
+   
+    //清除弹框内容
+    function clearData(){
+        $('#line_id').attr('disabled', false);
+        $('#type').attr('disabled', false);
+        $('#line_id').children().prop('selected',false);
+        $('#type').children().prop('selected',false);
+        $('input[name="status"][value=1]').prop('checked',true);
+        $('#s_id').val(''); 
+        $('#ip').val('');
+        $('#remark').val('');
+    }
+    //新增
+    $('#create').click(function () {
+        clearData();
+        openLayer('添加IP白名单','500px');
+    })
+
+    //修改
+    $('.update').click(function(){
+        clearData();
+        var id = $(this).attr('lid');
+        var line_id = $(this).attr('lline');
+        var state = $(this).attr('lstate');
+        var type = $(this).attr('ltype');
+        var ip = $(this).attr('lip');
+        var remark = $(this).attr('lremark');
+        if(line_id == '钱包') line_id = 'wallet';
+        $('#s_id').val(id);
+        $('#ip').val(ip);
+        $('#remark').val(remark);
+        $('input[name="status"][value='+ state +']').prop('checked',true);
+        $('#line_id option[value='+ line_id +']').prop('selected',true);
+        $('#type option[value='+ type +']').prop('selected',true);
+        $('#line_id').attr('disabled', true);
+        $('#type').attr('disabled', true);
+        openLayer('修改IP白名单','500px');
+
+    })
+
+    function save(){
+        var line_id = $('#line_id').val();
+        var ip = $('#ip').val();
+        var id = $('#s_id').val();
+        var type = $('#type').val();
+        var remark = $('#remark').val();
+        var status = $('input[name="status"]:radio:checked').val();
+        var url = 'savewhite';
+        if(line_id == ''){
+            layer.alert('请选择线路',{icon:2});
+            return false;
+        }
+        if(ip == ''){
+            layer.alert('请输入ip',{icon:2});
+            $('#ip').focus();
+            return false;
+        }
+
+        login_ip_arr = ip.split(',');
+        patterns = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}$/;
+        for(x in login_ip_arr){
+            if(!patterns.test(login_ip_arr[x])){
+                // login_ip_arr[x].
+                layer.alert('IP格式不正确', {icon: 2})
+                return false;
+            }
+        }
+
+        var data = {line_id:line_id,ip:ip,id:id,type:type,status:status,remark:remark};
+        var callback = function (result) {
+            layer.close(index);
+            if(result.ErrorCode == 1){
+                layer.alert(result.ErrorMsg,{icon:1},function(){window.location.reload();});
+            }else if(result.ErrorCode == 2){
+                layer.alert(result.ErrorMsg,{icon:2});
+                return false;
+            }else{
+                layer.alert('出错啦',{icon:0});
+                return false;
+            }
+            return false;
+        }
+
+        doajax(url,data,callback);
+    }
+
+    // 弹框
+    function openLayer(title, height) {
+        open = layer.open({
+            type: 1, //Page层类型
+            area: ['400px', height],
+            title: title,
+            shade: 0.5, //遮罩透明度
+            maxmin: true, //允许全屏最小化
+            anim: 1, //0-6的动画形式，-1不开启
+            content: $('#get_div')
+        });
+    }
+
+    function doajax(url,data,callback){
+         $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+               callback(res);
+            }
+        });
+    }
+
+
+<?php echo '</script'; ?>
+>
+<?php }
+}

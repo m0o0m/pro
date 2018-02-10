@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "MDJ4bD8UaRjGF0odHJm8m0s9mH4=",
+			"path": "github.com/gansidui/gotcp",
+			"revision": "7a5bfb32867e589216b0a96010cd12fc860c0d95",
+			"revisionTime": "2017-04-18T07:26:13Z"
+		}
+	],
+	"rootPath": "/Volumes/zxc/golang/wallet1.1/src"
+}

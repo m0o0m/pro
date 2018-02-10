@@ -1,0 +1,325 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>PK</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+
+
+</head>
+
+<style>
+    .myx_modal-s .go_deposit {
+        background:url("{{.CdnUrl}}/wap/style/images/gray_dialog.png");
+    }
+    
+    #marquee2 {
+        height: 25px;
+        overflow: hidden;
+    }
+    
+    #marquee2 ul li {
+        float: left;
+        padding: 0 0 0 60px;
+        line-height: 25px;
+    }
+    
+    .swiper-wrapper .ag li p {
+        background:url("{{.CdnUrl}}/wap/style/images/fullsize_distr.png") no-repeat;
+        height: 100px;
+        line-height: 180px;
+        background-size: 440px;
+        background-position-x: 8px;
+        max-width: 95px;
+        margin: 0 auto;
+        font-size: 16px;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='ag'],
+    .swiper-wrapper .ag li p[paidType='ag_dz'] {
+        background-position: 32% 26.5%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='lebo'] {
+        background-position: 102.5% 26.5%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='lmg'] {
+        background-position: 67% 53%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='gd'],
+    .swiper-wrapper .ag li p[paidType='gd_dz'] {
+        background-position: -1.8% 79.5%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='sa'] {
+        background-position: 102.5% 53%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='pk'],
+    .swiper-wrapper .ag li p[paidType='pk_fc'],
+    .swiper-wrapper .ag li p[paidType='pk_sp'] {
+        background-position: 32% 106%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='gpi'],
+    .swiper-wrapper .ag li p[paidType='gpi_dz'] {
+        background-position: 67% 26.5%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='ab'] {
+        background-position: 32% 79.5%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='dg'] {
+        background-position: 33% 53%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='eg_fc'],
+    .swiper-wrapper .ag li p[paidType='eg_dz'] {
+        background-position: 67% 106%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='cs_fc'] {
+        background-position: 102.5% 106%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='pt_dz'] {
+        background-position: 67% 79.5%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='hb_dz'] {
+        background-position: -1.8% 106%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='gg_dz'] {
+        background-position: 102.5% 79.5%;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='sb_sp'] {
+        background-position: 67% 0;
+    }
+    
+    .swiper-wrapper .ag li p[paidType='im_sp'] {
+        background-position: 102.5% 0;
+    }
+    
+    #clickAccount {
+        max-width: 120px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    
+    .registered {
+        display: none;
+    }
+</style>
+
+<body ontouchstart>
+    <header class="head-h">
+        <ul class="h-head">
+            <li>
+                <img src="{{.LogoUrl}}">
+            </li>
+            <li></li>
+            <li class="registered">
+                <a href="/m/login" style="float: left;">登录</a><span style="float: left;
+    width: 10px;">/</span>
+                <a href="/m/reg" style="float: left;width: 40px;">注册</a>
+            </li>
+        </ul>
+    </header>
+
+    <div id="mescroll" class="mescroll">
+
+        <div class="swiper-container top_img">
+            <div class="swiper-wrapper">
+                {{$cdnUrl:=.CdnUrl}} {{range .FlashList}}
+                <div class="swiper-slide">
+                    <img src="{{$cdnUrl}}{{.ImgUrl}}">
+                </div>
+                {{end}}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <section class="happy">
+            <i class="iconfont wap-laba"></i>
+            <div class="container" id="marquee2">
+                <ul class="clear">
+                    <li><a href="javascript:void(0);">{{.Notice}}扯鸡蛋扯鸭蛋扯鸵鸟蛋扯鸡蛋扯鸭蛋扯鸵鸟蛋扯鸡蛋扯鸭蛋扯鸵鸟蛋扯鸡蛋扯鸭蛋扯鸵鸟蛋</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="swiper-container video-cen">
+
+            <div class="video">
+            </div>
+            <div class="swiper-wrapper">
+
+                {{range $k,$v:=.Content}}
+                <ul class="ag clear swiper-slide">
+                    {{$gameType := .Module.VType}} {{range .SubModule}}
+                    <li onclick="openGame('','{{$gameType}}','{{.VType}}')">
+                        <!-- <a > -->
+                        <!-- <img src="{{$cdnUrl}}/wap/style/images/module/{{.VType}}.png"> -->
+                        <p paidType="{{.VType}}">{{.Name}}</p>
+                        <!-- </a> -->
+                    </li>
+                    {{end}}
+                </ul>
+                {{end}}
+
+            </div>
+        </div>
+        <ul class="footer">
+            {{/*
+            <li><a href="/index">电脑版</a><i class="iconfont wap-diannaoban"></i></li>*/}}
+            <li><a href="/m/fast">快捷充值</a><i class="iconfont wap-chongzhi"></i></li>
+            <li><a href="/m/apply">优惠申请</a><i class="iconfont wap-privilege"></i></li>
+            <li><a href="javascript:;" onclick="clearCache();">清除缓存</a><i class="iconfont wap-qingchuhuancun"></i></li>
+        </ul>
+        <div class="footer-txt">
+            <p>COPYRIGHT © {{.SiteName}} RESERVED</p>
+        </div>
+
+
+    </div>
+
+
+    {{template "footer" .}}
+
+<div class="myx_modal">
+    <div class="myx_modal-s">
+        <div><i class="shutDown iconfont wap-guanbi"></i></div>
+        <div>EG游戏账户余额（当前：<span class="myx_modal-s-red">¥0.00</span>）</div>
+        <div><span>系统余额：<span class="myx_modal-s-red">1201020.79</span></span><a class="fr go_deposit" href="/m/bank">去存款</a></div>
+        <div><span>转入金额：</span><input type="text" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/"/></div>
+        <div class="one">
+            <button class="but-1"><a href="#">进入游戏</a></button><button class="but-3">确认转账</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/swiper.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery.kxbdmarquee.js"></script>
+
+
+<script>
+    var cdnUrl = '{{.CdnUrl}}';
+    var a = [];
+    {{range $k,$v:=.Content}}
+    a[{{$k}}] = {
+        vType: "{{ .Module.VType }}",
+        icon: "{{if eq .Module.VType "video"}}wap-luxiangpeizhi{{else if eq .Module.VType "fc"}}wap-caipiao{{else if eq .Module.VType "sp"}}wap-lanqiu{{else}}wap-laohuji{{end}}",
+        name: "{{.Module.Name}}"
+    };
+
+    {{end}}
+
+    $(document).ready(function(e) {
+
+        // var isPC = typeof window.orientation == 'undefined' ;
+
+        //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
+        var mescroll = new MeScroll("mescroll", {
+            //下拉刷新的所有配置项
+            down: {
+                use: false, //是否初始化下拉刷新; 默认true
+                auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+            }
+        });
+
+
+        $("#marquee2").kxbdMarquee({
+            isEqual: false
+        });
+
+        $(".top_img").swiper({
+            loop: true,
+            autoplay: 3000,
+            pagination: '.swiper-pagination',
+            autoplayDisableOnInteraction: false
+        });
+        $(".video-cen").swiper({
+            pagination: ".video",
+            paginationClickable: true,
+            paginationBulletRender: function(index, className) {
+                return '<span class="' + className + '">' +
+                    '<i class="iconfont ' + a[index].icon + '">' +
+                    '</i>' + '<p class="video-p">' +
+                    a[index].name + '</p>' +
+                    '</span>';
+            }
+        });
+
+        $(".swiper-wrapper .ag").on("click", "li", function() {
+            $(".myx_modal").show();
+        })
+
+        $('.myx_modal').on("click", ".shutDown", function() {
+            $(".myx_modal").hide()
+        })
+
+
+        if (getCookie('loginBack')) { //判断是否登陆
+            var logindata = loginId();
+            // $(".registered").show()
+            $('.registered').html('<div id="clickAccount">欢迎您：' + logindata.account + '</div><div class="account-select" style="    background: rgb(255, 107, 42); position: relative; z-index: 999;width: 60px;right: -70px;text-align: center;top: -1px;display: none;border-radius: 0 0 0 45px;"><a style="width: 40px;" href="javascript:;" onclick="logOut()">登出</a></div>').show();
+            $('#clickAccount').click(function() {
+                $('.account-select').slideToggle();
+            })
+        } else {
+            $(".registered").show()
+            let html = `<div><i class="shutDown iconfont wap-guanbi" style="color: #fff;"></i></div>
+            <div class="cen">你还未登录</div>
+            <div class="cen">请先登录/注册再进行此操作</div>
+            <div class="one">
+                <button class="but-1"><a href="#">点击试玩</a></button><button class="but-3"><a href="/m/reg">还未注册？</a></button>
+            </div>
+            <div class="tow">
+                <button><a href="/m/login">立即登录</a></button>
+            </div>`
+            $(".myx_modal-s").html(html);
+        }
+
+    });
+    //视讯
+    var url = "";
+
+    function openGame(gameId, gameType, vType) {
+        if (gameType === 'dz') {
+            url = '/m/egame?type=' + vType
+        } else {
+            url = '/m/video/login?vType=' + vType;
+        }
+        $(".myx_modal .but-1 a").attr("href", url);
+    }
+
+    // $(".myx_modal").on("clikc",".but-1",function(){
+    //     console.log(11)
+    //     window.open(url)
+    // })
+</script>
+<script src="{{.CdnUrl}}/wap/style/js/redbag.js"></script>

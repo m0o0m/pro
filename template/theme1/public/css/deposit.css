@@ -1,0 +1,277 @@
+a{
+    color: #000;
+}
+
+
+.deposit-div1{
+    border: 1px solid #DDD;
+    margin-top: 5px;
+}
+.deposit-div1 .deposit-top{
+    height: 37px;
+    background-color: #F0F0F0;
+    padding-top: 12px;
+}
+.deposit-top p{
+    margin-left: 27px;
+    padding-left: 10px;
+    border-left: 2px solid #FF3440;
+}
+.deposit-nuv{
+    padding: 8px 0 8px 38px;
+    background-color: #fff;
+}
+.deposit-nuv li{
+    margin-right: 5px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.deposit-nuv li:hover{
+    box-shadow: 0px 4px 8px #ddd;
+}
+
+.deposit-nuv-shadow{
+    box-shadow: 0px 4px 8px #ddd;
+    background-color: #F2255F;
+    border: 1px solid transparent !important;
+}
+.deposit-nuv-shadow a{
+    color: #fff;
+}
+
+.deposit-div2{
+    margin-top: 5px;
+    overflow: hidden;
+    padding-left: 30px;
+    background-color: #fff;
+    border: 2px solid #FFC832;
+    padding-top: 25px;
+}
+
+.vip-bar-item  .deposit-account{
+    border: 1px solid #DDD;
+    padding: 17px 0 12px 38px;
+    background-color: #fff;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.deposit-account li{
+    background: url(../image/onlinepay.png) no-repeat;
+    width: 160px;
+    height: 48px;
+    line-height: 26px;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    border: 2px solid #D5D9DC;
+}
+.deposit-account li:nth-child(1){
+    background-position:-560px -40px; 
+}
+.deposit-account li:nth-child(2){
+    background-position:-31px -129px; 
+}
+.deposit-account li:nth-child(3){
+    background-position:-296px -129px; 
+}
+.deposit-account li:nth-child(4){
+    background-position:-560px -129px; 
+}
+.deposit-account li:nth-child(5){
+    background-position:-31px -212px; 
+}
+.deposit-account li:nth-child(6){
+    background-position:-296px -212px; 
+}
+.deposit-account li:nth-child(7){
+    background-position:-560px -212px; 
+}
+
+/* .deposit-schedule{
+    border: 1px solid #DDD;
+    height: 120px;
+    background-color: #fff;
+    position: relative;
+}
+.deposit-schedule .round{
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 18px;
+    z-index: 10;
+    text-align: center;
+}
+.deposit-schedule .line{
+    position: absolute;
+    top: 50px;
+    width: 288px;
+} */
+
+
+/* .round .round-2{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #E8E8E8;
+    line-height: 60px;
+    text-align: center;
+}
+
+.round .round-2 .myicon{
+    font-size: 30px;
+    color: #666;
+}
+.FEF7F9{
+    color: #FEF7F9 !important;
+} */
+.myd-red{
+    color: red !important;
+}
+
+/* .round p{
+    font-size: 14px;
+}
+.round .myd-t-gou{
+    color: #29BA1A;
+}
+
+
+} */
+
+/* .deposit-schedule .round:nth-child(3){
+    left: 20%;
+}
+.deposit-schedule .round:nth-child(4){
+    left: 47.5%;
+}
+.deposit-schedule .round:nth-child(5){
+    left: 75%;
+} */
+.caveat{
+    opacity: 0;
+    font-size: 12px;
+    padding-left: 20px;
+}
+
+.opacity{
+    opacity: 1 !important;
+}
+.myiocn-gou{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #0BBE43;
+    opacity: 0;
+}
+/* .deposit-schedule .line:nth-child(1){
+    left: 240px;
+}
+.deposit-schedule .line:nth-child(2){
+    left: 515px;
+} */
+
+.my-ma-show{
+    display: block;
+}
+.my-ma-hide{
+    display: none;
+}
+.vo{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+
+/* 这是日期插件的css */
+#schedule-box{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 90px;
+    width: 300px;
+    margin: 0 auto;
+    font-size: 13px;
+    background-color: #fff;
+}
+
+.schedule-hd{
+    padding: 10px 15px;
+}
+.schedule-hd >span{
+    display: inline-block;
+}
+.schedule-hd >span:nth-child(2){
+    width: 170px;
+}
+.schedule-hd >span:nth-child(1){
+    width: 50px;
+}
+.schedule-hd >span:nth-child(3){
+    text-align: right;
+    width: 50px;
+}
+
+.today{
+    flex: 1;
+    text-align: center;
+}
+.ul-box{
+    overflow: hidden;
+    padding: 5px 0 5px 0px;
+}
+.ul-box > li{
+    float: left;
+    width: 14.28%;
+    text-align: center;
+    /* padding: 5px 0; */
+    margin-bottom: 0;
+}
+.other-month{
+    color: #999;
+}
+.current-month{
+    color: #333333;
+}
+.today-style{
+    border-radius: 50%;
+    background: #58d321;
+}
+.arrow{
+    cursor: pointer;
+}
+.dayStyle{
+    display: inline-block;
+    width: 35px !important;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center !important;
+    line-height: 35px;
+    cursor: pointer;
+}
+.current-month > .dayStyle:hover{
+    background: #00BDFF;
+    color: #ffffff;
+}
+.today-flag{
+    background: #00C2B1;
+    color: #fff;
+}
+.boxshaw{
+    box-shadow: 2px 2px 15px 2px #e3e3e3;
+}
+.selected-style {
+    background: #00BDFF;
+    color: #ffffff;
+}

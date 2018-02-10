@@ -1,0 +1,20 @@
+package schema
+
+//线路表
+type SysLineList struct {
+	Id         int64   `xorm:"'id' PK autoincr notnull"`
+	LineId     string  `xorm:"'line_id' notnull index(line_id)"` //线路id
+	LineName   string  `xorm:"'line_name' notnull"`              //线路名称
+	Money      float64 `xorm:"'money' notnull default(0.00)"`    //线路额度
+	Url        string  `xorm:"'url' default('ull')"`             //线路对应的url
+	Addtime    int64   `xorm:"'addtime' notnull"`                //添加时间
+	Updatetime int64   `xorm:"'updatetime' default(ull)"`        //修改时间
+	Type       int64   `xorm:"'type' notnull default(1)"`        //1为钱包模式,2为额度转换
+	Status     int64   `xorm:"'status' notnull default(1)"`      //1启用2停用,3维护
+	Md5key     string  `xorm:"'md5key' notnull"`                 //线路接口
+	Deskey     string  `xorm:"'deskey' default('ull')"`          //线路接口
+}
+
+func (*SysLineList) TableName() string {
+	return "my_sys_line_list"
+}

@@ -1,0 +1,123 @@
+<!-- 会员资料 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('Customer Info')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset >
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Proxy account')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <label class="form-control ">{{detail.account}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Real name')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text" ng-model="detail.realname">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Customer ID')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text" ng-model="detail.id">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('ID number')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text" ng-model="detail.card">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('birthdays')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <div class="input-group">
+                                                                <input type="text" name="mydate" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="detail.birthday">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Cell-phone number')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text" ng-model="detail.mobile">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Mailbox')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text" ng-model="detail.email" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">QQ</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text"  ng-model="detail.qq">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('WeChat')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text" ng-model="detail.wechat" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Remarks')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text" ng-model="detail.remark">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('ATM password')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <input class="form-control"  type="text" ng-model="detail.draw_password">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Registration time')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <label class="col-md-3 form-control text-left">{{detail.create_time|formatDate}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Last logon time')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <label class="col-md-3 form-control text-left">{{detail.login_time|formatDate}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 col-xs-4 input-label">{{getWord('Finally login to IP')}}</label>
+                                                        <div class="col-md-6 col-xs-8">
+                                                            <label class="col-md-3 form-control text-left">{{detail.login_ip}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.history.back();">
+                                                            {{getWord('Cancel')}}
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary" ng-click="submit()">
+                                                            {{getWord('Confirm')}}
+                                                        </button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+    </section>
+</div>

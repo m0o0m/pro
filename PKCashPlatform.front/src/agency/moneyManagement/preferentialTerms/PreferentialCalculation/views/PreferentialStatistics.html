@@ -1,0 +1,240 @@
+<div id="content">
+    <div class="row">
+        <section widget-grid id="widget-grid">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('PreferentialStatistics')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">站点</label>
+                                                        <div class="col-sm-3 col-xs-8">
+                                                            <div class="form-group">
+                                                                <!--<div class="form-group">-->
+                                                                <select data-smart-select2  ng-model="site" class="selectWidth">
+                                                                    <option value="">请选择</option>
+                                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                                </select>
+                                                                <!--</div>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div>
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">日期查询</label>
+                                                        <div class="col-sm-3 col-xs-8">
+                                                            <div class="input-group form-group">
+                                                                <input type="text" class="form-control" data-smart-masked-input="9999-99-99" data-mask-placeholder= "-" ng-model="start_time">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-md-offset-0 col-xs-offset-4 col-xs-8">
+                                                            <div class="input-group form-group">
+                                                                <input type="text" class="form-control" data-smart-masked-input="9999-99-99" data-mask-placeholder= "-" ng-model="end_time">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                        <lable class="col-md-3 col-md-offset-0 col-xs-8 col-xs-offset-4" style="color: red">【请勿跨月查询】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label class="col-md-2 col-xs-4 input-label text-align-right">体系选择</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class=" form-group ">
+                                                                <select data-smart-select2 ng-change="change(rtype)" ng-model="rtype" class="selectWidth" id="type">
+                                                                    <option value="">请选择</option>
+                                                                   <option value="{{item.id}}" ng-repeat="item in option_Preferential_member">{{item.name}}</option>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="">
+                                                        <label  class="col-md-2 col-xs-4 input-label text-align-right">显示条件:</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class=" form-group">
+                                                                <select class="form-control" ng-model="typeed">
+                                                                    <option value="">有优惠</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+                                                <fieldset ng-show="istrue">
+                                                    <label class="col-md-2 col-xs-4 input-label">会员层级</label>
+                                                    <div class="widget-body no-padding form-group col-md-6 col-md-12 inline-group">
+                                                        <div class="panel-group smart-accordion-default" id="accordion-2" style="margin-left: 10px; margin-top: 10px;">
+                                                                <div class="panel panel-default">
+                                                        <div class="panel-heading ">
+                                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#collapseTwo-1" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i>点击展开</a></h4>
+                                                        </div>
+                                                        <div id="collapseTwo-1" class="panel-collapse collapse ">
+                                                            <div class="panel-body inline-group col-md-12">
+                                                                <label class="radio col col-md-4 col-xs-4" ng-repeat="item in drp">
+                                                                    <input type="checkbox" name="radio-inline2" class="disable" value="{{item.level_id}}" style="margin-top: 1px">
+                                                                    {{item.level_id}}</label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset ng-show="istrue_1">
+                                                    <div class="">
+                                                        <label class="col-md-2 input-label col-xs-4 text-align-right">会员账号</label>
+                                                        <div class="col-md-3 col-xs-8">
+                                                            <div class=" form-group ">
+                                                                <input class="form-control inp_2" placeholder="" type="text" >
+                                                            </div>
+                                                            <div class="input-group form-group col-md-12">
+                                                                <textarea rows="4" class="col-md-12"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1 col-xs-1">
+                                                            <button class="ids btn btn-primary btn-xs" type="submit" >
+                                                                <i class="fa fa-save"></i>
+                                                                确定
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="pull-right">
+                                                    <div class="row">
+                                                        <div class="col-md-12 ">
+                                                            <button class="btn btn-primary ng-binding" type="submit" ng-click="se()">
+                                                                <i class="fa fa-save"></i>
+                                                                查询
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+        <!--详情-->
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                            <fieldset>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">{{getWord('accounts')}}</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">456465465</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">真实姓名</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">张三</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">出生日期</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">2015-10-02</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">国际</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">中国</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">身份证号</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">42112419802813445</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">手机号</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">1368277653</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">QQ</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">123123123123</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">Email</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">123123123@qq.com</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">取款银行</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">中国银行</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">银行账号</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">45546465546465465456456</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">支行名称</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">桥梁支行</b>
+                                    </label>
+                                </section>
+                                <section class="input-item">
+                                    <label class="col-md-3 input-label">地区</label>
+                                    <label class="col-md-7 input">
+                                        <b class="form-control">浙江省/杭州市</b>
+                                    </label>
+                                </section>
+
+                                <div class="col-md-4">
+                                    <input class="form-control"  type="hidden" name="roleId"  hidden="hidden" value="5" ng-model="formData.role_id">
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control"  type="hidden"  disabled="disabled" value="0" name="parentId" ng-model="formData.parent_id">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{getWord('Cancel')}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submited()">
+                            {{getWord('Confirm')}}
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

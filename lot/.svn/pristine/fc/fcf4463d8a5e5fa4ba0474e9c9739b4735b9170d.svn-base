@@ -1,0 +1,41 @@
+<?php
+
+use \Workerman\Worker;
+use \Workerman\Lib\Timer;
+use Applications\Tools\Lib\Common;
+use \helper\RedisConPool as Redis;
+use Applications\Tools\Lib\Games;
+use \helper\MysqlPdo as pdo;
+use \helper\Encrypt;
+use helper\TcpConPoll;
+use \helper\IdWork;
+
+require_once __DIR__ . '/../../Workerman/Autoloader.php';
+
+$worker = new Worker("text://0.0.0.0:7777");
+
+$worker->name = 'test';
+
+$worker->count = 1;
+
+$worker->onWorkerStart = function($worker) {
+    
+};
+
+$worker->onMessage = function($connection, $data) {
+   
+    if (empty($data)) {
+        sleep(1);
+    }
+
+    
+    
+
+
+
+    $connection->send('success');
+};
+
+if (!defined('GLOBAL_START')) {
+    Worker::runAll();
+}

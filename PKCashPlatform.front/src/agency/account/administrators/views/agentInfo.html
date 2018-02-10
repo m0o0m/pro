@@ -1,0 +1,139 @@
+<!-- 管理员账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div id="tabs" data-smart-jqui-tabs>
+            <div id="tabs-c">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">{{getWord('Proxy information')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Proxy account')}}</label>
+                                <div class="col-md-6">
+                                    <label class="control-label">a123</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Real name')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('English name')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('ID number')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Cell-phone number')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">QQ：</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('English name')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">E-MAIL</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Withdrawal bank')}}</label>
+                                <div class="col-md-3">
+                                    <select class="form-control">
+                                        <option value="-1">工商银行</option>
+                                        <option value="1">2成</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Bank account')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Province')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Counties and cities')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Cell-phone number')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('ATM password')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Remarks')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Promotion URL')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Other promotion methods')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" >
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+</div>

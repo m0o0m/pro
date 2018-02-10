@@ -1,0 +1,53 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"net"
+	"os"
+	"os/signal"
+	"runtime"
+	"syscall"
+	"time"
+
+	"github.com/gansidui/gotcp"
+	"core"
+	"global"
+)
+
+func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	//配置文件
+	global.App_ini()
+
+	// creates a tcp listener
+	tcpAddr, err := net.ResolveTCPAddr("tcp4", global.Cfg.ListeningAdd)
+	checkError(err)
+	listener, err := net.ListenTCP("tcp", tcpAddr)
+	checkError(err)
+
+	// creates a server
+	config := &gotcp.Config{
+		PacketSendChanLimit:    20,
+		PacketReceiveChanLimit: 20,
+	}
+	srv := gotcp.NewServer(config, &core.PacketCallback{}, &core.PacketProtocol{})
+
+	// starts service
+	go srv.Start(listener, time.Second)
+	fmt.Println("listening:", listener.Addr())
+
+	// catchs system signal
+	chSig := make(chan os.Signal)
+	signal.Notify(chSig, syscall.SIGINT, syscall.SIGTERM)
+	fmt.Println("Signal: ", <-chSig)
+
+	// stops service
+	srv.Stop()
+}
+
+func checkError(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}

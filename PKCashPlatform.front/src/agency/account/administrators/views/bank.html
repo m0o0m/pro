@@ -1,0 +1,98 @@
+<!-- 出款银行 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('Bank')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>卡主名字</th>
+                                            <th>银行卡号</th>
+                                            <th>支行</th>
+                                            <th>添加时间</th>
+                                            <th>银行id</th>
+                                            <th style="text-align: center;">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.card_name}}</td>
+                                            <td>{{item.card}}</td>
+                                            <td>{{item.card_address}}</td>
+                                            <td>{{item.create_time|formatDate}}</td>
+                                            <td>{{item.bank_id}}</td>
+                                            <td>
+                                                <button class="btn btn-default btn-xs" ng-click="disable(item.id)">删除</button>
+                                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="Discount(item.card)" >修改</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">{{getWord('modifyUserBank')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('bankBranch')}}:</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" ng-model="modifys.card_address">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Name')}}:</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" ng-model="modifys.card_name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('card')}}:</label>
+                                <div class="col-md-6">
+                                    <input class="form-control"  type="text" ng-model="modifys.card">
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="modifyssubmit()" data-dismiss="modal">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

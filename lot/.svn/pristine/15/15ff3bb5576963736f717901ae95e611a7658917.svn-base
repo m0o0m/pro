@@ -1,0 +1,9 @@
+2017-09-12 13:56:56
+ah_k320170906036 update auto error 
+update my_ah_k3_auto set status=3 where qishu=20170906036 and status in(1,2)
+2017-09-12 13:59:42
+ah_k320170906036 update auto error 
+update my_ah_k3_auto set status=3 where qishu=20170906036 and status in(1,2)
+2017-09-12 13:59:52
+ah_k3 select 20170912032 count error
+SELECT count(id) as count FROM my_bet_ah_k3 where periods='20170912032' and js = 1 and addtime >= '1505195400'

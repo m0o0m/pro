@@ -1,0 +1,78 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('CommissionStatistics')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th rowspan="2">账号名称</th>
+                                                <th rowspan="2">有效会员（含期前）</th>
+                                                <th rowspan="2">JACK前期/当前</th>
+                                                <th rowspan="2">前期盈利</th>
+                                                <th rowspan="2">当期盈利</th>
+                                                <th colspan="{{arr.length}}" style="text-align: center">退佣比例(%)</th>
+                                                <th rowspan="2">前期有效投注</th>
+                                                <th rowspan="2">当期有效投注</th>
+                                                <th colspan="{{arr.length}}" style="text-align: center">退水比例(%)</th>
+                                                <th rowspan="2">前期费用</th>
+                                                <th rowspan="2">当期费用</th>
+                                                <th rowspan="2">可获退水</th>
+                                                <th rowspan="2">可获退佣</th>
+                                                <th rowspan="2">总可退金额</th>
+                                                <th rowspan="2">备注</th>
+                                            </tr>
+                                            <tr>
+                                                <th ng-repeat="item in arr track by $index">{{item}}</th>
+                                                <th ng-repeat="item in arr track by $index">{{item}}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="text-align-center">
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.member}}</td>
+                                                <td>{{item.before_jack}}/{{item.now_jack}}</td>
+                                                <td>{{item.before_earning}}</td>
+                                                <td>{{item.now_earning}}</td>
+                                                <td ng-repeat="tuiyong in item.RebateRatio track by $index">{{tuiyong}}</td>
+                                                <td>{{item.before_betting}}</td>
+                                                <td>{{item.now_betting}}</td>
+                                                <td ng-repeat="tuishui in item.WaterRatio track by $index">{{tuishui}}</td>
+                                                <td>{{item.before_expense}}</td>
+                                                <td>{{item.now_expense}}</td>
+                                                <td>{{item.aval_tuishui}}</td>
+                                                <td>{{item.aval_tuiyong}}</td>
+                                                <td>{{item.total_return}}</td>
+                                                <td>{{item.remark}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                                </form>
+
+                                <div class="row" style="text-align: center">
+                                    <label class="col-md-12">
+                                        <button class="btn btn-default"  data-ui-sref="app.CommissionStatistics.Commission">{{getWord('rebateKeep')}}</button>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+

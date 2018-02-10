@@ -1,0 +1,167 @@
+
+<!-- 搜索栏 -->
+<style>#search-form label{margin-right:10px}</style>
+<div class="page-header col-xs-12">
+    <form id="search-form" action="" method="?">
+        <label for="">类型:
+            <select type="select" name="type">
+                <option value="">全部</option>
+              <{foreach from=$data.show.types item=val key=key}>
+                <option <{if isset($smarty.get.type) && $smarty.get.type neq '' && $smarty.get.type eq $key}> selected<{/if}> value="<{$key}>"><{$val}></option>
+              <{/foreach}>
+            </select>
+        </label>
+        <label for="">关键词:
+            <input placeholder="请输入关键词进行搜索" type="text" name="keyword" value="<{if isset($smarty.get.keyword)}><{$smarty.get.keyword}><{/if}>">
+        </label>
+       <!--  <label for="">添加时间:
+            <input class="laydate-icon" placeholder="请输入日期" type="text" id="add_starttime" name="add_starttime" value="<{if isset($smarty.get.add_starttime)}><{$smarty.get.add_starttime}><{/if}>">
+            ~
+            <input class="laydate-icon" placeholder="请输入日期" type="text" id="add_endtime" name="add_endtime" value="<{if isset($smarty.get.add_endtime)}><{$smarty.get.add_endtime}><{/if}>">
+        </label>
+        <br> -->
+        <label for="">状态:
+            <select type="select" name="status">
+                <option value="">全部</option>
+              <{foreach from=$data.trans.status item=val key=key}>
+                <option <{if isset($smarty.get.status) && $smarty.get.status neq '' && $smarty.get.status eq $key}> selected<{/if}> value="<{$key}>"><{$val}></option>
+              <{/foreach}>
+            </select>
+        </label>
+        <label for="">每页显示条数:
+            <select type="select" name="pagenum" id="pagenum">
+                <option value="100"  <{if isset($smarty.get.pagenum) && $smarty.get.pagenum eq 100}>selected<{/if}>>100</option>
+                <option value="500" <{if isset($smarty.get.pagenum) && $smarty.get.pagenum eq 500}>selected<{/if}>>500</option>
+                <option value="1000" <{if isset($smarty.get.pagenum) && $smarty.get.pagenum eq 1000}>selected<{/if}>>1000</option>
+            </select>
+        </label>
+        <label for="">页码:
+            <select type="select" name="page" id="page">
+                <{section name=val loop=$result.totalpage}>
+                <option value="<{$smarty.section.val.index+1}>" <{if isset($smarty.get.page) && $smarty.get.page eq $smarty.section.val.index+1}>selected<{/if}>>
+                    <{$smarty.section.val.index+1}>
+                </option>
+            <{/section}>
+            </select>
+            共<{if isset($result.totalpage)}><{$result.totalpage}><{/if}>页
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索" />
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+
+<!-- 列表 -->
+<div class="row">
+    <div class="col-xs-12">
+        <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+            <{include file="_list.html"}>
+        </table>
+    </div>
+</div>
+
+<script>
+// $(document).ready(function(){
+    $("#search-form select").each(function(){
+        $(this).data("lastIndex",$(this).find(':selected').index()).change(function(){
+            var lastIndex = $(this).data('lastIndex');
+            var curIndex = $(this).find(':selected').index();
+            if(lastIndex != curIndex){
+                $(this).css({'color':'red'});
+            }else{
+                $(this).css({'color':''});
+            }
+        });
+    });
+
+// ------------------ 操作 ------------------------------------
+    function search() {
+        $.pjax({
+            data: $('#search-form').serialize(),
+            method: 'get',
+            url: '?',
+            container: '#container'
+        });
+    }
+    function jump(url) {
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    }
+      // 搜索
+     $('#search').click(function () {
+        search();
+    });
+    // 每页显示条数切换
+    $('#pagenum').change(function () {
+        search();
+    });
+    // 页码切换
+    $('#page').change(function () {
+        search();
+    });
+    // 添加
+    $('#create').click(function(){
+        jump('add');
+    });
+    // 修改
+    function actionEdit(id) {
+        jump('add?id='+id);
+    }
+
+// ------------------ 批量 ------------------------------------
+    // 选择全部
+    function checkAll(){
+        if($('input[name=batchAll]').is(':checked')){
+            $('input[name=batchId]').prop('checked',true);
+        }else{
+            $('input[name=batchId]').attr('checked',false);
+        }
+    }
+    // 选择一条
+    function checkOne(){
+        var flag = false;
+        $('input[name=batchId]').each(function(index,obj){
+            if(!$(this).is(':checked')){
+                flag = true;
+            }
+        });
+        if(flag){
+            $('input[name=batchAll]').prop('checked',false);
+        }else{
+            $('input[name=batchAll]').prop('checked',true);
+        }
+    }
+
+// ------------------ 控件 ------------------------------------
+    // //时间控件
+    // var add_start = {
+    //     elem: '#add_starttime',
+    //     format: 'YYYY-MM-DD',
+    //     max: laydate.now(),
+    //     // istime: true,
+    //     istoday: true,
+    //     choose: function (datas) {
+    //         add_end.min = datas;
+    //     }
+    // }
+    // laydate(add_start);
+    // var add_end = {
+    //     elem: '#add_endtime',
+    //     format: 'YYYY-MM-DD',
+    //     max: laydate.now(),
+    //     // istime: true,
+    //     istoday: true,
+    // }
+    // laydate(add_end);
+
+    // <{if !isset($smarty.get.add_starttime)}>
+    //     $('#add_starttime').val(laydate.now(0, 'YYYY-MM-DD'));
+    // <{/if}>
+    // <{if !isset($smarty.get.add_endtime)}>
+    //     $('#add_endtime').val(laydate.now(0, 'YYYY-MM-DD'));
+    // <{/if}>
+</script>

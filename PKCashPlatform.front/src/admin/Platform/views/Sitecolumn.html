@@ -1,0 +1,236 @@
+<div id="content">
+    <div class="row">
+
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>站点栏目</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> 筛选</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <div class="row">
+
+                                            <div class="col-sm-1">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="disables()" href-void>栏目同步</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">栏目名称</th>
+                                            <th class="text-center">URL</th>
+                                            <th class="text-center">TYPE</th>
+                                            <td class="text-center">排序</td>
+                                            <th class="text-center">私有</th>
+                                            <th class="text-center">功能</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list" class="text-center">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.url}}</td>
+                                            <td>{{item.type}}</td>
+                                            <td>{{item.sort}}</td>
+                                            <td>{{item.private}}</td>
+                                            <td>
+                                                <button class="btn btn-xs btn-default" ng-click="add(item.id,item.type)" data-toggle="modal" data-target="#add">添加</button>
+                                                <button class="btn btn-xs btn-default" ng-click="se(item)"  data-toggle="modal" data-target="#dialog_simple_divided">编辑</button>
+                                                <button class="btn btn-xs btn-default" ng-click="del(item.id)">删除</button>
+                                                <button class="btn btn-xs btn-default" ng-click="private(item.id)"  data-toggle="modal" data-target="#site">私有</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="modal fade" id="dialog_simple_divided" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">栏目编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid"  enctype="multipart/form-data" >
+                        <div class="row">
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">名称</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" placeholder="" type="text" ng-model="name" name="agencyName" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">URL路径</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="agencyAccount" placeholder="" type="text" ng-model="url" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">CTYPE</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="password" placeholder="" type="text" ng-model="typeM" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-xs-12">排序</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="password" placeholder="" type="text" ng-model="sort" >
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    {{lang['Cancel']}}
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="submit()" data-dismiss="modal">
+                                    {{lang['Confirm']}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="adds">添加栏目</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid"  enctype="multipart/form-data" >
+                        <div class="row">
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">名称</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" placeholder="" type="text" ng-model="addName">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">URL路径</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="agencyAccount" placeholder="" type="text" ng-model="addUrl" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">CTYPE</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="password" placeholder="" type="text" ng-model="ctype" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-xs-12">排序</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="password" placeholder="" type="text" ng-model="addSort" >
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    {{lang['Cancel']}}
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="addSub()" data-dismiss="modal">
+                                    {{lang['Confirm']}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="site" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="sitelist">选择站点</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid"  enctype="multipart/form-data" >
+                        <div class="row">
+                            <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th><input type="checkbox" name="test_1" ng-model="selectAll" ng-click="all(selectAll)"></th>
+                                            <th>站点</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" name="test" class="selected" value="1"></td>
+                                            <td>站点一</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" name="test" class="selected" value="2"></td>
+                                            <td>站点二</td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    {{lang['Cancel']}}
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="privateSub()" data-dismiss="modal">
+                                    {{lang['Confirm']}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

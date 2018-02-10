@@ -1,0 +1,160 @@
+workspace:
+  base: /go
+  path: src/management/
+
+clone:
+  git:
+    image: plugins/git
+    recursive: false
+#    environment:
+#      - GIT_SSL_NO_VERIFY=true
+
+      
+pipeline:
+  build:
+    image: golang:latest
+    commands:
+      - sh .drone.sh
+    environment:
+      - BUILD_ENV=production
+    when:
+      branch: docker
+      event: push
+
+
+  build_devel:
+    image: golang:latest
+    commands:
+      - sh .drone.sh
+    environment:
+      - BUILD_ENV=development
+    when:
+      branch: dev
+      event: push
+
+  rsync_devel:
+    image: ubuntu
+    commands:
+      - apt-get update && apt-get install rsync -y
+      - /bin/bash -x .rsync.sh
+    secrets: [ rsync_pass, dest_path ]
+    when:
+      branch: dev
+      event: push
+
+  slack_devel:
+    image: reg.pk051.com/drone/slack
+    channel: dev
+    username: drone
+    webhook: https://hooks.slack.com/services/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
+    template: >
+      *{{ uppercase build.status }}* *Development*
+      请注意， 项目 <https://gogs.pk051.com/nothingness/management.git|{{ repo.name }}> 第 _{{ build.number }}_ 次编译已完成。
+      git 信息为 分支 _{{ build.branch }}_ ，事件 _{{ build.event }}_ 。
+      结果为编译
+      {{#success build.status}}
+      *成功*
+      {{else}}
+      *失败*
+      {{/success}}，
+      编译时间为 {{ datetime build.started "Mon Jan _2 15:04:05 MST 2006" "Asia/Shanghai" }} 。
+      详细信息请点击 {{ build.link }}。
+    when:
+      status: [ success, failure ]
+      branch: dev
+
+
+  publish_server:
+    image: plugins/docker
+    dockerfile: server.Dockerfile
+    repo: reg.pk051.com/pkcashplatform/server
+    tag: [ sandbox, "sandbox-${DRONE_BUILD_NUMBER}" ]
+    registry: reg.pk051.com
+    secrets: [ docker_username, docker_password ]
+    build_args:
+      - BUILD_ENV=production
+      - GIT_BRANCH=${DRONE_BRANCH}
+      - GIT_COMMIT_SHA=${DRONE_COMMIT}
+      - GIT_COMMIT_LINK=${DRONE_COMMIT_LINK}
+      - CI_BUILD_TIME=${DRONE_BUILD_CREATED}
+      - CI_BUILD_NUMBER=${DRONE_BUILD_NUMBER}
+    when:
+      branch: docker
+      event: push
+
+  publish_admin:
+    image: plugins/docker
+    dockerfile: admin.Dockerfile
+    repo: reg.pk051.com/pkcashplatform/admin
+    tag: [ sandbox, "sandbox-${DRONE_BUILD_NUMBER}" ]
+    registry: reg.pk051.com
+    secrets: [ docker_username, docker_password ]
+    build_args:
+      - BUILD_ENV=production
+      - GIT_BRANCH=${DRONE_BRANCH}
+      - GIT_COMMIT_SHA=${DRONE_COMMIT}
+      - GIT_COMMIT_LINK=${DRONE_COMMIT_LINK}
+      - CI_BUILD_TIME=${DRONE_BUILD_CREATED}
+      - CI_BUILD_NUMBER=${DRONE_BUILD_NUMBER}
+    when:
+      branch: docker
+      event: push
+
+
+  publish_wap:
+    image: plugins/docker
+    dockerfile: wap.Dockerfile
+    repo: reg.pk051.com/pkcashplatform/wap
+    tag: [ sandbox, "sandbox-${DRONE_BUILD_NUMBER}" ]
+    registry: reg.pk051.com
+    secrets: [ docker_username, docker_password ]
+    build_args:
+      - BUILD_ENV=production
+      - GIT_BRANCH=${DRONE_BRANCH}
+      - GIT_COMMIT_SHA=${DRONE_COMMIT}
+      - GIT_COMMIT_LINK=${DRONE_COMMIT_LINK}
+      - CI_BUILD_TIME=${DRONE_BUILD_CREATED}
+      - CI_BUILD_NUMBER=${DRONE_BUILD_NUMBER}
+    when:
+      branch: docker
+      event: push
+
+  publish_front:
+    image: plugins/docker
+    dockerfile: front.Dockerfile
+    repo: reg.pk051.com/pkcashplatform/front
+    tag: [ sandbox, "sandbox-${DRONE_BUILD_NUMBER}" ]
+    registry: reg.pk051.com
+    secrets: [ docker_username, docker_password ]
+    build_args:
+      - BUILD_ENV=production
+      - GIT_BRANCH=${DRONE_BRANCH}
+      - GIT_COMMIT_SHA=${DRONE_COMMIT}
+      - GIT_COMMIT_LINK=${DRONE_COMMIT_LINK}
+      - CI_BUILD_TIME=${DRONE_BUILD_CREATED}
+      - CI_BUILD_NUMBER=${DRONE_BUILD_NUMBER}
+    when:
+      branch: docker
+      event: push
+
+
+  slack:
+    image: reg.pk051.com/drone/slack
+    channel: dev
+    username: drone
+    webhook: https://hooks.slack.com/services/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
+    template: >
+      *{{ uppercase build.status }}* *Production*
+      请注意， 项目 <https://gogs.pk051.com/nothingness/management.git|{{ repo.name }}> 第 _{{ build.number }}_ 次编译已完成。
+      git 信息为 分支 _{{ build.branch }}_ ，事件 _{{ build.event }}_ 。
+      结果为编译
+      {{#success build.status}}
+      *成功*
+      {{else}}
+      *失败*
+      {{/success}}，
+      编译时间为 {{ datetime build.started "Mon Jan _2 15:04:05 MST 2006" "Asia/Shanghai" }} 。
+      详细信息请点击 {{ build.link }}。
+    when:
+      status: [ success, failure ]
+      branch: docker

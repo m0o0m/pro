@@ -1,0 +1,51 @@
+{{define "memberdrawwrite"}}
+{{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/deposit.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/Audit.css" type="text/css">
+
+
+<div class=" mycenter">
+    <div class="deposit-schedule">
+        <div class="line"></div>
+        <div class="line"></div>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-gou1 myicon FEF7F9"></i>
+              </span>
+              <p class="myd-red">转账银行
+                <i class="icon iconfont icon-gou myd-t-gou"></i>
+              </p>
+            </span>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-surelist myicon"></i>
+              </span>
+              <p class="myd-red">正在稽核</p>
+            </span>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-qiandai1 myicon"></i>
+              </span>
+              <p>完成存款</p>
+            </span>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</body>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/jquery-2.1.4.js"></script>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/Audit.js"></script>
+
+<script>
+    $(".d-3-span2 ul").on('click', 'li', function () {
+        $(this).addClass('d-3-span2-click').siblings().removeClass('d-3-span2-click');
+    });
+    $(".center-t i").click(function () {
+        location.replace(location.href);
+    })
+
+</script>
+
+</html>
+{{end}}

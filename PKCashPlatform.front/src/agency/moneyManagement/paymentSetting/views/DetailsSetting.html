@@ -1,0 +1,387 @@
+<div id="content">
+    <div class="row">
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('PaymentParameterSetting')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-horizontal ng-pristine ng-valid" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="3" style="text-align: center;">
+                                                    出款手续费
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">是否免手续费</label>
+                                                        <div class="col-md-6">
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="1" class="radiobox" name="status" ng-model="data.is_free">
+                                                                <span>是</span>
+
+                                                            </label>
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="2" name="status" class="radiobox"  ng-model="data.is_free">
+                                                                <span>否</span>
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group"style="color: red">
+                                                        <label class="col-md-4">是(免手续费)</label>
+                                                        <label class="col-md-4">否(不免手续费)</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label ">免手续费次数:</label>
+                                                        <div class="col-md-6">
+                                                            <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.free_num" type="text"  style="">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label">出款手续费金额:</label>
+                                                        <div class="col-md-6">
+                                                            <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.out_charge" type="text"  style="">
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr >
+                                                <td class="text-align-center" style="vertical-align: middle">单次额度转下线:</td>
+                                                <td colspan="3" >
+                                                    <div class="col-md-6">
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.once_quota_change_limmit" type="text"  style="">
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr style="text-align: center">
+                                                <td>
+                                                    出入款设定
+                                                </td>
+                                                <td>线上存款</td>
+                                                <td>
+                                                    公司入款
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center" style="vertical-align: middle">存款优惠</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6">
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="1" class="radiobox" name="deposit" ng-model="data.online_is_deposit_discount">
+                                                                <span>首次</span>
+
+                                                            </label>
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="2" name="deposit" class="radiobox"  ng-model="data.online_is_deposit_discount">
+                                                                <span>每次</span>
+                                                            </label>
+
+                                                        </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6">
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="1" class="radiobox" name="line_is_deposit" ng-model="data.line_is_deposit_discount">
+                                                                <span>首次</span>
+
+                                                            </label>
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="2" name="line_is_deposit" class="radiobox"  ng-model="data.line_is_deposit_discount">
+                                                                <span>每次</span>
+                                                            </label>
+
+                                                        </div>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center" style="vertical-align: middle">可放弃线上入款存款优惠</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6">
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="1" class="radiobox" name="online_is_deposit" ng-model="data.online_is_deposit">
+                                                                <span>是</span>
+
+                                                            </label>
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="2" name="online_is_deposit" class="radiobox"  ng-model="data.online_is_deposit">
+                                                                <span>不是</span>
+                                                            </label>
+
+                                                        </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6">
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="1" class="radiobox" name="line_is_deposits" ng-model="data.line_is_deposit">
+                                                                <span>是</span>
+
+                                                            </label>
+                                                            <label class="radio radio-inline">
+                                                                <input type="radio" ng-value="2" name="line_is_deposits" class="radiobox"  ng-model="data.line_is_deposit">
+                                                                <span>不是</span>
+                                                            </label>
+
+                                                        </div>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">优惠标准(元)</td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.online_discount_standard" type="text"  style="">
+                                                </td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.line_discount_standard" type="text"  style="" >
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">优惠百分比(%)</td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.online_discount_percent" type="text"  style="">
+
+                                                </td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.line_discount_percent" type="text"  style="">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">单次最高存款金额(元)</td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.online_deposit_max" type="text"  style="">
+                                                </td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.line_deposit_max" type="text"  style="">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">单次最底存款金额(元)</td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.online_deposit_min" type="text"  style="">
+                                                </td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.line_deposit_min" type="text"  style="">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">优惠上线金额</td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.online_discount_up" type="text"  style="">
+                                                </td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" ng-model="data.line_discount_up" type="text"  style="">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">其他优惠标准(元)</td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.online_other_discount_standard">
+                                                </td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style=""ng-model="data.line_other_discount_standard">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">其他存款优惠百分比(%)</td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.online_other_discount_percent">
+                                                </td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.line_other_discount_percent">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">线上入款其他優惠上限</td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.online_other_discount_up">
+                                                </td>
+                                                <td>
+                                                    <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.line_other_discount_up">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">其他24小时内最高上限</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6">
+                                                            <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style=""ng-model="data.online_other_discount_up_day">
+                                                        </div>
+                                                        <div class="form-group"style="color: red">
+                                                            <label class="col-md-4" style="margin-top: 7px">0为不设上限</label>
+
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-md-6">
+                                                            <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.line_other_discount_up_day">
+                                                        </div>
+                                                        <div class="form-group"style="color: red">
+                                                            <label class="col-md-4"  style="margin-top: 7px">0为不设上限</label>
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center" style="vertical-align: middle">综合额度稽核</td>
+                                                <td>
+                                                    <div  style="vertical-align: middle">
+                                                        <div class="col-md-3">
+                                                            <label class="radio radio-inline">
+                                                                <input type="checkbox" class="checkbox" name="style-0a" ng-checked="data.online_is_multiple_audit==1">
+                                                                <span>开启</span>
+                                                            </label>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.online_multiple_audit_times">
+                                                        </div>
+
+                                                        <label class="col-md-2"  style="margin-top: 7px">(倍)</label>
+
+
+                                                </td>
+                                                <td>
+                                                    <div class="" style="vertical-align: middle">
+                                                        <div class="col-md-3">
+                                                            <label class="radio radio-inline">
+
+                                                                <input type="checkbox" class="checkbox" name="style-0a" ng-checked="data.line_is_multiple_audit==1">
+                                                                <span>开启</span>
+
+                                                            </label>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.line_multiple_audit_times">
+                                                        </div>
+                                                        <label class="col-md-2"  style="margin-top: 7px">(倍)</label>
+
+                                            </tr
+
+                                            <tr>
+                                                <td class="text-align-center" style="vertical-align: middle">常态性稽核</td>
+                                                <td>
+                                                    <div  style="vertical-align: middle">
+                                                        <div class="col-md-3">
+                                                            <label class="radio radio-inline">
+
+                                                                <input type="checkbox" class="checkbox" name="style-0a" ng-checked="data.online_is_normal_audit==1">
+                                                                <span>开启</span>
+
+                                                            </label>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.online_normal_audit_percent">
+                                                        </div>
+
+                                                            <label class="col-md-2"  style="margin-top: 7px">%</label>
+
+
+                                                </td>
+                                                <td>
+                                                    <div class="" style="vertical-align: middle">
+                                                        <div class="col-md-3">
+                                                            <label class="radio radio-inline">
+
+                                                                <input type="checkbox" class="checkbox" name="style-0a" ng-checked="data.line_is_normal_audit==1">
+                                                                <span>开启</span>
+
+                                                            </label>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.line_normal_audit_percent">
+                                                        </div>
+                                                            <label class="col-md-2"  style="margin-top: 7px">%</label>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">常态性稽核放款额度</td>
+                                                <td colspan="2">
+                                                    <div class="col-md-6">
+                                                        <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.audit_relax_quota">
+                                                    </div>
+                                                    <label class="col-md-2"  style="margin-top: 7px">元</label>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-align-center">常态性稽核行政费率</td>
+                                                <td colspan="2">
+                                                    <div class="col-md-6">
+                                                        <input class="form-control inp_2 ng-pristine ng-valid ng-touched" placeholder="" type="text"  style="" ng-model="data.audit_admin_rate">
+                                                    </div>
+                                                    <label class="col-md-2"  style="margin-top:7px">%</label>
+
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+
+                                                <td colspan="3" style="text-align: center">
+                                                    <button class="btn btn-primary"  type="submit" ng-click="submits()">
+                                                        确定
+                                                    </button>
+                                                    <button type="submit" onclick="history.go(-1)" class="btn btn-primary">
+                                                        返回
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+

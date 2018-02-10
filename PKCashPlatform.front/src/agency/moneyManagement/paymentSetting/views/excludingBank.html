@@ -1,0 +1,149 @@
+<div id="content">
+    <div class="row">
+
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('IncomeExcludingBank')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar">
+                                <div ng-show="newTodo">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <!--<div class="form-group">-->
+                                            <select data-smart-select2  ng-model="site" class="selectWidth">
+                                                <option value="">请选择</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1  col-xs-4 input-label">银行名称</label>
+                                    <div class="col-sm-3 col-xs-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control inp_2" placeholder="" ng-model="accounts">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-1 col-sm-offset-4 col-xs-offset-9 col-xs-1">
+                                        <div class="input-group">
+                                            <a class="btn btn-default search" ng-click="search()" href-void>{{getWord('Search')}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>银行名称</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.title}}</td>
+                                            <td>{{item.status|fiterStatused}}</td>
+                                            <td>
+                                                <button class="btn btn-default btn-xs" ng-click="disables(item.status,item.id,item)" ng-show="item.status==1">{{getWord('Disable')}}</button>
+                                                <button class="btn btn-default btn-xs" ng-click="disables(item.status,item.id,item)" ng-show="item.status==2">{{getWord('Enables')}}</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+
+
+    <div class="modal fade" id="dialog_simple_divided" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">{{getWord('Commission setting')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid"  enctype="multipart/form-data" >
+                        <div class="row">
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">经销商账号</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" placeholder="" type="text" ng-model="agency" name="agencyName" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">返佣金设定</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="agencyAccount" placeholder="" type="text" ng-model="account" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">返佣金上线</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="password" placeholder="" type="text" ng-model="password" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-xs-12">选择站点</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <select class="form-control">
+                                            <option value="Amsterdam">Amsterdam</option>
+                                            <option value="Atlanta">Atlanta</option>
+                                            <option value="Baltimore">Baltimore</option>
+                                            <option value="Boston">Boston</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    {{getWord('Cancel')}}
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                                    {{getWord('Confirm')}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

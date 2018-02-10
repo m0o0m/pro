@@ -1,0 +1,125 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-02-01 19:39:05
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/gameapi/auto/_list.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a72fc597b4b05_68076827',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '36c549911330c5d04158dd7fc1532c7e5a44e375' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/gameapi/auto/_list.html',
+      1 => 1516367086,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a72fc597b4b05_68076827 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+
+    <thead>
+        <tr>
+            <th class="center">种类</th>
+            <th class="center">期号</th>
+            <th class="center">开奖时间</th>
+            <th class="center">添加时间</th>
+            <th class="center" style="width:233px;">彩票控</th>
+            <th class="center" style="width:233px;">开奖网</th>
+        </tr>
+    </thead>
+<?php if (isset($_smarty_tpl->tpl_vars['result']->value['data'])) {?>
+    <tbody ball_num="<?php echo $_smarty_tpl->tpl_vars['result']->value['ball_num'];?>
+">
+    <?php if (count($_smarty_tpl->tpl_vars['result']->value['data']) == 0) {?>
+        <tr><td class="center" colspan="20">无记录</td></tr>
+    <?php } else { ?>
+      <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value['data'], 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+        <tr id="item<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+">
+            <td class="center" name="record" style="display:none;">
+              <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v']->value, 'vv', false, 'kk');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['kk']->value => $_smarty_tpl->tpl_vars['vv']->value) {
+?>
+                <i fieldkey="<?php echo $_smarty_tpl->tpl_vars['kk']->value;?>
+"><?php if (is_array($_smarty_tpl->tpl_vars['vv']->value)) {
+echo json_encode($_smarty_tpl->tpl_vars['vv']->value);
+} else {
+echo $_smarty_tpl->tpl_vars['vv']->value;
+}?></i>
+              <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                <info><?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+</info>
+            </td>
+            <td class="center" name="fc_type"><?php echo $_smarty_tpl->tpl_vars['result']->value['fc_type'];?>
+</td>
+            <td class="center" name="qishu"><?php echo $_smarty_tpl->tpl_vars['v']->value['qishu'];?>
+</td>
+            <td class="center" name="datedate"><?php echo $_smarty_tpl->tpl_vars['v']->value['datedate'];?>
+</td>
+            <td class="center" name="adddate"><?php echo $_smarty_tpl->tpl_vars['v']->value['adddate'];?>
+</td>
+            <td class="center" name="balls">
+              <?php
+$_smarty_tpl->tpl_vars['i'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? $_smarty_tpl->tpl_vars['result']->value['ball_num']+1 - (1) : 1-($_smarty_tpl->tpl_vars['result']->value['ball_num'])+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 1, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration == $_smarty_tpl->tpl_vars['i']->total;?>
+                <span name="ball_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+" style="display:inline-block;width:3em;margin-bottom:3px;text-align:center;color:white;background:#081D27;"><?php echo $_smarty_tpl->tpl_vars['v']->value[('ball_').($_smarty_tpl->tpl_vars['i']->value)];?>
+</span>
+              <?php }
+}
+?>
+
+            </td>
+            <td class="center" name="oballs">
+              <?php if (isset($_smarty_tpl->tpl_vars['v']->value['oauto'])) {?>
+              <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v']->value['oauto'], 'vv', false, 'kk');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['kk']->value => $_smarty_tpl->tpl_vars['vv']->value) {
+?>
+                <span style="display:inline-block;width:3em;margin-bottom:3px;text-align:center;color:white;background:#081D27;<?php if (isset($_smarty_tpl->tpl_vars['v']->value['diff'])) {
+if (in_array($_smarty_tpl->tpl_vars['kk']->value,$_smarty_tpl->tpl_vars['v']->value['diff'])) {?>color:red;<?php }
+}?>"><?php echo $_smarty_tpl->tpl_vars['vv']->value;?>
+</span>
+              <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+              <?php } else { ?>
+                无数据
+              <?php }?>
+            </td>
+
+        </tr>
+      <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+    <?php }?>
+    </tbody>
+<?php }
+}
+}

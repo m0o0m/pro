@@ -1,0 +1,217 @@
+{{define "withdrawalindex"}}
+{{template "memberheader" .}}
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/deposit.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/withdrawalIndex.css" type="text/css">
+<style>
+
+#page-body .center-t span.fr{
+    width: 200px;
+}
+
+#page-body .RefreshButton.fr{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    margin-top: 17px;
+}
+#page-body .RefreshButton img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+}
+
+</style>
+<div class=" mycenter">
+    <div class="center-t clearfix">
+            <span class="fl">
+              <span>账号：</span>
+              <span id="name"></span>
+            </span>
+        <span class="fr">
+              <span class="fl">账号余额：</span>
+              <span class="myd-red fl" id="money"></span>
+              <span class="fl">元</span>
+              <i class="RefreshButton fr" id="fresh-money">
+                <img src="{{.Header.CdnUrl}}/theme3/public/shared/member/image/4.png" alt="">
+              </i>
+        </span>
+    </div>
+    <div class="center-2">
+        <ul class="clearfix">
+            <li class="fl">
+                <span class="span1">取款上限：</span>
+                <span id="withdrawal-cap"></span>
+            </li>
+            <li class="fl">
+                <span class="span1">取款下限：</span>
+                <span>10.00</span>
+            </li>
+            <li class="fl">
+                <span class="span1">银行：</span>
+                <select id="bank-list">
+                    <option value="">请选择</option>
+                </select>
+            </li>
+            <li class="fl">
+                <a class="myd-green" href="/member/account">
+                    <i class="icon iconfont icon-jiahao"></i> 添加银行卡</a>
+                <a class="myd-red" href="/member/account">
+                    <i class="icon iconfont icon-icons64x6416 fl"></i> 查看银行卡</a>
+            </li>
+        </ul>
+        <div class="center-2-3">
+            <span class="span1">银行卡号：</span>
+            <span id="bank-card"></span>
+            <span class="span1">出款人：</span>
+            <span id="bank-name"></span>
+        </div>
+    </div>
+    <div class="center-3 clearfix">
+        <h3>尊敬的会员，您好！出款时若出现以下情况将会扣除一定的费用</h3>
+        <ul class="fl fl-1">
+            <li>1. 未满足常态稽核将扣除入款金额50%行政费用与优惠</li>
+            <li>2. 未满足综合稽核将会扣除优惠金额</li>
+            <li>3. 提交订单后注意查看稽核状态，请注意是否需要扣除费用</li>
+            <li>4. 有出款订单未处理时无法提交第二笔订单</li>
+        </ul>
+        <ul class="fl fl-2">
+            <li class="myd-red">常态稽核=会员入款金额 * 常态稽核倍数</li>
+            <li class="myd-red">综合（优惠）稽核=（会员入款金额 + 优惠） * 综合稽核倍数</li>
+            <li class="myd-red">优惠即存款优惠，人工优惠等等</li>
+        </ul>
+    </div>
+    <div class="center-4">
+        <div class="input-div"><span>取款金额：</span>
+
+            <input autocomplete="off" id="getMoney" name="drawMoney" type="text" placeholder="请输入整数取款金额" autocomplete="off" onkeyup="if(/\D/.test(this.value)){this.value='';}"><span></span></div>
+        <div class="input-div"><span>取款密码：</span>
+            <input id="getPwd" name="drawPassword" maxlength="4" type="text" onkeyup="if(/\D/.test(this.value)){this.value='';}" placeholder="请输入取款密码" onfocus="this.type='password'" autocomplete="off"><span></span></div>
+        <div class="myd-red">* 温馨提示：</div>
+        <ul>
+            <li>1. 取款金额须为整数值，不可增加小数点，如300，200等可取，300.01，300.21不可取</li>
+            <li>2. 提交订单后请注意查收会员信息</li>
+            <li>3. 有出款订单未处理时无法提交第二笔订单</li>
+        </ul>
+        <div class="center-4-a"><a href="javascript:;" id="draw-submit">取款</a></div>
+    </div>
+</div>
+<div class=" audit">
+    <div class="deposit-schedule">
+        <div class="line"></div>
+        <div class="line"></div>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-gou1 myicon FEF7F9"></i>
+              </span>
+              <p class="myd-red">转账银行<i class="icon iconfont icon-gou myd-t-gou"></i>
+              </p>
+            </span>
+        <span class="round">
+              <span class="round-2" style="cursor: pointer;">
+                <i class="icon iconfont icon-surelist myicon"></i>
+              </span>
+              <p class="myd-red" id="show-out-msg">正在稽核</p>
+            </span>
+        <span class="round">
+              <span class="round-2">
+                <i class="icon iconfont icon-qiandai1 myicon"></i>
+              </span>
+              <p>完成取款<i class="icon iconfont icon-gantanhao myd-red"></i></p>
+            </span>
+    </div>
+</div>
+<div class=" smallamount">
+    <div class="deposit-schedule">
+        <div class="line"></div>
+        <div class="line"></div>
+        <span class="round">
+                            <span class="round-2">
+                                <i class="icon iconfont icon-gou1 myicon FEF7F9"></i>
+                            </span>
+                            <p class="myd-red">转账银行<i class="icon iconfont icon-gou myd-t-gou"></i></p>
+                        </span>
+        <span class="round">
+                            <span class="round-2">
+                                <i class="icon iconfont icon-surelist myicon FEF7F9"></i>
+                            </span>
+                            <p class="myd-red">稽核完成<i class="icon iconfont icon-gou myd-t-gou"></i></p>
+                        </span>
+        <span class="round">
+                            <span class="round-2">
+                                <i class="icon iconfont icon-qiandai1 myicon FEF7F9"></i>
+                            </span>
+                            <p>完成取款<i class="icon iconfont icon-gantanhao myd-red"></i></p>
+                        </span>
+    </div>
+    <div class="deposit-schedule-c">
+        <div class="center-3 clearfix">
+            <div class="center-3-t">出款常见问题
+                <i class="icon iconfont icon-wenhao"></i>
+            </div>
+            <h3>尊敬的会员，您好！出款时若出现以下情况将会扣除一定的费用</h3>
+            <ul class="fl fl-1 f1-font">
+                <li>1. 未满足常态稽核将扣除入款金额50%行政费用与优惠</li>
+                <li>2. 未满足综合稽核将会扣除优惠金额</li>
+                <li>3. 提交订单后注意查看稽核状态，请注意是否需要扣除费用</li>
+                <li>4. 有出款订单未处理时无法提交第二笔订单</li>
+            </ul>
+            <ul class="fl fl-2 f1-font" style="padding-left: 20px;">
+                <li class="myd-red">常态稽核=会员入款金额 * 常态稽核倍数</li>
+                <li class="myd-red">综合（优惠）稽核=（会员入款金额 + 优惠） * 综合稽核倍数</li>
+                <li class="myd-red">优惠即存款优惠，人工优惠等等</li>
+            </ul>
+        </div>
+        <div class="center-4-1">
+            <ul class="clearfix my-theme">
+                <li class="fl">开始时间</li>
+                <li class="fl" style="line-height: 50px;">结束时间</li>
+                <li class="fl">存款金额</li>
+                <li class="fl">优惠稽核</li>
+                <li class="fl">综合稽核</li>
+                <li class="fl">手续费</li>
+                <li class="fl">常态稽核</li>
+                <li class="fl">综合稽核</li>
+            </ul>
+            <ul class="clearfix" id="show-charge-data">
+                <li class="fl">2017-11-22 12:00:00</li>
+                <li class="fl">2017-11-22 12:00:00</li>
+                <li class="fl">10000.00</li>
+                <li class="fl">1000.00</li>
+                <li class="fl">10000.00</li>
+                <li class="fl">10000.00</li>
+                <li class="fl myd-red">满足</li>
+                <li class="fl myd-red">满足</li>
+            </ul>
+        </div>
+    </div>
+    <div class="center-5">
+        <div class="center-5-t">稽核详情</div>
+        <div class="center-5-c">
+            <span class="span-1"><span><i class='myd-red'>*</i>订单号：</span><span class="myd-red" id="order-num">2017777777777777</span></span><br>
+            <span class="span-1"><span><i class='myd-red'>*</i>取款金额:</span><span
+                    class="myd-red" id="draw-money">20.00</span>元</span></span><br>
+            <span class="span-1"><span><i class='myd-red'>*</i>扣除手续费：</span><span
+                    class="myd-red" id="deduction-money">0</span>元</span></span><br>
+            <span class="span-1"><span><i class='myd-red'>*</i>最终取款金额：</span><span
+                    class="myd-red" id="draw-out-money">20.00</span>元</span></span><br>
+        </div>
+        <div class="center-5-b" id="show-result">
+            <span class="span-1"><i class='myd-red'>*</i>满足综合稽核，无需扣除优惠金额</span><br>
+            <span class="span-1"><i class='myd-red'>*</i>满足常态稽核，无需扣除50%行政优惠</span><br>
+            <span class="span-1"><i class='myd-red'>*</i>综合稽核+常态稽核+手续费，共需扣除：<span class='myd-red'>0</span>元</span><br>
+        </div>
+    </div>
+    <div class="center-6" id="result-url">
+    </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</body>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/ws.js"></script>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/bankOut.js"></script>
+{{end}}

@@ -1,0 +1,130 @@
+package global
+
+import (
+	"path/filepath"
+	"os"
+	"path"
+	"strings"
+	"io/ioutil"
+	"encoding/xml"
+	"os/exec"
+	"log"
+	logwriter "core/logger"
+	"core/redis"
+)
+
+var (
+	DEBUG  bool
+	Cfg    *XmlConfigApp
+	Logger *logwriter.Logger
+	Redisdb *redis.Client
+	Sites  *SyncMap //map[string]string
+)
+
+func init() {
+	Sites = new(SyncMap)
+	Sites.Data = make(map[string]string)
+}
+
+func App_ini() {
+	init_config()    //初始化配置文件
+	init_redis()     //初始化redis
+	init_logwriter() //初始化文件日志系统
+}
+
+//初始化配置文件
+func init_config() {
+	DEBUG = false
+
+	execPath, err := getExecPath()
+	if err != nil {
+		log.Fatal("Fail to get work directory: %v", err)
+	}
+	workDir := path.Dir(strings.Replace(execPath, "\\", "/", -1))
+	if DEBUG {
+		Cfg, err = loadxmlconfig(path.Join(path.Join(workDir, "../bin"), "debug.xml"))
+		if err != nil {
+			log.Fatal("Fail to parse 'debug.xml': %v", err)
+		}
+		//Cfg.LogWriterCfg.Coldpath = path.Join(path.Join(workDir, "../bin"), Cfg.LogWriterCfg.Coldpath)
+		Cfg.LogWriterCfg.LogPath = path.Join(path.Join(workDir, "../bin"), Cfg.LogWriterCfg.LogPath)
+	} else {
+		Cfg, err = loadxmlconfig(path.Join(workDir, "app.xml"))
+		if err != nil {
+			log.Fatal("Fail to parse 'app.xml': %v", err)
+		}
+		//Cfg.LogWriterCfg.Coldpath = path.Join(workDir, Cfg.LogWriterCfg.Coldpath)
+		Cfg.LogWriterCfg.LogPath = path.Join(workDir, Cfg.LogWriterCfg.LogPath)
+	}
+}
+
+//初始化数据库
+func init_redis() {
+	if Cfg != nil {
+		if len(Cfg.Redis.Password) > 0 {
+			Redisdb = redis.NewTCPClient(&redis.Options{
+				Addr:     Cfg.Redis.Host,
+				Password: Cfg.Redis.Password,
+				DB:       1,
+			})
+		} else {
+			Redisdb = redis.NewTCPClient(&redis.Options{
+				Addr: Cfg.Redis.Host,
+				DB:   1,
+			})
+		}
+		err := Redisdb.Ping().Err()
+		if err != nil {
+			log.Fatal("reids connect error :", err)
+		}
+	} else {
+		log.Fatal("reids config error : db len =0")
+	}
+}
+
+func loadxmlconfig(xmlpath string) (*XmlConfigApp, error) {
+	content, err := ioutil.ReadFile(xmlpath)
+	if err != nil {
+		return nil, err
+	}
+	var result XmlConfigApp
+	err = xml.Unmarshal(content, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+func getExecPath() (string, error) {
+	file, err := exec.LookPath(os.Args[0])
+	if err != nil {
+		return "", err
+	}
+	p, err := filepath.Abs(file)
+	if err != nil {
+		return "", err
+	}
+	return p, nil
+}
+
+func init_logwriter() {
+	//日志初始化
+	name := "access.log"
+	os.MkdirAll(Cfg.LogWriterCfg.LogPath, 0777)
+	fileLog := logwriter.NewFileLogWriter(path.Join(Cfg.LogWriterCfg.LogPath, name), true)
+	if Cfg.LogWriterCfg.LogMaxSize > 0 {
+		fileLog = fileLog.SetRotateSize(int(Cfg.LogWriterCfg.LogMaxSize))
+	} else {
+		fileLog = fileLog.SetRotateDaily(true)
+	}
+
+	if logwriter.DEBUG == logwriter.StringToLevel(Cfg.LogWriterCfg.LogLevel) {
+		Logger = &logwriter.Logger{
+			"stdout": &logwriter.Filter{logwriter.DEBUG, logwriter.NewConsoleLogWriter()},
+		}
+	} else {
+		Logger = &logwriter.Logger{
+			"fileout": &logwriter.Filter{logwriter.StringToLevel(Cfg.LogWriterCfg.LogLevel), fileLog},
+		}
+	}
+}

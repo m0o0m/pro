@@ -1,0 +1,133 @@
+<style>
+    #menu-form label{margin-right:10px}
+    .handle span{cursor: pointer}
+    #twoLevel{display: none}
+    .levelDiv{display: none}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="menu-form" method='get' action='/gameapi/opentime/index'>
+            <label for="menuLevel"> 彩票种类:
+                <select type="select" name="fc_type"  id="fc_type"style="width:120px;">
+                    <option value="">请选择彩种</option>
+                    <{foreach from=$games item=v key=k}>
+                    <option value="<{$v['type']}>" <{if isset($smarty.get.fc_type) && $smarty.get.fc_type eq <{$v['type']}>}>selected<{/if}>><{$v['name']}></option>
+                    <{/foreach}>
+                </select>
+            </label>
+            <label for="qishu">期号:
+                <input placeholder="请输入期号进行查询" type="text" id="qishu" name="qishu" field="search" value="<{if isset($smarty.get.fc_type)}><{$smarty.get.qishu}><{/if}>">
+            </label>
+            <label for="status"> 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum" >
+                    <option value="100"  <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 100}>selected<{/if}>>100</option>
+                    <option value="500" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 500}>selected<{/if}>>500</option>
+                    <option value="1000" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 1000}>selected<{/if}>>1000</option>
+                </select>
+            </label>
+            <label for="page"> 页码:
+                <select type="select" name="page"  id="page" onchange="submit()">
+                    <{section name=loop loop=$pagedata['totalpage']}>
+                    <option value="<{$smarty.section.loop.index+1}>"
+                            <{if isset($smarty.get.page) && $smarty.get.page eq $smarty.section.loop.index+1}>selected<{/if}>><{$smarty.section.loop.index+1}> 
+                </option>
+                <{/section}>
+            </select>
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+    </form>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <input type="hidden" value="<{$fc_type}>" id='lotteryType'>
+            <input type="hidden"
+                   <{foreach from=$games item=v key=k}>
+                   <{if <{$v["type"]}>  eq <{$fc_type}>}>value="<{$v["name"]}>"<{/if}>
+                   <{/foreach}>
+                   " id='lotteryName'>
+                   <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">彩票类型</th>
+                        <th class="center">期号</th>
+                        <th class="center">开盘时间</th>
+                        <th class="center">封盘时间</th>
+                        <th class="center">开奖时间</th>
+                        <th class="center">是否生效</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <{foreach from=$data item=v key=k}>
+                    <tr>
+                        <td class="center"> <{if isset($v['id'])}> <{$v['id']}><{/if}></td>
+                        <td class="center"> <{if isset($v['fc_type'])}> <{$v['fc_type']}><{/if}></td>
+                        <td class="center"> <{if isset($v['qishu'])}> <{$v['qishu']}><{/if}></td>
+                        <td class="center"> <{if isset($v['kaipan'])}> <{$v['kaipan']}><{/if}></td>
+                        <td class="center"> <{if isset($v['fengpan'])}> <{$v['fengpan']}><{/if}></td>
+                        <td class="center"> <{if isset($v['kaijiang'])}> <{$v['kaijiang']}><{/if}></td>
+                        <td class="center">
+                          <{if isset($v['status']) && $v['status'] eq 1}>有效<{else}>无效<{/if}>
+                        </td>
+                    </tr>
+                    <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+
+
+
+<script>
+ //pjax局部加载列表
+    function renderTableByPjax() {
+        var fc_type = $.trim($('#fc_type').val());
+        var periods = $.trim($('#qishu').val());
+        var pagenum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+        
+        var params = {
+            fc_type: fc_type,
+            qishu: periods,
+            pageNum: pagenum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/gameapi/opentime/index',
+            container: '#container'
+        });
+    }
+
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+     //彩种
+     $('#fc_type').change(function () {
+        renderTableByPjax();
+    })
+  
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+    $('#page').change(function () {
+        renderTableByPjax();
+    })
+</script>

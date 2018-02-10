@@ -1,0 +1,439 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-20 12:18:22
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/spiderbet/index.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a62c30eed5ce1_04899657',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '991597c35947c7692de3594b0a2f224902a0eeb1' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/spiderbet/index.html',
+      1 => 1516367086,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a62c30eed5ce1_04899657 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    #agent-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+    .width100{width:100px}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="agent-form" method='get' action='/agent/index'>
+            <label for="menuLevel"> 线路ID
+                <select type="select" name="line_id"  id="line_id">
+                    <option value="" >全部</option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['lines']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['lines']->value[$_smarty_tpl->tpl_vars['k']->value]['line_id'];?>
+" <?php ob_start();
+echo $_smarty_tpl->tpl_vars['lines']->value[$_smarty_tpl->tpl_vars['k']->value]['line_id'];
+$_prefixVariable1=ob_get_clean();
+if (isset($_GET['line_id']) && $_GET['line_id'] == $_prefixVariable1) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+</option>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </select>
+            </label>
+            <label for="fc_type"> 彩票种类:
+                <select type="select" name="fc_type"  id="fc_type" style="width:120px;">
+                    <option value="" >请选择彩种</option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['games']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+" <?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+$_prefixVariable2=ob_get_clean();
+if (isset($_GET['fc_type']) && $_GET['fc_type'] == $_prefixVariable2) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</option>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </select>
+            </label>
+            
+            <label for="menuLevel"> 状态:
+                <select type="select" name="status"  id="status" style="width:90px;">
+                    <option value="" >全部</option>
+                    <option value="1" <?php if (isset($_GET['status']) && $_GET['status'] == 1) {?>selected<?php }?>>正在处理</option>
+                    <option value="2" <?php if (isset($_GET['status']) && $_GET['status'] == 2) {?>selected<?php }?>>处理完成</option>
+                </select>
+            </label>
+
+             <label for="date"> 日期：
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name="starttime" id="starttime" value="<?php if (isset($_smarty_tpl->tpl_vars['starttime']->value)) {
+echo $_smarty_tpl->tpl_vars['starttime']->value;
+}?>">
+                ~
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name="endtime" id="endtime" value="<?php if (isset($_smarty_tpl->tpl_vars['endtime']->value)) {
+echo $_smarty_tpl->tpl_vars['endtime']->value;
+}?>">
+            </label>
+
+            <label > 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum" >
+                    <option value="100"  <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 100) {?>selected<?php }?>>100</option>
+                    <option value="500" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 500) {?>selected<?php }?>>500</option>
+                    <option value="1000" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 1000) {?>selected<?php }?>>1000</option>
+                </select>
+            </label>
+            <label > 页码:
+                <select type="select" name="page"  id="page">
+                    <?php
+$__section_loop_0_saved = isset($_smarty_tpl->tpl_vars['__smarty_section_loop']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop'] : false;
+$__section_loop_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['pagecount']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_loop_0_total = $__section_loop_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = new Smarty_Variable(array());
+if ($__section_loop_0_total != 0) {
+for ($__section_loop_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] = 0; $__section_loop_0_iteration <= $__section_loop_0_total; $__section_loop_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']++){
+?>
+                    <option value="<?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+"
+                            <?php if (isset($_GET['page']) && $_GET['page'] == (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1) {?>selected<?php }?>>
+                            <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+
+                </option>
+                <?php
+}
+}
+if ($__section_loop_0_saved) {
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = $__section_loop_0_saved;
+}
+?>
+            </select>
+        </label>
+        <label>
+            <input type="button" id='search' class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">注单复采</span></label>
+    </form>
+</div>
+</div>
+<div class="row" >
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">补采线路</th>
+                        <th class="center">补采彩种</th>
+                        <th class="center">补采日期</th>
+                        <th class="center">操作者id</th>
+                        <th class="center">操作者账号</th>
+                        <th class="center">请求时间</th>
+                        <th class="center">执行状态</th>
+                        <th class="center">备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['line_id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['line_id'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a><?php if (isset($_smarty_tpl->tpl_vars['v']->value['fc_type'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['fc_type'];
+}?></a>
+                        </td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['addday'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['addday'];
+}?></td>
+                        <td class="center green"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['uid'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['uid'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['uname'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['uname'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['addtime'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['addtime'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['statusTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['statusTxt'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['remark'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['remark'];
+}?></td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<div class="isHide layui-layer-wrap" id="get_div" style="display: none;">
+    <div class="modal-body">
+        <form  class="form-horizontal" id="" >
+            <div class="form-group" style="margin-left:20px;">
+                 <label for="menuLevel"> 线路ID:
+                    <select type="select" name="get_line"  id="get_line" style="width:120px;margin-left:34px;">
+                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['lines']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                        <option value="<?php echo $_smarty_tpl->tpl_vars['lines']->value[$_smarty_tpl->tpl_vars['k']->value]['line_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['line_id'];?>
+</option>
+                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                    </select>
+                </label>
+            </div>
+
+            <div class="form-group" style="margin-left:20px;">
+                <label for=""> 彩票种类:
+                    <select type="select" name="get_type"  id="get_type" style="width:120px;margin-left:20px;">
+                         <option value="" >全部</option>
+                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['games']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                        <option value="<?php if (isset($_smarty_tpl->tpl_vars['v']->value['type'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+}?>"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</option>
+                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                    </select>
+                </label>
+            </div>
+
+            <div class="form-group" style="margin-left:20px;">
+                 <label for="date"> 补采日期：
+                    <input class="laydate-icon" type="text" placeholder="请选择日期" name='get_time' value="" id="get_time" style="width:120px;margin-left:10px;">
+                </label>
+            </div>
+            <div class="form-group">
+               <center>
+                    <input  type="button" class="btn btn-info" value = "确定补采" onclick="return check();">
+               </center>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<?php echo '<script'; ?>
+>
+
+
+    //时间控件
+    var start = {
+        elem: '#starttime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas;
+        }
+    };
+    laydate(start);
+    var end = {
+        elem: '#endtime',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true
+    };
+    laydate(end);
+
+    var get_time = {
+        elem: '#get_time',
+        format: 'YYYY-MM-DD',
+        max: laydate.now(),
+        istime: false,
+        istoday: true
+    };
+    laydate(get_time);
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var line_id = $.trim($('#line_id').val());
+        var fc_type = $.trim($('#fc_type').val());
+        var status = $.trim($('#status').val());
+
+        var starttime = $.trim($('#starttime').val());
+        var endtime = $.trim($('#endtime').val());
+
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+
+        var params = {
+            line_id: line_id,
+            fc_type: fc_type,
+            status: status,
+            starttime: starttime,
+            endtime: endtime,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/spiderbet/index',
+            container: '#container'
+        });
+    }
+
+    //pjax局部加载表单
+    function renderFormByPjax(url) {
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    }
+
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //线路
+     $('#line_id').change(function () {
+        renderTableByPjax();
+     })
+    //彩种
+     $('#fc_type').change(function () {
+        renderTableByPjax();
+     })
+    //状态
+     $('#status').change(function () {
+        renderTableByPjax();
+     })
+
+    //新增
+    $('#create').click(function () {
+        openLayer('注单补采集','300px');
+    })
+
+    function check(){
+        var line_id = $('#get_line').val();
+        var addday = $('#get_time').val();
+        var fc_type = $('#get_type').val();
+
+        if(line_id == ''){
+            layer.alert('请选择线路',{icon:2});
+            return false;
+        }
+        if(addday == ''){
+            layer.alert('请选择日期',{icon:2});
+            return false;
+        }
+        var url = 'getdata';
+        var data = {line_id:line_id,fc_type:fc_type,addday:addday};
+        var callback = function (result) {
+            layer.close(index);
+            if(result.ErrorCode == 1){
+                layer.alert(result.ErrorMsg,{icon:1},function(){window.location.reload();});
+            }else if(result.ErrorCode == 2){
+                layer.alert(result.ErrorMsg,{icon:0});
+                return false;
+            }else{
+                layer.alert('出错啦',{icon:0});
+                return false;
+            }
+            return false;
+        }
+
+        doajax(url,data,callback);
+    }
+
+    // 弹框
+    function openLayer(title, height) {
+        open = layer.open({
+            type: 1, //Page层类型
+            area: ['320px', height],
+            title: title,
+            shade: 0.5, //遮罩透明度
+            maxmin: true, //允许全屏最小化
+            anim: 1, //0-6的动画形式，-1不开启
+            content: $('#get_div')
+        });
+    }
+
+    function doajax(url,data,callback){
+         $.ajax({
+            type: "post",
+            url: url,
+            data: data,
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+               callback(res);
+            }
+        });
+    }
+
+<?php echo '</script'; ?>
+>
+<?php }
+}

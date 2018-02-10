@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1">
+        <meta name=screen-orientation content=portrait>
+        <meta name=x5-orientation content=portrait>
+        <meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+        <title>PK-LOTTERY</title>
+    </head>
+    <body>
+
+    </body>
+    <script type=text/javascript>
+        window.onload = function () {
+            var locationUrl = {
+                pc: {
+                    fc_3d: 'yb/yb_one_1?page=fc_3d',
+                    pl_3: 'yb/yb_one_1?page=pl_3',
+                    liuhecai: 'mark_six/six_one_1?page=liuhecai',
+                    jsliuhecai: 'mark_six/six_one_1?page=jsliuhecai',
+                    ffc_o: 'ff_c/ffc_one_1?page=ffc_o',
+                    jsfc: 'bj_10/bj_tooface_1?page=jsfc',
+                    lfc_o: 'ff_c/ffc_one_1?page=lfc_o',
+                    els_o: 'ff_c/ffc_one_1?page=els_o',
+                    bj_10: 'bj_10/bj_tooface_1?page=bj_10',
+                    mnl_o: 'ff_c/ffc_one_1?page=mnl_o',
+                    dj_o: 'ff_c/ffc_one_1?page=dj_o',
+                    xdl_10: 'bj_10/bj_tooface_1?page=xdl_10',
+                    mg_o: 'ff_c/ffc_one_1?page=mg_o',
+                    cq_ssc: 'ssc/ssc_index_1?page=cq_ssc',
+                    tj_ssc: 'ssc/ssc_index_1?page=tj_ssc',
+                    xj_ssc: 'ssc/ssc_index_1?page=xj_ssc',
+                    gd_ten: 'happyTen/happy_too_1?page=gd_ten',
+                    cq_ten: 'happyTen/happy_too_1?page=cq_ten',
+                    gd_11: 'select_11/index_11_1?page=gd_11',
+                    sd_11: 'select_11/index_11_1?page=sd_11',
+                    jx_11: 'select_11/index_11_1?page=jx_11',
+                    gx_k3: 'happy_three/k3_one_1?page=gx_k3',
+                    ah_k3: 'happy_three/k3_one_1?page=ah_k3',
+                    js_k3: 'happy_three/k3_one_1?page=js_k3',
+                    bj_28: 'luckyiottery/bj_28_1?page=bj_28',
+                    pc_28: 'luckyiottery/pc_28_1?page=pc_28',
+                    jnd_28: 'luck_another/luck_28_1?page=jnd_28',
+                    dm_28: 'luck_another/luck_28_1?page=dm_28'
+                },
+                wap: {
+                    fc_3d: 'welfare/?type=fc_3d',
+                    pl_3: 'welfare/?type=pl_3',
+                    liuhecai: 'mark/tema?type=liuhecai',
+                    jsliuhecai: 'mark/tema?type=jsliuhecai',
+                    ffc_o: 'always/?type=ffc_o',
+                    jsfc: 'high/?type=jsfc',
+                    lfc_o: 'always/?type=lfc_o',
+                    els_o: 'always/?type=els_o',
+                    bj_10: 'high/?type=bj_10',
+                    mnl_o: 'always/?type=mnl_o',
+                    dj_o: 'always/?type=dj_o',
+                    xdl_10: 'high/?type=xdl_10:',
+                    mg_o: 'always/?type=mg_o',
+                    cq_ssc: 'always/?type=cq_ssc',
+                    tj_ssc: 'always/?type=tj_ssc',
+                    xj_ssc: 'always/?type=xj_ssc',
+                    gd_ten: 'ten/?type=gd_ten',
+                    cq_ten: 'ten/?type=cq_ten',
+                    gd_11: 'eleven/?type=gd_11',
+                    sd_11: 'eleven/?type=sd_11',
+                    jx_11: 'eleven/?type=jx_11',
+                    gx_k3: 'fast/?type=gx_k3',
+                    ah_k3: 'fast/?type=ah_k3',
+                    js_k3: 'fast/?type=js_k3',
+                    bj_28: 'lucky/?type=bj_28',
+                    pc_28: 'lucky/?type=pc_28',
+                    jnd_28: 'lucky/?type=jnd_28',
+                    dm_28: 'lucky/?type=dm_28'
+                }
+            }
+            var browser = {
+                versions: function () {
+                    var u = navigator.userAgent,
+                            app = navigator.appVersion;
+                    return {//移动终端浏览器版本信息
+                        trident: u.indexOf('Trident') > -1, //IE内核
+                        presto: u.indexOf('Presto') > -1, //opera内核
+                        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                        mobile: !!u.match(/AppleWebKit.*Mobile.*/), // || !!u.match(/AppleWebKit/), //是否为移动终端
+                        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+                        iPad: u.indexOf('iPad') > -1, //是否iPad
+                        webApp: u.indexOf('Safari') == -1
+                                //是否web应该程序，没有头部与底部
+                    };
+                }(),
+                language: (navigator.browserLanguage || navigator.language).toLowerCase()
+            }
+
+            //设置cookie
+            function setCookie(name, value, Days) {
+                if (Days == null || Days == '') {
+                    Days = 1;
+                }
+                var exp = new Date();
+                exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+                document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
+            }
+
+            //获取get参数
+            function GetQueryString(name)
+            {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null)
+                    return  unescape(r[2]);
+                return null;
+            }
+
+            //跳转
+            function redirect(fc_type) {
+                if (browser.versions.mobile) {
+                    if (fc_type != null) {
+                        var redirectUrl = locationUrl.wap[fc_type];
+                        if (redirectUrl == undefined) {
+                            window.location.href = '/wap/index.html';
+                            return false;
+                        }
+                        window.location.href = '/wap/index.html#/' + redirectUrl;
+                    } else {
+                        window.location.href = '/wap/index.html';
+                    }
+                } else {
+                    if (fc_type != null) {
+                        var redirectUrl = locationUrl.pc[fc_type];
+                        if (redirectUrl == undefined) {
+                            window.location.href = '/pc/index.html';
+                            return false;
+                        }
+                        window.location.href = '/pc/index.html#/pk_content/' + redirectUrl;
+                    } else {
+                        window.location.href = '/pc/index.html';
+                    }
+                }
+            }
+
+            /****************发送get请求*******************/
+            function fetch_ajax() {
+                var token = GetQueryString('token');
+                var fc_type = GetQueryString('fc_type');
+                if (token == null) {
+                    var token = 'a21e50c51be1bf945d539b5cbb26cf4c';
+                }
+
+                var api_url = 'http://pkapi.pk1358.com/login/login';
+                var ajax = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+                ajax.open('get', api_url + '?token=' + token);
+                ajax.send();
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        //步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
+                        var response = eval("(" + ajax.response + ")");
+                        if (response.code == 400) {
+                            alert('invalid token');
+                            return false;
+                        }
+                        setCookie('token', response.token);
+                        redirect(fc_type);
+                    }
+                }
+            }
+
+
+            fetch_ajax();
+
+        }
+    </script>
+
+</html>

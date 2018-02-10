@@ -1,0 +1,46 @@
+@import "./function.scss";
+
+.betting {
+  min-height: 615;
+  .r_box {
+    margin: 0 0 0 10px;
+    // position: fixed;
+    // top: 70px;
+    // z-index: 999;
+    background-color: #fff;
+    .thend {
+      overflow: hidden;
+      width: 900px;
+      h2 {
+        font-size: 18px;
+        font-weight: bold;
+        float: left;
+      }
+    }
+    // float: left;
+    ul {
+      overflow: hidden;
+      // height: 84px;
+      // margin-top: 10px;
+      width: 900px;
+      //border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      li {
+        margin-top: 15px;
+        float: left;
+        font-size: 16px;
+        font-weight: bold;
+        height: 50px;
+        line-height: 50px;
+        width: 120px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.styleBg {
+  background: $Button_color;
+  border-radius: 10px 10px 0 0px;
+  color: #fff;
+}

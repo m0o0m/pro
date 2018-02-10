@@ -1,0 +1,124 @@
+<!-- 菜单账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>自助优惠开关</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+
+                                        <label class="col-md-1 control-label allsite">站点：</label>
+                                        <div class="col-md-2 col-xs-12 allsite">
+                                            <div class="form-group">
+                                                <select data-smart-select2 style="width: 90%;" ng-model="site">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-1 control-label">输入站点ID：</label>
+                                        <div class="col-md-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control inp_2" ng-model="id">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-4">
+                                            <div class="input-group">
+                                                <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                            <tr >
+                                                <th>站点SITE_ID</th>
+                                                <th>INDEX_ID</th>
+                                                <th>网站名称</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.site_id}}</td>
+                                                <td>{{item.index_id}}</td>
+                                                <td>{{item.site_name}}</td>
+                                                <td>{{item.status|isOpen}}</td>
+                                                <td><button class="btn btn-xs btn-default" data-toggle="modal" data-target="#dialog_model" ng-click="modify(item)">编辑</button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <div class="modal fade" id="dialog_model" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">优惠设置</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">SITE_ID</label>
+                                <div class="col-md-7">
+                                    <input class="form-control" type="text" ng-model="modifyData.site_id">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">是否开启</label>
+                                <div class="col-md-7">
+                                    <select name="" id="" class="form-control">
+                                        <option class="form-control" value="1" ng-selected="modifyData.status===1" ng-model="modifyData.status">是</option>
+                                        <option class="form-control" value="2" ng-selected="modifyData.status===2" ng-model="modifyData.status">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifySubmit()">
+                        提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

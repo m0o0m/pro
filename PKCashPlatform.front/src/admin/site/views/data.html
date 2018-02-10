@@ -1,0 +1,110 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>数据</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="col-md-1 col-xs-4 col-md-2">
+                                            <div class="form-group">
+                                                <button class="btn btn-default btn-xs" data-ui-sref="app.site.dataLevel">层级数据</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-4 col-md-2">
+                                            <div class="form-group">
+                                                <button class="btn btn-default btn-xs" data-ui-sref="app.site.ProxyData">代理数据</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-4 col-md-2">
+                                            <div class="form-group">
+                                                <button class="btn btn-default btn-xs" ng-click="packge()">{{pag}}</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-4 col-md-2">
+                                            <div class="form-group">
+                                                <button class="btn btn-default btn-xs" data-ui-sref="app.site.admin">管理员</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            </div>
+
+            </article>
+
+
+    </div>
+
+    </section>
+    <div class="modal fade" id="dialog_model" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">站点口令设置</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">SITE_ID</label>
+                                <div class="col-md-7">
+                                    <input class="form-control" type="text" ng-model="data.site_index_id">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">密钥</label>
+                                <div class="col-md-7">
+                                    <input class="form-control" type="text" ng-model="data.key">
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">是否开启</label>
+                                <div class="col-md-7">
+                                    <select name="" id="" class="form-control" ng-model="data.status">
+                                        <option value="{{item.value}}" ng-repeat="item in option_onOff">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sumbit()">
+                        提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+

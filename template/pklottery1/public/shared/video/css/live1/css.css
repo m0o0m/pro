@@ -1,0 +1,121 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+a,
+img {
+	border: 0;
+}
+.clear{clear: both;}
+#slider {
+	position: relative;
+	width: 1000px;
+	margin: auto;
+	height: 539px;
+	overflow: hidden;
+}
+
+#slider .casino-slide {
+	position: absolute;
+	top: 0px;
+	height: 539px;
+	width: 665px;
+	overflow: hidden;
+	cursor: default;
+}
+
+#slider .title {
+	color: #F80;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-right: 1.5em;
+	text-decoration: none;
+}
+
+#slider .backgroundText {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 100%;
+}
+
+#slider .diapo {
+	position: absolute;
+	visibility: hidden;
+}
+.div-btn{position: absolute; left: 330px;}
+.div-btn a{
+	float: left;
+	display: block;
+	position: relative;
+	width: 120px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
+	font-family: '微软雅黑';
+	color: #fff;
+	text-align: center;
+	background: #006cff;
+	border-radius: 4px;
+	text-decoration: none;
+	}
+.div-btn a:hover{
+	background-color: #FF0069;
+}
+
+a.btnb {
+	margin-left: 20px;
+}
+
+
+.text {
+	opacity: 0;
+	position: absolute;
+	top:10px;
+	left: 20px;
+	z-index: 90;
+	color: #FFFFFF;
+	overflow: hidden;
+}
+.live-one{
+	width: 1000px;
+	margin: auto;
+	text-align: center;
+	height: 499px;
+}
+
+.live-one .casino-slide{
+	position: absolute;
+	height: 61%;
+	width: 667px;
+	overflow: hidden;
+	cursor: default;
+	margin-left: 166px;
+}
+
+.live-one .diapo {
+	position: absolute;
+	visibility: hidden;
+}
+
+.live-one .text{
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 20px;
+	z-index: 90;
+	color: #FFFFFF;
+	overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+

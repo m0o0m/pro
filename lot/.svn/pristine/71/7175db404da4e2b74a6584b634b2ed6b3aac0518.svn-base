@@ -1,0 +1,55 @@
+package input
+
+//注册
+type RegUser struct {
+	SiteId    string `query:"site_id" valid:"Required;ErrorCode(10001)" `          //站点(这里不用传,从头部取)
+	Uname     string `query:"uname" valid:"Required;ErrorCode(10002)" `            //会员账号
+	Pwd       string `query:"pwd" valid:"Required;ErrorCode(10004)" `              //密码
+	AgentName string `query:"agent_name" valid:"Required;ErrorCode(10003)" `       //代理账号
+	PType     int64  `query:"p_type" valid:"Required;Range(1,3);ErrorCode(10008)"` //平台(1为pc端 2为wap端  3为app)
+	CreateIp  string `query:"create_ip" valid:"Required;ErrorCode(10017)"`          //登陆id
+
+	Currency string  `query:"-" ` //币种
+	IsShiwan int     `query:"-" ` //是否试玩
+	Money    float64 `query:"-"`  //初始余额
+}
+
+//试玩注册
+type ShiwanRegUser struct {
+	CreateIp string `query:"create_ip"` //登陆id
+}
+
+//登陆
+type AttemptLogin struct {
+	SiteId string `query:"site_id" valid:"Required;ErrorCode(10001)" ` //站点
+	Uname  string `query:"uname" valid:"Required;ErrorCode(10002)" `   //会员账号
+	Pwd    string `query:"pwd" valid:"Required;ErrorCode(10004)" `     //密码
+	AgentName    string `query:"agent_name" valid:"Required;ErrorCode(10003)" `     //代理账号
+	CreateIp  string `query:"create_ip" valid:"Required;ErrorCode(10017)"`          //登陆ip
+	GameId string `query:"gameid"`
+}
+
+//余额
+type ReqBalance struct {
+	SiteId string `query:"site_id" valid:"Required;ErrorCode(10001)" ` //站点
+	Uname  string `query:"uname" valid:"Required;ErrorCode(10002)" `   //会员账号
+	Pwd    string `query:"pwd" valid:"Required;ErrorCode(10004)" `     //密码
+	AgentName    string `query:"agent_name" valid:"Required;ErrorCode(10003)" `     //代理账号
+}
+
+//额度转换
+type Translation struct {
+	SiteId string `query:"site_id" valid:"Required;ErrorCode(10001)" ` //站点
+	Uname  string `query:"uname" valid:"Required;ErrorCode(10002)" `   //会员账号
+	Pwd    string `query:"pwd" valid:"Required;ErrorCode(10004)" `     //密码
+	AgentName    string `query:"agent_name" valid:"Required;ErrorCode(10003)" `     //代理账号
+	Money float64 `query:"money" valid:"Required;ErrorCode(10006)"`             //转换的额度
+	CType int64   `query:"c_type" valid:"Required;Range(1,2);ErrorCode(10007)"` //额度转换方向1转入2转出
+	PType int64   `query:"p_type" valid:"Required;Range(1,3);ErrorCode(10008)"` //平台(1为pc端 2为wap端  3为app)
+}
+
+//修改密码
+type UpdatePwd struct {
+	AttemptLogin
+	NewPwd string `query:"new_pwd" valid:"Required;ErrorCode(10018)" ` //密码
+}

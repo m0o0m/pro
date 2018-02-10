@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1">
+        <meta name=screen-orientation content=portrait>
+        <meta name=x5-orientation content=portrait>
+        <meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+        <title>PK彩票</title>
+        <script type=text/javascript src=./config.js></script>
+        <!-- <link href=http://pkcdn.pk1358.com/pc/resource/css/app.css rel=stylesheet> -->
+    </head>
+    <style>
+        #loading_js {
+            width: 100%;
+            height: 100%;
+            display: block;
+            top: 0;
+            left: 0;
+            position: fixed;
+            opacity: 0.7;
+            z-index: 1000;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .loading-image {
+            position: absolute;
+            width: 100px;
+            top: 20%;
+            left: 47%;
+            height: 100px;
+            z-index: 999
+        }
+    </style>
+
+    <body>
+        <script type="text/javascript">
+          var font_link = document.createElement('link');
+          var head = document.getElementsByTagName('head')[0];
+          font_link.type = 'text/css';
+          font_link.rel = 'stylesheet';
+          font_link.href = String(window.configs.cdn_url) + 'pc/static/font/iconfont.css';
+          head.appendChild(font_link);
+          var link = document.createElement('link');
+          link.type = 'text/css';
+          link.rel = 'stylesheet';
+          link.href = String(window.configs.cdn_url) + 'pc/resource/css/app.d2bd5.css';
+          head.appendChild(link);
+        </script>
+        <!-- <div id=loading_js><img class=loading-image src=http://pkcdn.pk1358.com/pc/static/loading.gif alt=Loading...></div> -->
+        <div id=loading_js></div>
+        <div id=app></div>
+        <script type="text/javascript">
+          var parent = document.getElementById('loading_js');
+          var img_box = document.createElement("img");
+        　img_box.setAttribute("class", "loading-image");
+        　img_box.src = String(window.configs.cdn_url) + 'pc/static/loading.gif';
+          parent.appendChild(img_box);
+        </script>
+        <script type="text/javascript">
+          var fileList = [
+            'pc/resource/js/manifest.be7a4.js',
+            'pc/resource/js/vendor.c639e.js',
+            'pc/resource/js/app.d2bd5.js',
+            'pc/resource/js/0.2bf1e.js',
+            'pc/resource/js/1.e08f6.js',
+            'pc/resource/js/2.2a386.js',
+            'pc/resource/js/3.f3518.js',
+            'pc/resource/js/4.0d691.js',
+            'pc/resource/js/5.d5d09.js',
+            'pc/resource/js/6.ea1ab.js',
+            'pc/resource/js/7.801d3.js',
+            'pc/resource/js/8.6e06c.js',
+            'pc/resource/js/9.7383a.js',
+            'pc/resource/js/10.89e5e.js',
+            'pc/resource/js/11.07a05.js',
+            'pc/resource/js/12.49c9a.js',
+          ];
+          for (var i = 0; i < fileList.length; i++) {
+            var myScript = document.createElement('script');
+            myScript.type = 'text/javascript';
+            myScript.async = false;
+            myScript.src = window.configs.cdn_url + fileList[i];
+            document.body.appendChild(myScript);
+          }
+      </script>
+    </body>
+
+</html>

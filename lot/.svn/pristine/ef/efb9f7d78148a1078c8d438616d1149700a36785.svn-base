@@ -1,0 +1,198 @@
+<style type="text/css">
+    #role-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="role-form" method='get' action='/role/index'>
+            <label for="roleName">角色名称:
+                <input type="text" name="roleName" id='roleName' value="<{if isset($smarty.get.roleName)}><{$smarty.get.roleName}><{/if}>">
+            </label>
+           <!--  <label for="">添加时间:
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='startTime' value="<{if isset($smarty.get.startTime) }><{$smarty.get.startTime}><{/if}>" id="startTime">
+                ~
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='endTime' value="<{if isset($smarty.get.endTime) }><{$smarty.get.endTime}><{/if}>" id="endTime">
+            </label> -->
+            <label >
+                状态:
+            </label >
+            <label >
+                <select id='statusSelect' name='status' id='status' >
+                    <option value="">全部</option>
+                    <option value="1" <{if isset($smarty.get.status) && $smarty.get.status eq 1 }>selected<{/if}> >有效</option>
+                    <option value="2" <{if isset($smarty.get.status) && $smarty.get.status eq 2 }>selected<{/if}> >无效</option>
+                </select>
+            </label>
+            <!-- <br/> -->
+            <label for="status"> 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum">
+                    <option value="100"  <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 100}>selected<{/if}>>100</option>
+                    <option value="500" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 500}>selected<{/if}>>500</option>
+                    <option value="1000" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 1000}>selected<{/if}>>1000</option>
+                </select>
+            </label>
+            <label for="page"> 页码:
+                <select type="select" name="page"  id="page">
+                    <{section name=loop loop=$pagecount}>
+                    <option value="<{$smarty.section.loop.index+1}>"
+                            <{if isset($smarty.get.page) && $smarty.get.page eq $smarty.section.loop.index+1}>selected<{/if}>
+                            >
+                            <{$smarty.section.loop.index+1}>
+                </option>
+                <{/section}>
+            </select>
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">角色</th>
+                        <th class="center">角色名称</th>
+                        <th class="center">状态</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <{foreach from=$data item=v key=k}>
+                   <tr>
+                        <td class="center">
+                            <a ><{if isset($v['id'])}><{$v['id']}><{/if}></a>
+                        </td>
+                        <td class="center">
+                            <a ><{if isset($v['role'])}><{$v['role']}><{/if}></a>
+                        </td>
+                        <td class="center"><{if isset($v['role_name'])}><{$v['role_name']}><{/if}></td>
+                        <td class="center"><{if isset($v['deleteTxt'])}><{$v['deleteTxt']}><{/if}></td>
+                        <td class="center"><{if isset($v['addDate'])}><{$v['addDate']}><{/if}></td>
+                         <td class="center handle">
+                            <a  class="btn btn-xs btn-success detail" data_a = "<{if isset($v['id'])}><{$v['id']}><{/if}>" data_b="detail" href='javascript:;'>详情</a>
+                            <a  class="btn btn-xs btn-success update" data_a = "<{if isset($v['id'])}><{$v['id']}><{/if}>" data_b="update" href='javascript:;'>角色</a>
+                        </td>
+                    </tr>
+                    <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<script>
+
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var roleName = $.trim($('#roleName').val());
+        var status = $.trim($('#statusSelect').val());
+        var startTime = $.trim($('#startTime').val());
+        var endTime = $.trim($('#endTime').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+
+        var params = {
+            roleName: roleName,
+            status: status,
+            startTime: startTime,
+            endTime: endTime,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/role/index',
+            container: '#container'
+        });
+    }
+    //祥情
+    $('.detail').click(function(){
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/role/edit?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+
+    //添加
+    $('#create').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/role/edit/?type=create',
+            container: '#container'
+        });
+    })
+    //修改
+    $('.update').click(function(){
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/role/edit?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+    //状态
+    $('#statusSelect').change(function () {
+    	//状态下拉搜索
+        renderTableByPjax();
+    })
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+    $('#page').change(function () {
+        renderTableByPjax();
+    })
+
+
+    // //时间控件
+    // var start = {
+    //     elem: '#startTime',
+    //     format: 'YYYY/MM/DD hh:mm:ss',
+    //     //min: laydate.now(), //设定最小日期为当前日期
+    //     max: '2099-06-16 23:59:59', //最大日期
+    //     istime: true,
+    //     istoday: false,
+    //     choose: function (datas) {
+    //         end.min = datas; //开始日选好后，重置结束日的最小日期
+    //         end.start = datas //将结束日的初始值设定为开始日
+    //     }
+    // };
+    // var end = {
+    //     elem: '#endTime',
+    //     format: 'YYYY/MM/DD hh:mm:ss',
+    //     //min: laydate.now(), //设定最小日期为当前日期
+    //     max: '2099-06-16 23:59:59', //最大日期
+    //     istime: true,
+    //     istoday: false,
+    //     choose: function (datas) {
+    //         end.min = datas; //开始日选好后，重置结束日的最小日期
+    //         end.start = datas //将结束日的初始值设定为开始日
+    //     }
+    // };
+    // laydate(start);
+    // laydate(end);
+</script>

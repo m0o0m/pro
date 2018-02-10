@@ -1,0 +1,153 @@
+<div class="page-header">
+    <p id="me-table-buttons">
+       <h1>
+            <a href="javascript:;" id="bet_index">注单列表</a>
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                注单详情
+            </small>
+        </h1>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-12 col-sm-3">
+            <div class="col-xs-12 col-sm-12 widget-container-col  ui-sortable">
+                <div class="widget-box  ui-sortable-handle">
+                    <div class="widget-header">
+                        <h5 class="widget-title">用户基本信息</h5>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <div class="form-group ">
+                                <label class="control-label" for="role">线路ID</label>
+                                <input type="text" id="line_id" class="form-control" name="line_id" value="<{if isset($data['line_id'])}><{$data.line_id}><{/if}>" disabled="disabled">
+                                <div class="help-block"></div>
+                            </div>
+                            <div class="form-group  ">
+                                <label class="control-label" for="uname">用户名称</label>
+                                <input type="text" id="uname" class="form-control" name="uname" value="<{if isset($data['uname'])}><{$data.uname}><{/if}>" disabled="disabled">
+                                <div class="help-block"></div>
+                            </div>
+                            
+                            <div class="detailDiv">
+                                <div class="form-group  ">
+                                    <label class="control-label" >注册时间</label>
+                                    <input type="text" id="regtime" class="form-control" name="regtime" value="<{if isset($data['regtime'])}><{$data.regtime}><{/if}>" disabled="disabled">
+                                    <div class="help-block"></div>
+                                </div>
+                            </div>  
+                            
+                            <div class="form-group ">
+                                <label class="control-label" >状态</label>
+                                <select type="select" name="status" id="status" class="form-control" disabled="disabled">
+                                    <option value="1" <{if isset($data['user_status']) && $data['user_status'] eq 1}>selected<{/if}>>正常</option>
+                                    <option value="2" <{if isset($data['user_status']) && $data['user_status'] eq 2}>selected<{/if}>>停用</option>
+                                </select>
+                                <div class="help-block"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <div class="col-xs-12 col-sm-9 widget-container-col  ui-sortable">
+            <div class="widget-box ui-sortable-handle">
+                <div class="widget-header">
+                    <h5 class="widget-title">注单详情</h5>
+                </div>
+                <div class="widget-body">
+                    <div class="widget-main">
+                        <div class="form-group ">
+                            <ul class="line-input">
+                                <li>
+                                    <label class="control-label" for="periods">彩票期数</label>
+                                    <input type="text" id="periods" class="form-control" name="periods" value="<{if isset($data['periods'])}><{$data.periods}><{/if}>" disabled="disabled">
+                                </li>
+                                <li>
+                                    <label class="control-label" for="did">订单号</label>
+                                    <input type="text" id="did" class="form-control" name="did" value="<{if isset($data['order_num'])}><{$data.order_num}><{/if}>" disabled="disabled">
+                                </li>
+                            </ul>
+                            <div class="help-block"></div>
+                        </div>
+
+                        <div class="form-group ">
+                            <ul class="line-input">
+                                <li>
+                                    <label class="control-label" for="addtime">下注时间</label>
+                                    <input type="text" id="addtime" class="form-control" name="addtime" value="<{if isset($data['addtime'])}><{$data.addtime}><{/if}>" disabled="disabled">
+                                </li>
+                                <li>
+                                    <label class="control-label" for="money">下注金额</label>
+                                    <input type="text" id="money" class="form-control" name="money" value="<{if isset($data['bet'])}><{$data.bet}><{/if}>" disabled="disabled">
+                                </li>
+                            </ul>
+                            <div class="help-block"></div>
+                        </div>
+
+                        <div class="form-group ">
+                            <ul class="line-input">
+                                <li>
+                                    <label class="control-label" for="bet_info">下注内容</label>
+                                    <input type="text" id="bet_info" class="form-control" name="bet_info" value="<{if isset($data['bet_info'])}><{$data.bet_info}><{/if}>" disabled="disabled">
+                                </li>
+                                <li>
+                                    <label class="control-label" for="odds">赔率</label>
+                                    <input type="text" id="odds" class="form-control" name="odds" value="<{if isset($data['odds'])}><{$data.odds}><{/if}>" disabled="disabled">
+                                </li>
+                            </ul>
+                            <div class="help-block"></div>
+                        </div>
+
+                        <div class="form-group ">
+                            <ul class="line-input">
+                                <li>
+                                    <label class="control-label" for="status">结算状态</label>
+                                    <select type="select" name="status" id="status" class="form-control" disabled="disabled">
+                                        <option value="1" <{if isset($data['status']) && $data['status'] eq 1}>selected<{/if}>>未结算</option>
+                                        <option value="2" <{if isset($data['status']) && in_array($data['status'],[2,6,7])}>selected<{/if}>>赢</option>
+                                        <option value="3" <{if isset($data['status']) && $data['status'] eq 3}>selected<{/if}>>输</option>
+                                        <option value="4" <{if isset($data['status']) && $data['status'] eq 4}>selected<{/if}>>和局</option>
+                                        <option value="5" <{if isset($data['status']) && $data['status'] eq 5}>selected<{/if}>>无效</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label class="control-label" for="win">派彩金额</label>
+                                    <input type="text" id="win" class="form-control" name="win" value="<{if isset($data['win'])}><{$data.win}><{/if}>" disabled="disabled">
+                                </li>
+                            </ul>
+                            <div class="help-block"></div>
+                        </div>
+
+                    </div>         
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+
+    .line-input {
+        display:block;
+        width:100%;
+        margin:0;
+    }
+    .line-input li {
+        display:inline-block;
+        width:49%;
+    }
+</style>
+<script>
+     //返回列表页
+    $('#bet_index').click(function(){
+         $.pjax({
+            method: 'get',
+            url: '/gameapi/bet/index',
+            container: '#container'
+        });
+    })
+</script>

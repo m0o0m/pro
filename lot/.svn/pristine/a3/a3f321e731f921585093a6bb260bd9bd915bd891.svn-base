@@ -1,0 +1,21 @@
+package schema
+
+//代理表
+type UserAgent struct {
+	Id         int64   `insert:"id;auto;mycat:next value for MYCATSEQ_AGENT" xorm:"'id' PK autoincr"`
+	LoginUser  string  `insert:"login_user" xorm:"login_user"`                    //账号
+	LoginPwd   string  `insert:"login_pwd" xorm:"'login_pwd' notnull"`            //密码
+	LoginName  string  `insert:"login_name" xorm:"login_name"`                    //昵称
+	Addtime    int64   `insert:"addtime" xorm:"'addtime' notnull"`                //添加时间
+	Updatetime int64   `insert:"updatetime" xorm:"updatetime"`                    //修改时间
+	LoginIp    string  `insert:"login_ip" xorm:"login_ip"`                        //登录ip
+	IsDelete   int64   `insert:"is_delete" xorm:"'is_delete' notnull default(1)"` //(1-有效,2-无效)
+	RoleId     string  `insert:"role_id" xorm:"'role_id' default('0')"`           //角色id
+	Pid        int64   `insert:"pid" xorm:"'pid' notnull default(0)"`             //账号父级id
+	LineId     string  `insert:"line_id" xorm:"'line_id' notnull"`                //线路id
+	Money      float64 `insert:"money" xorm:"'money' notnull default(0.00)"`      //代理额度
+}
+
+func (*UserAgent) TableName() string {
+	return "my_user_agent"
+}

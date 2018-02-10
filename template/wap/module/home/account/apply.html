@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>Pk</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+    <style>
+    
+    #mescroll{
+        bottom: 0;
+    }
+    </style>
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+    <!-- <dl class="h-head">
+        <dt><a class="iconfont">&#xe605;</a></dt>
+    </dl> -->
+    <ul class="h-head">
+        <li>
+            <a>
+                <i class="iconfont wap-fanhui"></i>
+            </a>
+        </li>
+        <li>
+            <h2>优惠活动大厅</h2>
+        </li>
+        <li>
+            <a href="/m/index">首页</a>
+        </li>
+    </ul>
+</header>
+
+<div id="mescroll" class="mescroll">
+
+    <main class="apply">
+        <section class="apply-content">
+            <h2>优惠活动自助申请</h2>
+            <div class="total">
+                <span>活动类别：</span>
+                <select id="applyType">
+                    <option value="">--请选择--</option>
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                </select>
+                <!-- <i class="iconfont ">&#xe609;</i> -->
+                <p class="fred">(必须选择)</p>
+            </div>
+        </section>
+
+        <section class="apply-content">
+            <div class="apply-money">
+                <span>会员账号：</span>
+                <input type="text" id="account">
+                <p class="fred">(必须填写)</p>
+            </div>
+        </section>
+
+        <section class="apply-content">
+            <div class="apply-money">
+                <span>申请金额：</span>
+                <input type="text" id="applyMoney">
+                <p class="fred">(必须填写)</p>
+            </div>
+        </section>
+
+        <section class="apply-content">
+            <div class="apply-sake">
+                <div>
+                    <span>申请理由：</span>
+                    <p class="fred">(必须填写)</p>
+                </div>
+                <div>
+                    <textarea class="apply-txt" cols="25" rows="3" id="applyReason"></textarea>
+                </div>
+            </div>
+        </section>
+        <button class="submit-content" id="submitapply">提交申请</button>
+    </main>
+
+
+</div>
+
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script>
+    $(document).ready(function (e) {
+        $('.m-statemas .table tbody th').click(function () {
+            $(this).parent().siblings('tr').find('td').slideToggle()
+            $(this).parent().find('.iconfont').toggleClass('curr')
+        })
+        var loginBack;
+        if (getCookie('loginBack')) {
+            var loginBack = getCookie('loginBack');
+            //$("#account").val(loginData.account)
+        } else {
+            $.toast("用户登录信息已失效， 请重新登录！", 'text');
+            window.location.href = "/m/login"
+        }
+        $.ajax({
+            type: "get",
+            //url: "http://localhost:9595/online/wechat/deposit",
+            url: "/m/applyData",
+            headers: {
+                'Authorization': 'bearer ' + loginBack,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'platform': 'wap'
+            },
+            data: {},
+            dataType: 'json',
+            success: function (data) {
+                if (data.code) {
+                    $.toast(data.msg, 'text');
+                } else {
+                    $("#applyType").empty()
+                    $.each(data['data'], function (key, value) {
+                        $("#applyType").append("<option contentpro='" + value.proContent + "' idpro='" + value.proId + "'>" + value.proTitle + "</option>");
+                    });
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.status)
+                console.log(XMLHttpRequest.readyState)
+                console.log(textStatus)
+                console.log(errorThrown)
+            }
+        })
+
+
+        var mescroll = new MeScroll("mescroll", {
+                //下拉刷新的所有配置项
+                down:{
+                    use: false, //是否初始化下拉刷新; 默认true
+                    auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                    hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                    isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+                }
+			});
+        
+
+    });
+
+    $('.h-head .iconfont').click(function () {
+//        window.history.go(-1);
+    })
+
+    $("#submitapply").click(function () {
+        if (getCookie('loginBack')) {
+            loginBack = getCookie('loginBack');
+        }
+        var int_reg = /^\d+$/;
+        var float_reg = /^\d+\.\d+$/;
+        if ($.trim($("#applyType").val()) == '') {
+            alert('请选择活动类别');
+            return false;
+        } else if ($.trim($("#account").val()) == '') {
+            alert('请先登录');
+            return false;
+        } else if ($("#applyMoney").val() == '') {
+            console.log($("#applyMoney").val())
+            alert('请填写申请金额');
+            return false;
+        } else if (!int_reg.test($.trim($("#applyMoney").val())) && !float_reg.test($.trim($("#applyMoney").val()))) {
+            alert('申请金额只能为大于0的数字');
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/m/applySubmit',
+            data: JSON.stringify({
+                account: $.trim($("#account").val()),
+                applyreason: $.trim($("#applyReason").val()),
+                apply_money: parseFloat($.trim($("#applyMoney").val())),
+                pro_id: parseInt($("#applyType option:checked").attr('idpro')),
+                pro_title: $.trim($("#applyType").val()),
+                pro_content: $("#applyType option:checked").attr('contentpro')
+            }),
+            dataType: 'json',
+            headers: {
+                'Authorization': 'bearer ' + loginBack,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'platform': 'wap'
+            },
+            success: function (res, status, xml) {
+                if (res == null) {
+                    alert('提交申请成功,请等待审核');
+                    window.location.href = '/m/index';
+                } else {
+                    alert("出错了:" + res.msg);
+                }
+            }
+        });
+    })
+</script>
+</html>

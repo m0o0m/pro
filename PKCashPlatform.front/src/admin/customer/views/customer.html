@@ -1,0 +1,201 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{lang['List of customer management']}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="widget-body-toolbar">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <div class="">
+                                                <input class="form-control" placeholder="{{lang['Customer source']}}" type="text"  list="list">
+                                                <datalist id="list">
+                                                    <option value="经销商1">经销商1</option>
+                                                    <option value="经销商2">经销商2</option>
+                                                    <option value="经销商3">经销商3</option>
+                                                    <option value="经销商4">经销商4</option>
+                                                    <option value="经销商5">经销商5</option>
+                                                </datalist>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <div class="">
+                                                <input class="form-control" placeholder="{{lang['Site']}}" type="text"  list="list">
+                                                <datalist id="list">
+                                                    <option value="经销商1">经销商1</option>
+                                                    <option value="经销商2">经销商2</option>
+                                                    <option value="经销商3">经销商3</option>
+                                                    <option value="经销商4">经销商4</option>
+                                                    <option value="经销商5">经销商5</option>
+                                                </datalist>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <div class="input-group">
+                                            <button type="submit" ng-click="searh()" data-smart-jqui-dialog-launcher=".dialog_simple"  class="btn btn-primary">
+                                                {{lang['Search']}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline">
+                                    <table  class="table table-striped table-bordered table-hover table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th data-hide="phone">{{lang['Customer ID']}}</th>
+                                            <th data-class="expand">{{lang['Subordinate site']}}</th>
+                                            <th data-class="expand">{{lang['Customer nickname']}}</th>
+                                            <th data-hide="phone"> {{lang['Customer source']}}</th>
+                                            <th data-hide="phone,tablet">{{lang['Order number']}}</th>
+                                            <th data-hide="phone,tablet">{{lang['A turnover']}}</th>
+                                            <th data-hide="phone,tablet">{{lang['integral']}}</th>
+                                            <th data-hide="phone,tablet">{{lang['operation']}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="person in json" >
+                                            <td><img src=http://192.168.8.173:10080{{person.ServiceName}} style="width:30px; height: 30px" /></td>
+                                            <td >{{person.InterfaceName || idFilter}}</td>
+                                            <td>{{person.ID}}</td>
+                                            <td>{{person.WaterMoney}}</td>
+                                            <td>{{person.Status}}</td>
+
+                                            <td>
+                                                <button  ng-click="sub_z($index)" data-smart-jqui-dialog-launcher="#dialog_payxg" class="btn btn-warning btn-xs" style="margin-right: 10px;">修改</button>
+                                                <button  ng-click="pay_no($index)"  class="btn btn-danger btn-xs" style="margin-right: 10px;">修改状态</button>
+                                                <button  ng-click="pay_del($index)"  class="btn btn-primary btn-xs" >删除</button>
+                                            </td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <nav>
+                                        <ul class="pagination">
+                                            <li>
+                                                <a ng-click="Previous()">
+                                                    <span>上一页</span>
+                                                </a>
+                                            </li>
+                                            <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+                                                <a ng-click="selectPage(page)" >{{ page }}</a>
+                                            </li>
+                                            <li>
+                                                <a ng-click="Next()">
+                                                    <span>下一页</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+    <!--添加支付接口弹框-->
+    <div id="dialog_pay" data-smart-jqui-dialog data-modal="true">
+        <div data-dialog-title>
+            <div class='widget-header'><h4>新增支付接口</h4></div>
+        </div>
+        <form class="form-horizontal ng-pristine ng-valid" id="formid_h" enctype="multipart/form-data">
+
+            <fieldset >
+                <div class="form-group">
+                    <label class="col-md-2 control-label">接口名称：</label>
+                    <div class="col-md-6">
+                        <input class="form-control" placeholder="接口名称" type="text"  name="interface_name" >
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">LOGO：</label>
+                    <div class="col-md-10">
+                        <input type="file" class="btn btn-default"  name="service_name">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">状态：</label>
+                    <div class="col-md-10 inline-group">
+                        <label class="radio col col-md-2 ">
+                            <input type="radio" name="status" class="checkP" checked="checked" value="1" style="margin-top: 1px">
+                            启用</label>
+                        <label class="radio col col-md-2">
+                            <input type="radio" class="checkP" name="status" value="0" style="margin-top: 1px">
+                            <i></i>禁用</label>
+                    </div>
+                </div>
+            </fieldset>
+            <div data-dialog-buttons>
+                <button class="btn btn-danger" data-action="subiit_a()" type="submit"></i>&nbsp;确认</button>
+                <button class="btn btn-default" data-action="modalDemo2()"></i>&nbsp; 取消</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!--修改支付接口弹框-->
+    <!--修改-->
+    <div class="dialog_simple dialog_simple_1" style="display: none">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">
+                    ×
+                </button>
+                <h4 class="modal-title">修改支付接口</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <form class="form-horizontal ng-pristine ng-valid" id="formid_zz" enctype="multipart/form-data">
+
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">接口名称:</label>
+                                <div class="col-md-7">
+                                    <input class="form-control" placeholder="接口名称" type="text"  name="interface_name" ng-model="InterfaceName" >
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">LOGO:</label>
+                                <div class="col-md-8">
+                                    <input type="file" class="btn btn-default"  name="service_name">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="subiit()">
+                                提交
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="close()">
+                                关闭
+                            </button>
+                        </div>
+
+                    </form>
+
+
+                </fieldset>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

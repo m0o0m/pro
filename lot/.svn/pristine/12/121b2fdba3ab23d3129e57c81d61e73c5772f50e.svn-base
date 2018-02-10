@@ -1,0 +1,203 @@
+<?php
+/* Smarty version 3.1.31, created on 2017-12-12 12:16:52
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/agent/money.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a2fc8b4358691_71815143',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '7f4542e981eecc6da13f42fa5dfa42d229fc7917' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/agent/money.html',
+      1 => 1510109525,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a2fc8b4358691_71815143 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    .select{width:20%;float:left;margin-right:10px}
+    #sh-select{display: none}
+    #money{width:20%}
+</style>
+
+<div class="page-header">
+    <?php if ($_GET['type'] == 'user_sh') {?>
+    <h1>
+         <a href="javascript:jump('shindex');" id="agent_index">股东列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            股东额度分配
+        </small>
+    </h1>
+    <?php }?>
+    <?php if ($_GET['type'] == 'user_ua') {?>
+    <h1>
+         <a href="javascript:jump('uaindex');" id="agent_index">总代列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            总代额度分配
+        </small>
+    </h1>
+    <?php }?>
+    <?php if ($_GET['type'] == 'user_agent') {?>
+    <h1>
+         <a href="javascript:jump('index');" id="agent_index">代理列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            代理额度分配
+        </small>
+    </h1>
+    <?php }?>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" role="form"  id="pwd-form">
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">账号</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled='disabled' value="<?php echo $_smarty_tpl->tpl_vars['data']->value['login_user'];?>
+" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">昵称</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled='disabled' value="<?php echo $_smarty_tpl->tpl_vars['data']->value['login_name'];?>
+" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">余额</label>
+                <div class="col-sm-9">
+                    <input type="text" id='balance' disabled='disabled' value="<?php echo $_smarty_tpl->tpl_vars['data']->value['money'];?>
+" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">交易额度</label>
+                <div class="col-sm-9">
+                    <input type="text" id='money' value="" class="col-sm-5">
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">模式</label>
+                <div class="col-sm-9">
+                    <label class="line-height-1 blue">
+                        <input checked='checked' type="radio" name="type" class="ace " value="1" >
+                        <span class="lbl">存入</span>
+                    </label>　 
+                    <label class="line-height-1 blue">
+                        <input type="radio" name="type" class="ace" value="2" >
+                        <span class="lbl">取出</span>
+                    </label>　
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="button" id='save'>
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        提交
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="button" id='reset' >
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="hr hr-18 dotted hr-double"></div>
+    </div>
+</div>
+
+<?php echo '<script'; ?>
+>
+    var submit = true;
+
+    //重置
+    $('#reset').click(function () {
+        $('#money').val('');
+        $('input[name="type"][value="1"]').prop('checked', true);
+    })
+
+    //提交
+    $('#save').click(function () {
+        var type = $('input[name="type"]:radio:checked').val();
+        var agent_id = "<?php echo $_GET['id'];?>
+";
+        var balance = $.trim($('#balance').val());
+        var money = $('#money').val();
+        var reg = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+        var agent_type = "<?php echo $_GET['type'];?>
+";
+        if (!reg.test(money)) {
+            layer.alert('交易金额只能输入正数!', {icon: 2});
+            return false;
+        } else if (type == 2 && parseInt(money) > parseInt(balance)) {
+            layer.alert('取出额度不能大于当前余额', {icon: 2});
+            return false;
+        }
+
+        var data = {
+            type: type,
+            agent_type:agent_type,
+            agent_id: agent_id,
+            money: money
+        };
+        if(agent_type == 'user_agent'){
+            lurl = '/agent/index';
+        }else if(agent_type == 'user_ua'){
+            lurl = '/agent/uaindex';
+        }else if(agent_type == 'user_sh'){
+            lurl = '/agent/shindex';
+        }
+
+        if (submit) {
+            submit = false;
+            $.ajax({
+                type: "post",
+                url: '/agent/setmoney',
+                data: data,
+                dataType: 'json',
+                error: function () {
+                    submit = true;
+                    layer.alert('网络异常,请稍后再试!', {icon: 2});
+                },
+                success: function (res) {
+                    if (res.code == 400) {
+                        layer.alert(res.msg, {icon: 2});
+                    } else if (res.code == 200) {
+                        layer.alert(res.msg, {icon: 1},function(){
+                            window.location.href = lurl;
+                        });
+                    }
+                }
+            });
+        }
+
+    })
+
+   function jump(url){
+         $.pjax({
+            method: 'get',
+            url: '/agent/' + url,
+            container: '#container'
+        });
+    }
+<?php echo '</script'; ?>
+><?php }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>维护中心</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/theme3/public/shared/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/theme3/public/shared/css/maintain.css">
+</head>
+
+<body>
+<div id="maintain_content">
+    <div class="maintain_inside">
+        <div class="maintain_top">
+            <ul class="clearfix">
+                <li class="fl">
+                    <a class="wh_active">{{.SiteName}}</a>
+                </li>
+                <li class="fl">维护中心</li>
+                <li class="fr">
+                    <a href="/index">网站首页</a>
+                </li>
+            </ul>
+        </div>
+    {{if eq .WebHome 1}}
+        <div class="maintain_inside_content ">
+            <div class="maintain_inside_top">
+                <div class="maintain_inside_1 clearfix">
+                    <div class="maintain_inside_1_left lf">
+                        <img src="{{.CdnUrl}}/theme3/public/shared/images/wh/maintain_dice.png">
+                    </div>
+                    <div class="maintain_inside_1_right rt">
+                        <h3>对不起，我们系统正在维护中，请稍后访问!</h3>
+                        <div class="maintain_inside_1_bottom">
+                        {{.Content}}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="maintain_inside_bottom">
+                <ul>
+                {{/*<li>*/}}
+                {{/*<a href=""></a>*/}}
+                {{/*</li>*/}}
+                    <li>
+                        <a href="">在线客服</a>
+                    </li>
+                {{/*<li>*/}}
+                {{/*<a href="{{.Domain}}/index">网站首页</a>*/}}
+                {{/*</li>*/}}
+                </ul>
+            </div>
+        </div>
+    {{else}}
+        <div class="info">
+            <ul class="clearfix ulbox">
+            {{range .Products}}
+                <li class="fl">
+                    <div class="info_main">{{.Name}}</div>
+                {{if eq .IsMaintenance 1}}
+                    <div class="info_main_">
+                        <a class="startname" href="/{{.Router}}?type={{.VType}}">开始游戏</a>
+                        <div id="" class="info_main_con"></div>
+                    </div>
+                {{else}}
+                    <div class="info_main_">
+                        <a class="startname2" id="">开始游戏</a>
+                        <div id="" class="info_main_con">{{.Content}}</div>
+                    </div>
+                {{end}}
+
+                </li>
+            {{end}}
+            </ul>
+        </div>
+    {{end}}
+
+    </div>
+</div>
+</body>
+
+</html>
+<script>
+    function myMarquee(getdom) {
+        function scroll(self) {
+            /*往左*/
+            var tmp = (self.scrollLeft)++;
+            //当滚动条到达右边顶端时
+            if (self.scrollLeft == tmp) {
+                self.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;" + self.innerHTML;
+            }
+            //当滚动条滚动了初始内容的宽度时滚动条回到最左端
+            if (self.scrollLeft >= self.firstChild.offsetWidth) {
+                self.scrollLeft = 0;
+            }
+        }
+
+        if (getdom.scrollWidth > getdom.offsetWidth) {   // 判断是否需要滚动
+            var timer = setInterval(function () {
+                scroll(getdom);
+            }, 30);
+        }
+    }
+
+    window.onload = function () {
+        var lists = document.querySelectorAll('.info_main_con');
+        for (let i = 0; i < lists.length; i++) {
+            myMarquee(lists[i])
+        }
+    }
+</script>

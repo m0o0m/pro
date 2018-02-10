@@ -1,0 +1,214 @@
+.Lsjj_ele-live-wrap {
+	overflow: hidden;
+	width: 900px;
+	margin: 0 auto;
+}
+
+.Lsjj_ele-live-align {
+	position: relative;
+	height: 350px;
+}
+
+#Lsjj_u10 {
+    margin: 0 auto;
+    margin-top: 37%;
+    width: 467px;
+    height: 236px;
+    overflow: hidden;
+    background: #c1dff2;
+    -webkit-border-radius: 9px;
+ }
+ .Lsjj_egtc_lines {
+    border: 0 none;
+    padding: 0 10px;
+    font: 14px/30px "microsoft yahei";
+    height: 30px;
+    margin-left: 15px;
+    border-radius: 4px;
+    width: 167px;
+}
+.Lsjj_Hyzx-btn_flt {
+    cursor: pointer;
+    line-height: 26px;
+    text-align: center;
+    width: 60px;
+    height: 26px;
+    background: inherit;
+    border-radius: 0px;
+    -webkit-border-radius: 9px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: block;
+    float: left;
+    margin-left: 110px;
+    margin-top: 28px;
+    background: #fffa40;
+    color: #428bca;
+    text-decoration: none;
+}
+figure.Lsjj_box {
+	position: relative;
+	float: left;
+	overflow: hidden;
+	margin: 10px 5px;
+	min-width: 483px;
+	max-width: 432px;
+	width: 100%;
+	color: #ffffff;
+	text-align: center;
+	font-size: 16px;
+	background-color: #000000;
+}
+figure.Lsjj_box *,
+figure.Lsjj_box *:before,
+figure.Lsjj_box *:after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.55s ease;
+	transition: all 0.55s ease;
+}
+figure.Lsjj_box .Lsjj_bg-img {
+	max-width: 100%;
+	backface-visibility: hidden;
+	vertical-align: top;
+	opacity: 0.9;
+}
+figure.Lsjj_box .Lsjj_title {
+	position: absolute;
+	top: 58%;
+	left: 78px;
+	padding: 5px 10px 10px;
+	/*background-color: rgba(0, 0, 0, .4);*/
+}
+figure.Lsjj_box .Lsjj_title:before,
+figure.Lsjj_box .Lsjj_title:after {
+	height: 2px;
+	width: 400px;
+	position: absolute;
+	content: '';
+	background-color: #ffffff;
+}
+figure.Lsjj_box .Lsjj_title:before {
+	top: 0;
+	left: 10px;
+	-webkit-transform: translateX(100%);
+	transform: translateX(100%);
+}
+figure.Lsjj_box .Lsjj_title:after {
+	bottom: 0;
+	right: 10px;
+	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
+}
+figure.Lsjj_box .Lsjj_title div:before,
+figure.Lsjj_box .Lsjj_title div:after {
+	width: 2px;
+	height: 300px;
+	position: absolute;
+	content: '';
+	background-color: #ffffff;
+}
+figure.Lsjj_box .Lsjj_title div:before {
+	top: 10px;
+	right: 0;
+	-webkit-transform: translateY(100%);
+	transform: translateY(100%);
+}
+figure.Lsjj_box .Lsjj_title div:after {
+	bottom: 10px;
+	left: 0;
+	-webkit-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+figure.Lsjj_box .Lsjj_title.Lsjj_box-one .Lsjj_title-box {
+	width: 120px;
+}
+figure.Lsjj_box .Lsjj_title.Lsjj_box-two .Lsjj_title-box {
+	/*width: 205px;*/
+}
+
+figure.Lsjj_box .Lsjj_title .Lsjj_title-box img {
+	padding: 5px;
+}
+figure.Lsjj_box h4 {
+	display: inline-block;
+	width: 100px;
+	margin: 0;
+	opacity: 0;
+	font-size: 14px;
+	font-weight: 500;
+	background-color: #ffffff;
+	/* border: 2px solid #fff; */
+	padding: 10px 15px;
+	color: #000;
+	cursor: pointer;
+}
+figure.Lsjj_box h4:hover {
+	/*background-color: #49494F;*/
+	color: #fff;
+	opacity: 0.8;
+	background: -webkit-linear-gradient(#0A87C5, #01156F); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(#0A87C5, #01156F); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(#0A87C5, #01156F); /* Firefox 3.6 - 15 */
+	background: linear-gradient(#0A87C5	, #01156F); /* 标准的语法 */
+}
+figure.Lsjj_box figcaption {
+	position: absolute;
+	bottom: 42%;
+	left: 78px;
+	text-align: left;
+	opacity: 0;
+	padding: 5px 60px 5px 10px;
+	font-size: 0.8em;
+	font-weight: 500;
+	letter-spacing: 1.5px;
+}
+figure.Lsjj_box figcaption p {
+	font-size: 15px;
+	font-weight: 300;
+	margin: 0;
+}
+/*
+figure.box a {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+*/
+
+figure.Lsjj_box:hover .Lsjj_bg-img,
+figure.Lsjj_box.Lsjj_hover .Lsjj_bg-img {
+	zoom: 1;
+	filter: alpha(opacity=35);
+	-webkit-opacity: 0.35;
+	opacity: 0.35;
+}
+figure.Lsjj_box:hover .Lsjj_title:before,
+figure.Lsjj_box.hover .Lsjj_title:before,
+figure.Lsjj_box:hover .Lsjj_title:after,
+figure.Lsjj_box.hover .Lsjj_title:after,
+figure.Lsjj_box:hover .Lsjj_title div:before,
+figure.Lsjj_box.hover .Lsjj_title div:before,
+figure.Lsjj_box:hover .Lsjj_title div:after,
+figure.Lsjj_box.hover .Lsjj_title div:after {
+	-webkit-transform: translate(0, 0);
+	transform: translate(0, 0);
+}
+figure.Lsjj_box:hover .Lsjj_title:before,
+figure.Lsjj_box.hover .Lsjj_title:before,
+figure.Lsjj_box:hover .Lsjj_title:after,
+figure.Lsjj_box.hover .Lsjj_title:after {
+	-webkit-transition-delay: 0.15s;
+	transition-delay: 0.15s;
+}
+figure.Lsjj_box:hover figcaption,
+figure.Lsjj_box.hover figcaption {
+	opacity: 1;
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+

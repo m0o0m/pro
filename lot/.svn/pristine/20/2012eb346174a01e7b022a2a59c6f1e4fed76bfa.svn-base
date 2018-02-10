@@ -1,0 +1,272 @@
+<style>
+    #menu-form label{margin-right:10px}
+    .handle span{cursor: pointer}
+    #twoLevel{display: none}
+    .levelDiv{display: none}
+    .other_tr .center{background:#FF6970 !important}
+    .other_tr .center:hover<.other_tr{background-color:yellow !important}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="menu-form" method='get' action='/gameapi/bet/nobalance'>
+            <label for="date"> 日期：
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='s_addtime' value="<{if isset($starttime) }><{$starttime}><{/if}>" id="startTime" style="width:180px;">
+                ~
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='e_addtime' value="<{if isset($endtime) }><{$endtime}><{/if}>" id="endTime" style="width:180px;">
+
+            </label>
+
+        <label>
+            <input type="button" class="btn btn-sm btn-success" id="search" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="getauto">开奖结果补采</span></label>
+    </form>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">彩种</th>
+                        <th class="center">期号</th>
+                        <th class="center">是否开奖</th>
+                        <th class="center">未结算注单数</th>
+                        <th class="center">其它</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <{foreach from=$data item=val key=type}>
+                    <{foreach from=$val item=other key=periods}>
+
+                    <tr  <{if $other['other'] == 1}> class="other_tr" <{/if}>>
+                        <td class="center"> <{if isset(<{$new_fc_type[<{$type}>]}>)}><{$new_fc_type[<{$type}>]}><{/if}>  </td>
+                        <td class="center"> <{if isset(<{$periods}>)}><{$periods}><{/if}></td>
+                        <td class="center"> <{if isset(<{$other['kaijiang']}>)}><{$other['kaijiang']}><{/if}>  </td>
+                        <td class="center"> <{if isset(<{$other['count']}>)}><{$other['count']}><{/if}>  </td>
+                        <td class="center"> <{if !empty(<{$other['msg']}>)}> <{$other['msg']}><{if isset($other['other']) && $other['other'] == 1 }>  <a  class="btn btn-xs btn-success update" stype="float:right;" href="javascript:gobalance('<{$type}>',<{$periods}>);">尝试结算</a> <{/if}>  <{/if}>  </td>
+                    </tr>
+                    <{/foreach}>
+                <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="isHide layui-layer-wrap" id="getauto_div" style="display: none;">
+    <div class="modal-body">
+        <form  class="form-horizontal" id="getauto_form" >
+            <div class="form-group" style="margin-left:20px;">
+                <label for=""> 彩票种类:
+                    <select type="select" name="getauto_type"  id="getauto_type" style="width:120px;margin-left:20px;">
+                         <option value="" >请选择彩种</option>
+                      <{foreach from=$fc_type item=v key=k}>
+                        <option value="<{$v.type}>"> <{$v.name}></option>
+                        <{/foreach}>
+                    </select>
+                </label>
+            </div>
+
+            <div class="form-group" style="margin-left:20px;">
+                 <label for="date"> 请选择日期：
+                    <input class="laydate-icon" type="text" placeholder="请输入日期" name='getauto_time' value="" id="getauto_time" style="width:120px;">
+                </label>
+            </div>
+            <div class="form-group">
+               <center>
+                    <input  type="submit" class="btn btn-info" value = "确定补采" onclick="return dogetauto();">
+               </center>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+
+        var starttime = $.trim($('#startTime').val());
+        var endtime = $.trim($('#endTime').val());
+
+        var params = {
+            s_addtime: starttime,
+            e_addtime: endtime,
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/gameapi/bet/nobalance',
+            container: '#container'
+        });
+    }
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //返回列表页
+    $('#bet_index').click(function(){
+         $.pjax({
+            method: 'get',
+            url: '/gameapi/bet/index',
+            container: '#container'
+        });
+    })
+    //时间控件
+    var start = {
+        elem: '#startTime',
+        format: 'YYYY/MM/DD',
+        min: laydate.now(-4), //设定最小日期为当前日期
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            res =  GetDateStr(datas, 4, '+');
+            end.max = res; //开始日选好后，重置结束日的最小日期
+            end.min = datas;
+            // end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    var end = {
+        elem: '#endTime',
+        format: 'YYYY/MM/DD',
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+            res =  GetDateStr(datas, 4, '-');
+            start.min = res; //开始日选好后，重置结束日的最小日期
+            start.max = datas;
+            // end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    laydate(start);
+    laydate(end);
+    var getauto = {
+        elem: '#getauto_time',
+        format: 'YYYY/MM/DD',
+        //min: laydate.now(), //设定最小日期为当前日期
+        max: laydate.now(), //最大日期
+        istime: false,
+        istoday: true,
+        choose: function (datas) {
+        }
+    };
+    laydate(getauto);
+
+    function GetDateStr(date, AddDayCount, jj) { 
+          var dd = new Date(date); 
+          if(jj == '+'){
+              dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+          }else if(jj == '-'){
+              dd.setDate(dd.getDate()-AddDayCount);//获取AddDayCount天后的日期 
+          }
+          var y = dd.getFullYear(); 
+          var m = dd.getMonth()+1;//获取当前月份的日期 
+          var d = dd.getDate(); 
+          return y+"/"+m+"/"+d; 
+    } 
+
+    function gobalance(type,periods){
+        $.ajax({
+            type: "post",
+            url: 'secondblance',
+            data: {"periods": periods,"type":type},
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2})
+                layer.close(load);
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.ErrorCode == 2) {
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                    layer.close(load);
+                } else if (res.ErrorCode == 1) {
+                    layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.reload();});
+                    layer.close(load);
+                }
+            },
+            complete: function () {
+                var idx = $('.layui-layer-shade').length - 1;
+                if (idx > 0) {
+                    $('body').find('.layui-layer-shade').eq(idx).remove();
+                }
+            }
+        });
+    }
+
+    // ------------------补采开奖结果-------------------------------
+    $('#getauto').click(function(){
+        layer.open({
+            type: 1, //Page层类型
+            area: ['400px', '300px'],
+            title: '开奖结果补采集',
+            shade: 0.5, //遮罩透明度
+            maxmin: true, //允许全屏最小化
+            anim: 1, //0-6的动画形式，-1不开启
+            content: $('#getauto_div')
+         });
+        return false;
+    });
+
+    function dogetauto(){
+        var url = '/gameapi/auto/getauto?';
+        var type = 'post';
+        var fc_type = $('#getauto_type').val();
+        var time = $('#getauto_time').val();
+        if(fc_type == ''){
+            layer.alert('彩种不能为空!',{icon:0});
+            return false;
+        }
+        if(time == ''){
+            layer.alert('采集时间不能为空',{icon:0});
+            return false;
+        }
+
+        var data = 'fc_type=' + fc_type + '&time=' + time;
+        var callback = function (result) {
+            layer.close(index);
+            if(result.ErrorCode == 1){
+                layer.alert(result.ErrorMsg,{icon:1},function(){window.location.reload();});
+            }else if(result.ErrorCode == 2){
+                layer.alert(result.ErrorMsg,{icon:0});
+                return false;
+            }else{
+                layer.alert('出错啦',{icon:0});
+                return false;
+            }
+            return false;
+        }
+        doajax(url,data,callback);
+        return false;
+    }
+
+     function doajax(url,data,callback){
+             $.ajax({
+                type: "post",
+                url: url,
+                data: data,
+                beforeSend: function () {
+                    index = layer.load(1, {
+                        shade: [0.5, '#000000'] //0.1透明度的白色背景
+                    });
+                },
+                error: function () {
+                    layer.alert('出错啦！', {icon: 2});
+                    layer.close(index);
+                },
+                dataType: 'json',
+                success: function (res) {
+                   callback(res);
+                }
+            });
+        }
+</script>

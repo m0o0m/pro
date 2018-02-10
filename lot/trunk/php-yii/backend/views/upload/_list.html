@@ -1,0 +1,47 @@
+
+    <thead>
+        <tr>
+            <th class="center">ID</th>
+            <!-- <th class="center">线路</th> -->
+            <th class="center">代理</th>
+            <th class="center">文件名</th>
+            <th class="center">预览</th>
+            <th class="center">路径</th>
+            <th class="center">源文件名</th>
+            <th class="center">排序</th>
+            <th class="center">启用</th>
+            <th class="center">添加时间</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+<{if isset($result.data)}>
+    <tbody>
+    <{if count($result['data']) == 0}>
+        <tr><td class="center" colspan="20">无记录</td></tr>
+    <{else}>
+      <{foreach from=$result.data item=v key=k}>
+        <tr id="item<{$v.id}>"
+          <{foreach from=$v item=vv key=kk}>
+            data-<{$kk}>="<{$vv}>"
+          <{/foreach}>
+            data-info="<{$v|@json_encode}>"
+        >
+            <td class="center"><{$v.id}></td>
+            <!-- <td class="center"><{$v.line_id}></td> -->
+            <td class="center"><{$v.agentTxt}></td>
+            <td class="center"><{$v.filename}></td>
+            <td class="center"><img style="max-width:66px;max-height:66px;" onclick="actionView(<{$v.id}>);" src="<{$v.showpath}>"/></td>
+            <td class="center"><{$v.filepath}></td>
+            <td class="center"><{$v.original_filename}></td>
+            <td class="center"><{$v.sort}></td>
+            <td class="center" name="enable"><a onclick="actionEnable(<{$v.id}>, <{$v.enable}>)" class="btn btn-xs btn-<{if $v['enable'] eq '1'}>primary<{else}>default<{/if}> enable"><{$v.enableTxt}></a></td>
+            <td class="center"><{$v.adddate}></td>
+            <td class="center">
+                <a onclick="actionView(<{$v.id}>)" class="btn btn-xs btn-success view">查看</a>
+                <!-- <a onclick="actionEdit(<{$v.id}>)" class="btn btn-xs btn-success update">修改</a> -->
+            </td>
+        </tr>
+      <{/foreach}>
+    <{/if}>
+    </tbody>
+<{/if}>

@@ -1,0 +1,195 @@
+@import "./function.scss";
+
+.notice {
+  .r_box {
+    margin: 12px 0 0 10px;
+    .thend {
+      overflow: hidden;
+      width: 900px;
+      h2 {
+        font-size: 18px;
+        font-weight: bold;
+        float: left;
+      }
+    }
+    .week {
+      float: left;
+      ul {
+        overflow: hidden;
+        height: 84px;
+        margin-top: 10px;
+        width: 900px;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        li {
+          margin-top: 32px;
+          float: left;
+          font-size: 16px;
+          font-weight: bold;
+          height: 50px;
+          line-height: 50px;
+          width: 120px;
+          cursor: pointer;
+        }
+        li:last-child {
+          background-color: $Button_color;
+          border-radius: 10px 10px 0 0px;
+          color: #fff;
+        }
+      }
+    }
+    .table {
+      width: 900px;
+      .thend {
+        // float: left;
+        // margin-top: 20px;
+        width: 900px;
+        line-height: 50px;
+        height: 50px;
+        background-color: $Button_color;
+        li {
+          font-size: 14px;
+          color: #fff;
+          width: 400px;
+          float: left;
+        }
+      }
+      .from {
+        //.rightbtn {
+        //  position: relative;
+        //  i{
+        //    position: absolute;
+        //    right: 20px;
+        //    top: 18px;
+        //  }
+        //}
+        .li1 {
+          width: 900px;
+          border-left: 1px solid $border_color;
+          border-right: 1px solid $border_color;
+          border-bottom: 1px solid $border_color;
+          .ul1 {
+            .li11 {
+              position: relative;
+              cursor: pointer;
+              i {
+                height: 8px;
+                width: 8px;
+                line-height: 8px;
+                border-radius: 50px;
+                background-color: #e60012;
+                position: absolute;
+                left: 84px;
+                top: 25px;
+              }
+            }
+            li {
+              display: block;
+              float: left;
+              width: 400px;
+              height: 60px;
+              line-height: 60px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            .ul2:hover {
+              background-color: $bg_select;
+            }
+          }
+          .ul1 {
+          }
+          .ul2:last-child {
+            border-bottom: none;
+          }
+        }
+        .li1:hover {
+          background-color: $bg_select;
+        }
+        .li_select {
+          background-color: $bg_select
+        }
+        .li1 {
+          //cursor: pointer;
+        }
+        .li2 {
+          display: none;
+          li {
+            padding: 15px 0;
+            text-indent: 2em;
+            text-align: left;
+            width: 900px;
+            border-left: 1px solid $border_color;
+            border-right: 1px solid $border_color;
+            border-bottom: 1px solid $border_color;
+          }
+        }
+      }
+      .ul3 {
+        border-bottom: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+        height: 60px;
+        li {
+          display: block;
+          float: left;
+          width: 224px;
+          line-height: 60px;
+          height: 60px;
+        }
+      }
+    }
+  }
+  .footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .top_txt {
+      padding-bottom: 10px;
+      text-align: left;
+    }
+    // .footerUl{
+    //   text-align: left;
+    // }
+    .txt {
+      height: 32px;
+      line-height: 32px;
+      margin-right: 14px;
+    }
+    .inputTxt {
+      height: 30px;
+      width: 50px;;
+      margin-right: 14px;
+      padding-bottom: 0px;
+      line-height: 30px;
+      text-align: center;
+      color: #666;
+      font-family: Arial;
+      border: 1px solid #dddee1;
+      border-radius: 4px;
+      background-color: #fff;
+      outline: none;
+    }
+    .inputTxt:hover {
+      border-color: #2d8cf0;
+    }
+  }
+}
+
+//点击切换
+.stylebg {
+  background-color: $bg_color;
+  border-radius: 10px 10px 0 0px;
+  color: #fff;
+}
+
+.ulfor {
+  li {
+    height: 60px;
+    line-height: 60px;
+    color: red;
+    border: 1px solid #eee;
+  }
+}
+
+.red {
+  color: red;
+}

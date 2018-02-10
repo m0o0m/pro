@@ -1,0 +1,526 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>站点管理</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar" ng-show="newTodo">
+                                        <div class="row form-horizontal ">
+                                            <label class="col-md-1 col-xs-4 input-label">{{lang['Status']}}：</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group" style="width: 80%;">
+                                                    <select class="form-control">
+                                                        <option value="1">启用</option>
+                                                        <option value="2">禁用</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!--<label class="col-md-1 control-label">站点：</label>-->
+                                            <div class="col-md-2 col-xs-12">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="1">SITEID</option>
+                                                        <option value="2">INDEX_ID</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="" ng-model="key">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-4">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search"  data-toggle="modal" data-target="#myModal2">添加站点</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-xs-4">
+                                                <div class="input-group">
+                                                    <button class="btn btn-default" data-ui-sref="app.site.Maintenanceset">全站维护设置</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline">
+                                        <div class="table-scroll">
+                                            <table  class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>SITEID</th>
+                                                    <th>INDEX_ID</th>
+                                                    <th>站点名称</th>
+                                                    <th>退水设置</th>
+                                                    <th>标示</th>
+                                                    <th>域名</th>
+                                                    <th>视讯额度</th>
+                                                    <th>添加/上线时间</th>
+                                                    <th>状态</th>
+                                                    <th>模块管理</th>
+                                                    <th>财务</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list">
+                                                    <td>{{item.site_id}}</td>
+                                                    <td>{{item.index_id}}</td>
+                                                    <td>{{item.site_name}}</td>
+                                                    <td>{{item.return_setting}}</td>
+                                                    <td>{{item.mark}}</td>
+                                                    <td>{{item.domain}}</td>
+                                                    <td>{{item.limit}}<span class="text-red" data-toggle="modal" data-target="#myModal1">[额度操作]</span></td>
+                                                    <td>{{item.add_time|fiterTime}}</td>
+                                                    <td>{{item.status===1?'开启':'关闭'}}</td>
+                                                    <td><button class="btn btn-default btn-xs" data-ui-sref="app.site.videoModule({id:item.site_id})">模块管理</button></td>
+                                                    <td>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="getOnlien(item.site_id)">上线</button>
+                                                        <button class="btn btn-default btn-xs" data-ui-sref="app.site.negative({id:item.site_id})">负数</button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-default btn-xs" data-ui-sref="app.site.multistation({id:item.site_id})">多站点</button>
+                                                            <button class="btn btn-default btn-xs" data-ui-sref="app.site.reception({id:item.site_id})">前台</button>
+                                                        <button class="btn btn-default btn-xs" data-ui-sref="app.site.data">数据</button>
+                                                        <button class="btn btn-default btn-xs" data-target="#myModal7" data-toggle="modal" ng-click="de(item)">编辑</button>
+                                                        <button class="btn btn-default btn-xs">导航</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+    </div>
+</div>
+<!--当前额度-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="addAccount">视讯额度</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">选择类型:</label>
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <select data-smart-select2 class="selectWidth" ng-model="type_id">
+                                        <option value="">全部</option>
+                                        <option value="{{item.value}}" ng-repeat="item in option_ip">{{item.name}}</option>
+                                    </select>
+                                </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">当前额度</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <input class="form-control" ng-model="Current_quota"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">操作金额</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="Operation"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">内容</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea style="width: 100%;" rows="5" ng-model="content"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label ng-binding">操作选择</label>
+                            <div class="col-md-6">
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn" ng-model="choice" value="1"> 存款
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"  ng-model="choice" value="2">扣款
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"  ng-model="choice" value="3">预借存款
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="money()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加站点-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">添加站点</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">站点名称</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="site_name"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">SITEID</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="SITEID"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">INDEX_ID</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="INDEX_ID"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">主域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">代理后台域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="agent_domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">后台域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="Backstage"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">WAP域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="wap_domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">域名总数</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="domainCount" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label ng-binding">是否下载app</label>
+                            <div class="col-md-6">
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn" ng-model="status" value="1"> 是
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"  ng-model="status" value="2">否
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset style="border-bottom: 1px solid">
+                        <label class="col-md-4 control-label ng-binding" style="color: red; font-size: 13px">站点类型(此栏财务操作)</label>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">套餐</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="packge">
+                                    <option value="1">A套餐</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">类别</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="typeId">
+                                    <option value="1">A套餐</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">线路</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="line">
+                                    <option value="1">线路一</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">标示</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="Mark" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑站点-->
+<div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">编辑站点</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">站点名称</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.site_name"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">SITEID</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.SITEID"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">INDEX_ID</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.INDEX_ID"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">主域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">代理后台域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.agent_domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">后台域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.Backstage"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">WAP域名</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.wap_domain"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">域名总数</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.domainCount" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label ng-binding">是否下载app</label>
+                            <div class="col-md-6">
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn" ng-model="datas.status" value="1"> 是
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"  ng-model="datas.status" value="2">否
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset style="border-bottom: 1px solid">
+                        <label class="col-md-4 control-label ng-binding" style="color: red; font-size: 13px">站点类型(此栏财务操作)</label>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">套餐</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="datas.packge">
+                                    <option value="1">A套餐</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">类别</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="datas.typeId">
+                                    <option value="1">A套餐</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">线路</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" ng-model="datas.line">
+                                    <option value="1">线路一</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">标示</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="datas.Mark" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="mod()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--上线-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">上线</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">时间</label>
+                        <div class="col-md-6">
+                            <div class="input-group form-group">
+                                <input type="text" class="form-control" data-smart-masked-input="9999-99-99" data-mask-placeholder= "-" ng-model="time">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="online()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

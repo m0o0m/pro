@@ -1,0 +1,186 @@
+<div class="page-header">
+    <p id="me-table-buttons">
+    <h1>
+        <a href="javascript:;" id="front_index">前台公告列表</a>
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            <{if isset($smarty.get.id)}>
+                修改公告
+            <{else}>
+                添加公告
+            <{/if}>
+        </small>
+    </h1>
+</p>
+</div>
+
+<!-- 添加/修改 表单 -->
+<div class="isHide layui-layer-wrap">
+    <div class="modal-body">
+        <form id="add-form" class="form-horizontal" action="?" method="POST">
+            <input type="hidden" name="id" value="<{if isset($item) && $item.id}><{$item.id}><{/if}>">
+            <input type="hidden" name="info" value='<{if isset($item)}><{$item|json_encode}><{/if}>'>
+            <fieldset style="width:60%;">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 类型: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="type" style="width:30%;" id="type">
+                          <{foreach from=$show.types item=val key=key}>
+                            <option value="<{$key}>" <{if isset($item) && $item.type && $item.type == $key}>selected<{/if}> ><{$val}></option>
+                          <{/foreach}>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 线路: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="line_id" id="line_id" style="width:30%;">
+                            <option value="">请选择</option>
+                          <{foreach from=$show.lines item=val key=key}>
+                            <option value="<{$val.line_id}>" <{if isset($item) && $item.line_id && $item.line_id == $val.line_id}>selected<{/if}> ><{$val.line_id}></option>
+                          <{/foreach}>
+                        </select>
+                    </div>
+                </div>
+<!--                 <div class="form-group">
+                    <label class="col-sm-3 control-label"> 代理类型: </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="agent_type" id="agent_type">
+                            <option value="">请选择</option>
+                          <{foreach from=$show.atypes item=val key=key}>
+                            <option value="<{$key}>" <{if isset($item) && $item.agent_type && $item.agent_type == $key}>selected<{/if}> ><{$val}></option>
+                          <{/foreach}>
+                        </select>
+                        <br>
+                        <span class="children">
+                          <{if isset($item.agents)}>
+                          代理:
+                          <{foreach from=$item.agents item=val key=key}>
+                            <label>
+                                <input type="checkbox" name="agent_id[]" value="<{$val.id}>" <{if isset($item.aids) && in_array($val.id, $item.aids)}>checked<{/if}> />
+                                <{$val.login_name}>&nbsp;&nbsp;
+                            </label>
+                          <{/foreach}>
+                          <{/if}>
+                        </span>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 标题: </label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" name="title" id="title" value="<{if isset($item) && $item.title}><{$item.title}><{/if}>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 内容: </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="content" id="content" rows="6" ><{if isset($item) && $item.content}><{$item.content}><{/if}></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 备注: </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="remark" id="remark"><{if isset($item) && $item.remark}><{$item.remark}><{/if}></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    
+
+   <div class="clearfix form-actions">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" type="button" id='add-form-btn' >
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                提交
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="button" id='reset' >
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                重置
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#front_index').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/noticefront/index',
+            container: '#container'
+        });
+    })
+
+    $('#reset').click(function(){
+        $('#title').val('');
+        $('#remark').val('');
+        $('#content').val('');
+        $('#type').children().prop('selected',false);
+        $('#line_id').children().prop('selected',false);
+
+    })
+
+// ------------------ 增/改 ------------------------------------
+    $('#add-form-btn').click(function(){
+        var title = $('#title').val();
+        var content = $('#content').val();
+        if(title == ''){
+            layer.alert('公告标题不能为空',{icon:2});
+            return false;
+        }
+
+        if(content == ''){
+            layer.alert('公告内容不能为空',{icon:2});
+            return false;
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'add',
+            data: $('#add-form').serialize(),
+            dataType:'json',
+            success: function(data,textStatus){
+                var result = data;
+                if(result.ErrorCode > 0){
+                    layer.alert(result.ErrorMsg, {icon: 0});
+                    return;
+                }
+                if(result.ErrorMsg){
+                    layer.alert(result.ErrorMsg, {icon: 1}, function(){
+                        location = 'index?p';
+                    });
+                }
+            }
+        });
+    });
+    // $('#agent_type').change(function(){
+    //     var line_id = $('#line_id').val();
+    //     var agent_type = $('#agent_type').val();
+    //     if(!agent_type){
+    //         $('#agent_type ~ .children').html('');
+    //         return;
+    //     }
+    //     $.ajax({
+    //         type: 'post',
+    //         url: 'agent',
+    //         data: 'line_id=' + line_id + '&agent_type=' + agent_type,
+    //         dataType:'json',
+    //         success: function(data,textStatus){
+    //             var html = '代理:';
+    //             for(x in data){
+    //                 html += '<label>';
+    //                 html += '&nbsp;&nbsp;<input type="checkbox" name="agent_id[]" value="'+data[x].id+'" />';
+    //                 html += data[x].login_name;
+    //                 html += '</label>';
+    //             }
+    //             if(data.length == 0){
+    //                 html += 'null'
+    //             }
+
+    //             $('#agent_type ~ .children').html(html);
+    //         }
+    //     });
+    // });
+</script>

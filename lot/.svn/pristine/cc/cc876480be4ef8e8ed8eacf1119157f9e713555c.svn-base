@@ -1,0 +1,1427 @@
+<template>
+  <div class="bj">
+    <div class="pk_time">
+      <div class="time_left">
+        <div class="left_logo">
+          <img :src="c_data.img_path" alt="">
+        </div>
+        <div class="left_text">
+          <p>{{c_data.fc_name}}</p>
+          <p><span>第</span> {{c_data.qishu}} <span>期</span></p>
+        </div>
+      </div>
+      <div class="time_center">
+        <p class="center_top">投注剩余时间</p>
+        <div class="center_bottom">
+          <div class="fl time_content" v-if="h < 10 && h >= 0">0{{h}}</div>
+          <div class="fl time_content" v-else-if="h < 0">--</div>
+          <div class="fl time_content" v-else>{{h}}</div>
+          <div class="fl fs">时</div>
+          <div class="fl time_content" v-if="m < 10 && m >= 0">0{{m}}</div>
+          <div class="fl time_content" v-else-if="m < 0">--</div>
+          <div class="fl time_content" v-else>{{m}}</div>
+          <div class="fl fs">分</div>
+          <div class="fl time_content" v-if="s < 10 && s >= 0">0{{s}}</div>
+          <div class="fl time_content" v-else-if="s < 0">--</div>
+          <div class="fl time_content" v-else>{{s}}</div>
+          <div class="fl fs">秒</div>
+        </div>
+      </div>
+      <div class="time_bottom">
+        <!-- <div class="bottom_left">第{{auto.qishu}}期开奖</div> -->
+        <div class="bottom_left"><span>第</span> {{auto.qishu}} <span>期开奖</span></div>
+        <div v-if="this.$route.query.page == 'liuhecai'" class='bottom_center6'>
+          <div class="bottom_content">
+            <div class="content_list" v-for="item in auto.ball">
+              <p :class="[item.color,'box']">{{item.number}}</p>
+              <p class="animal">{{item.animal}}</p>
+            </div>
+          </div>
+        </div>
+        <div v-else :class="[auto.ball.length >= 10?'bottom_center_other':'bottom_center']">
+          <div :class="[auto.ball.length == 10?'other_content':'bottom_content']">
+            <div class="content_list" v-for="item in auto.ball">
+              <p :class="['box',item.color]">{{item.ball}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_bottom">
+        <p @click="history()">历史结果</p>
+        <p @click="open_way()">开奖走势</p>
+        <p @click="show_rule()">玩法规则</p>
+      </div>
+    </div>
+    <Nav-top :lists="menus" v-on:menu="go_child"></Nav-top>
+    <router-view :c_data="c_data" :toplist="toplist" :centerlist="centerlist" :buttomlist="buttomlist"
+                 :kemplist="kemplist" :onelist="onelist" :towlist="towlist"></router-view>
+    <Nav-bottom ref="dewdrop_map" :back_data="auto_list" :nav_top="bottom_nav"></Nav-bottom>
+  </div>
+</template>
+
+<script>
+  import NavTop from "../../../share_components/default_nav";
+  import api from "../../../api/config";
+  import ws from '../../../assets/js/socket'
+  import cm_cookie from '../../../assets/js/com_cookie'
+  import NavBottom from '../../../share_components/dewdrop_map'
+  export default {
+    components: {
+      NavTop,NavBottom
+    },
+    data() {
+      return {
+        auto_list:[],
+        bottom_nav:[
+            {name:'第一名'},
+            {name:'第二名'},
+            {name:'第三名'},
+            {name:'第四名'},
+            {name:'第五名'},
+            {name:'第六名'},
+            {name:'第七名'},
+            {name:'第八名'},
+            {name:'第九名'},
+            {name:'第十名'},
+        ],
+        menus: [
+          {name: "两面盘", item: "bj_10"},
+          {name: "冠、亚军组合", item: "bj_kemp"},
+          {name: "1-5名", item: "bj_1_5"},
+          {name: "6-10名", item: "bj_6_10"}
+        ],
+        timer: null,
+        // endTime: '2018/1/11 10:00:00',
+        h: 0,
+        m: 0,
+        s: 0,
+        c_data: {
+          fc_name: "",
+          img_path: "",
+          qishu: ""
+        },
+        auto: {
+          qishu: null,
+          datetime: "",
+          ball: []
+        },
+        close_time: {
+          fengpan: "",
+          kaijiang: "",
+          kaipan: "",
+          now_time: ""
+        },
+        toplist: [
+          {
+            name: "冠亚军和",
+            object: [
+              {num: "冠亚大", index: 0, money: "", flag: false},
+              {num: "冠亚小", index: 1, money: "", flag: false},
+              {num: "冠亚单", index: 2, money: "", flag: false},
+              {num: "冠亚双", index: 3, money: "", flag: false}
+            ]
+          }
+        ],
+        centerlist: [
+          {
+            name: "冠军",
+            object: [
+              {num: "大", index: 4, money: "", flag: false},
+              {num: "小", index: 5, money: "", flag: false},
+              {num: "单", index: 6, money: "", flag: false},
+              {num: "双", index: 7, money: "", flag: false},
+              {num: "龙", index: 8, money: "", flag: false},
+              {num: "虎", index: 9, money: "", flag: false}
+            ]
+          },
+          {
+            name: "亚军",
+            object: [
+              {num: "大", index: 10, money: "", flag: false},
+              {num: "小", index: 11, money: "", flag: false},
+              {num: "单", index: 12, money: "", flag: false},
+              {num: "双", index: 13, money: "", flag: false},
+              {num: "龙", index: 14, money: "", flag: false},
+              {num: "虎", index: 15, money: "", flag: false}
+            ]
+          },
+          {
+            name: "第三名",
+            object: [
+              {num: "大", index: 16, money: "", flag: false},
+              {num: "小", index: 17, money: "", flag: false},
+              {num: "单", index: 18, money: "", flag: false},
+              {num: "双", index: 19, money: "", flag: false},
+              {num: "龙", index: 20, money: "", flag: false},
+              {num: "虎", index: 21, money: "", flag: false}
+            ]
+          },
+          {
+            name: "第四名",
+            object: [
+              {num: "大", index: 22, money: "", flag: false},
+              {num: "小", index: 23, money: "", flag: false},
+              {num: "单", index: 24, money: "", flag: false},
+              {num: "双", index: 25, money: "", flag: false},
+              {num: "龙", index: 26, money: "", flag: false},
+              {num: "虎", index: 27, money: "", flag: false}
+            ]
+          },
+          {
+            name: "第五名",
+            object: [
+              {num: "大", index: 28, money: "", flag: false},
+              {num: "小", index: 29, money: "", flag: false},
+              {num: "单", index: 30, money: "", flag: false},
+              {num: "双", index: 31, money: "", flag: false},
+              {num: "龙", index: 32, money: "", flag: false},
+              {num: "虎", index: 33, money: "", flag: false}
+            ]
+          }
+        ],
+        buttomlist: [
+          {
+            name: "第六名",
+            object: [
+              {num: "大", index: 34, money: "", flag: false},
+              {num: "小", index: 35, money: "", flag: false},
+              {num: "单", index: 36, money: "", flag: false},
+              {num: "双", index: 37, money: "", flag: false}
+            ]
+          },
+          {
+            name: "第七名",
+            object: [
+              {num: "大", index: 38, money: "", flag: false},
+              {num: "小", index: 39, money: "", flag: false},
+              {num: "单", index: 40, money: "", flag: false},
+              {num: "双", index: 41, money: "", flag: false}
+            ]
+          },
+          {
+            name: "第八名",
+            object: [
+              {num: "大", index: 42, money: "", flag: false},
+              {num: "小", index: 43, money: "", flag: false},
+              {num: "单", index: 44, money: "", flag: false},
+              {num: "双", index: 45, money: "", flag: false}
+            ]
+          },
+          {
+            name: "第九名",
+            object: [
+              {num: "大", index: 46, money: "", flag: false},
+              {num: "小", index: 47, money: "", flag: false},
+              {num: "单", index: 48, money: "", flag: false},
+              {num: "双", index: 49, money: "", flag: false}
+            ]
+          },
+          {
+            name: "第十名",
+            object: [
+              {num: "大", index: 50, money: "", flag: false},
+              {num: "小", index: 51, money: "", flag: false},
+              {num: "单", index: 52, money: "", flag: false},
+              {num: "双", index: 53, money: "", flag: false}
+            ]
+          }
+        ],
+        kemplist: [
+          {
+            name: 1,
+            object: [
+              {num: "3", index: 0, flag: false, money: ""},
+              {num: "7", index: 1, flag: false, money: ""},
+              {num: "11", index: 2, flag: false, money: ""},
+              {num: "15", index: 3, flag: false, money: ""},
+              {num: "19", index: 4, flag: false, money: ""},
+              {num: "冠亚大", index: 5, flag: false, money: ""}
+            ]
+          },
+          {
+            name: 2,
+            object: [
+              {num: "4", index: 6, flag: false, money: ""},
+              {num: "8", index: 7, flag: false, money: ""},
+              {num: "12", index: 8, flag: false, money: ""},
+              {num: "16", index: 9, flag: false, money: ""},
+              {num: ""},
+              {num: "冠亚小", index: 10, flag: false, money: ""}
+            ]
+          },
+          {
+            name: 1,
+            object: [
+              {num: "5", index: 11, flag: false, money: ""},
+              {num: "9", index: 12, flag: false, money: ""},
+              {num: "13", index: 13, flag: false, money: ""},
+              {num: "17", index: 14, flag: false, money: ""},
+              {num: ""},
+              {num: "冠亚单", index: 15, flag: false, money: ""}
+            ]
+          },
+          {
+            name: 1,
+            object: [
+              {num: "6", index: 16, flag: false, money: ""},
+              {num: "10", index: 17, flag: false, money: ""},
+              {num: "14", index: 18, flag: false, money: ""},
+              {num: "18", index: 19, flag: false, money: ""},
+              {num: ""},
+              {num: "冠亚双", index: 20, flag: false, money: ""}
+            ]
+          }
+        ],
+        onelist: [
+          {
+            name: "冠军",
+            object: [
+              {
+                num: "1",
+                index: 0,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 1,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 2,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 3,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 4,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 5,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 6,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 7,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 8,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 9,
+                color: "",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 10, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 11, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 12, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 13, txt: "#000", flag: false, money: ""}
+            ]
+          },
+          {
+            name: "亚军",
+            object: [
+              {
+                num: "1",
+                index: 14,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 15,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 16,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 17,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 18,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 19,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 20,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 21,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 22,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 23,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 24, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 25, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 26, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 27, txt: "#000", flag: false, money: ""}
+            ]
+          },
+          {
+            name: "第三名",
+            object: [
+              {
+                num: "1",
+                index: 28,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 29,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 30,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 31,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 32,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 33,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 34,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 35,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 36,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 37,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 38, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 39, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 40, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 41, txt: "#000", flag: false, money: ""}
+            ]
+          },
+          {
+            name: "第四名",
+            object: [
+              {
+                num: "1",
+                index: 42,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 43,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 44,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 45,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 46,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 47,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 48,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 49,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 50,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 51,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 52, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 53, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 54, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 55, txt: "#000", flag: false, money: ""}
+            ]
+          },
+          {
+            name: "第五名",
+            object: [
+              {
+                num: "1",
+                index: 56,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 57,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 58,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 59,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 60,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 61,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 62,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 63,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 64,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 65,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 66, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 67, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 68, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 69, txt: "#000", flag: false, money: ""}
+            ]
+          }
+        ],
+        towlist: [
+          {
+            name: "第六名",
+            object: [
+              {
+                num: "1",
+                index: 0,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 1,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 2,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 3,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 4,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 5,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 6,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 7,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 8,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 9,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 10, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 11, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 12, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 13, txt: "#000", flag: false, money: ""}
+            ]
+          },
+          {
+            name: "第七名",
+            object: [
+              {
+                num: "1",
+                index: 14,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 15,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 16,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 17,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 18,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 19,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 20,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 21,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 22,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 23,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 24, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 25, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 26, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 27, txt: "#000", flag: false, money: ""}
+            ]
+          },
+          {
+            name: "第八名",
+            object: [
+              {
+                num: "1",
+                index: 28,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 29,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 30,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 31,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 32,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 33,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 34,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 35,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 36,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 37,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 38, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 39, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 40, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 41, txt: "#000", flag: false, money: ""}
+            ]
+          },
+          {
+            name: "第九名",
+            object: [
+              {
+                num: "1",
+                index: 42,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 43,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 44,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 45,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 46,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 47,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 48,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 49,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 50,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 51,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 52, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 53, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 54, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 55, txt: "#000", flag: false, money: ""}
+            ]
+          },
+          {
+            name: "第十名",
+            object: [
+              {
+                num: "1",
+                index: 56,
+                color: "linear-gradient(#ffc504, #846300)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "2",
+                index: 57,
+                color: "linear-gradient(#2991d2, #1c6196)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "3",
+                index: 58,
+                color: "linear-gradient(#808080, #484848)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "4",
+                index: 59,
+                color: "linear-gradient(#c8733d, #803e15)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "5",
+                index: 60,
+                color: "linear-gradient(#19bdce, #1c8598)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "6",
+                index: 61,
+                color: "linear-gradient(#2a61d7, #1d3c99)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "7",
+                index: 62,
+                color: "linear-gradient(#adaca5, #83827d)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "8",
+                index: 63,
+                color: "linear-gradient(#ee4c19, #bd2706)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "9",
+                index: 64,
+                color: "linear-gradient(#c24133, #86100e)",
+                flag: false,
+                money: ""
+              },
+              {
+                num: "10",
+                index: 65,
+                color: "linear-gradient(#3ec948, #026d09)",
+                flag: false,
+                money: ""
+              },
+              {num: "大", index: 66, txt: "#000", flag: false, money: ""},
+              {num: "小", index: 67, txt: "#000", flag: false, money: ""},
+              {num: "单", index: 68, txt: "#000", flag: false, money: ""},
+              {num: "双", index: 69, txt: "#000", flag: false, money: ""}
+            ]
+          }
+        ],
+        is_wh: false,
+      };
+    },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      '$route.query.page':function(to,from) {
+        this.$root.$off(from);
+        this.$root.$off(from+'lefttime');
+        this.fetchData();
+        this.socket_change(to);
+      }
+    },
+    mounted(){
+      this.fetchData();
+      this.socket_change(this.$route.query.page);
+    },
+    destroyed(){
+      console.log('清除定时器：'+this.timer);
+//      window.clearInterval(this.timer);
+      if(this.timer){
+          window.clearTimeout(this.timer);
+          this.timer = null;
+      }
+      if(!this.isIE9){
+        ws.close_ws(false);
+      }
+      this.$root.$off(this.$route.query.page);
+      this.$root.$off(this.$route.query.page+'lefttime');
+      cm_cookie.delCookie("top_nav")
+    },
+    methods: {
+      socket_change: function(to){
+        if(!this.isIE9){
+          let self = this;
+          ws.createWebSocket(to,self,true);
+          this.$root.$on(to,(e)=>{
+            console.log(e);
+            this.auto = e;
+          });
+          this.$root.$on(to+'lefttime',(e)=>{
+            console.log(e);
+            this.c_data.qishu = e.qishu;
+            this.close_time.fengpan = e.close_time;
+            this.close_time.now_time = e.now_time;
+            let t1 = e.close_time - e.now_time;
+            console.log('是否在维护中：'+this.is_wh);
+            if(t1 == 0 && !this.is_wh){
+                this.fetchData(2)
+            }else if(t1 > 0  && !this.is_wh){
+                if(this.timer){
+                    window.clearTimeout(this.timer);
+                    this.timer = null;
+                }
+                this.init();
+                this.$root.$emit('wh_modal',false);
+            }else if(t1 < 0  && !this.is_wh){
+                this.h = -1;
+                this.m = -1;
+                this.s = -1;
+                if(this.timer){
+                    window.clearTimeout(this.timer);
+                    this.timer = null;
+                }
+                this.$root.$emit('wh_modal',true,true)
+            }
+          })
+        }
+      },
+      open_way: function () {
+        let page =
+          "trend_chart/chart-lotteryId=" +
+          this.$route.query.page +
+          ".html" +
+          "?tab=1";
+        window.open(page);
+      },
+      history: function () {
+        let page =
+          "trend_chart/chart-lotteryId=" +
+          this.$route.query.page +
+          ".html" +
+          "?tab=3";
+        window.open(page);
+      },
+      //aaaaa
+      show_rule: function () {
+        this.$root.$emit("rule_show", true);
+        this.$root.$emit("now_page", this.$route.query.page);
+      },
+      getRTime: function () {
+        this.close_time.now_time += 1;
+        var t1 = this.close_time.fengpan * 1000 - this.close_time.now_time * 1000;
+        // var d=Math.floor(t/1000/60/60/24);
+        this.h = Math.floor((t1 / 1000 / 60 / 60) % 24);
+        this.m = Math.floor((t1 / 1000 / 60) % 60);
+        this.s = Math.floor((t1 / 1000) % 60);
+        console.log('封盘时间：' + '时：' + this.h + '；分：' + this.m + '；秒：' + this.s);
+        if (this.h == 0 && this.m == 0 && this.s == 0) {
+          this.fetchData(2);
+          this.$root.$emit("success", true);
+        }else if(this.h < 0 && this.m < 0 && this.s < 0){
+          if(this.timer){
+              window.clearTimeout(this.timer);
+              this.timer = null;
+          }
+          this.h = -1;
+          this.m = -1;
+          this.s = -1;
+        }
+      },
+      init: function () {
+          this.getRTime();
+          this.timer = window.setTimeout(this.init,1000); //time是指本身,延时递归调用自己,1000为间隔调用时间,单位毫秒
+      },
+      //aaaaaa
+      sortNumber: function (a, b) {
+        return a.sort - b.sort;
+      },
+      fetchData(type) {
+        this.$root.$emit('wh_modal',false);
+        if(this.timer){
+            window.clearTimeout(this.timer);
+            this.timer = null;
+        }
+        type==2?this.$root.$emit('loading',true,true):this.$root.$emit('loading',true);
+        let body = {
+          fc_type: this.$route.query.page
+        };
+        api.dewdrop(this, body, (res) => {
+              if (res.data.ErrorCode == 1) {
+//              console.log(res);
+              this.auto_list = res.data.Data;
+//              console.log(this.$refs.dewdrop_map);
+              api.getgameindex(this, body, res => {
+                  if (res.data.ErrorCode == 1) {
+                  if(type == 2){
+                      window.setTimeout(() => {
+                          this.$root.$emit("loading", false);
+                  }, 1000)
+                  }else{
+                      this.$root.$emit("loading", false);
+                  }
+                  this.auto = res.data.Data.auto;
+                  this.close_time = res.data.Data.closetime;
+                  if(this.close_time.fengpan - this.close_time.now_time < 0){
+                      this.$root.$emit('wh_modal',true,true)
+                  }
+                  this.c_data = res.data.Data.c_data;
+                  if(res.data.is_wh == 2){
+                      this.$root.$emit('wh_modal',true);
+                      this.is_wh = true;
+                  }else if(res.data.is_wh == 1){
+                      this.$root.$emit('wh_modal',false);
+                      this.is_wh = false;
+                  }
+                  let back_data = res.data.Data.odds;
+                  back_data.sort(this.sortNumber);
+                  this.computed(back_data);
+                  this.computed_kemp(back_data);
+                  this.computed_onelist(back_data);
+                  this.computed_towlist(back_data);
+                  this.$refs.dewdrop_map.top_go(0);//点击触发露珠图组件头部选中事件
+                  this.$refs.dewdrop_map.left_go(0);//点击触发露珠图组件左侧选中事件
+                  if(!this.is_wh){
+                      if(this.close_time.fengpan){
+                          if(this.timer){
+                              window.clearTimeout(this.timer);
+                              this.timer = null;
+                          }
+                          if(type == 2){
+                              window.setTimeout(() => {
+                                  this.init();
+                              }, 1000)
+                          }else{
+                              this.init();
+                          }
+                      }
+                  }
+              }
+          })
+          }
+        });
+
+      },
+      go_child: function (child) {
+        // //console.log(child);
+        this.$router.push({name: child, query: {page: this.$route.query.page}});
+        // //console.log();
+      },
+      computed(data) {
+        this.$set(this.toplist, this.toplist);
+        this.$set(this.buttomlist, this.buttomlist);
+        this.$set(this.centerlist, this.centerlist);
+
+        //冠亚军和
+        for (let j = 0, k = 0; j < this.toplist[0].object.length; j++, k++) {
+          Object.assign(this.toplist[0].object[j], data[k]);
+          let name = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          );
+//          console.log(name);
+          this.toplist[0].object[j].num = name;
+        }
+
+        var k = 4;
+        for (let i = 0; i < this.centerlist.length; i++) {
+          for (let l = 0; l < this.centerlist[i].object.length; l++, k++) {
+            Object.assign(this.centerlist[i].object[l], data[k]);
+            let name = data[k].remark.slice(
+              data[k].remark.search("#") + 1,
+              data[k].remark.length
+            );
+//            console.log(name);
+            this.centerlist[i].object[l].num = name;
+          }
+        }
+
+        for (let i = 0; i < this.buttomlist.length; i++) {
+          for (let l = 0; l < this.buttomlist[i].object.length; l++, k++) {
+            Object.assign(this.buttomlist[i].object[l], data[k]);
+            let name = data[k].remark.slice(
+              data[k].remark.search("#") + 1,
+              data[k].remark.length
+            );
+//            console.log(name);
+            this.buttomlist[i].object[l].num = name;
+          }
+        }
+      },
+      computed_kemp(data) {
+        // console.log(data);
+        this.$set(this.kemplist, this.kemplist);
+        //冠亚大
+        for (
+          let j = 0, k = 54;
+          j < this.kemplist[0].object.length - 1;
+          j++, k += 4
+        ) {
+          Object.assign(this.kemplist[0].object[j], data[k]);
+        }
+        Object.assign(this.kemplist[0].object[5], data[0]);
+        let name = data[0].remark.slice(
+          data[0].remark.search("#") + 1,
+          data[0].remark.length
+        );
+//        console.log(name);
+        this.kemplist[0].object[5].num = name;
+
+        //冠亚小
+        for (
+          let j = 0, k = 55;
+          j < this.kemplist[1].object.length - 1;
+          j++, k += 4
+        ) {
+          if (j == 4) {
+            k -= 4;
+            continue;
+          }
+          Object.assign(this.kemplist[1].object[j], data[k]);
+          // //console.log(j, k);
+        }
+        Object.assign(this.kemplist[1].object[5], data[1]);
+        let name_one = data[1].remark.slice(
+          data[1].remark.search("#") + 1,
+          data[1].remark.length
+        );
+//        console.log(name_one);
+        this.kemplist[1].object[5].num = name_one;
+        //冠亚单
+        for (
+          let j = 0, k = 56;
+          j < this.kemplist[2].object.length - 1;
+          j++, k += 4
+        ) {
+          if (j == 4) {
+            k -= 4;
+            continue;
+          }
+          Object.assign(this.kemplist[2].object[j], data[k]);
+        }
+        Object.assign(this.kemplist[2].object[5], data[2]);
+        let name_two = data[2].remark.slice(
+          data[2].remark.search("#") + 1,
+          data[2].remark.length
+        );
+//        console.log(name_two);
+        this.kemplist[2].object[5].num = name_two;
+        //冠亚双
+        for (
+          let j = 0, k = 57;
+          j < this.kemplist[3].object.length - 1;
+          j++, k += 4
+        ) {
+          if (j == 4) {
+            k -= 4;
+            continue;
+          }
+          Object.assign(this.kemplist[3].object[j], data[k]);
+        }
+        Object.assign(this.kemplist[3].object[5], data[3]);
+        let name_three = data[3].remark.slice(
+          data[3].remark.search("#") + 1,
+          data[3].remark.length
+        );
+//        console.log(name_three);
+        this.kemplist[3].object[5].num = name_three;
+      },
+      computed_onelist(data) {
+//        console.log(data);
+        this.$set(this.onelist, this.onelist);
+        //冠军
+        var k = 71;
+        for (let i = 0; i < this.onelist.length; i++) {
+          for (let j = 0; j < this.onelist[i].object.length - 4; j++, k++) {
+            Object.assign(this.onelist[i].object[j], data[k]);
+          }
+        }
+
+        k = 4;
+        for (let i = 0; i < this.onelist.length; i++) {
+          for (let j = 10; j < this.onelist[i].object.length; j++, k++) {
+            Object.assign(this.onelist[i].object[j], data[k]);
+            let name = data[k].remark.slice(
+              data[k].remark.search("#") + 1,
+              data[k].remark.length
+            );
+//            console.log(name);
+            this.onelist[i].object[j].num = name;
+          }
+          k += 2;
+        }
+      },
+      computed_towlist(data) {
+        this.$set(this.towlist, this.towlist);
+        var k = 121;
+        for (let i = 0; i < this.towlist.length; i++) {
+          for (let j = 0; j < this.towlist[i].object.length - 4; j++, k++) {
+            Object.assign(this.towlist[i].object[j], data[k]);
+          }
+        }
+
+        k = 34;
+        for (let i = 0; i < this.towlist.length; i++) {
+          for (let j = 10; j < this.towlist[i].object.length; j++, k++) {
+            Object.assign(this.towlist[i].object[j], data[k]);
+            let name = data[k].remark.slice(
+              data[k].remark.search("#") + 1,
+              data[k].remark.length
+            );
+//            console.log(name);
+            this.towlist[i].object[j].num = name;
+          }
+        }
+      }
+    }
+  };
+</script>
+<style lang="scss" src="../../../assets/css/bj.scss" scoped></style>

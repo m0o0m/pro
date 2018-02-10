@@ -1,0 +1,14 @@
+package schema
+
+//注单采集接口记录表
+type SpiderBet struct {
+	Id       int64  `xorm:"'id' autoincr"`     //主键id
+	LineId   string `xorm:"'line_id' notnull"` //线路id
+	OrderNum string `xorm:"'order_num' notnull"`
+	Status   int64  `xorm:"'status' notnull default(1)"` //注单是否采集过
+	Type     int64  `xorm:"'type' notnull default(1)"`   //注单是否被结算过
+}
+
+func (*SpiderBet) TableName() string {
+	return "my_spider_bet"
+}

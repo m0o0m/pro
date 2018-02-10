@@ -1,0 +1,124 @@
+<div id="content">
+    <div class="row">
+        <section widget-grid id="widget-grid">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>{{getWord('MemberPromotionSettings')}}</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label col-xs-8">站点</label>
+                                                        <div class="col-md-2 col-xs-8 col-xs-offset-2 col-md-offset-0">
+                                                            <div class="form-group">
+                                                                <select data-smart-select2  class="selectWidth" ng-model="site_index_id" ng-change="search(site_index_id)">
+                                                                    <option value="">请选择</option>
+                                                                    <option value="{{item.site_index_id}}" ng-repeat="item in names">{{item.site_name}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">是否启用会员推广</label>
+                                                        <div class="col-md-3 inline-group col-xs-8 col-xs-offset-2 col-md-offset-0">
+                                                            <label class="radio col col-md-4 col-xs-6">
+                                                                <input type="radio" name="extend" value="1" style="margin-top: 1px">
+                                                                启用</label>
+                                                            <label class="radio col col-md-4 col-xs-6">
+                                                                <input type="radio" name="extend" value="2" style="margin-top: 1px">
+                                                                <i></i>禁用 </label>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">限制IP</label>
+                                                        <div class="col-md-3 inline-group col-xs-8 col-xs-offset-2 col-md-offset-0">
+                                                            <label class="radio col col-md-4 col-xs-6">
+                                                                <input type="radio" name="ip" value="1" style="margin-top: 1px">
+                                                                启用</label>
+                                                            <label class="radio col col-md-4 col-xs-6">
+                                                                <input type="radio" name="ip" value="2" style="margin-top: 1px">
+                                                                <i></i>禁用</label>
+                                                        </div>
+                                                        <lable class="col-xs-12 col-md-4 text-align-left control-label" style="color: red">【如果注册会员IP与推广会员相同,此会员属于无效推广会员】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">是否匹配推广会员代理</label>
+                                                        <div class="col-md-3 inline-group col-md-offset-0 col-xs-8 col-xs-offset-2">
+                                                            <label class="radio col col-md-4 col-xs-6">
+                                                                <input type="radio" name="user" value="1" style="margin-top: 1px">
+                                                                启用</label>
+                                                            <label class="radio col col-md-4 col-xs-6">
+                                                                <input type="radio" name="user" value="2" style="margin-top: 1px">
+                                                                <i></i>禁用</label>
+                                                        </div>
+                                                        <lable class="col-xs-12 col-md-4 text-align-left control-label" style="color: red">【注册会员的代理使用推广会员的代理ID】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">返佣会员是否需要打码</label>
+                                                        <div class="col-md-3 inline-group col-md-offset-0 col-xs-8 col-xs-offset-2">
+                                                            <label class="radio col col-md-4 col-xs-6">
+                                                                <input type="radio" name="code" value="1" style="margin-top: 1px">
+                                                                启用</label>
+                                                            <label class="radio col col-md-4 col-xs-6">
+                                                                <input type="radio" name="code" value="2" style="margin-top: 1px">
+                                                                <i></i>禁用</label>
+                                                        </div>
+                                                        <lable class="col-xs-12 col-md-4 text-align-left control-label" style="color: red">【返佣会员没有打码则返佣数据为0】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">排行榜人数系数</label>
+                                                        <div class="col-md-3 col-md-offset-0 col-xs-8 col-xs-offset-2">
+                                                            <div class="input-group">
+                                                                <input class="form-control " placeholder="" type="text" ng-model="people">
+                                                            </div>
+                                                        </div>
+                                                        <lable class="col-xs-12 col-md-4 control-label text-align-left" style="color: red">【虚拟数据系数,建议初始值0.2,每周增幅0.1】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label text-align-right">排行金额系数</label>
+                                                        <div class="col-md-3 col-md-offset-0 col-xs-8 col-xs-offset-2">
+                                                            <div class="input-group">
+                                                                <input class="form-control " placeholder="" type="text" ng-model="money">
+                                                            </div>
+                                                        </div>
+                                                        <lable class="col-xs-12 col-md-4 control-label text-align-left" style="color: red">【虚拟金额系数】</lable>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6 text-align-center">
+                                                        <button class="btn btn-primary"  type="submit" ng-click="submit()">
+                                                           确定
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </div>
+        </section>
+    </div>
+</div>

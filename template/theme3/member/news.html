@@ -1,0 +1,73 @@
+{{define "membernews"}}
+{{template "memberheader" .}}
+<!-- <link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/vip.css" type="text/css"> -->
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/deposit.css" type="text/css">
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/news.css" type="text/css">
+<style>
+
+.showAlert .box-content{
+    word-wrap: break-word;
+}
+.showAlert .box-button .ddd{
+    background-color: #ddd;
+    border-color: #ddd !important;
+}
+
+</style>
+            <div class="">
+                <div class="vip-bar-1">
+                        <div class="promotion">
+                            <ul class="r_name clearfix">
+                                <li class="txt_l txt_active" gen="1">个人消息</li>
+                                <li class="txt_r" stat="0" gen="2">游戏公告</li>
+                            </ul>
+                            <div class="r_center">
+                                <div class="show record_item ">
+
+
+                                        <ul class="clearfix  my-theme date_nav">
+                                            <li>状态</li>
+                                            <li>日期</li>
+                                            <li>标题</li>
+                                            <li>操作</li>
+                                        </ul>
+                                    <div class="tabs_center " id="person-msg"></div>
+
+
+                                </div>
+                                <div class="record_item">
+                                    <div class="tabs_center clearfix">
+                                        <div class="show tabs_item clearfix">
+                                            <h3 class="nav2">
+                                                <a id="7" class="show-notice-list notice-curr">体育公告</a>
+                                                <a id="6" class="show-notice-list">彩票公告</a>
+                                                <a id="4" class="show-notice-list">视讯公告</a>
+                                                <a id="5" class="show-notice-list">电子公告</a>
+                                            </h3>
+                                            <ul class="ul3">
+                                                <li>标题</li>
+                                                <li>日期</li>
+                                                <li>内容</li>
+                                            </ul>
+                                            <div class="date_nav clearfix" id="notice-show"  style="color:black; cursor: pointer">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/mesCenter.js"></script>
+</body>
+<script>
+
+</script>
+
+</html>
+{{end}}
+

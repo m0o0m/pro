@@ -1,0 +1,233 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-27 11:28:04
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/agent/agent_son.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a6bf1c48e0893_75586607',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'df8af8ac485a584bcce62388dd4c67553ad68437' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/agent/agent_son.html',
+      1 => 1515574084,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a6bf1c48e0893_75586607 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    #admin-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+    .width100{width:100px}
+</style>
+
+<div class="col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="admin-form" method='get' action='/admin/index'>
+            <label for="login_user">账号:
+                <input class='width100' type="text" name="login_user" id='login_user' value="<?php if (isset($_GET['login_user'])) {
+echo $_GET['login_user'];
+}?>">
+            </label>
+            <label for="login_name">昵称:
+                <input class='width100' type="text" name='login_name'  id="login_name" value="<?php if (isset($_GET['login_name'])) {
+echo $_GET['login_name'];
+}?>">
+            </label>
+            <label for="menuLevel"> 状态:
+                <select type="select" name="status"  id="status">
+                    <option value="" >全部</option>
+                    <option value="1" <?php if (isset($_GET['status']) && $_GET['status'] == 1) {?>selected<?php }?>>有效</option>
+                    <option value="2" <?php if (isset($_GET['status']) && $_GET['status'] == 2) {?>selected<?php }?>>无效</option>
+                </select>
+            </label>
+
+            <label > 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum" >
+                    <option value="100"  <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 100) {?>selected<?php }?>>100</option>
+                    <option value="500" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 500) {?>selected<?php }?>>500</option>
+                    <option value="1000" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 1000) {?>selected<?php }?>>1000</option>
+                </select>
+            </label>
+            <label > 页码:
+                <select type="select" name="page"  id="page">
+                    <?php
+$__section_loop_0_saved = isset($_smarty_tpl->tpl_vars['__smarty_section_loop']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop'] : false;
+$__section_loop_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['pagecount']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_loop_0_total = $__section_loop_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = new Smarty_Variable(array());
+if ($__section_loop_0_total != 0) {
+for ($__section_loop_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] = 0; $__section_loop_0_iteration <= $__section_loop_0_total; $__section_loop_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']++){
+?>
+                    <option value="<?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+"
+                            <?php if (isset($_GET['page']) && $_GET['page'] == (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1) {?>selected<?php }?>>
+                            <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+
+                </option>
+                <?php
+}
+}
+if ($__section_loop_0_saved) {
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = $__section_loop_0_saved;
+}
+?>
+            </select>
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        <?php if ($_smarty_tpl->tpl_vars['user_type']->value == 3) {?>
+            <input type="button" id="son_add" class="btn btn-sm btn-success" value="添加"/>
+        <?php }?>
+        </label>
+    </form>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">账号 </th>
+                        <th class="center">昵称</th>
+                        <th class="center">状态</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">修改时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center">
+                            <a > <?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?> </a>
+                        </td>
+                        <td class="center">
+                            <a> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['login_user'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['login_user'];
+}?> </a>
+                        </td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['login_name'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['login_name'];
+}?> </td>
+                
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['deleteTxt'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['deleteTxt'];
+}?> </td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['addDate'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['addDate'];
+}?> </td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['updateDate'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['updateDate'];
+}?> </td>
+                        <td class="center handle">
+                            <a  class="btn btn-xs btn-success detail" data_a = "<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" data_b="detail" href='javascript:;'>详情</a>
+                        <?php if ($_smarty_tpl->tpl_vars['user_type']->value == 3) {?>
+                            <a  class="btn btn-xs btn-success update" data_a = "<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" data_b="update" href='javascript:;'>修改</a>
+                        <?php }?>
+                        </td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<?php echo '<script'; ?>
+>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var login_user = $.trim($('#login_user').val());
+        var login_name = $.trim($('#login_name').val());
+        var status = $.trim($('#status').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+
+        var params = {
+            login_user: login_user,
+            login_name: login_name,
+            status: status,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/agent/agent_son',
+            container: '#container'
+        });
+    }
+    //祥情
+    $('.detail').click(function () {
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/agent/editson?id=' + id + '&type=' + type + '&other=detail',
+            container: '#container'
+        });
+    })
+
+    //添加
+    $('#son_add').click(function () {
+        $.pjax({
+            method: 'get',
+            url: '/agent/editson/?type=create',
+            container: '#container'
+        });
+    })
+    //修改
+    $('.update').click(function () {
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/agent/editson?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+    $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+    //状态
+    $('#status').change(function () {
+        renderTableByPjax();
+    })
+
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+    $('#page').change(function () {
+        renderTableByPjax();
+    })
+
+<?php echo '</script'; ?>
+>
+<?php }
+}

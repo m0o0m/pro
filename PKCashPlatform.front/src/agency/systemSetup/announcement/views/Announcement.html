@@ -1,0 +1,206 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue" >
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('Announcement')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar" ng-show="newTodo">
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <select data-smart-select2  class="selectWidth" ng-model="site_index_id">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in sharedJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 col-xs-8">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control inp_2" placeholder="{{getWord('Please enter')}}{{getWord('GroupName')}}" ng-model="group">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-4 text-align-center">
+                                            <div class="form-group">
+                                                <a class="btn btn-default search" ng-click="search()" href-void>{{getWord('Search')}}</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-8">
+                                            <div class="form-group">
+                                                <button type="submit" data-toggle="modal" data-target="#myModal1"  class="btn btn-primary">
+                                                    <!--<button type="submit" ng-click="power.add()" class="btn btn-primary">-->
+                                                    {{getWord('New announcement')}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-align-center">{{getWord('Title')}}</th>
+                                            <th class="text-align-center">{{getWord('Content')}}</th>
+                                            <th class="text-align-center">{{getWord('Release time')}}</th>
+                                            <th class="text-align-center">{{getWord('Publish account')}}</th>
+                                            <th class="text-align-center">{{getWord('Type')}}</th>
+                                            <th class="text-align-center">{{getWord('operation')}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="text-align-center">
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.title}}</td>
+                                            <td>{{item.content}}</td>
+                                            <td>{{item.creat_time|fiterTime}}</td>
+                                            <td>{{item.account}}</td>
+                                            <td>{{item.type|noticeType}}</td>
+                                            <td>
+                                                <button class="ids btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="modify(item.id)">
+                                                    {{getWord('Edit')}}
+                                                </button>
+                                                <button tyle="margin-right: 5px"  ng-click="delete(item.id)"  class="ids btn btn-default btn-xs">
+                                                    {{getWord('Delete')}}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+
+<!--新增-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">{{getWord('New announcement')}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{getWord('Site')}}</label>
+                            <div class="col-md-8">
+                                <select data-smart-select2 style="width: 100%;" ng-model="addData.site" ng-init="addData.site=''">
+                                    <option value="">请选择</option>
+                                    <option value="{{item.site_index_id}}" ng-repeat="item in sharedJson">{{item.site_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">类型</label>
+                            <div class="col-md-8">
+                                <select data-smart-select2 style="width: 100%;" ng-model="addData.type" ng-init="addData.type=''">
+                                    <option value="">请选择</option>
+                                    <option value="{{item.id}}" ng-repeat="item in TypeJson">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{getWord('Announcement heading')}}</label>
+                            <div class="col-md-8">
+                                <input class="form-control" placeholder="" type="text" ng-model="addData.title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{getWord('Announcement content')}}</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" placeholder="" rows="4" ng-model="addData.content"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{getWord('Cancel')}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                    {{getWord('Confirm')}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" >{{getWord('modifyAnnouncement')}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{getWord('Site')}}</label>
+                            <div class="col-md-8">
+                                <select data-smart-select2 style="width: 100%;" ng-model="site">
+                                    <option value="{{item.site_index_id}}" ng-repeat="item in sharedJson">{{item.site_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">类型</label>
+                            <div class="col-md-8">
+                                <select data-smart-select2 style="width: 100%;" ng-model="type">
+                                    <option value="{{item.id}}" ng-repeat="item in TypeJson">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{getWord('Announcement heading')}}</label>
+                            <div class="col-md-8">
+                                <input class="form-control" placeholder="" type="text" ng-model="title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{getWord('Announcement content')}}</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" placeholder="" rows="4" ng-model="content"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{getWord('Cancel')}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifySubmit()">
+                    {{getWord('Confirm')}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

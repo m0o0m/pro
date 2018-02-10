@@ -1,0 +1,124 @@
+{{define "live"}}
+<script type="text/javascript">
+    document.writeln("<link rel=\"stylesheet\" href=\"" + cdnUrl + "/shared/video/css/live5/casino.css\" />");
+</script>
+<div class="casino-divBgImg">
+{{$num := .LiveLen}}
+{{range $k,$v := .LiveOrder}}
+{{if eq $num 1}}
+    <div class="casino-oneImg">
+        <div class="casino-agBg">
+            <div class="casino-agImg">
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live5/{{$v.VType}}.jpg\"/>");
+                </script>
+            </div>
+            <div class="casino-nvImg">
+                <span class="casino-spanImg casino-spanImg1 casino-mmImg1"></span>
+                <span class="casino-spanImg casino-spanImg2 casino-mmImg2"></span>
+            </div>
+            <div class="casino-btn">
+
+            {{if 0}}
+                <a href="javascript:;" class="casino-btnGame" style="background-color:#3B3C3F; color:#fff;">视讯维护中
+                </a>
+            {{else}}
+                <a href="javascript:;" class="casino-btnGame"
+                {{if 1}}onclick="javascript:zhuModal.login();"
+                   {{else}}onclick="opengeme('','video','{{$v.VType}}')"{{end}}>进入游戏</a>
+            {{end}}
+            {{if eq $v.VType "dg"}}
+                <a href="https://f.dg99.info/home/rule/cn/index.html" target="_blank" class="casino-btnRule">游戏规则</a>
+            {{else}}
+                <a href="javascript:;" onclick="getPager('','rule','')" class="casino-btnRule">游戏规则</a>
+            {{end}}
+            </div>
+        </div>
+    </div>
+{{else if gt $num 1}}
+    <div class="{{if eq $num 2 4}}casino-twoImg {{else}}casino-threeImg{{end}} casino-animentImg">
+        <div class="casino-Bg">
+            <div class="casino-Img">
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live5/{{if eq $num 2 4}}3{{else}}2{{end}}-{{$v.VType}}.jpg\" class=\"{{if eq $num 2 4}}img_two{{else}}img_three{{end}}\"/>");
+                </script>
+                <div class="casino-btn">
+                {{if 0}}
+                    <a href="javascript:;" class="casino-btnGame" style="background-color:#3B3C3F;color:#fff;">视讯维护中
+                    </a>
+                {{else}}
+                    <a href="javascript:;" onclick="javascript:zhuModal.login();" class="casino-btnGame pk-login-before">进入游戏</a>
+                    <a href="javascript:;" onclick="opengeme('','video','{{$v.VType}}')" class="casino-btnGame  pk-login-after" style="display: none;">进入游戏</a>
+                {{end}}
+                {{if eq $v.VType "dg"}}
+                    <a href="http://dg-game.98ff.cn/home/rule/cn/index.html" target="_blank"
+                       class="casino-btnRule">游戏规则</a>
+                {{else}}
+                    <a href="javascript:;" class="casino-btnRule" onclick="getPager('','rule','')">游戏规则</a>
+                {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}
+{{end}}
+{{if (gt $num 4) and (eq $num 7 10 13 16)}}
+    <div class="casino-threeImg casino-animentImg">
+        <div class="casino-Bg">
+            <div class="casino-Img">
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live5/3-wait.jpg\" width=\"300\" height=\"231\"/>");
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="casino-threeImg casino-animentImg">
+        <div class="casino-Bg">
+            <div class="casino-Img">
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live5/3-wait.jpg\" width=\"300\" height=\"231\"/>");
+                </script>
+            </div>
+        </div>
+    </div>
+{{end}}
+{{if (gt $num 3) and (eq $num 5 8 11 13 16)}}
+    <div class="casino-threeImg casino-animentImg">
+        <div class="casino-Bg">
+            <div class="casino-Img">
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live5/3-wait.jpg\" width=\"300\" height=\"231\"/>");
+                </script>
+            </div>
+        </div>
+    </div>
+{{end}}
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".casino-agBg .casino-btn .casino-btnGame").hover(function () {
+            $(this).parent('.casino-btn').siblings('.casino-nvImg').find('.casino-mmImg1').addClass("casino-spanImg-animent");
+            $(this).parent('.casino-btn').siblings('.casino-nvImg').find('.casino-mmImg2').addClass("casino-spanImg-animent2");
+        }, function () {
+            $(this).parent('.casino-btn').siblings('.casino-nvImg').find('.casino-mmImg1').removeClass("casino-spanImg-animent");
+            $(this).parent('.casino-btn').siblings('.casino-nvImg').find('.casino-mmImg2').removeClass("casino-spanImg-animent2");
+        });
+
+        $(".casino-agBg .casino-btn .casino-btnRule").hover(function () {
+            $(this).parent('.casino-btn').siblings('.casino-nvImg').find('.casino-mmImg2').addClass("casino-spanImg-animent");
+            $(this).parent('.casino-btn').siblings('.casino-nvImg').find('.casino-mmImg1').addClass("casino-spanImg-animent3");
+        }, function () {
+            $(this).parent('.casino-btn').siblings('.casino-nvImg').find('.casino-mmImg2').removeClass("casino-spanImg-animent");
+            $(this).parent('.casino-btn').siblings('.casino-nvImg').find('.casino-mmImg1').removeClass("casino-spanImg-animent3");
+        });
+
+
+        $(".casino-animentImg").hover(function () {
+            $(this).find(".casino-btn").addClass('casino-animentShow');
+        }, function () {
+            $(this).find(".casino-btn").removeClass('casino-animentShow');
+        });
+    });
+</script>
+{{end}}

@@ -1,0 +1,55 @@
+2018-01-03 12:01:15 pid:57189 Workerman[start.php] start in DEBUG mode
+2018-01-03 12:01:15 pid:57190 Error: Call to undefined method Applications\Chat\Lib\Common::run() in /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Applications/Chat/Events.php:10
+Stack trace:
+#0 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#2 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#5 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(459): Workerman\Worker::forkWorkers()
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/start.php(32): Workerman\Worker::runAll()
+#10 {main}
+2018-01-03 12:01:16 pid:57190 Worker process terminated
+2018-01-03 12:01:16 pid:57189 worker[ChatBusinessWorker:57190] exit with status 64000
+2018-01-03 12:01:16 pid:57200 Error: Call to undefined method Applications\Chat\Lib\Common::run() in /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Applications/Chat/Events.php:10
+Stack trace:
+#0 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#2 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#5 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/start.php(32): Workerman\Worker::runAll()
+#12 {main}
+2018-01-03 12:01:17 pid:57200 Worker process terminated
+2018-01-03 12:01:17 pid:57189 worker[ChatBusinessWorker:57200] exit with status 64000
+2018-01-03 12:01:17 pid:57201 Error: Call to undefined method Applications\Chat\Lib\Common::run() in /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Applications/Chat/Events.php:10
+Stack trace:
+#0 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#1 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/GatewayWorker/BusinessWorker.php(211): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#2 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#3 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(2081): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#4 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/GatewayWorker/BusinessWorker.php(190): Workerman\Worker->run()
+#5 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1294): GatewayWorker\BusinessWorker->run()
+#6 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1127): Workerman\Worker::forkOneWorkerForLinux(Object(GatewayWorker\BusinessWorker))
+#7 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1100): Workerman\Worker::forkWorkersForLinux()
+#8 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1426): Workerman\Worker::forkWorkers()
+#9 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(1375): Workerman\Worker::monitorWorkersForLinux()
+#10 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/Workerman/Worker.php(461): Workerman\Worker::monitorWorkers()
+#11 /Users/doublejian/www/pklottery/newproject/trunk/other/Chat/start.php(32): Workerman\Worker::runAll()
+#12 {main}
+2018-01-03 12:01:17 pid:57201 Worker process terminated
+2018-01-03 12:01:17 pid:57189 Workerman[start.php] stopping ...
+2018-01-03 12:01:17 pid:57189 worker[ChatBusinessWorker:57201] exit with status 64000
+2018-01-03 12:01:17 pid:57189 Workerman[start.php] has been stopped
+2018-01-03 12:01:39 pid:57249 Workerman[start.php] start in DEBUG mode
+2018-01-03 12:01:40 pid:57249 Workerman[start.php] stopping ...
+2018-01-03 12:01:40 pid:57249 Workerman[start.php] has been stopped

@@ -1,0 +1,453 @@
+.filemanager *,
+.filemanager *:focus {
+  outline: 0!important;
+}
+
+.filemanager .navbar {
+  min-height: 32px;
+  margin-bottom: 0;
+  border: 0;
+  border-radius: 0;
+  color: #fff;
+  border-color:#4c4f53;
+  background:#4c4f53;
+}
+
+.filemanager .navbar .navbar-collapse {
+  overflow: visible;
+  padding: 0;
+}
+
+.filemanager .navbar .navbar-toggle {
+  padding: 5px 10px;
+}
+
+.filemanager .navbar .navbar-brand {
+  font-size: inherit;
+  height: 34px;
+  line-height: 100%;
+}
+
+.filemanager .btn.btn-default {
+  color: #444;
+  background-color: #FAFAFA;
+}
+
+.filemanager .btn {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  font-weight: 500;
+  letter-spacing: .01em;
+  border: none;
+}
+
+.filemanager textarea.code {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 13px;
+  min-height: 250px;
+  resize: vertical;
+  color: #000;
+}
+
+.filemanager .sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.filemanager .sidebar {
+  display: none;
+  background: #fafafa;
+  margin-top: 2px;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid #eee;
+}
+
+.filemanager .btn-go-back {
+  margin-top: -5px;
+}
+
+.filemanager .nav-sidebar {
+  margin-right: -21px;
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+
+
+.filemanager .nav-sidebar > li > a {
+  color: #7a7a7a;
+  padding: 7px 0 7px 16px;
+}
+
+
+.filemanager .nav-sidebar> li > a:hover,
+.filemanager .nav-sidebar> li > a:focus {
+  background: none;
+  color: #1378b9;
+}
+
+.filemanager .nav-sidebar > li.active > a {
+  color: #2196F3;
+}
+
+
+.filemanager .main {
+  padding: 0;
+}
+
+.filemanager .main .page-header {
+  margin-top: 0;
+}
+
+.filemanager .file-tree ul.nav.nav-sidebar {
+  margin: 0;
+  padding: 0;
+  padding-left: 12px;
+}
+
+.filemanager .file-tree ul.nav.nav-sidebar:first-child {
+  padding-left: 0;
+}
+
+.filemanager .file-tree ul.nav.nav-sidebar.file-tree-root > li {
+  border-left: none;
+  padding-left: 0px;
+}
+
+.filemanager .table td {
+  vertical-align: middle;
+}
+
+.filemanager #context-menu {
+  position: absolute;
+  display: none;
+  z-index: 9999;
+}
+
+.filemanager .iconset {
+  padding: 10px;
+}
+
+.filemanager .col-120 {
+  width: 100px;
+  max-height: 100px;
+  float: left;
+  margin-bottom: 9px;
+  margin-right: 9px;
+}
+
+.filemanager .col-120:last-child {
+  margin-right: 0;
+}
+
+.filemanager .noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently */
+}
+
+.filemanager .iconset .thumbnail {
+  border-radius: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  padding: 10px 0;
+  border: none;
+  background: none;
+}
+
+.filemanager .table-files .selected,
+.filemanager .iconset .thumbnail.selected {
+  background: #2196F3;
+}
+
+.filemanager .iconset .thumbnail.selected,
+.filemanager .table-files .selected td,
+.filemanager .table-files .selected td a {
+  color:#fff;
+}
+
+.filemanager .iconset .thumbnail .item-icon {
+  font-size: 32px;
+}
+
+.filemanager .detail-sources {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.filemanager ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset -1px -1px 0 rgba(0, 0, 0, .07);
+}
+
+.filemanager ::-webkit-scrollbar:hover {
+  background-color: #eee;
+}
+
+.filemanager ::-webkit-scrollbar-thumb {
+  min-height: 0.8em;
+  min-width: 0.8em;
+  background-color: rgba(0, 0, 0, .2);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset -1px -1px 0 rgba(0, 0, 0, .07);
+}
+
+.filemanager ::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+.filemanager ::-webkit-scrollbar-thumb:active {
+  background-color: #888;
+}
+
+.filemanager .dropdown-menu {
+  font-size: 14px;
+}
+
+.filemanager .dropdown-menu > li > a {
+  padding: 6px 20px;
+}
+
+.filemanager .dropdown-menu > li > a > i {
+  margin-right: 4px;
+}
+
+.filemanager .dropdown-menu.dropdown-right-click {
+  display: block;
+  position: static;
+  margin-bottom: 5px; 
+}
+
+.filemanager .dropdown-menu.dropdown-right-click .divider {
+  margin: 3px 0;
+}
+
+.filemanager .upload-dragover .main {
+  opacity: .4;
+}
+
+.filemanager .upload-dragover:before {
+  content: "\e198";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  color: #2196F3;
+  font-size: 8em;
+  font-family: 'Glyphicons Halflings';
+}
+
+.filemanager .upload-list {
+  margin-top: 20px;
+}
+
+.filemanager .spinner-wrapper {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 8%;
+}
+
+.filemanager a:hover,
+.filemanager a:active,
+.filemanager a:focus,
+.filemanager table th > a:hover,
+.filemanager table th > a:active,
+.filemanager table th > a:focus {
+  text-decoration: none;
+}
+
+.filemanager .sortorder:after {
+  color: #2196f3;
+  content: '\25bc';
+}
+
+.filemanager .sortorder.reverse:after {
+  color: #2196f3;
+  content: '\25b2';
+}
+
+.filemanager [ng\:cloak], .filemanager [ng-cloak],
+.filemanager [data-ng-cloak], .filemanager [x-ng-cloak],
+.filemanager .ng-cloak, .filemanager .x-ng-cloak {
+  display: none !important;
+}
+
+.filemanager .mr2 {
+  margin-right: 2px;
+}
+
+.filemanager .mr5 {
+  margin-right: 5px;
+}
+
+.filemanager .mt10 {
+  margin-top: 10px;
+}
+
+.filemanager .mb0 {
+  margin-bottom: 0;
+}
+
+.filemanager .pointer {
+  cursor: pointer;
+}
+
+.filemanager .block {
+  display: block;
+}
+
+.filemanager .ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filemanager .bold {
+  font-weight: bold;
+}
+
+.filemanager .main {
+  overflow-y: auto;
+  background-color:#ffffff;
+}
+
+@media (min-width: 768px) {
+  .filemanager .main {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* The view should fill all available vertical space */
+  .filemanager angular-filemanager > div,.row,.main,.sidebar {
+    height: 100%;
+  }
+
+  .filemanager .container-fluid {
+    height: -webkit-calc(100% - 58px);
+    height: -moz-calc(100% - 58px);
+    height: calc(100% - 58px);
+  }
+
+  .filemanager .sidebar {
+    display: block;
+  }
+}
+
+.filemanager .selected-file-details {
+  padding-left: 20px;
+}
+
+.filemanager .item-extension::after {
+  font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+  content: attr(data-ext);
+  left: 4px;
+  position: absolute;
+  color: #fff;
+  font-size: 9px;
+  text-transform: uppercase;
+  top: 21px;
+}
+
+.filemanager .selected .item-extension::after {
+  color: #2196F3;
+}
+
+.filemanager .form-control.search-input {
+  max-width: 20em;
+  display: inline;
+}
+
+.filemanager .like-code {
+  display: inline;
+}
+
+.filemanager .point {
+  margin-right: 8px;
+  font-size: 10px;
+}
+
+.filemanager .navbar .btn.btn-flat {
+  /* padding: 2px; */
+  width: 30px;
+  height: 32px;
+  /* margin-left: 5px; */
+}
+
+.filemanager .navbar-inverse .navbar-toggle .icon-bar {
+  background: #fff;
+}
+
+.filemanager .navbar-inverse .navbar-form input[type="text"] {
+  color: #7a7a7a;
+  box-shadow: none;
+  margin: 0 10px;
+}
+
+.filemanager .navbar .navbar-form {
+  border-bottom: none;
+  border-top: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filemanager .breadcrumb {
+  background: none; 
+  padding: 0;
+  font-size: 17px;
+  margin:  0;
+  overflow: hidden;
+  max-height: 30px
+}
+
+.filemanager .breadcrumb>.active,
+.filemanager .breadcrumb a {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 32px;
+}
+
+.filemanager .breadcrumb>li+li:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e080";
+  font-size: 12px;
+  color: #fff;
+}
+
+.filemanager .scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+
+.filemanager .btn.btn-flat {
+  background: none;
+  color: #fff;
+}
+
+.filemanager .btn-group.open > .btn-flat,
+.filemanager .btn.btn-flat,
+.filemanager .btn.btn-flat:active {
+  box-shadow: none;
+}
+
+.filemanager .btn.btn-flat > i {
+  font-size: 14px;
+  /* width: 18px;
+  height: 18px; */
+  line-height: 100%;
+}
+.container, .container-fluid{
+  padding-left:0;
+  padding-right:0;
+}
+/* .container-fluid .row{
+  background-color: #fff;
+} */

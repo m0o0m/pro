@@ -1,0 +1,170 @@
+@import "./function.scss";
+
+.happy_ball {
+  float: left;
+  margin-top: 20px;
+  .ball_box {
+    margin-left: 20px;
+    float: left;
+    overflow: hidden;
+    ul {
+      float: left;
+      width: 220px;
+      height: 392px;
+      border-left: 1px solid $border_color;
+      border-bottom: 1px solid $border_color;
+      .thend {
+        border-top: 1px solid $border_color;
+        border-bottom: 1px solid $border_color;
+        background-color: #eee;
+        .one, .tow, .three {
+          line-height: 30px;
+          height: 30px;
+        }
+      }
+      li {
+        overflow: hidden;
+        border-bottom: 1px solid $border_color;
+        .one, .tow {
+          cursor: pointer;
+          i {
+            font-size: 14px;
+            color: #fff;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50px;
+            //background: url("../img/red_box.png") no-repeat center center;
+            background: $ball;
+          }
+          float: left;
+          display: block;
+          width: 70px;
+          height: 39px;
+          line-height: 40px;
+          border-right: 1px solid $border_color;
+        }
+        .three {
+          margin-left: 5px;
+          float: left;
+          width: 70px;
+          height: 39px;
+          line-height: 40px;
+          input {
+            width: 36px;
+            height: 16px;
+            border: 1px solid #b1b1b1;
+          }
+        }
+      }
+    }
+    ul:last-child {
+      border-right: 1px solid $border_color;
+    }
+    ul:nth-child(1), ul:nth-child(2), ul:nth-child(3) {
+      li:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  .footer1 {
+    width: 920px;
+    float: left;
+    margin-top: 10px;
+    padding-right: 20px;
+    // padding-bottom: 45px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .img {
+      margin-left: 136px;
+      float: left;
+      span {
+        //margin-left: 30px;
+        //height: 60px;
+        float: left;
+        display: block;
+        cursor: pointer;
+      }
+      .s1 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat 0 0px;
+        background-size: 368px;
+      }
+      .s2 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -64px 0px;
+        background-size: 368px;
+      }
+      .s3 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -128px 0px;
+        background-size: 368px;
+      }
+      .s4 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -192px 0px;
+        background-size: 368px;
+      }
+      .s5 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -256px 0px;
+        background-size: 368px;
+      }
+      .s6 {
+        height: 60px;
+        width: 73px;
+        background: url("../../assets/img/Chips.png") no-repeat -320px 0px;
+        background-size: 368px;
+      }
+    }
+    .one {
+      width: 160px;
+      float: left;
+      background-color: #eee;
+      padding: 5px;
+      border-radius: 10px;
+      margin-top: 12px;
+      border: none;
+      span {
+        color: $bg_color;
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      float: right;
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+}
+
+.styleclect {
+  background-color: $bg_select;
+}
+
+.bor_none {
+  border-right: none !important;
+}

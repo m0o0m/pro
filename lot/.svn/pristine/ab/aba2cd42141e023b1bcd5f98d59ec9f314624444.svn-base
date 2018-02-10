@@ -1,0 +1,184 @@
+package function
+
+import (
+	"models/input"
+	"models/schema"
+	"global"
+	"errors"
+	"github.com/go-xorm/xorm"
+	"github.com/golyu/sql-build"
+	"math"
+)
+
+type UserBean struct {
+}
+
+//注册
+func (m *UserBean) Reg(regUser *input.RegUser, agent *schema.UserAgent, ua *schema.MyUserUa) (*schema.User, error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	userSchema := new(schema.User)
+	userSchema.LineId = regUser.SiteId
+	userSchema.Uname = regUser.Uname
+	userSchema.Pword = global.Md5(global.Md5(regUser.Pwd))
+	userSchema.AgentId = agent.Id
+	userSchema.Money = regUser.Money
+	userSchema.UaId = ua.Id
+	userSchema.ShId = ua.Pid
+	userSchema.Currency = regUser.Currency
+	userSchema.CreateIp = regUser.CreateIp
+	userSchema.Addtime = global.GetCurrentTime()
+	userSchema.IsShiWan = regUser.IsShiwan
+	userSchema.Ptype = regUser.PType
+	userSchema.Status = 1
+	sql, err := sqlBuild.Insert(userSchema.TableName()).
+		Value(userSchema).
+		String()
+	if err != nil {
+		return userSchema, err
+	}
+	result, err := sess.Exec(sql)
+	if err != nil {
+		return userSchema, err
+	}
+	num, err := result.RowsAffected()
+	if err != nil {
+		return userSchema, err
+	}
+	if num == 0 {
+		return userSchema, errors.New("insert 0 row")
+	}
+	userSchema.Uid, err = result.LastInsertId()
+	if err != nil {
+		global.GlobalLogger.Error("err%s", err.Error())
+		return userSchema, errors.New("get id")
+	}
+	return userSchema, err
+}
+
+//判断账号是否存在
+func (m *UserBean) IsExist(siteId, uname string) (bool, *schema.User, error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	userSchema := new(schema.User)
+	//sess.Where("line_id = ?", siteId)
+	//sess.Where("uname = ?", uname)
+	//sess.Where("status = 1")
+	//b, err := sess.Get(userSchema)
+	sql, err := sqlBuild.Select(userSchema.TableName()).
+		Where(siteId, "line_id").
+		Where(uname, "uname").
+		Where(1, "status").
+		String()
+	if err != nil {
+		return false, userSchema, err
+	}
+	b, err := sess.SQL(sql).Get(userSchema)
+	if err != nil {
+		return false, userSchema, err
+	}
+	return b, userSchema, err
+}
+
+//登陆
+func (m *UserBean) Login(siteId, uname, pwd string) (bool, *schema.User, error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	userSchema := new(schema.User)
+	sql, err := sqlBuild.Select(userSchema.TableName()).
+		Where_(siteId, "line_id").
+		Where_(uname, "uname").
+		Where_(global.Md5(global.Md5(pwd)), "pword").
+		Where_(1, "status").
+		String()
+	if err != nil {
+		return false, userSchema, err
+	}
+	b, err := sess.SQL(sql).Get(userSchema)
+	return b, userSchema, err
+}
+
+//获取余额
+func (m *UserBean) GetBalance(siteId, account,pwd string) (money float64, err error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	userSchema := new(schema.User)
+	sql, err := sqlBuild.Select(userSchema.TableName()).
+		Where_(siteId, "line_id").
+		Where_(1, "status").
+		Where_(account, "uname").
+		Where_(global.Md5(global.Md5(pwd)), "pword").
+		Column("money").
+		String()
+	if err != nil {
+		return
+	}
+	b, err := sess.SQL(sql).Get(&money)
+	if err != nil {
+		return
+	}
+	if !(b) {
+		err = errors.New("get 0 row")
+	}
+	return
+}
+
+//余额加减
+func (m *UserBean) UpdateMoney(user *schema.User, money float64, cType int64,pwd string, sessArgs ...*xorm.Session) (num int64, err error) {
+	var sess *xorm.Session
+	switch len(sessArgs) {
+	case 1:
+		sess = sessArgs[0]
+	case 0:
+		sess = global.NewManagementSession()
+	default:
+		panic("sessArgs 传递参数不正确")
+	}
+	auto := sqlBuild.Update(user.TableName()).
+		Where_(user.LineId, "line_id").
+		Where_(1, "status").
+		Where_(global.Md5(global.Md5(pwd)), "pword").
+		Where_(user.Uname, "uname")
+	switch cType {
+	case 1: //转入
+		user.Money = global.FloatReserve2(user.Money + money)
+	case 2: //转出
+		//sess.Where("money >= ?", money)
+		auto.Where_(money, "money>=")
+		user.Money = global.FloatReserve2(user.Money - money)
+	default:
+		panic("c_type not in (1,2)")
+	}
+	sql, err := auto.Set_(user.Money, "money", sqlBuild.Rule{Float64Value: -math.MaxFloat64}).
+		String()
+	if err != nil {
+		return
+	}
+	result, err := sess.Exec(sql)
+	if err != nil {
+		return
+	}
+	return result.RowsAffected()
+}
+
+//修改密码
+func (m *UserBean) UpdatePwd(siteId, account, oldPwd, pwd string) (int64, error) {
+	sess := global.NewManagementSession()
+	defer sess.Close()
+	userSchema := new(schema.User)
+	sql, err := sqlBuild.Update(userSchema.TableName()).
+		Where_(siteId, "line_id").
+		Where_(account, "uname").
+		Where_(1, "status").
+		Where_(global.Md5(global.Md5(oldPwd)), "pword").
+		Set_(global.Md5(global.Md5(pwd)), "pword").
+		String()
+	if err != nil {
+		return 0, err
+	}
+	result, err := sess.Exec(sql)
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}

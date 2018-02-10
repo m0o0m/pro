@@ -1,0 +1,270 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-30 10:57:17
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/role/index.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a6fdf0dd0e774_11445688',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'c409b0aa233bff2e33f0abe74f1cc0ab176d698a' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/role/index.html',
+      1 => 1517022553,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a6fdf0dd0e774_11445688 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style type="text/css">
+    #role-form label{margin-right:10px}
+    .handle a{cursor: pointer}
+    .combo-select{border: none;width: 200px;top:7px}
+    .combo-dropdown{z-index:100}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="role-form" method='get' action='/role/index'>
+            <label for="roleName">角色名称:
+                <input type="text" name="roleName" id='roleName' value="<?php if (isset($_GET['roleName'])) {
+echo $_GET['roleName'];
+}?>">
+            </label>
+           <!--  <label for="">添加时间:
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='startTime' value="<?php if (isset($_GET['startTime'])) {
+echo $_GET['startTime'];
+}?>" id="startTime">
+                ~
+                <input class="laydate-icon" type="text" placeholder="请输入日期" name='endTime' value="<?php if (isset($_GET['endTime'])) {
+echo $_GET['endTime'];
+}?>" id="endTime">
+            </label> -->
+            <label >
+                状态:
+            </label >
+            <label >
+                <select id='statusSelect' name='status' id='status' >
+                    <option value="">全部</option>
+                    <option value="1" <?php if (isset($_GET['status']) && $_GET['status'] == 1) {?>selected<?php }?> >有效</option>
+                    <option value="2" <?php if (isset($_GET['status']) && $_GET['status'] == 2) {?>selected<?php }?> >无效</option>
+                </select>
+            </label>
+            <!-- <br/> -->
+            <label for="status"> 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum">
+                    <option value="100"  <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 100) {?>selected<?php }?>>100</option>
+                    <option value="500" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 500) {?>selected<?php }?>>500</option>
+                    <option value="1000" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 1000) {?>selected<?php }?>>1000</option>
+                </select>
+            </label>
+            <label for="page"> 页码:
+                <select type="select" name="page"  id="page">
+                    <?php
+$__section_loop_0_saved = isset($_smarty_tpl->tpl_vars['__smarty_section_loop']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop'] : false;
+$__section_loop_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['pagecount']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_loop_0_total = $__section_loop_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = new Smarty_Variable(array());
+if ($__section_loop_0_total != 0) {
+for ($__section_loop_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] = 0; $__section_loop_0_iteration <= $__section_loop_0_total; $__section_loop_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']++){
+?>
+                    <option value="<?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+"
+                            <?php if (isset($_GET['page']) && $_GET['page'] == (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1) {?>selected<?php }?>
+                            >
+                            <?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+
+                </option>
+                <?php
+}
+}
+if ($__section_loop_0_saved) {
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = $__section_loop_0_saved;
+}
+?>
+            </select>
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">角色</th>
+                        <th class="center">角色名称</th>
+                        <th class="center">状态</th>
+                        <th class="center">添加时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                   <tr>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?></a>
+                        </td>
+                        <td class="center">
+                            <a ><?php if (isset($_smarty_tpl->tpl_vars['v']->value['role'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['role'];
+}?></a>
+                        </td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['role_name'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['role_name'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['deleteTxt'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['deleteTxt'];
+}?></td>
+                        <td class="center"><?php if (isset($_smarty_tpl->tpl_vars['v']->value['addDate'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['addDate'];
+}?></td>
+                         <td class="center handle">
+                            <a  class="btn btn-xs btn-success detail" data_a = "<?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?>" data_b="detail" href='javascript:;'>详情</a>
+                            <a  class="btn btn-xs btn-success update" data_a = "<?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {
+echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?>" data_b="update" href='javascript:;'>角色</a>
+                        </td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+<?php echo '<script'; ?>
+>
+
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var roleName = $.trim($('#roleName').val());
+        var status = $.trim($('#statusSelect').val());
+        var startTime = $.trim($('#startTime').val());
+        var endTime = $.trim($('#endTime').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+
+        var params = {
+            roleName: roleName,
+            status: status,
+            startTime: startTime,
+            endTime: endTime,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/role/index',
+            container: '#container'
+        });
+    }
+    //祥情
+    $('.detail').click(function(){
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/role/edit?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+
+    //添加
+    $('#create').click(function(){
+        $.pjax({
+            method: 'get',
+            url: '/role/edit/?type=create',
+            container: '#container'
+        });
+    })
+    //修改
+    $('.update').click(function(){
+        var id = $(this).attr('data_a');
+        var type = $(this).attr('data_b');
+        $.pjax({
+            method: 'get',
+            url: '/role/edit?id=' + id + '&type=' + type,
+            container: '#container'
+        });
+    })
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+    //状态
+    $('#statusSelect').change(function () {
+    	//状态下拉搜索
+        renderTableByPjax();
+    })
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+    $('#page').change(function () {
+        renderTableByPjax();
+    })
+
+
+    // //时间控件
+    // var start = {
+    //     elem: '#startTime',
+    //     format: 'YYYY/MM/DD hh:mm:ss',
+    //     //min: laydate.now(), //设定最小日期为当前日期
+    //     max: '2099-06-16 23:59:59', //最大日期
+    //     istime: true,
+    //     istoday: false,
+    //     choose: function (datas) {
+    //         end.min = datas; //开始日选好后，重置结束日的最小日期
+    //         end.start = datas //将结束日的初始值设定为开始日
+    //     }
+    // };
+    // var end = {
+    //     elem: '#endTime',
+    //     format: 'YYYY/MM/DD hh:mm:ss',
+    //     //min: laydate.now(), //设定最小日期为当前日期
+    //     max: '2099-06-16 23:59:59', //最大日期
+    //     istime: true,
+    //     istoday: false,
+    //     choose: function (datas) {
+    //         end.min = datas; //开始日选好后，重置结束日的最小日期
+    //         end.start = datas //将结束日的初始值设定为开始日
+    //     }
+    // };
+    // laydate(start);
+    // laydate(end);
+<?php echo '</script'; ?>
+>
+<?php }
+}

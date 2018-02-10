@@ -1,0 +1,36 @@
+<?php
+
+use \GatewayWorker\Lib\Gateway;
+use \Applications\Chat\Lib\Common;
+
+class Events
+{
+    public static function onWorkerStart($worker) {
+        Common::init($worker); // 初始化
+    }
+
+    public static function onMessage($client_id, $message) {
+        if (isset($message['get'])) {
+            $message_data = $message['get']; // http
+        } elseif (isset($message['post'])) {
+            $message_data = $message['post']; // http
+        } else {
+            $message_data = json_decode($message, true); // ws
+        }
+        $cmd = isset($message_data['cmd']) ? $message_data['cmd'] : '';
+        switch ($cmd) {
+            case 'join': // 进入房间
+                Common::join($client_id, $message_data);
+                break;
+            case 'send': // 发送消息
+                Common::send($client_id, $message_data);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static function onClose($client_id) {
+        Common::exit($client_id); // 离开房间
+    }
+}

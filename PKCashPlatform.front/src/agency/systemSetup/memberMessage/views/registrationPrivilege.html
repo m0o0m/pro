@@ -1,0 +1,58 @@
+<!--发布新消息-->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('RegistrationCouponTemplates')}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-xs-4 input-label">选择站点</label>
+                                        <div class="col-md-4 col-xs-8">
+                                            <!--<div class="form-group">-->
+                                            <!--<div class="form-group">-->
+                                            <select data-smart-select2 style="width:100%;" ng-model="site">
+                                                <option value="">请选择</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-xs-4 input-label">内容1</label>
+                                        <label class="col-md-4 col-xs-8 inline-group">
+                                                <input class="form-control" placeholder="请输入标题" type="text" ng-model="content_1">
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-xs-12 input-label">内容2</label>
+                                        <div class="col-md-4 col-xs-12">
+                                            <textarea style="width: 100%;" rows="5"  ng-model="content_2"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-primary" type="submit" ng-click="add()">
+                                                <i class="fa fa-save"></i>
+                                                完成
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

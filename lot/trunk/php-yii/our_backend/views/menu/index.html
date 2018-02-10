@@ -1,0 +1,558 @@
+<style>
+    #menu-form label{margin-right:10px}
+    .handle span{cursor: pointer}
+    #twoLevel{display: none}
+    .levelDiv{display: none}
+    .red{color:red}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="menu-form" method='get' action='?'>
+            <label for="menuName">菜单名称:
+                <input type="text" name="menuName" id='menuName' value="<{if isset($smarty.get.menuName)}><{$smarty.get.menuName}><{/if}>">
+            </label>
+            <label for="menuLevel"> 级别:
+                <select type="select" name="menuLevel"  id="menuLevel">
+                    <option value="" >全部</option>
+                    <option value="1" <{if isset($smarty.get.menuLevel) && $smarty.get.menuLevel eq 1 }>selected<{/if}>>一级</option>
+                    <option value="2" <{if isset($smarty.get.menuLevel) && $smarty.get.menuLevel eq 2 }>selected<{/if}>>二级</option>
+                    <option value="3" <{if isset($smarty.get.menuLevel) && $smarty.get.menuLevel eq 3 }>selected<{/if}>>三级</option>
+                </select>
+            </label>
+            <label for="isUrl"> 是否页面可见:
+                <select type="select" name="isUrl"  id="isUrl">
+                    <option value="" >全部</option>
+                    <option value="1" <{if isset($smarty.get.isUrl) && $smarty.get.isUrl eq 1 }>selected<{/if}>>是</option>
+                    <option value="2" <{if isset($smarty.get.isUrl) && $smarty.get.isUrl eq 2 }>selected<{/if}>>否</option>
+                </select>
+            </label>
+            <label for="status"> 状态:
+                <select type="select" name="status"  id="status">
+                    <option value="" >全部</option>
+                    <option value="1" <{if isset($smarty.get.status) && $smarty.get.status eq 1 }>selected<{/if}>>有效</option>
+                    <option value="2" <{if isset($smarty.get.status) && $smarty.get.status eq 2 }>selected<{/if}>>无效</option>
+                </select>
+            </label>
+            <label for="status"> 每页显示条数:
+                <select type="select" name="pageNum" id="pageNum">
+                    <option value="100"  <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 100}>selected<{/if}>>100</option>
+                    <option value="500" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 500}>selected<{/if}>>500</option>
+                    <option value="1000" <{if isset($smarty.get.pageNum) && $smarty.get.pageNum eq 1000}>selected<{/if}>>1000</option>
+                </select>
+            </label>
+            <label for="page"> 页码:
+                <select type="select" name="page"  id="page">
+                    <{section name=loop loop=$pagecount}>
+                    <option value="<{$smarty.section.loop.index+1}>"
+                            <{if isset($smarty.get.page) && $smarty.get.page eq $smarty.section.loop.index+1}>selected<{/if}>
+                            >
+                            <{$smarty.section.loop.index+1}> 
+                </option>
+                <{/section}>
+            </select>
+        </label>
+        <label>
+            <input type="button" id="search" class="btn btn-sm btn-success" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center" style="width:6%;">ID</th>
+                        <th class="center">菜单名称</th>
+                        <th class="center" style="width:20%;">菜单地址</th>
+                        <th class="center" style="width:8%;">菜单级别</th>
+                        <th class="center" style="width:8%;">状态</th>
+                        <th class="center" style="width:8%;">是否页面可见</th>
+                        <th class="center" style="width:8%;">排序</th>
+                        <th class="center" style="width:12%;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <{foreach from=$data item=v key=k}>
+                  <{if isset($v['id'])}>
+                    <tr>
+                        <td class="center"><{if isset($v['id'])}><{$v['id']}><{/if}></td>
+                        <td><span style="display:inline-block;width:4em;"></span>
+                            <a><{if isset($v['menu_name'])}><{$v['menu_name']}><{/if}></a></td>
+                        <td class="center"><{if isset($v['menu'])}><{$v['menu']}><{/if}></td>
+                        <td class="center"><{if isset($v['levelTxt'])}><{$v['levelTxt']}><{/if}></td>
+                        <td class="center"><{if isset($v['deleteTxt'])}><{$v['deleteTxt']}><{/if}></td>
+                        <td class="center"><{if isset($v['urlTxt'])}><{$v['urlTxt']}><{/if}></td>
+                        <td class="center"><{if isset($v['sort'])}><{$v['sort']}><{/if}></td>
+                        <td class="center handle">
+                            <span class="btn btn-xs btn-success detail" data='<{if isset($v["id"])}><{$v["id"]}><{/if}>'>详情</span>
+                            <span class="btn btn-xs btn-success update" data='<{if isset($v["id"])}><{$v["id"]}><{/if}>'>修改</span>
+                        </td>
+                    </tr>
+                    <{if isset($v['children'])}>
+                      <{foreach from=$v['children'] item=v2 key=k2}>
+                        <tr>
+                            <td class="center"><{if isset($v2['id'])}><{$v2['id']}><{/if}></td>
+                            <td><span style="display:inline-block;width:4em;"></span>
+                                <span style="display:inline-block;width:1em;"></span>└<span style="display:inline-block;width:1em;"></span>
+                                <{if isset($v2['menu_name'])}><{$v2['menu_name']}><{/if}></td>
+                            <td class="center"><{if isset($v2['menu'])}><{$v2['menu']}><{/if}></td>
+                            <td class="center"><{if isset($v2['levelTxt'])}><{$v2['levelTxt']}><{/if}></td>
+                            <td class="center"><{if isset($v2['deleteTxt'])}><{$v2['deleteTxt']}><{/if}></td>
+                            <td class="center"><{if isset($v2['urlTxt'])}><{$v2['urlTxt']}><{/if}></td>
+                            <td class="center"><{if isset($v2['sort'])}><{$v2['sort']}><{/if}></td>
+                            <td class="center handle">
+                                <span class="btn btn-xs btn-success detail" data='<{if isset($v2["id"])}><{$v2["id"]}><{/if}>'>详情</span>
+                                <span class="btn btn-xs btn-success update" data='<{if isset($v2["id"])}><{$v2["id"]}><{/if}>'>修改</span>
+                            </td>
+                        </tr>
+                        <{if isset($v2['children'])}>
+                          <{foreach from=$v2['children'] item=v3 key=k3}>
+                            <tr>
+                                <td class="center"><{if isset($v3['id'])}><{$v3['id']}><{/if}></td>
+                                <td><span style="display:inline-block;width:6em;"></span>
+                                    <span style="display:inline-block;width:1em;"></span>└<span style="display:inline-block;width:1em;"></span>
+                                    <{if isset($v3['menu_name'])}><{$v3['menu_name']}><{/if}></td>
+                                <td class="center"><{if isset($v3['menu'])}><{$v3['menu']}><{/if}></td>
+                                <td class="center"><{if isset($v3['levelTxt'])}><{$v3['levelTxt']}><{/if}></td>
+                                <td class="center"><{if isset($v3['deleteTxt'])}><{$v3['deleteTxt']}><{/if}></td>
+                                <td class="center"><{if isset($v3['urlTxt'])}><{$v3['urlTxt']}><{/if}></td>
+                                <td class="center"><{if isset($v3['sort'])}><{$v3['sort']}><{/if}></td>
+                                <td class="center handle">
+                                    <span class="btn btn-xs btn-success detail" data='<{if isset($v3["id"])}><{$v3["id"]}><{/if}>'>详情</span>
+                                    <span class="btn btn-xs btn-success update" data='<{if isset($v3["id"])}><{$v3["id"]}><{/if}>'>修改</span>
+                                </td>
+                            </tr>
+                          <{/foreach}>
+                        <{/if}>
+                      <{/foreach}>
+                    <{/if}>
+                  <{/if}>
+                    <{/foreach}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+<div class="isHide layui-layer-wrap"id="data-detail" style="display: none;">
+    <div class="modal-body">
+        <form  class="form-horizontal" id="layForm"  >
+            <input type="hidden" value="" id='menuId'>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 父级菜单 </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="oneLevel" id='oneLevel' >
+
+                        </select>
+                        <select type="select" name="twoLevel" id='twoLevel' >
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 菜单名称 </label>
+                    <div class="col-sm-9">
+                        <input required="1"  type="text" id="Name" class="form-control ">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 菜单地址 </label>
+                    <div class="col-sm-9">
+                        <input  type="text" id="Url" class="form-control ">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 图标CLASS </label>
+                    <div class="col-sm-9">
+                        <input  type="text" id="Icon" class="form-control ">
+                        <span>参考网址:</span>
+                        <a class='red' href="https://www.iteblog.com/ace/buttons.html">
+                             https://www.iteblog.com/ace/buttons.html
+                        </a>
+                    </div>
+                </div>
+                <div class="form-group levelDiv">
+                    <label class="col-sm-3 control-label"> 菜单级别 </label>
+                    <div class="col-sm-9">
+                        <select type="select" name="Level" id='Level' >
+                            <option value="1">一级</option>
+                            <option value="2">二级</option>
+                            <option value="3">三级</option>>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 状态 </label>
+                    <div class="col-sm-9">
+                        <label class="line-height-1 blue">
+                            <input type="radio" checked name='isUse'  class="ace " value="1">
+                            <span class="lbl"> 启用 </span>
+                        </label>　 
+                        <label class="line-height-1 blue">
+                            <input type="radio" name='isUse'  class="ace"  value="2">
+                            <span class="lbl">  停用</span>
+                        </label>　
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 是否页面可见 </label>
+                    <div class="col-sm-9">
+                        <label class="line-height-1 blue">
+                            <input type="radio"  checked name='isSee' class="ace" value="1">
+                            <span class="lbl"> 可见 </span>
+                        </label>　 
+                        <label class="line-height-1 blue">
+                            <input type="radio" name='isSee' class="ace"  value="2">
+                            <span class="lbl"> 不可见 </span>
+                        </label>　
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> 排序 </label>
+                    <div class="col-sm-9" style="width:120px;">
+                        <input class="form-control" type="text" id="sort" name="sort" value="0">
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <label>
+            <input id='saveMenu' type="submit" class="btn btn-info" value = "保存">
+        </label>
+    </div>
+</div>
+
+<script>
+	// pjax局部加载列表
+    function renderTableByPjax() {
+        var menuName = $.trim($('#menuName').val());
+        var menuLevel = $.trim($('#menuLevel').val());
+        var isUrl = $.trim($('#isUrl').val());
+        var status = $.trim($('#status').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+      
+        var params = {
+            menuName: menuName,
+            menuLevel: menuLevel,
+            isUrl: isUrl,
+            status: status,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '?',
+            container: '#container'
+        });
+    }
+
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+    //级别
+    $('#menuLevel').change(function () {
+        renderTableByPjax();
+    })
+     //是否可见
+    $('#isUrl').change(function () {
+        renderTableByPjax();
+    })
+     //状态
+    $('#status').change(function () {
+        renderTableByPjax();
+    })
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+    $('#page').change(function () {
+        renderTableByPjax();
+    })
+
+    function getData(type, id) {
+        var url, title, height, load;
+        if (type == 'create') {
+            title = '菜单新增';
+            url = 'submenu';
+        } else if (type == 'detail') {
+            title = '菜单详情';
+            url = 'onedata';
+        } else if (type == 'update') {
+            title = '菜单修改';
+            url = 'onedata';
+        } else if (type == 'getTwoLevel') {
+            title = '';
+            height = '400px';
+            url = 'submenu';
+        }
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {"id": id},
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2})
+                layer.close(load);
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 400) {
+                    layer.alert(res.msg, {icon: 2});
+                    layer.close(load);
+                } else if(res.ErrorCode == 2){
+                    layer.close(load);
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                } else if (res.code == 200) {
+                    layer.close(load);
+                    handleHtml(type, res.data);
+                    if ($.inArray(type, ['create', 'update', 'detail'] > -1)) {
+                        openLayer(title, height);
+                    }
+                }
+            },
+            complete: function () {
+                var idx = $('.layui-layer-shade').length - 1;
+                if (idx > 0) {
+                    $('body').find('.layui-layer-shade').eq(idx).remove();
+                }
+            }
+        });
+    }
+
+    function openLayer(title, height) {
+        layer.open({
+            type: 1 //Page层类型
+            , area: ['604px']
+            , title: title
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: $('#data-detail')
+        });
+    }
+
+    //处理弹框中的html
+    function handleHtml(type, data) {
+        var tpl;
+        switch (type) {
+            case 'create':
+                tpl = '<option value="">请选择</option>';
+                $.each(data, function (k, v) {
+                    tpl += '<option value="' + v.id + '">' + v.menu_name + '</option>';
+                })
+                $("#oneLevel").html(tpl);
+                $('#saveMenu').show();
+                $('#layForm').find('#Name').val('');
+                $('#layForm').find('#Url').val('');
+                $('input[name="isUse"][value=1]').prop('checked', true);
+                $('input[name="isSee"][value=1]').prop('checked', true);
+                $('#layForm').find('input').attr('disabled', false);
+                $('#layForm').find('select').attr('disabled', false);
+                $('#layForm').find('radio').attr('disabled', false);
+                $('#oneLevel').attr('disabled', false);
+                $('#twoLevel').hide();
+                break;
+            case 'detail':
+            case 'update':
+                //渲染一级菜单
+                var onetpl = '<option value="">请选择</option>';
+                if (data.oneLevels.length > 0) {
+                    $.each(data.oneLevels, function (k, v) {
+                        onetpl += '<option value="' + v.id + '">' + v.menu_name + '</option>';
+                    })
+                }
+                $("#oneLevel").html(onetpl);
+                //二级菜单渲染
+                if (data.level != 1) {
+                    tpl = '<option value="">请选择</option>';
+                    if (data.twoLevels.length > 0) {
+                        $.each(data.twoLevels, function (k, v) {
+                            tpl += '<option value="' + v.id + '">' + v.menu_name + '</option>';
+                        })
+                    }
+                    $("#twoLevel").html(tpl);
+                    $("#twoLevel").show();
+                } else {
+                    tpl = '<option value="">请选择</option>';
+                    $("#twoLevel").html(tpl);
+                    $("#twoLevel").hide();
+                }
+                //选中
+                if (data.level == 3) {
+                    $.each($('#oneLevel option'), function (k, v) {
+                        if ($(this).val() == data.ppid) {
+                            $(this).attr('selected', true);
+                        }
+                    })
+                    $.each($('#twoLevel option'), function (k, v) {
+                        if ($(this).val() == data.pid) {
+                            $(this).attr('selected', true);
+                        }
+                    })
+                } else if (data.level == 2) {
+                    $.each($('#oneLevel option'), function (k, v) {
+                        if ($(this).val() == data.pid) {
+                            $(this).attr('selected', true);
+                        }
+                    })
+                }
+
+                //赋值
+                $('#Name').val(data.menu_name);
+                $('#Url').val(data.menu);
+                $('#Icon').val(data.icon_class);
+                $('input[name="isUse"][value=' + data.is_delete + ']').prop('checked', true);
+                $('input[name="isSee"][value=' + data.is_url + ']').prop('checked', true);
+                $('#sort').val(data.sort);
+
+                if (type == 'detail') {
+                    $('#saveMenu').hide();
+                    $('#layForm').find('input').attr('disabled', true);
+                    $('#layForm').find('select').attr('disabled', true);
+                    $('#layForm').find('radio').attr('disabled', true);
+                } else if (type == 'update') {
+                    $('#saveMenu').show();
+                    $('#layForm').find('input').attr('disabled', false);
+                    $('#layForm').find('select').attr('disabled', false);
+                    $('#layForm').find('radio').attr('disabled', false);
+                    //菜单层级不能修改
+                    $('#oneLevel').attr('disabled', true);
+                    $('#twoLevel').attr('disabled', true);
+                }
+                break;
+            case 'getTwoLevel':
+                if (data == '' || data.length < 1) {
+                    tpl = '<option value="">请选择</option>';
+                    $('#twoLevel').html(tpl);
+                } else {
+                    tpl = '<option value="">请选择</option>';
+                    $.each(data, function (k, v) {
+                        tpl += '<option value="' + v.id + '">' + v.menu_name + '</option>';
+                    })
+                    $("#twoLevel").html(tpl);
+                }
+                $("#twoLevel").show();
+                break;
+        }
+    }
+
+    //提交表单
+    function submit() {
+        $('#menu-form').submit();
+    }
+
+    //详情
+    $(".handle .detail").click(function () {
+        var id = $(this).attr('data');
+        getData('detail', id);
+    })
+    //修改
+    $('.handle .update').click(function () {
+        var id = $(this).attr('data');
+        $('#menuId').val(id);
+        getData('update', id);
+    })
+
+    //新增
+    $('#create').click(function () {
+        $('#menuId').val('');
+        getData('create', '');
+    })
+
+    //一级菜单切换
+    $('#oneLevel').change(function () {
+        var id = $.trim($(this).val());
+        if (id == '') {
+            var tpl = '<option value="">请选择</option>';
+            $('#twoLevel').html(tpl);
+            $('#twoLevel').hide();
+        } else {
+            getData('getTwoLevel', id);
+        }
+    })
+
+    //提交(新增,修改)
+    $('#saveMenu').click(function () {
+        var index;
+        var reg = /^[A-Za-z0-9\/#]*$/g;
+        var menuId = $.trim($('#menuId').val());
+        var oneLevel = $.trim($('#oneLevel').val());
+        var twoLevel = $.trim($('#twoLevel').val());
+        var menuName = $.trim($('#Name').val());
+        var menuUrl = $.trim($('#Url').val());
+        var iconClass = $.trim($('#Icon').val());
+        var isUse = $('input[name="isUse"]:radio:checked').val();
+        var isSee = $('input[name="isSee"]:radio:checked').val();
+        var sort = $.trim($('#sort').val());
+
+        if (menuName == '') {
+            layer.alert('菜单名称不能为空!', {icon: 2});
+            return false;
+        } else if (menuUrl == '') {
+            layer.alert('菜单地址不能为空!', {icon: 2});
+            return false;
+        } else if (!reg.test(menuUrl)) {
+            layer.alert('菜单地址只能为数字字母斜杠#', {icon: 2});
+            return false;
+        }
+
+        $.ajax({
+            type: "post",
+            url: 'savemenu',
+            data: {
+                "menuId": menuId,
+                "oneLevel": oneLevel,
+                "twoLevel": twoLevel,
+                "menuName": menuName,
+                "menuUrl": menuUrl,
+                "isUse": isUse,
+                "isSee": isSee,
+                "iconClass": iconClass,
+                "sort": sort
+            },
+            beforeSend: function () {
+                index = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(index);
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 400) {
+                    layer.alert(res.msg, {icon: 2});
+                    layer.close(index);
+                } else if (res.code == 200) {
+                    layer.alert(res.msg, {icon: 1}, function(){
+                        location = window.location;
+                    });
+                }
+
+            }
+        });
+    })
+
+</script>

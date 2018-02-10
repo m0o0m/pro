@@ -1,0 +1,77 @@
+@charset "UTF-8";
+#page-body {
+  /* 以下的皮肤颜色 */
+  /* 黑色 */
+  /* .my-theme{
+    background-color: #212121;
+  }
+  
+  .page-active{
+    background-color: #212121 !important;
+    color: #fff;
+  } */
+  /* 红色 */ }
+  #page-body body {
+    background-color: #f5f5f5; }
+  #page-body p, #page-body h1, #page-body input, #page-body ul, #page-body li, #page-body body, #page-body html {
+    padding: 0;
+    margin: 0; }
+  #page-body ul li {
+    list-style: none; }
+  #page-body a {
+    text-decoration: none; }
+  #page-body input, #page-body button {
+    outline: none; }
+  #page-body .center {
+    /*width: 1000px;*/
+    margin: 0 auto; }
+  #page-body .head-center {
+    line-height: 60px;
+    width: 1000px;
+    margin: 0 auto; }
+  #page-body .vip-c {
+    position: relative; }
+  #page-body .vip-h-c {
+    /* background-color: #f2233a; */
+    height: 60px;
+    color: #fff;
+    font-size: 26px; }
+  #page-body .vip-section {
+    font-size: 16px;
+    background-color: #f5f5f5;
+    /* height: 100%; */ }
+  #page-body .huangguan1-color {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 32px;
+    color: #fff; }
+  #page-body .vip-nav {
+    height: 64px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd; }
+  #page-body .vip-tab-1 a {
+    width: 12.5%;
+    font-size: 18px;
+    text-align: center;
+    height: 63px;
+    line-height: 63px;
+    border-bottom: 2px solid transparent;
+    color: #000; }
+  #page-body .vip-tab-1 .tab-1-active {
+    color: #f00;
+    border-bottom: 2px solid #f00 !important; }
+  #page-body .section-c {
+    padding-bottom: 20px; }
+  #page-body .buttonshadowR {
+    box-shadow: 0px 4px 8px #ddd;
+    background: linear-gradient(#BB2001, #FF4341); }
+  #page-body .buttonshadowY {
+    box-shadow: 0px 4px 8px #ddd;
+    background: linear-gradient(#BB2001, #FF4341); }
+  #page-body .my-theme {
+    background-color: #f2233a; }
+  #page-body .page-active {
+    background-color: #f2233a !important;
+    color: #fff; }
+
+/*# sourceMappingURL=mycommon.css.map */

@@ -1,0 +1,194 @@
+<!-- 彩票管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('lotteryManagrment')}} <span class="lable-color"> 修改时序号只能填单数</span>  </h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar" ng-show="newTodo">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 control-label">站点：</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group" ng-init="site_index_id==''" >
+                                            <div>
+                                                <select data-smart-select2 class="selectWidth" ng-model="site" ng-change="search()">
+                                                    <option value="">全部</option>
+                                                    <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-12">
+                                        <div class=" input-group">
+                                            <button type="submit" data-ui-sref="app.websiteManagement.lotterySort"  class="btn btn-primary">
+                                                进入彩票大厅模版排序
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-align-center">序号</th>
+                                            <th class="text-align-center">彩票名称</th>
+                                            <th class="text-align-center">WAP图标预览</th>
+                                            <th class="text-align-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="text-align-center">
+                                        <tr ng-repeat="item in list">
+                                            <td>{{item.order}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td><span data-toggle="modal" data-target="#myModal_logopic" class="text-red" ng-click="see(item.wapImg)">【{{getWord('See')}}】</span>【宽度90px高度65px】</td>
+                                            <td>
+                                                <button data-toggle="modal" data-target="#lottery2" class="ids btn btn-primary btn-xs"  ng-click="upload(item.id)">{{getWord('update')}}</button>
+                                                <button data-toggle="modal" data-target="#lotteryModal1" class="ids btn btn-primary btn-xs"  ng-click="open(item)">{{getWord('modifySort')}}</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!--//预览图片-->
+    <div class="modal fade" id="myModal_logopic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">IMG{{getWord('See')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <img ng-src="{{img_src}}" style="width: 100%;height: 400px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑顺序-->
+    <div class="modal fade" id="lotteryModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{getWord('Modify')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="text-align-center">彩票名称</th>
+                                <th>序号</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-align-center">{{name}}</td>
+                                <td><input type="text" id="videoID" ng-model="new_order"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default ng-binding" data-dismiss="modal">
+                                取消
+                            </button>
+                            <button type="button" class="btn btn-primary ng-binding" data-dismiss="modal" ng-click="modify()">
+                                确认
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--上传-->
+    <div class="modal fade" id="lottery2" tabindex="-1" role="dialog" aria-labelledby="lottery2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" >{{getWord('Modify')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <div class="row">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label ng-binding">标题</label>
+                                    <div class="col-md-7 col-xs-12">
+                                        <input class="form-control ng-pristine ng-untouched ng-valid" placeholder="标题" type="text" ng-model="title">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label ng-binding">地址</label>
+                                    <div class="col-md-7 col-xs-12">
+                                        <input class="form-control ng-pristine ng-untouched ng-valid" placeholder="地址" type="text" ng-model="url">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div  class="table-scroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>附件标题</th>
+                                    <th>附件地址</th>
+                                    <th>上传时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in enclosure">
+                                    <td>{{item.id}}</td>
+                                    <td><input type="text" ng-model="item.title"><button type="button" ng-click="select(item)">{{getWord('choose')}}</button><button type="button" ng-click="modifyTitle(item)">{{getWord('Modify')}}</button></td>
+                                    <td><input type="text"  ng-model="item.url"><a ng-href="{{item.url}}" target="_blank" class="lable-color">{{getWord('See')}}</a><button type="button" ng-click="delete(item)">{{getWord('Delete')}}</button></td>
+                                    <td>{{item.create_time}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default ng-binding" data-dismiss="modal">
+                                取消
+                            </button>
+                            <button type="button" class="btn btn-primary ng-binding" data-dismiss="modal" ng-click="submit()">
+                                确认
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

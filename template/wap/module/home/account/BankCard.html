@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>Pk</title>
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+<style>
+    ul.cardlist li{
+        border-radius: 10px;
+        padding: 5px 10px 5px 10px;
+        /*background: #54c9697a;*/
+    }
+    ul.cardlist li a{
+        width: 100%;
+        height: 130px;
+        display: block;
+        background: url(http://public.com/wap/style/images/bank/1.png) 0% 0% / 100% 100%; /*这里给个默认图片*/
+        line-height: 150px;
+        color: #fff;
+        font-size: 20px;
+        word-spacing: 8px;
+        letter-spacing: 1px;
+        text-indent: 55px;
+    }
+    ul.cardlist li div.col{
+       background: #54c9697a;
+    }
+    #mescroll{
+        bottom: 0;
+    }
+
+</style>
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+	<!-- <dl class="h-head h-login">
+    	<dt><a class="iconfont">&#xe605;</a></dt>
+        <h2>银行卡</h2>
+        <dd><a href="/m/index">首页</a></dd>
+    </dl> -->
+    <ul class="h-head">
+            <li>
+                <a>
+                    <i class="iconfont wap-fanhui"></i>
+                </a>
+            </li>
+            <li>
+                <h2>银行卡</h2>
+            </li>
+            <li>
+                <a href="/m/index">首页</a>
+            </li>
+        </ul>
+</header>
+
+<div id="mescroll" class="mescroll">
+
+	<dl class="m-myaccount">
+    	<ul class="cardlist">
+        	
+        </ul>
+        <ul class="addcord">
+        	<a href="bankCardAdd"><i>+</i>添加银行卡</a>
+        </ul>
+    </dl>
+
+</div>
+
+
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script> 
+</html>
+<script>
+    var cdnUrl = '{{.CdnUrl}}/wap';
+    // $('.h-head .iconfont').click(function(){
+    //     window.history.go(-1); 
+    // })
+    $(window).load(function(e){
+        loginId();
+        if(!getCookie('loginBack')){ //没有登陆信息的时候返回登陆页面
+            $.toast("用户登录信息已过期， 请重新登录！", 'text');
+            setTimeout("window.location.href = '/m/login'; ",1000);//延迟2秒执行
+        }
+        bank();
+    })
+    $(document).ready(function(){
+        var mescroll = new MeScroll("mescroll", {
+                //下拉刷新的所有配置项
+                down:{
+                    use: false, //是否初始化下拉刷新; 默认true
+                    auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                    hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                    isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+                }
+			});
+    })
+</script>

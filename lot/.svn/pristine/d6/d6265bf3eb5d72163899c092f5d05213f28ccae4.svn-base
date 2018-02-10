@@ -1,0 +1,58 @@
+package global
+
+import (
+	"github.com/labstack/echo"
+	"strings"
+	"github.com/zengnotes/utility"
+	"net/http"
+)
+
+
+const USER_HAS_PREFIX = "Lottery_Api_Go_"
+
+//校验
+func DesParams(c echo.Context) error {
+	//取出头部里面存储的里面的siteId,进行解密
+	siteId := strings.Replace(string(c.Request().UserAgent()), USER_HAS_PREFIX, "", -1)
+	params := c.FormValue("params")
+	md5value := c.FormValue("key")
+	GlobalLogger.Error("params:%s", params)
+	GlobalLogger.Error("md5value:%s", md5value)
+	params = strings.Replace(params, " ", "+", -1) //base64bug
+	if len(params) == 0 {
+		GlobalLogger.Error("err:not found site params", )
+		return echo.ErrUnauthorized
+	}
+	siteConfig, ok := M.Load(siteId)
+	if !ok {
+		GlobalLogger.Error("err:not found site config", )
+		return echo.ErrUnauthorized
+	}
+	config, _ := siteConfig.(*SiteConfig)
+	desKey := config.DesKey
+	md5Key := config.Md5Key //md5盐
+	GlobalLogger.Error("deskey:%s,md5key:%s",desKey,md5Key )
+	//验证数据完整性
+	serviceMd5Value := utility.Md5(params + md5Key)
+	if serviceMd5Value != md5value {
+		GlobalLogger.Error("err :md5key checked failure")
+		return echo.ErrUnauthorized
+	}
+
+	param, err := utility.DesDecrypt([]byte(params), []byte(desKey))
+	if err != nil {
+		GlobalLogger.Error("err:%s", err.Error())
+		return echo.ErrUnauthorized
+	}
+	paramArr := strings.Split(string(param), "/\\\\/")
+	c.Request().Form.Del("params")
+	for _, v := range paramArr {
+		val := strings.Split(v, "=")
+		if len(val) == 2 {
+			c.Request().Form.Set(val[0], val[1])
+
+		}
+	}
+	c.Request().Method = http.MethodGet
+	return nil
+}

@@ -1,0 +1,182 @@
+<div id="content">
+    <div class="row">
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('Immediate')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar">
+                                <div ng-show="newTodo">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group" ng-init="site=''">
+                                            <select data-smart-select2 class="selectWidth" ng-model="site">
+                                                <option value="">全部</option>
+                                                <option ng-value="item.site_id" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4  input-label">账号</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control inp_2" placeholder="{{getWord('Administrator account search')}}" ng-model="accounts">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-xs-1 col-xs-offset-9 col-md-offset-0">
+                                        <div class="input-group">
+                                            <a class="btn btn-default search" ng-click="search()" href-void>{{getWord('Search')}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <p>优惠稽核：{{v1}}</p>
+                                <p>自从出款后第一次存款开始之后：</p>
+                                <p>总有效投注：<span id="auditID"></span>{{v2}}(所以视讯有效投注)</p>
+                                <p id="auditP1"></p>
+                                <form class="form-inline " method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>存款日期区间</th>
+                                                <th>存款金额</th>
+                                                <th>存款优惠</th>
+                                                <th>实际购买</th>
+                                                <!--<th>优惠稽核(通过/全部)</th>-->
+                                                <th>常态稽核</th>
+                                                <th> 综合打码</th>
+                                                <th>通过</th>
+                                                <th>常态打码</th>
+                                                <th>放款额度</th>
+                                                <th>通过</th>
+                                                <th>需扣除行政费用</th>
+                                                <th>需扣除金额</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody >
+                                            <tr ng-repeat=" item in list">
+                                                <td>{{item.update_date}}</td>
+                                                <td>{{item.Deposit_amount}}</td>
+                                                <td>{{item.Deposit_discount}}</td>
+                                                <td>
+                                                    <a ng-click="Actual(item.id)" data-toggle="modal" data-target="#myModal1">{{item.Actual_purchase}}</a>
+                                                </td>
+                                                <td>{{item.Normal_audit}}</td>
+                                                <td>{{item.Comprehensive_code}}</td>
+                                                <td>{{item.adopt}}</td>
+                                                <td>{{item.Normal_code}}</td>
+                                                <td>{{item.Lenders}}</td>
+                                                <td>{{item.adopt_1}}</td>
+                                                <td>{{item.expenses_are_required_to_deducted}}</td>
+                                                <td>{{item.Amount_of_deductions}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf" ></tm-pagination>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div >优惠稽核 + 常态稽核 + 手续费 共扣除：{{v3}}元</div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccounts">{{getWord('PurchaseAnalysis')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <div class="table-scroll">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>商品类型</td>
+                                    <td>消费(元)</td>
+                                </tr>
+                                <tr ng-repeat="item in Purchase">
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.consumption}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adds()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">-->
+        <!--<div class="modal-dialog">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">-->
+                        <!--&times;-->
+                    <!--</button>-->
+                    <!--<h4 class="modal-title" id="addAccounts">优惠稽核</h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >-->
+                        <!--<div class="table-scroll">-->
+                            <!--<table class="table table-bordered">-->
+                                <!--<tr>-->
+                                    <!--<td>商品类型</td>-->
+                                    <!--<td>通过</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>12</td>-->
+                                    <!--<td>是</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>12</td>-->
+                                    <!--<td>否</td>-->
+                                <!--</tr>-->
+
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</form>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">-->
+                        <!--{{getWord('Cancel')}}-->
+                    <!--</button>-->
+                    <!--<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="adds()">-->
+                        <!--{{getWord('Confirm')}}-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+

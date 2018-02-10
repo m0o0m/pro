@@ -1,0 +1,41 @@
+{{template "header" .Header}}
+<style>
+	.clearfix {
+	    display: inherit;
+	}
+</style>
+        <!--主要内容-->
+        <div style="height:20px;"></div>
+        <div class="game_main" id="page-body">
+			{{if eq .MemberPage 1}}
+	            {{template "member_index" .}}
+	        {{else if eq .MemberPage 2}}
+	            {{template "membercompany" .}}
+	        {{else if eq .MemberPage 3}}
+	            {{template "withdrawalindex" .}}
+	        {{else if eq .MemberPage 4}}
+	            {{template "memberquota" .}}
+	        {{else if eq .MemberPage 5}}
+	            {{template "memberrecord" .}}
+	        {{else if eq .MemberPage 6}}
+	            {{template "memberreport" .}}
+	        {{else if eq .MemberPage 7}}
+	            {{template "memberpromotion" .}}
+	        {{else if eq .MemberPage 8}}
+	            {{template "membernews" .}}
+	        {{else if eq .MemberPage 9}}
+	            {{template "thirdparty" .}}
+	        {{else if eq .MemberPage 10}}
+	            {{template "membercomplete" .}}
+	        {{else if eq .MemberPage 11}}
+	            {{template "memberdrawwrite" .}}
+	        {{end}}
+
+        </div>
+    </div>
+</div>
+<style>
+    .cp_content .news .new02 {    width: 875px;}
+    .slots_banner{background: url({{.Header.CdnUrl}}/theme1/public/images/new/welcome_banner.jpg) no-repeat top center !important;}
+</style>
+{{template "footer" .Footer}}

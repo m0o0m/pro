@@ -1,0 +1,8 @@
+﻿index---活动中心主页
+content---活动中心内页
+bulletin---公告主页
+bulletinContent---公告内页
+returnWater---自助返水
+returnRanking---推广返佣排行
+spreadReturn---推广返佣
+paper---论文详情

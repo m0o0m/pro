@@ -1,0 +1,96 @@
+<div id="content">
+    <div class="row">
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('SetPreferential')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i>{{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div ng-show="newTodo">
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <label class="col-md-1 col-xs-4 input-label">站点</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <!--<div class="form-group">-->
+                                            <select data-smart-select2  ng-model="site" class="selectWidth">
+                                                <option value="">请选择</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                            </select>
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+                                    <label class="col-md-1 col-xs-4 input-label">返点层级</label>
+                                    <div class="col-md-2 col-xs-8">
+                                        <div class="form-group">
+                                            <!--<div class="form-group">-->
+                                            <select data-smart-select2  ng-model="level" class="selectWidth">
+                                                <option value="">请选择</option>
+                                                <option value="{{item.id}}" ng-repeat="item in levelDrop">{{item.name}}</option>
+                                            </select>
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+
+                                    <div  class="col-sm-2   col-xs-6">
+                                        <div class="input-group pull-right">
+                                            <button type="submit"  data-smart-jqui-dialog-launcher=".dialog_simple_z"  class="btn btn-primary" ng-click="search()">
+                                                {{lang['Search']}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div  class="col-sm-2   col-xs-6">
+                                        <div class="input-group pull-right">
+                                            <button type="submit"   class="btn btn-primary" data-ui-sref="app.Precalcula.NewOffer">
+                                                新增优惠设定
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    有效总消费
+                                                </th>
+                                                <th ng-repeat="item_1 in arr">{{item_1}}</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.valid_money}}</td>
+                                                <td ng-repeat="a in item.rebate track by $index">{{a}}</td>
+                                                <td>
+                                                    <button class="btn btn-default" data-ui-sref="app.Precalcula.modiOffer({id:item.id})" >修改</button>
+                                                    <button class="btn btn-default" ng-click="del(item.id)">删除</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </section>
+
+</div>
+

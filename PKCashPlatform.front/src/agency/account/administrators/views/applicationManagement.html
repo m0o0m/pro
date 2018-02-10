@@ -1,0 +1,695 @@
+<!-- 代理申请管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('A_7')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                            <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <label class="col-md-1 col-xs-3 input-label">{{getWord('Site')}}</label>
+                                            <div class="col-md-2 col-xs-9">
+                                                <div class="form-group">
+                                                    <select data-smart-select2  class="selectWidth" ng-model="appsite">
+                                                        <option value="">请选择</option>
+                                                        <option value="{{item.site_index_id}}" ng-repeat="item in site">{{item.site_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-3 input-label">{{getWord('Status')}}</label>
+                                            <div class="col-md-2 col-xs-9">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="applicationstatus">
+                                                        <option value="">请选择</option>
+                                                        <option ng-value="s.id" ng-repeat="s in json.option_states">{{s.status}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 col-xs-3 input-label">{{getWord('Search')}}</label>
+                                            <div class="col-md-1 col-xs-9">
+                                                <div class="form-group searchselect">
+                                                    <select class="form-control" ng-model="applicationtype">
+                                                        <option value="">请选择</option>
+                                                        <option ng-value="t.value" ng-repeat="t in json.option_type">{{t.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-0 col-xs-9 col-xs-offset-3">
+                                                <div class="searchselect">
+                                                    <input class="form-control"  type="text" ng-model="searchterms" placeholder="{{getWord('Administrator account search')}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-md-offset-0 col-xs-4 col-xs-offset-3">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{getWord('Search')}}</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1 col-xs-4">
+                                                <div class="input-group pull-right">
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal2" ng-click="addregister()">
+                                                        {{getWord('Registration settings')}}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">{{getWord('Site')}}</th>
+                                            <th class="text-center">账号</th>
+                                            <th class="text-center">{{getWord('Nickname Chinese')}}</th>
+                                            <th class="text-center">{{getWord('Telephone')}}</th>
+                                            <th class="text-center">{{getWord('Email')}}</th>
+                                            <th class="text-center">{{getWord('QQ')}}</th>
+                                            <th class="text-center">{{getWord('Status')}}</th>
+                                            <th class="text-center">{{getWord('application time')}}</th>
+                                            <th class="text-center">{{getWord('function')}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+                                            <td>{{item.site_id}}_{{item.site_index_id}}</td>
+                                            <td>{{item.account}}</td>
+                                            <td>{{item.zh_name}}</td>
+                                            <td>{{item.skype}}</td>
+                                            <td>{{item.email}}</td>
+                                            <td>{{item.qq}}</td>
+                                            <td>{{item.status|fiterApp}}</td>
+                                            <td>{{item.create_time|formatDate}}</td>
+                                            <td class="hidden">{{item.id}}</td>
+                                            <td style="text-align: center">
+                                                <button class="btn btn-default btn-xs" ng-show="item.status==2" data-toggle="modal" data-target="#myModal1" ng-click="addmodal($index,$event)">
+                                                    {{getWord('New account')}}
+                                                </button>
+                                                <button class="btn btn-default btn-xs" ng-click="see($index)" data-toggle="modal" data-target="#seeDetail">
+                                                    {{getWord('See')}}
+                                                </button>
+                                                <button  ng-show="item.status==2" class="btn btn-default btn-xs" ng-click="del($index)">{{getWord('Delete')}}</button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!--seeDetail-->
+    <div class="modal fade" id="seeDetail" tabindex="-1" role="dialog" aria-labelledby="seeAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="seeAccount">{{getWord('See')}}</h4>
+                </div>
+                <div class="modal-body table-scroll" style="height: 400px;">
+                    <!--<form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >-->
+                    <form class="smart-form form-horizontal ng-pristine ng-valid">
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Dealer account')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Real name')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.zh_name" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('englishName')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_index_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('ID number')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">QQ</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.qq" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">E-mail</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.email" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('cardNum')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Withdrawal bank')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Province')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Counties and cities')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('ATM password')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.skype" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Remarks')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Promotion URL')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="input-item">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-4 input-label">{{getWord('Other promotion methods')}}</label>
+                                <div class="col-md-6 col-xs-8 input">
+                                    <input type="text" ng-model="detail.site_id" readonly="readonly">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        {{getWord('Confirm submission')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">{{getWord('Proxy registration settings')}}</h4>
+
+                </div>
+                <div class="modal-body table-scroll" style="height: 400px;">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset >
+                            <div class="form-group allsite">
+
+                                <label class="col-md-4 col-xs-4 input-label">{{getWord('Site')}}</label>
+                                <div class="col-md-4 col-xs-8">
+                                    <div class="form-group">
+                                        <!--<div class="form-group">-->
+                                            <select data-smart-select2 style="width: 80%;" class="addsite">
+                                                <option value="">请选择</option>
+                                                <option value="{{item.site_index_id}}" ng-repeat="item in site">{{item.site_name}}</option>
+                                            </select>
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you want to enable proxy registration settings')}}：</label>
+                                <div class="col-md-4 col-xs-12">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="registerProxy">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="registerProxy">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you have a Chinese nickname')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="chineseNickname">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="chineseNickname">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you have a English nickname')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="englishNickname">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="englishNickname">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you need ID number')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="needCardnumber">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="needCardnumber">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you need a mailbox')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="needEmail">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="needEmail">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you need QQ')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="needQQ">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="needQQ">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you need phone number')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="NeedPhone">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="NeedPhone">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you need to promote the URL')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="promoteWebsite">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="promoteWebsite">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Do you need any other methods')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="otherMethod">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="otherMethod">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Chinese nickname is required')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="isMustChineseNickname">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="isMustChineseNickname">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('English nickname is required')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+
+                                        <label>
+                                            <input type="radio" value="1" name="isMustEnglishNickname">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="isMustEnglishNickname">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Whether the mailbox is required')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="isMustEmail">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="isMustEmail">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Documents are required')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="isMustIdentity">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="isMustIdentity">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('QQ is required')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="isMustQQ">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="isMustQQ">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('Mobile phone number is required')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="isMustPhone">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="isMustPhone">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('The URL is required for promotion')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="isMustPromoteWebsite">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="isMustPromoteWebsite">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 input-label">{{getWord('The other way is required')}}：</label>
+                                <div class="col-md-4">
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="1" name="isMUstMethod">
+                                            {{getWord('yes')}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                    <div class="checkbox pull-left">
+                                        <label>
+                                            <input type="radio" value="2" name="isMUstMethod">
+                                            {{getWord('No')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="appsubmit()" data-dismiss="modal">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">{{getWord('New proxy account')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <!--<form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >-->
+                        <form class="smart-form form-horizontal ng-pristine ng-valid">
+                            <fieldset class="second">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">{{getWord('Shareholder')}}</label>
+                                    <div class="col-md-6 col-xs-8">
+                                        <select data-smart-select2 style="width: 100%;" ng-model="modalsecond" ng-change="secondadd()" class="secondadd">
+                                            <option value="">请选择</option>
+                                            <option value="{{second.id}}"  ng-repeat="second in second_id">{{second.username}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="third">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">{{getWord('General agent')}}</label>
+                                    <div class="col-md-6 col-xs-8 col-xs-12">
+                                        <select data-smart-select2 style="width: 100%;" ng-model="modalparent" class="thirdadd">
+                                            <option value="">请选择</option>
+                                            <option value="{{if.id}}" ng-repeat="if in third_id">{{if.username}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="input-item">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">{{getWord('accounts')}}</label>
+                                    <div class="col-md-6 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                        <input class="form-control" placeholder="{{getWord('accounts')}}" type="text" ng-model="modalaccounts">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                            {{getWord('digitalLetter')}}</b>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="input-item">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">{{getWord('Proxy account')}}</label>
+                                    <div class="col-md-6 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                        <input class="form-control" placeholder="{{getWord('Proxy account')}}" type="text" ng-model="username">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                            {{getWord('digitalLetter')}}</b>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="input-item">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">{{getWord('Password')}}</label>
+                                    <div class="col-md-6 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                        <input class="form-control" placeholder="" type="password" ng-model="modalpass">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                            {{getWord('accountLength')}}</b>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="input-item">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">{{getWord('Confirm password')}}</label>
+                                    <div class="col-md-6 col-xs-8 input"><i class="icon-append fa fa-question-circle"></i>
+                                        <input class="form-control" placeholder="" type="password" ng-model="modalpassword">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i>
+                                            {{getWord('accountLength')}}</b>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="input-item hidden">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">{{getWord('Site')}}ID</label>
+                                    <div class="col-md-6 col-xs-8 input">
+                                        <input class="form-control" type="text" ng-model="site_index_id">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="input-item hidden">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-4 input-label">{{getWord('Applicant ID')}}</label>
+                                    <div class="col-md-6 col-xs-8 input">
+                                        <input class="form-control"type="text" ng-model="modalID">
+                                    </div>
+                                </div>
+                            </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary modalsub" ng-click="modalsubmit($index)" data-dismiss="modal">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,20 @@
+<?php
+
+namespace lotteryApi\modules\base\controllers;
+
+use Yii;
+use yii\web\UnauthorizedHttpException;
+use lotteryApi\controllers\Controller;
+
+class BaseController extends Controller {
+
+
+
+    public function actionIndex(){
+
+
+        echo 1111;die;
+    }
+}
+
+?>

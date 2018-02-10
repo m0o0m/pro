@@ -1,0 +1,203 @@
+<?php
+
+namespace frontend_api\controllers;
+
+use yii;
+use frontend_api\models\CommonModel;
+use common\helpers\Helper;
+use common\helpers\mongoTables;
+use common\models\LogModel;
+
+/**
+ * Login controller
+ */
+class LoginController extends \yii\web\Controller {
+
+    public function beforeAction($action) {
+        // 指定允许其他域名访问  
+        header('Access-Control-Allow-Origin:*');
+        return parent::beforeAction($action);
+    }
+
+    /*
+     * 登录
+     * 
+     * userOnLine_front （1:服务端定时踢线超过20分钟没有操作的会员,2:总后台在线会员统计）
+     * 
+     * $user_arr['line_id'] . '_uidToken'  (1:客户后台业主在线会员统计)
+     * 
+     * $user_arr['agent_id'] . '_uidToken'  (1:代理后台在线会员统计)
+     * 
+     */
+
+    public function actionLogin() {
+
+        $get = Yii::$app->request->get();
+        $token = isset($get['token']) ? $get['token'] : "";
+        if (empty($token)) {
+            echo json_encode(['code' => 400, 'msg' => 'params error!']);
+            die;
+        }
+
+        if ($token == 'a21e50c51be1bf945d539b5cbb26cf4c') {
+            //呆子专用---测试账号
+            echo json_encode(['code' => 200, 'token' => md5($token)]);
+            die;
+        }
+
+        $redis = Yii::$app->redis;
+        $user_json = $redis->get($token, false);
+
+        if (empty($user_json)) {
+            echo json_encode(['code' => 400, 'msg' => 'please login again!']);
+            die;
+        }
+
+        //删除redis 防止别人复制链接登录
+        $redis->del($token);
+
+
+        $user_arr = json_decode($user_json, true);
+        $user_arr['time'] = time();
+
+
+        //删除之前的key(是登录状态,平台商那边又通过之前的链接点击登陆过来)
+        $beforeToken = $redis->hget($user_arr['line_id'] . '_uidToken', $user_arr['uid']);
+        $redis->hdel('userOnLine_front', $beforeToken);
+
+
+        //存储到哈希列表 重新加密token 作为是否登录标示
+        $newToken = md5($token);
+        $redis->hset('userOnLine_front', $newToken, json_encode($user_arr));
+
+        //维护一组uid 对应的token  业主后台踢线用
+        $redis->hset($user_arr['line_id'] . '_uidToken', $user_arr['uid'], $newToken);
+
+        //维护一组uid 对应的token  代理后台踢线用
+        $redis->hset($user_arr['agent_id'] . '_uidToken', $user_arr['uid'], $newToken);
+
+        //写登录日志
+        $log = [
+            'uid' => $user_arr['uid'],
+            'login_user' => $user_arr['uname'],
+            'line_id' => $user_arr['line_id'],
+            'state' => 1
+        ];
+        $this->writeLog($log);
+
+        echo json_encode(['code' => 200, 'token' => $newToken]);
+        die;
+    }
+
+    /*
+     * 登录日志写mongodb
+     * 
+     * $ptype 1=>总后台,2=>业主后台,3=>前台PC,4=>前台WAP
+     * 
+     */
+
+    public function writeLog($log) {
+        $isMobile = Helper::isMobile();
+        if ($isMobile) {
+            $ptype = 4;
+        } else {
+            $ptype = 3;
+        }
+        $ip = Helper::getIpAddress();
+        $logTable = mongoTables::getTable('historyLogin');
+        $logInsert = [
+            'uid' => $log['uid'],
+            'uname' => $log['login_user'],
+            'ptype' => $ptype,
+            'line_id' => $log['line_id'], //总后台就写死PK
+            'ip' => $ip,
+            'addtime' => time(),
+            'adddate' => date("Y-m-d H:i:s"),
+            'state' => $log['state']
+        ];
+        LogModel::insertLog($logTable, $logInsert);
+    }
+
+    //试玩注册登录（zzz专用试玩线路 ）(代理账号:shiwan_dl)
+    public function actionShiwan() {
+        $line_id = 'zzz';
+        $agent_user = 'shiwan_dl';
+        //获取代理id和总代id
+        $aidAndUaid = CommonModel::getAidAndPid($agent_user);
+        if (empty($aidAndUaid)) {
+            echo json_encode(['code' => 400, 'msg' => 'agent information exception!']);
+            die;
+        }
+        $aid = $aidAndUaid['id'];
+        $ua_id = $aidAndUaid['pid'];
+        //获取股东id
+        $sh_id = CommonModel::getAgentPidById($ua_id);
+
+        if (empty($aidAndUaid)) {
+            echo json_encode(['code' => 400, 'msg' => 'sh information exception!']);
+            die;
+        }
+        $sh_id = $sh_id['pid'];
+
+        $ip = Helper::getIpAddress();
+        $isMobile = Helper::isMobile();
+        if ($isMobile) {
+            $ptype = 2;
+        } else {
+            $ptype = 1;
+        }
+        $arr = [
+            'aid' => $aid,
+            'ua_id' => $ua_id,
+            'sh_id' => $sh_id,
+            'line_id' => $line_id,
+            'agent_user' => $agent_user,
+            'ip' => $ip,
+            'ptype' => $ptype
+        ];
+
+        //创建账号
+        $res = CommonModel::creatShiWanUser($arr);
+        if ($res['code'] == 200) {
+            $user = $res['data'];
+            $redis = Yii::$app->redis;
+            //写入redis
+            $token = $this->createToken();
+
+            //存储到哈希列表 重新加密token 作为是否登录标示
+            $redis->hset('userOnLine_front', $token, json_encode($user));
+
+            //维护一组uid 对应的token  业主后台踢线用
+            $redis->hset($user['line_id'] . '_uidToken', $user['uid'], $token);
+
+            //维护一组uid 对应的token  代理后台踢线用
+            $redis->hset($user['agent_id'] . '_uidToken', $user['uid'], $token);
+
+            //写登录日志
+            $log = [
+                'uid' => $user['uid'],
+                'login_user' => $user['uname'],
+                'line_id' => $user['line_id'],
+                'state' => 1
+            ];
+            $this->writeLog($log);
+
+            echo json_encode(['code' => 200, 'token' => $token]);
+        } else {
+            echo json_encode(['code' => 400, 'msg' => 'create shiwan user failed!' . $res['msg']]);
+            die;
+        }
+    }
+
+    //生成唯一token
+    public function createToken() {
+        $token = md5(uniqid(rand(), true));
+        $redis = yii::$app->redis;
+        //判断是否存在
+        if ($redis->hexists('userOnLine_front', $token)) {
+            $token = $this->createToken();
+        }
+        return $token;
+    }
+
+}

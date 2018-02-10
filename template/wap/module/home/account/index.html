@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>PK</title>
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+<style>
+
+    #mescroll{
+        bottom: 0;
+    }
+</style>
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+
+    <ul class="h-head">
+            <li>
+                <a>
+                    <i class="iconfont wap-fanhui"></i>
+                </a>
+            </li>
+            <li>
+                <h2>个人中心</h2>
+            </li>
+            <li>
+            </li>
+        </ul>
+</header>
+
+<div id="mescroll" class="mescroll">
+    <dl class="m-myaccount">
+        <dt>
+            <li><span>真实姓名</span><p class='realname'></p></li>
+            <li><span>帐号</span><p class='account'></p></li>
+            <li><span>余额</span><input type="text" name='balance' value="" readonly="readonly"></li>
+            <li><span>注册时间</span><p class='createTime'></p></li>
+            <li><span>最后登陆时间</span><p class='lastLoginTime'></p></li>
+        </dt>
+        <dd>
+            <a href="modifyInfo"><span>详细资料</span><i class="iconfont wap-arrow-left"></i></a>
+            <a href="modifyPas"><span>修改密码</span><i class="iconfont wap-arrow-left"></i></a>
+            <a href="bankCard"><span>银行卡</span><i class="iconfont wap-arrow-left"></i></a>
+        </dd>
+    </dl>
+</div>
+
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script> 
+<script>
+$(document).ready(function() {
+    $('.edit').click(function(){
+		$(this)	.siblings('input').removeAttr("disabled"); 
+	})
+
+    var mescroll = new MeScroll("mescroll", {
+                //下拉刷新的所有配置项
+                down:{
+                    use: false, //是否初始化下拉刷新; 默认true
+                    auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                    hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                    isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+                }
+			});
+});
+
+$(window).load(function(){ //获取会员信息
+    if(getCookie('loginBack')){
+        $.ajax({
+            type: "get",
+            url: "/m/getInfo",
+            headers: {
+                'Authorization': 'bearer ' + $loginBack,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'platform': platform
+            },
+            data: {},
+            dataType: 'json',
+            success: function (data) {
+                if (data.code) {
+                    $.toast(data.msg, 'text');
+                } else {
+                    var $sdata = data.data;
+                    if($sdata.realname == ''){
+                        $("p.realname").text("会员真实姓名未填写，请尽快补充完整！");
+                    }else{
+                        $("p.realname").text($sdata.realname);
+                    }
+                    $("p.account").text($sdata.account);
+                    if($sdata.email == ''){
+                        $("input[name='email']").val("会员邮箱信息未填写，请尽快补充完整！");
+                    }else{
+                        $("input[name='email']").val($sdata.email);
+                    }
+                    $("input[name='balance']").val($sdata.balance);
+                    if($sdata.birthday == 0){
+                        $("input[name='birthday']").val(strToDate(0));
+                    }else{
+                        $("input[name='birthday']").val(strToDate($sdata.birthday));
+                    }
+                    // console.log(strToDate($sdata.create_time));
+                    // console.log(strToDate($sdata.last_login_time));
+                    
+                    $("p.createTime").text(strToDate($sdata.create_time));
+                    $("p.lastLoginTime").text(strToDate($sdata.last_login_time));
+                }
+            }
+        });
+    }else{
+        $.toast("用户登录信息已失效， 请重新登录！", 'text');
+        setTimeout("window.location.href = '/m/login'; ",1000);//延迟1秒执行
+    }
+})
+
+
+</script>
+</html>

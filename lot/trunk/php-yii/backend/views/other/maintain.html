@@ -1,0 +1,18 @@
+<div class="row" style="">
+    <div class="col-xs-12">
+        <div style="float:left;margin-top:40px;margin-left:40px;">
+            <img src="<{Yii::getAlias('@images')}>/maintain.png" alt="维护"> 
+        </div>
+
+        <div style="float:left;height:350px;margin-left:20px;">
+            <ul style="list-style:none;margin-top:35px;">
+                <li><h3 style="color:green;">非常抱歉,网站正在维护中......</h3></li>
+                <li style="margin-left:45px;margin-top:20px;font-size:19px;color:#089ead;">维护时间：</li>
+                <li style="margin-left:45px;margin-top:10px;font-size:16px;color:#dc513b;"><{$data['starttime']}> ~ <{$data['endtime']}></li>
+                <li style="margin-left:45px;margin-top:20px;font-size:19px;color:#089ead;">维护原因：</li>
+                <li style="margin-left:45px;margin-top:10px;font-size:16px;color:#dc513b;"><{$data['remark']}></li>
+            </ul>
+        </div>
+
+    </div>
+</div>

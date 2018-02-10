@@ -1,0 +1,190 @@
+@import "./function.scss";
+
+.pk_bj {
+  float: left;
+  .pk_bj_box {
+    margin-left: 20px;
+    float: left;
+    overflow: hidden;
+    ul {
+      border-top: 1px solid $border_color;
+      border-right: 1px solid $border_color;
+      float: left;
+      width: 176px;
+      .guan {
+        height: 30px;
+        line-height: 30px;
+        background-color: #eee;
+        font-size: 12px;
+      }
+      li {
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid $border_color;
+        .one, .tow {
+          float: left;
+          display: block;
+          width: 56px;
+          height: 40px;
+          line-height: 40px;
+          border-right: 1px solid $border_color;
+          cursor: pointer;
+          i {
+            font-size: 16px;
+            float: left;
+            display: block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50px;
+            line-height: 30px;
+            margin-left: 13px;
+            margin-top: 5px;
+            color: #fff;
+          }
+          .bj-black {
+            background: linear-gradient(#808080, #484848);
+          }
+          .bj-green {
+            background: linear-gradient(#3ec948, #026d09);
+          }
+          .bj-brown {
+            background: linear-gradient(#c8733d, #803e15);
+          }
+          .bj-red {
+            background: linear-gradient(#ee4c19, #bd2706);
+          }
+          .bj-silver {
+            background: linear-gradient(#adaca5, #83827d);
+          }
+          .bj-deepblue {
+            background: linear-gradient(#2a61d7, #1d3c99);
+          }
+          .bj-azure {
+            background: linear-gradient(#2e9fe6, #66c8f3);
+          }
+          .bj-orange {
+            background: linear-gradient(#c24133, #86100e);
+          }
+          .bj-blue {
+            background: linear-gradient(#2991d2, #1c6196);
+          }
+          .bj-yellow {
+            background: linear-gradient(#ffc504, #846300);
+          }
+          em {
+            text-align: center;
+          }
+        }
+        .three {
+          height: 40px;
+          width: 56px;
+          display: inline-block;
+          input {
+            margin-left: 5px;
+            width: 36px;
+            height: 16px;
+            border: 1px solid #b1b1b1;
+          }
+        }
+      }
+    }
+    ul:first-child {
+      border-left: 1px solid $border_color;
+    }
+  }
+  .footer1 {
+    width: 920px;
+    float: left;
+    margin-top: 10px;
+    padding-right: 20px;
+    // padding-bottom: 45px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .img {
+      margin-left: 136px;
+      float: left;
+      span {
+        //margin-left: 30px;
+        //height: 60px;
+        float: left;
+        display: block;
+        cursor: pointer;
+      }
+      .s1 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat 0 0px;
+        background-size: 368px;
+      }
+      .s2 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -64px 0px;
+        background-size: 368px;
+      }
+      .s3 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -128px 0px;
+        background-size: 368px;
+      }
+      .s4 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -192px 0px;
+        background-size: 368px;
+      }
+      .s5 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -256px 0px;
+        background-size: 368px;
+      }
+      .s6 {
+        height: 60px;
+        width: 73px;
+        background: url("../../assets/img/Chips.png") no-repeat -320px 0px;
+        background-size: 368px;
+      }
+    }
+    .one {
+      width: 160px;
+      float: left;
+      background-color: #eee;
+      span {
+        color: $bg_color;
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      float: right;
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+}
+
+.colorI {
+
+}
+
+.styleclect {
+  background-color: $bg_select;
+}

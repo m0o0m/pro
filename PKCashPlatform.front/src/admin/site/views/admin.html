@@ -1,0 +1,190 @@
+<div id="content">
+    <div class="row">
+
+        <section widget-grid id="widget-grid">
+
+            <div class="row">
+
+                <article class="col-sm-12">
+                    <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>管理员</h2>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div class="widget-body">
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal ">
+                                            <div class="col-md-1 col-xs-4 col-md-2   ">
+                                                <div class="form-group">
+                                                    <button class="btn btn-default " data-toggle="modal" data-target="#dialog_model2" >添加</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form-inline">
+                                        <div class="table-scroll">
+                                            <table  class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>名称</th>
+                                                    <th>账号</th>
+                                                    <th>登录账号</th>
+                                                    <th>添加时间</th>
+                                                    <th>备注</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in list">
+                                                    <td>{{item.name}}</td>
+                                                    <td>{{item.account}}</td>
+                                                    <td>{{item.login_acount}}</td>
+                                                    <td>{{item.time}}</td>
+                                                    <td>{{item.remack}}</td>
+                                                    <td>
+                                                        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#dialog_model" ng-click="detali(item)">编辑</button>
+                                                        <button class="btn btn-default btn-xs"  ng-click="del(item)">删除</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+        <div class="modal fade" id="dialog_model" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="addAccount">修改管理员</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">名称</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="data.name">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">账号</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="data.account">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">后台域名</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="data.domin">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">备注</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="data.remack">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sumbit()">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--添加管理员-->
+        <div class="modal fade" id="dialog_model2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="">添加管理员</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">名称</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="name">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">账号</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="account">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">后台域名</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="domins">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">备注</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" ng-model="remack">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sub()">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

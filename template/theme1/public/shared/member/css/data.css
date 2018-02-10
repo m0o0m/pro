@@ -1,0 +1,80 @@
+/* #schedule-box{
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 101px;
+  width: 300px;
+  margin: 0 auto;
+  font-size: 13px;
+  background-color: #fff;
+} */
+
+.schedule-hd{
+  padding: 10px 15px;
+}
+.schedule-hd >span{
+  display: inline-block;
+}
+.schedule-hd >span:nth-child(2){
+  width: 170px;
+}
+.schedule-hd >span:nth-child(1){
+  width: 50px;
+}
+.schedule-hd >span:nth-child(3){
+  text-align: right;
+  width: 50px;
+}
+
+.today{
+  flex: 1;
+  text-align: center;
+}
+.ul-box{
+  overflow: hidden;
+  padding: 5px 0 5px 0px;
+}
+.ul-box > li{
+  float: left;
+  width: 14.28%;
+  text-align: center;
+  /* padding: 5px 0; */
+  margin-bottom: 0;
+}
+.other-month{
+  color: #999;
+}
+.current-month{
+  color: #333333;
+}
+.today-style{
+  border-radius: 50%;
+  background: #58d321;
+}
+.arrow{
+  cursor: pointer;
+}
+.dayStyle{
+  display: inline-block;
+  width: 35px !important;
+  height: 35px;
+  border-radius: 50%;
+  text-align: center !important;
+  line-height: 35px;
+  cursor: pointer;
+}
+.current-month > .dayStyle:hover{
+  background: #00BDFF;
+  color: #ffffff;
+}
+.today-flag{
+  background: #00C2B1;
+  color: #fff;
+}
+.boxshaw{
+  box-shadow: 2px 2px 15px 2px #e3e3e3;
+}
+.selected-style {
+  background: #00BDFF;
+  color: #ffffff;
+}

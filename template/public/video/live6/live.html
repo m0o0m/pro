@@ -1,0 +1,91 @@
+{{define "live"}}
+<script type="text/javascript">
+    document.writeln("<link rel=\"stylesheet\" href=\"" + cdnUrl + "/shared/video/css/live6/casino.css\" />");
+</script>
+<div class="casino-divBg ">
+{{$num := .LiveLen}}
+{{range $k,$v := .LiveOrder}}
+    <div class="{{if eq $num 1}}casino-oneImg{{else if eq $num 2 4}}casino-twoImg{{else}}casino-threeImg{{end}}">
+        <div class="{{if eq $num 1}}casino-agBg{{else}}casino-Bg{{end}} casino-hoverImg">
+            <div class="{{if eq $num 1}}casino-agImg{{else}} casino-Img{{end}}">
+            {{if 0}}      {{/*维护*/}}
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/llive6/{{if eq $num 1}}1{{else if eq $num 2 4}}2{{else}}3{{end}}-{{$v.VType}}-wh.jpg\"/>");
+                </script>
+            {{else}}
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live6/{{if eq $num 1}}1{{else if eq $num 2 4}}2{{else}}3{{end}}-{{$v.VType}}.jpg\"/>");
+                </script>
+            {{end}}
+                <span class="shine"></span>
+            </div>
+            <div class="casino-btn">
+            {{if 0}}
+                维护
+            {{else}}
+                <a href="javascript:;" onclick="javascript:zhuModal.login();" class="casino-btnGame pk-login-before"
+                >进入游戏</a>
+                <a href="javascript:;" onclick="opengeme('','video','{{$v.VType}}')"
+                   class="casino-btnGame  pk-login-after" style="display: none;">进入游戏</a>
+            {{if eq $v.VType "dg"}}
+                <a href="https://f.dg99.info/home/rule/cn/index.html" target="_blank" class="casino-btnRule">游戏规则</a>
+            {{else}}
+                <a href="javascript:;" onclick="getPager('','rule','')" class="casino-btnRule">游戏规则</a>
+            {{end}}
+            {{end}}
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{if (gt $num 4) and (ne $num 6) and (ne $num 9) and (ne $num 12)}}
+    <div class="casino-threeImg">
+        <div class="casino-Bg casino-hoverImg">
+            <div class="casino-Img">
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live6/3-wait.jpg\"/>");
+                </script>
+                <span class="shine"></span>
+            </div>
+        </div>
+    </div>
+{{end}}
+{{if eq $num 7 10}}
+    <div class="casino-threeImg">
+        <div class="casino-Bg casino-hoverImg">
+            <div class="casino-Img">
+                <script type="text/javascript">
+                    document.writeln("<img src=\"" + cdnUrl + "/shared/video/images/live6/3-wait.jpg\"/>");
+                </script>
+                <span class="shine"></span>
+            </div>
+        </div>
+    </div>
+{{end}}
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".casino-twoImg .casino-hoverImg,.casino-threeImg .casino-hoverImg").hover(function () {
+            $(this).find(".shine").stop();
+            $(this).find(".shine").animate({
+                left: '500px'
+            });
+        }, function () {
+            $(this).find(".shine").animate({
+                left: '-500px'
+            });
+        });
+
+        $(".casino-oneImg .casino-hoverImg").hover(function () {
+            $(this).find(".shine").stop();
+            $(this).find(".shine").animate({
+                left: '1000px'
+            });
+        }, function () {
+            $(this).find(".shine").animate({
+                left: '-1000px'
+            });
+        });
+    });
+</script>
+{{end}}

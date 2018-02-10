@@ -1,0 +1,332 @@
+<?php
+
+namespace frontend_api\models;
+
+use Yii;
+use yii\db\Query;
+
+class CommonModel extends \yii\base\Model {
+
+    /**
+     * **********************************************************
+     * 查询mongo caipiaodb数据库   @author ruizuo qiyongsheng    *
+     * **********************************************************
+     */
+    public static function getMongoData($table, $select = [], $where = [], $offset = null, $limit = null) {
+        $db = Yii::$app->mongodb;
+        return (new \yii\mongodb\Query())
+                        ->select($select)
+                        ->from($table)
+                        ->where($where)
+                        ->offset($offset)
+                        ->limit($limit)
+                        ->all($db);
+    }
+
+    //我喜欢的,我收藏的 彩种
+    public static function getMyLoveFcTypes($where) {
+        return (new \yii\db\Query)
+                        ->select('fc_types')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'user_like')
+                        ->where($where)
+                        ->one(\Yii::$app->manage_db);
+    }
+
+    //根据彩种获取代理赔率
+    public static function getAgentOddsByFcType($fc_type, $agent_id, $pankou = 'A') {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,input_name,odd,pankou,remark,mingxi,sort')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'agent_odds')
+                        ->where(
+                                [
+                                    'fc_type' => $fc_type,
+                                    'pankou' => $pankou,
+                                    'agent_type' => 'at',
+                                    'agent_id' => $agent_id
+                                ]
+                        )
+                        ->orderBy(['sort' => SORT_ASC])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    //根据彩种获取总代赔率
+    public static function getUaOddsByFcType($fc_type, $ua_id, $pankou = 'A') {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,input_name,odd,pankou,remark,mingxi,sort')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'agent_odds')
+                        ->where(
+                                [
+                                    'fc_type' => $fc_type,
+                                    'pankou' => $pankou,
+                                    'agent_type' => 'ua',
+                                    'agent_id' => $ua_id
+                                ]
+                        )
+                        ->orderBy(['sort' => SORT_ASC])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    //根据彩种获取股东赔率
+    public static function getShOddsByFcType($fc_type, $sh_id, $pankou = 'A') {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,input_name,odd,pankou,remark,mingxi,sort')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'agent_odds')
+                        ->where(
+                                [
+                                    'fc_type' => $fc_type,
+                                    'pankou' => $pankou,
+                                    'agent_type' => 'sh',
+                                    'agent_id' => $sh_id
+                                ]
+                        )
+                        ->orderBy(['sort' => SORT_ASC])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    //根据彩种获取线路赔率
+    public static function getLineOddsByFcType($fc_type, $line_id, $pankou = 'A') {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,input_name,odd,pankou,remark,mingxi,sort')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'line_odds')
+                        ->where(
+                                [
+                                    'fc_type' => $fc_type,
+                                    'pankou' => $pankou,
+                                    'line_id' => $line_id
+                                ]
+                        )
+                        ->orderBy(['sort' => SORT_ASC])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    //根据彩种获取初始赔率
+    public static function getInitOddsByFcType($fc_type, $pankou = 'A') {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,input_name,odd,pankou,remark,mingxi,sort')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'fc_games_type')
+                        ->where(['fc_type' => $fc_type, 'pankou' => $pankou])
+                        ->orderBy(['sort' => SORT_ASC])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    /**
+     * **********************************************************
+     *  获取代理限额           @author ruizuo qiyongsheng    *
+     * **********************************************************
+     */
+    public static function getAgentLimitByFcType($fc_type, $agent_id) {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,name,limit_min,single_field_max,single_note_max')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'agent_limit_set')
+                        ->where([
+                            'fc_type' => $fc_type,
+                            'agent_type' => 'at',
+                            'agent_id' => $agent_id,
+                            'status' => 1
+                        ])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    /**
+     * **********************************************************
+     * 获取总代限额           @author ruizuo qiyongsheng    *
+     * **********************************************************
+     */
+    public static function getUaLimitByFcType($fc_type, $agent_id) {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,name,limit_min,single_field_max,single_note_max')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'agent_limit_set')
+                        ->where([
+                            'fc_type' => $fc_type,
+                            'agent_type' => 'ua',
+                            'agent_id' => $agent_id,
+                            'status' => 1
+                        ])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    /**
+     * **********************************************************
+     *  获取股东限额           @author ruizuo qiyongsheng    *
+     * **********************************************************
+     */
+    public static function getShLimitByFcType($fc_type, $agent_id) {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,name,limit_min,single_field_max,single_note_max')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'agent_limit_set')
+                        ->where([
+                            'fc_type' => $fc_type,
+                            'agent_type' => 'sh',
+                            'agent_id' => $agent_id,
+                            'status' => 1
+                        ])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    /**
+     * **********************************************************
+     *  获取线路限额           @author ruizuo qiyongsheng    *
+     * **********************************************************
+     */
+    public static function getLineLimitByFcType($fc_type, $line_id) {
+        return (new \yii\db\Query)
+                        ->select('fc_type,gameplay,name,limit_min,single_field_max,single_note_max')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'line_limit_set')
+                        ->where([
+                            'fc_type' => $fc_type,
+                            'line_id' => $line_id,
+                            'status' => 1
+                        ])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    /**
+     * **********************************************************
+     *  获取初始限额           @author ruizuo qiyongsheng    *
+     * **********************************************************
+     */
+    public static function getInitLimitByFcType($fc_type) {
+        return (new \yii\db\Query)
+                        ->select('id,fc_type,gameplay,name,limit_min,single_field_max,single_note_max')
+                        ->from(\Yii::$app->manage_db->tablePrefix . 'fc_games_set')
+                        ->where([
+                            'fc_type' => $fc_type,
+                            'status' => 1
+                        ])
+                        ->all(\Yii::$app->manage_db);
+    }
+
+    //根据代理账号获取代理id和总代id
+    public static function getAidAndPid($agent_user) {
+        return (new \yii\db\Query)
+                        ->select('id,pid')
+                        ->from(\Yii::$app->db->tablePrefix . 'user_agent')
+                        ->where([
+                            'login_user' => $agent_user
+                        ])
+                        ->one(\Yii::$app->db);
+    }
+
+    //根据自身id获取父级id
+    public static function getAgentPidById($id) {
+        return (new \yii\db\Query)
+                        ->select('pid')
+                        ->from(\Yii::$app->db->tablePrefix . 'user_ua')
+                        ->where([
+                            'id' => $id
+                        ])
+                        ->one(\Yii::$app->db);
+    }
+
+    //创建试玩账号
+    public static function creatShiWanUser($arr) {
+        //查看是不是mycat分库
+        $is_mycat = isset(Yii::$app->params['is_mycat']) ? Yii::$app->params['is_mycat'] : false;
+        $uname = self::getUniqueName();
+        $pwd = md5(md5(123456));
+        $time = time();
+        $addday = date('Ymd', time());
+
+        if ($is_mycat) {
+            //插入会员
+            $user_sql = 'insert into my_user '
+                    . '('
+                    . 'uid,line_id,uname,pword,money,addtime,create_ip,'
+                    . 'agent_id,ua_id,sh_id,ptype,is_shiwan'
+                    . ') '
+                    . 'values '
+                    . '(' . 'next value for MYCATSEQ_USER' . ',"' . $arr['line_id'] . '","' . $uname . '","' . $pwd . '",2000,' . time()
+                    . ',"' . $arr['ip'] . '",' . $arr['aid'] . ',' . $arr['ua_id'] . ',' . $arr['sh_id'] . ','
+                    . $arr['ptype'] . ',2) ';
+        } else {
+            //插入会员
+            $user_sql = 'insert into my_user '
+                    . '('
+                    . 'line_id,uname,pwd,money,addtime,create_ip,'
+                    . 'agent_id,ua_id,sh_id,ptype,is_shiwan'
+                    . ') '
+                    . 'values '
+                    . '(' . $arr['line_id'] . '","' . ',"' . $uname . '","' . $pwd . '",2000,' . time()
+                    . ',"' . $arr['ip'] . '",' . $arr['aid'] . ',' . $arr['ua_id'] . ',' . $arr['sh_id'] . ','
+                    . $arr['ptype'] . ',2) ';
+        }
+
+        $transaction = Yii::$app->db->beginTransaction();
+        $db = Yii::$app->db;
+        try {
+            $res = $db->createCommand($user_sql)->execute();
+            if ($res) {
+                $uid = $db->getLastInsertID();
+            } else {
+                return ['code' => 400, 'msg' => 'insert user failed!'];
+            }
+
+            if ($is_mycat) {
+                //会员现金记录
+                $cash_sql = 'insert into my_user_cash_record '
+                        . '(id,uid,line_id,agent_id,cash_type,cash_do_type,cash_num,'
+                        . 'cash_balance,remark,ptype,addtime,addday,uname,is_shiwan) '
+                        . 'values '
+                        . '(' . 'next value for MYCATSEQ_USERCASHRECORD' . ',' . $uid . ',"' . $arr['line_id']
+                        . '",' . $arr['aid'] . ',1,4,2000,2000,"试玩账号分配额度2000",' . $arr['ptype'] . ',' . $time
+                        . ',' . $addday . ',"' . $uname . '",2)';
+            } else {
+                //会员现金记录
+                $cash_sql = 'insert into my_user_cash_record '
+                        . '(uid,line_id,agent_id,cash_type,cash_do_type,cash_num,'
+                        . 'cash_balance,remark,ptype,addtime,addday,uname,is_shiwan) '
+                        . 'values '
+                        . '(' . $uid . ',"' . $arr['line_id']
+                        . '",' . $arr['aid'] . ',1,4,2000,2000,"试玩账号分配额度2000",' . $arr['ptype'] . ',' . $time
+                        . ',' . $addday . ',"' . $uname . '",2)';
+            }
+            $db->createCommand($cash_sql)->execute();
+            $transaction->commit();
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            return ['code' => 400, 'msg' => $e->getMessage()];
+        }
+
+        $user = [
+            'uid' => $uid,
+            'uname' => $uname,
+            'line_id' => $arr['line_id'],
+            'agent_id' => $arr['aid'],
+            'ua_id' => $arr['ua_id'],
+            'sh_id' => $arr['sh_id'],
+            'is_shiwan' => 2
+        ];
+
+        return ['code' => 200, 'msg' => 'success !', 'data' => $user];
+    }
+
+    //生成随机数
+    public static function getUniqueName() {
+        $unique = 'demo_';
+        $chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $str = '';
+        for ($i = 0; $i < 10; $i++) {
+            $str .= $chars[mt_rand(0, strlen($chars) - 1)];
+        }
+        $uname = $unique . $str;
+        //判断是否重复
+        $if_exist = self::getUserByUname($uname);
+        if (empty($if_exist)) {
+            return $uname;
+        } else {
+            self::getUniqueName();
+        }
+    }
+
+    //根据会员名称获取会员信息
+    public static function getUserByUname($uname) {
+        return (new \yii\db\Query)
+                        ->select('uid')
+                        ->from(\Yii::$app->db->tablePrefix . 'user')
+                        ->where([
+                            'uname' => $uname
+                        ])
+                        ->one(\Yii::$app->db);
+    }
+
+}

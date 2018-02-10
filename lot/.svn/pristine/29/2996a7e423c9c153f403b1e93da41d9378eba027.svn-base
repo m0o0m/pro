@@ -1,0 +1,121 @@
+package controllers
+
+import (
+	"github.com/labstack/echo"
+	"global"
+	"models/input"
+	"models/back"
+	"github.com/go-redis/redis"
+	"strings"
+	"encoding/json"
+)
+
+type DelController struct {
+}
+
+//查询区间
+func (*DelController) GetList(ctx echo.Context) error {
+	reqData := new(input.DataList)
+	reqData.SiteId = ctx.QueryParam("site_id")
+	code := global.ValidRequest(reqData, ctx)
+	if code != 0 {
+		return ctx.JSON(200, global.ReplyError(code, ctx))
+	}
+	global.DataRedisClient.Ping()
+	datas, err := global.DataRedisClient.ZRangeWithScores("spider_"+reqData.SiteId+"_data", 0, int64(global.GatherNumber-1)).Result()
+	switch err {
+	case nil:
+		results := make([]struct {
+			Score float64
+			Member struct {
+				ID          string `json:"id"`
+				LineID      string `json:"line_id"`
+				AtID        string `json:"at_id"`
+				UaID        string `json:"ua_id"`
+				ShID        string `json:"sh_id"`
+				AtUsername  string `json:"at_username"`
+				UID         string `json:"uid"`
+				Uname       string `json:"uname"`
+				OrderNum    string `json:"order_num"`
+				Bet         string `json:"bet"`
+				ValidBet    string `json:"valid_bet"`
+				Balance     string `json:"balance"`
+				Assets      string `json:"assets"`
+				FcType      string `json:"fc_type"`
+				Odds        string `json:"odds"`
+				Periods     string `json:"periods"`
+				Win         string `json:"win"`
+				Result      string `json:"result"`
+				Handicap    string `json:"handicap"`
+				Addtime     string `json:"addtime"`
+				Addday      string `json:"addday"`
+				Updatetime  string `json:"updatetime"`
+				Updateday   string `json:"updateday"`
+				BetInfo     string `json:"bet_info"`
+				Ptype       string `json:"ptype"`
+				Js          string `json:"js"`
+				Status      string `json:"status"`
+				ReturnWater string `json:"return_water"`
+				BetIP       string `json:"bet_ip"`
+				PlayID      string `json:"play_id"`
+				IsShiwan    string `json:"is_shiwan"`
+			}
+		}, len(datas))
+		for i, v := range datas {
+			results[i].Score = v.Score
+			memberStr, ok := v.Member.(string)
+			if !ok {
+				global.GlobalLogger.Error("::%s", memberStr)
+			}
+			err := json.Unmarshal([]byte(strings.Replace(memberStr, "\\", "", -1)), &(results[i].Member))
+			if err != nil {
+				global.GlobalLogger.Error("err:%s", err.Error())
+			}
+		}
+
+		/*js, err := json.Marshal(&datas)
+		if err != nil {
+			global.GlobalLogger.Error("error:%s", err.Error())
+			return ctx.JSON(500, global.ReplyError(20004, ctx))
+		}
+		bets := make([]schema.BetRecord, 0)
+		err = json.Unmarshal(js, &bets)
+		if err != nil {
+			global.GlobalLogger.Error("error:%s", err.Error())
+			return ctx.JSON(500, global.ReplyError(20004, ctx))
+		}*/
+		return ctx.JSON(global.ReplyItem(200, &results))
+	case redis.Nil:
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(20002, ctx))
+	default:
+		global.GlobalLogger.Error("error:%s", err.Error())
+		return ctx.JSON(500, global.ReplyError(60000, ctx))
+	}
+	return ctx.NoContent(204)
+}
+
+//删除
+func (*DelController) DelList(ctx echo.Context) error {
+	reqData := new(input.DellData)
+	reqData.SiteId = ctx.QueryParam("site_id")
+	reqData.Keys = ctx.QueryParam("keys")
+	code := global.ValidRequest(reqData, ctx)
+	if code != 0 {
+		return ctx.JSON(200, global.ReplyError(code, ctx))
+	}
+	ids := strings.Split(reqData.Keys, "|")
+	delResult := new(back.DelResult)
+	for _, key := range ids {
+		num, err := global.DataRedisClient.ZRemRangeByScore("spider_"+reqData.SiteId+"_data", key, key).Result()
+		if err != nil {
+			global.GlobalLogger.Error("error:%s", err.Error())
+			delResult.FailureNum++
+		} else if num == 0 {
+			delResult.FailureNum++
+		} else {
+			delResult.SuccessNum++
+		}
+	}
+	return ctx.JSON(global.ReplyItem(200, delResult))
+}

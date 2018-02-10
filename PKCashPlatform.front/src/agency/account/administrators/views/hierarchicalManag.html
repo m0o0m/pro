@@ -1,0 +1,252 @@
+<!-- 层级管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue" >
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{getWord('A_9')}}</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{getWord('screening')}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <span>
+                                            <label ng-if="isSuperAdmin" class="col-md-1 col-xs-3 input-label">{{getWord('Site')}}</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group">
+                                                    <select ng-show="isSuperAdmin" data-smart-select2 class="selectWidth" ng-model="site_index_id">
+                                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1 col-md-offset-0 col-xs-4 col-xs-offset-4 text-center" ng-if="isSuperAdmin">
+                                                <div class="form-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{getWord('Search')}}</a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                        <div class="col-md-1 col-xs-4">
+                                            <div class="form-group pull-right">
+                                                <!--<button type="submit" data-smart-jqui-dialog-launcher="#dialog_simple"  class="btn btn-primary">-->
+                                                <button type="submit" class="btn btn-primary" ng-click="add()">
+                                                    <i class="fa fa-plus"></i> {{getWord('AddMore')}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr class="text-align-center">
+                                                <td rowspan="2" style="vertical-align: middle" >{{getWord('Name')}}</td>
+                                                <td rowspan="2" style="vertical-align: middle">{{getWord('describe')}}</td>
+                                                <td colspan="3"  class="text-align-center">{{getWord('Join condition')}}</td>
+                                                <td rowspan="2" style="vertical-align: middle" >{{getWord('membership')}}</td>
+                                                <td rowspan="2" style="vertical-align: middle" >{{getWord('Self service return water')}}</td>
+                                                <td rowspan="2" style="vertical-align: middle" >{{getWord('Remarks')}}</td>
+                                                <td rowspan="2" style="vertical-align: middle">{{getWord('operation')}}</td>
+                                            </tr>
+                                            <tr class="text-align-center">
+                                                <td>{{getWord('Membership time')}}</td>
+                                                <td>{{getWord('Deposit times')}}</td>
+                                                <td>{{getWord('Total deposits')}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-center" ng-repeat="item in list">
+
+                                            <td>{{item.level_id}}</td>
+                                            <td>{{item.description}}</td>
+                                            <td>{{item.start_time|fiterTime}}</td>
+                                            <td>{{item.deposit_num}}</td>
+                                            <td>{{item.deposit_count}}</td>
+                                            <td class="text-red" data-ui-sref="app.administrators.MembershipDetails({site_index_id: item.site_index_id,level_id:item.level_id})">{{item.count}}</td>
+                                            <td class="text-red"><span ng-click="open(item.level_id,item.is_self_rebate)" ng-bind="item.is_self_rebate==1?'开启':'关闭'"></span></td>
+                                            <td>{{item.remark}}</td>
+                                            <td>
+                                                <button class="btn btn-default btn-xs" ng-show="item.is_default==2" data-ui-sref="app.administrators.ModifyHierarchy({site_index_id: item.site_index_id,level_id:item.level_id})">{{getWord('Modify')}}</button>
+                                                <button class="btn btn-default btn-xs" ng-show="item.is_default==2" ng-click="regression(item.level_id,item.site_index_id)">{{getWord('regression')}}</button>
+                                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="modifyHierarchy(item.level_id,item.site_index_id)">{{getWord('Layered')}}</button>
+                                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="paySetting(item.level_id,item.pay_set_id,item.site_index_id)" >{{getWord('Payment settings')}}</button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <span style="display: none" class="zz">{{getWord('accounts')}}</span>
+    <!--<input type="text" value="{{getWord('accounts')}}" class="zz">-->
+
+    <!--分层-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">{{getWord('Member hierarchy')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid" id="aa">
+                        <div class="table-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>选择分层</th>
+                                    <th>名称</th>
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr ng-repeat="item in hierarchylist" ng-if="item.level_id!==Id">
+                                    <td><input type="radio" name="hierarch" ng-value="item.level_id" /></td>
+                                    <td>{{item.level_id}}</td>
+                                    <td>{{item.description}}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="modifyHierarchySubmit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">{{getWord('Member hierarchy')}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Shareholder account')}}</label>
+                                <div class="col-md-6">
+                                    <label class="control-label">a123</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Password')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('Password')}}" type="text" ng-model="accounts.password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Confirm password')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="{{getWord('Password')}}" type="text" ng-model="accounts.password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{getWord('Shareholder account')}}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" value="我是股东" type="text" >
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--优惠-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">{{getWord('paymentPlatform')}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                        <div class="table-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>币别</th>
+                                    <th>设定</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr >
+                                    <td>人民币(RMB)</td>
+                                    <td >
+                                        <select class="form-control" id="pay_set_id">
+                                            <option value="0">测试一</option>
+                                            <option value="10">测试二</option>
+                                            <option value="100">测试三</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{getWord('Cancel')}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="paySettingSubmit()">
+                        {{getWord('Confirm')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

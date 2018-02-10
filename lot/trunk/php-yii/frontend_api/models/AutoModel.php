@@ -1,0 +1,35 @@
+<?php
+namespace frontend_api\models;
+
+use common\helpers\mongoTables;
+use Yii;
+use yii\db\Query;
+class AutoModel extends \yii\base\Model{
+/**
+    ***********************************************************
+    *  获取开奖结果表名           @author ruizuo qiyongsheng    *
+    ***********************************************************
+*/
+  public static function getTab($type){
+      return \Yii::$app->manage_db->tablePrefix . 'auto_' . $type;
+  }
+  
+  
+/**
+      ***********************************************************
+      * 查询彩种数据              @author ruizuo qiyongsheng    *
+      ***********************************************************
+*/
+    //获取开奖结果
+    public static function getTrend($type, $where = array(),  $offset = 0,  $limit = 50) {
+      return (new \yii\db\Query())
+            ->select('*')
+            ->from(self::getTab($type))
+            ->where($where)
+            ->limit($limit)
+            ->orderBy('qishu desc')
+            ->all(\Yii::$app->manage_db);
+    }
+
+}
+

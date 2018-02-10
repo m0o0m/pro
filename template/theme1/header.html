@@ -1,0 +1,340 @@
+{{define "header"}}
+<!DOCTYPE html PUBLIC>
+<html>
+<head>
+{{template "header_" .}}
+<link type="text/css" href="{{.CdnUrl}}/theme1/public/css/new/lightbox.css" rel="stylesheet">
+</head>
+<body>
+<link type="text/css" href="{{.CdnUrl}}/theme1/public/css/new/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+<link type="text/css" href="{{.CdnUrl}}/theme1/public/css/new/black.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{.CdnUrl}}/theme1/public/css/new/validationEngine.jquery.css">
+{{/*<link rel="stylesheet" type="text/css" href="{{.CdnUrl}}/theme1/public/css/new/member.css">*/}}
+<link rel="stylesheet" type="text/css" href="{{.CdnUrl}}/theme1/public/css/new/layout.css">
+<script type="text/javascript">
+/*字体闪烁  */
+function shake(element,className,times){
+    var i = 0,
+    t = false ,
+    o = element.attr("class"),
+    c = "",
+    times = times||2;
+    if(t) return;
+    t = setInterval(function(){
+      i++;
+      c = i%2 ? o + ' ' + className : o;
+      element.attr("class",c);
+
+      if(i==2*times){
+        clearInterval(t);
+        element.removeClass(className);
+        }
+    },400);
+};
+    $(function(){
+      //domready 就闪动
+      shake($(".box"),"resd",-1);
+      shake($(".box1"),"isGreen",-1);
+    });  
+
+    function imgshow(showId){
+        $("#"+showId).show();
+        $("."+showId).show();
+    }
+    function imghide(showId){
+        $("#"+showId).hide();
+        $("."+showId).hide();
+    }
+    //文案页面跳转
+    function iworkJump(str){
+        $("div.bottom .wrapper a.js-article-color").each(function(e){
+            console.log($(this).text());
+        });
+    }
+
+</script>
+<style type="text/css">
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #000; opacity:1; 
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #000;opacity:1;
+    }
+
+    input:-ms-input-placeholder{
+        color: #000;opacity:1;
+    }
+
+    input::-webkit-input-placeholder{
+        color: #000;opacity:1;
+    }
+</style>
+<div class="top">
+    <div class="top-01">
+        <div class="wrapper">
+            <div class="top-01-left">
+                <a href="javascript:void(0)" class="lang01 lang"></a>
+                <a href="javascript:void(0)" class="lang02  lang"></a>
+                <a href="javascript:void(0)" class="lang03  lang"></a>
+                <a onclick="iworkJump('常见问题');" href="javascript:void(0);" class="guide">
+                    <span class="box">常见问题</span>
+                </a>
+                |
+
+                <a onmouseover="imgshow('paizhao');" onmouseout="imghide('paizhao');" class="pzzs">
+                    <span class="box">
+                        <img alt="" src="{{.CdnUrl}}/theme1/public/images/new/h_img02.png">
+                        牌照展示
+                    </span>
+                    <span id="paizhao" style="display: none;visibility: visible;">
+                        <img alt="" src="{{.CdnUrl}}/theme1/public/images/new/paizhao.png">
+                    </span>  
+                </a>
+                |
+                <a href="javascript:void(0);" onclick="getPager('-','detect');" class="guide">
+                    <span class="box">线路检测</span>
+                </a>
+            </div>
+
+            <div class="top-01-right">
+                <a class="box1" href="/quick/pay" target="_blank">快捷存款</a>|
+                <!-- <a class="box" onclick="getPager('-','shiwan_reg');" href="javascript:void(0);">免费试玩</a>| -->
+                <a class="box" href="/wapview" target="_blank">APP下载</a>|
+                <a href="javascript:OnlineService('{{.UrlLink}}');" class="box" >在线客服 </a>|
+                <a href="/wapview" target="_blank" class="box">手机投注</a>
+                
+            </div>
+        </div>
+    </div>        
+    <div class="top-02">
+        <div class="wrapper">
+            <div class="logo">
+                <div id="indexLgDIV" style="margin:0;padding:0;width:289px;height:77px;">
+                    <div id="ele-logo-wrap">
+                        <a id="ele-logo-img"></a>
+                    </div>
+                    <style>
+                        #ele-logo-wrap, #ele-logo-img {
+                            width: 297px;
+                            height: 79px;
+                            background: url('{{.LogoUrl}}') no-repeat;
+                        }
+
+                        #ele-logo-wrap {
+                            background-position: 100% 100%;
+                        }
+
+                        #ele-logo-img {
+                            background-position: 0 0;
+                        }
+                    </style>
+                    <script>var ms = 600;
+                    $('#ele-logo-wrap > a').hover(function () {
+                        $(this).stop().animate({
+                                'opacity': 0
+                            },
+                        ms);
+                    },
+                    function () {
+                        $(this).stop().animate({
+                            'opacity': 1
+                        },
+                        ms);
+                    });
+                    </script>
+                </div>
+            </div>
+            <div class="slogon"></div>
+            <!-- 登录 -->
+            <div class="loginng pk-login-after" style="display: none">
+                <div class="user_account ele-acc-name">
+                    <p style="display: inline-block;"><span class="cursor">账号:</span><strong></strong></p>
+                </div>
+                <div class="user_money">
+                    <p><span>余额:</span> 
+                    <span id="all_balance" style="color: #feaf1d" class="cursor ele-first-balance"><strong></strong></span>
+                    </p>
+                    <div class="ele-obalance-wrap js_ele_obalance_wrap" style="display: inline-block;">
+                        <div class="ele-accinfo ele-other-balance">
+                            <i class="fa fa-plus-square" style="line-height: 0;"></i>
+                        </div>
+                        <div class="js_ele_obalance_item_wrap" style="margin-right: -130px;margin-top: 10px;">
+                        <div class="ele-obalance-item">
+                        </div>
+                        <div class="ele-balance-tool clearfix" style="display:block;">
+                           <a href="javascript:;" onclick="openmember('3');">额度转换</a>
+                        </div>
+                        <link rel="stylesheet" href="{{.CdnUrl}}/font-awesome1.css">
+                        <style>
+
+                            /*clear float*/
+                            .clearfix:before, .clearfix:after { content:""; display:table;}
+                            .clearfix:after { clear:both;}
+                            .clearfix { *zoom:1;}
+                            .js_ele_obalance_item_wrap{
+                                display:none;
+                                position: absolute;
+                                opacity: 1;
+                                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                                width: 270px;
+                                -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+                                -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+                                box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+                                border-radius: 2px;
+                                color: #000;
+                                font-size: 12px;
+                                background: #FFF56B;
+                                cursor: default;
+                                z-index: 9999;
+                                right: 0;
+                                text-align: left;
+                            }
+                            .js_ele_obalance_wrap{position:relative}
+                            .js_ele_obalance_wrap .ele-obalance{
+                                    line-height: 22px;
+                                    color:#000;
+                            }
+                            .js_ele_obalance_wrap .ele-obalance strong{
+                                    color:#000;
+                            }
+                            .ele-obalance-item{
+                                padding: 16px;
+                            }
+                            .ele-obalance-item strong{
+                                font-weight: normal;
+                            }
+                            .ele-obalance{
+                                padding-bottom: 2px;
+                                color: #444;
+                            }
+                            /* 額度轉換 */
+                            .ele-balance-tool{
+                                padding: 4px;
+                                background: #F4F4F4;
+                            }
+                            .ele-balance-tool a{
+                                float: right;
+                                padding: 4px 8px;
+                                color: #FFF;
+                                background: #555;
+                                -o-transition: background-color .20s linear;
+                                -webkit-transition: background-color .20s linear;
+                                -moz-transition: background-color .20s linear;
+                                transition:  background-color .20s linear;
+                                border-radius: 2px;
+                                text-decoration: none;
+                            }
+                            .ele-balance-tool a:hover{
+                                background: #000;
+                            }
+                            .js_ele_obalance_wrap:hover .js_ele_obalance_item_wrap{
+                            display:block;
+                        }
+                        </style>
+                        </div>
+                        </div>
+                </div>
+                <a href="javascript:void(0);" onclick="logOut()" class="cursor" id="exit"><span><b>退&nbsp;出</b></span></a>
+                <div class="operates">
+                    <a href="javascript:;" onclick="openmember('4');">会员中心</a>
+                    <a href="javascript:;" onclick="openmember('1');">线上存款</a>
+                    <a href="javascript:;" onclick="openmember('2');">线上取款 </a>
+                    <a href="javascript:;" onclick="openmember('3');">额度转换</a>
+                    <a href="javascript:;" onclick="openmember('8');">未读讯息 (<span id="unreadMsg" class="MsgNotReadCount"></span>)
+                    </a>
+                </div>
+            </div>
+            <div class="login pk-login-before">
+                <div class="login-1">
+                    <input name="account" class="{required:true,rangelength:[6,20],} username txtLoginUsername" id="username" placeholder="帐号" type="text" tabindex="1">
+                    <div style="height:10px;"></div>
+                    <input name="password" class="password txtLoginPasswordText" id="password" placeholder="******" type="password" tabindex="2">  
+                </div>
+                <div class="login-2">
+                    <div class="yz">
+                       <input name="code" class="code txtLoginCode" id="rmNum" placeholder="验证码" type="text" tabindex="3" onfocus="getYzm();">
+                        <img id="vImg" src="{{.CdnUrl}}/theme1/public/images/new/no.png" alt="" onclick="getYzm();" class="checkLoginCodeImage" style="cursor:pointer;top:0px;    right: 5px; width: 60px;height:26px;">
+                   </div>
+                   <input class="loginng" id="submit" value="登录" type="button" onclick="aLeftForm1Sub();">
+                   <a href="javascript:void(0);" onclick="alert('请联系在线客服人员！');" class="forget">忘记密码?</a>
+               </div>
+               <a onclick="getPager('-','zhuce');" href="javascript:void(0);" class="zc"></a>
+            </div>
+
+       </div>
+   </div>
+   <div class="top-03">
+    <div class="wrapper">
+        <div class="menu">
+            <ul>
+                <li>
+                    <a id="/index" class="nav-bg {{if eq .PageType 1}}active{{end}}" href="/"  target="_top">首页</a>
+                </li>
+                {{$str := .PageType}}
+                {{$imgUrl := .CdnUrl}}
+                {{range .Content}}
+                    <li>
+                        <a id="{{.Module.VType}}" href="javascript:void(0);" onclick="getPager('-','{{.Module.VType}}','m');"
+                           class="nav-bg {{if and (eq $str 2) (eq .Module.VType "video")}}active
+                           {{else if and (eq $str 3) (eq .Module.VType "dz")}}active
+                           {{else if and (eq $str 4) (eq .Module.VType "sp")}}active
+                           {{else if and (eq $str 5) (eq .Module.VType "fc")}}active
+                           {{else}}{{end}}">
+                           {{if eq $str 5}}
+                           <img class="cursor" src="{{$imgUrl}}/theme1/public/images/new/hot01.gif">
+                           {{end}}
+                        {{.Module.Name}}
+                        </a>
+                        {{$moduleName := .Module.VType}}
+                        <ul>
+                            {{range .SubModule}}
+                                <li><a href="javascript:;" onclick="openGame('{{$moduleName}}','{{.VType}}')" title="{{.Name}}">{{.Name}}</a> 
+                            {{end}}
+                        </ul>
+                    </li>
+                {{end}}
+                <li>
+                    <a class="nav-bg {{if eq .PageType 8}}active{{end}}" href="javascript:void(0);" onclick="iworkJump('代理文案');">代理加盟</a>
+                    <img class="cursor" src="{{.CdnUrl}}/theme1/public/images/new/hot01.gif">
+                </li>
+                <li>
+                    <a id="promotion" class="nav-bg {{if eq .PageType 6}}active{{end}}" href="javascript:void(0);" onclick="getPager('-','youhui');">最新优惠</a>
+                    <img class="cursor" src="{{.CdnUrl}}/theme1/public/images/new/hot01.gif">
+                </li>
+                <li>
+                    <a id="promotion" class="nav-bg" href="/wapview" target="_blank">手机投注</a>
+                    <img class="cursor" src="{{.CdnUrl}}/theme1/public/images/new/hot01.gif">
+                </li>
+                <li>
+                    <a id="promotion" class="nav-bg" href="javascript:OnlineService('{{.UrlLink}}');">在线客服</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<script language="javascript">
+$(document).ready(function() {
+    document.onkeydown = function (event){ 
+　　　　if (event.keyCode==13) //回车键的键值为13 
+　　　　$("#submit").click();
+　　　　};
+});
+</script>
+{{if ne .PageType 1}}
+<div class="slots_banner"></div>
+<div class="cp_content">
+<div class="wrapper" style="width: 1000px;">     
+    <!--内页最新消息-->
+    <div class="news">
+        <div class="new01">
+        <img src="{{.CdnUrl}}/theme1/public/images/new/news.png">
+        <span id="">最新公告：</span></div>
+        <div class="new02">
+        <marquee scrollamount="3" scrolldelay="150" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="cursor: pointer;"><span id="bulletinMsg" data="left"onclick="notice_data();">{{.Notice}}</span></marquee>
+        </div>
+    </div>
+{{end}}
+
+{{end}}

@@ -1,0 +1,7 @@
+﻿index---会员中心主页
+Statistics---报表统计
+Statisticsthis---报表统计本周
+account---账号中心
+convert---额度转换
+deposit---存款
+withdrawal---取款

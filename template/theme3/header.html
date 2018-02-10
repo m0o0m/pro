@@ -1,0 +1,532 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html class="first zh-cn ">
+<head>
+{{template "header_" .}}
+    <link href="{{.CdnUrl}}/theme3/public/css/new/standard.css" rel="stylesheet">
+    <link href="{{.CdnUrl}}/theme3/public/css/new/saipan.css" rel="stylesheet">
+    <link href="{{.CdnUrl}}/theme3/public/css/new/font-awesome.css" rel="stylesheet">
+
+    <link rel='stylesheet' href='{{.CdnUrl}}/theme3/public/css/new/style.css' type='text/css'/>
+    <script type='text/javascript' src='{{.CdnUrl}}/theme3/public/js/new/jquery.nivo.slider.pack.js'></script>
+    <style>/* header */
+    .header {
+        background: url({{.CdnUrl}}/theme3/public/images/new/head_Ad.png) 353px 16px no-repeat;
+    }
+
+    .news-wrap {
+        background: url({{.CdnUrl}}/theme3/public/images/new/news_bg.jpg) 5px 4px no-repeat #FFF;
+    }
+
+    .first-download {
+        background: url({{.CdnUrl}}/theme3/public/images/new/btn_download.png) 0 0 no-repeat;
+    }
+
+    /*banner-wrap*/
+    .banner-wrap {
+        background: url('{{.CdnUrl}}/theme3/public/images/new/title_welcome.jpg') no-repeat left top;
+    }
+
+    .live .banner-wrap, .livetop .banner-wrap {
+        background: url('{{.CdnUrl}}/theme3/public/images/new/title_live.jpg') no-repeat left top;
+    }
+
+    .memberexclusiveii .banner-wrap {
+        background: url('{{.CdnUrl}}/theme3/public/images/new/title_memberexclusiveii.jpg') no-repeat left top;
+    }
+
+    /* login */
+    .login-wrap {
+        background: url({{.CdnUrl}}/theme3/public/images/new/login02_bg.png) 8px 0 no-repeat #CDDDF1;
+    }
+
+    .first-login-wrap, .first-login-data {
+        background: url({{.CdnUrl}}/theme3/public/images/new/login_bg.png) 0 0 no-repeat;
+    }
+
+    .first-login-wrap .login-submit {
+        background: url({{.CdnUrl}}/theme3/public/images/new/btn_login.png) 0 0 no-repeat;
+    }
+
+    .first-login-wrap .login-joinmember {
+        background: url({{.CdnUrl}}/theme3/public/images/new/btn_join.png) 0 0 no-repeat;
+    }
+
+    .first-login-data .su-logout {
+        background: url({{.CdnUrl}}/theme3/public/images/new/btn_logout.png) 0 0 no-repeat;
+    }
+
+    /* 其它 */
+    .advertise-title {
+        background: url({{.CdnUrl}}/theme3/public/images/new/about_ad.jpg) 0 0 no-repeat;
+    }
+
+    /* ** 各站 遊戲彩金 Game Jackpot */
+    .ele-gamejp-wrap {
+        background: url('{{.CdnUrl}}/theme3/public/images/new/gamejp_bg.png') 0 0 no-repeat;
+    }</style>
+    <link href="{{.CdnUrl}}/theme3/public/css/new/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+</head>
+<body marginwidth="0" marginheight="0">
+<div id="mainBody">
+    <div id="page-header">
+    <div class="header clearfix">
+        <!-- LOGO -->
+        <div class="header-logo">
+            <div id="ele-logo-wrap">
+                <a id="ele-logo-img"></a>
+            </div>
+            <style>
+                #ele-logo-wrap, #ele-logo-img {
+                    width: 297px;
+                    height: 79px;
+                    background: url('{{.LogoUrl}}') no-repeat;
+                }
+
+                #ele-logo-wrap {
+                    background-position: 100% 100%;
+                }
+
+                #ele-logo-img {
+                    background-position: 0 0;
+                }
+            </style>
+            <script>var ms = 600;
+            $('#ele-logo-wrap > a').hover(function () {
+                        $(this).stop().animate({
+                                    'opacity': 0
+                                },
+                                ms);
+                    },
+                    function () {
+                        $(this).stop().animate({
+                                    'opacity': 1
+                                },
+                                ms);
+                    });</script>
+        </div>
+        <div class="header-top clearfix">
+            <!-- 自訂連結 -->
+            <div class="top-link-wrap">
+                {{/*<a onclick="getPager('-','shiwan_reg');" href="javascript:void(0);" data-color="#fcfbfc|#F203FE"*/}}
+                   {{/*style="color: rgb(252, 251, 252);"*/}}
+                   {{/*class="js-article-color top-custom-link">*/}}
+                    {{/*免费试玩*/}}
+                {{/*</a>&nbsp;|&nbsp;*/}}
+                <a href="javascript:void(0);" onclick="clearCache()" data-color="#FBFCFB|#21FD22"
+                       style="color: rgb(251, 252, 251);"
+                       class="js-article-color top-custom-link">
+                        清除缓存
+                </a>&nbsp;|&nbsp;
+                <a href="javascript:void(0);" onclick="getPager('-','detect');" data-color="#FBFCFB|#21FD22"
+                   style="color: rgb(251, 252, 251);"
+                   class="js-article-color top-custom-link">
+                    線路檢測
+                </a>&nbsp;|&nbsp;
+                <a href="/quick/pay" target="_blank" data-color="#FBFCFB|#FDFD21"
+                   style="color: rgb(251, 252, 251);display: none"
+                   class="js-article-color top-custom-link pk-login-after">
+                    快速充值中心 |
+                </a>
+                <a href="/applypro" target="_blank" data-color="#FBFCFB|#FDFD21"
+                   style="color: rgb(251, 252, 251);display: none"
+                   class="js-article-color top-custom-link pk-login-after">
+                    优惠活动大厅
+                </a>
+                <a href="javascript:;" onclick="if(!getCookie('loginBack')){zhuModal.login();}else{window.location.href='/quick/pay'}" target="_blank"
+                   data-color="#FBFCFB|#FDFD21"
+                   class="js-article-color top-custom-link pk-login-before">
+                    快速充值中心
+                </a> |
+                <a href="javascript:;" onclick="if(!getCookie('loginBack')){zhuModal.login();}else{window.location.href='/applypro'}" target="_blank"
+                   data-color="#FBFCFB|#FDFD21"
+                   class="js-article-color top-custom-link pk-login-before">
+                    优惠活动大厅
+                </a>
+                <!-- lang -->
+            </div>
+            <span class="lang-wrap">
+                    <style>.ele-lang-wrap {
+                        height: 20px;
+                        vertical-align: middle;
+                        display: inline-block;
+                        *display: inline;
+                        *zoom: 1;
+                    }
+
+                    .ele-lang-option {
+                        width: 22px;
+                        height: 16px;
+                        vertical-align: top;
+                        *margin-left: 4px;
+                        background: url('{{.CdnUrl}}/theme3/public/images/new/lang_rect.png') no-repeat;
+                        display: inline-block;
+                        *display: inline;
+                        *zoom: 1;
+                    }
+
+                    .ele-lang-zh-cn {
+                        background-position: 0 -40px;
+                    }
+
+                    .ele-lang-en {
+                        background-position: 0 -80px;
+                    }
+
+                    .ele-lang-ja {
+                        background-position: 0 -120px;
+                    }
+
+                    .ele-lang-ko {
+                        background-position: 0 -160px;
+                    }
+
+                    .ele-lang-vi {
+                        background-position: 0 -200px;
+                    }
+
+                    .ele-lang-th {
+                        background-position: 0 -240px;
+                    }</style>
+                    <span class="ele-lang-wrap">
+                        <a href="javascript:void(0);" class="ele-lang-option ele-lang-zh-tw" title="繁體中文"></a>
+                        <a href="javascript:void(0);" class="ele-lang-option ele-lang-zh-cn" title="简体中文"></a>
+                        <a href="javascript:void(0);" class="ele-lang-option ele-lang-en" title="English"></a>
+                    </span>
+                </span>
+            <br>
+            <!-- est -->
+            <div class="est-wrap"></div>
+        </div>
+        <!-- 主選單 -->
+        <div id="navfixed" class="mainnav-placeholder">
+            <div class="mainnav-wrap clear">
+                <div class="mainnav">
+                    <ul class="clearfix">
+                        <li>
+                            <div class="nav-line"></div>
+                        </li>
+                        <li id="LS-first" class="LS-first">
+                            <a href="/index" target="_top" class="{{if eq .PageType 1}}current{{end}}" title="首页">首页</a>
+                            <!-- 子選單 --></li>
+                    {{$str := .PageType}}
+                    {{range .Content}}
+                        <li>
+                            <div class="nav-line"></div>
+                        </li>
+                        <li id="{{.Module.VType}}" class="{{.Module.VType}}">
+                            <a href="javascript:void(0);" onclick="getPager('-','{{.Module.VType}}','m');"
+                               class="{{if and (eq $str 2) (eq .Module.VType "video")}}current
+                               {{else if and (eq $str 3) (eq .Module.VType "dz")}}current
+                               {{else if and (eq $str 4) (eq .Module.VType "sp")}}current
+                               {{else if and (eq $str 5) (eq .Module.VType "fc")}}current
+                               {{else}}{{end}}">
+                            {{.Module.Name}}
+                            </a>
+                        </li>
+                    {{end}}
+                        <li>
+                            <div class="nav-line"></div>
+                        </li>
+                        <li id="LS-memberexclusiveii" class="LS-memberexclusiveii">
+                            <a href="javascript:void(0);" onclick="getPager('-','youhui');"
+                               class="{{if eq .PageType 6}}current{{end}} js-article-color "
+                               data-color="#4967A7|#FF0000" title="优惠活动" style="color: rgb(73, 103, 167);">优惠活动
+                                <div class="event-new"></div>
+                            </a>
+                            <!-- 子選單 --></li>
+                        <li>
+                            <div class="nav-line"></div>
+                        </li>
+                        <li id="LS-joinmember" class="LS-joinmember">
+                            <a onclick="getPager('-','zhuce');" href="javascript:void(0);"
+                               class="nav-join {{if eq .PageType 7}}current{{end}}" title="会员注册">会员注册</a>
+                            <!-- 子選單 --></li>
+                        <li>
+                            <div class="nav-line"></div>
+                        </li>
+                        <li id="LS-mobile" class="LS-mobile">
+                            <a href="/wapview" target="_blank" title="手机下注">手机下注</a>
+                            <!-- 子選單 --></li>
+                    </ul>
+                    <div class="nav-line"></div>
+                    <a href="javascript:OnlineService('{{.UrlLink}}');" class="nav-servic">在线客服</a>
+                    <div class="nav-line"></div>
+                    <div id="L-Sub">
+                    {{range .Content}}
+                    {{$moduleName := .Module.VType}}
+                        <div class="{{.Module.VType}}" style="left: 51px; display: none;">
+                            <span class="subbg-left"></span>
+                        {{range .SubModule}}
+                            <a href="javascript:;" onclick="openGame('{{$moduleName}}','{{.VType}}')">
+                            {{.Name}}
+                            </a>
+                        {{end}}
+                            <span class="subbg-right"></span>
+                        </div>
+                    {{end}}
+                    </div>
+                    <style>
+                        #L-Sub {
+                            position: relative;
+                            z-index: 9999;
+                            clear: both;
+                        }
+
+                        #L-Sub div {
+                            background: #238be3;
+                            display: none;
+                            position: absolute;
+                            height: 32px;
+                            line-height: 32px;
+                            padding: 0 8px;
+                            z-index: 100;
+                            box-shadow: 0px 0px 5px 3px #666;
+                        }
+
+                        #L-Sub div a {
+                            float: left;
+                            display: block;
+                            padding: 0 4px;
+                            color: #FFFFE4;
+                            text-decoration: none;
+                            font-size: 12px;
+                            line-height: 30px;
+                            height: 30px;
+                            width: auto;
+                        }
+
+                        #L-Sub div a:hover {
+                            color: #F2E1B0;
+                        }
+
+                        #L-Sub span {
+                            display: block;
+                            float: left;
+                            width: 7px;
+                            height: 32px;
+                        }
+                    </style>
+                    <script language="javascript">
+                        $(document).ready(function () {
+                            var tabNames = "";
+                        {{range .Content}}
+                            if (tabNames != "") {
+                                tabNames += ","
+                            }
+                            tabNames += "li." + '{{.Module.VType}}';
+                        {{end}}
+                            $(tabNames).subTabs();
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    {{if ne .PageType 1}}
+        <div class="banner-wrap"></div>
+        <div class="news-wrap clearfix">
+            <div class="news-item ele-msg-cp">
+                <div class="ele-news-txt"
+                     style="display: inline-block; height: 44px; overflow: hidden; word-break: break-all; word-wrap: break-word; width: 874px;">
+                    <marquee scrollamount="3" scrolldelay="150" direction="left" onmouseover="this.stop();"
+                             onmouseout="this.start();" onclick="notice_data();" style="cursor: pointer;"><span id="bulletinMsg" data="left">{{.Notice}}</span></marquee>
+                </div>
+            </div>
+        </div>
+        <div class="login-data pk-login-after" style="display: none">
+            <div class="mem-info">
+                <style>.ele-accinfo {
+                    display: inline-block;
+                    padding-right: 5px;
+                }
+
+                .ele-accinfo .fa {
+                    padding: 0 2px;
+                    font-size: 14px;
+                }
+
+                .ele-first-balance {
+                    display: inline-block;
+                }
+
+                .ele-acc-unit {
+                    display: inline-block;
+                }
+
+                .ele-obalance-wrap {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .ele-other-balance {
+                    cursor: pointer;
+                }</style>
+                <div class="ele-accinfo ele-acc-name">
+                    <span>帐号：</span>
+                    <strong></strong></div>
+                <div class="ele-acc-unit">
+                    <div id="_bbsportBalance" class="ele-accinfo ele-first-balance">
+                        <span>账户总余额：</span>
+                        <strong></strong></div>
+                    <div class="ele-obalance-wrap js_ele_obalance_wrap">
+                        <div class="ele-accinfo ele-other-balance">
+                            <i class="fa fa-plus-square" style="line-height: 26px;"></i>
+                        </div>
+                        <div class="js_ele_obalance_item_wrap" style="margin-right: -130px;
+                                    margin-top: -3px;">
+                            <div class="ele-obalance-item">
+                            </div>
+                            <div class="ele-balance-tool clearfix">
+                                <a href="/member/convert">额度转换</a>
+                            </div>
+                            <link rel="stylesheet" href="{{.CdnUrl}}/theme3/public/css/font-awesome1.css">
+                            <style>
+
+                                /*clear float*/
+                                .clearfix:before, .clearfix:after {
+                                    content: "";
+                                    display: table;
+                                }
+
+                                .clearfix:after {
+                                    clear: both;
+                                }
+
+                                .clearfix {
+                                    *zoom: 1;
+                                }
+
+                                .js_ele_obalance_item_wrap {
+                                    display: none;
+                                    position: absolute;
+                                    opacity: 1;
+                                    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                                    width: 270px;
+                                    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                                    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+                                    border-radius: 2px;
+                                    color: #000;
+                                    font-size: 12px;
+                                    background: #FFF56B;
+                                    cursor: default;
+                                    z-index: 9999;
+                                    right: 0;
+                                    text-align: left;
+                                }
+
+                                .js_ele_obalance_wrap {
+                                    position: relative
+                                }
+
+                                .js_ele_obalance_wrap .ele-obalance {
+                                    line-height: 22px;
+                                    color: #000;
+                                }
+
+                                .js_ele_obalance_wrap .ele-obalance strong {
+                                    color: #000;
+                                }
+
+                                .ele-obalance-item {
+                                    padding: 16px;
+                                }
+
+                                .ele-obalance-item strong {
+                                    font-weight: normal;
+                                }
+
+                                .ele-obalance {
+                                    padding-bottom: 2px;
+                                    color: #444;
+                                }
+
+                                /*額度轉換*/
+                                .ele-balance-tool {
+                                    padding: 4px;
+                                    background: #F4F4F4;
+                                }
+
+                                .ele-balance-tool a {
+                                    float: right;
+                                    padding: 4px 8px;
+                                    color: #FFF;
+                                    background: #555;
+                                    -o-transition: background-color .20s linear;
+                                    -webkit-transition: background-color .20s linear;
+                                    -moz-transition: background-color .20s linear;
+                                    transition: background-color .20s linear;
+                                    border-radius: 2px;
+                                    text-decoration: none;
+                                }
+
+                                .ele-balance-tool a:hover {
+                                    background: #000;
+                                }
+
+                                .js_ele_obalance_wrap:hover .js_ele_obalance_item_wrap {
+                                    display: block;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- sub -->
+            <div class="SU-Menual clearfix">
+                <ul class="login-Menual">
+                    <li>
+                        <a id="su-macenter" href="/member/account" title="会员中心">会员中心</a></li>
+                    ｜
+                    <li>
+                        <a id="su-deposite" href="/member/bank" title="线上存款">线上存款</a></li>
+                    ｜
+                    <li>
+                        <a id="su-withdraw" href="/member/withdraw" title="线上取款">线上取款</a></li>
+                    ｜
+                    <li>
+                        <a id="su-switch" href="/member/convert" title="额度转换">额度转换</a></li>
+                </ul>
+                <a href="javascript:void(0)" onclick="logOut();"
+                   class="su-logout">登出</a>
+            </div>
+        </div>
+        <div class="login-wrap clearfix pk-login-before">
+            <form id="loginform">
+                <p class="login-unit login-unit-user">
+                    <input type="text" size="12" class="login-input" tabindex="1" name="account" id="username"
+                           placeholder="账号"></p>
+                <p class="login-unit login-unit-pwd">
+                    <input type="password" class="login-input" tabindex="2" name="password" id="password"
+                           placeholder="密码"></p>
+                <p class="login-unit login-unit-chk">
+                    <input type="text" name="code" id="rmNum" size="7" style='width:100px; height:22px;' maxlength="4"
+                           tabindex="3" placeholder="验证码">
+                    <img src="{{.CdnUrl}}/theme3/public/images/new/no.png" id="vImg" onclick="getYzm();" width="40"
+                         height="18"
+                         style="    position: absolute;right: 2px;top: 4px;cursor: pointer;"></p>
+                <a href="javascript:;" onclick="alert('忘记密码，请联系在线客服！');" class="login-forgetpw">忘记密码?</a>
+                <p class="login-links">
+                    <input type="button" id="submit" onclick="aLeftForm1Sub();" value="登入" class="login-submit"
+                           tabindex="4">
+                    <a onclick="getPager('-','zhuce');" href="javascript:void(0);" class="login-joinmember">会员注册</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    {{end}}
+        <script language="javascript">
+            $(document).ready(function () {
+                    document.onkeydown = function (event) {
+                    if (event.keyCode == 13) //回车键的键值为13
+                        $("#submit").click();
+                };
+            });
+            function clearCache(){
+                delCookie();
+                alert("清除成功");
+                window.location.href = '/index';
+
+            }
+        </script>
+{{end}}

@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>Pk</title>
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+<link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+</head>
+
+<body ontouchstart class="bgfff">
+<header class="head-h">
+	<!-- <dl class="h-head">
+    	<dt><a class="iconfont">&#xe605;</a></dt>
+        <h2>报表统计</h2>
+        <dd><a href="/m/statisticslast">上周</a></dd>
+    </dl> -->
+    <ul class="h-head">
+            <li>
+                <a href="/m/account">会员中心</a>
+            </li>
+            <li>
+                <h2>报表统计</h2>
+            </li>
+            <li>
+                <a href="/m/statisticslast">上周</a>
+            </li>
+        </ul>
+</header>
+<div id="mescroll" class="mescroll">
+    <section class="m-statemas">
+        <table class="table" id="report_data">
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>注单量</th>
+                <th>下注总额</th>
+                <th>有效下注总额</th>
+                <th>游戏</th>
+                <th>盈利</th>
+            </tr>
+            </thead>
+
+        </table>
+    </section>
+
+</div>
+</body>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script>
+$(window).load(function(e){
+    if(getCookie('loginBack')){
+        var loginBack = getCookie('loginBack');
+        $.ajax({
+            type: "get",
+            url: "/m/getThisWeekReport",
+            headers: {
+                'Authorization': 'bearer ' + loginBack,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'platform': 'wap'
+            },
+            data: {},
+            dataType: 'json',
+            success: function (data) {
+                if (data.code) {
+                    $.toast(data.msg, 'text');
+                } else {
+                    var report = data.data;
+                    var str = "";
+                    var totalnum = 0;
+                    var totalbetall = 0;
+                    var totalbetvalid = 0;
+                    var totalwin = 0;
+                    $.each(report,function(key,value) {
+                        str += "<tbody>";
+                        str += "<tr><th>"+value.dayTime+"</th>";
+                        str += "<th>"+value.num+"</th>";
+                        str += "<th>"+value.betAll+"</th>";
+                        str += "<th>"+value.betValid+"</th>";
+                        str += "<th>-</th>";
+                        str += "<th onclick='Showtr("+key+");' id='th"+key+"'><i>"+value.win+"</i></th></tr>";
+                        totalnum += value.num;
+                        totalbetall += value.betAll;
+                        totalbetvalid += value.betValid;
+                        totalwin += value.win;
+                        var reportlist = value.Data;
+                        if (reportlist != null){
+                            $.each(reportlist,function(k,val) {
+                                str += "<tr><td>"+val.dayTime+"</td>";
+                                str += "<td>"+val.num+"</td>";
+                                str += "<td>"+val.betAll+"</td>";
+                                str += "<td>"+val.betValid+"</td>";
+                                str += "<td>"+val.vType+"</td>";
+                                str += "<td>"+val.win+"</td></tr>";
+                            });
+                        }
+                        str += "</tbody>";
+                    });
+                    str += "<tbody><tr class=\"total\"><th>总计</th><th>"+totalnum+"</th><th>"+totalbetall+"</th><th>"+totalbetvalid+"</th><th>-</th><th>"+totalwin+"</th></tr></tbody>";
+                    $("#report_data").append(str);
+                }
+            },
+            error:function(){
+                $.toast("用户登录信息已失效， 请重新登录！", 'text');
+                window.location.href = "/m/login";
+            }
+        });
+    }else{
+        $.toast("用户登录信息已失效， 请重新登录！", 'text');
+        window.location.href = "/m/login";
+    }
+});
+
+function Showtr(id){
+    console.log(11)
+    $("#th"+id).parent().siblings('tr').find('td').slideToggle();
+    $("#th"+id).parent().find('.iconfont').toggleClass('curr');
+}
+
+$(document).ready(function(){
+        var mescroll = new MeScroll("mescroll", {
+                //下拉刷新的所有配置项
+                down:{
+                    use: false, //是否初始化下拉刷新; 默认true
+                    auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                    hardwareClass: "mescroll-hardware", //硬件加速样式;解决iOS下拉因隐藏进度条而闪屏的问题,参见mescroll.css
+                    isBoth: false, //下拉刷新时,如果滑动到列表底部是否可以同时触发上拉加载;默认false,两者不可同时触发;
+                }
+			});
+    })
+</script>
+</html>

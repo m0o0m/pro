@@ -1,0 +1,110 @@
+2018-02-05 17:17:30
+select * from my_user_agent where id=
+
+PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php:1637
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1637): PDOStatement->execute()
+#1 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1784): helper\DbConnection->execute('select * from m...', NULL)
+#2 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/Lib/Addbetstest.php(92): helper\DbConnection->row('select * from m...')
+#3 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(22): Applications\Tools\Lib\Addbetstest::addbet()
+#4 [internal function]: {closure}()
+#5 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(233): call_user_func_array(Object(Closure), Array)
+#6 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(274): Workerman\Events\Select->tick()
+#7 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1745): Workerman\Events\Select->loop()
+#8 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1047): Workerman\Worker->run()
+#9 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1010): Workerman\Worker::forkOneWorker(Object(Workerman\Worker))
+#10 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#11 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(41): Workerman\Worker::runAll()
+#12 {main}
+2018-02-05 18:35:04
+select * from my_user_agent where id=
+
+PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php:1637
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1637): PDOStatement->execute()
+#1 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1784): helper\DbConnection->execute('select * from m...', NULL)
+#2 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/Lib/Addbetstest.php(92): helper\DbConnection->row('select * from m...')
+#3 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(22): Applications\Tools\Lib\Addbetstest::addbet()
+#4 [internal function]: {closure}()
+#5 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(233): call_user_func_array(Object(Closure), Array)
+#6 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(274): Workerman\Events\Select->tick()
+#7 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1745): Workerman\Events\Select->loop()
+#8 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1047): Workerman\Worker->run()
+#9 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1010): Workerman\Worker::forkOneWorker(Object(Workerman\Worker))
+#10 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#11 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(41): Workerman\Worker::runAll()
+#12 {main}
+2018-02-05 18:36:46
+select * from my_user_agent where id=
+
+PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php:1637
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1637): PDOStatement->execute()
+#1 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1784): helper\DbConnection->execute('select * from m...', NULL)
+#2 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/Lib/Addbetstest.php(92): helper\DbConnection->row('select * from m...')
+#3 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(22): Applications\Tools\Lib\Addbetstest::addbet()
+#4 [internal function]: {closure}()
+#5 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(233): call_user_func_array(Object(Closure), Array)
+#6 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(274): Workerman\Events\Select->tick()
+#7 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1745): Workerman\Events\Select->loop()
+#8 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1047): Workerman\Worker->run()
+#9 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1010): Workerman\Worker::forkOneWorker(Object(Workerman\Worker))
+#10 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#11 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(41): Workerman\Worker::runAll()
+#12 {main}
+2018-02-05 18:37:25
+select * from my_user_agent where id=
+
+PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php:1637
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1637): PDOStatement->execute()
+#1 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1784): helper\DbConnection->execute('select * from m...', NULL)
+#2 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/Lib/Addbetstest.php(92): helper\DbConnection->row('select * from m...')
+#3 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(22): Applications\Tools\Lib\Addbetstest::addbet()
+#4 [internal function]: {closure}()
+#5 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(233): call_user_func_array(Object(Closure), Array)
+#6 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(274): Workerman\Events\Select->tick()
+#7 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1745): Workerman\Events\Select->loop()
+#8 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1047): Workerman\Worker->run()
+#9 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1010): Workerman\Worker::forkOneWorker(Object(Workerman\Worker))
+#10 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#11 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(41): Workerman\Worker::runAll()
+#12 {main}
+2018-02-05 18:45:03
+select * from my_user_agent where id=
+
+PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php:1637
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1637): PDOStatement->execute()
+#1 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1784): helper\DbConnection->execute('select * from m...', NULL)
+#2 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/Lib/Addbetstest.php(92): helper\DbConnection->row('select * from m...')
+#3 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(21): Applications\Tools\Lib\Addbetstest::addbet()
+#4 [internal function]: {closure}()
+#5 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(233): call_user_func_array(Object(Closure), Array)
+#6 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(274): Workerman\Events\Select->tick()
+#7 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1745): Workerman\Events\Select->loop()
+#8 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1047): Workerman\Worker->run()
+#9 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1010): Workerman\Worker::forkOneWorker(Object(Workerman\Worker))
+#10 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#11 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(40): Workerman\Worker::runAll()
+#12 {main}
+2018-02-05 18:46:09
+select * from my_fc_games_set where fc_type=liuhecai
+
+PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'liuhecai' in 'where clause' in /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php:1637
+Stack trace:
+#0 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1637): PDOStatement->execute()
+#1 /Users/frank/www/newproject/trunk/php-workerman/lottery/helper/DbConnection.php(1716): helper\DbConnection->execute('select * from m...', NULL)
+#2 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/Lib/Addbetstest.php(454): helper\DbConnection->query('select * from m...')
+#3 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/Lib/Addbetstest.php(383): Applications\Tools\Lib\Addbetstest::getNewPlayId('liuhecai', 'Tema')
+#4 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/Lib/Addbetstest.php(107): Applications\Tools\Lib\Addbetstest::check_bet('liuhecai', 73, Array, '3091')
+#5 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(21): Applications\Tools\Lib\Addbetstest::addbet()
+#6 [internal function]: {closure}()
+#7 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(233): call_user_func_array(Object(Closure), Array)
+#8 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Events/Select.php(274): Workerman\Events\Select->tick()
+#9 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1745): Workerman\Events\Select->loop()
+#10 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1047): Workerman\Worker->run()
+#11 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(1010): Workerman\Worker::forkOneWorker(Object(Workerman\Worker))
+#12 /Users/frank/www/newproject/trunk/php-workerman/lottery/Workerman/Worker.php(431): Workerman\Worker::forkWorkers()
+#13 /Users/frank/www/newproject/trunk/php-workerman/lottery/Applications/Tools/addbets_test.php(40): Workerman\Worker::runAll()
+#14 {main}

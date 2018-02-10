@@ -1,0 +1,1255 @@
+<template lang="html">
+  <div class="nine">
+    <div class="nav">
+      <ul>
+        <li v-for="(item,i) in menus" :class="{'item_class':selectItem==i}" @click="type(item,i)">{{item.name}}</li>
+      </ul>
+    </div>
+    <div class="content">
+      <ul v-for="(item,i) in lists[selectItem]" class='list clearfix fl'>
+        <li class="top">
+          <ul class='clearfix'>
+            <li class="fl">号码</li>
+            <li class="fl">赔率</li>
+            <li class="fl three">勾选</li>
+            <li class="fl four">球号</li>
+          </ul>
+        </li>
+        <li v-for="(key,k) in item.object" class="cen" :class="{'table-current':key.flag}" @click="numClick(key)">
+          <ul class='clearfix'>
+            <li class="one fl" >
+              {{key.lname}}
+            </li>
+            <li class="two fl" >
+              {{key.odd}}
+            </li>
+            <li class="three fl">
+               <!-- <I-Input ref="myfocus" style="width: 45px" v-model="key.money" size="small" @on-keyup="gogo(key)" @on-afterpaste="gogo(key)"></I-Input>
+               <Checkbox  v-model="key.flag"></Checkbox> -->
+               <i class="icon iconfont pk-selected my_icon-g" :class="{'my_icon-g_click':key.flag}"></i>
+            </li>
+            <li class="four fl" ><span v-for="yan in key.box" class="ball" :style="{background:yan.color}">{{yan.name}}</span></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="footer1 clearfix" style="margin-bottom: 20px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <div class="one"><span class="left">金额￥</span><I-Input :value="money" @on-focus="onfocus_top(1)"  @on-blur="onblur_top(1)" @on-change="change_money()" :maxlength='9' style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </div>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+  </div>
+</template>
+
+<script>
+import api from "../../../api/config";
+import MeModal from "../../../share_components/bet_happy_tail";
+import {Modal,Checkbox,Input} from 'iview';
+import '../../../assets/css/six_twelve.scss'
+import hint from '../../../share_components/hint_msg'
+import share from '../../../share_components/share'
+export default {
+  components: {
+    MeModal,Modal,'I-Input':Input,Checkbox
+  },
+  data() {
+    return {
+      cdata: null,
+      money: null,
+      modal: false,
+      leng: 2,
+      a:'',
+      selectItem: 0,
+      ArrIndex: 0,
+      name: "二尾连中",
+      menus: [
+        { name: "二尾连中", leng: 2 },
+        { name: "三尾连中", leng: 3 },
+        { name: "四尾连中", leng: 4 },
+        { name: "二尾连不中", leng: 2 },
+        { name: "三尾连不中", leng: 3 },
+        { name: "四尾连不中", leng: 4 }
+      ],
+      lists: [
+        [
+          {
+            object: [
+              {
+                lname: "0尾",
+                name: "0",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 10, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 20, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 30, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 40, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "1尾",
+                name: "1",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 1, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 11, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 21, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 31, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 41, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "2尾",
+                name: "2",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 2, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 12, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 22, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 32, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 42, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "3尾",
+                name: "3",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 3, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 13, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 23, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 33, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 43, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              },
+              {
+                lname: "4尾",
+                name: "4",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 4, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 14, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 24, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 34, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 44, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "5尾",
+                name: "5",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 5, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 15, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 25, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 35, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 45, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "6尾",
+                name: "6",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 6, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 16, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 26, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 36, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 46, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "7尾",
+                name: "7",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 7, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 17, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 27, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 37, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 47, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "8尾",
+                name: "8",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 8, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 18, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 28, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 38, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 48, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "9尾",
+                name: "9",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 9, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 19, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 29, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 39, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 49, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "0尾",
+                name: "0",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 10, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 20, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 30, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 40, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "1尾",
+                name: "1",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 1, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 11, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 21, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 31, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 41, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "2尾",
+                name: "2",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 2, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 12, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 22, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 32, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 42, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "3尾",
+                name: "3",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 3, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 13, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 23, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 33, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 43, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              },
+              {
+                lname: "4尾",
+                name: "4",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 4, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 14, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 24, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 34, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 44, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "5尾",
+                name: "5",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 5, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 15, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 25, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 35, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 45, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "6尾",
+                name: "6",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 6, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 16, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 26, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 36, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 46, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "7尾",
+                name: "7",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 7, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 17, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 27, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 37, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 47, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "8尾",
+                name: "8",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 8, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 18, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 28, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 38, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 48, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "9尾",
+                name: "9",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 9, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 19, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 29, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 39, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 49, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "0尾",
+                name: "0",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 10, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 20, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 30, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 40, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "1尾",
+                name: "1",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 1, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 11, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 21, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 31, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 41, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "2尾",
+                name: "2",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 2, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 12, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 22, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 32, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 42, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "3尾",
+                name: "3",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 3, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 13, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 23, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 33, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 43, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              },
+              {
+                lname: "4尾",
+                name: "4",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 4, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 14, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 24, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 34, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 44, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "5尾",
+                name: "5",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 5, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 15, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 25, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 35, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 45, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "6尾",
+                name: "6",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 6, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 16, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 26, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 36, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 46, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "7尾",
+                name: "7",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 7, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 17, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 27, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 37, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 47, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "8尾",
+                name: "8",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 8, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 18, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 28, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 38, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 48, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "9尾",
+                name: "9",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 9, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 19, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 29, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 39, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 49, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "0尾",
+                name: "0",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 10, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 20, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 30, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 40, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "1尾",
+                name: "1",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 1, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 11, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 21, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 31, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 41, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "2尾",
+                name: "2",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 2, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 12, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 22, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 32, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 42, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "3尾",
+                name: "3",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 3, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 13, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 23, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 33, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 43, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              },
+              {
+                lname: "4尾",
+                name: "4",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 4, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 14, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 24, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 34, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 44, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "5尾",
+                name: "5",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 5, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 15, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 25, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 35, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 45, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "6尾",
+                name: "6",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 6, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 16, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 26, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 36, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 46, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "7尾",
+                name: "7",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 7, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 17, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 27, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 37, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 47, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "8尾",
+                name: "8",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 8, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 18, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 28, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 38, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 48, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "9尾",
+                name: "9",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 9, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 19, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 29, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 39, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 49, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "0尾",
+                name: "0",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 10, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 20, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 30, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 40, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "1尾",
+                name: "1",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 1, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 11, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 21, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 31, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 41, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "2尾",
+                name: "2",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 2, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 12, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 22, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 32, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 42, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "3尾",
+                name: "3",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 3, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 13, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 23, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 33, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 43, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              },
+              {
+                lname: "4尾",
+                name: "4",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 4, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 14, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 24, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 34, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 44, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "5尾",
+                name: "5",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 5, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 15, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 25, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 35, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 45, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "6尾",
+                name: "6",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 6, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 16, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 26, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 36, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 46, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "7尾",
+                name: "7",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 7, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 17, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 27, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 37, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 47, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "8尾",
+                name: "8",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 8, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 18, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 28, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 38, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 48, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "9尾",
+                name: "9",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 9, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 19, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 29, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 39, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 49, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          }
+        ],
+        [
+          {
+            object: [
+              {
+                lname: "0尾",
+                name: "0",
+                // index: 0,
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 10, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 20, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 30, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 40, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "1尾",
+                name: "1",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 1, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 11, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 21, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 31, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 41, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "2尾",
+                name: "2",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 2, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 12, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 22, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 32, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 42, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "3尾",
+                name: "3",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 3, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 13, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 23, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 33, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 43, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              },
+              {
+                lname: "4尾",
+                name: "4",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 4, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 14, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 24, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 34, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 44, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          },
+          {
+            object: [
+              {
+                lname: "5尾",
+                name: "5",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 5, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 15, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 25, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 35, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 45, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "6尾",
+                name: "6",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 6, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 16, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 26, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 36, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 46, color: "linear-gradient(#ee4c19, #bd2706)" }
+                ]
+              },
+              {
+                lname: "7尾",
+                name: "7",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 7, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 17, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 27, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 37, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 47, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "8尾",
+                name: "8",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 8, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 18, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 28, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 38, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 48, color: "linear-gradient(#2991d2, #1c6196)" }
+                ]
+              },
+              {
+                lname: "9尾",
+                name: "9",
+                odd: null,
+                flag: false,
+                money: "",
+                box: [
+                  { name: 9, color: "linear-gradient(#2991d2, #1c6196)" },
+                  { name: 19, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 29, color: "linear-gradient(#ee4c19, #bd2706)" },
+                  { name: 39, color: "linear-gradient(#3ec948, #026d09)" },
+                  { name: 49, color: "linear-gradient(#3ec948, #026d09)" }
+                ]
+              }
+            ]
+          }
+        ]
+      ]
+    };
+  },
+  created() {
+    this.fetchData();
+    this.$root.$on("success", e => {
+      if (e) {
+        this.modal = false;
+        this.reset();
+      }
+    });
+    this.$root.$on('this_money',(e)=>{
+        this.money = e
+    });
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    $route: "fetchData", // 只有这个页面初始化之后，这个监听事件才开始生效
+    a: function (new_val,old_val) {
+        if(new_val != old_val){
+            this.$root.$emit('clear_key_number','')
+        }
+    },
+    money: function(new_val,old_val){
+        if(new_val != old_val){
+            this.computed_money()
+        }
+    }
+  },
+  mounted() {
+    this.$root.$emit('no_top',true);
+    this.$root.$emit("child_change", 0);
+    this.$root.$on("time_out", e => {
+      if (e) {
+        this.fetchData(2);
+      }
+    });
+  },
+  destroyed() {
+    this.$root.$off("time_out");
+  },
+  methods: {
+    sortNumber: function(a, b) {
+      return a.sort - b.sort;
+    },
+    fetchData: function(type) {
+      this.reset();
+      this.selectItem = 0;
+      type == 2
+        ? this.$root.$emit("loading", true, true)
+        : this.$root.$emit("loading", true);
+      let body = {
+        fc_type: this.$route.query.page,
+        gameplay: 177
+      };
+      api.getgameindex(this, body, res => {
+          this.$root.$emit('only_back',res,type);
+        if (res.data.ErrorCode == 1) {
+          this.cdata = res.data.Data.c_data;
+          this.$root.$emit("auto", res.data.Data.auto);
+          this.$root.$emit("closetime", res.data.Data.closetime);
+          this.$root.$emit("c_data", res.data.Data.c_data);
+          let back_data = res.data.Data.odds;
+          back_data.sort(this.sortNumber);
+          this.computed(back_data);
+          if(type == 2){
+            window.setTimeout(() => {
+              this.$root.$emit("loading", false);
+          }, 1000)
+          }else{
+            this.$root.$emit("loading", false);
+          }
+//          this.$root.$emit("get_closetime", res.data.Data.closetime);
+        }
+      });
+    },
+
+    computed: function(data) {
+      this.$set(this.lists, this.lists);
+      this.$set(this.menus, this.menus);
+      var k = 0;
+      for (let i = 0; i < this.lists.length; i++) {
+        let name = data[k].remark.slice(
+          data[k].remark.search("#") + 1,
+          data[k].remark.length
+        );
+
+        this.menus[i].name = name.slice(0, name.search("#"));
+        for (let l = 0; l < this.lists[i].length; l++) {
+          for (var n = 0; n < this.lists[i][l].object.length; n++, k++) {
+            Object.assign(this.lists[i][l].object[n], data[k]);
+          }
+        }
+      }
+
+      this.name = this.menus[0].name;
+      this.leng = this.menus[0].leng;
+    },
+
+    type(key, i) {
+      this.reset();
+      this.selectItem = i;
+      this.leng = this.menus[i].leng;
+      this.name = this.menus[i].name;
+    },
+
+    numClick: function(item) {
+      console.log(this.leng);
+      if (item.flag) {
+        this.ArrIndex -= 1;
+        item.flag = false;
+        item.money = "";
+      } else {
+        this.ArrIndex += 1;
+        if(this.ArrIndex > this.leng+3){
+          item.flag = false;
+          this.ArrIndex -= 1;
+          this.$Modal.warning({
+            content: "最多选择"+(this.leng+3)+'个选项',
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, share.Prompt);
+        }else{
+          item.flag = true;
+          item.money = this.money;
+        }
+      }
+    },
+      onfocus_top: function(index){
+          let dom = document.querySelectorAll('input');
+          this.a = 99;
+          if(index == 0){
+              index=0
+          }else{
+              index=dom.length-1;
+          }
+          for(let i = 0;i < dom.length;i++){
+              if(i != index) {
+                  dom[i].data_onoff = 'false';
+              }else{
+                  dom[i].data_onoff = 'true'
+              }
+          }
+      },
+      onblur_top: function(index){
+          let dom = document.querySelectorAll('input');
+          if(index == 0){
+              index=0
+          }else{
+              index=dom.length-1;
+          }
+        if(dom[index].value != 'on'){
+          this.money = dom[index].value;
+        }
+      },
+    push_money() {
+      this.money = this.money.replace(/\D/g, "");
+      this.computed_money();
+    },
+    change_money: function () { this.computed_money() },
+    computed_money() {
+      for (let l = 0; l < this.lists[this.selectItem].length; l++) {
+        // console.log(this.lists[this.selectItem])
+        for (var n = 0; n < this.lists[this.selectItem][l].object.length; n++) {
+          if (this.lists[this.selectItem][l].object[n].flag) {
+            this.lists[this.selectItem][l].object[n].money = this.money;
+          } else {
+            this.lists[this.selectItem][l].object[n].money = "";
+          }
+        }
+      }
+    },
+
+    go_to() {
+      let a = this.money + 'a';
+      this.money = a.replace(/\D/g, "");
+      if (this.ArrIndex < this.leng && this.ArrIndex != 0) {
+        this.$Modal.warning({
+          content:"请选择"+this.leng+'-'+(this.leng+3)+'个选项',
+          onOk: () => {
+            clearTimeout(time);
+          }
+        });
+        var time = setTimeout(() => {
+          this.$Modal.remove();
+        }, share.Prompt);
+      } else {
+        var kk = 0;
+        var is_select = false;
+        for (let l = 0; l < this.lists[this.selectItem].length; l++) {
+          for (
+            var n = 0;
+            n < this.lists[this.selectItem][l].object.length;
+            n++
+          ) {
+            let b = this.lists[this.selectItem][l].object[n].money + 'b';
+            this.lists[this.selectItem][l].object[n].money = b.replace(/\D/g, "");
+            kk += Number(this.lists[this.selectItem][l].object[n].money);
+            if(this.lists[this.selectItem][l].object[n].flag){
+              is_select = true
+            }
+          }
+        }
+        if(is_select){
+          if (kk != 0) {
+            this.modal = true;
+            this.$root.$emit("c_data", this.cdata);
+//            document.querySelector("body").style.overflow = "hidden";
+            this.$root.$emit(
+              "id-selected-tail",
+              this.lists[this.selectItem],
+              go_pour => {
+              for (let i = 0; i < go_pour.length; i++) {
+              var bool = go_pour[i].input_name.indexOf("0");
+              if (bool == -1) {
+                go_pour[i].odd = this.lists[this.selectItem][0].object[1].odd;
+              } else {
+                go_pour[i].odd = this.lists[this.selectItem][0].object[0].odd;
+              }
+            }
+          }
+          );
+          } else if (kk == 0) {
+            this.$Modal.warning({
+              content: hint.money_null
+            });
+            window.setTimeout(() => {
+              this.$Modal.remove();
+            }, share.Prompt);
+          }
+        }else{
+          this.$Modal.warning({
+            content: hint.all_null
+          });
+          window.setTimeout(() => {
+            this.$Modal.remove()
+          }, share.Prompt)
+        }
+      }
+    },
+    reset() {
+      this.ArrIndex = 0;
+      this.money = "";
+      this.$root.$emit("reset", "");
+      for (let l = 0; l < this.lists[this.selectItem].length; l++) {
+        for (var n = 0; n < this.lists[this.selectItem][l].object.length; n++) {
+          this.lists[this.selectItem][l].object[n].money = "";
+          this.lists[this.selectItem][l].object[n].flag = false;
+        }
+      }
+    },
+    cancel: function(item) {
+      this.modal = false;
+      document.querySelector("body").style.overflow = "auto";
+      var money = this.money;
+      this.money = 0;
+      this.money = money;
+    },
+
+    add_money(type) {
+      let money = this.money;
+      // console.log(type)
+      this.money = Number(money) + type;
+      this.computed_money();
+    }
+  }
+};
+</script>

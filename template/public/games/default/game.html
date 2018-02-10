@@ -1,0 +1,77 @@
+{{define "game"}}
+<script type="text/javascript">
+    document.writeln('<link rel="stylesheet" type="text/css" href="' + cdnUrl + '/shared/egames/css/css.css"/>');
+    document.writeln('<script src=\"' + cdnUrl + '/shared/egames/js/egame.js\" type=\"text/javascript\"><\/script>');
+
+    $(document).ready(function () {
+        var $type,$dz_i;
+        var $GameTitle = {{.GameTitle}};
+        $type = getQueryString('type');
+        if($type){
+            $dz_i = $GameTitle.indexOf($type);
+            $.EGame.setTab($dz_i);
+        }else{
+            $type = $GameTitle[0];
+            $.EGame.setTab(0);
+        }
+        $.EGame.getData($type);
+    });
+</script>
+{{ .GameTheme }}
+<div class="tab1" id="tab1">
+    <div class="divgmenu">
+        <ul class="ul_ul">
+            {{$Type := .Type}}
+            {{ range $key, $value := .GameTitle }}
+            <li id="one{{$key}}" class='zhu_gameClass {{if eq $value "EG"}}zhu-hotIcon{{ end }}' onclick="$.EGame.setTab({{$key}});$.EGame.getData('{{ $value }}');">            
+                <span class="bg_col" id="etitle-{{ $value }}"><script type="text/javascript">$.EGame.egameTitle('{{ $value }}');</script></span>
+                <span class="act-img"></span>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    <div class="menudiv">
+
+        <div id="con_one_1">
+            <div class="cur GPI_Game">
+                <ul class="game_category" id="ul_1">
+                    <li><a href="javascript:void(0)" class="active" style="width: 94px;" onclick="$.EGame.GetTopGame(0);">所有游戏</a></li>
+                    <li><a href="javascript:void(0)" style="width: 94px;" onclick="$.EGame.GetTopGame(1);" class="">拉霸</a></li>
+                    <li><a href="javascript:void(0)" style="width: 94px;" onclick="$.EGame.GetTopGame(2);" class="">桌面游戏</a></li>
+                    <li><a href="javascript:void(0)" style="width: 94px;" onclick="$.EGame.GetTopGame(3);" class="">视频扑克</a></li>
+                    <li><a href="javascript:void(0)" style="width: 94px;" onclick="$.EGame.GetTopGame(4);" class="">其它游戏</a></li>
+                </ul>
+                <div class="search">
+                    <input type="text" onkeyup="$.EGame.search($(this).val())" id="serch_input" class="serch_input">
+                    <a href="javascript:;" class="serch_but" onclick="$.EGame.search($('#serch_input').val())">确定</a>
+                </div>
+                <div class="egamebanner" style="display:none">
+                    <a href="javascript:;" class="egamefirst"><img src=""></a>
+                    <a href="javascript:;"><img src=""></a>
+                    <a href="javascript:;"><img src=""></a>
+                    <a href="javascript:;"><img src=""></a>
+                    <a href="javascript:;"><img src=""></a>
+
+                    <div class="egamechoose">
+                        <span class="egamered"></span>
+                        <span class=""></span>
+                        <span class=""></span>
+                        <span class=""></span>
+                        <span class=""></span>
+                    </div>
+                </div>
+                <div class="games_menu" style="display: block;">
+                    <!-- 电子数据 -->
+                </div>
+                <span class="games_menu_bg"></span>
+            </div>
+            <input type='hidden' id='etype' value="{{ .GameData.Type}}"/>
+        </div>
+        <div id='page_navigation' style="padding-bottom: 10px; margin-top: 10px;">
+            <ul class="btndiv">
+                <!-- 分页数据 -->
+            </ul>
+        </div>
+    </div>
+</div>
+{{end}}

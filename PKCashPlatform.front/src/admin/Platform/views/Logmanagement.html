@@ -1,0 +1,175 @@
+<div id="content">
+    <div class="row">
+
+    </div>
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>日志管理</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> 筛选</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                                <!--头部筛选查找以及添加-->
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+                                        <div class="row">
+                                            <label class="col-md-1 control-label col-xs-4">账户查询</label>
+                                            <div class="col-sm-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="" ng-model="account">
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label col-xs-4">日志信息</label>
+                                            <div class="col-sm-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="" ng-model="logInfo">
+
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label col-xs-4">操作IP</label>
+                                            <div class="col-sm-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="" ng-model="ip">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-1 control-label col-xs-4" style="padding-top: 8px;">操作时间</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group ">
+                                                    <input type="text" name="mydate" placeholder="{{lang['Creation Time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="stratTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label col-xs-4" style="padding-top: 8px;"></label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="input-group form-group">
+                                                    <input type="text" name="mydate" placeholder="{{lang['End time']}}" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd" ng-model="endTime">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <label class="col-md-1 control-label col-xs-4">类型</label>
+                                            <div class="col-md-2 col-xs-8">
+                                                <div class="form-group input-group col-md-12 col-xs-12" ng-init="type='0'">
+                                                    <select class="form-control" ng-model="type">
+                                                        <option value="0">全部</option>
+                                                        <option ng-value="item.value" ng-repeat="item in json.option_log">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1 col-md-offset-0 col-xs-8 col-xs-offset-5">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>搜索</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">操作者</th>
+                                            <th class="text-center">操作时间</th>
+                                            <th class="text-center">操作日志</th>
+                                            <th class="text-center">操作人IP</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list" class="text-center">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.time}}</td>
+                                            <td>{{item.Operation_record}}</td>
+                                            <td>{{item.Operation_IP}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="modal fade" id="dialog_simple_divided" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">返佣设置</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid"  enctype="multipart/form-data" >
+                        <div class="row">
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">经销商账号</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" placeholder="" type="text" ng-model="agency" name="agencyName" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">返佣金设定</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="agencyAccount" placeholder="" type="text" ng-model="account" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-12 control-label">返佣金上线</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input class="form-control" name="password" placeholder="" type="text" ng-model="password" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset >
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-xs-12">选择站点</label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <select class="form-control">
+                                            <option value="Amsterdam">Amsterdam</option>
+                                            <option value="Atlanta">Atlanta</option>
+                                            <option value="Baltimore">Baltimore</option>
+                                            <option value="Boston">Boston</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    {{lang['Cancel']}}
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="accounts.submit()">
+                                    {{lang['Confirm']}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

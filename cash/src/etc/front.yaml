@@ -1,0 +1,61 @@
+addr : :9898
+language : zh
+websocketport: :19898
+
+version :
+    test : 170926.01
+    product : v1
+
+##日志 "FNST", "FINE", "DEBG", "TRAC", "INFO", "WARN", "EROR", "CRIT"
+log :
+    level : EROR
+    type : file
+    path : log
+
+redis :
+-
+    name : default
+    host : 192.168.32.251:6379
+    db  : 0
+    password : management
+    expirtime : 15
+    runtime : 30
+    goroutimenum : 5
+    exp_update_ranking : 5
+
+mysql :
+-
+    name : default
+    host : 192.168.32.251:3306
+    username : dev
+    password : $Abc123456
+    dbname : new_management
+    showsql : false
+    timeout : 3s
+
+third :
+    paidtype : http://olmanage.pk1358.com/api/v1/type/list
+    getthirdapi : http://olmanage.pk1358.com/api/v1/config/list
+    newsetup : http://olmanage.pk1358.com/api/v1/business/up
+    getbank : http://olmanage.pk1358.com/api/v1/bank/list
+    getsetup : http://olmanage.pk1358.com/api/v1/merchant/list
+    clientuserid : 1
+    clientname : pkClient
+    clientsecret : h1qN7RYH9xpvugZhaFu5Inmdk6bJyIopJrsbCAmj
+#视讯api
+video:
+    api_url : http://localhost:8080
+    md5_key : DCEFDATG
+    des_key : hue7qwejk1tgatgsdadasdadGasdsadK
+
+mongo :
+    host : localhost:32772
+    account : accountUser
+    password : password
+
+template :
+    cache_size : 1000
+    cdn_url : http://gotest.pk051.com/template
+    cache_switch : on #on or off
+    source_path : ./
+    mongo_cache : off

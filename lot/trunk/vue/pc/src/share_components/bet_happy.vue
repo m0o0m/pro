@@ -1,0 +1,228 @@
+<template lang="html">
+  <div class="bet" v-show="modal">
+    <div class="pk_bet">
+    </div>
+    <div class="modal">
+      <div class="header">
+        <h3>下注金额</h3>
+      </div>
+      <p>当前投注：</p>
+      <div class="bet_center">
+        <p class="hp_center_top">
+          <span class="one">类型</span>
+          <span class="two">号码</span>
+          <span class="three">赔率</span>
+        </p>
+        <div class="bet_happy_modal" style="overflow:auto;height: 145px;">
+          <p class="hp_center_content" v-for="item in lists" v-if="item.money">
+            <!-- id: {{item.id}} num：{{item.num}} 赔率：{{item.number}} number：{{item.item}}<br/> -->
+            <span class="one">{{item.remark.split('#')[0]}}</span>
+            <span class="two"><i class="box">{{item.num}}</i></span>
+            <span class="three">{{item.odd}}</span>
+            <!-- <span style="width:100px;display:inline-block"> 金额:{{item.money}}</span> -->
+          </p>
+        </div>
+      </div>
+      <div style="text-align: center;padding: 10px 0">
+        <span style="margin-right:10px">共选：{{number}}个号码</span>
+        <span style="margin-right:10px">复式共分为：{{team}}组</span>
+        <span>金额合计：{{money}}</span>
+      </div>
+      <div style="padding: 10px 0">
+        <button type="button" v-if="!loading" class="bet_bottom color1" @click="pour()">下注</button>
+        <button type="button" v-else class="bet_bottom color1">下单中...</button>
+        <button type="button" class="bet_bottom color2 font" @click="cancel()">取消</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import api from '../api/config'
+  import algorithm from '../assets/js/split'
+  import share from './share'
+  import mymousewheel from '../assets/js/mousewheel'
+  import {Modal} from 'iview';
+  import '../assets/css/bet.scss';
+  export default {
+    components: {Modal},
+    props: {
+      modal: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        number:'',//注单量
+        loading: false,
+        lists: [],
+        arr: [],
+        qishu: '',
+        money: 0,
+        team:0,
+        go_pour:[]
+      }
+    },
+    created() {
+      this.$root.$on('id-selected-h', (e) => {
+        console.log(e);
+      for (let i = 0; i < e.length; i++) {
+        for (let j = 0; j < e[i].object.length; j++) {
+          //添加金额参数入对象
+//          console.log( e[i].object);
+          let money = e[i].object[j].money;
+          this.arr.push(Object.assign(e[i].object[j], {
+            'money': money
+          }));
+        }
+      }
+      if (this.arr) {
+        this.lists = this.unique(this.arr);
+        let arr = [];
+        for(let i = 0;i < this.lists.length;i++){
+          if(this.lists[i].state){
+            arr.push(this.lists[i])
+          }
+        }
+        this.lists = arr;
+        this.number = arr.length;
+        var moj = 0;
+        //计算金额
+        for (let l = 0; l < this.lists.length; l++) {
+          if (this.lists[l].money) {
+            moj = Number(this.lists[l].money);
+            this.money = moj
+          }
+        }
+        this.computed();
+      }
+    });
+      this.$root.$on('reset', (e) => {
+        this.money = e
+    });
+      this.$root.$on('c_data', (e) => {
+        this.qishu = e.qishu
+    })
+    },
+    mounted(){
+      let bet_happy_modal = document.querySelector(".bet_happy_modal");
+      mymousewheel(bet_happy_modal);
+    },
+    methods: {
+      choose_box: function() {
+        var box_arr = [];
+        for(let i = 0;i < this.lists.length;i++){
+          if(this.lists[i].state){
+            box_arr.push(this.lists[i].num)
+          }
+        }
+        return box_arr
+      },
+      //排列组合输出二维数组
+      computed: function(){
+        var send_data = this.lists;
+        var money_data = {};
+        send_data.forEach(function(e){
+          if(e.money){
+            money_data = e;
+          }
+        });
+        //抽取选中的那种类型
+        let select_type = 0;
+        if(send_data[0].gameplay == "choose_one"){
+          select_type = 1
+        }else if (send_data[0].gameplay == "choose_two") {
+          select_type = 2
+        }else if (send_data[0].gameplay == "choose_three") {
+          select_type = 3
+        }else if (send_data[0].gameplay == "choose_four") {
+          select_type = 4
+        }else if (send_data[0].gameplay == "choose_five") {
+          select_type = 5
+        }else if(send_data[0].gameplay == 'random_choose_two'){
+          select_type = 2
+        }else if(send_data[0].gameplay == 'random_choose_two_group'){
+          select_type = 2
+        }else if(send_data[0].gameplay == 'random_choose_three'){
+          select_type = 3
+        }else if(send_data[0].gameplay == 'random_choose_four'){
+          select_type = 4
+        }else if(send_data[0].gameplay == 'random_choose_five'){
+          select_type = 5
+        }
+        //二维数组转换
+        const newGroup = algorithm.groupSplit(this.choose_box(), select_type);//select_type是选中的是类型,比如2
+        console.log(newGroup);
+        this.team = newGroup.length;
+        this.money = this.money * this.team;
+        let checkedArr = [];
+        newGroup.forEach((item, index) => {
+          checkedArr[index] = JSON.parse(JSON.stringify(money_data));
+          checkedArr[index].input_name = item.join()
+        });
+        console.log(checkedArr);
+        this.go_pour = checkedArr
+      },
+      pour: function() {
+        //去除不必要的key和值
+        // var send_op = [];
+        // for (let l = 0; l < send_data.length; l++) {
+        //   if (send_data[l].money) {
+        //     // console.log(send_data[l]);
+        //     // delete send_data[l].flag;
+        //     // delete send_data[l].num;
+        //     delete send_data[l].number;
+        //     send_op.push(send_data[l]);
+        //   }
+        // };
+        window.pour_status = 1;
+        const body = {
+          fc_type: JSON.stringify(this.$route.query.page),
+          qishu: JSON.stringify(this.qishu),
+          data: JSON.stringify(this.go_pour)
+        };
+        this.loading = true;
+        api.addbet(this, body, (res) => {
+          if (res.data.ErrorCode == 1) {
+          window.pour_status = 2;
+          this.loading = false;
+          this.$Modal.success({
+              content: "下注成功",
+              onOk: () => {
+              this.$root.$emit('success', true);
+              this.$root.$emit('bet_success',true);
+        },
+        });
+        window.setTimeout(() => {
+          this.$root.$emit('success',true);
+          this.$root.$emit('bet_success',true);
+          this.$Modal.remove()
+        }, share.bet_time)
+        }else if(res.data.ErrorCode == 2) {
+          this.loading = false;
+        }
+      })
+      },
+      reset: function() {
+        // this.modal = false;
+        this.lists = [];
+        this.$root.$emit('reset', '');
+      },
+      cancel: function() {
+        this.loading = false;
+        this.$emit('cancel', false)
+      },
+      //数组去重
+      unique: function(arr) {
+        var newArr = [];
+        for (var i in arr) {
+          if (newArr.indexOf(arr[i]) == -1) {
+            newArr.push(arr[i])
+          }
+        }
+        return newArr;
+      }
+    }
+  }
+</script>

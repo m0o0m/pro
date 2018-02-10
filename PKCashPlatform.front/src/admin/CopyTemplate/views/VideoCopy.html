@@ -1,0 +1,168 @@
+<!-- 管理员权限分组列表 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>视讯模板管理</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body">
+                                <div class="widget-body-toolbar">
+                                    <div class="row">
+                                        <div class="col-sm-1 col-sm-offset-11  col-xs-12">
+                                            <div class="input-group pull-right">
+                                                <button type="submit" class="btn btn-primary" ng-click="add()" data-toggle="modal" data-target="#myModal1" >
+                                                    <i class="fa fa-plus"></i> 添加模板
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-align-center">序号</th>
+                                                <th class="text-align-center">名称</th>
+                                                <th class="text-align-center">状态</th>
+                                                <th class="text-align-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-align-center" ng-repeat="item in list">
+                                                <td class="hidden">{{item.id}}</td>
+                                                <td>{{item.num}}</td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.status|fiterStatused}}</td>
+                                                <td>
+                                                    <button class="ids btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="modify(item.id,$index)">
+                                                        修改
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">添加视讯模板</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">模板名称</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control"  type="text"  ng-model="name" placeholder="请输入模板名称">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--代理名称长度5-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">模板序号</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" placeholder="请输入模板序号" type="text" ng-model="number">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--账号长度5-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">状态</label>
+                                <label class="col-md-2 input-label text-left">
+                                    <input type="radio" ng-value="1" name="aa" ng-model="status">
+                                    {{lang['Enables']}}
+                                </label>
+                                <label class="col-md-2 input-label text-left">
+                                    <input type="radio" ng-value="2" name="aa" ng-model="status">
+                                    {{lang['Disable']}}
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit_a()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">修改视讯模板</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">模板名称</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control"  type="text"  ng-model="name_m" placeholder="请输入模板名称">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--代理名称长度5-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">模板序号</label>
+                                <label class="col-md-7 input">
+                                    <input class="form-control" placeholder="请输入模板序号" type="text" ng-model="number_m">
+                                    <!--<b class="tooltip tooltip-top-right">-->
+                                    <!--账号长度5-12位，只能字母和数字组合</b>-->
+                                </label>
+                            </section>
+
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">状态</label>
+                                <label class="col-md-2 input-label text-left">
+                                    <input type="radio" ng-value="1" name="bb" ng-model="status_m" ng-checked="status_m==1">
+                                    {{lang['Enables']}}
+                                </label>
+                                <label class="col-md-2 input-label text-left">
+                                    <input type="radio" ng-value="2" name="bb" ng-model="status_m" ng-checked="status_m==2">
+                                    {{lang['Disable']}}
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit_m(item)">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

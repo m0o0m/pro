@@ -1,0 +1,269 @@
+<template>
+  <div class="eleven_group">
+    <div class="footer1 clearfix">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength="9" style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <div class="e_g_box">
+      <ul v-for="(item,i) in GroupLists">
+        <li class="thend">{{item.name}}</li>
+        <li v-for="(key,k) in item.object" @click="myclick(item,key,i)" :class="{'styleclect':key.flag}" class="num">
+          <i class="ball">
+            {{key.name}}
+          </i>
+        </li>
+      </ul>
+    </div>
+    <div class="footer1 clearfix" style="margin-bottom: 20px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <button type="button" class="one"><span class="left">金额￥</span><I-Input @on-change="change_money()" :maxlength="9" style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </button>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:20px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+  </div>
+</template>
+
+<script>
+import api from "../../../api/config";
+import MeModal from "../../../share_components/bet";
+import {Input, Modal} from 'iview';
+export default {
+  components: { MeModal,'I-Input':Input,Modal},
+  data() {
+    return {
+      money: "",
+      modal: false
+    };
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': 'reset'   // 只有这个页面初始化之后，这个监听事件才开始生效
+  },
+  props: ["cdata", "GroupType", "GroupLists"],
+  created() {
+    this.$root.$on("success", e => {
+      if (e) {
+        this.modal = false;
+        this.reset();
+      }
+    });
+    this.reset();
+  },
+  methods: {
+    myclick(item, key, i) {
+      this.columnClaic(item, key, i);
+    },
+    cancel: function(item) {
+      this.modal = false;
+      document.querySelector("body").style.overflow = "auto";
+    },
+    push_money: function() {
+      this.money = this.money.replace(/\D/g, "");
+      this.computed_money();
+    },
+    change_money: function () { this.computed_money() },
+    go_to: function() {
+      let a = this.money + 'a';
+      this.money = a.replace(/\D/g, "");
+      var flag = false;
+      var flag2 = false;
+      var prompt = 0;
+      var prompt2 = 0;
+
+      if (this.GroupLists[0].arr.length == 2) {
+        this.GroupType[0].object[0].input_name = "";
+        let input_name =
+          this.GroupLists[0].arr[0].name + "," + this.GroupLists[0].arr[1].name;
+        flag = true;
+        this.GroupType[0].object[0].input_name = input_name;
+        this.GroupType[0].object[0].flag = true;
+        this.GroupType[0].object[0].money = this.money;
+      } else if (this.GroupLists[0].arr.length == 0) {
+        flag = true;
+      } else {
+        flag = false;
+        prompt = 1;
+      }
+
+      if (this.GroupLists[1].arr.length == 3) {
+        this.GroupType[0].object[1].input_name = "";
+        let input_name =
+          this.GroupLists[1].arr[0].name +
+          "," +
+          this.GroupLists[1].arr[1].name +
+          "," +
+          this.GroupLists[1].arr[2].name;
+        flag2 = true;
+        this.GroupType[0].object[1].input_name = input_name;
+        this.GroupType[0].object[1].flag = true;
+        this.GroupType[0].object[1].money = this.money;
+      } else if (this.GroupLists[1].arr.length == 0) {
+        flag2 = true;
+      } else {
+        flag2 = false;
+        prompt2 = 1;
+      }
+
+      if (flag2 && flag) {
+        // console.log(this.GroupType)
+        var kk = 0;
+        for (let i = 0; i < this.GroupType.length; i++) {
+          for (let j = 0; j < this.GroupType[i].object.length; j++) {
+            let b = this.GroupType[i].object[j].money + 'b';
+            this.GroupType[i].object[j].money = b.replace(/\D/g, "");
+            kk += Number(this.GroupType[i].object[j].money);
+          }
+        }
+
+        if (kk != 0) {
+          this.modal = true;
+          this.$root.$emit("c_data", this.cdata);
+          this.$root.$emit("id-selected", this.GroupType);
+          document.querySelector("body").style.overflow = "hidden";
+        } else if (kk == 0) {
+          this.$Modal.warning({
+            content: "请先下注"
+          });
+          window.setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        }
+      } else {
+        if (prompt && prompt2) {
+          clearTimeout(time);
+          this.$Modal.warning({
+            content: "组选前二和组选三少选了球",
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        } else if (prompt) {
+          clearTimeout(time);
+          this.$Modal.warning({
+            content: "前二组最少选择2个号码",
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        } else {
+          clearTimeout(time);
+          this.$Modal.warning({
+            content: "前三组最少选择3个号码",
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        }
+      }
+    },
+    computed_money() {
+      for (let i = 0; i < this.GroupLists.length; i++) {
+        for (let j = 0; j < this.GroupLists[i].object.length; j++) {
+          if (this.GroupLists[i].object[j].flag) {
+            this.GroupLists[i].object[j].money = this.money;
+          } else {
+            this.GroupLists[i].object[j].money = "";
+          }
+        }
+      }
+    },
+    reset: function() {
+      console.log('change');
+      for (let i = 0; i < this.GroupLists.length; i++) {
+        this.GroupLists[i].arr = [];
+        for (let j = 0; j < this.GroupLists[i].object.length; j++) {
+          this.GroupLists[i].object[j].money = "";
+          this.GroupLists[i].object[j].flag = false;
+        }
+      }
+      if(this.GroupType.length != 0){
+        for (let i = 0; i < this.GroupType[0].object.length; i++) {
+          this.GroupType[0].object[i].flag = false;
+          this.GroupType[0].object[i].money = "";
+        }
+      }
+      this.money = "";
+      this.$root.$emit("reset", "");
+    },
+    columnClaic(item, key, i) {
+      var k = i + 1;
+      if (item.arr.length < k + 1) {
+        var flag = true;
+        for (let i = 0; i < item.arr.length; i++) {
+          if (item.arr[i].name == key.name) {
+            flag = !flag;
+            key.money = "";
+            item.arr.splice(i, 1);
+            key.flag = false;
+          }
+        }
+        if (flag) {
+          key.money = this.money;
+          item.arr.push(key);
+          key.flag = true;
+        }
+      } else {
+        var flag = true;
+        for (let i = 0; i < item.arr.length; i++) {
+          if (item.arr[i].name == key.name) {
+            item.arr.splice(i, 1);
+            key.flag = false;
+            flag = !flag;
+            key.money = "";
+            break;
+          }
+        }
+        if (flag) {
+          clearTimeout(time);
+          this.$Modal.warning({
+            content: "只能选" + (k + 1) + "个",
+            onOk: () => {
+              clearTimeout(time);
+            }
+          });
+          var time = setTimeout(() => {
+            this.$Modal.remove();
+          }, 500);
+        }
+      }
+    },
+    add_money: function(type) {
+      let money = this.money;
+      this.money = Number(money) + type;
+      this.computed_money();
+    }
+  }
+};
+</script>
+
+<style lang="scss" src="../../../assets/css/eleven_group.scss" scoped>
+
+</style>

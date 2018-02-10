@@ -1,0 +1,432 @@
+<template>
+  <div class="or">
+    <div class="footer1" style="padding-right: 0px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <div class="one"><span class="left">金额￥</span><I-Input :value="money" @on-blur="onblur_top(0)"  @on-focus="onfocus_top(0)" @on-change="change_money()" :maxlength="9" style="width: 100px" size="small" v-model="money"  @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </div>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:16px;" @click="reset()">重置</button>
+    </div>
+    <div class="top">
+      <div class="my_table">
+        <div class="tab_top">
+          和值
+        </div>
+        <div class="all_body">
+          <div class="table" v-for="item in top_lists">
+            <ul :class="['my_ul',key.flag?'table-current':'']" v-for="(key,i) in item.object">
+              <li class="one" @click="top_click(key,i)" v-if="i < 4">{{key.input_name}}</li>
+              <li class="one" @click="top_click(key,i)" v-else-if="i == 4">{{key.num}}</li>
+              <li class="two" @click="top_click(key,i)">{{key.odd}}</li>
+              <li class="three" @click.self="top_click(key,i)">
+                <I-Input @on-keydown="tab_now(key)" :value="key.money" @on-blur="onblur(key)" @on-change="onchange(key)" :maxlength="9" ref="top" style="width: 60px" v-model="key.money" size="small" @on-focus="onfocus(key)" @on-keyup="gogo(key)" @on-afterpaste="gogo(key)"></I-Input>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="list_center">
+      <div class="my_table">
+        <div class="tab_top">
+          两连
+        </div>
+        <div class="all_body">
+          <div class="table" v-for="item in center_lists">
+            <ul :class="['my_ul',key.flag?'table-current':'']" v-if="key.odd" v-for="(key,i) in item.object">
+              <li class="one" @click="center_click(key,i)">{{key.input_name}}</li>
+              <li class="two" @click="center_click(key,i)">{{key.odd}}</li>
+              <li class="three" @click.self="center_click(key,i)">
+                <I-Input @on-keydown="tab_now(key)" :value="key.money" @on-blur="onblur1(key)" @on-change="onchange(key)" :maxlength="9" ref="center" style="width: 60px" v-model="key.money" size="small" @on-focus="onfocus1(key)" @on-keyup="gogo(key)" @on-afterpaste="gogo(key)"></I-Input>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="my_table" v-for="item in bottom_lists">
+        <div class="tab_top">
+            {{item.name}}
+        </div>
+        <ul :class="['my_ul',key.flag?'table-current':'']" v-for="(key,i) in item.object">
+          <li class="one" @click="bottom_click(key,i)" v-if="i==6">{{key.num}}</li>
+          <li class="one" @click="bottom_click(key,i)" v-else>{{key.input_name}}</li>
+          <li class="two" @click="bottom_click(key,i)">{{key.odd}}</li>
+          <li class="three" @click.self="bottom_click(key,i)">
+            <!-- <input ref="bottom" type="text" v-model="key.item"/> -->
+            <I-Input @on-keydown="tab_now(key)" :value="key.money" @on-blur="onblur2(key)" @on-change="onchange(key)" :maxlength="9" ref="bottom" style="width: 60px" v-model="key.money" size="small" @on-focus="onfocus2(key)" @on-keyup="gogo(key)" @on-afterpaste="gogo(key)"></I-Input>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer1" style="padding-right: 0px">
+      <div class="img">
+        <span class="s1" @click="add_money(10)"></span>
+        <span class="s2" @click="add_money(20)"></span>
+        <span class="s3" @click="add_money(50)"></span>
+        <span class="s4" @click="add_money(100)"></span>
+        <span class="s5" @click="add_money(500)"></span>
+        <span class="s6" @click="add_money(1000)"></span>
+      </div>
+      <div class="one"><span class="left">金额￥</span><I-Input :value="money" @on-focus="onfocus_top(1)"  @on-blur="onblur_top(1)" @on-change="change_money()" :maxlength="9" style="width: 100px" size="small" v-model="money" @on-keyup="push_money()" @on-afterpaste="push_money()"></I-Input>
+      </div>
+      <button type="button" class="two" style="padding: 8px;" @click="go_to()">立即下注</button>
+      <button type="button" class="two" style="padding: 8px;margin-right:16px;" @click="reset()">重置</button>
+    </div>
+    <Me-Modal :modal="modal" @cancel="cancel"></Me-Modal>
+  </div>
+</template>
+
+<script>
+import back_data from './back_data'
+import api from '../../../api/config'
+import MeModal from '../../../share_components/bet'
+import {Input, Modal} from 'iview';
+import hint from '../../../share_components/hint_msg'
+import share from '../../../share_components/share'
+export default {
+  components: { MeModal,'I-Input':Input,Modal},
+  data() {
+    return {
+      money: '',
+      modal: false,
+      a:''
+    }
+  },
+  props:{
+    top_lists:{
+      type:Array
+    },
+    center_lists:{
+      type:Array
+    },
+    bottom_lists:{
+      type:Array
+    }
+  },
+  created() {
+    this.reset();
+    this.$root.$on('success',(e)=>{
+      if(e){
+        this.modal = false;
+        this.reset()
+      }
+    });
+    this.$root.$on('this_money',(e)=>{
+        this.money = e
+    });
+  },
+  mounted(){
+    this.$root.$emit('no_top', false);
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': 'reset',   // 只有这个页面初始化之后，这个监听事件才开始生效
+    a: function (new_val,old_val) {
+        if(new_val != old_val){
+            this.$root.$emit('clear_key_number','')
+        }
+    },
+    money: function(new_val,old_val){
+        if(new_val != old_val){
+            this.computed_money()
+        }
+    }
+  },
+  methods: {
+    top_click: function(item, i) {
+      console.log(item);
+      console.log(item.flag);
+      if(item.money && item.flag == true){
+        item.flag = false;
+        item.money = '';
+        this.$refs.top[item.index].blur();
+        this.$refs.top[item.index].$refs.input.value = '';
+      }else if(item.money == '' && item.flag == false){
+        this.$refs.top[item.index].focus();
+      }else if (item.flag == true && item.money == ''){
+        item.flag = false;
+        this.$refs.top[item.index].$refs.input.value = '';
+      }else if (item.flag == true){
+        item.money = this.money;
+      }
+    },
+      center_click: function(item, i) {
+          console.log(item);
+          console.log(this.$refs.center);
+          if(item.money && item.flag == true){
+              item.flag = false;
+              item.money = '';
+              this.$refs.center[item.index].blur();
+              this.$refs.center[item.index].$refs.input.value = '';
+          }else if(item.money == '' && item.flag == false){
+              this.$refs.center[item.index].focus();
+          }else if (item.flag == true && item.money == ''){
+              item.flag = false;
+              this.$refs.center[item.index].$refs.input.value = '';
+          }else if (item.flag == true){
+              item.money = this.money;
+          }
+      },
+      bottom_click: function(item, i) {
+          console.log(item);
+          console.log(item.flag);
+          if(item.money && item.flag == true){
+              item.flag = false;
+              item.money = '';
+              this.$refs.bottom[item.index].blur();
+              this.$refs.bottom[item.index].$refs.input.value = '';
+          }else if(item.money == '' && item.flag == false){
+              this.$refs.bottom[item.index].focus();
+          }else if (item.flag == true && item.money == ''){
+              item.flag = false;
+              this.$refs.bottom[item.index].$refs.input.value = '';
+          }else if (item.flag == true){
+              item.money = this.money;
+          }
+      },
+    onfocus: function(item){
+      this.$refs.top[item.index].$refs.input.data_onoff = 'true';
+      this.a = item.index;
+      let dom = document.querySelectorAll('input');
+      for(let i = 0;i < dom.length;i++){
+          if(i != item.index+1) {
+              dom[i].data_onoff = 'false';
+          }
+      }
+      if(item.flag == false && item.money == ''){
+        item.flag = true;
+        item.money = this.money;
+      }
+    },
+      onfocus1: function(item){
+          this.$refs.center[item.index].$refs.input.data_onoff = 'true';
+          this.a = item.index;
+          let dom = document.querySelectorAll('input');
+          for(let i = 0;i < dom.length;i++){
+              if(i != item.index+21) {
+                  dom[i].data_onoff = 'false';
+              }
+          }
+          if(item.flag == false && item.money == ''){
+              item.flag = true;
+              item.money = this.money;
+          }
+      },
+      onfocus2: function(item){
+          this.$refs.bottom[item.index].$refs.input.data_onoff = 'true';
+          this.a = item.index;
+          let dom = document.querySelectorAll('input');
+          for(let i = 0;i < dom.length;i++){
+              if(i != item.index+36) {
+                  dom[i].data_onoff = 'false';
+              }
+          }
+          if(item.flag == false && item.money == ''){
+              item.flag = true;
+              item.money = this.money;
+          }
+      },
+      onblur: function (key) {
+          key.money = this.$refs.top[key.index].$refs.input.value;
+          console.log('选中后的金额：'+key.money);
+      },
+      onblur1: function (key) {
+          key.money = this.$refs.center[key.index].$refs.input.value;
+          console.log('选中后的金额：'+key.money);
+      },
+      onblur2: function (key) {
+          key.money = this.$refs.bottom[key.index].$refs.input.value;
+          console.log('选中后的金额：'+key.money);
+      },
+      onfocus_top: function(index){
+          let dom = document.querySelectorAll('input');
+          this.a = 99;
+          if(index == 0){
+              index=0
+          }else{
+              index=dom.length-1;
+          }
+          for(let i = 0;i < dom.length;i++){
+              if(i != index) {
+                  dom[i].data_onoff = 'false';
+              }else{
+                  dom[i].data_onoff = 'true'
+              }
+          }
+      },
+      onblur_top: function(index){
+          let dom = document.querySelectorAll('input');
+          if(index == 0){
+              index=0
+          }else{
+              index=dom.length-1;
+          }
+        if(dom[index].value != 'on'){
+          this.money = dom[index].value;
+        }
+      },
+    //按键tab
+    tab_now: function(key) {
+      if (!key.money) {
+        key.flag = false;
+      } else if (key.money) {
+        key.flag = true;
+      }
+    },
+    //监听input值得变化
+    onchange: function(key) {
+      if (!key.money) {
+        key.flag = false;
+      } else if (key.money) {
+        key.flag = true;
+      }
+    },
+    //每个球对应的输入框
+    gogo: function(key) {
+      key.money = key.money.replace(/\D/g, "");
+    },
+    go_to: function() {
+      let a = this.money + 'a';
+      this.money = a.replace(/\D/g, "");
+      var kk = 0;
+      var ll = 0;
+      var mm = 0;
+      var is_select = false;
+      for (let i = 0; i < this.top_lists.length; i++) {
+        for (let j = 0; j < this.top_lists[i].object.length; j++) {
+          let b = this.top_lists[i].object[j].money + 'b';
+          this.top_lists[i].object[j].money = b.replace(/\D/g, "");
+          kk += Number(this.top_lists[i].object[j].money);
+          if(this.top_lists[i].object[j].flag){
+            is_select = true
+          }
+        }
+      };
+      for (let i = 0; i < this.center_lists.length; i++) {
+        for (let j = 0; j < this.center_lists[i].object.length; j++) {
+          let c = this.center_lists[i].object[j].money + 'c';
+          this.center_lists[i].object[j].money = c.replace(/\D/g, "");
+          ll += Number(this.center_lists[i].object[j].money);
+          if(this.center_lists[i].object[j].flag){
+            is_select = true
+          }
+        }
+      };
+      for (let i = 0; i < this.bottom_lists.length; i++) {
+        for (let j = 0; j < this.bottom_lists[i].object.length; j++) {
+          let d = this.bottom_lists[i].object[j].money + 'd';
+          this.bottom_lists[i].object[j].money = d.replace(/\D/g, "");
+          mm += Number(this.bottom_lists[i].object[j].money);
+          if(this.bottom_lists[i].object[j].flag){
+            is_select = true
+          }
+        }
+      };
+      console.log('kk:' + kk);
+      if(is_select){
+        if (kk != 0 || ll != 0 || mm != 0) {
+          this.modal = true;
+//          document.querySelector('body').style.overflow='hidden';
+          var arr = this.top_lists.concat(this.center_lists,this.bottom_lists);
+          console.log(arr);
+          this.$root.$emit('id-selected', arr);
+        } else if (kk == 0 && ll == 0 && mm == 0) {
+          this.$Modal.warning({
+            content: hint.money_null
+          });
+          window.setTimeout(() => {
+            this.$Modal.remove()
+          }, share.Prompt)
+        }
+      }else{
+        this.$Modal.warning({
+          content: hint.all_null
+        });
+        window.setTimeout(() => {
+          this.$Modal.remove()
+        }, share.Prompt)
+      }
+    },
+    cancel: function(item) {
+      this.modal = false;
+      document.querySelector('body').style.overflow='auto'
+    },
+    push_money: function() {
+      // this.disabled = true;
+      this.money = this.money.replace(/\D/g, "");
+      this.computed_money()
+    },
+    change_money: function () { this.computed_money() },
+    add_money: function(type){
+      let money = this.money;
+      this.money = Number(money) + type;
+      this.computed_money()
+    },
+    //处理金额
+    computed_money: function(){
+      for (let i = 0; i < this.top_lists.length; i++) {
+        for (let j = 0; j < this.top_lists[i].object.length; j++) {
+          //添加金额参数入对象
+          if (this.top_lists[i].object[j].flag) {
+            this.top_lists[i].object[j].money = this.money
+          }
+        }
+      };
+      for (let i = 0; i < this.center_lists.length; i++) {
+        for (let j = 0; j < this.center_lists[i].object.length; j++) {
+          //添加金额参数入对象
+          if (this.center_lists[i].object[j].flag) {
+            this.center_lists[i].object[j].money = this.money
+          }
+        }
+      };
+      for (let i = 0; i < this.bottom_lists.length; i++) {
+        for (let j = 0; j < this.bottom_lists[i].object.length; j++) {
+          //添加金额参数入对象
+          if (this.bottom_lists[i].object[j].flag) {
+            this.bottom_lists[i].object[j].money = this.money
+          }
+        }
+      };
+    },
+    reset: function() {
+      for (let i = 0; i < this.top_lists.length; i++) {
+        for (let j = 0; j < this.top_lists[i].object.length; j++) {
+          this.top_lists[i].object[j].money = '';
+          this.top_lists[i].object[j].flag = '';
+        }
+      };
+      for (let i = 0; i < this.center_lists.length; i++) {
+        for (let j = 0; j < this.center_lists[i].object.length; j++) {
+          this.center_lists[i].object[j].money = '';
+          this.center_lists[i].object[j].flag = '';
+        }
+      };
+      for (let i = 0; i < this.bottom_lists.length; i++) {
+        for (let j = 0; j < this.bottom_lists[i].object.length; j++) {
+          this.bottom_lists[i].object[j].money = '';
+          this.bottom_lists[i].object[j].flag = '';
+        }
+      };
+      this.money = '';
+      this.$root.$emit('reset', '');
+      let dom = document.querySelectorAll('input');
+      for(let i = 0;i < dom.length;i++){
+          dom[i].value = '';
+          dom[i].data_onoff = 'false';
+      }
+      this.$root.$emit('clear_key_number','')
+    },
+  },
+}
+</script>
+<style lang="scss" src="../../../assets/css/happy_three.scss" scoped></style>

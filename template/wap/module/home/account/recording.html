@@ -1,0 +1,162 @@
+<!-- <!doctype html> -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>Pk</title>
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/weui.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/fonts/iconfont.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/jquery-weui.min.css" type="text/css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/reset.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/mescroll.min.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/admin.css">
+    <link rel="stylesheet" href="{{.CdnUrl}}/wap/style/css/recording.css">
+</head>
+<style>
+
+    #mescroll{
+        bottom: 0;
+        top: 80px;
+    }
+    .head-h{
+        height: auto;
+    }
+
+</style>
+<body ontouchstart>
+<header class="head-h">
+    <ul class="h-head">
+        <li>
+            <a>
+                <i class="iconfont wap-fanhui"></i>
+            </a>
+        </li>
+        <li>
+            <h2>交易记录</h2>
+        </li>
+        <li>
+            <a href="/m/index">首页</a>
+        </li>
+    </ul>
+    <nav class="h-infornav1">
+        <li class="curr"><a>投注记录</a></li>
+        <li id="cashRecord"><a>交易记录</a></li>
+        <li id="proApply"><a>优惠申请</a></li>
+    </nav>
+</header>
+<div id="mescroll" class="mescroll">
+
+        <div class="report-c">
+
+                <div class="report-item show">
+                    <div class="h-recora">
+                    {{range .ProductList}}
+                        <li value="{{.Id}}" {{if eq .Id 1}} class="curr"{{end}} ><a>{{.Title}}</a></li>
+                    {{end}}
+                    </div>
+                    <div class="record-content-c">
+                    {{range  .ProductList}}
+                        <div class="record-main-c {{if eq .Id 1}}show{{end}}">
+                        {{range .Children}}
+                            <div class="record-ul">
+                                <p class="record-ul-p" vType="{{.VType}}" stat="0">
+                                    <span><i class="iconfont" style="color:#ff831f">&#xe600;</i>{{.ProductName}}</span>
+                                    <span class="iconfont icon-return-copy arrow
+                                    "></span>
+                                </p>
+                                <ul>
+                                </ul>
+                            </div>
+                        {{end}}
+                        </div>
+                    {{end}}
+                    </div>
+                </div>
+                <div class="report-item">
+                    <div class="tranding-record-h">
+                        <div>
+                            <span>交易选项:</span>
+                            <select name="source_type" id="source_type">
+                                <option value="99" selected="selected">全部</option>
+                                <option value="0">存入</option>
+                                <option value="1">会员返佣</option>
+                                <option value="2">线上入款</option>
+                                <option value="3">取出</option>
+                                <option value="4">线上取款</option>
+                                <option value="5">线上出款</option>
+                                <option value="6">注册优惠</option>
+                                <option value="7">下单</option>
+                                <option value="8">额度转换</option>
+                                <option value="9">优惠返水</option>
+                                <option value="10">自助返水</option>
+                                <option value="11">会员返佣</option>
+                                <option value="12">红包</option>
+                                <option value="13">入款监控</option>
+                            </select>
+                            <button id="record-search">搜索</button>
+                        </div>
+                        <div class="tranding-record-date">
+                            <span><i>开始时间:</i><input type="text" value="" name="start_time" id='my1'/></span>
+                            <span><i>结束时间:</i><input type="text" value="" name="end_time" id='my2'/></span>
+                        </div>
+                    </div>
+                    <div class="report-scroll-c">
+                            <ul class="record-total-h">
+                                <li class="p-flex-l">时间</li>
+                                <li>类型</li>
+                                <li>交易额度</li>
+                                <li>优惠金额</li>
+                                <li>操作后金额</li>
+                            </ul>
+                            <ul  id="record-total-ul">
+    
+                            </ul>
+                    </div>
+                </div>
+                <div class="report-item">
+                    <div class="tranding-record-h">
+                        <div>
+                            <span>活动类别:</span>
+                            <select id="apply-title-list">
+                            </select>
+                            <button id="apply-search">搜索</button>
+                        </div>
+                        <div class="tranding-record-date">
+                            <span><i>开始时间:</i><input type="text" value="" name="start_time" id='my3'/></span>
+                            <span><i>结束时间:</i><input type="text" value="" name="end_time" id='my4'/></span>
+                        </div>
+                    </div>
+                    <div class="report-scroll-c">
+                        <div>
+                            <ul class="record-total-h">
+                                <li class="p-flex-l">活动标题</li>
+                                <li>申请时间</li>
+                                <li>申请金额</li>
+                                <li>实际金额</li>
+                                <li>状态</li>
+                            </ul>
+                            <div id="apply-total-data">
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+</body>
+<script>
+    var cdnUrl = "{{.CdnUrl}}";
+</script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-2.1.4.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/jquery-weui.min.js"></script>
+<!-- <script src="{{.CdnUrl}}/wap/style/js/iscroll.js"></script> -->
+<script src="{{.CdnUrl}}/wap/style/js/mescroll.min.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/admin.js"></script>
+<script src="{{.CdnUrl}}/wap/style/js/recording.js"></script>
+
+</html>

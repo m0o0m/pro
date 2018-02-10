@@ -1,0 +1,4 @@
+﻿index---取款中心
+complete---取款完成
+carry---取款中
+carry-two---取款中2

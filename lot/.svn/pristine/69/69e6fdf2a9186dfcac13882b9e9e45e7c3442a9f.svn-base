@@ -1,0 +1,23 @@
+package global
+
+type XmlConfigApp struct {
+	Name         string           `xml:"name,attr"`
+	LogWriterCfg XmlConfigLogfile `xml:"logwriter"`
+	Port         int              `xml:"port"`
+	MD5Key       string           `xml:"md5key"`
+	DESKey       string           `xml:"deskey"`
+	ListeningAdd string           `xml:"listeningAdd"`
+	SendAdd      string           `xml:"sendAdd"`
+	Redis        XmlConfigRedis   `xml:"redis"`
+}
+
+type XmlConfigLogfile struct {
+	LogMaxSize int64  `xml:"LogMaxSize"`
+	LogPath    string `xml:"LogPath"`
+	LogLevel   string `xml:"LogLevel"`
+}
+
+type XmlConfigRedis struct {
+	Host     string `xml:"host"`
+	Password string `xml:"password"`
+}

@@ -1,0 +1,6 @@
+﻿bank---存款 网银
+WeChat---存款 微信
+card---存款 点卡
+Fast--快捷支付
+carry--已提交
+finished---返回结果 成功

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <meta name=format-detection content="telephone=no">
+  <meta name=screen-orientation content=portrait>
+  <meta name=x5-fullscreen content=true>
+  <meta name=x5-orientation content=portrait>
+  <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <link rel=stylesheet type=text/css href=http://pkcdn.pk1358.com/wap/static/font_427291_qzgxkycd1mj9k9/iconfont.css>
+  <script src=http://pkcdn.pk1358.com/wap/static/am-flexible.js></script>
+  <script src=./config.js></script>
+  <title>PK彩票</title>
+  <style>
+    #loading {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      position: fixed;
+      opacity: 0.7;
+      z-index: 99;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .loading-image {
+      width: 100px;
+      height: 100px;
+      z-index: 100;
+    }
+
+    .mint-indicator-mask {
+      top: 50px !important;
+      bottom: 50px !important;
+      height: auto !important;
+    }
+  </style>
+  <link href=http://pkcdn.pk1358.com/wap/static/css/app.93664972b36674080c245395beb37b12.css rel=stylesheet>
+</head>
+
+<body>
+  <div id=app>
+    <div id=loading><img class=loading-image src=http://pkcdn.pk1358.com/wap/static/img/loading.gif alt=Loading...></div>
+  </div>
+  <script type=text/javascript src=http://pkcdn.pk1358.com/wap/static/js/manifest.38e496f883575c0d03f0.js></script>
+  <script type=text/javascript src=http://pkcdn.pk1358.com/wap/static/js/vendor.88cba64231994cf1d810.js></script>
+  <script type=text/javascript src=http://pkcdn.pk1358.com/wap/static/js/app.cc7bbee47a7e291c90f3.js></script>
+</body>
+
+</html>

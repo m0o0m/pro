@@ -1,0 +1,1014 @@
+{{define "member_index"}}
+{{template "memberheader" .}}
+{{/*<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/loading.js"></script>*/}}
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/load.js"></script>
+<link rel="stylesheet" href="{{.Header.CdnUrl}}/theme3/public/shared/member/css/vip.css" type="text/css">
+<style>
+.dialog-c .icon-iconfontroundclosefill{
+    width: 30px;
+    height: 30px;
+    right: -8px;
+    top: -12px;
+}
+.icon-iconfontroundclosefill:before{
+    font-size:30px;
+}
+
+.iconRefresh {
+    -webkit-transition: all 2s;
+    transition: all 2s;
+    display: inline-block;
+}
+
+.Refresh{
+    transform: rotate(720deg)
+}
+.paddl{
+    padding-left: 5px;
+}
+#page-body .one-top-left p{
+    margin-top: 4px;
+}
+#page-body .one-top-left p.clearfix{
+    padding: 0 20px 0 32px;
+}
+#page-body .one-top-left p a{
+    width: 45%;
+    display: inline-block;
+    height: 20px;
+    text-align: center;
+    border-radius: 7px;
+    background: #e85036;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    cursor: pointer;
+}
+#page-body .one-top-left p a:first-child {
+    margin: 0 5px 0 7px;
+}
+
+#page-body .RefreshButton{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+}
+#page-body .one-top-left p .icon-ren{
+    margin-top: 3px;
+}
+#page-body .one-top-left p .icon-qiandai{
+    margin-top: 1px;
+}
+/* iconfont icon-qiandai fl
+iconfont icon-ren fl */
+#page-body .RefreshButton img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+}
+
+.bank-ul li p{
+    height: 28px;
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+}
+#page-body  .birthday-x{
+    position: relative;
+}
+#page-body #schedule-box-x{
+    top: 15px;
+    left: 50px;
+}
+
+#page-body .bank-ul{
+    margin-top: 0px;
+}
+.right-b-r{
+    margin-top: 24px;
+}
+#page-body .birthday-x input[type="text"]{
+        cursor: pointer;
+    }
+</style>
+<div class="">
+    <div class="vip-bar-1">
+        <div class="vip-bar-item show">
+            <div class="bar-one">
+                <div class="one-top">
+                    <div class="one-top-left">
+                        <div>
+                            <span>
+                                <img src="{{.Header.CdnUrl}}/theme3/public/shared/member/image/timg.jpg" alt="">
+                            </span>
+                            <span></span>
+                            <span class="left-top-span"></span>
+                        </div>
+                        <p class="clearfix">
+                            <i class="iconfont icon-ren fl"></i>
+                            <span class="self-margin fl"></span>
+                        </p>
+                        <p class="clearfix">
+                            <i class="iconfont icon-qiandai fl"></i>
+                            <span class="self-margin fl"></span>
+                            <i class="RefreshButton fr" style="cursor:pointer;">
+                                <img src="{{.Header.CdnUrl}}/theme3/public/shared/member/image/4.png" alt="">
+                            </i>
+                        </p>
+                        <p><a class="modify-pas">修改密码</a><a class="modify-info">基础资料</a></p>
+                    </div>
+                    <div class="one-top-right">
+                        <div class="one-right-top">
+                            <p>
+                                <span>注册时间：</span>
+                                <span class="one-right-top-span">2017-10-11 12:12:12</span>
+                                <span>最后登录时间</span>：
+                                <span>2017-10-11 12:12:12</span>
+                            </p>
+                            <!-- <di class="modify-data">修改资料</di> -->
+                        </div>
+                        <div class="one-right-bottom clearfix">
+                            <div class="right-b-l fl">
+                                <p>
+                                    <span class="iconfont icon-shouji"></span>
+                                    <input type="text" value="" readonly>
+                                    <!-- <span class="iconfont icon-jiahao tel"></span> -->
+                                </p>
+                                <p>
+                                    <span class="iconfont icon-xiaoxi"></span>
+                                    <input type="text" value="" readonly>
+                                    <!-- <span class="iconfont icon-jiahao email"></span> -->
+                                </p>
+                                <p>
+                                    <span class="iconfont icon-liwu"></span>
+                                    <input type="text" value="" readonly>
+                                    <!-- <span class="iconfont icon-jiahao birthday"></span> -->
+                                </p>
+                                <!-- <di class="modify-data" style="width:  238px;">修改密码</di> -->
+                            </div>
+                            <div class="right-b-r fr">
+                                <ul class="bank-ul clear">
+                                    <!-- <li></li>
+                                    <li></li>
+                                    <li></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-bottom">
+                    <ul class="one-bottom-tab clearfix">
+                        <li class="one-bottom-tab-item transaction-active fl">今日交易</li>
+                        {{if eq .IsSelf 1}}<li class="one-bottom-tab-item fl" onclick="IsSelfReturn();">自助返水</li>{{end}}
+                    </ul>
+                    <div class="one-bottom-c-e">
+                        <div class="one-bottom-c show">
+                            <div class="one-bottom-content">
+                                <ul class="one-bottom-head my-theme">
+                                    <li class="fl one-bottom-hl">交易时间</li>
+                                    <li class="fl one-bottom-hl">金额</li>
+                                    <li class="fl one-bottom-hl">类型</li>
+                                    <li class="fl one-bottom-hl">交易类型</li>
+                                    <li class="fl one-bottom-hl">现有金额</li>
+                                    <li class="fl one-bottom-hr">备注</li>
+                                </ul>
+                                <ul class=" one-bottom-f">
+                                    <!-- <li>
+                                        <p class="fl one-bottom-hl">2017-11-13<br>12:12:12
+                                        </p>
+                                        <div class="one-bottom-hl fl font-size-red">10000.00</div>
+                                        <div class="one-bottom-hl fl">快捷存款</div>
+                                        <div class="one-bottom-hl fl">取出</div>
+                                        <div class="one-bottom-hl fl">10.00</div>
+                                        <p class="fl one-bottom-hr">
+                                            <span>自动结算单号：1234356465767</span><br>
+                                            <span>类型： 福彩3D</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="fl one-bottom-hl">2017-11-13<br>12:12:12
+                                        </p>
+                                        <div class="one-bottom-hl fl font-size-red">10000.00</div>
+                                        <div class="one-bottom-hl fl">快捷存款</div>
+                                        <div class="one-bottom-hl fl">取出</div>
+                                        <div class="one-bottom-hl fl">10.00</div>
+                                        <p class="fl one-bottom-hr">
+                                            <span>自动结算单号：1234356465767</span><br>
+                                            <span>类型： 福彩3D</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="fl one-bottom-hl">2017-11-13<br>12:12:12
+                                        </p>
+                                        <div class="one-bottom-hl fl font-size-red">10000.00</div>
+                                        <div class="one-bottom-hl fl">快捷存款</div>
+                                        <div class="one-bottom-hl fl">取出</div>
+                                        <div class="one-bottom-hl fl">10.00</div>
+                                        <p class="fl one-bottom-hr">
+                                            <span>自动结算单号：1234356465767</span><br>
+                                            <span>类型： 福彩3D</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="fl one-bottom-hl">2017-11-13<br>12:12:12
+                                        </p>
+                                        <div class="one-bottom-hl fl font-size-red">10000.00</div>
+                                        <div class="one-bottom-hl fl">快捷存款</div>
+                                        <div class="one-bottom-hl fl">取出</div>
+                                        <div class="one-bottom-hl fl">10.00</div>
+                                        <p class="fl one-bottom-hr">
+                                            <span>自动结算单号：1234356465767</span><br>
+                                            <span>类型： 福彩3D</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="fl one-bottom-hl">2017-11-13<br>12:12:12
+                                        </p>
+                                        <div class="one-bottom-hl fl font-size-red">10000.00</div>
+                                        <div class="one-bottom-hl fl">快捷存款</div>
+                                        <div class="one-bottom-hl fl">取出</div>
+                                        <div class="one-bottom-hl fl">10.00</div>
+                                        <p class="fl one-bottom-hr">
+                                            <span>自动结算单号：1234356465767</span><br>
+                                            <span>类型： 福彩3D</span>
+                                        </p>
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="one-bottom-c">
+                            <div class="water-h clearfix">
+                                <p class="fl font-size-green">当日已返水金额：<span class="font-size-red" id="hasreturn">0.00</span>元</p>
+                                <div class="fr water-h-r">
+                                    <span class="water-amount" onclick="GetAllBet();"><i class="iconfont icon-sousuo1 paddl"></i><i class="paddl">返水额度</i></span>
+                                    <span onclick="ReturnMoney();" class="water-receive">全部领取</span>
+                                </div>
+                            </div>
+                            <div class="one-bottom-content">
+                                <ul class="one-bottom-head">
+                                    <li class="fl one-water-hl">返水模块</li>
+                                    <li class="fl one-water-hl">返水比例</li>
+                                    <li class="fl one-water-hl">有效投注</li>
+                                    <li class="fl one-water-hl">返水金额</li>
+                                </ul>
+                                <ul class="one-bottom-f" id="firstReturnDate">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<div class="my-dialog">
+    <div class="dialog-c">
+
+        <div class="one-tel-dialog">
+            <div class="dialog-add-tel">修改手机</div>
+            <div class="dialog-bottom-c">
+                <div class="one-tel-content ">
+                    <span class=" fl-tel-w">手机：</span>
+                    <div class=" fr-tel-w">
+                        <span class="tel-prefix">+86</span>
+                        <input type="text" name='mobile' size="11" placeholder="手机号码格式不正确">
+                    </div>
+                </div>
+                <div class="tel-verify-c ">
+                    <span class=" fl-tel-w">验证码：</span>
+                    <div class=" fr-tel-w">
+                        <input type="tel"/>
+                        <span class="get-verity">获取验证码</span>
+                    </div>
+                </div>
+                <div class="dialog-submit">提交</div>
+            </div>
+        </div>
+
+        <div class="one-pass-dialog">
+            <div class="dialog-add-tel">修改密码</div>
+            <div class="dialog-bottom-c">
+              <div class="one-tel-content ">
+                <span class=" fl-email-w margin-email">类型选择：</span>
+                <select class="" name="select-passward" id="passward-select" onchange="passTypeChange(this)">
+                  <option value="userpwd">登录密码</option>
+                  <option value="moneypwd">取款密码</option>
+                  <option value="mg">MG密码</option>
+                  <option value="pt">PT密码</option>
+                  <option value="bbin">BBIN密码</option>
+                  <option value="ab">AB密码</option>
+                  <option value="og">OG密码</option>
+                  <option value="gg">GG密码</option>
+                  <option value="dg">DG密码</option>
+                </select>
+              </div>
+              <div class=" margin-title" style="display:none">
+                <span class=" fl-email-w">MG用户名：</span> <!-- 这里是平台账号从平台接口那边获取 -->
+                <input class=" fr-email-w" name='title' disabled placeholder="12345668"/>
+              </div>
+              <div class=" margin-email">
+                <span class=" fl-email-w">原密码：</span>
+                <input class=" fr-email-w" type='password' name='beforePassword' placeholder="输入原密码"/>
+              </div>
+              <div class=" margin-email">
+                <span class=" fl-email-w">设置新密码：</span>
+                <input class=" fr-email-w" type='password' name='password'  placeholder="输入新密码"/>
+              </div>
+              <div class=" margin-email">
+                <span class=" fl-email-w">确认新密码：</span>
+                <input class=" fr-email-w" type='password' name='confirmPassword'  placeholder="再次输入新密码"/>
+              </div>
+              <div class="dialog-submit">提交</div>
+            </div>
+        </div>
+
+        <div class="one-data-dialog">
+            <div class="dialog-add-tel">选择生日</div>
+            <div class="dialog-bottom-c birthday-c">
+              <p class="clearfix margin-email">
+                <span>你的生日是：</span>
+                <input type="text" name='birthday' value="" >
+                <!-- <div id='schedule-box' class="boxshaw"></div> -->
+              </p>
+              <div class="dialog-submit">提交</div>
+            </div>
+        </div>
+
+        <div class="one-email-dialog">
+            <div class="dialog-add-tel">修改邮箱</div>
+            <div class="dialog-bottom-c">
+              <p class="li_time">
+                <span>邮箱：</span>
+                <input type="text" name='email' value="">
+                <div id='schedule-box' class="boxshaw"></div>
+              </p>
+              <div class="dialog-submit">提交</div>
+            </div>
+        </div>
+
+        <div class="one-info-dialog">
+            <div class="dialog-add-info">基础资料</div>
+            <div class="dialog-bottom-c">
+                <div class=" margin-info">
+                    <span class=" fl-info-w">真实姓名：</span>
+                    <input class=" fr-info-w" type='text' name='realname' placeholder="真实姓名添加之后不能修改"/>
+                </div>
+
+                <div class=" margin-info birthday-x">
+                    <span class=" fl-info-w">生日：</span>
+                    <input class=" fr-info-w" type='text' name='birthday_num' placeholder="会员生日" readonly/>
+                    <div id='schedule-box-x' class="boxshaw timebox"></div>
+                </div>
+
+                <div class=" margin-info">
+                    <span class=" fl-info-w">邮箱：</span>
+                    <input class=" fr-info-w" type='text' name='email_num' placeholder="电子邮箱"/>
+                </div>
+
+                <div class=" margin-info">
+                    <span class=" fl-info-w">手机：</span>
+                    <input class=" fr-info-w" type='text' name='phone_num' placeholder="手机号码"/>
+                </div>
+
+                <div class=" margin-info">
+                    <span class=" fl-info-w">QQ：</span>
+                    <input class=" fr-info-w" type='text' name='qq_num' placeholder="会员qq"/>
+                </div>
+
+                <div class=" margin-info">
+                    <span class=" fl-info-w">微信：</span>
+                    <input class=" fr-info-w" type='text' name='wechat' placeholder="会员微信号"/>
+                </div>
+
+                <div class=" margin-info">
+                    <span class=" fl-info-w">身份证件：</span>
+                    <input class=" fr-info-w" type='text' name='card' placeholder="会员身份证件"/>
+                </div>
+
+                <div class=" margin-info">
+                    <span class=" fl-info-w">区号：</span>
+                    <input class=" fr-info-w" type='text' name='local_code' placeholder="区号"/>
+                </div>
+
+                <div class=" margin-info">
+                    <span class="vt fl-info-w">备注：</span>
+                    <textarea class=" fr-info-w" name='remark' placeholder="备注不超过40个字" maxlength="40" onchange="this.value=this.value.substring(0, 40)" onkeydown="this.value=this.value.substring(0, 40)" onkeyup="this.value=this.value.substring(0, 40)"></textarea>
+                </div>
+
+                <div class="dialog-submit">提交</div>
+            </div>
+        </div>
+
+        <div class="one-bank-dialog">
+            <div class="dialog-add-bank">添加出款银行</div>
+            <div class="dialog-bottom-c">
+                <div class="one-tel-content ">
+                    <span class=" fl-bank-w margin-bank">选择银行：</span>
+                    <select class="" name="bank">
+                        <option value="">请选择银行</option>
+                    </select>
+                 </div>
+                
+                <div class=" margin-bank">
+                    <span class=" fl-bank-w">银行卡号：</span>
+                    <input class=" fr-bank-w" type='text' name='card' placeholder="银行卡号" maxlength="19"/>
+                </div>
+
+                <div class=" margin-bank">
+                    <span class=" fl-bank-w">开户人：</span>
+                    <input class=" fr-bank-w" type='text' name='cardName' placeholder="开户人"/>
+                </div>
+
+                <div class=" margin-bank">
+                    <span class=" fl-bank-w">开户支行：</span>
+                    <input class=" fr-bank-w" type='text' name='cardAddress' placeholder="开户支行"/>
+                </div>
+
+                <div class="pass margin-bank" style="display:none">
+                    <span class=" fl-bank-w">取款密码：</span>
+                    <input class=" fr-bank-w" type='password' name='password' placeholder="取款密码" maxlength="4" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                </div>
+                <div class="pass margin-bank" style="display:none">
+                    <span class=" fl-bank-w">确认密码：</span>
+                    <input class=" fr-bank-w" type='password' name='comPassword' placeholder="确认密码" maxlength="4" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                </div>
+
+                <div class="dialog-submit">提交</div>
+            </div>
+        </div>
+
+
+        <span class="iconfont icon-iconfontroundclosefill
+        "></span>
+    </div>
+    
+</div>
+</div>
+</body>
+<script src="{{.Header.CdnUrl}}/theme3/public/shared/member/js/schedule.js"></script>
+<script>
+    fChkMail=function(szMail){
+        var szReg=/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,5}$/;
+        var bChk=szReg.test(szMail);
+        return bChk;
+    }
+    // $(document).ready(function () {
+    //     $('body').prepend('<img src="\'+cdnUrl+\'/shared/member/image/ajax-loader-white.gif?v=\'+jsVersion+\'"  height="150" id="loader"/>');
+    //     $("#loader").animate({
+    //         top: -200
+    //     }, 1500);
+    // });
+    if(!getCookie("loginBack")){
+        // alert("登录已过期 请重新登录");
+        // My_pc_Modal({
+        //     text:"登录已过期 请重新登录",
+        // })
+        $.Pro('登录已过期 请重新登录',{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+        window.location.href = "/index";
+    };
+    //验证是否开启自助反水
+    function IsSelfReturn() {
+        if (getCookie("loginBack")) {
+            $.ajax({
+                type: "get",
+                url: "/member/isself",
+                data: {},
+                dataType: 'json',
+                beforeSend:function () {
+                   $('.one-bottom').loading();
+                },
+                success: function (data) {
+                    $('.one-bottom').hideLoad();
+                    if (data.code) {
+                        // alert(data.msg);
+                        // My_pc_Modal({
+                        //     text:data.msg,
+                        // })
+                        $.Pro(data.msg,{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                    } else {
+                        var result = data.data;
+                        if (result.IsSelf != 1) {
+                            // alert("自助反水未开启！");
+                            // My_pc_Modal({
+                            //     text:"自助反水未开启！",
+                            // })
+                            $.Pro("自助反水未开启！",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                            window.location.href = "/member/account";
+                        } else {
+                            var str = "";
+                            var Rdata = result.RData;
+                            $.each(Rdata,function(key,val){
+                                str += "<li>";
+                                str += "<div class=\"fl one-water-hl\">"+val.ProductName+"</div>";
+                                str += "<div class=\"one-water-hl fl font-size-red\">"+val.Rate+"%</div>";
+                                str += "<div class=\"one-water-hl fl\">"+val.BetValid+"</div>";
+                                str += "<div class=\"one-water-hl fl\">"+val.ReturnMoney+"</div>";
+                                str += "</li>";
+                            });
+                            $("#firstReturnDate").html(str);
+                        }
+                    }
+                },
+                error: function () {
+                    $('.one-bottom').hideLoad();
+                    // alert("用户登录信息已失效， 请重新登录！");
+                    // My_pc_Modal({
+                    //         text:"用户登录信息已失效， 请重新登录！",
+                    //     })
+                    $.Pro("用户登录信息已失效， 请重新登录！",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                    
+                    window.location.href = "/index";
+                },
+                headers: {
+                    'Authorization': 'bearer ' + getCookie('loginBack'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': "pc"
+                }
+            });
+        } else {
+            // alert("用户登录信息已失效， 请重新登录！");
+            // My_pc_Modal({
+            //     text:"用户登录信息已失效， 请重新登录！",
+            // })
+            $.Pro("用户登录信息已失效， 请重新登录！",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+            
+            window.location.href = "/index";
+        }
+    }
+    //获取反水打码
+    function GetAllBet() {
+        if(getCookie('loginBack')){
+            $.ajax({
+                type: "get",
+                url: "/member/getmemberbet",
+                data: {},
+                dataType: 'json',
+                beforeSend:function () {
+                    $('.one-bottom').loading();
+                },
+                success: function (data) {
+                    $('.one-bottom').hideLoad();
+                    if (data.code) {
+                        $.toast(data.msg, 'text');
+                    }else {
+                        var returnwater = data.data;
+                        if(returnwater != ""){
+                            var str = "";
+                            $.each(returnwater.data,function(key,val) {
+                                str += "<li>";
+                                str += "<p class=\"fl one-water-hl\">"+val.ProductName+"</p>";
+                                str += "<div class=\"one-water-hl fl font-size-red\">"+val.Rate+"%</div>";
+                                str += "<div class=\"one-water-hl fl\">"+val.BetValid+"</div>";
+                                str += "<div class=\"one-water-hl fl\">"+val.ReturnMoney+"</div>";
+                                str += "</li>";
+                            });
+                            // $(".my_pc_Modal").text("总计可反水额度："+ returnwater.count);
+                            // $(".my_pc_Modal").show()
+                            // // alert("总计可反水额度："+ returnwater.count);
+
+                            // My_pc_Modal({
+                            //     text:"总计可反水额度："+ returnwater.count,
+                            // })
+                            $.Pro("总计可反水额度："+ returnwater.count,{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                            if(returnwater.coun >= 0.01){
+                                $("#hasreturn").html(returnwater.HasReturn);
+                                $("#tdata").html(str);
+                            }
+                        }else{
+                            // alert("暂无打码数据！");
+                            // My_pc_Modal({
+                            //     text:"暂无打码数据！",
+                            // })
+                            $.Pro("暂无打码数据！",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                            
+                        }
+                    }
+                },
+                error:function(){
+                    $('.one-bottom').hideLoad();
+                    // alert("用户登录信息已失效， 请重新登录！");
+                    // My_pc_Modal({
+                    //     text:"用户登录信息已失效， 请重新登录！",
+                    // })
+                    $.Pro("用户登录信息已失效， 请重新登录！",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                    window.location.href = "/member/account";
+                },
+                headers: {
+                    'Authorization': 'bearer ' + getCookie('loginBack'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': "pc"
+                }
+            });
+        }else{
+            // alert("用户登录信息已失效， 请重新登录！");
+            // My_pc_Modal({
+            //     text:"用户登录信息已失效， 请重新登录！",
+            // })
+            $.Pro("用户登录信息已失效， 请重新登录！",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+            
+            window.location.href = "/index";
+        }
+    }
+    //写入反水数据
+    function ReturnMoney() {
+        if(getCookie('loginBack')){
+            $.ajax({
+                type: "get",
+                url: "/member/postreturnwater",
+                data: {},
+                dataType: 'json',
+                beforeSend:function () {
+                    $('.one-bottom').loading();
+                },
+                success: function (data) {
+                    $('.one-bottom').hideLoad();
+                    if (data != "") {
+                        // alert(data.msg);
+                        // My_pc_Modal({
+                        //     text:data.msg,
+                        // })
+                        $.Pro(data.msg,{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                    }else {
+                        // alert("存入成功");
+                        // My_pc_Modal({
+                        //     text:"存入成功",
+                        // })
+                    $.Pro("存入成功",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                        
+                    }
+                },
+                error:function(err){
+                    $('.one-bottom').hideLoad();
+                    // alert("无可反水数据，请重新统计");
+                    // My_pc_Modal({
+                    //     text:"无可反水数据，请重新统计！",
+                    // })
+                    $.Pro("无可反水数据，请重新统计！",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                    
+                },
+                headers: {
+                    'Authorization': 'bearer ' + getCookie('loginBack'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'platform': "pc"
+                }
+            });
+        }else{
+            // alert("用户登录信息已失效， 请重新登录！");
+            // My_pc_Modal({
+            //     text:"用户登录信息已失效， 请重新登录！",
+            // })
+            $.Pro("用户登录信息已失效， 请重新登录！",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+            
+            window.location.href = "/index";
+        }
+    }
+
+
+    $('.fr').on('click', '.one-foot-circle', function () {
+        var ind = $(this).index();
+        $(this).addClass('page-active').siblings().removeClass('page-active');
+    })
+
+    $(function(){
+        //获取个人信息
+        Info();
+        //获取会员出款银行列表
+        bankPaymentList();
+        //获取今日交易记录
+        InfoRecord();
+
+        //银行卡鼠标事件
+        $('.bank-ul').on('mouseenter mouseleave','li',function(event){
+            var ulWidth = $(".bank-ul").width(), liWidth = $(".bank-ul li").width();
+            var num = (ulWidth-liWidth)/2;
+            if (event.type == "mouseenter") {
+                var $index = $(this).index();
+                // $(this).find('div').css({'color': '#fff','background': 'rgba(0,0,0,0.3)'});
+                // $(this).siblings('li').find('div').css({'color': '#285e8e','background': 'rgba(0,0,0,0)'});
+                $(this).next('li').stop().animate({'left': $index*num+liWidth}).siblings().stop().animate({width:$index*num+num})
+                $.each($(".bank-ul li"), function(index, e){
+                    if (index > $index) {
+                        $(this).stop().animate({'left':index*num+liWidth-num});
+                    }else{
+                        $(this).stop().animate({'left':index*num});
+                    }
+                })
+                return 
+            }
+            if (event.type == "mouseleave") {
+                console.log(222);
+                $.each($(".bank-ul li"), function(index, e){
+                    $(this).stop().animate({'left':index*num});
+                })
+                $(this).find('div').css({'color': '#285e8e','background': 'rgba(0,0,0,0)'});
+                return
+            }
+        })
+
+        var $layerObj = $('.my-dialog');
+        $(window).keyup(function(e){
+    　  　　if(e.keyCode==27 && !$layerObj.is(":hidden")){//此处代表按的是键盘的Esc键
+     　　　 　　$layerObj.hide();
+    　　　　}    
+   　　　});
+
+        //刷新会员余额
+        document.querySelector(".one-top-left .RefreshButton").addEventListener("click",function(){
+            var $success = function(data){
+                if (data) {
+                    if (data.code) {
+                        // alert(data.msg);
+                        // My_pc_Modal({
+                        //     text:data.msg,
+                        // })
+                        $.Pro(data.msg,{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                        return
+                    }
+                    $("div.one-top-left span.self-margin").html(data.accountBalance);
+                }
+                LoadingClose();
+            };
+            ajaxObj("GET", "/balance",$success);
+        })
+
+        // $(".one-top-left").on("click", '.RefreshButton fr',function(){
+        //     var $success = function(data){
+        //         if (data) {
+        //             if (data.code) {
+        //                 // alert(data.msg);
+        //                 // My_pc_Modal({
+        //                 //     text:data.msg,
+        //                 // })
+        //                 $.Pro(data.msg,{Time:2,StartOn:function(){
+        //                         $("html").click(function(){
+        //                             $(".showAlert_Pro").hide()
+        //                         })
+        //                     }})
+        //                 return
+        //             }
+        //             $("div.one-top-left span.self-margin").html(data.account_balance);
+        //         }
+        //     };
+        //     ajaxObj("GET", "/wap/balance",$success);
+        // })
+    });
+
+    //弹窗
+    $('div.one-top-left').on('click','a.modify-pas',function(){
+        var $layerObj = $('.my-dialog');
+        $layerObj .show();
+        var $obj = $('.one-pass-dialog');
+        $obj.show();
+        $obj.siblings('div').hide();
+
+        var $height1 = $layerObj .height();
+        var $height2 = $obj.height();
+        $('.my-dialog div.dialog-c').css({'margin-top':"100px"});
+    })
+
+    $("div.one-top-left").on('click','a.modify-info',function(e){
+        var $layerObj = $('.my-dialog');
+        var $obj = $('.one-info-dialog');
+        if (loginData.realname != "") {
+            $obj.find("input[name='realname']").attr({'disabled':"disabled"}).val(loginData.realname);
+        }
+        var $success = function(msg){
+            if (msg) {
+                if(msg.code){
+                    // alert(msg.msg);
+                    // My_pc_Modal({
+                    //         text:msg.msg,
+                    //     })
+                    $.Pro(msg.msg,{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                    LoadingClose();
+                    return false;
+                }
+                var sdata = msg.data;
+                if (sdata.birthday != 0) {
+                    $obj.find("input[name='birthday_num']").val(date('Y-m-d', sdata.birthday));
+                }
+                $obj.find("input[name='email_num']").val(sdata.email);
+                $obj.find("input[name='phone_num']").val(sdata.mobile);
+                $obj.find("input[name='qq_num']").val(sdata.qq);
+                $obj.find("input[name='wechat']").val(sdata.wechat);
+                $obj.find("input[name='card']").val(sdata.card);
+                $obj.find("textarea[name='remark']").val(sdata.remark);
+                LoadingClose();
+            } else {
+                // alert('获取会员详细信息失败');
+                // My_pc_Modal({
+                //     text:"获取会员详细信息失败",
+                // })
+                $.Pro("获取会员详细信息失败",{Time:2,StartOn:function(){
+                                $("html").click(function(){
+                                    $(".showAlert_Pro").hide()
+                                })
+                            }})
+                LoadingClose();
+                return
+            }
+        }
+
+        ajaxObj('GET', "/base/info/detail", $success);
+        $layerObj.show();
+        $obj.show();
+        $obj.siblings('div').hide();
+
+        var $height1 = $layerObj.height();
+        var $height2 = $obj.height();
+        $('.my-dialog div.dialog-c').css({'margin-top':"100px"});
+    })
+
+    $(".one-top-left").on("mousedown",".modify-pas,.modify-info",function(e){
+        if((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)){
+            $(this).addClass("buttonshadowR")
+        }
+    })
+    $(".one-top-left").on("mouseup",".modify-pas,.modify-info",function(){
+        $(this).removeClass("buttonshadowR")
+    })
+
+    $('.dialog-c').on('click', '.icon-iconfontroundclosefill', function () {
+        $('.my-dialog').hide();
+    })
+
+    $('.one-bottom-tab').on('click', '.one-bottom-tab-item', function () {
+        var inq = $(this).index();
+        $(this).addClass('transaction-active').siblings().removeClass('transaction-active');
+        $('.one-bottom-c-e .one-bottom-c').eq(inq).show().siblings().hide();
+    })
+
+    $('.li_time input').click(function () {
+        $('#schedule-box').show();
+    })
+
+    $(".water-h-r").on("mousedown",".water-amount",function(e){
+        if((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)){
+            $(this).addClass("buttonshadowY")
+        }
+    })
+    $(".water-h-r").on("mouseup","span",function(){
+        $(this).removeClass("buttonshadowY")
+    })
+    $(".water-h-r").on("mousedown",".water-receive",function(e){
+        if((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)){
+            $(this).addClass("buttonshadowB")
+        }
+    })
+    $(".water-h-r").on("mouseup","span",function(){
+        $(this).removeClass("buttonshadowB")
+    })
+
+    //修改密码类型变动
+    function passTypeChange(obj){
+        var $passType = $(obj).val();
+        var titleObj = $(obj).parents('.dialog-bottom-c').find('.margin-title');
+
+        if ($passType == 'userpwd' || $passType == 'moneypwd'){
+            titleObj.hide();
+            var inputObj = $(obj).parents('.dialog-bottom-c').find('.margin-email input');
+            if ($passType == 'userpwd') {
+                inputObj.attr({"maxlength":12});
+
+
+            }else if ($passType == 'moneypwd') {
+                inputObj.attr({"maxlength":4});
+            }
+        }else{
+            titleObj.show();
+            titleObj.find('div').text($passType.toUpperCase() +"用户名：");
+            titleObj.find('input').val("1234567");
+        }
+    }
+
+    // var mySchedule = new Schedule({
+    //     el: '#schedule-box',
+    //     clickCb: function (y, m, d) {
+    //         document.querySelector('.li_time input').value = y + '-' + m + '-' + d;
+    //         $('#schedule-box').hide();
+    //     },
+    //   });
+      
+    function buttonMouse(dom, classss) {
+        dom.mousedown(function (e) {
+            if((!$.browser.msie && e.button == 0) || ($.browser.msie && e.button == 1)){
+                $(this).addClass(classss)
+            }
+        })
+        dom.mouseup(function () {
+            $(this).removeClass(classss)
+        })
+    }
+    $(".dialog-submit").each(function(i){
+        var _this=$(this);
+        buttonMouse(_this, "buttonshadowR")
+    })
+    
+    $(".birthday-x").on("click","input",function(){
+        $('#schedule-box-x').show();
+    })
+
+    new Schedule({
+    el: '#schedule-box-x',
+    // date: '2018-9-20',
+    clickCb: function (y, m, d) {
+        //点击日期回调（可选）
+
+        $(".birthday-x input").val(y + '-' + m + '-' + d)
+
+        // document.querySelector('.choose .inp5').value = y + '-' + m + '-' + d;
+        $('#schedule-box-x').hide();
+    },
+    // nextMonthCb: function (y,m,d) {
+    //   //点击下个月回调（可选）
+    // },
+    // nextYeayCb: function (y,m,d) {
+    //   //点击下一年回调（可选）
+    // },
+    // prevMonthCb: function (y,m,d) {
+    //   //点击上个月回调（可选）
+    // },
+    // prevYearCb: function (y,m,d) {
+    //    //点击上一年月回调（可选）
+    // }
+    
+});
+$('.timebox').each(function (i) {
+    $(this).mouseleave(function () {
+        $(this).hide();
+    })
+});
+
+</script>
+
+</html>
+{{end}}

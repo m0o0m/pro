@@ -1,0 +1,351 @@
+@import "./function.scss";
+
+.six_one {
+  width: 920px;
+  overflow: hidden;
+  //padding-top: 17px;
+  .content {
+    // width: 885px;
+    overflow: hidden;
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    .top {
+      border: 1px solid $border_color;
+      ul {
+        overflow: hidden;
+        background-color: #eeeeee;
+        color: #999999;
+        li {
+          float: left;
+          padding: 10px 0;
+        }
+        li:last-child {
+          border-right: none 0;
+        }
+        .only {
+          width: 55px;
+          border-right: 1px solid $border_color
+        }
+        .one {
+          width: 137px;
+          border-right: 1px solid $border_color
+        }
+        // .two{
+        //   width: 60px
+        // }
+        // .three{
+        //   width: 60px;
+        //
+        // }
+      }
+    }
+    .table {
+      overflow: hidden;
+      .bottom {
+        float: left;
+        ul {
+          overflow: hidden;
+          li {
+            float: left;
+            height: 39px;
+            padding: 10px 0;
+            border-bottom: 1px solid $border_color;
+            border-left: 1px solid $border_color;
+            cursor: pointer;
+          }
+          .border2_none {
+            width: 60px;
+            border-left: none 0 !important;
+          }
+          .border3_none {
+            width: 62px;
+            padding: 9px 0;
+            border-left: none 0 !important;
+            border-right: 1px solid $border_color;
+          }
+          .bg_color {
+            background-color: $bg_select;
+          }
+          .one {
+            width: 55px;
+          }
+          .two {
+            width: 60px;
+          }
+          .two1 {
+            width: 70px;
+          }
+          .three1 {
+            width: 67px;
+            padding: 9px 0;
+            input {
+              width: 40px;
+              border: 1px solid #ddd
+            }
+          }
+          .three {
+            width: 60px;
+            padding: 9px 0;
+            input {
+              width: 40px;
+              border: 1px solid #ddd
+            }
+          }
+        }
+      }
+      // .bottom:nth-child(3) ul:nth-child(11)>li:nth-child(3){
+      //   border-right: 1px solid #ddd;
+      // }
+      .bottom:last-child ul > li.three1 {
+        width: 69px;
+        border-right: 1px solid $border_color;
+      }
+    }
+
+  }
+  .bottom_content {
+    // width: 877px;
+    overflow: hidden;
+    float: left;
+    margin-left: 20px;
+    margin-top: 15px;
+    .top {
+      border: 1px solid $border_color;
+      ul {
+        overflow: hidden;
+        background-color: #eeeeee;
+        color: #999999;
+        li {
+          float: left;
+          padding: 10px 0;
+        }
+        li:last-child {
+          border-right: none 0;
+        }
+        .one {
+          width: 65px
+        }
+        .two {
+          width: 75px
+        }
+        .three {
+          width: 70px;
+          border-right: 1px solid $border_color
+        }
+      }
+    }
+    .table {
+      overflow: hidden;
+      .bottom {
+        float: left;
+        ul {
+          overflow: hidden;
+          li {
+            float: left;
+            padding: 10px 0;
+            height: 39px;
+            border-bottom: 1px solid $border_color;
+            border-left: 1px solid $border_color;
+          }
+          .border2_none {
+            width: 75px;
+            border-left: none 0 !important;
+          }
+          .border3_none {
+            width: 77px;
+            padding: 9px 0;
+            border-left: none 0 !important;
+            border-right: 1px solid $border_color;
+          }
+          .one {
+            width: 65px;
+            cursor: pointer;
+          }
+          .two {
+            width: 75px;
+            cursor: pointer;
+          }
+          .three {
+            width: 70px;
+            padding: 9px 0;
+            input {
+              width: 45px;
+              border: 1px solid #ddd
+            }
+          }
+        }
+      }
+      .bottom:last-child ul > li.three {
+        width: 72px;
+        border-right: 1px solid $border_color;
+      }
+    }
+
+  }
+  .footer {
+    width: 920px;
+    float: left;
+    /* margin-top: 20px; */
+    margin-bottom: 20px;
+    padding-right: 20px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+    }
+    .one {
+      background-color: #eeeeee;
+      margin-right: 15px;
+      span {
+        color: $bg_color
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+  .footer1 {
+    width: 920px;
+    // float: left;
+    margin-top: 10px;
+    //height: 115px;
+    padding-right: 20px;
+    //padding-bottom: 10px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 10px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+      border-radius: 5px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .img {
+      margin-left: 136px;
+      float: left;
+      span {
+        //margin-left: 30px;
+        //height: 60px;
+        float: left;
+        display: block;
+        cursor: pointer;
+      }
+      .s1 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat 0 0px;
+        background-size: 368px;
+      }
+      .s2 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -64px 0px;
+        background-size: 368px;
+      }
+      .s3 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -128px 0px;
+        background-size: 368px;
+      }
+      .s4 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -192px 0px;
+        background-size: 368px;
+      }
+      .s5 {
+        height: 60px;
+        width: 64px;
+        background: url("../../assets/img/Chips.png") no-repeat -256px 0px;
+        background-size: 368px;
+      }
+      .s6 {
+        height: 60px;
+        width: 73px;
+        background: url("../../assets/img/Chips.png") no-repeat -320px 0px;
+        background-size: 368px;
+      }
+    }
+    .one {
+      width: 160px;
+      float: left;
+      background-color: #eee;
+      padding: 5px;
+      border-radius: 10px;
+      margin-top: 12px;
+      border: none;
+      span {
+        color: $bg_color;
+      }
+      .red {
+
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      float: right;
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+  .footer2 {
+    width: 920px;
+    float: left;
+    margin-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 45px;
+    .input {
+      width: 85px;
+      padding: 5px;
+      background-color: #eeeeee;
+      margin-right: 15px;
+      border-radius: 5px;
+      float: right;
+    }
+    button {
+      width: 85px;
+      padding: 5px;
+      float: right;
+      outline: none 0;
+    }
+    .one {
+      background-color: #eeeeee;
+      // margin-right: 15px;
+      span {
+        color: $bg_color
+      }
+      .left {
+        color: #999999
+      }
+    }
+    .two {
+      background-color: $bg_color;
+      color: #fff
+    }
+  }
+}

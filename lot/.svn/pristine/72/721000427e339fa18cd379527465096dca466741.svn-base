@@ -1,0 +1,40 @@
+package schema
+
+//注单记录表
+type BetRecord struct {
+	Id          int64   `insert:"id;auto;mycat:next value for MYCATSEQ_BETRECORD" xorm:"'id' index(id_addday)"` //主键id
+	LineId      string  `insert:"line_id" xorm:"'line_id' notnull"`                                             //线路id
+	AtId        int64   `insert:"at_id" xorm:"'at_id' notnull"`                                                 //代理id
+	UaId        int64   `insert:"ua_id" xorm:"'ua_id' notnull"`                                                 //总代id
+	ShId        int64   `insert:"sh_id" xorm:"'sh_id' notnull"`                                                 //股东id
+	AtUsername  string  `insert:"at_username" xorm:"'at_username' notnull"`                                     //代理账号
+	Uid         int64   `insert:"uid" xorm:"'uid' notnull"`                                                     //用户id
+	Uname       string  `insert:"uname" xorm:"'uname' notnull"`                                                 //会员账号
+	OrderNum    int64   `insert:"order_num" xorm:"'order_num' notnull index(order_adday)"`                      //订单号
+	Bet         float64 `insert:"bet" xorm:"'bet' notnull default(0.00)"`                                       //下注金额
+	ValidBet    float64 `insert:"valid_bet" xorm:"'valid_bet' notnull default(0.00)"`                           //有效投注
+	Balance     float64 `insert:"balance" xorm:"'balance' notnull default(0.00)"`                               //下注后的会员余额
+	Assets      float64 `insert:"assets" xorm:"'assets' notnull default(0.00)"`                                 //下注前的会员余额
+	FcType      string  `insert:"fc_type" xorm:"'fc_type' notnull"`                                             //彩种类型
+	Odds        float64 `insert:"odds" xorm:"'odds' notnull default(0.00)"`                                     //赔率
+	Periods     int64   `insert:"periods" xorm:"'periods' notnull"`                                             //彩票期数
+	Win         float64 `insert:"win" xorm:"'win' notnull default(0.00)"`                                       //派彩金额
+	Result      float64 `insert:"result" xorm:"'result' notnull default(0.00)"`                                 //输赢结果
+	Handicap    int64   `insert:"handicap" xorm:"'handicap' notnull default(1)"`                                //盘口
+	Addtime     int64   `insert:"addtime" xorm:"'addtime' notnull"`                                             //下注时间
+	Addday      int64   `insert:"addday" xorm:"'addday' notnull index(order_adday)"`                            //下注的日期例如：20170612'
+	Updatetime  int64   `insert:"updatetime" xorm:"'updatetime' notnull"`                                       //结算时间
+	Updateday   int64   `insert:"updateday" xorm:"'updateday' notnull"`                                         //结算的日期例如：20170612'
+	BetInfo     string  `insert:"bet_info" xorm:"'bet_info' default('ull')"`                                    //下注内容分割'
+	Ptype       int64   `insert:"ptype" xorm:"'ptype' notnull default(1)"`                                      //1为pc端2为wap端3为app'
+	Js          int64   `insert:"js" xorm:"'js' notnull default(1)"`                                            //结算状态1为未结算2为已结算'
+	Status      int64   `insert:"status" xorm:"'status' notnull default(1)"`                                    //1为未结算2为赢3为输4为和局5为无效6为赢(特殊玩法)7为赢(特殊玩法)'
+	ReturnWater float64 `insert:"return_water" xorm:"'return_water' notnull default(0.00)"`                     //时时反水金额
+	BetIp       int64   `insert:"bet_ip" xorm:"'bet_ip' default(ull)"`                                          //会员下注的ip地址
+	PlayId      int64   `insert:"play_id" xorm:"'play_id' notnull"`                                             //bet_info大玩法的id
+	IsShiwan    int64   `insert:"is_shiwan" xorm:"'is_shiwan' notnull default(1)"`                              //1:非试玩注单2:试玩注单'
+}
+
+func (*BetRecord) TableName() string {
+	return "my_bet_record"
+}

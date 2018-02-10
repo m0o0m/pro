@@ -1,0 +1,15 @@
+<?php
+
+namespace lotteryApi\modules\base;
+
+use yii\base\Module;
+
+class BaseModule extends Module {
+
+    public function init() {
+        parent::init();
+    }
+
+}
+
+?>

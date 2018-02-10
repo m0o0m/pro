@@ -1,0 +1,5725 @@
+  <template>
+  <div class="happy">
+    <div class="pk_time">
+      <div class="time_left">
+        <div class="left_logo">
+          <img :src="c_data.img_path" alt="">
+        </div>
+        <div class="left_text">
+          <p>{{c_data.fc_name}}</p>
+          <p><span>第</span> {{c_data.qishu}} <span>期</span></p>
+        </div>
+      </div>
+      <div class="time_center">
+        <p class="center_top">投注剩余时间</p>
+        <div class="center_bottom">
+          <div class="fl time_content" v-if="h < 10 && h >= 0">0{{h}}</div>
+          <div class="fl time_content" v-else-if="h < 0">--</div>
+          <div class="fl time_content" v-else>{{h}}</div>
+          <div class="fl fs">时</div>
+          <div class="fl time_content" v-if="m < 10 && m >= 0">0{{m}}</div>
+          <div class="fl time_content" v-else-if="m < 0">--</div>
+          <div class="fl time_content" v-else>{{m}}</div>
+          <div class="fl fs">分</div>
+          <div class="fl time_content" v-if="s < 10 && s >= 0">0{{s}}</div>
+          <div class="fl time_content" v-else-if="s < 0">--</div>
+          <div class="fl time_content" v-else>{{s}}</div>
+          <div class="fl fs">秒</div>
+        </div>
+      </div>
+      <div class="time_bottom">
+        <div class="bottom_left"><span>第</span> {{auto.qishu}} <span>期开奖</span></div>
+        <div v-if="this.$route.query.page == 'liuhecai'" class='bottom_center6'>
+          <div class="bottom_content">
+            <div class="content_list" v-for="item in auto.ball">
+              <p :class="[item.color,'box']">{{item.number}}</p>
+              <p class="animal">{{item.animal}}</p>
+            </div>
+          </div>
+        </div>
+        <div v-else :class="[auto.ball.length >= 10?'bottom_center_other':'bottom_center']">
+          <div :class="[auto.ball.length == 10?'other_content':'bottom_content']">
+            <div class="content_list" v-for="item in auto.ball">
+              <p class="box blue">{{item}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_bottom">
+        <p @click="history()">历史结果</p>
+        <p @click="open_way()">开奖走势</p>
+        <p @click="show_rule()">玩法规则</p>
+      </div>
+    </div>
+    <Nav-top :lists="menus" v-on:menu="go_child"></Nav-top>
+    <router-view :c_data="c_data" :only_data="only_data" :toplist="toplist" :centerlist="centerlist" :firstlist="firstlist" :twolist="twolist" :threelist="threelist" :fourlist="fourlist" :fivelist="fivelist" :sixlist="sixlist" :sevenlist="sevenlist" :eightlist="eightlist" :sumlist="sumlist" :tenlist="tenlist"></router-view>
+    <Nav-bottom ref="dewdrop_map" :back_data="auto_list" :nav_top="bottom_nav" :max_lint="max_lint"></Nav-bottom>
+  </div>
+</template>
+
+<script>
+  function toplist(){
+    return [
+      {
+        name: "1",
+        object: [
+          { index: 0, flag: false, money: "" },
+          { index: 1, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "2",
+        object: [
+          { index: 2, flag: false, money: "" },
+          { index: 3, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          { index: 4, flag: false, money: "" },
+          { index: 5, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "2",
+        object: [
+          { index: 6, flag: false, money: "" },
+          { index: 7, flag: false, money: "" }
+        ]
+      }
+    ]
+  }
+  function centerlist(){
+    return [
+      {
+        name: "第一球",
+        object: [
+          { index: 8, flag: false, money: "" },
+          { index: 9, flag: false, money: "" },
+          { index: 10, flag: false, money: "" },
+          { index: 11, flag: false, money: "" },
+          { index: 12, flag: false, money: "" },
+          { index: 13, flag: false, money: "" },
+          { index: 14, flag: false, money: "" },
+          { index: 15, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "第二球",
+        object: [
+          { index: 16, flag: false, money: "" },
+          { index: 17, flag: false, money: "" },
+          { index: 18, flag: false, money: "" },
+          { index: 19, flag: false, money: "" },
+          { index: 20, flag: false, money: "" },
+          { index: 21, flag: false, money: "" },
+          { index: 22, flag: false, money: "" },
+          { index: 23, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "第三球",
+        object: [
+          { index: 24, flag: false, money: "" },
+          { index: 25, flag: false, money: "" },
+          { index: 26, flag: false, money: "" },
+          { index: 27, flag: false, money: "" },
+          { index: 28, flag: false, money: "" },
+          { index: 29, flag: false, money: "" },
+          { index: 30, flag: false, money: "" },
+          { index: 31, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "第四球",
+        object: [
+          { index: 32, flag: false, money: "" },
+          { index: 33, flag: false, money: "" },
+          { index: 34, flag: false, money: "" },
+          { index: 35, flag: false, money: "" },
+          { index: 36, flag: false, money: "" },
+          { index: 37, flag: false, money: "" },
+          { index: 38, flag: false, money: "" },
+          { index: 39, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "第五球",
+        object: [
+          { index: 40, flag: false, money: "" },
+          { index: 41, flag: false, money: "" },
+          { index: 42, flag: false, money: "" },
+          { index: 43, flag: false, money: "" },
+          { index: 44, flag: false, money: "" },
+          { index: 45, flag: false, money: "" },
+          { index: 46, flag: false, money: "" },
+          { index: 47, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "第六球",
+        object: [
+          { index: 48, flag: false, money: "" },
+          { index: 49, flag: false, money: "" },
+          { index: 50, flag: false, money: "" },
+          { index: 51, flag: false, money: "" },
+          { index: 52, flag: false, money: "" },
+          { index: 53, flag: false, money: "" },
+          { index: 54, flag: false, money: "" },
+          { index: 55, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "第七球",
+        object: [
+          { index: 56, flag: false, money: "" },
+          { index: 57, flag: false, money: "" },
+          { index: 58, flag: false, money: "" },
+          { index: 59, flag: false, money: "" },
+          { index: 60, flag: false, money: "" },
+          { index: 61, flag: false, money: "" },
+          { index: 62, flag: false, money: "" },
+          { index: 63, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "第八球",
+        object: [
+          { index: 64, flag: false, money: "" },
+          { index: 65, flag: false, money: "" },
+          { index: 66, flag: false, money: "" },
+          { index: 67, flag: false, money: "" },
+          { index: 68, flag: false, money: "" },
+          { index: 69, flag: false, money: "" },
+          { index: 70, flag: false, money: "" },
+          { index: 71, flag: false, money: "" }
+        ]
+      }
+    ]
+  }
+  function firstlist(){
+    return [
+      {
+        name: "1",
+        object: [
+          {
+            num: "1",
+            // txt: "19.300",
+            bg: "1;",
+            index: 0,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "5",
+            // txt: "19.300",
+            bg: "1;",
+            index: 1,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "9",
+            // txt: "19.300",
+            bg: "1;",
+            index: 2,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "13",
+            // txt: "19.300",
+            bg: "1;",
+            index: 3,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "17",
+            // txt: "19.300",
+            bg: "1;",
+            index: 4,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 5,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 6,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "东",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 7,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "中",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 8,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "10",
+        object: [
+          {
+            num: "2",
+            // txt: "19.300",
+            bg: "1;",
+            index: 9,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "6",
+            // txt: "19.300",
+            bg: "1;",
+            index: 10,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "10",
+            // txt: "19.300",
+            bg: "1;",
+            index: 11,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "14",
+            // txt: "19.300",
+            bg: "1;",
+            index: 12,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "18",
+            // txt: "19.300",
+            bg: "1;",
+            index: 13,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 14,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 15,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "南",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 16,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "发",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 17,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "3",
+            // txt: "19.300",
+            bg: "1;",
+            index: 18,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "7",
+            // txt: "19.300",
+            bg: "1;",
+            index: 19,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "11",
+            // txt: "19.300",
+            bg: "1;",
+            index: 20,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "15",
+            // txt: "19.300",
+            bg: "1;",
+            index: 21,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "19",
+            // txt: "19.300",
+            bg: "1;",
+            index: 22,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 23,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 24,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "西",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 25,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "白",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 26,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "4",
+            // txt: "19.300",
+            bg: "1;",
+            index: 27,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "8",
+            // txt: "19.300",
+            bg: "1;",
+            index: 28,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "12",
+            // txt: "19.300",
+            bg: "1;",
+            index: 29,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "16",
+            // txt: "19.300",
+            bg: "1;",
+            index: 30,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "20",
+            // txt: "19.300",
+            bg: "1;",
+            index: 31,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 32,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 33,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "北",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 34,
+            flag: false,
+            money: ""
+          }
+        ]
+      }
+    ]
+  }
+  function twolist(){
+    return [
+      {
+        name: "1",
+        object: [
+          {
+            num: "1",
+            // txt: "19.300",
+            bg: "1;",
+            index: 0,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "5",
+            // txt: "19.300",
+            bg: "1;",
+            index: 1,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "9",
+            // txt: "19.300",
+            bg: "1;",
+            index: 2,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "13",
+            // txt: "19.300",
+            bg: "1;",
+            index: 3,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "17",
+            // txt: "19.300",
+            bg: "1;",
+            index: 4,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 5,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 6,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "东",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 7,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "中",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 8,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "10",
+        object: [
+          {
+            num: "2",
+            // txt: "19.300",
+            bg: "1;",
+            index: 9,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "6",
+            // txt: "19.300",
+            bg: "1;",
+            index: 10,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "10",
+            // txt: "19.300",
+            bg: "1;",
+            index: 11,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "14",
+            // txt: "19.300",
+            bg: "1;",
+            index: 12,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "18",
+            // txt: "19.300",
+            bg: "1;",
+            index: 13,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 14,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 15,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "南",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 16,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "发",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 17,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "3",
+            // txt: "19.300",
+            bg: "1;",
+            index: 18,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "7",
+            // txt: "19.300",
+            bg: "1;",
+            index: 19,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "11",
+            // txt: "19.300",
+            bg: "1;",
+            index: 20,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "15",
+            // txt: "19.300",
+            bg: "1;",
+            index: 21,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "19",
+            // txt: "19.300",
+            bg: "1;",
+            index: 22,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 23,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 24,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "西",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 25,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "白",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 26,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "4",
+            // txt: "19.300",
+            bg: "1;",
+            index: 27,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "8",
+            // txt: "19.300",
+            bg: "1;",
+            index: 28,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "12",
+            // txt: "19.300",
+            bg: "1;",
+            index: 29,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "16",
+            // txt: "19.300",
+            bg: "1;",
+            index: 30,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "20",
+            // txt: "19.300",
+            bg: "1;",
+            index: 31,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 32,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 33,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "北",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 34,
+            flag: false,
+            money: ""
+          }
+        ]
+      }
+    ]
+  }
+  function threelist() {
+    return [
+      {
+        name: "1",
+        object: [
+          {
+            num: "1",
+            // txt: "19.300",
+            bg: "1;",
+            index: 0,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "5",
+            // txt: "19.300",
+            bg: "1;",
+            index: 1,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "9",
+            // txt: "19.300",
+            bg: "1;",
+            index: 2,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "13",
+            // txt: "19.300",
+            bg: "1;",
+            index: 3,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "17",
+            // txt: "19.300",
+            bg: "1;",
+            index: 4,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 5,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 6,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "东",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 7,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "中",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 8,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "10",
+        object: [
+          {
+            num: "2",
+            // txt: "19.300",
+            bg: "1;",
+            index: 9,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "6",
+            // txt: "19.300",
+            bg: "1;",
+            index: 10,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "10",
+            // txt: "19.300",
+            bg: "1;",
+            index: 11,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "14",
+            // txt: "19.300",
+            bg: "1;",
+            index: 12,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "18",
+            // txt: "19.300",
+            bg: "1;",
+            index: 13,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 14,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 15,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "南",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 16,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "发",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 17,
+            flag: false,
+            money: "",
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "3",
+            // txt: "19.300",
+            bg: "1;",
+            index: 18,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "7",
+            // txt: "19.300",
+            bg: "1;",
+            index: 19,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "11",
+            // txt: "19.300",
+            bg: "1;",
+            index: 20,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "15",
+            // txt: "19.300",
+            bg: "1;",
+            index: 21,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "19",
+            // txt: "19.300",
+            bg: "1;",
+            index: 22,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 23,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 24,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "西",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 25,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "白",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 26,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "4",
+            // txt: "19.300",
+            bg: "1;",
+            index: 27,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "8",
+            // txt: "19.300",
+            bg: "1;",
+            index: 28,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "12",
+            // txt: "19.300",
+            bg: "1;",
+            index: 29,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "16",
+            // txt: "19.300",
+            bg: "1;",
+            index: 30,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "20",
+            // txt: "19.300",
+            bg: "1;",
+            index: 31,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 32,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 33,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "北",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 34,
+            flag: false,
+            money: ""
+          }
+        ]
+      }
+    ]
+  }
+  function fourlist() {
+    return [
+      {
+        name: "1",
+        object: [
+          {
+            num: "1",
+            // txt: "19.300",
+            bg: "1;",
+            index: 0,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "5",
+            // txt: "19.300",
+            bg: "1;",
+            index: 1,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "9",
+            // txt: "19.300",
+            bg: "1;",
+            index: 2,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "13",
+            // txt: "19.300",
+            bg: "1;",
+            index: 3,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "17",
+            // txt: "19.300",
+            bg: "1;",
+            index: 4,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 5,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 6,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "东",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 7,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "中",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 8,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "10",
+        object: [
+          {
+            num: "2",
+            // txt: "19.300",
+            bg: "1;",
+            index: 9,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "6",
+            // txt: "19.300",
+            bg: "1;",
+            index: 10,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "10",
+            // txt: "19.300",
+            bg: "1;",
+            index: 11,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "14",
+            // txt: "19.300",
+            bg: "1;",
+            index: 12,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "18",
+            // txt: "19.300",
+            bg: "1;",
+            index: 13,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 14,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 15,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "南",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 16,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "发",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 17,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "3",
+            // txt: "19.300",
+            bg: "1;",
+            index: 18,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "7",
+            // txt: "19.300",
+            bg: "1;",
+            index: 19,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "11",
+            // txt: "19.300",
+            bg: "1;",
+            index: 20,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "15",
+            // txt: "19.300",
+            bg: "1;",
+            index: 21,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "19",
+            // txt: "19.300",
+            bg: "1;",
+            index: 22,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 23,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 24,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "西",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 25,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "白",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 26,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "4",
+            // txt: "19.300",
+            bg: "1;",
+            index: 27,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "8",
+            // txt: "19.300",
+            bg: "1;",
+            index: 28,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "12",
+            // txt: "19.300",
+            bg: "1;",
+            index: 29,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "16",
+            // txt: "19.300",
+            bg: "1;",
+            index: 30,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "20",
+            // txt: "19.300",
+            bg: "1;",
+            index: 31,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 32,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 33,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "北",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 34,
+            flag: false,
+            money: ""
+          }
+        ]
+      }
+    ]
+  }
+  function fivelist() {
+    return [
+      {
+        name: "1",
+        object: [
+          {
+            num: "1",
+            // txt: "19.300",
+            bg: "1;",
+            index: 0,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "5",
+            // txt: "19.300",
+            bg: "1;",
+            index: 1,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "9",
+            // txt: "19.300",
+            bg: "1;",
+            index: 2,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "13",
+            // txt: "19.300",
+            bg: "1;",
+            index: 3,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "17",
+            // txt: "19.300",
+            bg: "1;",
+            index: 4,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 5,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 6,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "东",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 7,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "中",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 8,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "10",
+        object: [
+          {
+            num: "2",
+            // txt: "19.300",
+            bg: "1;",
+            index: 9,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "6",
+            // txt: "19.300",
+            bg: "1;",
+            index: 10,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "10",
+            // txt: "19.300",
+            bg: "1;",
+            index: 11,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "14",
+            // txt: "19.300",
+            bg: "1;",
+            index: 12,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "18",
+            // txt: "19.300",
+            bg: "1;",
+            index: 13,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 14,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 15,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "南",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 16,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "发",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 17,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "3",
+            // txt: "19.300",
+            bg: "1;",
+            index: 18,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "7",
+            // txt: "19.300",
+            bg: "1;",
+            index: 19,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "11",
+            // txt: "19.300",
+            bg: "1;",
+            index: 20,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "15",
+            // txt: "19.300",
+            bg: "1;",
+            index: 21,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "19",
+            // txt: "19.300",
+            bg: "1;",
+            index: 22,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 23,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 24,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "西",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 25,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "白",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 26,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "4",
+            // txt: "19.300",
+            bg: "1;",
+            index: 27,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "8",
+            // txt: "19.300",
+            bg: "1;",
+            index: 28,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "12",
+            // txt: "19.300",
+            bg: "1;",
+            index: 29,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "16",
+            // txt: "19.300",
+            bg: "1;",
+            index: 30,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "20",
+            // txt: "19.300",
+            bg: "1;",
+            index: 31,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 32,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 33,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "北",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 34,
+            flag: false,
+            money: ""
+          }
+        ]
+      }
+    ]
+  }
+  function sixlist() {
+    return [
+      {
+        name: "1",
+        object: [
+          {
+            num: "1",
+            // txt: "19.300",
+            bg: "1;",
+            index: 0,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "5",
+            // txt: "19.300",
+            bg: "1;",
+            index: 1,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "9",
+            // txt: "19.300",
+            bg: "1;",
+            index: 2,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "13",
+            // txt: "19.300",
+            bg: "1;",
+            index: 3,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "17",
+            // txt: "19.300",
+            bg: "1;",
+            index: 4,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 5,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 6,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "东",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 7,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "中",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 8,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "10",
+        object: [
+          {
+            num: "2",
+            // txt: "19.300",
+            bg: "1;",
+            index: 9,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "6",
+            // txt: "19.300",
+            bg: "1;",
+            index: 10,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "10",
+            // txt: "19.300",
+            bg: "1;",
+            index: 11,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "14",
+            // txt: "19.300",
+            bg: "1;",
+            index: 12,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "18",
+            // txt: "19.300",
+            bg: "1;",
+            index: 13,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 14,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 15,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "南",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 16,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "发",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 17,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "3",
+            // txt: "19.300",
+            bg: "1;",
+            index: 18,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "7",
+            // txt: "19.300",
+            bg: "1;",
+            index: 19,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "11",
+            // txt: "19.300",
+            bg: "1;",
+            index: 20,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "15",
+            // txt: "19.300",
+            bg: "1;",
+            index: 21,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "19",
+            // txt: "19.300",
+            bg: "1;",
+            index: 22,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 23,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 24,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "西",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 25,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "白",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 26,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "4",
+            // txt: "19.300",
+            bg: "1;",
+            index: 27,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "8",
+            // txt: "19.300",
+            bg: "1;",
+            index: 28,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "12",
+            // txt: "19.300",
+            bg: "1;",
+            index: 29,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "16",
+            // txt: "19.300",
+            bg: "1;",
+            index: 30,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "20",
+            // txt: "19.300",
+            bg: "1;",
+            index: 31,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 32,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 33,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "北",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 34,
+            flag: false,
+            money: ""
+          }
+        ]
+      }
+    ]
+  }
+  function sevenlist() {
+    return [
+      {
+        name: "1",
+        object: [
+          {
+            num: "1",
+            // txt: "19.300",
+            bg: "1;",
+            index: 0,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "5",
+            // txt: "19.300",
+            bg: "1;",
+            index: 1,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "9",
+            // txt: "19.300",
+            bg: "1;",
+            index: 2,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "13",
+            // txt: "19.300",
+            bg: "1;",
+            index: 3,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "17",
+            // txt: "19.300",
+            bg: "1;",
+            index: 4,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 5,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 6,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "东",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 7,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "中",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 8,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "10",
+        object: [
+          {
+            num: "2",
+            // txt: "19.300",
+            bg: "1;",
+            index: 9,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "6",
+            // txt: "19.300",
+            bg: "1;",
+            index: 10,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "10",
+            // txt: "19.300",
+            bg: "1;",
+            index: 11,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "14",
+            // txt: "19.300",
+            bg: "1;",
+            index: 12,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "18",
+            // txt: "19.300",
+            bg: "1;",
+            index: 13,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 14,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 15,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "南",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 16,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "发",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 17,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "3",
+            // txt: "19.300",
+            bg: "1;",
+            index: 18,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "7",
+            // txt: "19.300",
+            bg: "1;",
+            index: 19,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "11",
+            // txt: "19.300",
+            bg: "1;",
+            index: 20,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "15",
+            // txt: "19.300",
+            bg: "1;",
+            index: 21,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "19",
+            // txt: "19.300",
+            bg: "1;",
+            index: 22,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 23,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 24,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "西",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 25,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "白",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 26,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "4",
+            // txt: "19.300",
+            bg: "1;",
+            index: 27,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "8",
+            // txt: "19.300",
+            bg: "1;",
+            index: 28,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "12",
+            // txt: "19.300",
+            bg: "1;",
+            index: 29,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "16",
+            // txt: "19.300",
+            bg: "1;",
+            index: 30,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "20",
+            // txt: "19.300",
+            bg: "1;",
+            index: 31,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 32,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 33,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "北",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 34,
+            flag: false,
+            money: ""
+          }
+        ]
+      }
+    ]
+  }
+  function eightlist() {
+    return [
+      {
+        name: "1",
+        object: [
+          {
+            num: "1",
+            // txt: "19.300",
+            bg: "1;",
+            index: 0,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "5",
+            // txt: "19.300",
+            bg: "1;",
+            index: 1,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "9",
+            // txt: "19.300",
+            bg: "1;",
+            index: 2,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "13",
+            // txt: "19.300",
+            bg: "1;",
+            index: 3,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "17",
+            // txt: "19.300",
+            bg: "1;",
+            index: 4,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 5,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾大",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 6,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "东",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 7,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "中",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 8,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "10",
+        object: [
+          {
+            num: "2",
+            // txt: "19.300",
+            bg: "1;",
+            index: 9,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "6",
+            // txt: "19.300",
+            bg: "1;",
+            index: 10,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "10",
+            // txt: "19.300",
+            bg: "1;",
+            index: 11,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "14",
+            // txt: "19.300",
+            bg: "1;",
+            index: 12,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "18",
+            // txt: "19.300",
+            bg: "1;",
+            index: 13,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 14,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "尾小",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 15,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "南",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 16,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "发",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 17,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "3",
+            // txt: "19.300",
+            bg: "1;",
+            index: 18,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "7",
+            // txt: "19.300",
+            bg: "1;",
+            index: 19,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "11",
+            // txt: "19.300",
+            bg: "1;",
+            index: 20,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "15",
+            // txt: "19.300",
+            bg: "1;",
+            index: 21,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "19",
+            // txt: "19.300",
+            bg: "1;",
+            index: 22,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 23,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和单",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 24,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "西",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 25,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "白",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 26,
+            flag: false,
+            money: ""
+          }
+        ]
+      },
+      {
+        name: "3",
+        object: [
+          {
+            num: "4",
+            // txt: "19.300",
+            bg: "1;",
+            index: 27,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "8",
+            // txt: "19.300",
+            bg: "1;",
+            index: 28,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "12",
+            // txt: "19.300",
+            bg: "1;",
+            index: 29,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "16",
+            // txt: "19.300",
+            bg: "1;",
+            index: 30,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "20",
+            // txt: "19.300",
+            bg: "1;",
+            index: 31,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 32,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "和双",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 33,
+            flag: false,
+            money: ""
+          },
+          {
+            num: "北",
+            // txt: "19.300",
+            styletxt: "#000",
+            index: 34,
+            flag: false,
+            money: ""
+          }
+        ]
+      }
+    ]
+  }
+  function sumlist() {
+    return [
+      {
+        name: "1",
+        object: [
+          { test: "总和大", num: "2.000", index: 0, flag: false, money: "" },
+          { test: "总和小", num: "2.000", index: 1, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "1",
+        object: [
+          { test: "总和单", num: "2.000", index: 2, flag: false, money: "" },
+          { test: "总和双", num: "2.000", index: 3, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "1",
+        object: [
+          { test: "总和尾大", num: "2.000", index: 4, flag: false, money: "" },
+          { test: "总和尾小", num: "2.000", index: 5, flag: false, money: "" }
+        ]
+      },
+      {
+        name: "2",
+        object: [
+          { test: "龙", num: "2.000", index: 6, flag: false, money: "" },
+          { test: "虎", num: "2.000", index: 7, flag: false, money: "" }
+        ]
+      }
+    ]
+  }
+  function tenlist() {
+    return [
+      {
+        name: "任选二",
+        number: "2",
+        index: 0,
+        object: [
+          { num: "1", index: 0, state: false, money: "" },
+          { num: "2", index: 1, state: false, money: "" },
+          { num: "3", index: 2, state: false, money: "" },
+          { num: "4", index: 3, state: false, money: "" }
+        ]
+      },
+      {
+        name: "任选二组",
+        number: "20",
+        index: 1,
+        object: [
+          { num: "5", index: 4, state: false, money: "" },
+          { num: "6", index: 5, state: false, money: "" },
+          { num: "7", index: 6, state: false, money: "" },
+          { num: "8", index: 7, state: false, money: "" }
+        ]
+      },
+      {
+        name: "任选三",
+        number: "18",
+        index: 2,
+        object: [
+          { num: "9", index: 8, state: false, money: "" },
+          { num: "10", index: 9, state: false, money: "" },
+          { num: "11", index: 10, state: false, money: "" },
+          { num: "12", index: 11, state: false, money: "" }
+        ]
+      },
+      {
+        name: "任选四",
+        number: "60",
+        index: 3,
+        object: [
+          { num: "13", index: 12, state: false, money: "" },
+          { num: "14", index: 13, state: false, money: "" },
+          { num: "15", index: 14, state: false, money: "" },
+          { num: "16", index: 15, state: false, money: "" }
+        ]
+      },
+      {
+        name: "任选五",
+        number: "120",
+        index: 4,
+        object: [
+          { num: "17", index: 16, state: false, money: "" },
+          { num: "18", index: 17, state: false, money: "" },
+          { num: "19", index: 18, state: false, money: "" },
+          { num: "20", index: 19, state: false, money: "" }
+        ]
+      }
+    ]
+  }
+import NavTop from "../../../share_components/default_nav";
+import api from "../../../api/config";
+import ws from '../../../assets/js/socket'
+import cm_cookie from '../../../assets/js/com_cookie'
+import NavBottom from '../../../share_components/dewdrop_map'
+export default {
+  components: {
+    NavTop,NavBottom
+  },
+  data() {
+    return {
+      max_lint:10,
+      auto_list:[],
+      bottom_nav:[
+          {name:'第一球'},
+          {name:'第二球'},
+          {name:'第三球'},
+          {name:'第四球'},
+          {name:'第五球'},
+          {name:'第六球'},
+          {name:'第七球'},
+          {name:'第八球'},
+      ],
+      timer: null,
+      h: 0,
+      m: 0,
+      s: 0,
+      c_data: {
+        fc_name: "",
+        img_path: "",
+        qishu: ""
+      },
+      auto: {
+        qishu: null,
+        datetime: "",
+        ball: []
+      },
+      close_time: {
+        fengpan: "",
+        kaijiang: "",
+        kaipan: "",
+        now_time: ""
+      },
+      only_data: [],
+      menus: [
+        { name: "两面盘", item: "gd_ten" },
+        { name: "第一球", item: "ball_one" },
+        { name: "第二球", item: "ball_two" },
+        { name: "第三球", item: "ball_three" },
+        { name: "第四球", item: "ball_four" },
+        { name: "第五球", item: "ball_five" },
+        { name: "第六球", item: "ball_six" },
+        { name: "第七球", item: "ball_seven" },
+        { name: "第八球", item: "ball_eight" },
+        { name: "总和", item: "happy_sum" },
+        { name: "连码", item: "happy_ten" }
+      ],
+      toplist: [
+        {
+          name: "1",
+          object: [
+            { index: 0, flag: false, money: "" },
+            { index: 1, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "2",
+          object: [
+            { index: 2, flag: false, money: "" },
+            { index: 3, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            { index: 4, flag: false, money: "" },
+            { index: 5, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "2",
+          object: [
+            { index: 6, flag: false, money: "" },
+            { index: 7, flag: false, money: "" }
+          ]
+        }
+      ],
+      centerlist: [
+        {
+          name: "第一球",
+          object: [
+            { index: 8, flag: false, money: "" },
+            { index: 9, flag: false, money: "" },
+            { index: 10, flag: false, money: "" },
+            { index: 11, flag: false, money: "" },
+            { index: 12, flag: false, money: "" },
+            { index: 13, flag: false, money: "" },
+            { index: 14, flag: false, money: "" },
+            { index: 15, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "第二球",
+          object: [
+            { index: 16, flag: false, money: "" },
+            { index: 17, flag: false, money: "" },
+            { index: 18, flag: false, money: "" },
+            { index: 19, flag: false, money: "" },
+            { index: 20, flag: false, money: "" },
+            { index: 21, flag: false, money: "" },
+            { index: 22, flag: false, money: "" },
+            { index: 23, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "第三球",
+          object: [
+            { index: 24, flag: false, money: "" },
+            { index: 25, flag: false, money: "" },
+            { index: 26, flag: false, money: "" },
+            { index: 27, flag: false, money: "" },
+            { index: 28, flag: false, money: "" },
+            { index: 29, flag: false, money: "" },
+            { index: 30, flag: false, money: "" },
+            { index: 31, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "第四球",
+          object: [
+            { index: 32, flag: false, money: "" },
+            { index: 33, flag: false, money: "" },
+            { index: 34, flag: false, money: "" },
+            { index: 35, flag: false, money: "" },
+            { index: 36, flag: false, money: "" },
+            { index: 37, flag: false, money: "" },
+            { index: 38, flag: false, money: "" },
+            { index: 39, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "第五球",
+          object: [
+            { index: 40, flag: false, money: "" },
+            { index: 41, flag: false, money: "" },
+            { index: 42, flag: false, money: "" },
+            { index: 43, flag: false, money: "" },
+            { index: 44, flag: false, money: "" },
+            { index: 45, flag: false, money: "" },
+            { index: 46, flag: false, money: "" },
+            { index: 47, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "第六球",
+          object: [
+            { index: 48, flag: false, money: "" },
+            { index: 49, flag: false, money: "" },
+            { index: 50, flag: false, money: "" },
+            { index: 51, flag: false, money: "" },
+            { index: 52, flag: false, money: "" },
+            { index: 53, flag: false, money: "" },
+            { index: 54, flag: false, money: "" },
+            { index: 55, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "第七球",
+          object: [
+            { index: 56, flag: false, money: "" },
+            { index: 57, flag: false, money: "" },
+            { index: 58, flag: false, money: "" },
+            { index: 59, flag: false, money: "" },
+            { index: 60, flag: false, money: "" },
+            { index: 61, flag: false, money: "" },
+            { index: 62, flag: false, money: "" },
+            { index: 63, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "第八球",
+          object: [
+            { index: 64, flag: false, money: "" },
+            { index: 65, flag: false, money: "" },
+            { index: 66, flag: false, money: "" },
+            { index: 67, flag: false, money: "" },
+            { index: 68, flag: false, money: "" },
+            { index: 69, flag: false, money: "" },
+            { index: 70, flag: false, money: "" },
+            { index: 71, flag: false, money: "" }
+          ]
+        }
+      ],
+      firstlist: [
+        {
+          name: "1",
+          object: [
+            {
+              num: "1",
+              // txt: "19.300",
+              bg: "1;",
+              index: 0,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "5",
+              // txt: "19.300",
+              bg: "1;",
+              index: 1,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "9",
+              // txt: "19.300",
+              bg: "1;",
+              index: 2,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "13",
+              // txt: "19.300",
+              bg: "1;",
+              index: 3,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "17",
+              // txt: "19.300",
+              bg: "1;",
+              index: 4,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 5,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 6,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "东",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 7,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "中",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 8,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "10",
+          object: [
+            {
+              num: "2",
+              // txt: "19.300",
+              bg: "1;",
+              index: 9,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "6",
+              // txt: "19.300",
+              bg: "1;",
+              index: 10,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "10",
+              // txt: "19.300",
+              bg: "1;",
+              index: 11,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "14",
+              // txt: "19.300",
+              bg: "1;",
+              index: 12,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "18",
+              // txt: "19.300",
+              bg: "1;",
+              index: 13,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 14,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 15,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "南",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 16,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "发",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 17,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "3",
+              // txt: "19.300",
+              bg: "1;",
+              index: 18,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "7",
+              // txt: "19.300",
+              bg: "1;",
+              index: 19,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "11",
+              // txt: "19.300",
+              bg: "1;",
+              index: 20,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "15",
+              // txt: "19.300",
+              bg: "1;",
+              index: 21,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "19",
+              // txt: "19.300",
+              bg: "1;",
+              index: 22,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 23,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 24,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "西",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 25,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "白",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 26,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "4",
+              // txt: "19.300",
+              bg: "1;",
+              index: 27,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "8",
+              // txt: "19.300",
+              bg: "1;",
+              index: 28,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "12",
+              // txt: "19.300",
+              bg: "1;",
+              index: 29,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "16",
+              // txt: "19.300",
+              bg: "1;",
+              index: 30,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "20",
+              // txt: "19.300",
+              bg: "1;",
+              index: 31,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 32,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 33,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "北",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 34,
+              flag: false,
+              money: ""
+            }
+          ]
+        }
+      ],
+      twolist: [
+        {
+          name: "1",
+          object: [
+            {
+              num: "1",
+              // txt: "19.300",
+              bg: "1;",
+              index: 0,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "5",
+              // txt: "19.300",
+              bg: "1;",
+              index: 1,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "9",
+              // txt: "19.300",
+              bg: "1;",
+              index: 2,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "13",
+              // txt: "19.300",
+              bg: "1;",
+              index: 3,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "17",
+              // txt: "19.300",
+              bg: "1;",
+              index: 4,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 5,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 6,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "东",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 7,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "中",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 8,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "10",
+          object: [
+            {
+              num: "2",
+              // txt: "19.300",
+              bg: "1;",
+              index: 9,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "6",
+              // txt: "19.300",
+              bg: "1;",
+              index: 10,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "10",
+              // txt: "19.300",
+              bg: "1;",
+              index: 11,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "14",
+              // txt: "19.300",
+              bg: "1;",
+              index: 12,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "18",
+              // txt: "19.300",
+              bg: "1;",
+              index: 13,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 14,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 15,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "南",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 16,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "发",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 17,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "3",
+              // txt: "19.300",
+              bg: "1;",
+              index: 18,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "7",
+              // txt: "19.300",
+              bg: "1;",
+              index: 19,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "11",
+              // txt: "19.300",
+              bg: "1;",
+              index: 20,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "15",
+              // txt: "19.300",
+              bg: "1;",
+              index: 21,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "19",
+              // txt: "19.300",
+              bg: "1;",
+              index: 22,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 23,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 24,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "西",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 25,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "白",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 26,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "4",
+              // txt: "19.300",
+              bg: "1;",
+              index: 27,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "8",
+              // txt: "19.300",
+              bg: "1;",
+              index: 28,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "12",
+              // txt: "19.300",
+              bg: "1;",
+              index: 29,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "16",
+              // txt: "19.300",
+              bg: "1;",
+              index: 30,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "20",
+              // txt: "19.300",
+              bg: "1;",
+              index: 31,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 32,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 33,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "北",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 34,
+              flag: false,
+              money: ""
+            }
+          ]
+        }
+      ],
+      threelist: [
+        {
+          name: "1",
+          object: [
+            {
+              num: "1",
+              // txt: "19.300",
+              bg: "1;",
+              index: 0,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "5",
+              // txt: "19.300",
+              bg: "1;",
+              index: 1,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "9",
+              // txt: "19.300",
+              bg: "1;",
+              index: 2,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "13",
+              // txt: "19.300",
+              bg: "1;",
+              index: 3,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "17",
+              // txt: "19.300",
+              bg: "1;",
+              index: 4,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 5,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 6,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "东",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 7,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "中",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 8,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "10",
+          object: [
+            {
+              num: "2",
+              // txt: "19.300",
+              bg: "1;",
+              index: 9,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "6",
+              // txt: "19.300",
+              bg: "1;",
+              index: 10,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "10",
+              // txt: "19.300",
+              bg: "1;",
+              index: 11,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "14",
+              // txt: "19.300",
+              bg: "1;",
+              index: 12,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "18",
+              // txt: "19.300",
+              bg: "1;",
+              index: 13,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 14,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 15,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "南",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 16,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "发",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 17,
+              flag: false,
+              money: "",
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "3",
+              // txt: "19.300",
+              bg: "1;",
+              index: 18,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "7",
+              // txt: "19.300",
+              bg: "1;",
+              index: 19,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "11",
+              // txt: "19.300",
+              bg: "1;",
+              index: 20,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "15",
+              // txt: "19.300",
+              bg: "1;",
+              index: 21,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "19",
+              // txt: "19.300",
+              bg: "1;",
+              index: 22,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 23,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 24,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "西",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 25,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "白",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 26,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "4",
+              // txt: "19.300",
+              bg: "1;",
+              index: 27,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "8",
+              // txt: "19.300",
+              bg: "1;",
+              index: 28,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "12",
+              // txt: "19.300",
+              bg: "1;",
+              index: 29,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "16",
+              // txt: "19.300",
+              bg: "1;",
+              index: 30,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "20",
+              // txt: "19.300",
+              bg: "1;",
+              index: 31,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 32,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 33,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "北",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 34,
+              flag: false,
+              money: ""
+            }
+          ]
+        }
+      ],
+      fourlist: [
+        {
+          name: "1",
+          object: [
+            {
+              num: "1",
+              // txt: "19.300",
+              bg: "1;",
+              index: 0,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "5",
+              // txt: "19.300",
+              bg: "1;",
+              index: 1,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "9",
+              // txt: "19.300",
+              bg: "1;",
+              index: 2,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "13",
+              // txt: "19.300",
+              bg: "1;",
+              index: 3,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "17",
+              // txt: "19.300",
+              bg: "1;",
+              index: 4,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 5,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 6,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "东",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 7,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "中",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 8,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "10",
+          object: [
+            {
+              num: "2",
+              // txt: "19.300",
+              bg: "1;",
+              index: 9,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "6",
+              // txt: "19.300",
+              bg: "1;",
+              index: 10,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "10",
+              // txt: "19.300",
+              bg: "1;",
+              index: 11,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "14",
+              // txt: "19.300",
+              bg: "1;",
+              index: 12,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "18",
+              // txt: "19.300",
+              bg: "1;",
+              index: 13,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 14,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 15,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "南",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 16,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "发",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 17,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "3",
+              // txt: "19.300",
+              bg: "1;",
+              index: 18,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "7",
+              // txt: "19.300",
+              bg: "1;",
+              index: 19,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "11",
+              // txt: "19.300",
+              bg: "1;",
+              index: 20,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "15",
+              // txt: "19.300",
+              bg: "1;",
+              index: 21,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "19",
+              // txt: "19.300",
+              bg: "1;",
+              index: 22,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 23,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 24,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "西",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 25,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "白",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 26,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "4",
+              // txt: "19.300",
+              bg: "1;",
+              index: 27,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "8",
+              // txt: "19.300",
+              bg: "1;",
+              index: 28,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "12",
+              // txt: "19.300",
+              bg: "1;",
+              index: 29,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "16",
+              // txt: "19.300",
+              bg: "1;",
+              index: 30,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "20",
+              // txt: "19.300",
+              bg: "1;",
+              index: 31,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 32,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 33,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "北",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 34,
+              flag: false,
+              money: ""
+            }
+          ]
+        }
+      ],
+      fivelist: [
+        {
+          name: "1",
+          object: [
+            {
+              num: "1",
+              // txt: "19.300",
+              bg: "1;",
+              index: 0,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "5",
+              // txt: "19.300",
+              bg: "1;",
+              index: 1,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "9",
+              // txt: "19.300",
+              bg: "1;",
+              index: 2,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "13",
+              // txt: "19.300",
+              bg: "1;",
+              index: 3,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "17",
+              // txt: "19.300",
+              bg: "1;",
+              index: 4,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 5,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 6,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "东",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 7,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "中",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 8,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "10",
+          object: [
+            {
+              num: "2",
+              // txt: "19.300",
+              bg: "1;",
+              index: 9,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "6",
+              // txt: "19.300",
+              bg: "1;",
+              index: 10,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "10",
+              // txt: "19.300",
+              bg: "1;",
+              index: 11,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "14",
+              // txt: "19.300",
+              bg: "1;",
+              index: 12,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "18",
+              // txt: "19.300",
+              bg: "1;",
+              index: 13,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 14,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 15,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "南",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 16,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "发",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 17,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "3",
+              // txt: "19.300",
+              bg: "1;",
+              index: 18,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "7",
+              // txt: "19.300",
+              bg: "1;",
+              index: 19,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "11",
+              // txt: "19.300",
+              bg: "1;",
+              index: 20,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "15",
+              // txt: "19.300",
+              bg: "1;",
+              index: 21,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "19",
+              // txt: "19.300",
+              bg: "1;",
+              index: 22,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 23,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 24,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "西",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 25,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "白",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 26,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "4",
+              // txt: "19.300",
+              bg: "1;",
+              index: 27,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "8",
+              // txt: "19.300",
+              bg: "1;",
+              index: 28,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "12",
+              // txt: "19.300",
+              bg: "1;",
+              index: 29,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "16",
+              // txt: "19.300",
+              bg: "1;",
+              index: 30,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "20",
+              // txt: "19.300",
+              bg: "1;",
+              index: 31,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 32,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 33,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "北",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 34,
+              flag: false,
+              money: ""
+            }
+          ]
+        }
+      ],
+      sixlist: [
+        {
+          name: "1",
+          object: [
+            {
+              num: "1",
+              // txt: "19.300",
+              bg: "1;",
+              index: 0,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "5",
+              // txt: "19.300",
+              bg: "1;",
+              index: 1,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "9",
+              // txt: "19.300",
+              bg: "1;",
+              index: 2,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "13",
+              // txt: "19.300",
+              bg: "1;",
+              index: 3,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "17",
+              // txt: "19.300",
+              bg: "1;",
+              index: 4,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 5,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 6,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "东",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 7,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "中",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 8,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "10",
+          object: [
+            {
+              num: "2",
+              // txt: "19.300",
+              bg: "1;",
+              index: 9,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "6",
+              // txt: "19.300",
+              bg: "1;",
+              index: 10,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "10",
+              // txt: "19.300",
+              bg: "1;",
+              index: 11,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "14",
+              // txt: "19.300",
+              bg: "1;",
+              index: 12,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "18",
+              // txt: "19.300",
+              bg: "1;",
+              index: 13,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 14,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 15,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "南",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 16,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "发",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 17,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "3",
+              // txt: "19.300",
+              bg: "1;",
+              index: 18,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "7",
+              // txt: "19.300",
+              bg: "1;",
+              index: 19,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "11",
+              // txt: "19.300",
+              bg: "1;",
+              index: 20,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "15",
+              // txt: "19.300",
+              bg: "1;",
+              index: 21,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "19",
+              // txt: "19.300",
+              bg: "1;",
+              index: 22,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 23,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 24,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "西",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 25,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "白",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 26,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "4",
+              // txt: "19.300",
+              bg: "1;",
+              index: 27,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "8",
+              // txt: "19.300",
+              bg: "1;",
+              index: 28,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "12",
+              // txt: "19.300",
+              bg: "1;",
+              index: 29,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "16",
+              // txt: "19.300",
+              bg: "1;",
+              index: 30,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "20",
+              // txt: "19.300",
+              bg: "1;",
+              index: 31,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 32,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 33,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "北",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 34,
+              flag: false,
+              money: ""
+            }
+          ]
+        }
+      ],
+      sevenlist: [
+        {
+          name: "1",
+          object: [
+            {
+              num: "1",
+              // txt: "19.300",
+              bg: "1;",
+              index: 0,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "5",
+              // txt: "19.300",
+              bg: "1;",
+              index: 1,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "9",
+              // txt: "19.300",
+              bg: "1;",
+              index: 2,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "13",
+              // txt: "19.300",
+              bg: "1;",
+              index: 3,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "17",
+              // txt: "19.300",
+              bg: "1;",
+              index: 4,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 5,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 6,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "东",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 7,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "中",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 8,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "10",
+          object: [
+            {
+              num: "2",
+              // txt: "19.300",
+              bg: "1;",
+              index: 9,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "6",
+              // txt: "19.300",
+              bg: "1;",
+              index: 10,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "10",
+              // txt: "19.300",
+              bg: "1;",
+              index: 11,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "14",
+              // txt: "19.300",
+              bg: "1;",
+              index: 12,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "18",
+              // txt: "19.300",
+              bg: "1;",
+              index: 13,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 14,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 15,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "南",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 16,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "发",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 17,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "3",
+              // txt: "19.300",
+              bg: "1;",
+              index: 18,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "7",
+              // txt: "19.300",
+              bg: "1;",
+              index: 19,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "11",
+              // txt: "19.300",
+              bg: "1;",
+              index: 20,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "15",
+              // txt: "19.300",
+              bg: "1;",
+              index: 21,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "19",
+              // txt: "19.300",
+              bg: "1;",
+              index: 22,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 23,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 24,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "西",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 25,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "白",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 26,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "4",
+              // txt: "19.300",
+              bg: "1;",
+              index: 27,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "8",
+              // txt: "19.300",
+              bg: "1;",
+              index: 28,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "12",
+              // txt: "19.300",
+              bg: "1;",
+              index: 29,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "16",
+              // txt: "19.300",
+              bg: "1;",
+              index: 30,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "20",
+              // txt: "19.300",
+              bg: "1;",
+              index: 31,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 32,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 33,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "北",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 34,
+              flag: false,
+              money: ""
+            }
+          ]
+        }
+      ],
+      eightlist: [
+        {
+          name: "1",
+          object: [
+            {
+              num: "1",
+              // txt: "19.300",
+              bg: "1;",
+              index: 0,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "5",
+              // txt: "19.300",
+              bg: "1;",
+              index: 1,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "9",
+              // txt: "19.300",
+              bg: "1;",
+              index: 2,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "13",
+              // txt: "19.300",
+              bg: "1;",
+              index: 3,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "17",
+              // txt: "19.300",
+              bg: "1;",
+              index: 4,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 5,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾大",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 6,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "东",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 7,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "中",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 8,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "10",
+          object: [
+            {
+              num: "2",
+              // txt: "19.300",
+              bg: "1;",
+              index: 9,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "6",
+              // txt: "19.300",
+              bg: "1;",
+              index: 10,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "10",
+              // txt: "19.300",
+              bg: "1;",
+              index: 11,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "14",
+              // txt: "19.300",
+              bg: "1;",
+              index: 12,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "18",
+              // txt: "19.300",
+              bg: "1;",
+              index: 13,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 14,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "尾小",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 15,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "南",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 16,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "发",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 17,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "3",
+              // txt: "19.300",
+              bg: "1;",
+              index: 18,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "7",
+              // txt: "19.300",
+              bg: "1;",
+              index: 19,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "11",
+              // txt: "19.300",
+              bg: "1;",
+              index: 20,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "15",
+              // txt: "19.300",
+              bg: "1;",
+              index: 21,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "19",
+              // txt: "19.300",
+              bg: "1;",
+              index: 22,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 23,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和单",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 24,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "西",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 25,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "白",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 26,
+              flag: false,
+              money: ""
+            }
+          ]
+        },
+        {
+          name: "3",
+          object: [
+            {
+              num: "4",
+              // txt: "19.300",
+              bg: "1;",
+              index: 27,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "8",
+              // txt: "19.300",
+              bg: "1;",
+              index: 28,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "12",
+              // txt: "19.300",
+              bg: "1;",
+              index: 29,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "16",
+              // txt: "19.300",
+              bg: "1;",
+              index: 30,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "20",
+              // txt: "19.300",
+              bg: "1;",
+              index: 31,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 32,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "和双",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 33,
+              flag: false,
+              money: ""
+            },
+            {
+              num: "北",
+              // txt: "19.300",
+              styletxt: "#000",
+              index: 34,
+              flag: false,
+              money: ""
+            }
+          ]
+        }
+      ],
+      sumlist: [
+        {
+          name: "1",
+          object: [
+            { test: "总和大", num: "2.000", index: 0, flag: false, money: "" },
+            { test: "总和小", num: "2.000", index: 1, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "1",
+          object: [
+            { test: "总和单", num: "2.000", index: 2, flag: false, money: "" },
+            { test: "总和双", num: "2.000", index: 3, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "1",
+          object: [
+            { test: "总和尾大", num: "2.000", index: 4, flag: false, money: "" },
+            { test: "总和尾小", num: "2.000", index: 5, flag: false, money: "" }
+          ]
+        },
+        {
+          name: "2",
+          object: [
+            { test: "龙", num: "2.000", index: 6, flag: false, money: "" },
+            { test: "虎", num: "2.000", index: 7, flag: false, money: "" }
+          ]
+        }
+      ],
+      tenlist: [
+        {
+          name: "任选二",
+          number: "2",
+          index: 0,
+          object: [
+            { num: "1", index: 0, state: false, money: "" },
+            { num: "2", index: 1, state: false, money: "" },
+            { num: "3", index: 2, state: false, money: "" },
+            { num: "4", index: 3, state: false, money: "" }
+          ]
+        },
+        {
+          name: "任选二组",
+          number: "20",
+          index: 1,
+          object: [
+            { num: "5", index: 4, state: false, money: "" },
+            { num: "6", index: 5, state: false, money: "" },
+            { num: "7", index: 6, state: false, money: "" },
+            { num: "8", index: 7, state: false, money: "" }
+          ]
+        },
+        {
+          name: "任选三",
+          number: "18",
+          index: 2,
+          object: [
+            { num: "9", index: 8, state: false, money: "" },
+            { num: "10", index: 9, state: false, money: "" },
+            { num: "11", index: 10, state: false, money: "" },
+            { num: "12", index: 11, state: false, money: "" }
+          ]
+        },
+        {
+          name: "任选四",
+          number: "60",
+          index: 3,
+          object: [
+            { num: "13", index: 12, state: false, money: "" },
+            { num: "14", index: 13, state: false, money: "" },
+            { num: "15", index: 14, state: false, money: "" },
+            { num: "16", index: 15, state: false, money: "" }
+          ]
+        },
+        {
+          name: "任选五",
+          number: "120",
+          index: 4,
+          object: [
+            { num: "17", index: 16, state: false, money: "" },
+            { num: "18", index: 17, state: false, money: "" },
+            { num: "19", index: 18, state: false, money: "" },
+            { num: "20", index: 19, state: false, money: "" }
+          ]
+        }
+      ],
+      is_wh: false
+    };
+  },
+  created() {
+    this.fetchData();
+  },
+  mounted(){
+    this.socket_change(this.$route.query.page);
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route.query.page':function(to,from) {
+      this.$root.$off(from);
+      this.$root.$off(from+'lefttime');
+      this.fetchData();
+      this.socket_change(to);
+    }
+  },
+  destroyed(){
+    console.log('清除定时器：'+this.timer);
+    if(this.timer){
+        window.clearTimeout(this.timer);
+        this.timer = null;
+    }
+    if(!this.isIE9){
+      ws.close_ws(false);
+    }
+    this.$root.$off(this.$route.query.page);
+    this.$root.$off(this.$route.query.page+'lefttime');
+    cm_cookie.delCookie("top_nav")
+  },
+  methods:{
+    socket_change: function(to){
+      if(!this.isIE9){
+        let self = this;
+        ws.createWebSocket(to,self,true);
+        this.$root.$on(to,(e)=>{
+          this.auto = e;
+        });
+        this.$root.$on(to+'lefttime',(e)=>{
+          console.log(e);
+          this.c_data.qishu = e.qishu;
+          this.close_time.fengpan = e.close_time;
+          this.close_time.now_time = e.now_time;
+          let t1 = e.close_time - e.now_time;
+          console.log('是否在维护中：'+this.is_wh);
+          if(t1 == 0 && !this.is_wh){
+              this.fetchData(2)
+          }else if(t1 > 0  && !this.is_wh){
+              if(this.timer){
+                  window.clearTimeout(this.timer);
+                  this.timer = null;
+              }
+              this.init();
+              this.$root.$emit('wh_modal',false);
+          }else if(t1 < 0  && !this.is_wh){
+              this.h = -1;
+              this.m = -1;
+              this.s = -1;
+              if(this.timer){
+                  window.clearTimeout(this.timer);
+                  this.timer = null;
+              }
+              this.$root.$emit('wh_modal',true,true)
+          }
+        })
+      }
+    },
+    open_way: function() {
+      let page =
+        "trend_chart/chart-lotteryId=" +
+        this.$route.query.page +
+        ".html" +
+        "?tab=1";
+      window.open(page);
+    },
+    history: function() {
+      let page =
+        "trend_chart/chart-lotteryId=" +
+        this.$route.query.page +
+        ".html" +
+        "?tab=3";
+      window.open(page);
+    },
+    //aaaaa
+    show_rule: function() {
+      this.$root.$emit("rule_show", true);
+      this.$root.$emit("now_page", this.$route.query.page);
+    },
+    getRTime: function() {
+      this.close_time.now_time += 1;
+      var t1 = this.close_time.fengpan * 1000 - this.close_time.now_time * 1000;
+      this.h = Math.floor((t1 / 1000 / 60 / 60) % 24);
+      this.m = Math.floor((t1 / 1000 / 60) % 60);
+      this.s = Math.floor((t1 / 1000) % 60);
+      if (this.h == 0 && this.m == 0 && this.s == 0) {
+        this.fetchData(2);
+        this.$root.$emit("success", true);
+      }else if(this.h < 0 && this.m < 0 && this.s < 0){
+        if(this.timer){
+            window.clearTimeout(this.timer);
+            this.timer = null;
+        }
+        this.h = -1;
+        this.m = -1;
+        this.s = -1;
+      }
+    },
+    init: function() {
+        this.getRTime();
+        this.timer = window.setTimeout(this.init,1000); //time是指本身,延时递归调用自己,1000为间隔调用时间,单位毫秒
+    },
+    //aaaaaa
+    sortNumber: function(a, b) {
+      return a.sort - b.sort;
+    },
+    fetchData(type) {
+      this.$root.$emit('wh_modal',false);
+      if(this.timer){
+          window.clearTimeout(this.timer);
+          this.timer = null;
+      }
+      type==2?this.$root.$emit('loading',true,true):this.$root.$emit('loading',true);
+      let body = {
+        fc_type: this.$route.query.page
+      };
+      api.dewdrop(this, body, (res) => {
+        if (res.data.ErrorCode == 1) {
+            console.log(res);
+            this.auto_list = res.data.Data;
+            console.log(this.$refs.dewdrop_map);
+            api.getgameindex(this, body, res => {
+                if (res.data.ErrorCode == 1) {
+                if(type == 2){
+                    window.setTimeout(() => {
+                        this.$root.$emit("loading", false);
+                }, 1000)
+                }else{
+                    this.$root.$emit("loading", false);
+                }
+                if(res.data.is_wh == 2){
+                    this.$root.$emit('wh_modal',true);
+                    this.is_wh = true;
+                }else if(res.data.is_wh == 1){
+                    this.$root.$emit('wh_modal',false);
+                    this.is_wh = false
+                }
+                this.auto = res.data.Data.auto;
+                this.close_time = res.data.Data.closetime;
+                if(this.close_time.fengpan - this.close_time.now_time < 0){
+                    this.$root.$emit('wh_modal',true,true)
+                }
+                this.c_data = res.data.Data.c_data;
+                let back_data = res.data.Data.odds;
+                back_data.sort(this.sortNumber);
+//          console.log(back_data);
+                this.computed(back_data);
+                this.firstlist = firstlist();
+                this.twolist = twolist();
+                this.threelist = threelist();
+                this.fourlist = fourlist();
+                this.fivelist = fivelist();
+                this.sixlist = sixlist();
+                this.sevenlist = sevenlist();
+                this.eightlist = eightlist();
+                this.computed_firstlist(back_data, this.firstlist,0);
+                this.computed_firstlist(back_data, this.twolist, 35);
+                this.computed_firstlist(back_data, this.threelist, 70);
+                this.computed_firstlist(back_data, this.fourlist, 105);
+                this.computed_firstlist(back_data, this.fivelist, 140);
+                this.computed_firstlist(back_data, this.sixlist, 175);
+                this.computed_firstlist(back_data, this.sevenlist, 210);
+                this.computed_firstlist(back_data, this.eightlist, 245);
+                this.computed_sum(back_data);
+                this.computed_ten(back_data);
+                this.$refs.dewdrop_map.top_go(0);//点击触发露珠图组件头部选中事件
+                this.$refs.dewdrop_map.left_go(0);//点击触发露珠图组件左侧选中事件
+                if(!this.is_wh){
+                    if(this.close_time.fengpan){
+                        if(this.timer){
+                            window.clearTimeout(this.timer);
+                            this.timer = null;
+                        }
+                        if(type == 2){
+                            window.setTimeout(() => {
+                                this.init();
+                        }, 1000)
+                        }else{
+                            this.init();
+                        }
+                    }
+                }
+            }
+        });
+        }
+      });
+    },
+    go_child: function(child) {
+      // console.log(child);
+      this.$router.push({ name: child, query: { page:this.$route.query.page} });
+    },
+    computed(data) {
+      // console.log(data);
+      this.$set(this.toplist, this.toplist);
+      this.toplist = toplist();
+      this.$set(this.centerlist, this.centerlist);
+      this.centerlist = centerlist();
+      var k = 280;
+      //总和大 总合小
+
+      for (let i = 0; i < this.toplist.length; i++) {
+        for (let j = 0; j < this.toplist[i].object.length; j++, k++) {
+          Object.assign(this.toplist[i].object[j], data[k]);
+          let test = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          );
+          this.toplist[i].object[j].test = test;
+        }
+      }
+
+      k = 20;
+      for (let i = 0; i < this.centerlist.length; i++) {
+        for (let j = 0; j < this.centerlist[i].object.length; j++, k++) {
+          Object.assign(this.centerlist[i].object[j], data[k]);
+          let test = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          );
+          this.centerlist[i].object[j].test = test;
+        }
+        k += 27;
+      }
+    },
+    computed_firstlist(data, lists, num) {
+      this.$set(lists,lists);
+      //1-20球
+      var k = num;
+      for (var i = 0; i < lists.length; i++) {
+        // console.log(i)
+        k = num;
+        k += i;
+        for (var l = 0; l < lists[i].object.length; l++, k += 4) {
+          Object.assign(lists[i].object[l], data[k]);
+          let test = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          );
+          lists[i].object[l].num = test;
+        }
+      }
+    },
+    computed_sum(data) {
+      // console.log(111);
+      this.$set(this.sumlist, this.sumlist);
+      this.sumlist = sumlist();
+      //总和大 总合小
+
+      var k=280;
+
+      for (let i = 0; i < this.sumlist.length; i++) {
+        for (let j = 0; j < this.sumlist[i].object.length; j++, k++) {
+          Object.assign(this.sumlist[i].object[j], data[k]);
+          let test = data[k].remark.slice(
+            data[k].remark.search("#") + 1,
+            data[k].remark.length
+          );
+          this.sumlist[i].object[j].test = test;
+        }
+      }
+    },
+    computed_ten(data) {
+      this.$set(this.tenlist, this.tenlist);
+      this.tenlist = tenlist();
+      for (let i = 288; i < data.length; i++) {
+        if (i == 388) {
+          break;
+        } else {
+          this.only_data.push(data[i]);
+        }
+      }
+      // console.log(this.only_data);
+      for (let i = 0; i < this.tenlist[0].object.length; i++) {
+        Object.assign(this.tenlist[0].object[i], data[288 + i]);
+        Object.assign(this.tenlist[0], data[288]);
+      }
+      for (let i = 0; i < this.tenlist[1].object.length; i++) {
+        Object.assign(this.tenlist[1].object[i], data[292 + i]);
+        Object.assign(this.tenlist[1], data[292]);
+      }
+      for (let i = 0; i < this.tenlist[2].object.length; i++) {
+        Object.assign(this.tenlist[2].object[i], data[296 + i]);
+        Object.assign(this.tenlist[2], data[296]);
+      }
+      for (let i = 0; i < this.tenlist[3].object.length; i++) {
+        Object.assign(this.tenlist[3].object[i], data[300 + i]);
+        Object.assign(this.tenlist[3], data[300]);
+      }
+      for (let i = 0; i < this.tenlist[4].object.length; i++) {
+        Object.assign(this.tenlist[4].object[i], data[304 + i]);
+        Object.assign(this.tenlist[4], data[304]);
+      }
+    }
+  }
+};
+</script>

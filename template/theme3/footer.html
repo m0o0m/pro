@@ -1,0 +1,24 @@
+{{define "footer"}}
+<div id="page-footer">
+    <div class="footer clearfix">
+        <div class="article-menu">
+        {{range $k,$v:=.Content}}
+            <a href="javascript:void(0);" onclick="getPager('-','iword','{{$v.Id}}');" target="mem_index" data-color="" class="js-article-color">
+            {{if gt $k 0}}&nbsp;&nbsp;|&nbsp;&nbsp;{{end}}{{$v.Title}}
+            </a>
+        {{end}}
+        </div>
+        <div class="footer-pics clearfix">
+            <a target="_brank" href="http://pkbet.cc" id="bblogo"></a>
+            <a id="browser-logo">
+                <img src="{{.CdnUrl}}/theme3/public/images/new/ublogo.png" border="0" width="146"></a>
+            <div class="footer-bank"></div>
+        </div>
+        <div class="copyright">Copyright © {{.SiteName}} Reserved&nbsp;&nbsp;</div>
+    </div>
+</div>
+</div>
+{{template "footer_" .}}
+</body>
+</html>
+{{end}}

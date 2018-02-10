@@ -1,0 +1,581 @@
+<?php
+/* Smarty version 3.1.31, created on 2018-01-19 18:18:49
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/gameapi/opentime/index.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a61c609c73dc0_29814619',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '127d82a47769078fc8fcf7473bad6d21ba2e0826' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/our_backend/views/gameapi/opentime/index.html',
+      1 => 1514989228,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a61c609c73dc0_29814619 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<style>
+    #menu-form label{margin-right:10px}
+    .handle span{cursor: pointer}
+    #twoLevel{display: none}
+    .levelDiv{display: none}
+</style>
+
+<div class="page-header col-xs-12">
+    <div id="show-table_filter" class="dataTables_length">
+        <form id="menu-form" method='get' action='/gameapi/opentime/index'>
+            <label for="menuLevel"> 彩票种类:
+                <select type="select" name="fc_type"  id="fc_type" style="width:120px;">
+                    <option value="">请选择彩种</option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['games']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+" <?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['type'];
+$_prefixVariable1=ob_get_clean();
+if (isset($_GET['fc_type']) && $_GET['fc_type'] == $_prefixVariable1) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</option>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </select>
+            </label>
+            <label for="qishu">期号:
+                <input placeholder="请输入期号进行查询" type="text" id="qishu" name="qishu" field="search" value="<?php if (isset($_GET['fc_type'])) {
+echo $_GET['qishu'];
+}?>">
+            </label>
+            <label for="status"> 每页显示条数:
+                <select type="select" name="pageNum"  id="pageNum" >
+                    <option value="100"  <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 100) {?>selected<?php }?>>100</option>
+                    <option value="500" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 500) {?>selected<?php }?>>500</option>
+                    <option value="1000" <?php if (isset($_GET['pageNum']) && $_GET['pageNum'] == 1000) {?>selected<?php }?>>1000</option>
+                </select>
+            </label>
+            <label for="page"> 页码:
+                <select type="select" name="page"  id="page">
+                    <?php
+$__section_loop_0_saved = isset($_smarty_tpl->tpl_vars['__smarty_section_loop']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop'] : false;
+$__section_loop_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['pagedata']->value['totalpage']) ? count($_loop) : max(0, (int) $_loop));
+$__section_loop_0_total = $__section_loop_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = new Smarty_Variable(array());
+if ($__section_loop_0_total != 0) {
+for ($__section_loop_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] = 0; $__section_loop_0_iteration <= $__section_loop_0_total; $__section_loop_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']++){
+?>
+                    <option value="<?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+"
+                            <?php if (isset($_GET['page']) && $_GET['page'] == (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1) {?>selected<?php }?>><?php echo (isset($_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_loop']->value['index'] : null)+1;?>
+
+                </option>
+                <?php
+}
+}
+if ($__section_loop_0_saved) {
+$_smarty_tpl->tpl_vars['__smarty_section_loop'] = $__section_loop_0_saved;
+}
+?>
+            </select>
+        </label>
+        <label>
+            <input type="button" class="btn btn-sm btn-success" id="search" value="搜索"/>
+        </label>
+        <label><span class="btn btn-sm btn-success" id="create">添加</span></label>
+    </form>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['fc_type']->value;?>
+" id='lotteryType'>
+            <input type="hidden"
+                   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['games']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                   <?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["type"];
+$_prefixVariable2=ob_get_clean();
+ob_start();
+echo $_smarty_tpl->tpl_vars['fc_type']->value;
+$_prefixVariable3=ob_get_clean();
+if ($_prefixVariable2 == $_prefixVariable3) {?>value="<?php echo $_smarty_tpl->tpl_vars['v']->value["name"];?>
+"<?php }?>
+                   <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                   " id='lotteryName'>
+                   <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">ID</th>
+                        <th class="center">彩票类型</th>
+                        <th class="center">期号</th>
+                        <th class="center">开盘时间</th>
+                        <th class="center">封盘时间</th>
+                        <th class="center">开奖时间</th>
+                        <th class="center">是否生效</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+                    <tr>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['id'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['id'];
+}?></td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['fc_type'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['fc_type'];
+}?></td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['qishu'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['qishu'];
+}?></td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['kaipan'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['kaipan'];
+}?></td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['fengpan'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['fengpan'];
+}?></td>
+                        <td class="center"> <?php if (isset($_smarty_tpl->tpl_vars['v']->value['kaijiang'])) {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['kaijiang'];
+}?></td>
+                        <td class="center">
+                          <?php if (isset($_smarty_tpl->tpl_vars['v']->value['status']) && $_smarty_tpl->tpl_vars['v']->value['status'] == 1) {?>有效<?php } else { ?>无效<?php }?>
+                        </td>
+                        <td class="center handle">
+                            <span  class="btn btn-xs btn-success update" data='<?php echo $_smarty_tpl->tpl_vars['v']->value["id"];?>
+'>修改</span>
+                            <!-- <span  class="btn btn-xs btn-danger delete" data='<?php echo $_smarty_tpl->tpl_vars['v']->value["id"];?>
+'>删除</span> -->
+                        </td>
+                    </tr>
+                    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-double"></div>
+
+
+<div class="isHide layui-layer-wrap"id="data-detail" style="display: none;">
+    <div class="modal-body"  style="margin-left:70px;">
+        <form id="addForm" class="layui-form" method='post' action="">
+            <input type="hidden" name="fc_type" value="" id='addLotteryType'>
+            <input type="hidden" name="id" value="" id='fid'>
+            <div class="layui-form-item">
+                <label class="layui-form-label">期 &nbsp; &nbsp;数 ：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="qishu" id="qishu2" placeholder="期数" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开盘时间 :</label>
+                <div class="layui-input-block">
+                    <input type="text" name="kaipan" id="kaipan" placeholder="开盘时间" class="laydate-icon laydate-icon-dahong" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">封盘时间 :</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fengpan" id="fengpan" placeholder="封盘时间" autocomplete="off" class="laydate-icon laydate-icon-dahong" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开奖时间 :</label>
+                <div class="layui-input-block">
+                    <input type="text" name="kaijiang" id="kaijiang" placeholder="开奖时间" autocomplete="off" class="laydate-icon laydate-icon-dahong" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                </div>
+            </div>
+            <div class="layui-form-item" id="status">
+                <label class="layui-form-label">状态 ：</label>
+                <div class="layui-input-block">
+                    有效 <input type="radio" name="status" value="1" checked="checked">
+                    无效 <input type="radio" name="status" value="2" >
+                </div>
+            </div>
+        </form>
+        <style>
+            #laydate_box {position:fixed !important;}
+            .layui-form-item{margin-bottom:10px;}
+            .layui-input-block{display:inline-block;}
+            .layui-form-label {padding:0px;}
+            .layui-form input[type=radio]{display:inline-block;width:25px;height:25px;}
+        </style>
+    </div>
+    <div class="modal-footer">
+        <label>
+            <input id='saveMenu' type="submit" class="btn btn-info" value = "保存">
+        </label>
+    </div>
+</div>
+<div class="isHide layui-layer-wrap"id="editWin" style="display: none;">
+    <div class="modal-body" style="margin-left:70px;">
+        <form id="editForm" class="layui-form" method='post' action="" >
+            <input type="hidden" name="fc_type" value="" id='editLotteryType'>
+            <div class="layui-form-item">
+                <label class="layui-form-label">期 &nbsp; &nbsp;数 ：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="qishu" id="qishu1" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开盘时间 :</label>
+                <div class="layui-input-block">
+                    <input type="text" name="kaipan" id="kaipan1"  class="laydate-icon laydate-icon-dahong" placeholder="" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">封盘时间 :</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fengpan" id="fengpan1"  autocomplete="off" class="laydate-icon laydate-icon-dahong" placeholder=""  onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开奖时间 :</label>
+                <div class="layui-input-block">
+                    <input type="text" name="kaijiang" id="kaijiang1"  autocomplete="off" class="laydate-icon laydate-icon-dahong" placeholder="" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                </div>
+            </div>
+            <div class="layui-form-item" id="status1">
+                <label class="layui-form-label">状态 ：</label>
+                <div class="layui-input-block">
+                    有效 <input type="radio" name="status" value="1" />
+                    无效 <input type="radio" name="status" value="2" />
+                </div>
+            </div>
+        </form>
+        <style>
+            #laydate_box {position:fixed !important;}
+            .layui-form-item{margin-bottom:10px;}
+            .layui-input-block{display:inline-block;}
+            .layui-form-label {padding:0px;}
+            .layui-form input[type=radio]{display:inline-block;width:25px;height:25px;}
+        </style>
+    </div>
+    <div class="modal-footer">
+        <label>
+            <input id='saveMenu1' type="submit" class="btn btn-info" value = "保存">
+        </label>
+    </div>
+</div>
+
+<?php echo '<script'; ?>
+>
+    //pjax局部加载列表
+    function renderTableByPjax() {
+        var fc_type = $.trim($('#fc_type').val());
+        var periods = $.trim($('#qishu').val());
+        var pageNum = $.trim($('#pageNum').val());
+        var page = $.trim($('#page').val());
+
+        var params = {
+            fc_type: fc_type,
+            qishu: periods,
+            pageNum: pageNum,
+            page: page
+        };
+        $.pjax({
+            data: params,
+            method: 'get',
+            url: '/gameapi/opentime/index',
+            container: '#container'
+        });
+    }
+
+    //搜索
+    $('#search').click(function () {
+        renderTableByPjax();
+    })
+    //刷新
+     $('#table_refresh').click(function () {
+        renderTableByPjax();
+    })
+     //彩种
+     $('#fc_type').change(function () {
+        renderTableByPjax();
+    })
+
+    //每页显示条数切换
+    $('#pageNum').change(function () {
+        renderTableByPjax();
+    })
+    //页码切换
+    $('#page').change(function () {
+        renderTableByPjax();
+    })
+
+
+    //获取修改数据
+    function getData(type, id, fc_type) {
+        var url, title, height, load;
+        if (type == 'detail') {
+            title = '详情';
+            height = '320px';
+            url = 'onedata';
+        } else if (type == 'update') {
+            title = '修改';
+            height = '420px';
+            url = 'open_edit_info';
+        }
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {id: id, fc_type: fc_type},
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(load);
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.code['ErrorCode'] == 2) {
+                    layer.alert(res.code['ErrorMsg'], {icon: 2});
+                    layer.close(load);
+                } else if (res.code['ErrorCode'] == 1) {
+                    layer.close(load);
+                    handleHtml(type, res.data);
+                    if ($.inArray(type, ['create', 'update', 'detail'] > -1)) {
+                        openLayer(title, height);
+                    }
+                }
+            },
+            complete: function () {
+                var idx = $('.layui-layer-shade').length - 1;
+                if (idx > 0) {
+                    $('body').find('.layui-layer-shade').eq(idx).remove();
+                }
+            }
+        });
+    }
+    //修改页面赋值
+    function handleHtml(type, data) {
+        $('#fid').val(data.id);
+        $('#editLotteryType').val(type);
+        $('#qishu1').val(data.qishu);
+        // $('#kaipan1').val(data.kaipan);
+        // $('#fengpan1').val(data.fengpan);
+        // $('#kaijiang1').val(data.kaijiang);
+        $('#kaipan1').attr('placeholder',data.kaipan);
+        $('#fengpan1').attr('placeholder',data.fengpan);
+        $('#kaijiang1').attr('placeholder',data.kaijiang);
+        $("#status1 input[type='radio']").each(function () {
+            if (this.value == data.status) {
+                $(this).attr('checked', 'checked');
+            }
+        });
+    }
+    //新增
+    $('#create').click(function () {
+        var fc_type = $('#lotteryType').val();
+        var fc_name = $('#lotteryName').val();
+        $('#addLotteryType').val(fc_type);
+        addPopup(fc_type, fc_name);
+    })
+    /**
+     * 添加页面
+     * @param {type} fc_type
+     * @param {type} fc_name
+     * @returns {undefined}
+     */
+    function addPopup(fc_type, fc_name) {
+        layer.open({
+            type: 1 //Page层类型
+            , area: ['404px', '420px']
+            , title: fc_name + '添加'
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: $('#data-detail')
+        });
+    }
+    function openLayer(title, height) {
+        layer.open({
+            type: 1 //Page层类型
+            , area: ['404px', height]
+            , title: title
+            , shade: 0.5 //遮罩透明度
+            , maxmin: true //允许全屏最小化
+            , anim: 1 //0-6的动画形式，-1不开启
+            , content: $('#editWin')
+        });
+    }
+    //增加
+    $("#status input[name='status']").click(function () {
+        $("#status input[name='status'][checked]").removeAttr("checked");
+        $(this).attr("checked", "checked");
+    })
+    $('#saveMenu').click(function () {
+//        $('#addForm').submit();
+        var fc_type = $('#addLotteryType').val();
+        var qishu = $('#qishu2').val();
+        var kaipan = $('#kaipan').val();
+        var fengpan = $('#fengpan').val();
+        var kaijiang = $('#kaijiang').val();
+        var status = $("#status input[name='status'][checked]").val();
+        $.ajax({
+            type: "post",
+            url: '/gameapi/opentime/open_add',
+            data: {qishu: qishu, fc_type: fc_type, kaipan: kaipan, fengpan: fengpan, kaijiang: kaijiang, status: status},
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(load);
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.ErrorCode == 1) {
+                    layer.alert(res.ErrorMsg, {icon: 1},function(){window.location.href = '/gameapi/opentime/index';});
+                }
+                if (res.ErrorCode == 2) {
+                    layer.alert(res.ErrorMsg, {icon: 2});
+                    layer.close(load);
+                }
+            }
+        });
+    })
+    //更新
+    $("#status1 input[name='status']").click(function () {
+        $("#status1 input[name='status'][checked]").removeAttr("checked");
+        $(this).attr("checked", "checked");
+    })
+    $('#saveMenu1').click(function () {
+        var id = $('#fid').val();
+        var fc_type = $('#lotteryType').val();
+        var qishu = $('#qishu1').val();
+        var kaipan = $('#kaipan1').val();
+        var fengpan = $('#fengpan1').val();
+        var kaijiang = $('#kaijiang1').val();
+        if(kaipan == ''){
+            kaipan = $('#kaipan1').attr('placeholder');
+        }
+        if(fengpan == ''){
+            fengpan = $('#fengpan1').attr('placeholder');
+        }
+        if(kaijiang == ''){
+            kaijiang = $('#kaijiang1').attr('placeholder');
+        }
+        var status = $("#status1 input[name='status'][checked]").val();
+        $.ajax({
+            type: "post",
+            url: '/gameapi/opentime/open_update',
+            data: {id: id, qishu: qishu, fc_type: fc_type, kaipan: kaipan, fengpan: fengpan, kaijiang: kaijiang, status: status},
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(load);
+            },
+            dataType: 'json',
+            success: function (res) {
+                console.log(res);
+                if (res.code['ErrorCode'] == 1) {
+                    layer.alert(res.code['ErrorMsg'], {icon: 1},function(){ window.location.reload();});
+                }else if (res.code['ErrorCode'] == 2) {
+                    layer.alert(res.code['ErrorMsg'], {icon: 2});
+                    layer.close(load);
+                }else{
+                    layer.alert('出错啦！', {icon: 2});
+                    layer.close(load);
+                }
+            }
+        });
+    })
+    //删除
+    function delData(id, fc_type) {
+        $.ajax({
+            type: "post",
+            url: '/gameapi/opentime/open_delete',
+            data: {id: id, fc_type: fc_type},
+            beforeSend: function () {
+                load = layer.load(1, {
+                    shade: [0.5, '#000000'] //0.1透明度的白色背景
+                });
+            },
+            error: function () {
+                layer.alert('出错啦！', {icon: 2});
+                layer.close(load);
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.code.ErrorCode == 1) {
+                    layer.alert(res.code['ErrorMsg'], {icon: 1},function(){ window.location.reload();})
+                }else if (res.code.ErrorCode == 2) {
+                    layer.alert(res.code['ErrorMsg'], {icon: 2});
+                    layer.close(load);
+                }else{
+                    layer.alert('出错啦！', {icon: 2});
+                    // console.dir(res.code.ErrorCode);
+                    layer.close(load);
+                }
+            }
+        });
+    }
+    //提交表单
+    function submit() {
+        $('#menu-form').submit();
+    }
+
+    //详情
+    $(".handle .detail").click(function () {
+        var id = $(this).attr('data');
+        getData('detail', id, '');
+    })
+    //修改
+    $('.handle .update').click(function () {
+        var id = $(this).attr('data');
+        var fc_type = $('#lotteryType').val();
+        $('#menuId').val(id);
+        getData('update', id, fc_type);
+    })
+    // //删除
+    // $(".handle .delete").click(function () {
+    //     var id = $(this).attr('data');
+    //     var fc_type = $('#lotteryType').val();
+    //     layer.confirm('下定决心要删这条数据了？？？',{
+    //           btn: ['确定','再想想'] //按钮
+    //         },function(){
+    //             delData(id, fc_type);
+    //         },
+    //           function(){
+    //             return;
+    //         });
+    // })
+<?php echo '</script'; ?>
+><?php }
+}

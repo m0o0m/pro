@@ -1,0 +1,90 @@
+<?php
+
+namespace Applications\Chat\Lib;
+
+use \Applications\Common\Config\Config;
+use \Applications\Common\Helper\Db;
+use \Applications\Common\Helper\Redis;
+use \workerman\Lib\Timer;
+use \GatewayWorker\Lib\Gateway;
+
+class Common 
+{
+    // 彩种 有变动时需重启
+    public static $fc_type = [
+        'ffc_o','lfc_o','els_o','jsfc','jsliuhecai','mnl_o','dj_o','mg_o','xdl_10',
+        'fc_3d','pl_3','liuhecai','cq_ssc','tj_ssc','xj_ssc','bj_10',
+        'ah_k3','jl_k3','gx_k3','js_k3','gd_ten','cq_ten','gd_11','sd_11',
+        'jx_11','bj_kl8','jnd_bs','dm_klc','bj_28','pc_28','jnd_28','dm_28'
+    ];
+
+    // 初始化
+    public static function init($worker){
+        date_default_timezone_set('PRC');
+    }
+
+    // 进入房间
+    public static function join($client_id, $message_data){
+        $fc_type = isset($message_data['fc_type']) ? $message_data['fc_type'] : '';
+        $data['uid'] = $uid = isset($message_data['uid']) ? $message_data['uid'] : '';
+        $data['username'] = $username = isset($message_data['username']) ? $message_data['username'] : '';
+        $data['sendtime'] = $sendtime = isset($message_data['sendtime']) ? $message_data['sendtime'] : '';
+
+        if (!in_array($fc_type, self::$fc_type)) {
+            Gateway::closeClient($client_id);
+        }
+        if (empty($uid) || empty($username) || empty($sendtime)) {
+            Gateway::sendToCurrentClient(json_encode('Param error'));
+            Gateway::closeClient($client_id);
+        }
+
+        $_SESSION['fc_type'] = $fc_type;
+        $_SESSION['info']['uid'] = $data['uid'];
+        $_SESSION['info']['username'] = $data['username'];
+        Gateway::joinGroup($client_id, $fc_type);
+
+        $msg['cmd'] = 'join';
+        $msg['fc_type'] = $fc_type;
+        $msg['data'] = $data;
+        Gateway::sendToGroup($fc_type, json_encode($msg));
+    }
+
+    // 离开房间
+    public static function exit($client_id){
+        $fc_type = $_SESSION['fc_type'];
+        $data = $_SESSION['info'];
+        $data['sendtime'] = time();
+
+        $msg['cmd'] = 'exit';
+        $msg['fc_type'] = $fc_type;
+        $msg['data'] = $data;
+        Gateway::sendToGroup($fc_type, json_encode($msg));
+    }
+
+    // 发送消息
+    public static function send($client_id, $message_data) {
+        $fc_type = isset($message_data['fc_type']) ? $message_data['fc_type'] : '';
+        $data['uid'] = $uid = isset($message_data['uid']) ? $message_data['uid'] : '';
+        $data['username'] = $username = isset($message_data['username']) ? $message_data['username'] : '';
+        $data['content'] = $content = isset($message_data['content']) ? $message_data['content'] : '';
+        $data['sendtime'] = $sendtime = isset($message_data['sendtime']) ? $message_data['sendtime'] : '';
+
+        if (!in_array($fc_type, self::$fc_type)) {
+            Gateway::closeClient($client_id);
+        }
+        if (empty($uid) || empty($username) || empty($content) || empty($sendtime)) {
+            Gateway::sendToCurrentClient(json_encode('Param error'));
+            Gateway::closeClient($client_id);
+        }
+
+        $msg['cmd'] = 'send';
+        $msg['fc_type'] = $fc_type;
+        $msg['data'] = $data;
+        Gateway::sendToGroup($fc_type, json_encode($msg));
+
+        if ($_SERVER['GATEWAY_PORT'] == 3528) {
+            Gateway::sendToCurrentClient(json_encode($msg)); // http
+        }
+    }
+
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>PK</title>
+<link rel="stylesheet" href="../../../style/css/weui.min.css">
+<link rel="stylesheet" href="../../../style/css/jquery-weui.min.css">
+<link rel="stylesheet" href="../../../style/css/reset.css">
+<link rel="stylesheet" href="../../../style/css/admin.css">
+<link rel="stylesheet" href="../../../style/fonts/iconfont.css">
+</head>
+
+<body ontouchstart>
+<header class="head-h">
+	<!-- <dl class="h-head">
+    	<dt><a class="iconfont">&#xe605;</a></dt>
+        <h2>活动中心</h2>
+        <dd><a href="../../../index.html">首页</a></dd>
+    </dl> -->
+    <ul class="h-head">
+            <li>
+                    <a>
+                            <i class="iconfont wap-fanhui"></i>
+                        </a>
+            </li>
+            <li>
+                <h2>活动中心</h2>
+            </li>
+            <li>
+                <a href="/m/index">首页</a>
+            </li>
+        </ul>
+    <nav class="swiper-container h-swiper">
+        <div class="swiper-wrapper">
+            <li class="swiper-slide curr"><a href="#">微信</a></li>
+            <li class="swiper-slide"><a href="#">支付宝</a></li>
+            <li class="swiper-slide"><a href="#">支付宝</a></li>
+            <li class="swiper-slide"><a href="#">支付宝</a></li>
+            <li class="swiper-slide"><a href="#">支付宝</a></li>
+            <li class="swiper-slide"><a href="#">2222</a></li>
+        </div>
+    </nav>
+</header>
+<div id="wrapper">
+<div id="scroller">
+<!--iscroll 滑动 开始-->
+
+
+<ul class="m-navbacn clear">
+    <li><a><i class="iconfont">&#xe606;</i><span>线上</span><p>网易1</p></a></li>
+    <li><a><i class="iconfont">&#xe606;</i><span>线上</span><p>网易1</p></a></li>
+    <li><a><i class="iconfont">&#xe606;</i><span>线上</span><p>网易1</p></a></li>
+    <li><a><i class="iconfont">&#xe606;</i><span>线上</span><p>网易1</p></a></li>
+    <li><a><i class="iconfont">&#xe606;</i><span>线上</span><p>网易1</p></a></li>
+    <li><a><i class="iconfont">&#xe606;</i><span>线上</span><p>网易1</p></a></li>
+</ul>
+
+
+<section class="m-depositad">
+	<dl>
+    	<dt>
+        	<li>
+            	<p><i>*</i><span>充值金额：</span></p>
+                <input type="tel" placeholder="充值金额" value="ninsofno" disabled>
+            </li>
+            <li>
+            	<p><i>*</i><span>存款金额：</span></p>
+                <input type="text" placeholder="存款人姓名">
+            </li>
+            <li>
+            	<p><i>*</i><span>卡面值：</span></p>
+                <input type="text" placeholder="存款人姓名">
+            </li>
+            <li>
+            	<p><i>*</i><span>卡序列号：</span></p>
+                <input type="text" placeholder="存款人姓名">
+            </li>
+            <li>
+            	<p><i>*</i><span>卡密码：</span></p>
+                <input type="text" placeholder="存款人姓名">
+            </li>
+            <li>
+            	<p><i>*</i><span>选卡类型：</span></p>
+                <select>
+                	<option>111</option>
+                    <option>111</option>
+                    <option>111</option>
+                </select>
+            </li>
+        </dt>
+        <div class="btn"><button>保存</button></div>
+        <ol class="minim">
+        	<p>1.单笔最低存款金额为10元。</p>
+            <p>2.单笔最高存款金额为50000元。</p>
+            <p>3.首次充值可得100优惠。</p>
+            <p>4.若充值未到账，<a href="javascript:OnlineService('{{.UrlLink}}');">请联系客服</a></p>
+        </ol>
+    </dl>
+</section>
+
+          
+
+
+
+<!--iscroll 滑动 结束-->
+</div>
+</div>
+{{template "mem_footer" .}}
+</body>
+<script src="../../../style/js/jquery-2.1.4.js"></script>
+<script src="../../../style/js/jquery-weui.min.js"></script>
+<script src="../../../style/js/swiper.min.js"></script>
+<script src="../../../style/js/iscroll.js"></script>
+<script src="../../../style/js/admin.js"></script> 
+<script>
+	var swiper = new Swiper('.swiper-container', {
+	slidesPerView: 5,
+	spaceBetween: 0
+	});
+    // $('.h-head .iconfont').click(function(){
+    //     window.history.go(-1); 
+    // })
+
+</script>
+</html>

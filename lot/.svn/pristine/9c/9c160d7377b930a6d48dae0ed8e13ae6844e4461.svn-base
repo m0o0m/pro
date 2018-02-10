@@ -1,0 +1,40 @@
+
+<!-- 列表 -->
+    <thead>
+        <tr>
+            <th class="center"></th>
+            <th class="center">彩票玩法</th>
+            <th class="center">彩票类型</th>
+          <{if !empty($smarty.get.line_id)}>
+            <th class="center">线路</th>
+          <{/if}>
+            <th class="center">最小限额</th>
+            <th class="center">单场最大限额</th>
+            <th class="center">单笔最大限额</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+<{if isset($result.data)}>
+    <tbody>
+    <{if count($result.data) == 0}>
+        <tr><th class="center" colspan="20">无记录</th></tr>
+    <{else}>
+      <{foreach from=$result.data item=v key=k}>
+        <tr id="item<{$v.id}>" iscustom="<{if isset($v.iscustom)}><{$v.iscustom}><{else}>0<{/if}>">
+            <td class="center"><{$v.id}></td>
+            <td class="center" <{if isset($v.iscustom) && $v.iscustom eq 1}> style="color:red;"<{elseif $v.iscustom eq -1}> style="color:blue;"<{/if}> ><{$v.gameplayText}></td>
+            <td class="center"><{$v.fc_name}></td>
+          <{if !empty($smarty.get.line_id)}>
+            <td class="center"><{$smarty.get.line_id}></td>
+          <{/if}>
+            <td class="center"><{$v.limit_min}></td>
+            <td class="center"><{$v.single_field_max}></td>
+            <td class="center"><{$v.single_note_max}></td>
+            <td class="center">
+                <a onclick="actionEdit('<{$v.id}>',<{if isset($v.iscustom)}><{$v.iscustom}><{else}>0<{/if}>)" class="btn btn-xs btn-success update">修改</a>
+            </td>
+        </tr>
+      <{/foreach}>
+    <{/if}>
+    </tbody>
+<{/if}>

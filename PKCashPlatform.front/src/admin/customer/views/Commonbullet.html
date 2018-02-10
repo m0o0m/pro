@@ -1,0 +1,308 @@
+<!-- 子账号 -->
+<section widget-grid id="widget-grid">
+    <div id="tabs" data-smart-jqui-tabs>
+        <ul>
+            <li>
+                <a href="#tabs-a">公共弹框</a>
+            </li>
+            <li>
+                <a href="#tabs-b">H5动画</a>
+            </li>
+        </ul>
+        <div id="tabs-a">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div id="todo-widgets" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>公共弹框列表</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+                                <div ng-show="newTodo">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+                                            <div class="row">
+                                                <label class="col-md-1 control-label">站点：</label>
+                                                <div class="col-md-2">
+                                                    <div class="form-group" ng-init="end_ip==''" >
+                                                        <div class="form-group">
+                                                            <select data-smart-select2 class="selectWidth" ng-model="end_ip"  >
+                                                                <option value="">全部</option>
+                                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <label class="col-md-1 col-xs-4 input-label">ID:</label>
+                                                <div class="col-md-2 col-xs-8" >
+                                                    <div class="form-group ">
+                                                        <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="acounted">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 col-xs-4 text-center">
+                                                    <div class="form-group">
+                                                        <a class="btn btn-default search" ng-click="search1()" href-void>{{lang['Search']}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">站点site_id</th>
+                                                <th class="text-center">index_id</th>
+                                                <th class="text-center">网络名称</th>
+                                                <th class="text-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="text-center" ng-repeat="item in list1">
+                                                <td>{{item.site_id }}</td>
+                                                <td>{{item.index_id}}</td>
+                                                <td>{{item.netName}}</td>
+                                                <td>
+                                                    <button class="btn btn-default btn-xs" data-ui-sref="app.customer.configurationsetting"  ng-click="paySetting()" >公告弹框配置</button>
+                                                </td>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf1"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div id="tabs-b">
+            <div class="row">
+                <article class="col-sm-12">
+                    <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>出款操作</h2>
+                            <div class="widget-toolbar">
+                                <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                            </div>
+                        </header>
+                        <div>
+                            <div class="widget-body tab-content">
+
+                                <div ng-show="newTodo">
+                                    <!--头部筛选查找以及添加-->
+                                    <div class="widget-body-toolbar">
+                                        <div class="row form-horizontal">
+
+                                            <div class="row">
+                                                <label class="col-md-1 control-label">站点：</label>
+                                                <div class="col-md-2">
+                                                    <div class="form-group" ng-init="end_ip==''" >
+                                                        <div class="form-group">
+                                                            <select data-smart-select2 class="selectWidth" ng-model="site2"  >
+                                                                <option value="">全部</option>
+                                                                <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <label class="col-md-1 col-xs-4 input-label">状态:</label>
+                                                <div class="col-md-2 col-xs-8" >
+                                                    <div class="form-group">
+                                                        <select  class=" form-control col-md-12" ng-model="status"  >
+                                                            <option value="">全部</option>
+                                                            <option value="1">开启</option>
+                                                            <option value="2">关闭</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 col-xs-4 text-center">
+                                                    <div class="form-group">
+                                                        <a class="btn btn-default search" ng-click="search2()" href-void>{{lang['Search']}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr class="text-center">
+                                                <th class="text-center"><input type="checkbox" name="test_1" ng-model="selectAll" ng-click="all(selectAll)"></th>
+                                                <th class="text-center">站点site_id</th>
+                                                <th class="text-center">index_id</th>
+                                                <th class="text-center">全屏动画状态</th>
+                                                <th class="text-center">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="text-center">
+                                            <tr ng-repeat="item1 in list2">
+                                                <td >
+                                                    <input type="checkbox" name="test" class="selected" >
+                                                </td>
+                                                <td>{{item1.site_id }}</td>
+                                                <td>{{item1.index_id}}</td>
+                                                <td>{{item1.status|fiterStatused}}</td>
+                                                <td>
+                                                    <button ng-if="item1.status===2" class="btn btn-default btn-xs"  ng-click="disable(item1.id,item1.status)" >开启</button>
+                                                    <button ng-if="item1.status===1" class="btn btn-default btn-xs"  ng-click="disable(item1.id,item1.status)" >关闭</button>
+                                                </td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <tm-pagination conf="paginationConf2"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!--添加-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" >{{lang['Add Account']}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">IP:</label>
+                        <div class="col-md-6">
+                            <div class="form-group" ng-init="ip==''" >
+                                <div class="form-group">
+                                    <select data-smart-select2 class="col-md-12" ng-model="ip">
+                                        <option value="">全部</option>
+                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">内容</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea style="width: 100%;" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label ng-binding">是否启用</label>
+                            <div class="col-md-6">
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"> 启用
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"> 禁用
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAcount()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--编辑-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="addAccount">{{lang['Add Account']}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">IP:</label>
+                        <div class="col-md-6">
+                            <div class="form-group" ng-init="ip==''" >
+                                <div class="form-group">
+                                    <select data-smart-select2 class="col-md-12" ng-model="ip">
+                                        <option value="">全部</option>
+                                        <option value="{{item.site_index_id}}" ng-repeat="item in siteJson">{{item.site_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <label class="col-md-3 control-label ng-binding">内容</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea style="width: 100%;" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label ng-binding">是否启用</label>
+                            <div class="col-md-6">
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"> 启用
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="radioBtn"> 禁用
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAcount()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

@@ -1,0 +1,229 @@
+<!-- 域名管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="todo-widget" jarvis-widget data-widget-editbutton="false" data-widget-color="blue">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>域名管理</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar" ng-show="newTodo">
+                                <div class="form-horizontal">
+                                    <div class="row ">
+                                        <label class="col-md-1 col-xs-3 input-label">域名</label>
+                                        <div class="col-md-2 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control inp_2" placeholder="{{lang['Administrator account search']}}" ng-model="domain">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-2">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <a class="btn btn-default search" ng-click="search()" href-void>{{lang['Search']}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <!--<button type="submit" data-smart-jqui-dialog-launcher="#dialog_simple"  class="btn btn-primary">-->
+                                                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
+                                                        <i class="fa fa-plus"></i> 新增域名
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-xs-6">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <button class="btn btn-primary" onclick="history.go(-1)">
+                                                        返回
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="table-scroll">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>主域名</th>
+                                            <th>是否绑定</th>
+                                            <th>PC域名</th>
+                                            <th>WAP域名</th>
+                                            <th>添加日期</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list">
+
+                                            <td>{{item.id}}</td>
+                                            <td><span ng-bind="item.is_default==1?'是':'否'"></span></td>
+                                            <td class="text-red"><span ng-bind="item.is_used==1?'是':'否'"></span></td>
+                                            <td>{{item.pc_domain}}</td>
+                                            <td>{{item.wap_domain}}</td>
+                                            <td>{{item.create_time|fiterTime}}</td>
+                                            <td>
+                                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="modify(item.id,item.site_id,item.site_index_id)" >修改</button>
+                                                <button class="btn btn-default btn-xs" ng-click="delete(item.id,item.site_id,item.site_index_id)" >删除</button>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <tm-pagination conf="paginationConf"></tm-pagination>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!--添加-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">新增域名</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" id="form" >
+                        <fieldset>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">PC域名</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <!--<i class="icon-append fa fa-user"></i>-->
+                                    <input type="text" name="pc_domain" placeholder="" ng-model="pc_domain">
+                                    <b class="tooltip tooltip-top-right">
+                                        <!--<i class="fa fa-user txt-color-teal"></i>-->
+                                        请输入域名地址</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">WAP域名</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <!--<i class="icon-append fa fa-user"></i>-->
+                                    <input type="text" name="wap_domain" placeholder="" ng-model="wap_domain">
+                                    <b class="tooltip tooltip-top-right">
+                                        <!--<i class="fa fa-user txt-color-teal"></i>-->
+                                        请输入域名地址</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">证书请求</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="file" name="ssl_key_csr" class="btn btn-default" id="exampleInputFile1">
+                                    <p class="help-block">
+                                        支持扩展名：.crt...
+                                    </p>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">私钥</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <input type="file" name="ssl_key_file" class="btn btn-default" id="exampleInputFile2">
+                                    <p class="help-block">
+                                        支持扩展名：.key...
+                                    </p>
+                                </label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">修改域名</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" >
+                        <fieldset>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">PC域名</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <!--<i class="icon-append fa fa-user"></i>-->
+                                    <input type="text" name="pc_domain" placeholder="" ng-model="modifyData.pc_domain">
+                                    <b class="tooltip tooltip-top-right">
+                                        <!--<i class="fa fa-user txt-color-teal"></i>-->
+                                        请输入域名地址</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 col-xs-4 input-label">WAP域名</label>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <!--<i class="icon-append fa fa-user"></i>-->
+                                    <input type="text" name="wap_domain" placeholder="" ng-model="modifyData.wap_domain">
+                                    <b class="tooltip tooltip-top-right">
+                                        <!--<i class="fa fa-user txt-color-teal"></i>-->
+                                        请输入域名地址</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">证书请求</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <p><i class="fa fa-file-archive-o"></i>{{modifyData.file_name.ssl_csr}}</p>
+                                    <input type="file" name="ssl_key_csr" class="btn btn-default" id="exampleInputFile3">
+                                    <p class="help-block">
+                                        支持扩展名：.crt...
+                                    </p>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <div class="col-md-3 col-xs-4 input-label">私钥</div>
+                                <label class="col-md-7 col-xs-8 input">
+                                    <p><i class="fa fa-file-archive-o"></i>{{modifyData.file_name.ssl_key}}</p>
+                                    <input type="file" name="ssl_key_file" class="btn btn-default" id="exampleInputFile4">
+                                    <p class="help-block">
+                                        支持扩展名：.key...
+                                    </p>
+                                </label>
+                            </section>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifySubmit()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,225 @@
+@charset "UTF-8";
+#page-body {
+    /*加载遮罩*/
+    /*刷新按钮*/
+    /*刷新按钮end*/
+}
+
+#page-body .original {
+    font-size: 12px;
+    background: #000000 url("../image/whbg.jpg");
+    margin: 0px;
+    padding: 0px;
+    font-family: Microsoft YaHei, "微软雅黑", sans-serif;
+}
+
+#page-body .deposit-div1 {
+    height: 125px;
+    border: 1px solid #DDD;
+    margin-top: 5px;
+}
+
+#page-body .deposit-div1 .deposit-top {
+    height: 37px;
+    background-color: #F0F0F0;
+    padding-top: 12px;
+}
+
+#page-body .deposit-top p {
+    margin-left: 27px;
+    padding-left: 10px;
+    border-left: 2px solid #FF3440;
+}
+
+#page-body .deposit-nuv {
+    padding: 8px 0 8px 38px;
+    background-color: #fff;
+}
+
+#page-body .deposit-nuv li {
+    margin-right: 5px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    display: inline-block;
+    width: 150px;
+    /* width: 166px; */
+    /* height: 58px; */
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#page-body .deposit-nuv li:hover {
+    box-shadow: 0px 4px 8px #ddd;
+}
+
+#page-body .deposit-nuv li img {
+    display: block;
+}
+
+#page-body .deposit-nuv-shadow {
+    box-shadow: 0px 4px 8px #ddd;
+}
+
+#page-body .deposit-div2 {
+    padding-top: 8px;
+}
+
+#page-body .deposit-div2 .deposit-account {
+    border: 1px solid #DDD;
+    height: 48px;
+    padding: 17px 0 17px 38px;
+    background-color: #fff;
+    position: relative;
+}
+
+#page-body .deposit-account li {
+    width: 100px;
+    height: 48px;
+    border-radius: 5px;
+    background-color: #DCDDD8;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 48px;
+    color: #898989;
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    /* position: relative; */
+}
+
+#page-body .deposit-account li .deposit-cen {
+    position: relative;
+}
+
+#page-body .deposit-account li .deposit-cen p {
+    position: absolute;
+    height: 20px;
+    width: 80px;
+    line-height: 20px;
+    background-color: #465F76;
+    color: #fff;
+    transform: rotate(-45deg) translate(-20px, -14px);
+    -ms-transform: rotate(-45deg) translate(-20px, -14px);
+}
+
+#page-body .deposit-account li:hover {
+    color: #4C585F;
+    background-color: #D5E2E9;
+    /* box-shadow: 0px 4px 4px rgba(204, 204, 204, .5); */
+}
+
+#page-body .deposit-account-click {
+    color: #4C585F !important;
+    background-color: #D5E2E9 !important;
+    box-shadow: 0px 4px 4px rgba(204, 204, 204, 0.5);
+}
+
+#page-body .deposit-schedule {
+    margin-top: 8px;
+    border: 1px solid #DDD;
+    height: 120px;
+    background-color: #fff;
+    position: relative;
+}
+
+#page-body .deposit-schedule .round {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    /* border-radius: 50%;
+    background-color: #E8E8E8; */
+    position: absolute;
+    top: 18px;
+    z-index: 10;
+    text-align: center;
+}
+
+#page-body .deposit-schedule .line {
+    position: absolute;
+    top: 50px;
+    width: 288px;
+}
+
+#page-body .round .round-2 {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #E8E8E8;
+    line-height: 60px;
+    text-align: center;
+}
+
+#page-body .round .round-2 .myicon {
+    font-size: 30px;
+    color: #666;
+}
+
+#page-body .FEF7F9 {
+    color: #FEF7F9 !important;
+}
+
+#page-body .myd-red {
+    color: red !important;
+}
+
+#page-body .round p {
+    font-size: 14px;
+    /* text-align: left; */
+}
+
+#page-body .round .myd-t-gou {
+    color: #29BA1A;
+}
+
+#page-body .myiocn-gou {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #0BBE43;
+    opacity: 0;
+}
+
+#page-body .deposit-schedule .round:nth-child(3) {
+    left: 20%;
+}
+
+#page-body .deposit-schedule .round:nth-child(4) {
+    left: 47.5%;
+}
+
+#page-body .deposit-schedule .round:nth-child(5) {
+    left: 75%;
+}
+
+#page-body .caveat {
+    opacity: 0;
+    font-size: 12px;
+    padding-left: 20px;
+}
+
+#page-body .opacity {
+    opacity: 1 !important;
+}
+
+#page-body .deposit-schedule .line:nth-child(1) {
+    left: 240px;
+}
+
+#page-body .deposit-schedule .line:nth-child(2) {
+    left: 515px;
+}
+
+
+
+#page-body .iconRefresh {
+    -webkit-transition: all 2s;
+    transition: all 2s;
+    display: inline-block;
+}
+
+#page-body .Refresh {
+    transform: rotate(720deg);
+}
+
+/*# sourceMappingURL=deposit.css.map */

@@ -1,0 +1,225 @@
+<?php
+/* Smarty version 3.1.31, created on 2017-12-27 17:08:52
+  from "/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/gameapi/bet/_list.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.31',
+  'unifunc' => 'content_5a436324b6a892_87501110',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '41b51cc7de52d683885e2269682ad51a048820bf' => 
+    array (
+      0 => '/Users/doublejian/www/pklottery/newproject/trunk/adminyii/backend/views/gameapi/bet/_list.html',
+      1 => 1514250908,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5a436324b6a892_87501110 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<thead>
+    <tr>
+        <th class="center">
+            <select id="batch" onchange="batch(this.value)">
+                <option value="">批量操作</option>
+                <!-- <option value="balance">批量结算</option> -->
+                <option value="rollback">批量回滚</option>
+                <option value="invalid">批量设置无效</option>
+                <option value="ok">批量恢复有效</option>
+            </select><br>
+            <input name="batchAll" onclick="checkAll()" type="checkbox" />
+            <span class="lbl">全选</span>
+        </th>
+        <th class="center">投注账号</th>
+        <th class="center">彩种</th>
+        <th class="center">代理帐号</th>
+        <th class="center">订单号</th>
+        <th class="center">期 数</th>
+        <th class="center">下注时间</th>
+        <th class="center">投注内容</th>
+        <th class="center">设备来源</th>
+
+        <th class="center">投注金额</th>
+        <th class="center">赔率</th>
+        <th class="center">派彩金额</th>
+        <th class="center">注单状态</th>
+        <th class="center">操作</th>
+    </tr>
+</thead>
+<tbody>
+    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+    <tr>
+        <td class="center">
+            <input name="batchId" onclick="checkOne()" value="<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+,<?php echo $_smarty_tpl->tpl_vars['v']->value['periods'];?>
+,<?php echo $_smarty_tpl->tpl_vars['v']->value['fc_type'];?>
+" type="checkbox" />
+            <?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["line_id"];
+$_prefixVariable2=ob_get_clean();
+if (isset($_prefixVariable2)) {
+echo $_smarty_tpl->tpl_vars['v']->value["line_id"];
+}?>
+        </td>
+        <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["uname"];
+$_prefixVariable3=ob_get_clean();
+if (isset($_prefixVariable3)) {
+echo $_smarty_tpl->tpl_vars['v']->value["uname"];
+}?></td>
+         <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["type_name"];
+$_prefixVariable4=ob_get_clean();
+if (isset($_prefixVariable4)) {
+echo $_smarty_tpl->tpl_vars['v']->value["type_name"];
+}?></td>
+         <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["at_username"];
+$_prefixVariable5=ob_get_clean();
+if (isset($_prefixVariable5)) {
+echo $_smarty_tpl->tpl_vars['v']->value["at_username"];
+}?></td>
+        <td class="center" style="max-width:150px;word-break:break-all;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["order_num"];
+$_prefixVariable6=ob_get_clean();
+if (isset($_prefixVariable6)) {
+echo $_smarty_tpl->tpl_vars['v']->value["order_num"];
+}?></td>
+        <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["periods"];
+$_prefixVariable7=ob_get_clean();
+if (isset($_prefixVariable7)) {
+echo $_smarty_tpl->tpl_vars['v']->value["periods"];
+}?></td>
+        <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["addtime"];
+$_prefixVariable8=ob_get_clean();
+if (isset($_prefixVariable8)) {
+echo $_smarty_tpl->tpl_vars['v']->value["addtime"];
+}?></td>
+        <td class="center" style="max-width:150px;word-break:break-all;"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["bet_info"];
+$_prefixVariable9=ob_get_clean();
+if (isset($_prefixVariable9)) {
+echo $_smarty_tpl->tpl_vars['v']->value["bet_info"];
+}?></td>
+        <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["ptype"];
+$_prefixVariable10=ob_get_clean();
+if (isset($_prefixVariable10)) {
+echo $_smarty_tpl->tpl_vars['v']->value["ptype"];
+}?></td>
+        <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["bet"];
+$_prefixVariable11=ob_get_clean();
+if (isset($_prefixVariable11)) {
+echo $_smarty_tpl->tpl_vars['v']->value["bet"];
+}?></td>
+        <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["odds"];
+$_prefixVariable12=ob_get_clean();
+if (isset($_prefixVariable12)) {
+echo $_smarty_tpl->tpl_vars['v']->value["odds"];
+}?></td>
+        <td class="center"><?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["win"];
+$_prefixVariable13=ob_get_clean();
+if (isset($_prefixVariable13)) {
+echo $_smarty_tpl->tpl_vars['v']->value["win"];
+}?></td>
+        <td class="center">
+            <?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value["status"];
+$_prefixVariable14=ob_get_clean();
+if (isset($_prefixVariable14)) {?>
+                <?php if ($_smarty_tpl->tpl_vars['v']->value['oldstatus'] == 3) {?><font color="green"><?php }?>
+                <?php if ($_smarty_tpl->tpl_vars['v']->value['oldstatus'] == 2) {?><font color="red"><?php }?>
+                <?php if ($_smarty_tpl->tpl_vars['v']->value['oldstatus'] == 4) {?><font color="blue"><?php }?>
+                <?php echo $_smarty_tpl->tpl_vars['v']->value["status"];?>
+
+                </font>
+            <?php }?>
+        </td>
+        <td class="center handle">
+            <a  class="btn btn-xs btn-success detail" data_a="<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+" data_b="<?php echo $_smarty_tpl->tpl_vars['v']->value['fc_type'];?>
+" href='javascript:void(0);'>详情</a>
+            <!-- <a  class="btn btn-xs btn-success update" href='/gameapi/bet/edit?id=<?php echo $_smarty_tpl->tpl_vars['v']->value["id"];?>
+&fc_type=<?php echo $_smarty_tpl->tpl_vars['v']->value["fc_type"];?>
+'>修改</a> -->
+
+        </td>
+    </tr>
+    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+?>
+
+    <?php if (isset($_smarty_tpl->tpl_vars['data']->value) && !empty($_smarty_tpl->tpl_vars['data']->value)) {?>
+    <tr><td colspan="2">本页所有注单</td><td colspan="12"><?php echo $_smarty_tpl->tpl_vars['totalbet']->value['str_page_all'];?>
+</td></tr>
+    <tr><td colspan="2">本页未结算注单</td><td colspan="12"><?php echo $_smarty_tpl->tpl_vars['totalbet']->value['str_page_a'];?>
+</td></tr>
+    <tr><td colspan="2">本页已结算注单</td><td colspan="12"><?php echo $_smarty_tpl->tpl_vars['totalbet']->value['str_page_b'];?>
+</td></tr>
+ 
+    <?php }?>
+</tbody>
+<input type="hidden" id= "tmp_page" value="<?php if (isset($_smarty_tpl->tpl_vars['pagedata']->value['page'])) {
+echo $_smarty_tpl->tpl_vars['pagedata']->value['page'];
+} else { ?>1<?php }?>">
+<input type="hidden" id= "tmp_total_page" value="<?php if (isset($_smarty_tpl->tpl_vars['pagedata']->value['totalpage'])) {
+echo $_smarty_tpl->tpl_vars['pagedata']->value['totalpage'];
+} else { ?>1<?php }?>">
+<?php echo '<script'; ?>
+ type="text/javascript">
+     //祥情
+     $('.detail').click(function(){
+        var id = $(this).attr('data_a');;
+        var fc_type = $(this).attr('data_b');
+        var url = '/gameapi/bet/detail?id=' + id + '&fc_type=' + fc_type;
+        $.pjax({
+            method: 'get',
+            url: url,
+            container: '#container'
+        });
+    })
+
+   //页码
+    $(function(){
+        var page = $('#tmp_page').val();
+        var total_page = $('#tmp_total_page').val();
+        var new_page = 0;
+        if(page == 0) page = 1;
+        if(total_page == 0){
+            new_page = 1;
+        }else if(total_page > 500 ){
+            new_page = 500;
+        }else{
+            new_page = total_page;
+        }
+        var str = '';
+        for(var i = 1; i <= new_page; i++){
+            if(i == page){
+                str += '<option value="'+ i +'" selected >' + i + '</option>';
+            }else{
+                str += '<option value="'+ i +'">' + i + '</option>';
+            }
+        }
+        $('#page').html('');
+        $('#page').html(str);
+        $('#total_page_label').html('').html('共 ' + total_page + ' 页');
+    })
+<?php echo '</script'; ?>
+><?php }
+}

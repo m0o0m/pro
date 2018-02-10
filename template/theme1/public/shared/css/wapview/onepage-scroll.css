@@ -1,0 +1,107 @@
+body, html {
+  margin: 0;
+  overflow: hidden;
+  -webkit-transition: opacity 400ms;
+  -moz-transition: opacity 400ms;
+  transition: opacity 400ms;
+}
+
+body, .onepage-wrapper, html {
+  display: block;
+  position: static;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.onepage-wrapper {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  padding: 0;
+}
+
+.onepage-wrapper .section {
+  width: 100%;
+  height: 100%;
+}
+
+.onepage-pagination {
+  position: absolute;
+  height: 30%;
+  right: 2%;
+  top: 15%;
+  z-index: 5;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+.onepage-pagination:before{
+  content:'';
+  border-left:1px solid #989898;
+  position: absolute;
+  height: 100%;
+  left:15px;
+  background: none;
+
+}
+
+
+.onepage-pagination li {
+  padding: 0;
+  text-align: center;
+}
+
+.onepage-pagination li:first-child{
+  margin-top: 15%;
+}
+
+.onepage-pagination li a{
+  padding: 10px 10px 10px 65px;
+  width: 160px;
+  height: 10px;
+  line-height: 20px;
+  text-align: left;
+  display: block;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  font-size: .9rem;
+
+  
+}
+.onepage-pagination li a:before{
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #989898;
+  left:10px;
+  background: #062753;
+
+  /*background: rgba(255,255,0,0.85);*/
+  /*border-radius: 10px;*/
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+
+
+}
+
+.onepage-pagination li a.active:before{
+  width: 41px;
+  height: 19px;
+  background: url("../../images/wapIntroduce/select.png") no-repeat ;
+  background-size: cover;
+  border: none;
+  margin-top: -4px;
+  left: 8px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+}
+
+.onepage-pagination{
+
+}

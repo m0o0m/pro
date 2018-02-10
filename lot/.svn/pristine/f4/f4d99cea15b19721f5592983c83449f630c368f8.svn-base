@@ -1,0 +1,13 @@
+package lottery
+
+import "models/function"
+
+var (
+	userBean            = new(function.UserBean)            //会员
+	agentBean           = new(function.AgentBean)           //代理
+	uaBean              = new(function.UaBean)              //总代
+	lineBean            = new(function.LineBean)            //线路
+	userCashRecordBean  = new(function.UserCashRecord)      //会员现金记录
+	agentCashRecordBean = new(function.AgentCashRecordBean) //代理现金记录
+	refreshBean         = new(function.Refresh)             //刷新
+)

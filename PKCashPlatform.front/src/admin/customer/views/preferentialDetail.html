@@ -1,0 +1,77 @@
+<!-- 菜单账号 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>优惠查询</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+
+                                <div class="widget-body-toolbar">
+                                    <div class="row form-horizontal">
+
+                                        <label class="col-md-1 control-label allsite">年月份查询：</label>
+                                        <div class="col-md-2">
+                                            <div class="input-group form-group">
+                                                <input type="text" name="mydate" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm" ng-model="date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-6">
+                                            <a href-void="" class="btn btn-primary" href="#" ng-click="search()">查询</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <div class="table-scroll">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                            <tr >
+                                                <th>编号</th>
+                                                <th>事件</th>
+                                                <th>反水区间（起）</th>
+                                                <th>反水区间（迄）</th>
+                                                <th>人数/金额</th>
+                                                <th>创建日期</th>
+                                                <th>创建者</th>
+                                                <th>综合打码倍数</th>
+                                                <th>查询明细</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in list">
+                                                <td>{{item.code}}</td>
+                                                <td>{{item.event}}</td>
+                                                <td>{{item.return_start}}</td>
+                                                <td>{{item.return_end}}</td>
+                                                <td>{{item.number}}/{{item.amount}}</td>
+                                                <td>{{item.create_time|fiterTime}}</td>
+                                                <td>{{item.create_person}}</td>
+                                                <td>{{item.code_multiple}}</td>
+                                                <td>{{item.detail}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

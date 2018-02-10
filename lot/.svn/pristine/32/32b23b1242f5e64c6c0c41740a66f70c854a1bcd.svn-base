@@ -1,0 +1,181 @@
+package config
+
+import (
+	"io/ioutil"
+	"os"
+	"gopkg.in/yaml.v2"
+	"gopkg.in/mgo.v2"
+	"time"
+	"gopkg.in/mgo.v2/bson"
+	"path/filepath"
+	"strings"
+	"os/exec"
+)
+
+//整个config文件对应的结构
+type Config struct {
+	AppName       string        `yaml:"app_name" `
+	Addr          string        `yaml:"addr" `
+	Language      string        `yaml:"language" `
+	GatherNumber  int           `yaml:"gather_number" `
+	Version       VersionConfig `yaml:"version"`
+	Log           LogConfig     `yaml:"log"`
+	Redis         RedisConfig   `yaml:"redis"`
+	DataRedis     RedisConfig   `yaml:"dataRedis"`
+	Mysqls        MysqlConfig   `yaml:"mysql"`
+	ExePath        string         `yaml:"-"`
+}
+
+//版本配置
+type VersionConfig struct {
+	Test    string `yaml:"test"`
+	Product string `yaml:"product"`
+}
+
+//log配置
+type LogConfig struct {
+	Level    string `yaml:"level"`
+	Log_type string `yaml:"type"`
+	Path     string `yaml:"path"`
+}
+
+type Dg struct {
+	Apikey     string `yaml:"apikey" `
+	AgenetName string `yaml:"agenet_name" `
+}
+
+//redis
+type RedisConfig struct {
+	Name         int    `yaml:"name"`
+	Host         string `yaml:"host"`
+	Password     string `yaml:"password"`
+	Expirtime    int    `yaml:"expirtime"`    //token过期时间,外面配置文件过期时间以分钟为单位
+	Goroutinenum int    `yaml:"goroutimenum"` //可以开的协程数量
+}
+
+//Mysql
+type MysqlConfig struct {
+	Name     string `yaml:"name"`
+	Host     string `yaml:"host"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+	DbName   string `yaml:"dbname"`
+	ShowSql  bool   `yaml:"showsql"`
+}
+
+//从数据解析配置
+func ParseConfigData(data []byte) (*Config, error) {
+	var cfg Config
+	if err := yaml.Unmarshal([]byte(data), &cfg); err != nil {
+		return nil, err
+	}
+
+	path, _ := GetExecPath()
+	cfg.ExePath = filepath.Dir(path)
+
+	if !strings.HasPrefix(cfg.Log.Path, "/") {
+		cfg.Log.Path = filepath.Join(cfg.ExePath, cfg.Log.Path)
+	}
+	return &cfg, nil
+}
+
+//从文件解析配置
+func ParseConfigFile(fileName string) (*Config, error) {
+	data, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		return nil, err
+	}
+	return ParseConfigData(data)
+}
+
+//写入文件
+func WriteConfigFile(cfg *Config, filename string) error {
+	data, err := yaml.Marshal(cfg)
+	if err != nil {
+		return err
+	}
+
+	execPath, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
+	configPath := execPath + "/etc/" + filename
+	err = ioutil.WriteFile(configPath, data, 0755)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+type ConfigMgo struct {
+	FileName string `bson:"filename"`
+	Content  []byte `bson:"content"`
+	DateTime string `bson:"datetime"`
+}
+
+//将配置写入mongodb
+func WriteToMongoDB(cfg *Config, source string, filename string) error {
+	data, err := yaml.Marshal(cfg)
+	if err != nil {
+		return err
+	}
+	session, err := mgo.Dial(source)
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
+	// Optional. Switch the session to a monotonic behavior.
+	session.SetMode(mgo.Monotonic, true)
+	c := session.DB("").C("p_config")
+	//_, err = c.RemoveAll(bson.M{"filename": "p_config.yaml"})
+	//覆盖
+	var datetime = time.Now().String()
+	_, err = c.Upsert(bson.M{"filename": filename}, &ConfigMgo{filename, data, datetime})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+//从mongodb中解析配置
+func ParseFromMongoDB(source string, filename string) (*Config, error) {
+	//source
+	/*
+		10.10.10.23 27017
+		10.10.10.186 27017
+		mongodb://10.10.10.23:27017,10.10.10.186:27017/config
+	*/
+	session, err := mgo.Dial(source)
+	if err != nil {
+		return nil, err
+	}
+	defer session.Close()
+
+	// Optional. Switch the session to a monotonic behavior.
+	session.SetMode(mgo.Monotonic, true)
+
+	c := session.DB("").C("p_config")
+
+	result := ConfigMgo{}
+	err = c.Find(bson.M{"filename": filename}).One(&result)
+	if err != nil {
+		return nil, err
+	}
+
+	return ParseConfigData(result.Content)
+}
+
+
+func GetExecPath() (string, error) {
+	file, err := exec.LookPath(os.Args[0])
+	if err != nil {
+		return "", err
+	}
+	p, err := filepath.Abs(file)
+	if err != nil {
+		return "", err
+	}
+	return p, nil
+}

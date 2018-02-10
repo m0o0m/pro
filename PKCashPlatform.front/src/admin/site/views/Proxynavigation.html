@@ -1,0 +1,350 @@
+<!-- 管理员账号 -->
+<div id="content">
+
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget  data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>客户后台导航栏管理</h2>
+                        <div class="widget-toolbar">
+                            <button class="btn btn-xs btn-default" ng-class="{active: newTodo}" ng-click="toggleAdd()"><i ng-class="{ 'fa fa-plus': !newTodo, 'fa fa-times': newTodo}"></i> {{lang['screening']}}</button>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div ng-show="newTodo">
+                            <!--头部筛选查找以及添加-->
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+
+                                    <div class="col-sm-offset-11">
+                                        <div class="input-group">
+                                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" ng-click="add()">
+                                                <i class="fa fa-plus"></i> 新增菜单
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <form class="form-inline" method="post">
+                                <div class="row menu_table">
+                                    <ul class="col-md-12 menu_th">
+                                        <li class="col-md-3">id</li>
+                                        <li class="col-md-3">权限名</li>
+                                        <li class="col-md-3">权限路径</li>
+                                        <li class="col-md-3">功能</li>
+                                    </ul>
+                                    <ul class="row menu_tbody" ng-repeat="item in listdl">
+                                        <li class="col-md-3">
+                                            <i class="fa fa-lg fa-plus-circle" ng-click="showFace($index,$event)"></i>{{item.id}}
+                                        </li>
+                                        <li class="col-md-3">
+                                            {{item.menu_name}}
+                                        </li>
+                                        <li class="col-md-3">
+                                            {{item.route}}
+                                        </li>
+
+                                        <li class="col-md-3">
+                                            <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="addmd1($index)">添加下级</button>
+                                            <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="modify_d1($index)">修改</button>
+                                            <button class="btn btn-default btn-xs" ng-click="delete(item.id)" >删除</button>
+                                        </li>
+                                        <ul class="col-md-12 secondul" ng-repeat="list1 in item.Children" style="background-color: #f7f7f7;">
+                                            <li class="col-md-3 secondli">
+                                                <i ng-show="list1.Children.length!==0" class="fa fa-lg fa-plus-circle" ng-click="showFace($index,$event)"></i>{{list1.id}}
+                                            </li>
+                                            <li class="col-md-3">
+                                                {{list1.menu_name}}
+                                            </li>
+                                            <li class="col-md-3">
+                                                {{list1.route}}
+                                            </li>
+
+                                            <li class="col-md-3">
+                                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal2" ng-click="addmd2($event)">添加下级</button>
+                                                <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="modify_d2($event)">修改</button>
+                                                <button class="btn btn-default btn-xs" ng-click="delete(list1.id)" >删除</button>
+                                            </li>
+                                            <ul class="col-md-12 thirdul" ng-repeat="data in list1.Children" style="background-color: #e3e2e1;">
+                                                <li class="col-md-3 thirdli">
+                                                    {{data.id}}
+                                                </li>
+                                                <li class="col-md-3">
+                                                    {{data.menu_name}}
+                                                </li>
+                                                <li class="col-md-3">
+                                                    {{data.route}}
+                                                </li>
+
+                                                <li class="col-md-3">
+                                                    <!--<button class="btn btn-default" data-toggle="modal" data-target="#myModal2" >添加下级</button>-->
+                                                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal3" ng-click="modify_d3($event)">修改</button>
+                                                    <button class="btn btn-default btn-xs" ng-click="delete(data.id)" >删除</button>
+                                                </li>
+                                            </ul>
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!--新增平台菜单-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="addAccount">新增平台菜单</h4>
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <div class="col-md-3 input-label">菜单名称</div>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="menu_name">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">前端路由</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="route">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">语言国际化Key</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="add_language_key">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">排序</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="sort">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">上传icon</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="icon">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{lang['Cancel']}}
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addMenu()">
+                        {{lang['Confirm']}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加下级-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">添加下级</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">菜单名称</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="addname">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">前端路由</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="addroute">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">所属层级</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="add_name" value="add_id" readonly="readonly">
+
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">语言国际化Key</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="addF_language_key">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item hidden">
+                                <label class="col-md-3 input-label">平台/代理</label>
+                                <label class="col-md-7 input">
+                                    <div class="form-group">
+                                        <input type="text" ng-model="addF_type">
+                                    </div>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">排序</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="addsort">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">icon</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="addicon">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add_M()">
+                            {{lang['Confirm']}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--代理修改-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">代理菜单修改</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                        <fieldset>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">菜单名称</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="first_data.menu_name">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">前端路由</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="first_data.route">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">语言国际化Key</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" ng-model="first_data.LanguageKey">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">平台/代理</label>
+                                <label class="col-md-7 input">
+                                    <div class="form-group">
+                                        <input type="text" ng-model="first_data.Type">
+                                    </div>
+                                </label>
+                            </section>
+                            <section class="input-item" ng-show="mod_show>=2">
+                                <label class="col-md-3 input-label">上级菜单</label>
+                                <label class="col-md-7 input">
+                                    <div class="form-group searchselect">
+                                        <select class="form-control" ng-model="menu_select_1" ng-change="selectM()">
+                                            <option value="">请选择</option>
+                                            <option ng-value="select.id" ng-repeat="select in select_1">{{select.menu_name}}</option>
+                                        </select>
+                                    </div>
+                                </label>
+                            </section>
+                            <!--<section class="input-item" ng-show="mod_show==3">-->
+                            <!--<label class="col-md-3 input-label">下级菜单</label>-->
+                            <!--<label class="col-md-7 input">-->
+                            <!--<div class="form-group searchselect">-->
+                            <!--<select class="form-control" ng-model="menu_select_2">-->
+                            <!--<option value="">请选择</option>-->
+                            <!--<option ng-value="select2.id" ng-repeat="select2 in select_2">{{select2.menu_name}}</option>-->
+                            <!--</select>-->
+                            <!--</div>-->
+                            <!--</label>-->
+                            <!--</section>-->
+                            <section class="input-item">
+                                <label class="col-md-3 input-label">排序</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="first_data.sort">
+                                    <b class="tooltip tooltip-top-right">
+                                        账号长度5-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                            <section class="input-item" ng-show="mod_show!==3">
+                                <label class="col-md-3 input-label">icon</label>
+                                <label class="col-md-7 input">
+                                    <input type="text" name="account" ng-model="first_data.icon">
+                                    <b class="tooltip tooltip-top-right">
+                                        密码长度6-12位，只能字母和数字组合</b>
+                                </label>
+                            </section>
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{lang['Cancel']}}
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">
+                            {{lang['Confirm']}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

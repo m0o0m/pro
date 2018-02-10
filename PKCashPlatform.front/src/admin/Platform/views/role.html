@@ -1,0 +1,248 @@
+<!--- 角色管理 -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="blue" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>角色管理</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body tab-content">
+                            <div class="widget-body-toolbar">
+                                <div class="row form-horizontal">
+                                    <div class="col-sm-2 col-sm-offset-10">
+                                        <div class="input-group pull-right">
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
+                                                <i class="fa fa-plus"></i> 新增角色
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <form class="form-inline" method="post">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">角色ID</th>
+                                            <th class="text-center">角色名称</th>
+                                            <th class="text-center">状态</th>
+                                            <th class="text-center">创建时间</th>
+                                            <th class="text-center">备注</th>
+                                            <th class="text-center">功能</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in list" class="text-center">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.role_name}}</td>
+                                            <td class="text-red" ng-bind="item.status|fiterStatused"></td>
+                                            <td>{{item.create_time|fiterTime}}</td>
+                                            <td>{{item.remark}}</td>
+                                            <td>
+                                                <button  class="btn btn-default btn-xs" data-ui-sref="app.Platform.permissionConfig({id: item.id,role_mark: item.role_mark})">权限配置</button>
+                                                <button  class="btn btn-default btn-xs" data-ui-sref="app.Platform.menuCarte({idese:item.id})">菜单</button>
+                                                <button ng-if="item.is_operate===0" ng-click="disable(item.id,item.status)"  class="btn btn-default btn-xs" ng-bind="item.status | fiterStatusBtn"></button>
+                                                <button ng-if="item.is_operate===0" ng-click="delete(item.id)"  class="btn btn-default btn-xs" >删除</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+<!--添加-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="addAccount">新增角色</h4>
+            </div>
+            <div class="modal-body">
+                <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                    <fieldset>
+                        <section class="input-item">
+                            <div class="col-md-3 col-xs-4 input-label">角色名称</div>
+                            <label class="col-md-7 col-xs-8  input">
+                                <input type="text" name="account" placeholder="" ng-model="formData.role_name">
+                            </label>
+                        </section>
+                        <section class="input-item">
+                            <label class="col-md-3 col-xs-4 input-label">角色状态</label>
+                            <label class="col-md-4 col-xs-4 input-label text-left">
+                                <input type="radio" ng-value="1" name="status" ng-model="formData.status">
+                                启用
+                            </label>
+                            <label class="col-md-4 col-xs-4 input-label text-left">
+                                <input type="radio" ng-value="2" name="status" ng-model="formData.status">
+                                禁用
+                            </label>
+                        </section>
+                        <section class="input-item">
+                            <div class="col-md-3 col-xs-4 input-label">备注</div>
+                            <label class="col-md-7 col-xs-8 input">
+                                <input type="text" name="account" placeholder="" ng-model="formData.remark">
+                            </label>
+                        </section>
+
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAcount()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--编辑-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">站点资料</h4>
+            </div>
+            <div class="modal-body">
+                <form  enctype="multipart/form-data" class="smart-form client-form ng-pristine ng-valid" novalidate="novalidate" method = 'POST' >
+                    <fieldset>
+                        <section class="input-item">
+                            <div class="col-md-3 input-label">站点名称</div>
+                            <label class="col-md-7 input">
+                                <input type="text" name="account" placeholder="{{lang['accounts']}}" ng-model="formData.account">
+                                <b class="tooltip tooltip-top-right">
+                                    请输入站点名称</b>
+                            </label>
+                        </section>
+                        <section class="input-item">
+                            <label class="col-md-3 input-label">域名上线</label>
+                            <label class="col-md-7 input">
+                                <input type="number" min="1" ng-model="formData.password">
+                                <b class="tooltip tooltip-top-right">
+                                    默认最小为1</b>
+                            </label>
+                        </section>
+                        <section class="input-item">
+                            <label class="col-md-3 input-label">超过上限收费</label>
+                            <label class="col-md-7 input">
+                                <input type="number" min="1" name="account" ng-model="formData.confirm_password">
+                                <b class="tooltip tooltip-top-right">
+                                    超出域名上限每个域名加收费用</b>
+                            </label>
+                            <label class="col-md-2 input-label">元/个</label>
+                        </section>
+
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{lang['Cancel']}}
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAcount()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--编辑-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">站点资料</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>PC域名</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>手机域名</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>支付域名</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    <tr>
+                        <td>www.baidu.com</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addAcount()">
+                    {{lang['Confirm']}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

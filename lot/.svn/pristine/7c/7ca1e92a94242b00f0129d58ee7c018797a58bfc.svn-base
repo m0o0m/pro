@@ -1,0 +1,83 @@
+// @function rem($size) {
+//     @return $size / 192 * 1rem;
+// };
+$border_color: rgba(219, 219, 219, 0.36);
+
+////红色版
+// $bg_color: #dc3545;
+// $bg_color2:linear-gradient(#dc3545, #d44d11);
+// $bg_color3:linear-gradient(#da3a3a, #d93d33);
+// $bg_color4:linear-gradient(#d93d33, #d83f2f);
+// $bg_color5:linear-gradient(#d83f2f, #d74326);
+// $time_color:#fff;
+// $ball:linear-gradient(#ee4c19, #bd2706);
+// $time_background:#f4cd92;
+// $border:#feae01;
+// $icon_color:#feae01;
+// $time_border:#f4cd92;
+
+//// 绿色版
+// $bg_color: #002B36;
+// $bg_color2:linear-gradient(#002B36, #71B2E0);
+// $bg_color3:linear-gradient(#584f7c, #9d9d9d);
+// $bg_color4:linear-gradient(#92909a, #8c97a8);
+// $bg_color5:linear-gradient(#8c97a8, #9d8584);
+// $time_color:rgba(0,0,0,0.8);
+// $ball:linear-gradient(#2c5f78, #8c97a8);
+// $time_background:rgba(255,255,255,0.2);
+// $border:#5f577f;
+// $icon_color:orange;
+// $time_border:#f4cd92;
+// $Button_color:#3e7593;
+//
+
+//橙色版#213 74 24  rgba(255,255,0,1);
+// $bg_color: #d54a19;
+// $bg_color2:linear-gradient(rgba(213,74,24,1), rgba(237,141,21,0.8));
+// $bg_color3:linear-gradient(rgba(222,99,23,1), rgba(219,91,23,1));
+// $bg_color4:linear-gradient(rgba(219,91,23,1), rgba(224,106,22,1));
+// $bg_color5:linear-gradient(rgba(224,106,22,1), rgba(230,120,22,0.8));
+// $time_color:rgba(0,0,0,0.8);
+// $ball:linear-gradient(#faa351, #f88200);
+// $time_background:#f4cd92;
+// $border:#feae01;
+// $icon_color:#feae01;
+// $time_border:#f4cd92;
+// $Button_color:#df6717;
+
+////蓝色版
+$bg_color: #028BE1;
+$bg_color2: linear-gradient(#028BE1, #52d2f6);
+$bg_color3: #028BE1;
+$bg_color4: linear-gradient(#028BE1, #028BE1 50%, #028BE1, #0991E3);
+$bg_color5: linear-gradient(#0B93E4, #0D95E4);
+$time_color: #fff;
+$ball: linear-gradient(#008ae0, #52d2f6);
+$time_background: rgba(255, 255, 255, 0.2);
+$border: rgba(153, 251, 151, 0.3);
+$icon_color: #FCCA2F;
+$time_border: #99FB97;
+$Button_color: #0992E3;
+
+//下注选中颜色
+$bg_select: rgba(82, 210, 246, 0.16);
+//lg开头渐变
+$lg_yellow: linear-gradient(#ffc504, #846300);
+$lg_blue: linear-gradient(#2991d2, #1c6196);
+$lg_gray: linear-gradient(#808080, #f56262);
+$lg_cyan: linear-gradient(#c8733d, #803e15);
+$lg_blue2: linear-gradient(#2e9fe6, #66c8f3);
+$lg_grey: linear-gradient(#adaca5, #83827d);
+$lg_red: linear-gradient(#ee4c19, #bd2706);
+$lg_green: linear-gradient(#3ec948, #026d09);
+$lg_orange: linear-gradient(#faa351, #f88200);
+
+$box_shadow: 0 0 6px 2px rgba(194, 123, 160, 0.7);
+
+// .div_content{
+//     margin-top: 170px !important;
+// }
+
+// .div_content_2{
+//     margin-top: 190px !important;
+// }
