@@ -1,0 +1,56 @@
+addr : :9797
+language : zh
+redisthirdset : thirdset
+
+version :
+    test : 170926.01
+    product : v1
+
+##日志 "FNST", "FINE", "DEBG", "TRAC", "INFO", "WARN", "EROR", "CRIT"
+log :
+    level : EROR
+    type :
+    path : log
+
+redis :
+-
+    name : default
+    host : localhost:6379
+    db  : 0
+    password :
+    expirtime : 15
+    runtime : 30
+    goroutimenum : 5
+    exp_update_ranking : 5
+
+mysql :
+-
+    name : default
+    host : 127.0.0.1:3306
+    username : root
+    password : 19861261
+    dbname : management
+    showsql : true
+    timeout : 10s
+-
+    name : video
+    host : 202.66.30.7:3306
+    username : amoebashixun2
+    password : PKduli#com.000
+    dbname : shixunv2
+    showsql : true
+    timeout : 10s
+
+mongo :
+    host : mongodb://192.168.8.111:27017
+
+third :
+    paidtype : http://olmanage.pk1358.com/api/v1/type/list
+    getthirdapi : http://olmanage.pk1358.com/api/v1/config/list
+    newsetup : http://olmanage.pk1358.com/api/v1/business/up
+    getbank : http://olmanage.pk1358.com/api/v1/bank/list
+    getsetup : http://olmanage.pk1358.com/api/v1/merchant/list
+    clientuserid : 1
+    clientname : pkClient
+    clientsecret : h1qN7RYH9xpvugZhaFu5Inmdk6bJyIopJrsbCAmj
+

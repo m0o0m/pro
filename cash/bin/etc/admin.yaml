@@ -1,0 +1,46 @@
+addr : :9797
+language : zh
+redisthirdset : thirdset
+
+version :
+    test : 170926.01
+    product : v1
+
+##日志
+log :
+    level : EROR
+    type : file1
+    path : log
+
+redis :
+-
+    name : default
+    host : 127.0.0.1:6379
+    db  : 0
+#    password : management
+    expirtime : 15
+    runtime : 30
+    goroutimenum : 5
+    exp_update_ranking : 5
+
+mysql :
+-
+    name : default
+    host : 127.0.0.1:3306
+    username : root
+    password : 123456
+    dbname : new_management
+    showsql : false
+    timeout : 3s
+
+
+third :
+    paidtype : http://olmanage.pk1358.com/api/v1/type/list
+    getthirdapi : http://olmanage.pk1358.com/api/v1/config/list
+    newsetup : http://olmanage.pk1358.com/api/v1/business/up
+    getbank : http://olmanage.pk1358.com/api/v1/bank/list
+    getsetup : http://olmanage.pk1358.com/api/v1/merchant/list
+    clientuserid : 1
+    clientname : pkClient
+    clientsecret : h1qN7RYH9xpvugZhaFu5Inmdk6bJyIopJrsbCAmj
+
